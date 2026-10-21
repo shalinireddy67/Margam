@@ -1,0 +1,660 @@
+[
+  {
+    "id": "q-int-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "At 6:00 AM, the temperature recorded in Leh was -7°C. By noon, the temperature rose by 5°C. What was the temperature at noon?",
+      "hi": "सुबह 6:00 बजे लेह में तापमान -7°C दर्ज किया गया था। दोपहर तक तापमान 5°C बढ़ गया। दोपहर में तापमान क्या था?",
+      "te": "ఉదయం 6:00 గంటలకు లేహ్‌లో ఉష్ణోగ్రత -7°C గా నమోదైంది. మధ్యాహ్నానికి ఉష్ణోగ్రత 5°C పెరిగింది. మధ్యాహ్నం ఉష్ణోగ్రత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "-12°C", "hi": "-12°C", "te": "-12°C", "reviewed": false },
+        "mistakeTag": "wrong_direction_addition"
+      },
+      {
+        "id": "B",
+        "text": { "en": "-2°C", "hi": "-2°C", "te": "-2°C", "reviewed": false }
+      },
+      {
+        "id": "C",
+        "text": { "en": "2°C", "hi": "2°C", "te": "2°C", "reviewed": false },
+        "mistakeTag": "lost_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": { "en": "12°C", "hi": "12°C", "te": "12°C", "reviewed": false },
+        "mistakeTag": "absolute_value_sum"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Starting at -7°C and rising by 5°C means calculating -7 + 5. Moving 5 units to the right from -7 on the number line lands on -2°C.",
+      "hi": "-7°C से शुरू करके 5°C बढ़ने का मतलब है -7 + 5 की गणना करना। संख्या रेखा पर -7 से 5 इकाई दाईं ओर चलने पर -2°C आता है।",
+      "te": "-7°C నుండి మొదలై 5°C పెరగడం అంటే -7 + 5 అని అర్థం. సంఖ్యా రేఖపై -7 నుండి కుడివైపుకు 5 స్థానాలు కదిలితే -2°C వస్తుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "A rise in temperature means addition (moving right on the number line).",
+      "hi": "तापमान में वृद्धि का अर्थ है जोड़ना (संख्या रेखा पर दाईं ओर चलना)।",
+      "te": "ఉష్ణోగ్రత పెరగడం అంటే సంకలనం (సంఖ్యా రేఖపై కుడివైపుకు కదలడం).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-int-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the value of: (-15) - (-9)?",
+      "hi": "मान ज्ञात कीजिए: (-15) - (-9)",
+      "te": "విలువను కనుగొనండి: (-15) - (-9)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "-24", "hi": "-24", "te": "-24", "reviewed": false },
+        "mistakeTag": "double_negative_ignored"
+      },
+      {
+        "id": "B",
+        "text": { "en": "-6", "hi": "-6", "te": "-6", "reviewed": false }
+      },
+      {
+        "id": "C",
+        "text": { "en": "6", "hi": "6", "te": "6", "reviewed": false },
+        "mistakeTag": "sign_confusion_larger_magnitude"
+      },
+      {
+        "id": "D",
+        "text": { "en": "24", "hi": "24", "te": "24", "reviewed": false },
+        "mistakeTag": "all_positive_assumption"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Subtracting a negative number is equivalent to adding its opposite: (-15) - (-9) = -15 + 9 = -6.",
+      "hi": "किसी ऋणात्मक संख्या को घटाना उसके विपरीत को जोड़ने के समान है: (-15) - (-9) = -15 + 9 = -6।",
+      "te": "ఋణ సంఖ్యను తీసివేయడం అంటే దాని వ్యతిరేక ధన సంఖ్యను కూడటంతో సమానం: (-15) - (-9) = -15 + 9 = -6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that two minus signs directly together (- -) become positive (+).",
+      "hi": "याद रखें कि दो ऋण चिह्न एक साथ आने पर धन (+) बन जाते हैं।",
+      "te": "రెండు ఋణ గుర్తులు పక్కపక్కనే వచ్చినప్పుడు అవి ధన గుర్తుగా (+) మారతాయని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-int-03",
+    "conceptId": "c7-int-03",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the expression: (-4) × (-3) × (-2)",
+      "hi": "व्यंजक का मान ज्ञात कीजिए: (-4) × (-3) × (-2)",
+      "te": "ఈ క్రింది సమాసం విలువను లెక్కించండి: (-4) × (-3) × (-2)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "-24", "hi": "-24", "te": "-24", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "24", "hi": "24", "te": "24", "reviewed": false },
+        "mistakeTag": "odd_negatives_product_rule"
+      },
+      {
+        "id": "C",
+        "text": { "en": "-9", "hi": "-9", "te": "-9", "reviewed": false },
+        "mistakeTag": "added_instead_of_multiplied"
+      },
+      {
+        "id": "D",
+        "text": { "en": "9", "hi": "9", "te": "9", "reviewed": false },
+        "mistakeTag": "arithmetic_miscalculation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "First multiply (-4) × (-3) = +12 (negative × negative = positive). Then (+12) × (-2) = -24 (positive × negative = negative). Three negative factors yield a negative product.",
+      "hi": "पहले (-4) × (-3) = +12 (ऋण × ऋण = धन)। फिर (+12) × (-2) = -24 (धन × ऋण = ऋण)। तीन ऋणात्मक गुणनखंडों का गुणनफल सदैव ऋणात्मक होता है।",
+      "te": "మొదట (-4) × (-3) = +12 (ఋణ × ఋణ = ధన). తర్వాత (+12) × (-2) = -24 (ధన × ఋణ = ఋణ). మూడు ఋణ సంఖ్యల లబ్దం ఎల్లప్పుడూ ఋణ సంఖ్యే అవుతుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Count the number of negative signs: an odd number of negatives produces a negative product.",
+      "hi": "ऋण चिह्नों की संख्या गिनें: विषम संख्या में ऋण होने पर गुणनफल ऋणात्मक होता है।",
+      "te": "ఋణ గుర్తుల సంఖ్యను లెక్కించండి: బేసి సంఖ్యలో ఋణ గుర్తులు ఉంటే లబ్దం ఋణ సంఖ్య అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-int-04",
+    "conceptId": "c7-int-03",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the result of: (-48) ÷ (-6)?",
+      "hi": "परिणाम क्या होगा: (-48) ÷ (-6)",
+      "te": "ఫలితం ఎంత: (-48) ÷ (-6)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "-8", "hi": "-8", "te": "-8", "reviewed": false },
+        "mistakeTag": "negative_quotient_bias"
+      },
+      {
+        "id": "B",
+        "text": { "en": "8", "hi": "8", "te": "8", "reviewed": false }
+      },
+      {
+        "id": "C",
+        "text": { "en": "-7", "hi": "-7", "te": "-7", "reviewed": false },
+        "mistakeTag": "table_division_error"
+      },
+      {
+        "id": "D",
+        "text": { "en": "7", "hi": "7", "te": "7", "reviewed": false },
+        "mistakeTag": "table_division_error"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Dividing a negative integer by another negative integer gives a positive quotient: (-48) ÷ (-6) = +8.",
+      "hi": "ऋणात्मक पूर्णांक को दूसरे ऋणात्मक पूर्णांक से विभाजित करने पर धनात्मक भागफल प्राप्त होता है: (-48) ÷ (-6) = +8।",
+      "te": "ఒక ఋణ పూర్ణాంకాన్ని మరొక ఋణ పూర్ణాంకంతో భాగిస్తే ధన భాగఫలం వస్తుంది: (-48) ÷ (-6) = +8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Negative divided by negative equals positive, just like multiplication.",
+      "hi": "ऋण भाग ऋण हमेशा धन होता है, बिल्कुल गुणन की तरह।",
+      "te": "గుణకారం లాగే, ఋణ సంఖ్యను ఋణ సంఖ్యతో భాగిస్తే ధన సంఖ్య వస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-int-05",
+    "conceptId": "c7-int-04",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Using the distributive property, simplify: (-25) × 102",
+      "hi": "वितरण गुणधर्म का प्रयोग कर सरल कीजिए: (-25) × 102",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి సూక్ష్మీకరించండి: (-25) × 102",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "-2550", "hi": "-2550", "te": "-2550", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "-2500", "hi": "-2500", "te": "-2500", "reviewed": false },
+        "mistakeTag": "forgot_second_distributive_term"
+      },
+      {
+        "id": "C",
+        "text": { "en": "-2450", "hi": "-2450", "te": "-2450", "reviewed": false },
+        "mistakeTag": "distributive_sign_subtraction_error"
+      },
+      {
+        "id": "D",
+        "text": { "en": "2550", "hi": "2550", "te": "2550", "reviewed": false },
+        "mistakeTag": "lost_negative_sign"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Write 102 as (100 + 2). Then (-25) × (100 + 2) = (-25 × 100) + (-25 × 2) = -2500 + (-50) = -2550.",
+      "hi": "102 को (100 + 2) लिखें। तब (-25) × (100 + 2) = (-25 × 100) + (-25 × 2) = -2500 + (-50) = -2550।",
+      "te": "102 ను (100 + 2) గా రాయండి. అప్పుడు (-25) × (100 + 2) = (-25 × 100) + (-25 × 2) = -2500 + (-50) = -2550.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Split 102 into 100 + 2, then multiply (-25) by each part.",
+      "hi": "102 को 100 + 2 में तोड़ें, फिर (-25) को दोनों भागों से गुणा करें।",
+      "te": "102 ను 100 + 2 గా విభజించి, ప్రతి భాగాన్ని (-25) తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-int-06",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "Sunita had a bank balance of ₹2,400. She made an online payment of ₹3,100 for school supplies, putting her account into overdraft. What is her new balance?",
+      "hi": "सुनीता के बैंक खाते में ₹2,400 थे। उसने स्कूल सामग्री के लिए ₹3,100 का ऑनलाइन भुगतान किया, जिससे उसका खाता ओवरड्राफ्ट में चला गया। उसका नया बैलेंस क्या है?",
+      "te": "సునీత బ్యాంక్ బ్యాలెన్స్ ₹2,400. ఆమె పాఠశాల సామగ్రి కోసం ₹3,100 ఆన్‌లైన్ చెల్లింపు చేసింది, దీంతో ఆమె ఖాతా ఓవర్‌డ్రాఫ్ట్‌లోకి వెళ్లింది. ఆమె కొత్త బ్యాలెన్స్ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "₹700", "hi": "₹700", "te": "₹700", "reviewed": false },
+        "mistakeTag": "ignored_negative_balance"
+      },
+      {
+        "id": "B",
+        "text": { "en": "-₹700", "hi": "-₹700", "te": "-₹700", "reviewed": false }
+      },
+      {
+        "id": "C",
+        "text": { "en": "-₹5,500", "hi": "-₹5,500", "te": "-₹5,500", "reviewed": false },
+        "mistakeTag": "added_instead_of_subtracted"
+      },
+      {
+        "id": "D",
+        "text": { "en": "₹0", "hi": "₹0", "te": "₹0", "reviewed": false },
+        "mistakeTag": "floor_at_zero_misconception"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "2400 - 3100 = -(3100 - 2400) = -₹700. The negative sign represents money owed to the bank.",
+      "hi": "2400 - 3100 = -(3100 - 2400) = -₹700। ऋणात्मक चिह्न बैंक की देनदारी (कर्ज) दर्शाता है।",
+      "te": "2400 - 3100 = -(3100 - 2400) = -₹700. ఋణ గుర్తు బ్యాంకుకు బాకీ ఉన్న అప్పును సూచిస్తుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When you spend more than you have, the remaining amount is negative.",
+      "hi": "जब आप उपलब्ध राशि से अधिक खर्च करते हैं, तो शेष राशि ऋणात्मक होती है।",
+      "te": "ఉన్నదానికంటే ఎక్కువ ఖర్చు చేసినప్పుడు, మిగిలిన మొత్తం ఋణ విలువగా ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-lin-01",
+    "conceptId": "c8-lin-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Which of the following is a linear equation in one variable?",
+      "hi": "निम्नलिखित में से कौन सा एक चर वाला रैखिक समीकरण है?",
+      "te": "ఈ క్రింది వాటిలో ఒకే చరరాశి కలిగిన రేఖీయ సమీకరణం ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "2x + 5 = 17", "hi": "2x + 5 = 17", "te": "2x + 5 = 17", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "x² + 3x = 10", "hi": "x² + 3x = 10", "te": "x² + 3x = 10", "reviewed": false },
+        "mistakeTag": "confused_quadratic_with_linear"
+      },
+      {
+        "id": "C",
+        "text": { "en": "3x + 2y = 8", "hi": "3x + 2y = 8", "te": "3x + 2y = 8", "reviewed": false },
+        "mistakeTag": "two_variables_overlooked"
+      },
+      {
+        "id": "D",
+        "text": { "en": "4x - 9", "hi": "4x - 9", "te": "4x - 9", "reviewed": false },
+        "mistakeTag": "expression_mistaken_for_equation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "2x + 5 = 17 has exactly one variable (x), highest power is 1 (linear), and contains an equality sign (=). Hence it is a linear equation in one variable.",
+      "hi": "2x + 5 = 17 में केवल एक चर (x) है, अधिकतम घात 1 है (रैखिक), और समानता चिह्न (=) है। अतः यह एक चर वाला रैखिक समीकरण है।",
+      "te": "2x + 5 = 17 లో ఒకే చరరాశి (x) ఉంది, గరిష్ట ఘాతం 1 (రేఖీయ), మరియు సమానత్వ గుర్తు (=) ఉంది. కావున ఇది ఒక చరరాశిలో రేఖీయ సమీకరణం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Look for one letter only, exponent 1, and an equality sign (=).",
+      "hi": "केवल एक अक्षर, घात 1, और बराबर का चिह्न (=) खोजें।",
+      "te": "ఒకే అక్షరం, ఘాతం 1, మరియు సమానత్వ గుర్తు (=) ఉండేలా చూసుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-lin-02",
+    "conceptId": "c8-lin-03",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve for x:  3x - 7 = -16",
+      "hi": "x के लिए हल कीजिए: 3x - 7 = -16",
+      "te": "x విలువను కనుగొనండి: 3x - 7 = -16",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "x = -3", "hi": "x = -3", "te": "x = -3", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "x = 3", "hi": "x = 3", "te": "x = 3", "reviewed": false },
+        "mistakeTag": "sign_error_transposition"
+      },
+      {
+        "id": "C",
+        "text": { "en": "x = -23/3", "hi": "x = -23/3", "te": "x = -23/3", "reviewed": false },
+        "mistakeTag": "transposition_sign_forgotten"
+      },
+      {
+        "id": "D",
+        "text": { "en": "x = -1", "hi": "x = -1", "te": "x = -1", "reviewed": false },
+        "mistakeTag": "arithmetic_miscalculation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Transpose -7 to RHS: 3x = -16 + 7. Then 3x = -9. Divide both sides by 3: x = -9 / 3 = -3.",
+      "hi": "-7 को दाएँ पक्ष में पक्षांतरित करें: 3x = -16 + 7। अतः 3x = -9। दोनों पक्षों को 3 से भाग दें: x = -9 / 3 = -3।",
+      "te": "-7 ను కుడివైపుకు పక్షాంతరీకరించండి: 3x = -16 + 7. అప్పుడు 3x = -9. ఇరువైపులా 3 చే భాగించండి: x = -9 / 3 = -3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When -7 moves across the equals sign, it becomes +7. Then calculate -16 + 7 carefully.",
+      "hi": "जब -7 बराबर के पार जाता है तो +7 बन जाता है। फिर -16 + 7 की ध्यान से गणना करें।",
+      "te": "-7 సమానత్వ గుర్తును దాటినప్పుడు +7 అవుతుంది. ఆ తర్వాత -16 + 7 ను జాగ్రత్తగా లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-lin-03",
+    "conceptId": "c8-lin-04",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the equation: 5x + 9 = 2x - 6",
+      "hi": "समीकरण हल कीजिए: 5x + 9 = 2x - 6",
+      "te": "సమీకరణాన్ని సాధించండి: 5x + 9 = 2x - 6",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "x = -5", "hi": "x = -5", "te": "x = -5", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "x = 5", "hi": "x = 5", "te": "x = 5", "reviewed": false },
+        "mistakeTag": "sign_error_transposition"
+      },
+      {
+        "id": "C",
+        "text": { "en": "x = -1", "hi": "x = -1", "te": "x = -1", "reviewed": false },
+        "mistakeTag": "constant_subtraction_error"
+      },
+      {
+        "id": "D",
+        "text": { "en": "x = -15/7", "hi": "x = -15/7", "te": "x = -15/7", "reviewed": false },
+        "mistakeTag": "added_variables_instead_of_subtracting"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Collect variables on LHS: 5x - 2x = -6 - 9. This gives 3x = -15. Dividing by 3 gives x = -5.",
+      "hi": "चरों को बाएँ पक्ष में लाएँ: 5x - 2x = -6 - 9। इससे 3x = -15 मिलता है। 3 से भाग देने पर x = -5 प्राप्त होता है।",
+      "te": "చరరాశులను ఎడమవైపుకు తీసుకురండి: 5x - 2x = -6 - 9. దీనివలన 3x = -15 వస్తుంది. 3 చే భాగించగా x = -5 వస్తుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Group like terms: bring 2x to the left (becomes -2x) and +9 to the right (becomes -9).",
+      "hi": "समान पदों को एक साथ लाएँ: 2x को बाईं ओर (-2x) और +9 को दाईं ओर (-9) ले जाएँ।",
+      "te": "సజాతి పదాలను చేర్చండి: 2x ను ఎడమవైపుకు (-2x గా) మరియు +9 ను కుడివైపుకు (-9 గా) మార్చండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-lin-04",
+    "conceptId": "c8-lin-05",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "An auto-rickshaw in Hyderabad charges a base fare of ₹30 for the first 1.5 km and ₹15 for each additional kilometre. If Rahul paid ₹105 for his trip, how many additional kilometres did he travel?",
+      "hi": "हैदराबाद में एक ऑटो-रिक्शा पहले 1.5 किमी के लिए ₹30 मूल किराया और प्रत्येक अतिरिक्त किमी के लिए ₹15 लेता है। यदि राहुल ने अपनी यात्रा के लिए ₹105 का भुगतान किया, तो उसने कितने अतिरिक्त किमी की यात्रा की?",
+      "te": "హైదరాబాద్‌లో ఒక ఆటో-రిక్షా మొదటి 1.5 కి.మీ.కు ₹30 ప్రాథమిక ఛార్జీని, ఆపై ప్రతి అదనపు కిలోమీటరుకు ₹15 వసూలు చేస్తుంది. రాహుల్ తన ప్రయాణానికి ₹105 చెల్లిస్తే, అతను ఎన్ని అదనపు కిలోమీటర్లు ప్రయాణించాడు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "5 km", "hi": "5 किमी", "te": "5 కి.మీ.", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "7 km", "hi": "7 किमी", "te": "7 కి.మీ.", "reviewed": false },
+        "mistakeTag": "divided_total_without_subtracting_base"
+      },
+      {
+        "id": "C",
+        "text": { "en": "4 km", "hi": "4 किमी", "te": "4 కి.మీ.", "reviewed": false },
+        "mistakeTag": "arithmetic_miscalculation"
+      },
+      {
+        "id": "D",
+        "text": { "en": "9 km", "hi": "9 किमी", "te": "9 కి.మీ.", "reviewed": false },
+        "mistakeTag": "added_base_fare_to_total"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Let additional km be x. The equation is 30 + 15x = 105. Subtract 30 from both sides: 15x = 75. Divide by 15: x = 5 km.",
+      "hi": "मान लीजिए अतिरिक्त किमी x है। समीकरण 30 + 15x = 105 है। दोनों पक्षों से 30 घटाएँ: 15x = 75। 15 से भाग दें: x = 5 किमी।",
+      "te": "అదనపు కి.మీ. x అనుకుందాం. సమీకరణం: 30 + 15x = 105. ఇరువైపుల నుండి 30 తీసివేయండి: 15x = 75. 15 చే భాగించండి: x = 5 కి.మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the fixed base fare (₹30) from the total amount paid (₹105) first, then divide by ₹15.",
+      "hi": "पहले कुल भुगतान (₹105) में से मूल किराया (₹30) घटाएँ, फिर ₹15 से भाग दें।",
+      "te": "మొదట మొత్తం చెల్లించిన ₹105 నుండి ప్రాథమిక ఛార్జీ ₹30 తీసివేసి, ఆపై ₹15 చే భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-poly-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the degree of the polynomial: P(x) = 7x³ - 5x⁴ + 2x - 9?",
+      "hi": "बहुपद की घात क्या है: P(x) = 7x³ - 5x⁴ + 2x - 9",
+      "te": "బహుపది యొక్క తరగతి ఎంత: P(x) = 7x³ - 5x⁴ + 2x - 9?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "3", "hi": "3", "te": "3", "reviewed": false },
+        "mistakeTag": "first_term_power_bias"
+      },
+      {
+        "id": "B",
+        "text": { "en": "4", "hi": "4", "te": "4", "reviewed": false }
+      },
+      {
+        "id": "C",
+        "text": { "en": "-5", "hi": "-5", "te": "-5", "reviewed": false },
+        "mistakeTag": "coefficient_mistaken_for_degree"
+      },
+      {
+        "id": "D",
+        "text": { "en": "9", "hi": "9", "te": "9", "reviewed": false },
+        "mistakeTag": "constant_term_mistaken_for_degree"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The degree of a polynomial is the highest power of the variable x. Here the powers of x are 3, 4, 1, and 0. The highest is 4.",
+      "hi": "बहुपद की घात चर x का उच्चतम घातांक होता है। यहाँ x के घातांक 3, 4, 1 और 0 हैं। उच्चतम घातांक 4 है।",
+      "te": "బహుపది తరగతి అనేది చరరాశి x యొక్క గరిష్ట ఘాతం. ఇక్కడ ఘాతాలు 3, 4, 1 మరియు 0. గరిష్ట ఘాతం 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find the largest exponent on x anywhere in the expression.",
+      "hi": "व्यंजक में x पर सबसे बड़ा घातांक देखें, भले ही वह पहला पद न हो।",
+      "te": "సమాసంలో మొదటి పదం కాకపోయినా x యొక్క అతిపెద్ద ఘాతాన్ని గుర్తించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-poly-02",
+    "conceptId": "c9-poly-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the polynomial P(x) = x² - 3x - 4 at x = -2.",
+      "hi": "x = -2 पर बहुपद P(x) = x² - 3x - 4 का मान ज्ञात कीजिए।",
+      "te": "x = -2 వద్ద P(x) = x² - 3x - 4 బహుపది విలువను లెక్కించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "6", "hi": "6", "te": "6", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "-6", "hi": "-6", "te": "-6", "reviewed": false },
+        "mistakeTag": "sign_error_integer_product"
+      },
+      {
+        "id": "C",
+        "text": { "en": "-14", "hi": "-14", "te": "-14", "reviewed": false },
+        "mistakeTag": "squared_negative_is_negative"
+      },
+      {
+        "id": "D",
+        "text": { "en": "2", "hi": "2", "te": "2", "reviewed": false },
+        "mistakeTag": "arithmetic_miscalculation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Substitute x = -2: P(-2) = (-2)² - 3(-2) - 4. (-2)² = 4. -3(-2) = +6 (negative × negative = positive!). So 4 + 6 - 4 = 6.",
+      "hi": "x = -2 प्रतिस्थापित करें: P(-2) = (-2)² - 3(-2) - 4। (-2)² = 4। -3(-2) = +6 (ऋण × ऋण = धन!)। अतः 4 + 6 - 4 = 6।",
+      "te": "x = -2 ప్రతిక్షేపించండి: P(-2) = (-2)² - 3(-2) - 4. (-2)² = 4. -3(-2) = +6 (ఋణ × ఋణ = ధన!). కావున 4 + 6 - 4 = 6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Careful with negative signs: (-2)² is POSITIVE 4, and -3 × (-2) is POSITIVE 6.",
+      "hi": "ऋण चिह्नों से सावधान रहें: (-2)² धनात्मक 4 होता है, और -3 × (-2) धनात्मक 6 होता है।",
+      "te": "ఋణ గుర్తుల విషయంలో జాగ్రత్త: (-2)² అంటే ధన 4, మరియు -3 × (-2) అంటే ధన 6.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-poly-03",
+    "conceptId": "c9-poly-04",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Factorise the quadratic polynomial by splitting the middle term: x² - x - 6",
+      "hi": "मध्य पद को विभाजित करके द्विघात बहुपद का गुणनखंड कीजिए: x² - x - 6",
+      "te": "మధ్య పదాన్ని విభజించి వర్గ బహుపదిని కారణాంకాలుగా మార్చండి: x² - x - 6",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "(x - 3)(x + 2)", "hi": "(x - 3)(x + 2)", "te": "(x - 3)(x + 2)", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "(x + 3)(x - 2)", "hi": "(x + 3)(x - 2)", "te": "(x + 3)(x - 2)", "reviewed": false },
+        "mistakeTag": "sign_error_middle_term_split"
+      },
+      {
+        "id": "C",
+        "text": { "en": "(x - 6)(x + 1)", "hi": "(x - 6)(x + 1)", "te": "(x - 6)(x + 1)", "reviewed": false },
+        "mistakeTag": "incorrect_factor_pair"
+      },
+      {
+        "id": "D",
+        "text": { "en": "(x - 2)(x - 3)", "hi": "(x - 2)(x - 3)", "te": "(x - 2)(x - 3)", "reviewed": false },
+        "mistakeTag": "constant_sign_product_error"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "We need two numbers whose product is -6 and sum is -1. The numbers are -3 and +2 because (-3) × (+2) = -6 and -3 + 2 = -1. Therefore, x² - 3x + 2x - 6 = (x - 3)(x + 2). Notice that confusing signs here directly traces back to Class 7 integer sign rules!",
+      "hi": "हमें दो ऐसी संख्याएँ चाहिए जिनका गुणनफल -6 और योग -1 हो। वे संख्याएँ -3 और +2 हैं क्योंकि (-3) × (+2) = -6 और -3 + 2 = -1। अतः x² - x - 6 = (x - 3)(x + 2)। चिह्नों का यह भ्रम सीधे कक्षा 7 के पूर्णांक चिह्न नियमों से जुड़ा है!",
+      "te": "లబ్దం -6 మరియు మొత్తం -1 అయ్యే రెండు సంఖ్యలు కావాలి. అవి -3 మరియు +2, ఎందుకంటే (-3) × (+2) = -6 మరియు -3 + 2 = -1. కాబట్టి x² - x - 6 = (x - 3)(x + 2). ఈ సంకేత తప్పు నేరుగా 7వ తరగతి పూర్ణ సంఖ్యల నియమాల లోపాన్ని చూపుతుంది!",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The sum of the two numbers must be -1, so the number with the larger absolute value must be negative.",
+      "hi": "दोनों संख्याओं का योग -1 होना चाहिए, इसलिए बड़े निरपेक्ष मान वाली संख्या ऋणात्मक होनी चाहिए।",
+      "te": "రెండు సంఖ్యల మొత్తం -1 కావాలి, కాబట్టి పెద్ద సంపూర్ణ విలువ గల సంఖ్య ఋణ సంఖ్యగా ఉండాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-poly-04",
+    "conceptId": "c9-poly-05",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Using the algebraic identity (x + a)(x + b) = x² + (a + b)x + ab, find the product: (x - 5)(x + 8)",
+      "hi": "बीजीय सर्वसमिका (x + a)(x + b) = x² + (a + b)x + ab का प्रयोग कर गुणनफल ज्ञात कीजिए: (x - 5)(x + 8)",
+      "te": "(x + a)(x + b) = x² + (a + b)x + ab సర్వసమీకరణాన్ని ఉపయోగించి లబ్దాన్ని కనుగొనండి: (x - 5)(x + 8)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": { "en": "x² + 3x - 40", "hi": "x² + 3x - 40", "te": "x² + 3x - 40", "reviewed": false }
+      },
+      {
+        "id": "B",
+        "text": { "en": "x² - 3x - 40", "hi": "x² - 3x - 40", "te": "x² - 3x - 40", "reviewed": false },
+        "mistakeTag": "sign_error_middle_term_sum"
+      },
+      {
+        "id": "C",
+        "text": { "en": "x² + 3x + 40", "hi": "x² + 3x + 40", "te": "x² + 3x + 40", "reviewed": false },
+        "mistakeTag": "constant_sign_product_error"
+      },
+      {
+        "id": "D",
+        "text": { "en": "x² - 13x - 40", "hi": "x² - 13x - 40", "te": "x² - 13x - 40", "reviewed": false },
+        "mistakeTag": "signs_added_without_balancing"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Here a = -5 and b = 8. (a + b) = -5 + 8 = +3. ab = (-5) × (8) = -40. Thus, x² + 3x - 40.",
+      "hi": "यहाँ a = -5 और b = 8 है। (a + b) = -5 + 8 = +3। ab = (-5) × (8) = -40। अतः x² + 3x - 40 प्राप्त होता है।",
+      "te": "ఇక్కడ a = -5 మరియు b = 8. (a + b) = -5 + 8 = +3. ab = (-5) × (8) = -40. కావున x² + 3x - 40.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add (-5) + 8 for the middle term coefficient, and multiply (-5) × 8 for the constant.",
+      "hi": "मध्य पद के लिए (-5) + 8 को जोड़ें, और अचर पद के लिए (-5) × 8 का गुणा करें।",
+      "te": "మధ్య పదం కోసం (-5) + 8 కూడండి, స్థిరపదం కోసం (-5) × 8 గుణించండి.",
+      "reviewed": false
+    }
+  }
+]

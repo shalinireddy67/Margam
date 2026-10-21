@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #FAF8F5;
+  --bg-paper: #F4EFEA;
+  --bg-subtle: #EDE7DF;
+  --border-muted: #DED6CA;
+  --text-navy: #0B192C;
+  --text-muted: #475569;
+  --accent-terracotta: #C2410C;
+  --accent-amber: #D97706;
+  --mastery-emerald: #047857;
+  --mastery-bg: #ECFDF5;
+  --gap-rose: #BE123C;
+  --gap-bg: #FFF1F2;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-cream);
+    color: var(--text-navy);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Accessible focus indicators */
+  *:focus-visible {
+    outline: 2px solid var(--accent-terracotta);
+    outline-offset: 2px;
+  }
+}
+
+/* Subtle editorial paper texture effect */
+.editorial-paper {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(#DED6CA 0.65px, transparent 0.65px);
+  background-size: 16px 16px;
+}
+
+/* Print Styles for Single-Sheet A4 Worksheets */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-page {
+    page-break-after: always;
+    border: 1px solid #ccc;
+    padding: 1.5cm;
+    margin: 0;
+    width: 100%;
+    max-width: 210mm;
+    min-height: 297mm;
+  }
+}
+
+/* Smooth motion respecting user preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

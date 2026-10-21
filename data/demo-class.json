@@ -1,0 +1,574 @@
+{
+  "syntheticNotice": "DEMO DATASET ONLY — 100% synthetic fictional data generated for demonstration purposes. No real student personal data is stored or processed.",
+  "classId": "demo-sec-8a",
+  "className": "Class 8 — Section A",
+  "academicYear": "2026-2027",
+  "teacherName": "Mrs. Lakshmi Devi",
+  "subject": "Mathematics",
+  "totalStudents": 25,
+  "students": [
+    {
+      "id": "stu-001",
+      "rollNumber": 1,
+      "name": "Aarav Sharma",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 95, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 85, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 84, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-05",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "fast_track",
+        "rationale": "Strong foundational grasp across integers and equations. Ready for advanced multi-step word problems."
+      }
+    },
+    {
+      "id": "stu-002",
+      "rollNumber": 2,
+      "name": "Ananya Reddy",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 85, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 45, "status": "gap_detected", "identifiedMistakeTag": "sign_error_subtraction" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 40, "status": "gap_detected" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 75, "status": "learning" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 42, "status": "gap_detected" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 38, "status": "gap_detected", "identifiedMistakeTag": "sign_error_transposition" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "basics_first",
+        "rationale": "Struggles with equation transposition because subtracting negative numbers is conceptually unclear. Backtrack to Kirana Debt/Credit integer model."
+      }
+    },
+    {
+      "id": "stu-003",
+      "rollNumber": 3,
+      "name": "Bhavya Patel",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 80, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 72, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-03",
+        "recommendedVariant": "standard",
+        "rationale": "Solid foundations. Minor practice needed on isolating variables with fractional coefficients."
+      }
+    },
+    {
+      "id": "stu-004",
+      "rollNumber": 4,
+      "name": "Chirag Rao",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 60, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 52, "status": "learning" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 38, "status": "gap_detected", "identifiedMistakeTag": "odd_negatives_product_rule" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 55, "status": "learning" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 40, "status": "gap_detected" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-02",
+        "rootPrerequisiteId": "c7-int-03",
+        "recommendedVariant": "basics_first",
+        "rationale": "Root gap in integer multiplication sign rules causing verification failures in algebraic expressions."
+      }
+    },
+    {
+      "id": "stu-005",
+      "rollNumber": 5,
+      "name": "Deepa Sundaram",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 98, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 96, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 94, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c8-lin-04", "masteryPercentage": 88, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-05",
+        "rootPrerequisiteId": "c8-lin-05",
+        "recommendedVariant": "fast_track",
+        "rationale": "High-performing learner. Excels with mental calculations and ready for Olympiad-level linear equation setups."
+      }
+    },
+    {
+      "id": "stu-006",
+      "rollNumber": 6,
+      "name": "Eashan Verma",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 75, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 70, "status": "mastered" },
+        { "conceptId": "c6-frac-01", "masteryPercentage": 42, "status": "gap_detected", "identifiedMistakeTag": "fraction_denominator_addition" },
+        { "conceptId": "c7-frac-01", "masteryPercentage": 36, "status": "gap_detected" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 50, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c6-frac-01",
+        "recommendedVariant": "basics_first",
+        "rationale": "Struggles when equations contain fractions (e.g., x/3 + 1/2 = 5) due to an unaddressed Class 6 LCM and fraction addition gap."
+      }
+    },
+    {
+      "id": "stu-007",
+      "rollNumber": 7,
+      "name": "Farhan Ali",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 65, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 58, "status": "learning" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 55, "status": "learning" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 62, "status": "learning" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 50, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-02",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "standard",
+        "rationale": "Steady progress across the board; needs guided practice in balancing steps."
+      }
+    },
+    {
+      "id": "stu-008",
+      "rollNumber": 8,
+      "name": "Gauri Joshi",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 80, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 84, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 80, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 76, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-04",
+        "rootPrerequisiteId": "c8-lin-03",
+        "recommendedVariant": "standard",
+        "rationale": "Good mastery of basic transposition, transitioning to equations with variables on both sides."
+      }
+    },
+    {
+      "id": "stu-009",
+      "rollNumber": 9,
+      "name": "Harshvardhan Singh",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 48, "status": "gap_detected" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 42, "status": "gap_detected" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 70, "status": "learning" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 36, "status": "gap_detected" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "basics_first",
+        "rationale": "Persistent confusion when moving negative constants across equals sign (forgets to flip sign from - to +)."
+      }
+    },
+    {
+      "id": "stu-010",
+      "rollNumber": 10,
+      "name": "Ishita Sen",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 80, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-04",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "standard",
+        "rationale": "Consistent performer. Ready for challenging applications."
+      }
+    },
+    {
+      "id": "stu-011",
+      "rollNumber": 11,
+      "name": "Jayant Kulkarni",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 70, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 68, "status": "learning" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 60, "status": "learning" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 72, "status": "learning" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 65, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-02",
+        "recommendedVariant": "standard",
+        "rationale": "Requires structured balancing examples before attempting rapid transposition."
+      }
+    },
+    {
+      "id": "stu-012",
+      "rollNumber": 12,
+      "name": "Kavya Naidu",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 84, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 75, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-04",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "standard",
+        "rationale": "High diligence and strong bilingual grasp in Telugu and English."
+      }
+    },
+    {
+      "id": "stu-013",
+      "rollNumber": 13,
+      "name": "Lokesh Choudhary",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 55, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 35, "status": "gap_detected" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 30, "status": "gap_detected" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 50, "status": "learning" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 25, "status": "gap_detected" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "basics_first",
+        "rationale": "Severely hampered by negative integer operations. Remediation of Class 7 integer addition/subtraction is essential."
+      }
+    },
+    {
+      "id": "stu-014",
+      "rollNumber": 14,
+      "name": "Manish Gupta",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 74, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 72, "status": "learning" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 76, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 70, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-03",
+        "recommendedVariant": "standard",
+        "rationale": "Good general understanding, slight hesitation when variable term has a negative multiplier (e.g. -3x = 12)."
+      }
+    },
+    {
+      "id": "stu-015",
+      "rollNumber": 15,
+      "name": "Nandini Iyer",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 96, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 94, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c8-lin-04", "masteryPercentage": 84, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-05",
+        "rootPrerequisiteId": "c8-lin-05",
+        "recommendedVariant": "fast_track",
+        "rationale": "Strong analytical problem solver. Ready for complex age-relation and geometric perimeter word problems."
+      }
+    },
+    {
+      "id": "stu-016",
+      "rollNumber": 16,
+      "name": "Omkar Deshmukh",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 80, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 75, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 72, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-02",
+        "recommendedVariant": "standard",
+        "rationale": "Benefits from worked examples with step-by-step LHS/RHS equality checks."
+      }
+    },
+    {
+      "id": "stu-017",
+      "rollNumber": 17,
+      "name": "Pranathi Rao",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 84, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 50, "status": "gap_detected" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 46, "status": "gap_detected" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 74, "status": "learning" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 42, "status": "gap_detected" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "basics_first",
+        "rationale": "Requires Telugu basics-first explanation on subtracting signed integers to restore confidence."
+      }
+    },
+    {
+      "id": "stu-018",
+      "rollNumber": 18,
+      "name": "Raghav Menon",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 85, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 80, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-03",
+        "recommendedVariant": "standard",
+        "rationale": "Mastery intact; ready for practice on bracket expansion before transposition."
+      }
+    },
+    {
+      "id": "stu-019",
+      "rollNumber": 19,
+      "name": "Sai Krishna",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 78, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 75, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 70, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 74, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 68, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-02",
+        "recommendedVariant": "standard",
+        "rationale": "Consistent effort, grasps concept well with Telugu terminology."
+      }
+    },
+    {
+      "id": "stu-020",
+      "rollNumber": 20,
+      "name": "Tanvi Agarwal",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 94, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 84, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-04",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "fast_track",
+        "rationale": "Excels with algebraic manipulation and balances both sides quickly."
+      }
+    },
+    {
+      "id": "stu-021",
+      "rollNumber": 21,
+      "name": "Utkarsh Tiwari",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 62, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 44, "status": "gap_detected" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 40, "status": "gap_detected" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 60, "status": "learning" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 35, "status": "gap_detected" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c7-int-02",
+        "recommendedVariant": "basics_first",
+        "rationale": "Needs 10-minute basics-first review on signed addition before tackling multi-step equations."
+      }
+    },
+    {
+      "id": "stu-022",
+      "rollNumber": 22,
+      "name": "Vaishnavi Patil",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 84, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 80, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 78, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-03",
+        "recommendedVariant": "standard",
+        "rationale": "Good conceptual understanding; ready to practice word problems with currency."
+      }
+    },
+    {
+      "id": "stu-023",
+      "rollNumber": 23,
+      "name": "Varun Reddy",
+      "gender": "M",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "te",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 74, "status": "learning" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 70, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 68, "status": "learning" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 72, "status": "learning" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 66, "status": "learning" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-03",
+        "rootPrerequisiteId": "c8-lin-02",
+        "recommendedVariant": "standard",
+        "rationale": "Developing well; benefits from graphic organizer showing balancing on each step."
+      }
+    },
+    {
+      "id": "stu-024",
+      "rollNumber": 24,
+      "name": "Yashasvi Pandey",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "hi",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 90, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 85, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 80, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-04",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "standard",
+        "rationale": "High diligence and precision in arithmetic steps."
+      }
+    },
+    {
+      "id": "stu-025",
+      "rollNumber": 25,
+      "name": "Zoya Khan",
+      "gender": "F",
+      "overallGradeLevel": 8,
+      "section": "A",
+      "primaryLanguage": "en",
+      "mastery": [
+        { "conceptId": "c7-int-01", "masteryPercentage": 92, "status": "mastered" },
+        { "conceptId": "c7-int-02", "masteryPercentage": 88, "status": "mastered" },
+        { "conceptId": "c7-int-03", "masteryPercentage": 86, "status": "mastered" },
+        { "conceptId": "c8-lin-01", "masteryPercentage": 84, "status": "mastered" },
+        { "conceptId": "c8-lin-02", "masteryPercentage": 82, "status": "mastered" },
+        { "conceptId": "c8-lin-03", "masteryPercentage": 80, "status": "mastered" }
+      ],
+      "diagnosedRootGap": {
+        "currentConceptId": "c8-lin-05",
+        "rootPrerequisiteId": "c8-lin-04",
+        "recommendedVariant": "fast_track",
+        "rationale": "Fast learner, strong verbal translation into equations."
+      }
+    }
+  ]
+}
