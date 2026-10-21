@@ -1,0 +1,1338 @@
+[
+  {
+    "id": "c6-ch01",
+    "class": 6,
+    "chapterNumber": 1,
+    "name": {
+      "en": "Patterns in Mathematics",
+      "hi": "गणित में पैटर्न",
+      "te": "గణితంలో నమూనాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Sequences",
+      "Visual Patterns",
+      "Number Patterns"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch02",
+    "class": 6,
+    "chapterNumber": 2,
+    "name": {
+      "en": "Lines and Angles",
+      "hi": "रेखाएँ और कोण",
+      "te": "రేఖలు మరియు కోణాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Points",
+      "Lines",
+      "Rays",
+      "Angles"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch03",
+    "class": 6,
+    "chapterNumber": 3,
+    "name": {
+      "en": "Number Play",
+      "hi": "संख्याओं का खेल",
+      "te": "సంఖ్యల ఆట",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Place value",
+      "Estimation",
+      "Large Numbers"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch04",
+    "class": 6,
+    "chapterNumber": 4,
+    "name": {
+      "en": "Data Handling and Presentation",
+      "hi": "आँकड़ों का प्रबंधन और प्रस्तुतीकरण",
+      "te": "దత్తాంశ నిర్వహణ మరియు ప్రదర్శన",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Tally Marks",
+      "Pictographs",
+      "Bar Graphs"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch05",
+    "class": 6,
+    "chapterNumber": 5,
+    "name": {
+      "en": "Prime Time",
+      "hi": "अभाज्य समय (प्राइम टाइम)",
+      "te": "ప్రైమ్ టైమ్ (ప్రధాన సంఖ్యలు)",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Factors",
+      "Multiples",
+      "Prime & Composite Numbers",
+      "HCF & LCM"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch06",
+    "class": 6,
+    "chapterNumber": 6,
+    "name": {
+      "en": "Perimeter and Area",
+      "hi": "परिमाप और क्षेत्रफल",
+      "te": "చుట్టుకొలత మరియు వైశాల్యం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Perimeter of Polygons",
+      "Area of Rectangles"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch07",
+    "class": 6,
+    "chapterNumber": 7,
+    "name": {
+      "en": "Fractions",
+      "hi": "भिन्न",
+      "te": "భిన్నాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Fraction Concepts",
+      "Equivalent Fractions",
+      "Like and Unlike Fractions"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch08",
+    "class": 6,
+    "chapterNumber": 8,
+    "name": {
+      "en": "Playing with Constructions",
+      "hi": "रचनाओं के साथ खेल",
+      "te": "నిర్మాణాలతో ఆటలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Ruler & Compasses",
+      "Perpendicular Bisectors",
+      "Angle Construction"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch09",
+    "class": 6,
+    "chapterNumber": 9,
+    "name": {
+      "en": "Symmetry",
+      "hi": "सममिति",
+      "te": "సౌష్టవం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Line Symmetry",
+      "Mirror Reflection"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c6-ch10",
+    "class": 6,
+    "chapterNumber": 10,
+    "name": {
+      "en": "The Other Side of Zero",
+      "hi": "शून्य के दूसरी ओर",
+      "te": "సున్నాకి అవతలి వైపు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash",
+    "subject": "maths",
+    "topics": [
+      "Negative Numbers",
+      "Number Line",
+      "Additive Inverses",
+      "Ordering Integers"
+    ],
+    "status": "full"
+  },
+  {
+    "id": "c7-ch01",
+    "class": 7,
+    "chapterNumber": 1,
+    "part": 1,
+    "name": {
+      "en": "Large Numbers Around Us",
+      "hi": "हमारे आस-पास बड़ी संख्याएँ",
+      "te": "మన చుట్టూ ఉన్న పెద్ద సంఖ్యలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Large Number Systems",
+      "Estimation"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch02",
+    "class": 7,
+    "chapterNumber": 2,
+    "part": 1,
+    "name": {
+      "en": "Arithmetic Expressions",
+      "hi": "अंकगणितीय व्यंजक",
+      "te": "అంకగణిత సమాసాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Order of Operations",
+      "Brackets",
+      "Simplification"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch03",
+    "class": 7,
+    "chapterNumber": 3,
+    "part": 1,
+    "name": {
+      "en": "A Peek Beyond the Point",
+      "hi": "दशमलव बिंदु के पार एक नज़र",
+      "te": "దశాంశ బిందువుకు ఆవల ఒక చూపు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Decimals",
+      "Place Values Beyond Tenths"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch04",
+    "class": 7,
+    "chapterNumber": 4,
+    "part": 1,
+    "name": {
+      "en": "Expressions Using Letter-Numbers",
+      "hi": "अक्षर-संख्याओं का उपयोग करके व्यंजक",
+      "te": "అక్షర-సంఖ్యలతో సమాసాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Variables",
+      "Forming Algebraic Expressions"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch05",
+    "class": 7,
+    "chapterNumber": 5,
+    "part": 1,
+    "name": {
+      "en": "Parallel and Intersecting Lines",
+      "hi": "समांतर और प्रतिच्छेदी रेखाएँ",
+      "te": "సమాంతర మరియు ఖండన రేఖలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Transversals",
+      "Angles Made by Transversals"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch06",
+    "class": 7,
+    "chapterNumber": 6,
+    "part": 1,
+    "name": {
+      "en": "Number Play",
+      "hi": "संख्या खेल",
+      "te": "సంఖ్యల ఆట",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Divisibility Rules",
+      "Puzzles and Patterns"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch07",
+    "class": 7,
+    "chapterNumber": 7,
+    "part": 1,
+    "name": {
+      "en": "A Tale of Three Intersecting Lines",
+      "hi": "तीन प्रतिच्छेदी रेखाओं की कहानी",
+      "te": "మూడు ఖండన రేఖల కథ",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Triangles and their Angle Sum Properties"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch08",
+    "class": 7,
+    "chapterNumber": 8,
+    "part": 1,
+    "name": {
+      "en": "Working with Fractions",
+      "hi": "भिन्नों के साथ कार्य",
+      "te": "భిన్నాలతో పనిచేయడం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Fraction Multiplication and Division"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch09",
+    "class": 7,
+    "chapterNumber": 9,
+    "part": 2,
+    "name": {
+      "en": "Geometric Twins",
+      "hi": "ज्यामितीय जुड़वाँ (सर्वांगसमता)",
+      "te": "జ్యామితీయ జంటలు (సర్వసమానత్వం)",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Congruence of Triangles"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch10",
+    "class": 7,
+    "chapterNumber": 10,
+    "part": 2,
+    "name": {
+      "en": "Operations with Integers",
+      "hi": "पूर्णांकों के साथ संक्रियाएँ",
+      "te": "పూర్ణ సంఖ్యలతో ప్రక్రియలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Integer Addition",
+      "Integer Subtraction",
+      "Integer Multiplication",
+      "Sign Rules"
+    ],
+    "status": "full"
+  },
+  {
+    "id": "c7-ch11",
+    "class": 7,
+    "chapterNumber": 11,
+    "part": 2,
+    "name": {
+      "en": "Finding Common Ground",
+      "hi": "समान आधार खोजना",
+      "te": "సమాన ఆధారాన్ని కనుగొనడం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Ratios and Proportions",
+      "Unitary Method"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch12",
+    "class": 7,
+    "chapterNumber": 12,
+    "part": 2,
+    "name": {
+      "en": "Another Peek Beyond the Point",
+      "hi": "दशमलव के पार एक और नज़र",
+      "te": "దశాంశాలకు ఆవల మరో చూపు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Decimal Multiplication and Division"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch13",
+    "class": 7,
+    "chapterNumber": 13,
+    "part": 2,
+    "name": {
+      "en": "Connecting the Dots…",
+      "hi": "बिंदुओं को जोड़ना…",
+      "te": "చుక్కలను కలపడం…",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Data Representation and Graphs"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch14",
+    "class": 7,
+    "chapterNumber": 14,
+    "part": 2,
+    "name": {
+      "en": "Constructions and Tilings",
+      "hi": "रचनाएँ और टाइलिंग",
+      "te": "నిర్మాణాలు మరియు టైలింగ్",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Practical Geometry and Tessellations"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c7-ch15",
+    "class": 7,
+    "chapterNumber": 15,
+    "part": 2,
+    "name": {
+      "en": "Finding the Unknown",
+      "hi": "अज्ञात को खोजना",
+      "te": "తెలియని విలువను కనుగొనడం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Linear Equations in One Variable"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch01",
+    "class": 8,
+    "chapterNumber": 1,
+    "part": 1,
+    "name": {
+      "en": "A Square and a Cube",
+      "hi": "एक वर्ग और एक घन",
+      "te": "ఒక చతురస్రం మరియు ఒక ఘనం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Square Numbers",
+      "Square Roots",
+      "Factorisation",
+      "Division Method",
+      "Cube Roots"
+    ],
+    "status": "full"
+  },
+  {
+    "id": "c8-ch02",
+    "class": 8,
+    "chapterNumber": 2,
+    "part": 1,
+    "name": {
+      "en": "Power Play",
+      "hi": "घातों का खेल (पावर प्ले)",
+      "te": "ఘాతాల ఆట (పవర్ ప్లే)",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Exponents and Powers",
+      "Laws of Exponents"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch03",
+    "class": 8,
+    "chapterNumber": 3,
+    "part": 1,
+    "name": {
+      "en": "A Story of Numbers",
+      "hi": "संख्याओं की एक कहानी",
+      "te": "సంఖ్యల కథ",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Rational Numbers and Properties"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch04",
+    "class": 8,
+    "chapterNumber": 4,
+    "part": 1,
+    "name": {
+      "en": "Quadrilaterals",
+      "hi": "चतुर्भुज",
+      "te": "చతుర్భుజాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Polygons",
+      "Parallelograms",
+      "Properties of Quadrilaterals"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch05",
+    "class": 8,
+    "chapterNumber": 5,
+    "part": 1,
+    "name": {
+      "en": "Number Play",
+      "hi": "संख्या खेल",
+      "te": "సంఖ్యల ఆట",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Divisibility Puzzles",
+      "Patterns in Numbers"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch06",
+    "class": 8,
+    "chapterNumber": 6,
+    "part": 1,
+    "name": {
+      "en": "We Distribute, Yet Things Multiply",
+      "hi": "हम बाँटते हैं, फिर भी चीजें गुणा होती हैं",
+      "te": "మనం పంచుతాము, అయినా గుణించబడతాయి",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Distributive Law",
+      "Multiplication of Algebraic Expressions"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch07",
+    "class": 8,
+    "chapterNumber": 7,
+    "part": 1,
+    "name": {
+      "en": "Proportional Reasoning-1",
+      "hi": "आनुपातिक तर्क-1",
+      "te": "అనుపాత రీజనింగ్-1",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 1",
+    "subject": "maths",
+    "topics": [
+      "Direct Proportion",
+      "Percentages in Daily Life"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch08",
+    "class": 8,
+    "chapterNumber": 8,
+    "part": 2,
+    "name": {
+      "en": "Fractions in Disguise",
+      "hi": "छद्म वेश में भिन्न",
+      "te": "మారిన రూపంలో భిన్నాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Rational Operations",
+      "Complex Fractions"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch09",
+    "class": 8,
+    "chapterNumber": 9,
+    "part": 2,
+    "name": {
+      "en": "The Baudhayana-Pythagoras Theorem",
+      "hi": "बौधायन-पाइथागोरस प्रमेय",
+      "te": "బౌధాయన-పైథాగరస్ సిద్ధాంతం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Right-angled Triangles",
+      "Pythagorean Triplets"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch10",
+    "class": 8,
+    "chapterNumber": 10,
+    "part": 2,
+    "name": {
+      "en": "Proportional Reasoning-2",
+      "hi": "आनुपातिक तर्क-2",
+      "te": "అనుపాత రీజనింగ్-2",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Inverse Proportion",
+      "Compound Interest"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch11",
+    "class": 8,
+    "chapterNumber": 11,
+    "part": 2,
+    "name": {
+      "en": "Exploring Some Geometric Themes",
+      "hi": "कुछ ज्यामितीय विषयों की खोज",
+      "te": "కొన్ని జ్యామితీయ అంశాల అన్వేషణ",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Visualising Solid Shapes",
+      "Euler's Formula"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch12",
+    "class": 8,
+    "chapterNumber": 12,
+    "part": 2,
+    "name": {
+      "en": "Tales by Dots and Lines",
+      "hi": "बिंदुओं और रेखाओं की कहानियाँ",
+      "te": "చుక్కలు మరియు గీతల కథలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Coordinate Introductions",
+      "Data Graphing"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch13",
+    "class": 8,
+    "chapterNumber": 13,
+    "part": 2,
+    "name": {
+      "en": "Algebra Play",
+      "hi": "बीजगणित का खेल",
+      "te": "బీజగణిత ఆట",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Linear Equations in One Variable",
+      "Application Problems"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c8-ch14",
+    "class": 8,
+    "chapterNumber": 14,
+    "part": 2,
+    "name": {
+      "en": "Area",
+      "hi": "क्षेत्रफल",
+      "te": "వైశాల్యం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Prakash Part 2",
+    "subject": "maths",
+    "topics": [
+      "Area of Trapezium",
+      "Surface Area and Volume"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch01",
+    "class": 9,
+    "chapterNumber": 1,
+    "part": 1,
+    "name": {
+      "en": "Orienting Yourself: The Use of Coordinates",
+      "hi": "दिशा निर्धारण: निर्देशांकों का उपयोग",
+      "te": "దిశానిర్దేశం: నిరూపకాల ఉపయోగం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Cartesian Plane",
+      "Coordinates of Points",
+      "Quadrants"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch02",
+    "class": 9,
+    "chapterNumber": 2,
+    "part": 1,
+    "name": {
+      "en": "Introduction to Linear Polynomials",
+      "hi": "रैखिक बहुपदों का परिचय",
+      "te": "రేఖీయ బహుపదుల పరిచయం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Terms and Coefficients",
+      "Degree of Polynomials",
+      "Zeroes of Polynomials"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch03",
+    "class": 9,
+    "chapterNumber": 3,
+    "part": 1,
+    "name": {
+      "en": "The World of Numbers",
+      "hi": "संख्याओं का संसार",
+      "te": "సంఖ్యల ప్రపంచం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Real Numbers",
+      "Rational and Irrational Numbers",
+      "Number Line Density"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch04",
+    "class": 9,
+    "chapterNumber": 4,
+    "part": 1,
+    "name": {
+      "en": "Exploring Algebraic Identities",
+      "hi": "बीजगणितीय सर्वसमिकाओं की खोज",
+      "te": "బీజగణిత సర్వసమీకరణాల అన్వేషణ",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Standard Identities",
+      "Quadratic Factoring",
+      "Splitting the Middle Term"
+    ],
+    "status": "full"
+  },
+  {
+    "id": "c9-ch05",
+    "class": 9,
+    "chapterNumber": 5,
+    "part": 1,
+    "name": {
+      "en": "I'm Up and Down, and Round and Round",
+      "hi": "ऊपर-नीचे और गोल-गोल (वृत्त और ज्यामिति)",
+      "te": "పైకి కిందకి, గుండ్రంగా (వృత్తాలు మరియు జ్యామితి)",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Circles",
+      "Arcs",
+      "Chords and Angles"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch06",
+    "class": 9,
+    "chapterNumber": 6,
+    "part": 1,
+    "name": {
+      "en": "Measuring Space: Perimeter and Area",
+      "hi": "स्थान का मापन: परिमाप और क्षेत्रफल",
+      "te": "స్థల కొలత: చుట్టుకొలత మరియు వైశాల్యం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Heron's Formula",
+      "Area of Polygons"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch07",
+    "class": 9,
+    "chapterNumber": 7,
+    "part": 1,
+    "name": {
+      "en": "The Mathematics of Maybe: Introduction to Probability",
+      "hi": "संभावना का गणित: प्रायिकता का परिचय",
+      "te": "సంభావ్యత గణితం: సంభావ్యత పరిచయం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Events",
+      "Empirical Probability"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch08",
+    "class": 9,
+    "chapterNumber": 8,
+    "part": 1,
+    "name": {
+      "en": "Predicting What Comes Next: Exploring Sequences and Progressions",
+      "hi": "आगे क्या आएगा: अनुक्रमों और श्रेणियों की खोज",
+      "te": "తర్వాత ఏమి వస్తుంది: శ్రేణులు మరియు ప్రగతులు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 1",
+    "subject": "maths",
+    "topics": [
+      "Arithmetic Sequences",
+      "Patterns in Progressions"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch09",
+    "class": 9,
+    "chapterNumber": 9,
+    "part": 2,
+    "name": {
+      "en": "Propositions and their Converses",
+      "hi": "प्रमेय और उनके विलोम",
+      "te": "ప్రమేయాలు మరియు వాటి విపర్యయాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Mathematical Proofs",
+      "Deductive Reasoning",
+      "Triangles"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch10",
+    "class": 9,
+    "chapterNumber": 10,
+    "part": 2,
+    "name": {
+      "en": "How Quantities Combine: Understanding Data",
+      "hi": "राशियाँ कैसे जुड़ती हैं: आँकड़ों को समझना",
+      "te": "రాశులు ఎలా కలుస్తాయి: దత్తాంశాన్ని అర్థం చేసుకోవడం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Grouped Data",
+      "Mean, Median, Mode"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch11",
+    "class": 9,
+    "chapterNumber": 11,
+    "part": 2,
+    "name": {
+      "en": "The World of Algorithms",
+      "hi": "एल्गोरिदम का संसार",
+      "te": "అల్గారిథమ్ల ప్రపంచం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Step-by-step Procedures",
+      "Algorithmic Thinking"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch12",
+    "class": 9,
+    "chapterNumber": 12,
+    "part": 2,
+    "name": {
+      "en": "Quadrilaterals",
+      "hi": "चतुर्भुज",
+      "te": "చతుర్భుజాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Properties of Parallelograms",
+      "Midpoint Theorem"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch13",
+    "class": 9,
+    "chapterNumber": 13,
+    "part": 2,
+    "name": {
+      "en": "Two Variables, One Line",
+      "hi": "दो चर, एक रेखा",
+      "te": "రెండు చరరాశులు, ఒక రేఖ",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Linear Equations in Two Variables",
+      "Graphing ax + by = c"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c9-ch14",
+    "class": 9,
+    "chapterNumber": 14,
+    "part": 2,
+    "name": {
+      "en": "Math of Space: Surface Area and Volume",
+      "hi": "अंतरिक्ष का गणित: पृष्ठीय क्षेत्रफल और आयतन",
+      "te": "స్థల గణితం: ఉపరితల వైశాల్యం మరియు ఘనపరిమాణం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Ganita Manjari Part 2",
+    "subject": "maths",
+    "topics": [
+      "Surface Area and Volume of Spheres, Cones, Cylinders"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch01",
+    "class": 10,
+    "chapterNumber": 1,
+    "name": {
+      "en": "Real Numbers",
+      "hi": "वास्तविक संख्याएँ",
+      "te": "వాస్తవ సంఖ్యలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Fundamental Theorem of Arithmetic",
+      "Revisiting Irrational Numbers"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch02",
+    "class": 10,
+    "chapterNumber": 2,
+    "name": {
+      "en": "Polynomials",
+      "hi": "बहुपद",
+      "te": "బహుపదులు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Geometrical Meaning of Zeroes",
+      "Relationship Between Zeroes and Coefficients"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch03",
+    "class": 10,
+    "chapterNumber": 3,
+    "name": {
+      "en": "Pair of Linear Equations in Two Variables",
+      "hi": "दो चरों वाले रैखिक समीकरण युग्म",
+      "te": "రెండు చరరాశులలో రేఖీయ సమీకరణాల జత",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Graphical Method",
+      "Substitution Method",
+      "Elimination Method"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch04",
+    "class": 10,
+    "chapterNumber": 4,
+    "name": {
+      "en": "Quadratic Equations",
+      "hi": "द्विघात समीकरण",
+      "te": "వర్గ సమీకరణాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Standard Form ax² + bx + c = 0",
+      "Solution by Factorisation",
+      "Quadratic Formula",
+      "Nature of Roots & Discriminant"
+    ],
+    "status": "full"
+  },
+  {
+    "id": "c10-ch05",
+    "class": 10,
+    "chapterNumber": 5,
+    "name": {
+      "en": "Arithmetic Progressions",
+      "hi": "समान्तर श्रेढ़ियाँ",
+      "te": "అంకశ్రేఢులు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "nth Term of an AP",
+      "Sum of First n Terms"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch06",
+    "class": 10,
+    "chapterNumber": 6,
+    "name": {
+      "en": "Triangles",
+      "hi": "त्रिभुज",
+      "te": "త్రిభుజాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Similar Figures",
+      "Basic Proportionality Theorem",
+      "Criteria for Similarity"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch07",
+    "class": 10,
+    "chapterNumber": 7,
+    "name": {
+      "en": "Coordinate Geometry",
+      "hi": "निर्देशांक ज्यामिति",
+      "te": "నిరూపక జ్యామితి",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Distance Formula",
+      "Section Formula"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch08",
+    "class": 10,
+    "chapterNumber": 8,
+    "name": {
+      "en": "Introduction to Trigonometry",
+      "hi": "त्रिकोणमिति का परिचय",
+      "te": "త్రికోణమితి పరిచయం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Trigonometric Ratios",
+      "Values of Specific Angles",
+      "Trigonometric Identities"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch09",
+    "class": 10,
+    "chapterNumber": 9,
+    "name": {
+      "en": "Some Applications of Trigonometry",
+      "hi": "त्रिकोणमिति के कुछ अनुप्रयोग",
+      "te": "త్రికోణమితి యొక్క కొన్ని అనువర్తనాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Heights and Distances",
+      "Angle of Elevation and Depression"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch10",
+    "class": 10,
+    "chapterNumber": 10,
+    "name": {
+      "en": "Circles",
+      "hi": "वृत्त",
+      "te": "వృత్తాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Tangent to a Circle",
+      "Number of Tangents from a Point"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch11",
+    "class": 10,
+    "chapterNumber": 11,
+    "name": {
+      "en": "Areas Related to Circles",
+      "hi": "वृत्तों से संबंधित क्षेत्रफल",
+      "te": "వృత్తాలకు సంబంధించిన వైశాల్యాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Area of Sector and Segment of a Circle"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch12",
+    "class": 10,
+    "chapterNumber": 12,
+    "name": {
+      "en": "Surface Areas and Volumes",
+      "hi": "पृष्ठीय क्षेत्रफल और आयतन",
+      "te": "ఉపరితల వైశాల్యాలు మరియు ఘనపరిమాణాలు",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Surface Area of Combination of Solids",
+      "Volume of Combination of Solids"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch13",
+    "class": 10,
+    "chapterNumber": 13,
+    "name": {
+      "en": "Statistics",
+      "hi": "सांख्यिकी",
+      "te": "సాంఖ్యక శాస్త్రం",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Mean of Grouped Data",
+      "Mode of Grouped Data",
+      "Median of Grouped Data"
+    ],
+    "status": "in_progress"
+  },
+  {
+    "id": "c10-ch14",
+    "class": 10,
+    "chapterNumber": 14,
+    "name": {
+      "en": "Probability",
+      "hi": "प्रायिकता",
+      "te": "సంభావ్యత",
+      "reviewed": false
+    },
+    "board": "ncert",
+    "bookName": "Mathematics",
+    "subject": "maths",
+    "topics": [
+      "Theoretical Probability",
+      "Elementary Events"
+    ],
+    "status": "in_progress"
+  }
+]
