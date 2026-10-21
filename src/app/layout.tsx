@@ -32,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#FAF8F5",
+  themeColor: "#fff7e6",
 };
 
 export default function RootLayout({
@@ -42,10 +42,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col editorial-paper font-sans text-margam-navy selection:bg-margam-terracotta selection:text-white">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-accent selection:text-white pb-16 sm:pb-0 overflow-x-hidden">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-margam-navy focus:text-white focus:rounded-md focus:shadow-lg focus:font-semibold text-sm"
+          className="skip-to-content"
         >
           Skip to main content
         </a>

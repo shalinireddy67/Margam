@@ -3,49 +3,144 @@
 @tailwind utilities;
 
 :root {
-  --bg-cream: #FAF8F5;
-  --bg-paper: #F4EFEA;
-  --bg-subtle: #EDE7DF;
-  --border-muted: #DED6CA;
-  --text-navy: #0B192C;
-  --text-muted: #475569;
-  --accent-terracotta: #C2410C;
-  --accent-amber: #D97706;
-  --mastery-emerald: #047857;
-  --mastery-bg: #ECFDF5;
-  --gap-rose: #BE123C;
-  --gap-bg: #FFF1F2;
+  --background: #fff7e6;
+  --foreground: #2f4a1e;
+  --card: #fffdf8;
+  --card-foreground: #2f4a1e;
+  --popover: #fffdf8;
+  --popover-foreground: #2f4a1e;
+  --primary: #6ca24a;
+  --primary-foreground: #fff7e6;
+  --secondary: #c7ddae;
+  --secondary-foreground: #2f4a1e;
+  --muted: #f5eedb;
+  --muted-foreground: #4b6833;
+  --accent: #f28c38;
+  --accent-foreground: #fff7e6;
+  --destructive: #d9483b;
+  --border: #d2e2be;
+  --input: #d2e2be;
+  --ring: #6ca24a;
+  --radius: 20px;
+  --surface: #fffdf8;
+  --surface-muted: #f3ebd8;
+
+  --shadow-warm-sm: 0 2px 8px -1px rgba(47, 74, 30, 0.08), 0 1px 4px -1px rgba(242, 140, 56, 0.04);
+  --shadow-warm: 0 8px 24px -4px rgba(47, 74, 30, 0.1), 0 3px 8px -2px rgba(242, 140, 56, 0.06);
+  --shadow-warm-lg: 0 16px 36px -6px rgba(47, 74, 30, 0.14), 0 6px 14px -3px rgba(242, 140, 56, 0.08);
+
+  --status-good: #3e8424;
+  --status-good-bg: #eaf5e1;
+  --status-good-border: #b7de9e;
+  --status-warn: #c26c15;
+  --status-warn-bg: #fff3da;
+  --status-warn-border: #fcd685;
+  --status-urgent: #c03527;
+  --status-urgent-bg: #feeceb;
+  --status-urgent-border: #f7b7c4;
+
+  --font-sans: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+
+.dark {
+  --background: #1c2d14;
+  --foreground: #fff7e6;
+  --card: #253c1b;
+  --card-foreground: #fff7e6;
+  --popover: #253c1b;
+  --popover-foreground: #fff7e6;
+  --surface: #253c1b;
+  --surface-muted: #2e4822;
+  --primary: #85c060;
+  --primary-foreground: #1c2d14;
+  --secondary: #355227;
+  --secondary-foreground: #fff7e6;
+  --muted: #2e4822;
+  --muted-foreground: #c2ddae;
+  --border: #3b5428;
+  --input: #3b5428;
+  --ring: #85c060;
 }
 
 @layer base {
+  * {
+    border-color: var(--border);
+  }
+
   body {
-    background-color: var(--bg-cream);
-    color: var(--text-navy);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Accessible focus indicators */
-  *:focus-visible {
-    outline: 2px solid var(--accent-terracotta);
-    outline-offset: 2px;
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  :focus-visible {
+    border-radius: 8px;
+    outline: 2.5px solid var(--ring) !important;
+    outline-offset: 2px !important;
+  }
+
+  .skip-to-content {
+    z-index: 9999;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: var(--shadow-warm);
+    border-radius: 9999px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 700;
+    text-decoration: underline;
+    transition: top 0.2s;
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+  }
+
+  .skip-to-content:focus {
+    top: 1rem;
   }
 }
 
-/* Subtle editorial paper texture effect */
-.editorial-paper {
-  background-color: #FAF8F5;
-  background-image: radial-gradient(#DED6CA 0.65px, transparent 0.65px);
-  background-size: 16px 16px;
+/* Botanical dots texture matching ShikshaGap */
+.botanical-dots {
+  background-image: radial-gradient(circle, rgba(108, 162, 74, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
-/* Print Styles for Single-Sheet A4 Worksheets */
+/* Sticker lift interaction */
+.sticker-lift {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+}
+
+.sticker-lift:hover {
+  box-shadow: var(--shadow-warm);
+  transform: translateY(-3px) rotate(-0.6deg);
+}
+
+/* Print Stylesheet for A4 Single-Sheet Worksheets */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
   body {
-    background: white !important;
-    color: black !important;
-    font-size: 12pt;
+    color: #000 !important;
+    background: #fff !important;
+    font-size: 14pt;
   }
 
   .no-print {
@@ -56,18 +151,18 @@
     display: block !important;
   }
 
-  .print-page {
+  .worksheet-a4 {
     page-break-after: always;
-    border: 1px solid #ccc;
-    padding: 1.5cm;
+    border: 1.5px solid #2f4a1e;
+    padding: 20mm;
     margin: 0;
     width: 100%;
     max-width: 210mm;
     min-height: 297mm;
+    background: white;
   }
 }
 
-/* Smooth motion respecting user preference */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

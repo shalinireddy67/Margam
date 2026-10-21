@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Users, Layers, Sliders, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
+import { Users, Layers, Sliders, CheckCircle2, ChevronRight, Sparkles, GraduationCap } from "lucide-react";
 import demoClassData from "../../data/demo-class.json";
 import { SupportedLanguage } from "@/lib/types";
 
@@ -27,10 +27,11 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
 
   const t = {
     en: {
+      sectionNum: "07 / TEACHERS REMAIN IN CONTROL",
       badge: "Empowered, Not Replaced",
-      headline: "Teachers Remain in Full Control",
+      headline: "Classroom Clustering & Teacher Agency",
       subhead:
-        "Algorithms should inform educators, never dictate to them. Margam turns scattered test scores into clear, actionable classroom groups so teachers can conduct focused 10-minute interventions.",
+        "Algorithms inform educators, never dictate to them. Margam turns scattered diagnostic marks into clear, actionable classroom clusters so teachers can conduct focused 10-minute interventions.",
       pillar1: "Class-Wide Mastery Heatmap",
       pillar1Desc:
         "Instantly see which concepts the entire class has mastered, and where hidden prerequisite bottlenecks lie across grade levels.",
@@ -45,8 +46,9 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
         "Based on synthetic demo dataset in data/demo-class.json. Full Teacher Dashboard arrives in Phase 3.",
     },
     hi: {
+      sectionNum: "07 / शिक्षक ही मुख्य निर्णयकर्ता हैं",
       badge: "सशक्तिकरण, प्रतिस्थापन नहीं",
-      headline: "शिक्षक ही मुख्य निर्णयकर्ता हैं",
+      headline: "कक्षा समूहन और शिक्षक की स्वायत्तता",
       subhead:
         "एल्गोरिदम को शिक्षकों का मार्गदर्शन करना चाहिए, उन पर हावी नहीं होना चाहिए। मार्गम् बिखरे हुए अंकों को स्पष्ट समूहों में बदलता है ताकि शिक्षक 10 मिनट के प्रभावी सत्र ले सकें।",
       pillar1: "कक्षा-वार दक्षता हीटमैप",
@@ -62,8 +64,9 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
       demoSubtitle: "data/demo-class.json पर आधारित। पूर्ण शिक्षक डैशबोर्ड चरण 3 में उपलब्ध होगा।",
     },
     te: {
-      badge: "ఉపాధ్యాయుల చేతుల్లోనే నియంత్రణ",
-      headline: "ఉపాధ్యాయుడికి సహాయకారి, ప్రత్యామ్నాయం కాదు",
+      sectionNum: "07 / ఉపాధ్యాయుల చేతుల్లోనే నియంత్రణ",
+      badge: "ఉపాధ్యాయుడికి సహాయకారి, ప్రత్యామ్నాయం కాదు",
+      headline: "తరగతి గది బృంద విభజన & ఉపాధ్యాయ ప్రాధాన్యత",
       subhead:
         "సాంకేతికత ఉపాధ్యాయుడికి తోడ్పడాలి కానీ బోధనను శాసించకూడదు. మార్గం విద్యార్థుల సమస్యలను స్పష్టమైన గ్రూపులుగా విభజించి 10 నిమిషాల లక్ష్య కేంద్రీకృత బోధనకు సహాయపడుతుంది.",
       pillar1: "తరగతి సమగ్ర హీట్‌మ్యాప్",
@@ -81,168 +84,168 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
   }[currentLang];
 
   return (
-    <section id="teachers" className="py-16 md:py-24 bg-margam-cream border-b border-margam-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-        {/* Header */}
-        <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-margam-terracotta inline-block" />
-            <span className="text-xs font-bold uppercase tracking-widest text-margam-terracotta">
-              06 / {t.badge}
-            </span>
+    <section id="teachers" className="px-4 sm:px-8 py-14 max-w-7xl mx-auto">
+      {/* Section Header */}
+      <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-primary font-bold mb-4">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+          <path d="M 4 20 C 6 12 14 5 21 3 C 21 11 15 19 4 20 Z" fill="#6CA24A" />
+          <path d="M 6 18 Q 13 13 19 5" stroke="#FFF7E6" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+        <span>{t.sectionNum}</span>
+      </div>
+
+      <div className="max-w-3xl mb-10 space-y-3">
+        <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+          {t.headline}
+        </h2>
+        <p className="text-foreground/80 text-sm sm:text-base leading-relaxed">
+          {t.subhead}
+        </p>
+      </div>
+
+      {/* 3 Pillars */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-3.5 shadow-warm">
+          <div className="w-10 h-10 rounded-full bg-[#EAF5E1] border border-[#B7DE9E] text-primary flex items-center justify-center font-bold">
+            <Layers className="w-5 h-5" />
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-margam-navy leading-tight">
-            {t.headline}
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-margam-navy/80 leading-relaxed">
-            {t.subhead}
+          <h3 className="font-heading text-lg font-bold text-foreground">
+            {t.pillar1}
+          </h3>
+          <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+            {t.pillar1Desc}
           </p>
         </div>
 
-        {/* 3 Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 space-y-3 shadow-card">
-            <div className="w-10 h-10 rounded-xl bg-orange-100 text-margam-terracotta flex items-center justify-center font-bold">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h3 className="font-serif text-lg font-bold text-margam-navy">
-              {t.pillar1}
-            </h3>
-            <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-              {t.pillar1Desc}
-            </p>
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-3.5 shadow-warm">
+          <div className="w-10 h-10 rounded-full bg-[#FFF3DA] border border-[#FCD685] text-accent flex items-center justify-center font-bold">
+            <Users className="w-5 h-5" />
           </div>
-
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 space-y-3 shadow-card">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 text-margam-amber flex items-center justify-center font-bold">
-              <Users className="w-5 h-5" />
-            </div>
-            <h3 className="font-serif text-lg font-bold text-margam-navy">
-              {t.pillar2}
-            </h3>
-            <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-              {t.pillar2Desc}
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 space-y-3 shadow-card">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 text-margam-emerald flex items-center justify-center font-bold">
-              <Sliders className="w-5 h-5" />
-            </div>
-            <h3 className="font-serif text-lg font-bold text-margam-navy">
-              {t.pillar3}
-            </h3>
-            <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-              {t.pillar3Desc}
-            </p>
-          </div>
+          <h3 className="font-heading text-lg font-bold text-foreground">
+            {t.pillar2}
+          </h3>
+          <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+            {t.pillar2Desc}
+          </p>
         </div>
 
-        {/* Synthetic Grouping Engine Demo */}
-        <div className="rounded-2xl border-2 border-margam-border bg-white p-6 sm:p-8 space-y-6 shadow-card">
-          <div className="flex flex-wrap items-center justify-between border-b border-margam-border pb-4 gap-3">
-            <div>
-              <span className="text-xs font-mono font-bold uppercase text-margam-terracotta">
-                Classroom Grouping Engine
-              </span>
-              <h3 className="font-serif text-xl font-bold text-margam-navy">
-                {t.demoTitle}
-              </h3>
-            </div>
-            <span className="text-xs font-mono bg-margam-cream-paper border border-margam-border text-slate-700 px-3 py-1 rounded-full font-bold">
-              Teacher: Mrs. Lakshmi Devi
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-3.5 shadow-warm">
+          <div className="w-10 h-10 rounded-full bg-[#EAF5E1] border border-[#B7DE9E] text-[#3E8424] flex items-center justify-center font-bold">
+            <Sliders className="w-5 h-5" />
+          </div>
+          <h3 className="font-heading text-lg font-bold text-foreground">
+            {t.pillar3}
+          </h3>
+          <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+            {t.pillar3Desc}
+          </p>
+        </div>
+      </div>
+
+      {/* Synthetic Grouping Engine Demo */}
+      <div className="rounded-[24px] border-2 border-[#C7DDAE] bg-card p-6 sm:p-8 space-y-6 shadow-warm">
+        <div className="flex flex-wrap items-center justify-between border-b border-[#C7DDAE]/60 pb-4 gap-3">
+          <div>
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-accent">
+              Classroom Grouping Engine
+            </span>
+            <h3 className="font-heading text-xl font-bold text-foreground mt-0.5">
+              {t.demoTitle}
+            </h3>
+          </div>
+          <span className="text-xs font-mono bg-background border border-[#C7DDAE] text-foreground/80 px-3 py-1 rounded-full font-bold">
+            Teacher: Mrs. Lakshmi Devi
+          </span>
+        </div>
+
+        {/* Group Switcher Tabs */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setActiveGroupTab("integers")}
+            className={`px-4 py-2 rounded-[14px] text-xs font-heading font-bold transition-all cursor-pointer ${
+              activeGroupTab === "integers"
+                ? "bg-[#FFF3DA] text-accent border-2 border-[#FCD685] shadow-warm-sm scale-[1.01]"
+                : "bg-background border-2 border-[#C7DDAE]/60 text-foreground/80 hover:border-primary"
+            }`}
+          >
+            Group A: Signed Integer Operations ({integerGapStudents.length} Students)
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveGroupTab("transposition")}
+            className={`px-4 py-2 rounded-[14px] text-xs font-heading font-bold transition-all cursor-pointer ${
+              activeGroupTab === "transposition"
+                ? "bg-[#EAF5E1] text-primary border-2 border-[#B7DE9E] shadow-warm-sm scale-[1.01]"
+                : "bg-background border-2 border-[#C7DDAE]/60 text-foreground/80 hover:border-primary"
+            }`}
+          >
+            Group B: Variable Transposition ({transpositionStudents.length} Students)
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveGroupTab("fractions")}
+            className={`px-4 py-2 rounded-[14px] text-xs font-heading font-bold transition-all cursor-pointer ${
+              activeGroupTab === "fractions"
+                ? "bg-[#EAF5E1] text-[#3E8424] border-2 border-[#B7DE9E] shadow-warm-sm scale-[1.01]"
+                : "bg-background border-2 border-[#C7DDAE]/60 text-foreground/80 hover:border-primary"
+            }`}
+          >
+            Group C: Fraction Denominators ({fractionStudents.length} Students)
+          </button>
+        </div>
+
+        {/* Group Student Cards */}
+        <div className="bg-background rounded-[18px] p-5 border border-[#C7DDAE] space-y-4">
+          <div className="flex flex-wrap items-center justify-between text-xs font-bold gap-2">
+            <span className="text-foreground">
+              Identified Students Needing Focused 10-Minute Remediation:
+            </span>
+            <span className="text-accent bg-[#FFF3DA] px-2.5 py-0.5 rounded-full border border-[#FCD685]">
+              Recommended Action: 10-Min Kirana Model Group Activity
             </span>
           </div>
 
-          {/* Group Switcher Tabs */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveGroupTab("integers")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activeGroupTab === "integers"
-                  ? "bg-rose-100 text-rose-900 border-2 border-rose-300 shadow-xs"
-                  : "bg-margam-cream-paper border border-margam-border text-margam-slate hover:text-margam-navy"
-              }`}
-            >
-              Group A: Signed Integer Operations ({integerGapStudents.length} Students)
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveGroupTab("transposition")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activeGroupTab === "transposition"
-                  ? "bg-amber-100 text-amber-900 border-2 border-amber-300 shadow-xs"
-                  : "bg-margam-cream-paper border border-margam-border text-margam-slate hover:text-margam-navy"
-              }`}
-            >
-              Group B: Variable Transposition ({transpositionStudents.length} Students)
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveGroupTab("fractions")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activeGroupTab === "fractions"
-                  ? "bg-blue-100 text-blue-900 border-2 border-blue-300 shadow-xs"
-                  : "bg-margam-cream-paper border border-margam-border text-margam-slate hover:text-margam-navy"
-              }`}
-            >
-              Group C: Fraction Denominators ({fractionStudents.length} Students)
-            </button>
-          </div>
-
-          {/* Group Student Cards */}
-          <div className="bg-margam-cream-paper rounded-xl p-5 border border-margam-border space-y-4">
-            <div className="flex items-center justify-between text-xs font-bold">
-              <span className="text-margam-navy">
-                Identified Students Needing Focused 10-Minute Remediation:
-              </span>
-              <span className="text-margam-terracotta">
-                Recommended Action: 10-Min Kirana Model Group Activity
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-              {(activeGroupTab === "integers"
-                ? integerGapStudents
-                : activeGroupTab === "transposition"
-                ? transpositionStudents
-                : fractionStudents
-              ).map((student) => (
-                <div
-                  key={student.id}
-                  className="bg-white p-3.5 rounded-xl border border-margam-border shadow-xs space-y-1.5"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-margam-navy">
-                      {student.name}
-                    </span>
-                    <span className="text-[10px] font-mono text-margam-slate bg-gray-100 px-1.5 py-0.5 rounded">
-                      Roll #{student.rollNumber}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-margam-slate line-clamp-2">
-                    {student.diagnosedRootGap?.rationale}
-                  </div>
-                  <div className="pt-1 flex items-center justify-between text-[10px] font-mono">
-                    <span className="text-margam-terracotta font-semibold">
-                      Prereq: {student.diagnosedRootGap?.rootPrerequisiteId}
-                    </span>
-                    <span className="uppercase text-slate-500 font-bold">
-                      {student.diagnosedRootGap?.recommendedVariant}
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {(activeGroupTab === "integers"
+              ? integerGapStudents
+              : activeGroupTab === "transposition"
+              ? transpositionStudents
+              : fractionStudents
+            ).map((student) => (
+              <div
+                key={student.id}
+                className="bg-card p-4 rounded-[14px] border border-[#C7DDAE] shadow-warm-sm space-y-2 hover:border-primary transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-heading font-bold text-xs text-foreground">
+                    {student.name}
+                  </span>
+                  <span className="text-[10px] font-mono text-muted-foreground bg-background px-2 py-0.5 rounded-full border border-[#C7DDAE]">
+                    Roll #{student.rollNumber}
+                  </span>
                 </div>
-              ))}
-            </div>
+                <div className="text-[11px] text-foreground/80 line-clamp-2 font-sans">
+                  {student.diagnosedRootGap?.rationale}
+                </div>
+                <div className="pt-1.5 border-t border-[#C7DDAE]/40 flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-accent font-bold">
+                    Prereq: {student.diagnosedRootGap?.rootPrerequisiteId}
+                  </span>
+                  <span className="uppercase text-muted-foreground font-bold">
+                    {student.diagnosedRootGap?.recommendedVariant}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <p className="text-[11px] text-margam-slate text-center italic">
-            {t.demoSubtitle}
-          </p>
         </div>
+
+        <p className="text-[11px] text-muted-foreground text-center font-sans">
+          {t.demoSubtitle}
+        </p>
       </div>
     </section>
   );

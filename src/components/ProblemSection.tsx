@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { AlertCircle, ArrowDown, HelpCircle, Lightbulb, Zap, TrendingUp } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 
 interface ProblemSectionProps {
@@ -11,191 +10,154 @@ interface ProblemSectionProps {
 export default function ProblemSection({ currentLang }: ProblemSectionProps) {
   const t = {
     en: {
-      badge: "The Indian Classroom Dilemma",
-      headline: "A student scores 38% on a Class 9 Polynomials test.",
-      quote:
-        "The mark confirms struggle, but completely conceals the root cause. Giving 40 more quadratic factoring problems only compounds frustration.",
-      traditionalTitle: "The Conventional Approach: Blind Repetition",
-      traditionalDesc:
-        "When an Indian student fails polynomial factorization, standard practice is to assign additional chapter drill. But if the student cannot determine whether (-3) × (+2) is -6 or +6, repeating Class 9 problems only deepens anxiety.",
-      margamTitle: "The Margam Solution: Prerequisite Backtracking",
-      margamDesc:
-        "Margam traverses backwards across the curriculum DAG. Within 4 minutes, it traces the breakdown past Class 8 linear terms back to Class 7 signed integer rules. A 10-minute targeted remediation unlocks the entire high-school chapter.",
-      stat1: "2 Academic Years",
-      stat1Desc: "Average grade distance between an apparent failure and its root prerequisite gap",
-      stat2: "45+ Students",
-      stat2Desc: "Typical Indian classroom size where a teacher cannot manually diagnose every gap",
-      stat3: "10 Minutes",
-      stat3Desc: "Targeted remedial time needed to close an identified foundational gap",
+      sectionNum: "02 / THE CLASSROOM DILEMMA",
+      problemTag: "THE PROBLEM",
+      quote: "A student scores 38% on a Class 9 Polynomials test. The mark confirms struggle, but conceals the root cause.",
+      contextTag: "DESIGNED FOR INDIAN MIDDLE & HIGH SCHOOL CLASSROOMS",
+      card1Tag: "The Dilemma",
+      card1Title: "Repeating current class problems creates frustration.",
+      card1Desc: "When a Class 9 student fails polynomial middle-term factoring (x² - x - 6), giving 20 more quadratic equations fails. The real gap is almost always in Class 7 integer sign rules: (-3) × (+2) = -6, but (-3) + 2 = -1.",
+      card2Tag: "The AI Agent Solution",
+      card2Title: "Traces the prerequisite gap and generates a 5-day plan.",
+      card2Desc: "Margam backtracks through the curriculum DAG to identify whether the missing link began in Class 7 or Class 8, then produces a concrete 5-day classroom plan with single-sheet A4 paper printouts.",
     },
     hi: {
-      badge: "भारतीय कक्षाओं की वास्तविक समस्या",
-      headline: "कक्षा 9 के बहुपद परीक्षण में एक छात्र को 38% अंक मिलते हैं।",
-      quote:
-        "यह अंक संघर्ष की पुष्टि तो करता है, परंतु मूल कारण को छिपा देता है। 40 और द्विघात समीकरण हल करने के लिए देना केवल निराशा बढ़ाता है।",
-      traditionalTitle: "पारंपरिक दृष्टिकोण: अंधी पुनरावृत्ति",
-      traditionalDesc:
-        "जब कोई छात्र बहुपद गुणनखंड में असफल होता है, तो सामान्य अभ्यास उसी अध्याय के और प्रश्न देना होता है। लेकिन यदि छात्र यह नहीं जानता कि (-3) × (+2) का मान -6 है या +6, तो अधिक प्रश्न देने से केवल घबराहट बढ़ती है।",
-      margamTitle: "मार्गम् समाधान: पूर्वापेक्षा का पता लगाना",
-      margamDesc:
-        "मार्गम् पाठ्यक्रम DAG में पीछे की ओर खोज करता है। 4 मिनट में यह पता लगा लेता है कि समस्या कक्षा 7 के पूर्णांक चिह्न नियमों में है। 10 मिनट का लक्षित शिक्षण पूरे अध्याय को सुगम बना देता है।",
-      stat1: "2 शैक्षणिक वर्ष",
-      stat1Desc: "स्पष्ट विफलता और उसके मूल कारण के बीच औसत कक्षा का अंतर",
-      stat2: "45+ विद्यार्थी",
-      stat2Desc: "कक्षा का सामान्य आकार जहाँ शिक्षक अकेले हर विद्यार्थी की कमी नहीं पहचान सकता",
-      stat3: "10 मिनट",
-      stat3Desc: "पहचाने गए बुनियादी अंतर को भरने के लिए आवश्यक लक्षित समय",
+      sectionNum: "02 / कक्षा का असमंजस",
+      problemTag: "मुख्य समस्या",
+      quote: "कक्षा 9 के बहुपद टेस्ट में छात्र 38% अंक लाता है। अंक विफलता दर्शाते हैं, परंतु मूल कारण छिपा देते हैं।",
+      contextTag: "भारतीय माध्यमिक विद्यालयों के लिए डिज़ाइन किया गया",
+      card1Tag: "पारंपरिक दुविधा",
+      card1Title: "वर्तमान कक्षा के ही और प्रश्न देने से हताशा बढ़ती है।",
+      card1Desc: "जब कोई कक्षा 9 का छात्र गुणनखंड (x² - x - 6) नहीं कर पाता, तो 20 और प्रश्न देना विफल रहता है। वास्तविक अंतर कक्षा 7 के पूर्णांक चिह्न नियमों में होता है।",
+      card2Tag: "AI एजेंट समाधान",
+      card2Title: "बुनियादी कमी का पता लगाकर 5-दिवसीय योजना बनाता है।",
+      card2Desc: "मार्गम् पाठ्यक्रम DAG में पीछे जाकर यह पता लगाता है कि कमी कक्षा 7 या 8 में कहाँ से शुरू हुई, फिर एकल-पृष्ठ प्रिंटआउट के साथ 5-दिवसीय योजना तैयार करता है।",
     },
     te: {
-      badge: "భారతీయ తరగతి గదులలోని ప్రధాన సమస్య",
-      headline: "9వ తరగతి బహుపదుల పరీక్షలో ఒక విద్యార్థికి 38% మార్కులు వచ్చాయి.",
-      quote:
-        "ఈ మార్కులు విద్యార్థి ఇబ్బందిని నిర్ధారిస్తాయి, కానీ అసలు మూలకారణాన్ని దాచిపెడతాయి. మరో 40 వర్గ సమీకరణాల హోమ్‌వర్క్ ఇవ్వడం వలన నిరాశ పెరుగుతుంది తప్ప ఫలితం ఉండదు.",
-      traditionalTitle: "సాంప్రదాయ పద్ధతి: గుడ్డిగా మరిన్ని లెక్కలు ఇవ్వడం",
-      traditionalDesc:
-        "బహుపదుల కారణాంక విభజన రాకపోతే, ఉపాధ్యాయులు సాధారణంగా అదే పాఠం నుండి మరిన్ని లెక్కలు ఇస్తారు. కానీ విద్యార్థికి (-3) × (+2) = -6 అవుతుందో కాదో తెలియకపోతే, 9వ తరగతి లెక్కలను మళ్ళీ మళ్ళీ చేయడం వలన భయం మరింత పెరుగుతుంది.",
-      margamTitle: "మార్గం పరిష్కారం: కాన్సెప్ట్ బ్యాక్‌ట్రాకింగ్",
-      margamDesc:
-        "మార్గం పాఠ్యప్రణాళిక DAG ద్వారా వెనుకకు వెళ్లి విశ్లేషిస్తుంది. 4 నిమిషాల్లో సమస్య 7వ తరగతి పూర్ణ సంఖ్యల సంకేత నియమాలలో ఉందని గుర్తిస్తుంది. 10 నిమిషాల నిర్దిష్ట వివరణతో విద్యార్థికి పూర్తి అధ్యాయం సులభమవుతుంది.",
-      stat1: "2 విద్యా సంవత్సరాలు",
-      stat1Desc: "విద్యార్థి కనబరిచే సమస్య మరియు దాని అసలు మూల లోపం మధ్య ఉండే సగటు తరగతి అంతరం",
-      stat2: "45+ విద్యార్థులు",
-      stat2Desc: "ఉపాధ్యాయుడు ప్రతి విద్యార్థి వ్యక్తిగత లోపాన్ని విడిగా గమనించలేని తరగతి పరిమాణం",
-      stat3: "10 నిమిషాలు",
-      stat3Desc: "గుర్తించిన ప్రాథమిక లోపాన్ని సరిదిద్దడానికి అవసరమైన సమయం",
+      sectionNum: "02 / తరగతి గది సమస్య",
+      problemTag: "ప్రధాన సమస్య",
+      quote: "9వ తరగతి బహుపదుల పరీక్షలో విద్యార్థికి 38% మార్కులు వచ్చాయి. మార్కులు సమస్యను చూపుతాయి కానీ మూల కారణాన్ని దాచిపెడతాయి.",
+      contextTag: "భారతీయ ఉన్నత పాఠశాలల కోసం ప్రత్యేక రూపకల్పన",
+      card1Tag: "సాంప్రదాయ సందిగ్ధత",
+      card1Title: "అదే తరగతి లెక్కలను మళ్ళీ ఇవ్వడం వలన నిరాశ పెరుగుతుంది.",
+      card1Desc: "విద్యార్థి వర్గ సమీకరణాల కారణాంక విభజన (x² - x - 6) చేయలేకపోతే, మరిన్ని లెక్కలు ఇచ్చినా ఫలితం ఉండదు. అసలు లోపం 7వ తరగతి పూర్ణ సంఖ్యల సంకేత నియమాలలో ఉంటుంది.",
+      card2Tag: "AI ఏజెంట్ పరిష్కారం",
+      card2Title: "పునాది లోపాన్ని గుర్తించి 5 రోజుల బోధనా ప్రణాళికను అందిస్తుంది.",
+      card2Desc: "మార్గం DAG ద్వారా వెనుకకు వెళ్లి 7వ తరగతి లేదా 8వ తరగతి లోపాన్ని కనుగొని, 1-పేజీ A4 వర్క్‌షీట్‌లతో స్పష్టమైన 5 రోజుల ప్రణాళికను తయారుచేస్తుంది.",
     },
   }[currentLang];
 
   return (
-    <section id="problem" className="py-16 md:py-24 bg-white border-b border-margam-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-margam-terracotta inline-block" />
-            <span className="text-xs font-bold uppercase tracking-widest text-margam-terracotta">
-              01 / {t.badge}
-            </span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-margam-navy leading-tight">
-            {t.headline}
-          </h2>
-          <blockquote className="border-l-4 border-margam-terracotta pl-4 text-base sm:text-lg text-margam-navy/85 italic font-serif">
-            &ldquo;{t.quote}&rdquo;
+    <section id="problem" className="px-4 sm:px-8 py-14 max-w-7xl mx-auto">
+      {/* Numbered Section Label */}
+      <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-primary font-bold mb-4">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+          <path d="M 4 20 C 6 12 14 5 21 3 C 21 11 15 19 4 20 Z" fill="#6CA24A" />
+          <path d="M 6 18 Q 13 13 19 5" stroke="#FFF7E6" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+        <span>{t.sectionNum}</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Big Blockquote */}
+        <div className="lg:col-span-5 border-l-4 border-primary pl-5 py-2">
+          <span className="text-xs font-sans uppercase tracking-widest text-accent font-bold block mb-2">
+            {t.problemTag}
+          </span>
+          <blockquote className="font-heading text-2xl sm:text-3xl lg:text-4xl leading-tight text-foreground">
+            {t.quote}
           </blockquote>
-        </div>
-
-        {/* Comparison Cards: Traditional vs Margam */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Card 1: Traditional Drill Fallacy */}
-          <div className="rounded-2xl border-2 border-rose-200 bg-rose-50/50 p-6 sm:p-8 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-200">
-                  <AlertCircle className="w-3.5 h-3.5 text-rose-600" />
-                  <span>The Traditional Drill Fallacy</span>
-                </span>
-                <span className="text-xs font-mono font-bold text-rose-900 bg-white px-2 py-0.5 rounded border border-rose-200">
-                  Class 9 Score: 38%
-                </span>
-              </div>
-
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-rose-950">
-                {t.traditionalTitle}
-              </h3>
-
-              <p className="text-sm text-rose-900/90 leading-relaxed font-sans">
-                {t.traditionalDesc}
-              </p>
-            </div>
-
-            {/* Visual Equation Breakdown Error */}
-            <div className="bg-white rounded-xl p-4 border border-rose-200 space-y-3 font-mono text-xs">
-              <div className="text-slate-600 font-sans font-bold flex items-center justify-between">
-                <span>Problem: Factorise x² - x - 6</span>
-                <span className="text-rose-600 font-bold">Failed Attempt</span>
-              </div>
-              <div className="p-3 bg-rose-50 rounded-lg text-rose-900 space-y-1">
-                <div>Student wrote: (x + 3)(x - 2)</div>
-                <div className="text-rose-600 text-[11px]">
-                  ✗ Error: (+3) × (-2) = -6, but (+3) + (-2) = +1 (Expected -1).
-                </div>
-              </div>
-              <div className="text-[11px] text-slate-500 font-sans italic">
-                Teacher conclusion: &ldquo;Needs more factoring practice.&rdquo; (Wrong diagnosis)
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Margam DAG Solution */}
-          <div className="rounded-2xl border-2 border-emerald-300 bg-emerald-50/50 p-6 sm:p-8 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-200">
-                  <Lightbulb className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>The Margam Breakthrough</span>
-                </span>
-                <span className="text-xs font-mono font-bold text-emerald-900 bg-white px-2 py-0.5 rounded border border-emerald-200">
-                  Backtracked in 4 Min
-                </span>
-              </div>
-
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-emerald-950">
-                {t.margamTitle}
-              </h3>
-
-              <p className="text-sm text-emerald-900/90 leading-relaxed font-sans">
-                {t.margamDesc}
-              </p>
-            </div>
-
-            {/* Visual Prerequisite Resolution */}
-            <div className="bg-white rounded-xl p-4 border border-emerald-200 space-y-3 font-mono text-xs">
-              <div className="text-slate-600 font-sans font-bold flex items-center justify-between">
-                <span>DAG Backtracking Diagnostic Result</span>
-                <span className="text-emerald-700 font-bold">Root Gap Pinpointed</span>
-              </div>
-              <div className="p-3 bg-emerald-50 rounded-lg text-emerald-950 space-y-1">
-                <div className="font-bold">c7-int-02: Integer Addition & Sign Rules</div>
-                <div className="text-emerald-800 text-[11px]">
-                  ✓ Prescription: 10-minute Kirana Debt/Credit visual model on adding signed values.
-                </div>
-              </div>
-              <div className="text-[11px] text-emerald-800 font-sans font-semibold flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5 text-margam-amber" />
-                <span>Result: Unlocks Class 8 Transposition & Class 9 Polynomials immediately.</span>
-              </div>
-            </div>
+          <div className="mt-4 text-xs font-sans text-muted-foreground flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+              <rect x="4" y="9" width="16" height="11" rx="2.5" fill="#6CA24A" />
+              <rect x="3" y="6" width="18" height="4" rx="2" fill="#6CA24A" />
+              <rect x="10.5" y="6" width="3" height="14" fill="#F4C542" />
+            </svg>
+            <span>{t.contextTag}</span>
           </div>
         </div>
 
-        {/* 3 Vital Statistics */}
-        <div className="pt-6 border-t border-margam-border grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-5 rounded-xl bg-margam-cream-paper border border-margam-border space-y-1">
-            <div className="font-serif text-3xl font-black text-margam-terracotta">
-              {t.stat1}
+        {/* Right 2 Editorial Cards */}
+        <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Card 1: The Dilemma */}
+          <div className="rounded-[24px] border border-[#F7B7C4] bg-[#F7B7C4]/20 p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-warm transition-all duration-200">
+            <div>
+              <div className="text-xs font-sans uppercase tracking-wider text-accent font-bold mb-1">
+                {t.card1Tag}
+              </div>
+              <h3 className="font-heading text-lg font-bold text-foreground mb-2">
+                {t.card1Title}
+              </h3>
+              <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed mb-4">
+                {t.card1Desc}
+              </p>
             </div>
-            <p className="text-xs text-margam-slate leading-relaxed font-sans">
-              {t.stat1Desc}
-            </p>
+
+            {/* Visual SVG Card */}
+            <div className="pt-2 flex justify-center">
+              <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-[240px] h-auto drop-shadow-xs">
+                <rect x="20" y="20" width="240" height="140" rx="8" fill="#C6C7C4" stroke="#2F4A1E" strokeWidth="4" />
+                <rect x="30" y="30" width="220" height="120" rx="4" fill="#253C1B" stroke="#2F4A1E" strokeWidth="2.5" />
+                <circle cx="85" cy="90" r="38" stroke="#F56276" strokeWidth="5" strokeDasharray="14 7" fill="none" />
+                <text x="85" y="100" textAnchor="middle" fill="#F56276" fontFamily="var(--font-heading)" fontSize="28" fontWeight="bold">38%</text>
+                <g transform="translate(145, 55)">
+                  <rect x="0" y="0" width="95" height="30" rx="4" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="2.5" />
+                  <text x="47" y="20" textAnchor="middle" fill="#2F4A1E" fontFamily="ui-monospace, monospace" fontSize="11" fontWeight="bold">x² - x - 6</text>
+                </g>
+                <g transform="translate(145, 95)">
+                  <rect x="0" y="0" width="95" height="30" rx="4" fill="#EEF0F2" stroke="#F56276" strokeWidth="2.5" />
+                  <text x="47" y="20" textAnchor="middle" fill="#F56276" fontFamily="ui-monospace, monospace" fontSize="10" fontWeight="bold">Sign Mistake (?)</text>
+                </g>
+              </svg>
+            </div>
           </div>
 
-          <div className="p-5 rounded-xl bg-margam-cream-paper border border-margam-border space-y-1">
-            <div className="font-serif text-3xl font-black text-margam-navy">
-              {t.stat2}
+          {/* Card 2: The AI Agent Solution */}
+          <div className="rounded-[24px] border border-[#6CA24A]/40 bg-[#C7DDAE]/30 p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-warm transition-all duration-200">
+            <div>
+              <div className="text-xs font-sans uppercase tracking-wider text-primary font-bold mb-1">
+                {t.card2Tag}
+              </div>
+              <h3 className="font-heading text-lg font-bold text-foreground mb-2">
+                {t.card2Title}
+              </h3>
+              <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed mb-4">
+                {t.card2Desc}
+              </p>
             </div>
-            <p className="text-xs text-margam-slate leading-relaxed font-sans">
-              {t.stat2Desc}
-            </p>
-          </div>
 
-          <div className="p-5 rounded-xl bg-margam-cream-paper border border-margam-border space-y-1">
-            <div className="font-serif text-3xl font-black text-margam-emerald">
-              {t.stat3}
+            {/* Visual DAG & 5-Day Plan SVG */}
+            <div className="pt-2 flex justify-center">
+              <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-[240px] h-auto drop-shadow-xs">
+                <rect x="25" y="18" width="230" height="144" rx="6" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="4" />
+                <rect x="25" y="18" width="230" height="26" rx="6" fill="#A2999E" stroke="#2F4A1E" strokeWidth="2.5" />
+                <circle cx="45" cy="31" r="4.5" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="2" />
+                <circle cx="62" cy="31" r="4.5" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="2" />
+                <circle cx="79" cy="31" r="4.5" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="2" />
+
+                {/* Nodes C7 -> C8 -> C9 */}
+                <g transform="translate(45, 60)">
+                  <circle cx="22" cy="30" r="16" fill="#EEF0F2" stroke="#2F4A1E" strokeWidth="3" />
+                  <text x="22" y="34" textAnchor="middle" fill="#2F4A1E" fontFamily="var(--font-heading)" fontSize="11" fontWeight="bold">C7</text>
+                  <line x1="38" y1="30" x2="68" y2="30" stroke="#F56276" strokeWidth="3" strokeDasharray="4 2" />
+                  <polygon points="70,30 62,26 62,34" fill="#F56276" />
+                  <circle cx="86" cy="30" r="16" fill="#C6C7C4" stroke="#2F4A1E" strokeWidth="3" />
+                  <text x="86" y="34" textAnchor="middle" fill="#2F4A1E" fontFamily="var(--font-heading)" fontSize="11" fontWeight="bold">C8</text>
+                  <line x1="102" y1="30" x2="132" y2="30" stroke="#6CA24A" strokeWidth="3" />
+                  <polygon points="134,30 126,26 126,34" fill="#6CA24A" />
+                  <circle cx="150" cy="30" r="16" fill="#6CA24A" stroke="#2F4A1E" strokeWidth="3" />
+                  <text x="150" y="34" textAnchor="middle" fill="#FFF7E6" fontFamily="var(--font-heading)" fontSize="11" fontWeight="bold">C9</text>
+                </g>
+
+                {/* Plan checklist preview */}
+                <g transform="translate(50, 115)">
+                  <rect x="0" y="0" width="14" height="14" rx="3" fill="#6CA24A" stroke="#2F4A1E" strokeWidth="2" />
+                  <path d="M 3 7 L 6 10 L 11 3" stroke="#FFF7E6" strokeWidth="2" strokeLinecap="round" fill="none" />
+                  <line x1="22" y1="7" x2="140" y2="7" stroke="#2F4A1E" strokeWidth="2.5" strokeLinecap="round" />
+                  <line x1="22" y1="16" x2="110" y2="16" stroke="#2F4A1E" strokeWidth="2" strokeLinecap="round" />
+                </g>
+              </svg>
             </div>
-            <p className="text-xs text-margam-slate leading-relaxed font-sans">
-              {t.stat3Desc}
-            </p>
           </div>
         </div>
       </div>

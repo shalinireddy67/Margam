@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Search, Shuffle, CheckCircle, ArrowRight, RotateCw, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 
 interface ApproachSectionProps {
@@ -11,164 +11,220 @@ interface ApproachSectionProps {
 export default function ApproachSection({ currentLang }: ApproachSectionProps) {
   const t = {
     en: {
-      badge: "The Central Learning Loop",
-      headline: "Diagnose → Adapt → Check Again",
-      subhead:
-        "Margam replaces blind repetition with a continuous, explainable three-step cycle that respects each student's pace while keeping the teacher informed.",
-      step1Title: "1. DIAGNOSE",
-      step1Subtitle: "Pinpoints the root prerequisite in 6 questions",
-      step1Desc:
-        "A short diagnostic tests the current chapter skill. When a mistake occurs, deterministic mistake tags classify the error type (such as sign inversion or like-term confusion) and trace backwards along the NCERT DAG to find the exact prerequisite breakdown.",
-      step2Title: "2. ADAPT",
-      step2Subtitle: "Adapts Learn, Solve, and Test simultaneously",
-      step2Desc:
-        "Margam selects the appropriate learning variant: Basics-first with concrete Indian models (Kirana debts, weighing balances), Standard with formal steps, or Fast-track with mental shortcuts. Practice questions adapt difficulty deterministically (1 to 3).",
-      step3Title: "3. CHECK AGAIN",
-      step3Subtitle: "Verifies true conceptual mastery before moving on",
-      step3Desc:
-        "After completing the adapted lesson, a quick 2-question check verifies that the foundational gap has closed. Only when mastery is demonstrated does the system progress to the next concept in the pathway.",
+      sectionNum: "03 / HOW THE AGENT WORKS : VISUAL SAMPLES",
+      headline: "From 6-Minute Check to Actionable Gap Report",
+      ctaBtn: "Start an Assessment Now",
+      sampleReport: "SAMPLE REPORT",
+      reportTitle: "Student Gap Report",
+      classScore: "Class 9A : 38%",
+      sampleNotice: "Sample data. Not a real student.",
+      studentName: "Rajesh Kumar (Roll #7)",
+      diagnosedCause: "Diagnosed Root Cause:",
+      rootTitle: "Class 7 Integer Subtraction & Sign Rules",
+      quote: "“Student attempted middle-term splitting in x² - x - 6 by choosing 3 and 2, but multiplied (-3) × (+2) to get +6 instead of -6.”",
+      backtrackTrail: "AI Agent Backtracking Trail:",
+      prescribedSeq: "Prescribed 5-Day Classroom Sequence:",
+      prescribedDays: "Day 1 to 2: Kirana shop debt model on paper. Day 3: Sign flips on slate. Day 4 to 5: Single-sheet paper checks.",
+      sampleWorksheet: "SAMPLE WORKSHEET",
+      worksheetTitle: "1-Page Paper Worksheet",
+      worksheetBadge: "Standard A4 Print",
+      targetSkill: "Target Skill: Factoring with Negative Signs",
+      deterministicFooter: "Deterministic Question Bank • Generated for Student Diagnosis • Form M-A4-2026",
     },
     hi: {
-      badge: "मुख्य शिक्षण चक्र",
-      headline: "निदान (Diagnose) → अनुकूलन (Adapt) → पुनः जाँच (Check Again)",
-      subhead:
-        "मार्गम् अंधी पुनरावृत्ति को एक सतत, स्पष्ट तीन-चरणीय चक्र से बदलता है जो शिक्षक को सूचित रखते हुए प्रत्येक छात्र की गति का सम्मान करता है।",
-      step1Title: "1. निदान (Diagnose)",
-      step1Subtitle: "6 प्रश्नों में मूल कारण का पता लगाता है",
-      step1Desc:
-        "एक छोटा डायग्नोस्टिक वर्तमान अध्याय कौशल की जाँच करता है। त्रुटि होने पर, निश्चित मिस्टेक टैग्स त्रुटि के प्रकार (जैसे चिह्न विपर्यय) को वर्गीकृत करते हैं और NCERT DAG में पीछे जाकर सटीक कमी खोजते हैं।",
-      step2Title: "2. अनुकूलन (Adapt)",
-      step2Subtitle: "सीखना, हल करना और परीक्षण तीनों को अनुकूलित करता है",
-      step2Desc:
-        "मार्गम् उपयुक्त पाठ चुनता है: भारतीय उदाहरणों के साथ बुनियादी (किराना उधारी, तराजू संतुलन), मानक व्यवस्थित चरण, या त्वरित शॉर्टकट। अभ्यास प्रश्नों की कठिनाई (1 से 3) स्वचालित रूप से अनुकूलित होती है।",
-      step3Title: "3. पुनः जाँच (Check Again)",
-      step3Subtitle: "आगे बढ़ने से पहले वास्तविक अवधारणा स्पष्टता की पुष्टि करता है",
-      step3Desc:
-        "अनुकूलित पाठ के बाद, 2 प्रश्नों की संक्षिप्त जाँच पुष्टि करती है कि बुनियादी कमी दूर हो गई है। दक्षता सिद्ध होने पर ही विद्यार्थी अगले संप्रत्यय पर बढ़ता है।",
-      te: {
-        badge: "ప్రధాన అభ్యాస ప్రక్రియ",
-        headline: "రోగ నిర్ధారణ (Diagnose) → అనుకూలత (Adapt) → మళ్ళీ సరిచూడటం (Check Again)",
-        subhead:
-          "మార్గం గుడ్డి హోమ్‌వర్క్ స్థానంలో స్పష్టమైన మూడు దశల ప్రక్రియను అందిస్తుంది, ఇది ఉపాధ్యాయుడి నియంత్రణలో ప్రతి విద్యార్థి వేగానికి అనుగుణంగా నడుస్తుంది.",
-        step1Title: "1. నిర్ధారణ (Diagnose)",
-        step1Subtitle: "6 ప్రశ్నలలో మూల లోపాన్ని గుర్తిస్తుంది",
-        step1Desc:
-          "ఒక చిన్న డయాగ్నోస్టిక్ పరీక్ష ప్రస్తుత పాఠాన్ని పరీక్షిస్తుంది. తప్పు సమాధానం వచ్చినప్పుడు, మిస్టేక్ ట్యాగ్‌లు సంకేత లేదా గణన లోపాలను గుర్తించి, NCERT DAG ద్వారా వెనుకకు వెళ్లి అసలు కారణాన్ని కనుగొంటాయి.",
-        step2Title: "2. అనుకూలత (Adapt)",
-        step2Subtitle: "నేర్చుకోవడం, సాధన, మరియు పరీక్ష మూడింటినీ మారుస్తుంది",
-        step2Desc:
-          "మార్గం సరైన పాఠ్యాంశాన్ని ఎంచుకుంటుంది: కిరాణా అప్పుల ఉదాహరణలతో ప్రాథమిక పద్ధతి, క్రమబద్ధమైన సాధారణ పద్ధతి, లేదా వేగవంతమైన షార్ట్‌కట్‌లు. సాధన ప్రశ్నల స్థాయి (1 నుండి 3) మారుతుంది.",
-        step3Title: "3. సరిచూడటం (Check Again)",
-        step3Subtitle: "ముందుకు సాగే ముందు భావన అర్థమైందో లేదో నిర్ధారిస్తుంది",
-        step3Desc:
-          "పాఠం పూర్తయిన తర్వాత, 2 ప్రశ్నల చిన్న పరీక్ష ద్వారా లోపం తొలగిపోయిందో లేదో ధృవీకరిస్తుంది. సంపూర్ణ పట్టు సాధించిన తర్వాత మాత్రమే తదుపరి కాన్సెప్ట్‌కు అనుమతిస్తుంది.",
-      },
+      sectionNum: "03 / एजेंट कैसे काम करता है : दृश्य नमूने",
+      headline: "6-मिनट की जाँच से क्रियाशील गैप रिपोर्ट तक",
+      ctaBtn: "अभी मूल्यांकन शुरू करें",
+      sampleReport: "नमूना रिपोर्ट",
+      reportTitle: "छात्र अंतर रिपोर्ट",
+      classScore: "कक्षा 9A : 38%",
+      sampleNotice: "काल्पनिक डेटा। वास्तविक छात्र नहीं।",
+      studentName: "राजेश कुमार (रोल #7)",
+      diagnosedCause: "पहचाना गया मूल कारण:",
+      rootTitle: "कक्षा 7 पूर्णांक व्यवकलन और चिह्न नियम",
+      quote: "“छात्र ने x² - x - 6 में मध्य पद तोड़ने का प्रयास किया परंतु (-3) × (+2) को -6 के स्थान पर +6 समझ लिया।”",
+      backtrackTrail: "AI एजेंट बैकट्रैकिंग पथ:",
+      prescribedSeq: "निर्धारित 5-दिवसीय कक्षा अनुक्रम:",
+      prescribedDays: "दिन 1 से 2: किराना उधारी खाता मॉडल। दिन 3: स्लेट पर चिह्न अभ्यास। दिन 4 से 5: एकल-पृष्ठ पेपर टेस्ट।",
+      sampleWorksheet: "नमूना वर्कशीट",
+      worksheetTitle: "1-पेज पेपर वर्कशीट",
+      worksheetBadge: "मानक A4 प्रिंट",
+      targetSkill: "लक्षित कौशल: ऋणात्मक चिह्नों के साथ गुणनखंडन",
+      deterministicFooter: "निश्चित प्रश्न बैंक • छात्र निदान हेतु उत्पन्न • फॉर्म M-A4-2026",
     },
     te: {
-      badge: "ప్రధాన అభ్యాస ప్రక్రియ",
-      headline: "రోగ నిర్ధారణ (Diagnose) → అనుకూలత (Adapt) → మళ్ళీ సరిచూడటం (Check Again)",
-      subhead:
-        "మార్గం గుడ్డి హోమ్‌వర్క్ స్థానంలో స్పష్టమైన మూడు దశల ప్రక్రియను అందిస్తుంది, ఇది ఉపాధ్యాయుడి నియంత్రణలో ప్రతి విద్యార్థి వేగానికి అనుగుణంగా నడుస్తుంది.",
-      step1Title: "1. నిర్ధారణ (Diagnose)",
-      step1Subtitle: "6 ప్రశ్నలలో మూల లోపాన్ని గుర్తిస్తుంది",
-      step1Desc:
-        "ఒక చిన్న డయాగ్నోస్టిక్ పరీక్ష ప్రస్తుత పాఠాన్ని పరీక్షిస్తుంది. తప్పు సమాధానం వచ్చినప్పుడు, మిస్టేక్ ట్యాగ్‌లు సంకేత లేదా గణన లోపాలను గుర్తించి, NCERT DAG ద్వారా వెనుకకు వెళ్లి అసలు కారణాన్ని కనుగొంటాయి.",
-      step2Title: "2. అనుకూలత (Adapt)",
-      step2Subtitle: "నేర్చుకోవడం, సాధన, మరియు పరీక్ష మూడింటినీ మారుస్తుంది",
-      step2Desc:
-        "మార్గం సరైన పాఠ్యాంశాన్ని ఎంచుకుంటుంది: కిరాణా అప్పుల ఉదాహరణలతో ప్రాథమిక పద్ధతి, క్రమబద్ధమైన సాధారణ పద్ధతి, లేదా వేగవంతమైన షార్ట్‌కట్‌లు. సాధన ప్రశ్నల స్థాయి (1 నుండి 3) మారుతుంది.",
-      step3Title: "3. సరిచూడటం (Check Again)",
-      step3Subtitle: "ముందుకు సాగే ముందు భావన అర్థమైందో లేదో నిర్ధారిస్తుంది",
-      step3Desc:
-        "పాఠం పూర్తయిన తర్వాత, 2 ప్రశ్నల చిన్న పరీక్ష ద్వారా లోపం తొలగిపోయిందో లేదో ధృవీకరిస్తుంది. సంపూర్ణ పట్టు సాధించిన తర్వాత మాత్రమే తదుపరి కాన్సెప్ట్‌కు అనుమతిస్తుంది.",
+      sectionNum: "03 / ఏజెంట్ ఎలా పనిచేస్తుంది : దృశ్య నమూనాలు",
+      headline: "6 నిమిషాల పరిశీలన నుండి కార్యాచరణ నివేదిక వరకు",
+      ctaBtn: "ఇప్పుడే డయాగ్నోస్టిక్ ప్రారంభించండి",
+      sampleReport: "నమూనా రిపోర్ట్",
+      reportTitle: "విద్యార్థి గ్యాప్ రిపోర్ట్",
+      classScore: "తరగతి 9A : 38%",
+      sampleNotice: "నమూనా సమాచారం. అసలు విద్యార్థి కాదు.",
+      studentName: "రాజేష్ కుమార్ (రోల్ #7)",
+      diagnosedCause: "గుర్తించిన మూల కారణం:",
+      rootTitle: "7వ తరగతి పూర్ణ సంఖ్యల తీసివేత & సంకేత నియమాలు",
+      quote: "“విద్యార్థి x² - x - 6 లో మధ్య పదాన్ని విభజించడానికి ప్రయత్నించాడు, కానీ (-3) × (+2) = -6 కు బదులుగా +6 అనుకున్నాడు.”",
+      backtrackTrail: "AI ఏజెంట్ బ్యాక్‌ట్రాకింగ్ మార్గం:",
+      prescribedSeq: "సూచించిన 5 రోజుల తరగతి ప్రణాళిక:",
+      prescribedDays: "రోజు 1 నుండి 2: కిరాణా అప్పుల పద్ధతి. రోజు 3: పలకపై సంకేతాల సాధన. రోజు 4 నుండి 5: పేపర్ చెక్స్.",
+      sampleWorksheet: "నమూనా వర్క్‌షీట్",
+      worksheetTitle: "1-పేజీ పేపర్ వర్క్‌షీట్",
+      worksheetBadge: "ప్రామాణిక A4 ప్రింట్",
+      targetSkill: "లక్ష్య నైపుణ్యం: ఋణ సంఖ్యలతో కారణాంక విభజన",
+      deterministicFooter: "ఖచ్చితమైన ప్రశ్నల బ్యాంక్ • రోగ నిర్ధారణ కోసం రూపొందించబడింది • ఫారం M-A4-2026",
     },
   }[currentLang];
 
   return (
-    <section id="approach" className="py-16 md:py-24 bg-margam-cream border-b border-margam-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-margam-terracotta inline-block" />
-            <span className="text-xs font-bold uppercase tracking-widest text-margam-terracotta">
-              02 / {t.badge}
-            </span>
+    <section id="approach" className="px-4 sm:px-8 py-14 max-w-7xl mx-auto bg-[#FFF7E6] dark:bg-[#1A2615] rounded-[32px] border border-[#C7DDAE]/60 my-6 shadow-card">
+      {/* Top Banner */}
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[#C7DDAE]/60 pb-4">
+        <div>
+          <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-primary font-bold">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+              <path d="M 4 20 C 6 12 14 5 21 3 C 21 11 15 19 4 20 Z" fill="#6CA24A" />
+              <path d="M 6 18 Q 13 13 19 5" stroke="#FFF7E6" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <span>{t.sectionNum}</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-margam-navy leading-tight">
+          <h2 className="font-heading text-2xl sm:text-4xl font-bold mt-1 text-foreground">
             {t.headline}
           </h2>
-          <p className="font-sans text-base sm:text-lg text-margam-navy/80 leading-relaxed">
-            {t.subhead}
-          </p>
         </div>
 
-        {/* 3 Step Process Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Step 1 */}
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 sm:p-7 shadow-card flex flex-col justify-between space-y-5 relative">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-orange-100 text-margam-terracotta flex items-center justify-center font-bold">
-                <Search className="w-6 h-6" />
-              </div>
-              <h3 className="font-serif text-xl font-bold text-margam-navy">
-                {t.step1Title}
+        <div className="flex items-center gap-3">
+          <a
+            href="#try-diagnostic"
+            className="rounded-full bg-primary text-primary-foreground px-6 py-2.5 min-h-[44px] inline-flex items-center gap-1.5 text-xs font-sans uppercase font-bold hover:bg-primary/90 cursor-pointer shadow-warm transition-transform active:scale-95"
+          >
+            <span>{t.ctaBtn}</span>
+            <ArrowRight className="w-3.5 h-3.5 ml-1" />
+          </a>
+        </div>
+      </div>
+
+      {/* 2 Massive Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        {/* Left: Student Gap Report */}
+        <div className="rounded-[28px] border-2 border-[#C7DDAE] bg-[#FFF7E6] dark:bg-[#1C2817] p-6 shadow-card space-y-4">
+          <div className="border-b border-[#C7DDAE]/60 pb-3 flex items-center justify-between">
+            <div>
+              <span className="text-xs font-sans uppercase tracking-wider text-primary font-bold flex items-center gap-1">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+                  <path d="M 12 2 C 12 8 8 12 2 12 C 8 12 12 16 12 22 C 12 16 16 12 22 12 C 16 12 12 8 12 2 Z" fill="#F4C542" />
+                </svg>
+                {t.sampleReport}
+              </span>
+              <h3 className="font-heading text-xl font-bold text-foreground">
+                {t.reportTitle}
               </h3>
-              <div className="text-xs font-bold text-margam-terracotta uppercase tracking-wide">
-                {t.step1Subtitle}
-              </div>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.step1Desc}
-              </p>
             </div>
-            <div className="pt-3 border-t border-margam-border/60 text-[11px] font-mono font-semibold text-margam-slate flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-margam-terracotta" />
-              <span>Deterministic Distractor Analysis</span>
+            <div className="flex flex-col items-end gap-1">
+              <span className="text-xs font-sans px-3 py-1 rounded-full bg-[#F4C542]/25 text-[#9E6000] dark:text-[#F4C542] border border-[#F4C542]/50 font-bold">
+                {t.classScore}
+              </span>
+              <span className="text-xs font-sans px-2 py-0.5 rounded-full bg-[#C7DDAE]/20 text-muted-foreground border border-[#C7DDAE]/40">
+                {t.sampleNotice}
+              </span>
             </div>
           </div>
 
-          {/* Step 2 */}
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 sm:p-7 shadow-card flex flex-col justify-between space-y-5 relative">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 text-margam-amber flex items-center justify-center font-bold">
-                <Shuffle className="w-6 h-6" />
-              </div>
-              <h3 className="font-serif text-xl font-bold text-margam-navy">
-                {t.step2Title}
-              </h3>
-              <div className="text-xs font-bold text-margam-amber uppercase tracking-wide">
-                {t.step2Subtitle}
-              </div>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.step2Desc}
+          <div className="rounded-[20px] border border-[#C7DDAE] p-4 bg-[#C7DDAE]/20 space-y-2">
+            <div className="flex items-center justify-between text-xs font-sans">
+              <span className="text-muted-foreground uppercase">Student:</span>
+              <strong className="text-foreground">{t.studentName}</strong>
+            </div>
+            <div className="text-xs font-sans">
+              <span className="text-accent font-bold uppercase block">{t.diagnosedCause}</span>
+              <p className="font-heading text-base font-bold text-primary">
+                {t.rootTitle}
               </p>
             </div>
-            <div className="pt-3 border-t border-margam-border/60 text-[11px] font-mono font-semibold text-margam-slate flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-margam-amber" />
-              <span>Basics-First • Standard • Fast-Track</span>
+            <p className="text-xs text-foreground/80 leading-relaxed italic border-t border-[#C7DDAE]/50 pt-2">
+              {t.quote}
+            </p>
+          </div>
+
+          <div className="rounded-[20px] border border-[#C7DDAE] p-3.5 bg-white dark:bg-[#1A2615] space-y-2 text-xs font-sans">
+            <span className="uppercase font-bold text-primary flex items-center gap-1">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+                <circle cx="12" cy="7.2" r="4.2" fill="#F4C542" />
+                <circle cx="16.6" cy="10.5" r="4.2" fill="#F4C542" />
+                <circle cx="14.8" cy="16" r="4.2" fill="#F4C542" />
+                <circle cx="9.2" cy="16" r="4.2" fill="#F4C542" />
+                <circle cx="7.4" cy="10.5" r="4.2" fill="#F4C542" />
+                <circle cx="12" cy="12" r="3.2" fill="#F28C38" />
+              </svg>
+              {t.backtrackTrail}
+            </span>
+            <div className="flex items-center justify-between text-xs bg-[#FFF7E6] dark:bg-[#1C2817] p-2.5 rounded-[14px] border border-[#C7DDAE]/60">
+              <span className="text-primary font-bold">Class 7 Signed Arithmetic</span>
+              <ArrowRight className="w-3.5 h-3.5 text-accent" />
+              <span className="text-primary font-bold">Class 8 Balancing</span>
+              <ArrowRight className="w-3.5 h-3.5 text-accent" />
+              <span className="text-muted-foreground font-semibold">Class 9 Polynomials</span>
             </div>
           </div>
 
-          {/* Step 3 */}
-          <div className="bg-white rounded-2xl border-2 border-margam-border p-6 sm:p-7 shadow-card flex flex-col justify-between space-y-5 relative">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-margam-emerald flex items-center justify-center font-bold">
-                <CheckCircle className="w-6 h-6" />
-              </div>
-              <h3 className="font-serif text-xl font-bold text-margam-navy">
-                {t.step3Title}
+          <div className="rounded-[20px] border border-[#6CA24A]/40 p-4 bg-[#C7DDAE]/30 space-y-1.5 text-xs font-sans">
+            <span className="uppercase font-bold text-foreground block">{t.prescribedSeq}</span>
+            <div className="text-foreground/80 leading-relaxed">
+              {t.prescribedDays}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: 1-Page Paper Worksheet */}
+        <div className="rounded-[28px] border-2 border-[#C7DDAE] p-6 bg-[#FFF7E6] dark:bg-[#1C2817] text-foreground shadow-card space-y-4">
+          <div className="border-b border-[#C7DDAE]/60 pb-3 flex items-center justify-between">
+            <div>
+              <span className="text-xs font-sans uppercase tracking-wider text-muted-foreground font-bold flex items-center gap-1">
+                {t.sampleWorksheet}
+              </span>
+              <h3 className="font-heading text-xl font-bold">
+                {t.worksheetTitle}
               </h3>
-              <div className="text-xs font-bold text-margam-emerald uppercase tracking-wide">
-                {t.step3Subtitle}
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <span className="text-xs font-sans px-3 py-1 rounded-full bg-[#C7DDAE]/40 text-primary border border-[#6CA24A]/40 font-bold">
+                {t.worksheetBadge}
+              </span>
+              <span className="text-xs font-sans px-2 py-0.5 rounded-full bg-[#C7DDAE]/20 text-muted-foreground border border-[#C7DDAE]/40">
+                {t.sampleNotice}
+              </span>
+            </div>
+          </div>
+
+          {/* Worksheet Paper Card */}
+          <div className="grid grid-cols-3 gap-2 border border-[#C7DDAE] p-2.5 rounded-[16px] text-xs font-sans bg-[#C7DDAE]/20">
+            <div>STUDENT: <strong>Rajesh Kumar</strong></div>
+            <div>ROLL NO: <strong>#7</strong></div>
+            <div className="text-right">CLASS: <strong>9A</strong></div>
+          </div>
+
+          <div className="space-y-3 pt-1">
+            <div className="text-xs font-sans uppercase tracking-wider text-primary font-bold">
+              {t.targetSkill}
+            </div>
+            <div className="border border-[#C7DDAE] p-3 rounded-[16px] space-y-1 bg-white dark:bg-[#1A2615]">
+              <div className="text-xs font-bold font-sans">1. Split the middle term and factorise:</div>
+              <div className="text-xs font-mono font-bold text-primary">x² - x - 6 = ?</div>
+              <div className="h-8 border-b border-dashed border-[#C7DDAE] flex items-end text-xs text-muted-foreground font-sans">
+                Answer: (x - 3)(x + 2)
               </div>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.step3Desc}
-              </p>
             </div>
-            <div className="pt-3 border-t border-margam-border/60 text-[11px] font-mono font-semibold text-margam-slate flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-margam-emerald" />
-              <span>Evidence-Based Mastery Validation</span>
+
+            <div className="border border-[#C7DDAE] p-3 rounded-[16px] space-y-1 bg-white dark:bg-[#1A2615]">
+              <div className="text-xs font-bold font-sans">2. Evaluate integer sign products:</div>
+              <div className="text-xs font-mono font-bold text-primary">(-4) × (-3) × (-2) = ?</div>
+              <div className="h-8 border-b border-dashed border-[#C7DDAE] flex items-end text-xs text-muted-foreground font-sans">
+                Answer: -24
+              </div>
             </div>
+          </div>
+
+          <div className="pt-2 text-center text-xs font-sans text-muted-foreground border-t border-[#C7DDAE]/50">
+            {t.deterministicFooter}
           </div>
         </div>
       </div>

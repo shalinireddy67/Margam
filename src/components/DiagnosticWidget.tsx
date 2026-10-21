@@ -13,12 +13,13 @@ interface DiagnosticWidgetProps {
 
 export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidgetProps) {
   const [lang, setLang] = useState<SupportedLanguage>(currentLang);
+  const [selectedGrade, setSelectedGrade] = useState<number>(9);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [showLessonPreview, setShowLessonPreview] = useState<boolean>(false);
 
-  // The 3 sequential diagnostic questions representing Class 9 -> Class 8 -> Class 7 DAG
+  // 3 sequential diagnostic questions representing Class 9 -> Class 8 -> Class 7 DAG
   const diagnosticQuestionIds = ["q-poly-02", "q-lin-02", "q-int-02"];
   const currentQuestions = diagnosticQuestionIds.map((id) =>
     questionsData.find((q) => q.id === id)
@@ -45,280 +46,266 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
     setShowLessonPreview(false);
   };
 
-  // Find root gap concept & lesson variant
-  const rootConcept = conceptsData.find((c) => c.id === "c7-int-02");
   const rootLesson = lessonsData.find((l) => l.conceptId === "c7-int-02");
 
-  return (
-    <div
-      id="try-diagnostic"
-      className="w-full max-w-4xl mx-auto my-8 bg-white rounded-2xl border-2 border-margam-border shadow-card overflow-hidden"
-    >
-      {/* Widget Header */}
-      <div className="bg-margam-cream-paper border-b border-margam-border px-5 py-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-margam-terracotta text-white flex items-center justify-center font-bold shadow-xs">
-            <Compass className="w-4 h-4" />
-          </span>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs uppercase tracking-wider font-bold text-margam-terracotta">
-                Interactive Diagnostic Simulator
-              </span>
-              <span className="text-xs bg-margam-cream-subtle text-margam-navy px-2 py-0.5 rounded font-mono font-semibold">
-                NCERT DAG
-              </span>
-            </div>
-            <h3 className="font-serif text-lg font-bold text-margam-navy">
-              Experience Prerequisite Backtracking in 3 Questions
-            </h3>
-          </div>
-        </div>
+  const stepsList = [
+    "01. Select Student",
+    "02. Check Learning",
+    "03. Find Gaps",
+    "04. Practice Plan",
+    "05. Check Again",
+  ];
 
-        {/* Mini Language Selector for Widget */}
-        <div className="flex items-center gap-1 bg-white border border-margam-border rounded-lg p-0.5 text-xs font-semibold">
-          <button
-            type="button"
-            onClick={() => setLang("en")}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              lang === "en"
-                ? "bg-margam-navy text-white font-bold"
-                : "text-margam-slate hover:text-margam-navy"
-            }`}
-          >
-            EN
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang("hi")}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              lang === "hi"
-                ? "bg-margam-navy text-white font-bold"
-                : "text-margam-slate hover:text-margam-navy"
-            }`}
-          >
-            हिन्दी
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang("te")}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              lang === "te"
-                ? "bg-margam-navy text-white font-bold"
-                : "text-margam-slate hover:text-margam-navy"
-            }`}
-          >
-            తెలుగు
-          </button>
+  return (
+    <div id="try-diagnostic" className="w-full max-w-7xl mx-auto my-6">
+      {/* Numbered Section Header matching ShikshaGap */}
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-[#C7DDAE]/60 pb-4">
+        <div>
+          <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-primary font-bold">
+            <span className="w-2 h-2 rounded-full bg-accent inline-block" />
+            <span>04 / INTERACTIVE WORKFLOW CASE FILES</span>
+          </div>
+          <h2 className="font-heading text-2xl sm:text-4xl font-bold mt-1 text-foreground">
+            How the Agent Runs in Five Steps
+          </h2>
+        </div>
+        <p className="text-xs sm:text-sm font-sans text-muted-foreground max-w-md">
+          Select a class and test student records below to experience diagnostic checking, DAG backtracking, and 5-day practice sequences.
+        </p>
+      </div>
+
+      {/* Grade Selector Box */}
+      <div className="mb-6 p-5 rounded-[24px] border border-[#C7DDAE] bg-[#C7DDAE]/20">
+        <div className="text-xs font-sans uppercase tracking-wider text-primary mb-3 font-bold">
+          Select Grade to Explore Middle & High School Cases:
+        </div>
+        <div className="grid grid-cols-5 sm:grid-cols-5 gap-2 max-w-md">
+          {[6, 7, 8, 9, 10].map((gr) => (
+            <button
+              key={gr}
+              type="button"
+              onClick={() => setSelectedGrade(gr)}
+              className={`min-h-[46px] px-2 py-2 text-xs sm:text-sm font-bold rounded-[14px] border flex flex-col items-center justify-center gap-0.5 transition-all cursor-pointer ${
+                selectedGrade === gr
+                  ? "border-primary bg-primary text-primary-foreground shadow-warm"
+                  : "border-border bg-card text-foreground hover:bg-muted"
+              }`}
+            >
+              <span>Class {gr}</span>
+              <span className="text-[10px] font-normal opacity-85 leading-none">
+                {gr <= 8 ? "Middle" : "Secondary"}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Main Diagnostic Body */}
-      {!submitted ? (
-        <div className="p-6 md:p-8">
-          {/* Progress Indicator */}
-          <div className="flex items-center justify-between mb-6 border-b border-margam-border/60 pb-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-margam-slate">
-              <span>Question {currentStep + 1} of 3</span>
-              <span>•</span>
-              <span className="text-margam-navy font-bold">
-                {currentStep === 0 && "Class 9 — Polynomial Evaluation"}
-                {currentStep === 1 && "Class 8 — Linear Equation Transposition"}
-                {currentStep === 2 && "Class 7 — Negative Integer Operations"}
+      {/* 5 Process Step Pills */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 mb-6 text-xs font-sans">
+        {stepsList.map((stepText, idx) => (
+          <div
+            key={idx}
+            className={`min-h-[44px] px-3.5 py-2 rounded-full border text-center font-bold flex items-center justify-center transition-all ${
+              (currentStep === idx && !submitted) || (submitted && idx === 4)
+                ? "border-primary bg-primary text-primary-foreground shadow-warm"
+                : "border-[#C7DDAE] bg-[#FFF7E6] text-foreground/80"
+            }`}
+          >
+            {stepText}
+          </div>
+        ))}
+      </div>
+
+      {/* Main Interactive Card */}
+      <div className="rounded-[28px] border-2 border-[#C7DDAE] bg-[#FFF7E6] dark:bg-[#1C2817] p-6 sm:p-8 shadow-card space-y-6">
+        {!submitted ? (
+          <div className="space-y-6">
+            {/* Student Header */}
+            <div className="flex flex-wrap items-center justify-between pb-4 border-b border-[#C7DDAE]/60 gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-sans text-muted-foreground uppercase font-bold">
+                  Class {selectedGrade} Case Record:
+                </span>
+                <span className="px-3.5 py-1 rounded-full border border-primary bg-primary text-primary-foreground font-bold text-xs">
+                  Ananya Reddy (Roll #2)
+                </span>
+              </div>
+              <div className="text-xs font-sans text-muted-foreground font-medium">
+                Targeted: Polynomials & Equations
+              </div>
+            </div>
+
+            {/* Step Heading */}
+            <div className="flex items-center justify-between">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold">
+                Step {currentStep + 1}: Diagnostic Verification Check
+              </h3>
+              <span className="text-xs font-sans px-3 py-1 rounded-full border border-[#C7DDAE] bg-[#C7DDAE]/30 font-semibold text-primary">
+                Question {currentStep + 1} of 3
               </span>
             </div>
-            <div className="flex items-center gap-1.5">
-              {[0, 1, 2].map((idx) => (
-                <div
-                  key={idx}
-                  className={`w-6 h-1.5 rounded-full transition-all ${
-                    idx === currentStep
-                      ? "bg-margam-terracotta w-8"
-                      : idx < currentStep
-                      ? "bg-margam-emerald"
-                      : "bg-margam-border"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
 
-          {/* Active Question */}
-          {activeQ && (
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <span className="inline-block text-xs uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-margam-cream-paper text-margam-slate border border-margam-border">
-                  Concept ID: {activeQ.conceptId}
-                </span>
-                <p className="font-serif text-lg md:text-xl font-bold text-margam-navy leading-relaxed">
-                  {activeQ.prompt[lang]}
-                </p>
-              </div>
+            {/* Question Card */}
+            {activeQ && (
+              <div className="space-y-5">
+                <div className="rounded-[20px] border border-[#C7DDAE] p-5 bg-[#C7DDAE]/20 space-y-2">
+                  <span className="text-xs uppercase font-mono font-bold text-primary block">
+                    Concept Node: {activeQ.conceptId}
+                  </span>
+                  <p className="font-heading text-base sm:text-lg font-bold text-foreground">
+                    {activeQ.prompt[lang]}
+                  </p>
+                </div>
 
-              {/* Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {activeQ.options?.map((opt) => {
-                  const isSelected = selectedAnswers[currentStep] === opt.id;
-                  return (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => handleSelectOption(opt.id)}
-                      className={`p-4 rounded-xl border-2 text-left transition-all flex items-start gap-3 cursor-pointer ${
-                        isSelected
-                          ? "border-margam-terracotta bg-orange-50/50 shadow-xs"
-                          : "border-margam-border hover:border-margam-navy/40 bg-white"
-                      }`}
-                    >
-                      <span
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold font-mono shrink-0 transition-colors ${
+                {/* Option Choices */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {activeQ.options?.map((opt) => {
+                    const isSelected = selectedAnswers[currentStep] === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => handleSelectOption(opt.id)}
+                        className={`p-4 rounded-[16px] border-2 text-left transition-all flex items-start gap-3 cursor-pointer ${
                           isSelected
-                            ? "bg-margam-terracotta text-white"
-                            : "bg-margam-cream-paper text-margam-navy border border-margam-border"
+                            ? "border-accent bg-[#FFFDF8] shadow-warm text-foreground"
+                            : "border-[#C7DDAE] hover:border-primary bg-white text-foreground/80"
                         }`}
                       >
-                        {opt.id}
-                      </span>
-                      <span className="font-mono text-sm md:text-base font-semibold text-margam-navy mt-0.5">
-                        {opt.text[lang]}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                        <span
+                          className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-mono shrink-0 ${
+                            isSelected
+                              ? "bg-accent text-accent-foreground"
+                              : "bg-[#C7DDAE]/40 text-foreground border border-[#C7DDAE]"
+                          }`}
+                        >
+                          {opt.id}
+                        </span>
+                        <span className="font-mono text-xs sm:text-sm font-semibold mt-0.5">
+                          {opt.text[lang]}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
 
-              {/* Hint Callout */}
-              <div className="p-3.5 bg-amber-50/70 border border-amber-200/80 rounded-xl text-xs text-amber-950 flex items-start gap-2">
-                <span className="font-bold text-margam-amber uppercase shrink-0">
-                  Pedagogical Hint:
-                </span>
-                <p>{activeQ.hint[lang]}</p>
-              </div>
+                {/* Hint Callout */}
+                <div className="p-3.5 bg-[#FFFDF8] border border-[#C7DDAE] rounded-[14px] text-xs text-foreground/85 flex items-start gap-2">
+                  <strong className="text-accent uppercase shrink-0">Pedagogical Hint:</strong>
+                  <span>{activeQ.hint[lang]}</span>
+                </div>
 
-              {/* Action Button */}
-              <div className="pt-4 flex items-center justify-between border-t border-margam-border">
-                <span className="text-xs text-margam-slate">
-                  {selectedAnswers[currentStep]
-                    ? "Option selected. Click next to proceed."
-                    : "Select an option to test adaptive response."}
-                </span>
-                <button
-                  type="button"
-                  disabled={!selectedAnswers[currentStep]}
-                  onClick={handleNext}
-                  className="px-6 py-2.5 rounded-xl font-bold text-sm bg-margam-navy text-white hover:bg-margam-navy/90 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 transition-all shadow-xs"
-                >
-                  <span>{currentStep === 2 ? "Analyze Root Gap" : "Next Question"}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      ) : (
-        /* Result & Prerequisite DAG Backtracking Visualizer */
-        <div className="p-6 md:p-8 space-y-6">
-          <div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 space-y-3">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-margam-terracotta">
-              <Sparkles className="w-4 h-4" />
-              <span>Adaptive Diagnosis Completed</span>
-            </div>
-            <h4 className="font-serif text-xl md:text-2xl font-bold text-margam-navy">
-              Root Cause Diagnosed: Class 7 Signed Integer Operations
-            </h4>
-            <p className="text-sm text-margam-navy/85 leading-relaxed">
-              When the learner made a sign mistake in Class 9 polynomial evaluation, Margam did not simply label them &ldquo;bad at algebra.&rdquo; Our algorithm backtracked across grade boundaries to verify if the breakdown was caused by Class 8 equation transposition or Class 7 integer sign rules.
-            </p>
-          </div>
-
-          {/* Visual Concept Chain */}
-          <div className="p-5 bg-margam-cream-paper border border-margam-border rounded-xl space-y-3">
-            <span className="text-xs uppercase tracking-wider font-bold text-margam-slate block">
-              Prerequisite DAG Backtracking Trail:
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="p-3 bg-white rounded-lg border border-margam-border space-y-1">
-                <span className="text-xs font-bold text-margam-slate">Tested Class 9 Skill</span>
-                <div className="text-sm font-bold text-margam-navy">Polynomial Evaluation (c9-poly-02)</div>
-                <span className="inline-flex items-center gap-1 text-xs text-rose-600 font-semibold">
-                  <XCircle className="w-3.5 h-3.5" /> Sign Error Detected
-                </span>
-              </div>
-
-              <div className="p-3 bg-white rounded-lg border border-margam-border space-y-1">
-                <span className="text-xs font-bold text-margam-slate">Checked Class 8 Bridge</span>
-                <div className="text-sm font-bold text-margam-navy">Linear Transposition (c8-lin-03)</div>
-                <span className="inline-flex items-center gap-1 text-xs text-amber-600 font-semibold">
-                  <ArrowRight className="w-3.5 h-3.5" /> Prerequisite Chain
-                </span>
-              </div>
-
-              <div className="p-3 bg-emerald-50 rounded-lg border-2 border-margam-emerald space-y-1">
-                <span className="text-xs font-bold text-margam-emerald uppercase">Root Prerequisite Gap</span>
-                <div className="text-sm font-bold text-margam-navy">Integer Subtraction (c7-int-02)</div>
-                <span className="inline-flex items-center gap-1 text-xs text-margam-emerald font-bold">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Targeted Intervention
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Recommended Adaptive Next Step */}
-          <div className="border border-margam-border rounded-xl p-5 space-y-3 bg-white">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-margam-terracotta">
-                Recommended Pedagogical Adaptation
-              </span>
-              <span className="text-xs bg-orange-100 text-orange-900 font-bold px-2.5 py-0.5 rounded-full">
-                Basics-First Variant
-              </span>
-            </div>
-            <p className="text-sm text-margam-navy/85">
-              Instead of assigning 20 more polynomial drill problems, Margam prescribes a <strong>10-minute Basics-First lesson</strong> using the concrete Kirana shop debt & credit model to rebuild sign intuition.
-            </p>
-
-            {/* Toggle Lesson Preview */}
-            <div className="pt-2 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => setShowLessonPreview((prev) => !prev)}
-                className="px-4 py-2 rounded-lg bg-margam-navy text-white text-xs font-bold flex items-center gap-2 hover:bg-margam-navy/90 transition-colors"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>{showLessonPreview ? "Hide Lesson Preview" : "Preview Basics-First Lesson"}</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleRestart}
-                className="px-4 py-2 rounded-lg border border-margam-border text-margam-navy text-xs font-semibold hover:bg-margam-cream-paper flex items-center gap-1.5 transition-colors"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Try Simulator Again</span>
-              </button>
-            </div>
-
-            {/* Inline Lesson Variant Preview */}
-            {showLessonPreview && rootLesson && (
-              <div className="mt-4 p-4 rounded-xl bg-orange-50/60 border border-orange-200/80 space-y-2 text-xs">
-                <span className="font-bold text-margam-terracotta uppercase">
-                  {rootLesson.basics_first.headline[lang]}
-                </span>
-                <p className="text-margam-navy/90 leading-relaxed">
-                  {rootLesson.basics_first.explanation[lang]}
-                </p>
-                <div className="p-3 bg-white rounded-lg border border-orange-200 space-y-1">
-                  <span className="font-bold text-margam-navy">
-                    {rootLesson.basics_first.workedExample.problem[lang]}
-                  </span>
-                  <div className="font-mono text-margam-emerald font-bold">
-                    {rootLesson.basics_first.workedExample.solution[lang]}
-                  </div>
+                {/* Action Button */}
+                <div className="pt-2 flex justify-end">
+                  <button
+                    type="button"
+                    disabled={!selectedAnswers[currentStep]}
+                    onClick={handleNext}
+                    className="rounded-full min-h-[44px] px-7 bg-primary text-primary-foreground text-xs font-sans uppercase font-bold hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-warm transition-transform active:scale-95 flex items-center gap-2"
+                  >
+                    <span>{currentStep === 2 ? "Analyze Root Gap" : "Next: Check Learning"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             )}
           </div>
-        </div>
-      )}
+        ) : (
+          /* Backtracking Results View */
+          <div className="space-y-6">
+            <div className="border-b border-[#C7DDAE]/60 pb-3 flex items-center justify-between">
+              <div>
+                <span className="text-xs font-sans uppercase tracking-wider text-accent font-bold">
+                  STEP 5: ADAPTIVE INTERVENTION READY
+                </span>
+                <h3 className="font-heading text-xl sm:text-2xl font-bold">
+                  Diagnosed Root Gap: Class 7 Integer Operations
+                </h3>
+              </div>
+              <span className="text-xs px-3 py-1 rounded-full bg-accent text-accent-foreground font-bold">
+                Intervention Planned
+              </span>
+            </div>
+
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+              The diagnostic traces the student&apos;s difficulty with Class 9 polynomial evaluation directly back 2 academic years to Class 7 signed integer subtraction rules.
+            </p>
+
+            {/* DAG Backtracking Visual Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="p-4 rounded-[18px] border border-[#C7DDAE] bg-white space-y-1">
+                <span className="text-[11px] font-bold text-muted-foreground uppercase">Class 9 Target</span>
+                <div className="font-bold text-foreground text-sm">Polynomials (c9-poly-02)</div>
+                <span className="text-xs text-[var(--status-urgent)] font-semibold flex items-center gap-1">
+                  <XCircle className="w-3.5 h-3.5" /> Sign Mistake Found
+                </span>
+              </div>
+
+              <div className="p-4 rounded-[18px] border border-[#C7DDAE] bg-white space-y-1">
+                <span className="text-[11px] font-bold text-muted-foreground uppercase">Class 8 Bridge</span>
+                <div className="font-bold text-foreground text-sm">Linear Transposition (c8-lin-03)</div>
+                <span className="text-xs text-[var(--status-warn)] font-semibold flex items-center gap-1">
+                  <ArrowRight className="w-3.5 h-3.5" /> Prerequisite Link
+                </span>
+              </div>
+
+              <div className="p-4 rounded-[18px] border-2 border-primary bg-[#C7DDAE]/30 space-y-1">
+                <span className="text-[11px] font-bold text-primary uppercase">Root Prerequisite Gap</span>
+                <div className="font-bold text-foreground text-sm">Integer Subtraction (c7-int-02)</div>
+                <span className="text-xs text-primary font-bold flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> 10-Min Remedial Target
+                </span>
+              </div>
+            </div>
+
+            {/* Prescribed Lesson Accordion */}
+            <div className="p-5 rounded-[20px] border border-[#C7DDAE] bg-white space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-accent font-sans">
+                  Recommended Pedagogical Lesson
+                </span>
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#C7DDAE]/50 text-foreground font-bold font-sans">
+                  Basics-First Variant
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-foreground/85 leading-relaxed">
+                Prescribed <strong>Kirana Shop Debt & Credit Model</strong> to build intuitive understanding of adding and subtracting signed quantities.
+              </p>
+
+              <div className="pt-2 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowLessonPreview(!showLessonPreview)}
+                  className="rounded-full px-5 py-2 bg-primary text-primary-foreground text-xs font-sans uppercase font-bold hover:bg-primary/90 cursor-pointer shadow-warm transition-transform active:scale-95"
+                >
+                  {showLessonPreview ? "Hide Lesson Preview" : "Preview Basics-First Lesson"}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleRestart}
+                  className="rounded-full px-5 py-2 border border-[#C7DDAE] bg-transparent text-foreground text-xs font-sans font-semibold hover:bg-[#C7DDAE]/30 cursor-pointer transition-colors"
+                >
+                  Run Simulator Again
+                </button>
+              </div>
+
+              {showLessonPreview && rootLesson && (
+                <div className="mt-4 p-4 rounded-[16px] bg-[#FFF7E6] border border-[#C7DDAE] space-y-2 text-xs">
+                  <span className="font-bold text-primary uppercase">
+                    {rootLesson.basics_first.headline[lang]}
+                  </span>
+                  <p className="text-foreground/90 leading-relaxed font-sans">
+                    {rootLesson.basics_first.explanation[lang]}
+                  </p>
+                  <div className="p-3 bg-white rounded-lg border border-[#C7DDAE] font-mono text-primary font-bold">
+                    {rootLesson.basics_first.workedExample.problem[lang]} &rarr; {rootLesson.basics_first.workedExample.solution[lang]}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
 
   const t = {
     en: {
+      sectionNum: "10 / BUILT FOR INDIAN CLASSROOM REALITIES",
       badge: "Built for Indian Realities",
       headline: "Engineered for Diverse Indian Classrooms",
       subhead:
@@ -35,6 +36,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
         "Zero tracking cookies. Zero third-party surveillance or advertising scripts. Student performance data remains strictly localized and private.",
     },
     hi: {
+      sectionNum: "10 / भारतीय कक्षाओं के अनुकूल",
       badge: "भारतीय वास्तविकताओं के अनुकूल",
       headline: "भारतीय कक्षाओं की विविधता के लिए डिज़ाइन किया गया",
       subhead:
@@ -47,7 +49,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
         "किराना दुकान के खाते, ऑटो किराया, लेह का तापमान और क्रिकेट रन-रेट जैसे रोज़मर्रा के उदाहरणों से अमूर्त गणित को सरल बनाया गया है।",
       card3Title: "कम डेटा और साझा उपकरण",
       card3Desc:
-        "कम इंटरनेट डेटा खपत और स्थानीय भंडारण। बजट एंड्रॉइड फोन और साझा टैबलेट पर भी निर्बाధ काम करता है।",
+        "कम इंटरनेट डेटा खपत और स्थानीय भंडारण। बजट एंड्रॉइड फोन और साझा टैबलेट पर भी निर्बाध काम करता है।",
       card4Title: "प्रिंट-योग्य एकल-पृष्ठ A4 वर्कशीट",
       card4Desc:
         "घर पर स्मार्टफोन न रखने वाले छात्रों के लिए शिक्षक सीधे 1-पेज की A4 वर्कशीट प्रिंट कर सकते हैं।",
@@ -57,6 +59,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
         "शून्य ट्रैकिंग कुकीज़। शून्य तृतीय-पक्ष विज्ञापन ट्रैकर। बच्चों की गोपनीयता पूरी तरह सुरक्षित है।",
     },
     te: {
+      sectionNum: "10 / భారతీయ తరగతుల వాస్తవికతలకు అనుగుణంగా",
       badge: "భారతీయ పాఠశాలల వాస్తవికతలకు అనుగుణంగా",
       headline: "వైవిధ్యభరితమైన భారతీయ తరగతుల కోసం ప్రత్యేక రూపకల్పన",
       subhead:
@@ -85,190 +88,125 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
   };
 
   return (
-    <section id="indian-classrooms" className="py-16 md:py-24 bg-white border-b border-margam-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
-        {/* Header */}
-        <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-margam-terracotta inline-block" />
-            <span className="text-xs font-bold uppercase tracking-widest text-margam-terracotta">
-              05 / {t.badge}
-            </span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-margam-navy leading-tight">
-            {t.headline}
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-margam-navy/80 leading-relaxed">
-            {t.subhead}
-          </p>
-        </div>
+    <section id="indian-classrooms" className="px-4 sm:px-8 py-14 max-w-7xl mx-auto">
+      {/* Section Header */}
+      <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-primary font-bold mb-4">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block shrink-0" aria-hidden="true">
+          <path d="M 4 20 C 6 12 14 5 21 3 C 21 11 15 19 4 20 Z" fill="#6CA24A" />
+          <path d="M 6 18 Q 13 13 19 5" stroke="#FFF7E6" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+        <span>{t.sectionNum}</span>
+      </div>
 
-        {/* 4 Feature Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Pillar 1 */}
-          <div className="bg-margam-cream-paper rounded-2xl border border-margam-border p-6 space-y-3 flex flex-col justify-between">
-            <div className="space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-orange-100 text-margam-terracotta flex items-center justify-center font-bold">
-                <Globe className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg font-bold text-margam-navy">
-                {t.card1Title}
-              </h3>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.card1Desc}
-              </p>
-            </div>
-            <div className="flex gap-1.5 text-[11px] font-bold text-margam-navy pt-2">
-              <span className="px-2 py-0.5 rounded bg-white border border-margam-border">English</span>
-              <span className="px-2 py-0.5 rounded bg-white border border-margam-border">हिन्दी</span>
-              <span className="px-2 py-0.5 rounded bg-white border border-margam-border">తెలుగు</span>
-            </div>
-          </div>
+      <div className="max-w-3xl mb-10 space-y-3">
+        <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+          {t.headline}
+        </h2>
+        <p className="text-foreground/80 text-sm sm:text-base leading-relaxed">
+          {t.subhead}
+        </p>
+      </div>
 
-          {/* Pillar 2 */}
-          <div className="bg-margam-cream-paper rounded-2xl border border-margam-border p-6 space-y-3 flex flex-col justify-between">
-            <div className="space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 text-margam-amber flex items-center justify-center font-bold">
-                <FileText className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg font-bold text-margam-navy">
-                {t.card2Title}
-              </h3>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.card2Desc}
-              </p>
+      {/* 4 Feature Pillars */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        {/* Pillar 1 */}
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-4 shadow-warm flex flex-col justify-between sticker-lift">
+          <div className="space-y-3">
+            <div className="w-10 h-10 rounded-full bg-[#FFF3DA] border border-[#FCD685] text-accent flex items-center justify-center font-bold">
+              <Globe className="w-5 h-5" />
             </div>
-            <span className="text-[11px] font-mono text-margam-slate font-semibold pt-2 block">
-              ₹ Rupees • Temperatures • Auto Fares
-            </span>
+            <h3 className="font-heading text-lg font-bold text-foreground">
+              {t.card1Title}
+            </h3>
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+              {t.card1Desc}
+            </p>
           </div>
-
-          {/* Pillar 3 */}
-          <div className="bg-margam-cream-paper rounded-2xl border border-margam-border p-6 space-y-3 flex flex-col justify-between">
-            <div className="space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-margam-emerald flex items-center justify-center font-bold">
-                <Smartphone className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg font-bold text-margam-navy">
-                {t.card3Title}
-              </h3>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.card3Desc}
-              </p>
-            </div>
-            <span className="text-[11px] font-mono text-margam-slate font-semibold pt-2 block">
-              &lt; 50 KB initial payload • Zero third-party scripts
-            </span>
-          </div>
-
-          {/* Pillar 4: Printable A4 */}
-          <div className="bg-margam-cream-paper rounded-2xl border border-margam-border p-6 space-y-3 flex flex-col justify-between">
-            <div className="space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
-                <Printer className="w-5 h-5" />
-              </div>
-              <h3 className="font-serif text-lg font-bold text-margam-navy">
-                {t.card4Title}
-              </h3>
-              <p className="text-xs sm:text-sm text-margam-slate leading-relaxed font-sans">
-                {t.card4Desc}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="w-full mt-2 py-2 px-3 rounded-lg bg-margam-navy text-white text-xs font-bold hover:bg-margam-navy/90 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>{t.printBtn}</span>
-            </button>
+          <div className="flex gap-1.5 text-[11px] font-bold text-foreground pt-3 border-t border-[#C7DDAE]/60 font-mono">
+            <span className="px-2.5 py-0.5 rounded-full bg-background border border-[#C7DDAE]">English</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-background border border-[#C7DDAE]">हिन्दी</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-background border border-[#C7DDAE]">తెలుగు</span>
           </div>
         </div>
 
-        {/* Printable Worksheet Preview Card */}
-        <div className="rounded-2xl border-2 border-margam-border bg-white p-6 sm:p-8 space-y-5 shadow-card">
-          <div className="flex flex-wrap items-center justify-between border-b border-margam-border pb-4 gap-3">
-            <div>
-              <span className="text-xs font-mono font-bold uppercase text-margam-terracotta">
-                Single-Page A4 Classroom Handout
-              </span>
-              <h3 className="font-serif text-xl font-bold text-margam-navy">
-                Sample A4 Practice Worksheet (Form M-A4-2026)
-              </h3>
+        {/* Pillar 2 */}
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-4 shadow-warm flex flex-col justify-between sticker-lift">
+          <div className="space-y-3">
+            <div className="w-10 h-10 rounded-full bg-[#EAF5E1] border border-[#B7DE9E] text-primary flex items-center justify-center font-bold">
+              <FileText className="w-5 h-5" />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-full">
-                Ready for Inkjet & Xerox
-              </span>
-            </div>
+            <h3 className="font-heading text-lg font-bold text-foreground">
+              {t.card2Title}
+            </h3>
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+              {t.card2Desc}
+            </p>
           </div>
-
-          {/* Worksheet Paper Layout */}
-          <div className="p-6 bg-margam-cream-paper border border-margam-border rounded-xl space-y-4 font-mono text-xs">
-            <div className="grid grid-cols-3 gap-2 border-b border-margam-border pb-3 text-slate-700">
-              <div>STUDENT: ___________________</div>
-              <div>ROLL NO: ________</div>
-              <div className="text-right">DATE: ___/___/2026</div>
-            </div>
-
-            <div className="space-y-3 font-sans text-xs">
-              <div className="p-3 bg-white rounded-lg border border-margam-border space-y-1.5">
-                <div className="font-bold text-margam-navy">
-                  1. Hyderabad auto fare calculation: 30 + 15x = 105. Find additional km (x).
-                </div>
-                <div className="h-6 border-b border-dashed border-gray-300 flex items-end text-slate-400 font-mono text-[11px]">
-                  Working space: _________________________________________________________________
-                </div>
-              </div>
-
-              <div className="p-3 bg-white rounded-lg border border-margam-border space-y-1.5">
-                <div className="font-bold text-margam-navy">
-                  2. Evaluate with proper signs: (-48) ÷ (-6) = ?
-                </div>
-                <div className="h-6 border-b border-dashed border-gray-300 flex items-end text-slate-400 font-mono text-[11px]">
-                  Answer: _______________________
-                </div>
-              </div>
-
-              <div className="p-3 bg-white rounded-lg border border-margam-border space-y-1.5">
-                <div className="font-bold text-margam-navy">
-                  3. Factorise quadratic expression: x² - x - 6 = (____ - ____)(____ + ____)
-                </div>
-                <div className="h-6 border-b border-dashed border-gray-300 flex items-end text-slate-400 font-mono text-[11px]">
-                  Show two integers whose product is -6 and sum is -1: ______________________________
-                </div>
-              </div>
-            </div>
-          </div>
+          <span className="text-[11px] font-mono text-muted-foreground font-semibold pt-3 border-t border-[#C7DDAE]/60 block">
+            ₹ Rupees • Temperatures • Auto Fares
+          </span>
         </div>
 
-        {/* DPDP Act 2023 Principles Banner */}
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-margam-emerald" />
-              <span className="text-xs font-bold uppercase tracking-wider text-margam-emerald">
-                {t.privacyTitle}
-              </span>
+        {/* Pillar 3 */}
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-4 shadow-warm flex flex-col justify-between sticker-lift">
+          <div className="space-y-3">
+            <div className="w-10 h-10 rounded-full bg-[#EAF5E1] border border-[#B7DE9E] text-[#3E8424] flex items-center justify-center font-bold">
+              <Smartphone className="w-5 h-5" />
             </div>
-            <p className="text-xs sm:text-sm text-emerald-950 font-sans leading-relaxed">
+            <h3 className="font-heading text-lg font-bold text-foreground">
+              {t.card3Title}
+            </h3>
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+              {t.card3Desc}
+            </p>
+          </div>
+          <span className="text-[11px] font-mono text-muted-foreground font-semibold pt-3 border-t border-[#C7DDAE]/60 block">
+            &lt; 50 KB payload • 0 tracking scripts
+          </span>
+        </div>
+
+        {/* Pillar 4: Printable A4 */}
+        <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 space-y-4 shadow-warm flex flex-col justify-between sticker-lift">
+          <div className="space-y-3">
+            <div className="w-10 h-10 rounded-full bg-[#FFF3DA] border border-[#FCD685] text-accent flex items-center justify-center font-bold">
+              <Printer className="w-5 h-5" />
+            </div>
+            <h3 className="font-heading text-lg font-bold text-foreground">
+              {t.card4Title}
+            </h3>
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
+              {t.card4Desc}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handlePrint}
+            className="w-full mt-2 py-2.5 px-3 rounded-[12px] bg-primary text-white text-xs font-bold font-heading hover:bg-[#5b8a3e] flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-warm-sm"
+          >
+            <Printer className="w-4 h-4" />
+            <span>{t.printBtn}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Child Privacy Callout */}
+      <div className="bg-card rounded-[22px] border-2 border-[#C7DDAE] p-6 sm:p-7 shadow-warm flex flex-col sm:flex-row items-center gap-5 justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-[#EAF5E1] border border-[#B7DE9E] text-[#3E8424] flex items-center justify-center shrink-0">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
+          <div>
+            <h4 className="font-heading text-base sm:text-lg font-bold text-foreground">
+              {t.privacyTitle}
+            </h4>
+            <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed font-sans">
               {t.privacyDesc}
             </p>
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono font-bold text-emerald-900 shrink-0">
-            <div className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-margam-emerald" />
-              <span>Cookies: 0</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-margam-emerald" />
-              <span>Trackers: 0</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-margam-emerald" />
-              <span>Local Session</span>
-            </div>
-          </div>
+        </div>
+        <div className="shrink-0 flex items-center gap-2 text-xs font-mono font-bold bg-background px-3 py-1.5 rounded-full border border-[#C7DDAE] text-[#3E8424]">
+          <Check className="w-4 h-4" />
+          <span>DPDP 2023 COMPLIANT</span>
         </div>
       </div>
     </section>
