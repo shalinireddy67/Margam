@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Nunito, Noto_Sans_Devanagari, Noto_Sans_Telugu } from "next/font/google";
+import { Outfit, Nunito, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_TAGLINE, SITE_DESCRIPTION } from "@/config/site";
 
@@ -20,13 +20,6 @@ const nunito = Nunito({
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
   variable: "--font-devanagari",
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
-
-const notoTelugu = Noto_Sans_Telugu({
-  subsets: ["telugu"],
-  variable: "--font-telugu",
   weight: ["400", "600", "700"],
   display: "swap",
 });
@@ -72,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${outfit.variable} ${nunito.variable} ${notoDevanagari.variable} ${notoTelugu.variable}`}
+      className={`scroll-smooth ${outfit.variable} ${nunito.variable} ${notoDevanagari.variable}`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans antialiased selection:bg-coral selection:text-white pb-20 md:pb-0 overflow-x-hidden">
         <a

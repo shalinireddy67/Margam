@@ -12,10 +12,26 @@ export interface LocalizedString {
   reviewed: boolean; // Flag to easily filter and audit human translations
 }
 
+export interface Chapter {
+  id: string; // e.g. "c6-ch10", "c8-ch06", "c10-ch04"
+  class: 6 | 7 | 8 | 9 | 10;
+  chapterNumber: number;
+  part?: number;
+  name: LocalizedString;
+  board: "ncert";
+  bookName: string;
+  subject: "maths";
+  topics: string[];
+  status: "full" | "in_progress";
+}
+
 export interface Concept {
   id: string;
   class: number; // 6 to 10
+  chapterId?: string; // Links to Chapter.id in chapters.json
   chapter: string;
+  subject?: string;
+  board?: string;
   name: LocalizedString;
   learningObjective: LocalizedString;
   prerequisites: string[]; // IDs of prerequisite concepts (DAG edges)
@@ -99,4 +115,89 @@ export interface DemoClassData {
   totalStudents: number;
   students: DemoStudent[];
   syntheticNotice: string;
+}
+
+// ==========================================
+// Student Progression & Learner Profile
+// ==========================================
+
+export type TopicStatus = "available" | "in_progress" | "completed" | "locked";
+
+export interface TopicProgress {
+  conceptId: string;
+  status: TopicStatus;
+  lessonCompleted: boolean;
+  worksheetCompleted: boolean;
+  worksheetScore?: number;
+  worksheetTotal?: number;
+  lastAttemptAt?: string;
+  completedAt?: string;
+  // Per-concept adaptive state
+  mastery?: number; // 0.0 to 100.0
+  difficulty?: 1 | 2 | 3;
+  consecutiveCorrect?: number;
+  consecutiveIncorrect?: number;
+  mistakeTagHistory?: string[];
+}
+
+export interface RemediationGap {
+  currentConceptId: string;
+  rootConceptId: string;
+  mistakeTag: string;
+  plainLanguageReason: string;
+  prerequisitePath: string[];
+  confirmationQuestionIds: string[];
+  status: "pending_confirmation" | "confirmed" | "resolved";
+}
+
+export interface LearnerProfile {
+  id: string;
+  name: string;
+  selectedClass: 6 | 7 | 8 | 9 | 10;
+  createdAt: string;
+  lastActiveAt: string;
+  topicProgress: Record<string, TopicProgress>;
+  consecutiveCorrect: number; // profile-level fallback
+  consecutiveIncorrect: number; // profile-level fallback
+  currentDifficulty: 1 | 2 | 3; // profile-level fallback
+  activeGap?: RemediationGap | null;
+}
+
+export interface WorksheetSubmission {
+  conceptId: string;
+  answers: Record<string, string>; // questionId -> selectedOptionId
+  submittedAt: string;
+}
+
+export interface QuestionFeedback {
+  questionId: string;
+  selectedOption: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+  explanation: LocalizedString;
+  mistakeTag?: string;
+  mistakeDescription?: string;
+  suggestedPrerequisiteId?: string;
+}
+
+export interface WorksheetResult {
+  conceptId: string;
+  totalQuestions: number;
+  answeredCount: number;
+  correctCount: number;
+  scorePercentage: number;
+  qualifiesForCompletion: boolean;
+  feedback: QuestionFeedback[];
+}
+
+export interface GapTraceResult {
+  confirmed: boolean;
+  rootConceptId: string | null;
+  rootConcept?: Concept;
+  triggerReason: "repeated_tag" | "convergent_tags" | null;
+  mistakeTags: string[];
+  prerequisitePath: string[]; // For visual display only
+  canRoute: boolean;
+  shortfallReport?: string;
+  plainLanguageReason: string;
 }

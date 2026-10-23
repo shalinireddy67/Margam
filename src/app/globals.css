@@ -3,24 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --background: #F4F6EE;
-  --foreground: #171C26;
+  --font-telugu: 'Noto Sans Telugu', sans-serif;
+  --background: #FAF8F6;
+  --foreground: #140513;
   --card: #FFFFFF;
-  --card-foreground: #171C26;
-  --card-subtle: #F9F7E8;
-  --primary: #D33E1A;
-  --primary-hover: #B83212;
+  --card-foreground: #140513;
+  --card-subtle: #FDF5F3;
+  --primary: #AC427C;
+  --primary-hover: #8E3264;
   --primary-foreground: #FFFFFF;
-  --secondary: #E8F2DA;
-  --secondary-foreground: #2E5A1C;
-  --muted: #EEF2E6;
-  --muted-foreground: #5A6977;
-  --border: #E0E5D4;
-  --ring: #D33E1A;
+  --secondary: #EAA291;
+  --secondary-foreground: #140513;
+  --muted: #F2ECE9;
+  --muted-foreground: #646464;
+  --border: #EBDED8;
+  --ring: #AC427C;
   --radius: 24px;
 
-  --shadow-soft: 0 8px 30px rgba(23, 28, 38, 0.04);
-  --shadow-card: 0 4px 20px -2px rgba(23, 28, 38, 0.05);
+  /* Reference Palette */
+  --color-plum: #140513;
+  --color-berry: #AC427C;
+  --color-peach: #EAA291;
+  --color-warm-brown: #B07040;
+  --color-grey: #646464;
+
+  --shadow-soft: 0 8px 30px rgba(20, 5, 19, 0.05);
+  --shadow-card: 0 4px 20px -2px rgba(20, 5, 19, 0.06);
 }
 
 .dark {
