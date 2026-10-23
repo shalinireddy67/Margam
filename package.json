@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "validate": "node scripts/validate-content.mjs",
-    "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs"
+    "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
