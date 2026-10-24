@@ -4930,7 +4930,7 @@
           "te": "10009",
           "reviewed": false
         },
-        "mistakeTag": "added_instead_of_subtracted"
+        "mistakeTag": "sign_error_difference_of_squares"
       },
       {
         "id": "D",
