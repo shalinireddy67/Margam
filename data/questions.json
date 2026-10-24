@@ -977,7 +977,7 @@
           "te": "(x - 3)(x - 5)",
           "reviewed": false
         },
-        "mistakeTag": "sign_error_both_factors_negative"
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
       },
       {
         "id": "D",
@@ -3734,7 +3734,7 @@
           "te": "0",
           "reviewed": false
         },
-        "mistakeTag": "confused_with_zero"
+        "mistakeTag": "assumed_factors_cancel_to_zero"
       }
     ],
     "correctAnswer": "B",
