@@ -16,7 +16,7 @@ const localDir = path.join(process.cwd(), "screenshots");
 
 async function isServerRunning(port = 3008) {
   return new Promise((resolve) => {
-    const req = http.get(`http://localhost:${port}/design-system`, (res) => {
+    const req = http.get(`http://localhost:${port}/`, (res) => {
       resolve(res.statusCode === 200);
     });
     req.on("error", () => resolve(false));
@@ -75,7 +75,7 @@ async function run() {
       const page = await browser.newPage();
       await page.setViewport({ width: tc.width, height: tc.height });
 
-      await page.goto("http://localhost:3008/design-system", {
+      await page.goto("http://localhost:3008/", {
         waitUntil: "networkidle0",
         timeout: 30000,
       });
@@ -120,7 +120,7 @@ async function run() {
         };
       });
 
-      const shotName = `design-system_${tc.lang}_${tc.width}x${tc.height}.png`;
+      const shotName = `home_${tc.lang}_${tc.width}x${tc.height}.png`;
       const extPath = path.join(externalDir, shotName);
       const localPath = path.join(localDir, shotName);
 

@@ -2,21 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
-  Compass,
-  ArrowRight,
-  CheckCircle2,
-  Lock,
-  Clock,
-  PlayCircle,
-  RotateCcw,
-  Sparkles,
-  FileText,
-  Award,
-  BarChart2,
-} from "lucide-react";
-import { SupportedLanguage, LearnerProfile, TopicStatus } from "@/lib/types";
+  Button,
+  Card,
+  Tile,
+  Input,
+  LanguageToggle,
+  BottomTabBar,
+  OfflineBanner,
+  type Language,
+} from "@/components/ui";
+import { LearnerProfile } from "@/lib/types";
 import {
   getActiveProfile,
   createLearnerProfile,
@@ -25,470 +22,609 @@ import {
 import { syncClassProgression } from "@/lib/progression";
 import {
   getChaptersByClass,
-  getConceptsByChapter,
   getSupportedChapters,
+  getConceptsByChapter,
   canTakeChapterDiagnostic,
 } from "@/lib/curriculum";
-import WitchCatCompanion from "@/components/WitchCatCompanion";
 
-export default function MargamApp() {
+export default function HomePage() {
+  const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const [currentLang, setCurrentLang] = useState<Language>("en");
 
-  // Welcome Form State
+  // Onboarding form state
   const [nameInput, setNameInput] = useState("");
-  const [selectedClassInput, setSelectedClassInput] = useState<6 | 7 | 8 | 9 | 10>(8);
+  const [selectedClass, setSelectedClass] = useState<6 | 7 | 8 | 9 | 10>(10);
 
   useEffect(() => {
     const active = getActiveProfile();
     if (active && active.selectedClass) {
       const updated = syncClassProgression(active);
       setProfile(updated);
+      setSelectedClass(updated.selectedClass as 6 | 7 | 8 | 9 | 10);
     }
     setIsLoaded(true);
   }, []);
 
-  // 1. Handle Start Learning
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
+
+  // Handle Start Learning
   const handleStartLearning = (e: React.FormEvent) => {
     e.preventDefault();
     const newProfile = createLearnerProfile(
       nameInput.trim() || "Student",
-      selectedClassInput
+      selectedClass
     );
     const updated = syncClassProgression(newProfile);
     setProfile(updated);
   };
 
-  // 2. Handle Reset Profile
+  // Handle Try 3 Questions (Fast entry into pilot diagnostic)
+  const handleTryQuestions = () => {
+    const effectiveProfile =
+      profile ||
+      syncClassProgression(
+        createLearnerProfile(nameInput.trim() || "Student", selectedClass)
+      );
+    setProfile(effectiveProfile);
+    const pilotChapters = getSupportedChapters(selectedClass);
+    const chapterId = pilotChapters[0]?.id || "c10-ch04";
+    router.push(`/student/diagnostic/${chapterId}`);
+  };
+
+  // Handle Reset Profile
   const handleResetProfile = () => {
     if (
       window.confirm(
-        "Are you sure you want to reset your learner profile? This will allow you to enter a new name or class."
+        "Are you sure you want to switch class or learner? Progress for this profile is preserved in browser storage."
       )
     ) {
       clearActiveProfile();
       setProfile(null);
       setNameInput("");
-      setSelectedClassInput(8);
     }
   };
 
+  // Translations dictionary
+  const copy = {
+    en: {
+      appName: "Margam",
+      tagline: "Sequential Maths",
+      heroLine1: "Adaptive maths practice for CBSE & State Boards.",
+      heroLine2: "Catches hidden foundation gaps from earlier classes.",
+      heroLine3: "Free, private, and works offline on any phone.",
+      try3Questions: "Try 3 questions",
+      startCardTitle: "Get Started",
+      startCardSubtitle: "Enter your name and select your class to begin.",
+      nameLabel: "Your Name",
+      namePlaceholder: "Enter your name (e.g. Priya)",
+      classLabel: "Select Your Class",
+      startLearningBtn: "Start Learning",
+      welcomeBack: "Welcome back",
+      classBadge: "Class",
+      activeGapFound: "Active gap identified in foundational prerequisite",
+      fixGapBtn: "Fix Foundation Gap",
+      continueLessonBtn: "Continue Practice",
+      switchProfile: "Switch class or name",
+      chaptersHeading: "Maths Chapters",
+      chaptersSubtitle: "Choose a chapter to practice, review lessons, or diagnose foundation gaps.",
+      teacherLink: "Teacher View",
+      conceptsMastered: "concepts mastered",
+    },
+    hi: {
+      appName: "मार्गम्",
+      tagline: "अनुक्रमिक गणित",
+      heroLine1: "सीबीएसई और राज्य बोर्डों के लिए अनुकूली गणित अभ्यास।",
+      heroLine2: "पिछली कक्षाओं की छुपी हुई कमियों को खोजकर ठीक करता है।",
+      heroLine3: "पूरी तरह निःशुल्क, निजी और किसी भी फ़ोन पर ऑफ़लाइन चलता है।",
+      try3Questions: "3 प्रश्नों को आज़माएं",
+      startCardTitle: "शुरू करें",
+      startCardSubtitle: "अपना नाम दर्ज करें और अपनी कक्षा चुनें।",
+      nameLabel: "आपका नाम",
+      namePlaceholder: "अपना नाम दर्ज करें (उदा. प्रिया)",
+      classLabel: "अपनी कक्षा चुनें",
+      startLearningBtn: "सीखना शुरू करें",
+      welcomeBack: "वापसी पर स्वागत है",
+      classBadge: "कक्षा",
+      activeGapFound: "बुनियादी पूर्व-अपेक्षा में अंतराल पाया गया",
+      fixGapBtn: "बुनियादी कमी ठीक करें",
+      continueLessonBtn: "अभ्यास जारी रखें",
+      switchProfile: "कक्षा या नाम बदलें",
+      chaptersHeading: "गणित के अध्याय",
+      chaptersSubtitle: "अभ्यास करने, पाठ सीखने या कमी का पता लगाने के लिए एक अध्याय चुनें।",
+      teacherLink: "शिक्षक दृश्य",
+      conceptsMastered: "अवधारणाएं पूरी हुईं",
+    },
+    te: {
+      appName: "మార్గం",
+      tagline: "క్రమానుగత గణితం",
+      heroLine1: "సీబీఎస్‌ఈ మరియు స్టేట్ బోర్డుల కోసం అనుకూల గణిత అభ్యాసం.",
+      heroLine2: "మునుపటి తరగతుల పునాది లోపాలను గుర్తించి సరిచేస్తుంది.",
+      heroLine3: "ఉచితం, గోప్యత మరియు ఏ ఫోన్‌లోనైనా ఆఫ్‌లైన్‌లో పనిచేస్తుంది.",
+      try3Questions: "3 ప్రశ్నలను ప్రయత్నించండి",
+      startCardTitle: "ప్రారంభించండి",
+      startCardSubtitle: "మీ పేరును నమోదు చేసి మీ తరగతిని ఎంచుకోండి.",
+      nameLabel: "మీ పేరు",
+      namePlaceholder: "మీ పేరు నమోదు చేయండి (ఉదా. ప్రియ)",
+      classLabel: "మీ తరగతిని ఎంచుకోండి",
+      startLearningBtn: "నేర్చుకోవడం ప్రారంభించండి",
+      welcomeBack: "పునఃస్వాగతం",
+      classBadge: "తరగతి",
+      activeGapFound: "పునాది అంశంలో లోపం గుర్తించబడింది",
+      fixGapBtn: "పునాది లోపాన్ని సరిచేయండి",
+      continueLessonBtn: "అభ్యాసం కొనసాగించండి",
+      switchProfile: "తరగతి లేదా పేరు మార్చండి",
+      chaptersHeading: "గణిత అధ్యాయాలు",
+      chaptersSubtitle: "అభ్యాసం చేయడానికి లేదా లోపాలను గుర్తించడానికి ఒక అధ్యాయాన్ని ఎంచుకోండి.",
+      teacherLink: "ఉపాధ్యాయుల వీక్షణ",
+      conceptsMastered: "కాన్సెప్ట్‌లు పూర్తి అయ్యాయి",
+    },
+  }[currentLang];
+
+  const currentGrade = profile ? (profile.selectedClass as 6 | 7 | 8 | 9 | 10) : selectedClass;
+  const gradeChapters = getChaptersByClass(currentGrade);
+
+  // Calculate completed concepts count if profile exists
+  const completedConceptsCount = profile
+    ? Object.values(profile.topicProgress).filter((p) => p.status === "completed").length
+    : 0;
+
+  // Active gap concept if any
+  const firstActiveGapId =
+    profile?.activeGap && profile.activeGap.status === "confirmed"
+      ? profile.activeGap.rootConceptId
+      : undefined;
+
+  // Tile colors rotation
+  const tileColors: ("yellow" | "cyan" | "green" | "sky" | "orange")[] = [
+    "yellow",
+    "cyan",
+    "green",
+    "sky",
+    "orange",
+  ];
+
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAF8F6]">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-berry border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-grey">Loading Margam...</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#FFF8DC]">
+        <div className="p-6 border-[3px] border-[#111111] rounded-2xl bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
+          <p className="font-heading font-extrabold text-lg text-[#111111]">Loading Margam...</p>
         </div>
       </div>
     );
   }
 
-  // =========================================================================
-  // SCREEN 1: Simple Welcome Screen (If no profile saved)
-  // Ask only two things: Name and Class. One button: Start Learning.
-  // =========================================================================
-  if (!profile) {
-    return (
-      <div className="min-h-screen bg-[#FAF8F6] flex flex-col justify-between text-plum font-sans">
-        {/* Simple Header */}
-        <header className="border-b border-border bg-white/90 backdrop-blur-md">
-          <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-berry flex items-center justify-center text-white shadow-soft">
-                <Compass className="w-5 h-5" />
-              </div>
-              <span className="font-extrabold text-xl tracking-tight text-plum">
-                Margam
-              </span>
-            </div>
-            <span className="text-xs font-semibold text-grey">
-              Math for Classes 6–10
-            </span>
-          </div>
-        </header>
-
-        {/* Main Onboarding Card with Witch Cat */}
-        <main className="max-w-md mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-6">
-            {/* Mascot Centerpiece */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 relative animate-gentle-float">
-                <Image
-                  src="/images/witch-cat-transparent.png"
-                  alt="Margam Witch Cat Study Companion"
-                  width={112}
-                  height={112}
-                  className="object-contain drop-shadow-sm select-none"
-                  priority
-                />
-              </div>
-
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-peach-light text-plum text-xs font-bold border border-peach-border">
-                  <Sparkles className="w-3.5 h-3.5 text-berry" />
-                  <span>Meet Your Study Companion</span>
-                </div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-plum tracking-tight pt-1">
-                  Welcome to Margam
-                </h1>
-                <p className="text-xs sm:text-sm text-grey">
-                  Enter your name and select your class to begin.
-                </p>
-              </div>
-            </div>
-
-            <form onSubmit={handleStartLearning} className="space-y-5">
-              {/* Question 1: Name */}
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="learner-name"
-                  className="block text-xs font-bold text-plum uppercase tracking-wider"
-                >
-                  Your Name
-                </label>
-                <input
-                  id="learner-name"
-                  type="text"
-                  required
-                  value={nameInput}
-                  onChange={(e) => setNameInput(e.target.value)}
-                  placeholder="e.g. Priya Sharma"
-                  className="w-full px-4 py-3 rounded-2xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-berry focus:border-transparent text-plum bg-white"
-                />
-              </div>
-
-              {/* Question 2: Class Selection */}
-              <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-plum uppercase tracking-wider">
-                  Your Class
-                </label>
-                <div className="grid grid-cols-5 gap-2">
-                  {([6, 7, 8, 9, 10] as const).map((grade) => {
-                    const isSelected = selectedClassInput === grade;
-                    return (
-                      <button
-                        type="button"
-                        key={grade}
-                        onClick={() => setSelectedClassInput(grade)}
-                        className={`min-h-[48px] py-2.5 rounded-2xl font-bold text-sm transition-all ${
-                          isSelected
-                            ? "bg-berry text-white shadow-soft ring-2 ring-berry/20"
-                            : "bg-[#FDF5F3] hover:bg-peach-light text-plum border border-peach-border/60"
-                        }`}
-                      >
-                        {grade}
-                      </button>
-                    );
-                  })}
-                </div>
-                <p className="text-[11px] text-grey pt-1 text-center">
-                  Selected: <strong className="text-plum">Class {selectedClassInput}</strong>
-                </p>
-              </div>
-
-              {/* Primary Action Button */}
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 min-h-[50px] px-6 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-sm shadow-soft transition-all cursor-pointer active:scale-98"
-              >
-                <span>Start Learning</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-          </div>
-        </main>
-
-        {/* Footer */}
-        <footer className="border-t border-border py-4 text-center text-xs text-grey bg-white">
-          Margam Adaptive Mathematics • Classes 6 to 10
-        </footer>
-      </div>
-    );
-  }
-
-  // =========================================================================
-  // SCREEN 2: Class-Specific Learning Page
-  // Shows ONLY that class's lessons in a simple vertical list with Witch Cat.
-  // =========================================================================
-  const allChapters = getChaptersByClass(profile.selectedClass);
-
   return (
-    <div className="min-h-screen bg-[#FAF8F6] flex flex-col justify-between text-plum font-sans">
-      {/* Simple Top Navigation */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-          {/* Logo & Grade */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-berry flex items-center justify-center text-white shadow-soft">
-              <Compass className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-extrabold text-lg text-plum">
-                Margam
+    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28">
+      {/* Offline Status Listener */}
+      <OfflineBanner />
+
+      {/* Top Header */}
+      <header className="sticky top-0 z-30 bg-[#FFF8DC]/95 backdrop-blur-none border-b-[3px] border-[#111111]">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+          {/* Logo & Grade Info */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 no-underline text-[#111111]"
+            >
+              <div className="w-10 h-10 rounded-[12px_10px_14px_11px] bg-[#FFE14D] border-[3px] border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center shrink-0">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-[#111111]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <div>
+                <span className="font-heading font-extrabold text-2xl text-[#111111] tracking-tight leading-none block">
+                  {copy.appName}
+                </span>
+                <span className="text-xs font-bold text-[#111111]/70 block">
+                  {copy.tagline}
+                </span>
+              </div>
+            </Link>
+
+            {profile && (
+              <span className="hidden sm:inline-block px-2.5 py-1 border-[2px] border-[#111111] rounded-full bg-[#FFE14D] text-xs font-heading font-extrabold text-[#111111]">
+                {copy.classBadge} {profile.selectedClass}
               </span>
-              <span className="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-peach-light text-plum border border-peach-border">
-                Class {profile.selectedClass}
-              </span>
-            </div>
+            )}
           </div>
 
-          {/* Right Controls: Language Switcher, Learner Badge, Reset */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Language Switcher */}
-            <div className="flex items-center gap-1 bg-[#FDF5F3] p-1 rounded-xl border border-peach-border/70">
-              <button
-                type="button"
-                onClick={() => setCurrentLang("en")}
-                className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
-                  currentLang === "en" ? "bg-white text-plum shadow-xs" : "text-grey"
-                }`}
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrentLang("hi")}
-                className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
-                  currentLang === "hi" ? "bg-white text-plum shadow-xs" : "text-grey"
-                }`}
-              >
-                हिन्दी
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrentLang("te")}
-                className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
-                  currentLang === "te" ? "bg-white text-plum shadow-xs" : "text-grey"
-                }`}
-              >
-                తెలుగు
-              </button>
-            </div>
-
-            {/* Learner Name Badge */}
-            <span className="text-xs font-semibold text-plum hidden sm:inline">
-              {profile.name}
-            </span>
-
-            {/* Simple Reset Profile Action */}
-            <button
-              type="button"
-              onClick={handleResetProfile}
-              title="Reset profile to switch class or name"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-grey hover:text-plum p-2 rounded-xl hover:bg-slate-100 transition-colors"
+          {/* Right Controls: Teacher link & Language Toggle */}
+          <div className="flex items-center gap-2">
+            <Link
+              href="/teacher"
+              className="hidden sm:inline-flex items-center px-2.5 py-1 min-h-[38px] border-[2px] border-[#111111] rounded-xl bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] text-xs font-heading font-extrabold text-[#111111] no-underline hover:bg-[#FFE14D]/30 active:translate-x-[1px] active:translate-y-[1px]"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Reset</span>
-            </button>
+              {copy.teacherLink}
+            </Link>
+            <LanguageToggle
+              currentLang={currentLang}
+              onLanguageChange={setCurrentLang}
+            />
           </div>
         </div>
       </header>
 
-      {/* Main Learning Space: Vertical List of Lessons */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
-        {/* Friendly Witch Cat Greeting Banner */}
-        <WitchCatCompanion
-          studentName={profile.name}
-          context="greeting"
-          mode="inline"
-        />
-
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-plum tracking-tight">
-            Class {profile.selectedClass} Mathematics
-          </h1>
-          <p className="text-xs sm:text-sm text-grey mt-1">
-            Complete each lesson in order to unlock the next.
-          </p>
-        </div>
-
-        {/* Chapters & Lessons */}
-        <div className="space-y-4">
-          {allChapters.map((chapter) => {
-            const isFull = chapter.status === "full";
-            const chapterConcepts = getConceptsByChapter(chapter.id);
-            const hasDiagnostic = canTakeChapterDiagnostic(chapter.id);
-            const hasCompletedAny = chapterConcepts.some(
-              (c) => profile.topicProgress[c.id]?.status === "completed"
-            );
-
-            return (
-              <div
-                key={chapter.id}
-                className={`rounded-3xl border transition-all ${
-                  isFull
-                    ? "bg-white border-border shadow-card p-5 sm:p-6"
-                    : "bg-[#FBF9F7] border-border/70 p-4 sm:p-5"
-                }`}
+      {/* Main Content Container */}
+      <main className="max-w-4xl mx-auto px-4 pt-6 sm:pt-8 space-y-8">
+        {/* ================================================================= */}
+        {/* LANDING & ONBOARDING (For First-Time Visitors)                    */}
+        {/* ================================================================= */}
+        {!profile && (
+          <section aria-labelledby="welcome-heading" className="space-y-6">
+            {/* 3-Line Landing Hero */}
+            <Card color="yellow" className="p-6 sm:p-8 space-y-4">
+              <h1
+                id="welcome-heading"
+                className="font-heading font-extrabold text-3xl sm:text-4xl text-[#111111] leading-tight"
               >
-                {/* Chapter Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border/60">
-                  <div>
-                    <h2 className="font-bold text-base text-plum">
-                      Ch {chapter.chapterNumber}: {chapter.name[currentLang] || chapter.name.en}
-                    </h2>
-                    <p className="text-xs text-grey">{chapter.bookName}</p>
-                  </div>
+                {copy.appName}
+              </h1>
 
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {/* Take Diagnostic (Only on chapters whose questions total >= 6) */}
-                    {isFull && hasDiagnostic && (
-                      <Link
-                        href={`/student/diagnostic/${chapter.id}`}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-berry text-white text-xs font-bold hover:bg-berry-hover transition-colors shadow-soft"
-                      >
-                        <Award className="w-3.5 h-3.5" />
-                        <span>Take Diagnostic</span>
-                      </Link>
-                    )}
+              {/* 3 Short Informative Lines */}
+              <div className="space-y-2 max-w-xl">
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
+                    1
+                  </span>
+                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
+                    {copy.heroLine1}
+                  </p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
+                    2
+                  </span>
+                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
+                    {copy.heroLine2}
+                  </p>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
+                    3
+                  </span>
+                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
+                    {copy.heroLine3}
+                  </p>
+                </div>
+              </div>
 
-                    {/* Chapter Test (if chapter has questions and at least one concept completed) */}
-                    {isFull && hasDiagnostic && hasCompletedAny && (
-                      <Link
-                        href={`/student/test/${chapter.id}`}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-plum text-xs font-bold transition-colors"
-                      >
-                        <BarChart2 className="w-3.5 h-3.5" />
-                        <span>Chapter Test</span>
-                      </Link>
-                    )}
+              {/* Main "Try 3 questions" Action Button */}
+              <div className="pt-2">
+                <Button
+                  variant="ink"
+                  size="lg"
+                  onClick={handleTryQuestions}
+                  className="w-full sm:w-auto text-[#FFE14D]"
+                >
+                  <span className="mr-2">{copy.try3Questions}</span>
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="w-5 h-5 inline-block"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </Button>
+              </div>
+            </Card>
 
-                    {!isFull && (
-                      <span className="text-xs font-semibold text-grey bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
-                        Coming soon
-                      </span>
-                    )}
-                  </div>
+            {/* Name and Class Entry Card */}
+            <Card color="white" className="p-6 sm:p-8 space-y-6">
+              <div>
+                <h2 className="font-heading font-extrabold text-2xl text-[#111111]">
+                  {copy.startCardTitle}
+                </h2>
+                <p className="text-sm font-bold text-[#111111]/70 mt-1">
+                  {copy.startCardSubtitle}
+                </p>
+              </div>
+
+              <form onSubmit={handleStartLearning} className="space-y-5">
+                {/* 1. Name Input */}
+                <div>
+                  <label
+                    htmlFor="student-name-field"
+                    className="block font-heading font-bold text-sm text-[#111111] mb-1.5 uppercase tracking-wide"
+                  >
+                    {copy.nameLabel}
+                  </label>
+                  <Input
+                    id="student-name-field"
+                    type="text"
+                    required
+                    placeholder={copy.namePlaceholder}
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value)}
+                  />
                 </div>
 
-                {/* If full chapter, show lessons vertically */}
-                {isFull && (
-                  <div className="pt-4 space-y-3">
-                    {chapterConcepts.map((concept, idx) => {
-                      const prog = profile.topicProgress[concept.id];
-                      const status: TopicStatus =
-                        prog?.status || (idx === 0 ? "available" : "locked");
-                      const isLocked = status === "locked";
-                      const isCompleted = status === "completed";
-                      const isInProgress = status === "in_progress";
-                      const isAvailable = status === "available";
-
+                {/* 2. Class Selection: 48px buttons with checkmark + 21:1 contrast */}
+                <div>
+                  <label
+                    id="class-selector-label"
+                    className="block font-heading font-bold text-sm text-[#111111] mb-1.5 uppercase tracking-wide"
+                  >
+                    {copy.classLabel}
+                  </label>
+                  <div
+                    role="radiogroup"
+                    aria-labelledby="class-selector-label"
+                    className="grid grid-cols-5 gap-2 sm:gap-3"
+                  >
+                    {([6, 7, 8, 9, 10] as const).map((grade) => {
+                      const isSelected = selectedClass === grade;
                       return (
-                        <div
-                          key={concept.id}
-                          className={`rounded-2xl border p-4 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                            isCompleted
-                              ? "bg-[#F3FAF5] border-emerald-200"
-                              : isAvailable || isInProgress
-                              ? "bg-white border-berry/40 ring-1 ring-berry/20 shadow-xs"
-                              : "bg-slate-50/70 border-slate-200 opacity-60"
-                          }`}
+                        <button
+                          key={grade}
+                          type="button"
+                          role="radio"
+                          aria-checked={isSelected}
+                          aria-label={`Class ${grade}${isSelected ? ", selected" : ""}`}
+                          onClick={() => setSelectedClass(grade)}
+                          className={`
+                            min-h-[48px] py-2 px-1
+                            flex items-center justify-center gap-1
+                            font-heading font-extrabold text-base
+                            border-[3px] border-[#111111]
+                            rounded-[14px_12px_16px_13px/13px_15px_12px_14px]
+                            box-border cursor-pointer select-none
+                            transition-transform active:translate-x-[2px] active:translate-y-[2px]
+                            ${
+                              isSelected
+                                ? "bg-[#111111] text-[#FFFFFF] shadow-[2px_2px_0px_#111111]"
+                                : "bg-[#FFFFFF] text-[#111111] shadow-[3px_3px_0px_#111111] hover:bg-[#FFE14D]/30"
+                            }
+                          `.trim()}
                         >
-                          {/* Lesson Info */}
-                          <div className="space-y-1 flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-bold text-grey uppercase tracking-wider">
-                                Lesson {idx + 1}
-                              </span>
-
-                              {isCompleted && (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  <span>Completed</span>
-                                </span>
-                              )}
-                              {isInProgress && (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-berry bg-berry-light px-2 py-0.5 rounded-full border border-berry-border">
-                                  <Clock className="w-3 h-3" />
-                                  <span>In Progress</span>
-                                </span>
-                              )}
-                              {isAvailable && (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-plum bg-peach-light px-2 py-0.5 rounded-full border border-peach-border">
-                                  <span>Available</span>
-                                </span>
-                              )}
-                              {isLocked && (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-grey bg-slate-200 px-2 py-0.5 rounded-full">
-                                  <Lock className="w-3 h-3" />
-                                  <span>Locked</span>
-                                </span>
-                              )}
-                            </div>
-
-                            <h3 className="font-bold text-sm sm:text-base text-plum">
-                              {concept.name[currentLang] || concept.name.en}
-                            </h3>
-
-                            <p className="text-xs text-grey line-clamp-2">
-                              {concept.learningObjective[currentLang] ||
-                                concept.learningObjective.en}
-                            </p>
-                          </div>
-
-                          {/* Action Buttons: Practice & Lesson */}
-                          <div className="flex items-center gap-2 shrink-0 flex-wrap sm:flex-nowrap">
-                            {isLocked ? (
-                              <button
-                                disabled
-                                className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-slate-200 text-grey cursor-not-allowed"
-                              >
-                                Locked
-                              </button>
-                            ) : (
-                              <>
-                                <Link
-                                  href={`/student/worksheet/${concept.id}`}
-                                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FDF5F3] hover:bg-peach-light text-plum border border-peach-border/70 transition-all min-h-[38px]"
-                                >
-                                  <FileText className="w-3.5 h-3.5 text-berry" />
-                                  <span>Practice</span>
-                                </Link>
-
-                                <Link
-                                  href={`/lesson/${concept.id}`}
-                                  className={`w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all min-h-[38px] ${
-                                    isCompleted
-                                      ? "bg-slate-100 hover:bg-slate-200 text-plum"
-                                      : "bg-berry hover:bg-berry-hover text-white shadow-soft"
-                                  }`}
-                                >
-                                  <PlayCircle className="w-4 h-4" />
-                                  <span>
-                                    {isCompleted
-                                      ? "Revisit"
-                                      : isInProgress
-                                      ? "Continue"
-                                      : "Start Lesson"}
-                                  </span>
-                                </Link>
-                              </>
-                            )}
-                          </div>
-                        </div>
+                          {isSelected && (
+                            <svg
+                              viewBox="0 0 16 16"
+                              className="w-4 h-4 text-[#8DE86A] shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="M3 8.5l3.5 3.5 7-7" />
+                            </svg>
+                          )}
+                          <span className={isSelected ? "text-[#FFFFFF]" : "text-[#111111]"}>
+                            {grade}
+                          </span>
+                        </button>
                       );
                     })}
                   </div>
-                )}
+                </div>
+
+                {/* Submit Action */}
+                <Button
+                  type="submit"
+                  variant="yellow"
+                  size="default"
+                  className="w-full text-[#111111]"
+                >
+                  <span>{copy.startLearningBtn}</span>
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </Button>
+              </form>
+            </Card>
+          </section>
+        )}
+
+        {/* ================================================================= */}
+        {/* RETURNING STUDENT SECTION (If profile exists)                     */}
+        {/* ================================================================= */}
+        {profile && (
+          <section aria-labelledby="returning-heading" className="space-y-4">
+            {/* Continue Card */}
+            <Card color="yellow" className="p-6 sm:p-7 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
+                    {copy.welcomeBack}
+                  </span>
+                  <h1
+                    id="returning-heading"
+                    className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111] leading-tight"
+                  >
+                    {profile.name}
+                  </h1>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="inline-block px-3 py-1 bg-[#111111] text-[#FFFFFF] rounded-full font-heading font-extrabold text-xs">
+                    {copy.classBadge} {profile.selectedClass}
+                  </span>
+                  <span className="text-xs font-bold text-[#111111]/80">
+                    {completedConceptsCount} {copy.conceptsMastered}
+                  </span>
+                </div>
               </div>
-            );
-          })}
+
+              {/* Active gap indicator or continue prompt */}
+              {firstActiveGapId ? (
+                <div className="p-4 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-2xl shadow-[3px_3px_0px_#111111] space-y-2">
+                  <div className="flex items-center gap-2 text-[#FF4F9A]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="w-5 h-5 shrink-0 stroke-[3]"
+                      fill="none"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span className="font-heading font-extrabold text-sm text-[#111111]">
+                      {copy.activeGapFound}
+                    </span>
+                  </div>
+                  <div className="pt-1">
+                    <Link
+                      href={`/student/worksheet/${firstActiveGapId}`}
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#FF4F9A] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                    >
+                      {copy.fixGapBtn}
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="pt-2 flex flex-wrap gap-3 items-center">
+                  <Button
+                    variant="ink"
+                    size="sm"
+                    onClick={handleTryQuestions}
+                    className="text-[#FFE14D]"
+                  >
+                    <span>{copy.continueLessonBtn}</span>
+                    <svg
+                      viewBox="0 0 16 16"
+                      className="w-4 h-4 ml-1.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </Button>
+
+                  <button
+                    type="button"
+                    onClick={handleResetProfile}
+                    className="text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A] cursor-pointer"
+                  >
+                    {copy.switchProfile}
+                  </button>
+                </div>
+              )}
+            </Card>
+          </section>
+        )}
+
+        {/* ================================================================= */}
+        {/* CHAPTERS LIST (Coloured Illustrated Tiles)                        */}
+        {/* ================================================================= */}
+        <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-[3px] border-[#111111] pb-2">
+            <div>
+              <h2
+                id="chapters-list-heading"
+                className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111]"
+              >
+                {copy.classBadge} {currentGrade} {copy.chaptersHeading}
+              </h2>
+              <p className="text-xs sm:text-sm font-bold text-[#111111]/70 mt-0.5">
+                {copy.chaptersSubtitle}
+              </p>
+            </div>
+            <span className="text-xs font-extrabold text-[#111111] shrink-0">
+              {gradeChapters.length} Chapters
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {gradeChapters.map((chapter, index) => {
+              const isFull = chapter.status === "full";
+              const chapterConcepts = getConceptsByChapter(chapter.id);
+              const hasDiagnostic = isFull && canTakeChapterDiagnostic(chapter.id);
+              const hasStarted = chapterConcepts.some(
+                (c) =>
+                  profile?.topicProgress[c.id]?.status === "completed" ||
+                  profile?.topicProgress[c.id]?.status === "in_progress"
+              );
+
+              // Real state mapping
+              const tileState = !isFull
+                ? "coming_soon"
+                : hasStarted
+                ? "in_progress"
+                : "available";
+
+              const color = tileColors[index % tileColors.length];
+              const localizedTitle = `Ch ${chapter.chapterNumber}: ${
+                chapter.name[currentLang] || chapter.name.en
+              }`;
+              const localizedSubtitle = `NCERT • ${chapter.bookName}`;
+
+              const firstConceptId = chapterConcepts[0]?.id;
+              const diagnosticHref = hasDiagnostic
+                ? `/student/diagnostic/${chapter.id}`
+                : undefined;
+              const practiceHref =
+                isFull && firstConceptId
+                  ? `/student/worksheet/${firstConceptId}`
+                  : undefined;
+              const lessonHref =
+                isFull && firstConceptId
+                  ? `/lesson/${firstConceptId}`
+                  : undefined;
+
+              return (
+                <Tile
+                  key={chapter.id}
+                  title={localizedTitle}
+                  subtitle={localizedSubtitle}
+                  state={tileState}
+                  color={color}
+                  diagnosticHref={diagnosticHref}
+                  practiceHref={practiceHref}
+                  lessonHref={lessonHref}
+                />
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Small Teacher link for mobile footer */}
+        <div className="pt-4 text-center sm:hidden">
+          <Link
+            href="/teacher"
+            className="text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A]"
+          >
+            {copy.teacherLink}
+          </Link>
         </div>
       </main>
 
-      {/* Floating Witch Cat Companion */}
-      <WitchCatCompanion
-        studentName={profile.name}
-        context="greeting"
-        mode="floating"
-      />
-
-      {/* Simple Clean Footer */}
-      <footer className="border-t border-border py-4 text-center text-xs text-grey bg-white">
-        Margam • Sequentially Adaptive Mathematics
-      </footer>
+      {/* Student Bottom Tab Bar (Home active) */}
+      <BottomTabBar currentTab="home" />
     </div>
   );
 }

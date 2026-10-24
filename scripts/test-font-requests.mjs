@@ -35,7 +35,7 @@ async function run() {
         }
       });
 
-      await page.goto("http://localhost:3008/design-system", {
+      await page.goto("http://localhost:3008/", {
         waitUntil: "networkidle0",
         timeout: 30000,
       });
