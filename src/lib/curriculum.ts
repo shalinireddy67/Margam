@@ -52,6 +52,30 @@ export function getQuestionsByConceptId(conceptId: string): Question[] {
 }
 
 /**
+ * Returns all questions belonging to concepts within a given chapter.
+ */
+export function getQuestionsByChapterId(chapterId: string): Question[] {
+  const chapterConcepts = getConceptsByChapter(chapterId);
+  const conceptIds = chapterConcepts.map((c) => c.id);
+  return questions.filter((q) => conceptIds.includes(q.conceptId));
+}
+
+/**
+ * Returns the total count of questions available in a chapter.
+ */
+export function getChapterQuestionCount(chapterId: string): number {
+  return getQuestionsByChapterId(chapterId).length;
+}
+
+/**
+ * RULE: "Take diagnostic" is only available on chapters whose questions total 6 or more.
+ * Other chapters stay lesson-only (no empty or tiny diagnostics).
+ */
+export function canTakeChapterDiagnostic(chapterId: string): boolean {
+  return getChapterQuestionCount(chapterId) >= 6;
+}
+
+/**
   * Returns true if the concept has at least minRequired questions in the active question bank.
   */
 export function hasEnoughQuestions(conceptId: string, minRequired = 3): boolean {

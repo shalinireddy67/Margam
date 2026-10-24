@@ -230,6 +230,14 @@ export function getLessonVariantFromMastery(
   return "standard";
 }
 
+/**
+ * Chooses lesson variant from concept mastery:
+ * - mastery < 50: basics_first
+ * - mastery >= 80: fast_track
+ * - otherwise: standard
+ */
+export const selectLessonVariant = getLessonVariantFromMastery;
+
 export function recommendLessonVariant(
   profile: LearnerProfile,
   conceptId: string
@@ -240,16 +248,29 @@ export function recommendLessonVariant(
   }
 
   if (progress.mastery !== undefined) {
-    return getLessonVariantFromMastery(progress.mastery);
+    return selectLessonVariant(progress.mastery);
   }
 
   if (progress.worksheetTotal && progress.worksheetTotal > 0) {
     const score = ((progress.worksheetScore || 0) / progress.worksheetTotal) * 100;
-    return getLessonVariantFromMastery(score);
+    return selectLessonVariant(score);
   }
 
   if (profile.consecutiveIncorrect >= 2) return "basics_first";
   return "standard";
+}
+
+/**
+ * Selects 1 or 2 confirmation check questions on a root concept before routing.
+ * If the student passes them, prerequisite routing is withheld to prevent false positives.
+ */
+export function getConfirmationQuestions(
+  rootConceptId: string,
+  count = 2
+): Question[] {
+  const pool = getQuestionsByConceptId(rootConceptId);
+  const sorted = [...pool].sort((a, b) => a.difficulty - b.difficulty);
+  return sorted.slice(0, count);
 }
 
 // ==========================================

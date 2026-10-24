@@ -238,11 +238,12 @@ To deploy Margam on Vercel:
 1. Push your changes to GitHub: `git push origin main`.
 2. Go to [https://vercel.com/new](https://vercel.com/new) and log in.
 3. Import the GitHub repository: `shalinireddy67/kernel2k26`.
-4. Keep the default settings:
-   - **Framework Preset:** Next.js
-   - **Root Directory:** `./`
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `.next`
+4. Configure Environment Variables in the Vercel Project Settings:
+   - `NEXT_PUBLIC_APP_NAME="Margam"`
+   - `NEXT_PUBLIC_DEFAULT_LOCALE="en"`
+   - `NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS="false"`
+   - `NEXT_PUBLIC_DEMO_UNLOCK="false"`  
+     > **CRITICAL PRODUCTION RULE:** `NEXT_PUBLIC_DEMO_UNLOCK` must **STAY `false`** on Vercel and all production environments to enforce standard curriculum progression and placement rules. Setting it to `true` is intended solely for local offline test execution.
 5. Click **Deploy**. Vercel will build and deploy the production bundle with automatic SSL and edge caching.
 
 ### Option B: Via Vercel CLI

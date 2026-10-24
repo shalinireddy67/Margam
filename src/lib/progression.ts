@@ -12,6 +12,7 @@ import {
 } from "./types";
 import {
   getConceptsByClass,
+  getConceptsByChapter,
   getConceptById,
   getFirstSupportedConcept,
   getQuestionsByConceptId,
@@ -25,6 +26,9 @@ import { getActiveProfile, saveProfile } from "./storage";
 export function syncClassProgression(profile: LearnerProfile): LearnerProfile {
   const classConcepts = getConceptsByClass(profile.selectedClass);
   const firstSupported = getFirstSupportedConcept(profile.selectedClass);
+  const demoUnlock =
+    typeof process !== "undefined" &&
+    process.env.NEXT_PUBLIC_DEMO_UNLOCK === "true";
 
   if (!profile.topicProgress) {
     profile.topicProgress = {};
@@ -37,6 +41,18 @@ export function syncClassProgression(profile: LearnerProfile): LearnerProfile {
 
     if (existing && existing.status === "completed") {
       // Completed topics stay completed and accessible for revision
+      continue;
+    }
+
+    if (demoUnlock) {
+      if (!existing || existing.status === "locked") {
+        profile.topicProgress[concept.id] = {
+          conceptId: concept.id,
+          status: "available",
+          lessonCompleted: false,
+          worksheetCompleted: false,
+        };
+      }
       continue;
     }
 
@@ -77,6 +93,36 @@ export function syncClassProgression(profile: LearnerProfile): LearnerProfile {
           worksheetCompleted: false,
         };
       }
+    }
+  }
+
+  saveProfile(profile);
+  return profile;
+}
+
+/**
+ * Unlocks all lessons in a chapter after the student achieves placement (score >= 70% on chapter diagnostic).
+ * Each concept in the chapter is set to "available" if currently locked or not yet started.
+ */
+export function unlockChapterLessons(chapterId: string): LearnerProfile | null {
+  const profile = getActiveProfile();
+  if (!profile) return null;
+
+  const chapterConcepts = getConceptsByChapter(chapterId);
+  if (!profile.topicProgress) {
+    profile.topicProgress = {};
+  }
+
+  for (const concept of chapterConcepts) {
+    const existing = profile.topicProgress[concept.id];
+    if (!existing || existing.status === "locked") {
+      profile.topicProgress[concept.id] = {
+        ...(existing || {}),
+        conceptId: concept.id,
+        status: "available",
+        lessonCompleted: existing ? existing.lessonCompleted : false,
+        worksheetCompleted: existing ? existing.worksheetCompleted : false,
+      };
     }
   }
 

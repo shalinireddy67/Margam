@@ -11,6 +11,8 @@ import {
   updateMastery,
   updateConceptDifficulty,
   getLessonVariantFromMastery,
+  selectLessonVariant,
+  getConfirmationQuestions,
   generateChapterDiagnostic,
   evaluateChapterDiagnostic,
   selectPracticeQuestions,
@@ -102,12 +104,17 @@ assert.equal(demoteState.newDifficulty, 1, "Floor is difficulty 1");
 console.log("  [PASS] Per-concept difficulty stepping and streak resets verified.");
 
 // 3. Lesson Variant from Mastery
-console.log("\n3. Testing Lesson Variant from Mastery...");
+console.log("\n3. Testing Lesson Variant from Mastery & Confirmation Questions...");
 assert.equal(getLessonVariantFromMastery(undefined), "standard");
-assert.equal(getLessonVariantFromMastery(45), "basics_first", "< 50 should be basics_first");
-assert.equal(getLessonVariantFromMastery(65), "standard", "50 to 79 should be standard");
-assert.equal(getLessonVariantFromMastery(85), "fast_track", ">= 80 should be fast_track");
-console.log("  [PASS] Lesson variant mapping verified.");
+assert.equal(selectLessonVariant(45), "basics_first", "< 50 should be basics_first");
+assert.equal(selectLessonVariant(65), "standard", "50 to 79 should be standard");
+assert.equal(selectLessonVariant(85), "fast_track", ">= 80 should be fast_track");
+
+// Confirmation questions selection
+const confirmQ = getConfirmationQuestions("c7-int-02", 2);
+assert.equal(confirmQ.length, 2, "Returned 2 confirmation questions for root concept c7-int-02");
+assert.equal(confirmQ.every((q) => q.conceptId === "c7-int-02"), true);
+console.log("  [PASS] Lesson variant mapping (selectLessonVariant) and confirmation questions verified.");
 
 // 4. Storage & Cross-Grade Remediation Access
 console.log("\n4. Testing Storage & Lower-Grade Concept Remediation Access...");
