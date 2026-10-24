@@ -1,28 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Nunito, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { SITE_NAME, SITE_TAGLINE, SITE_DESCRIPTION } from "@/config/site";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["400", "600", "700", "800"],
-  display: "swap",
-});
-
-const notoDevanagari = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
-  variable: "--font-devanagari",
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} | Adaptive Learning Platform for Classes 6–10`,
@@ -54,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#F4F6EE",
+  themeColor: "#FFF8DC",
 };
 
 export default function RootLayout({
@@ -63,15 +41,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`scroll-smooth ${outfit.variable} ${nunito.variable} ${notoDevanagari.variable}`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans antialiased selection:bg-coral selection:text-white pb-20 md:pb-0 overflow-x-hidden">
-        <a
-          href="#main-content"
-          className="skip-to-content"
-        >
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-full flex flex-col bg-[#FFF8DC] text-[#111111] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
+        <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
         {children}

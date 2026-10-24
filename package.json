@@ -11,6 +11,11 @@
     "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs && npx tsx scripts/test-draft-translations.mjs"
   },
   "dependencies": {
+    "@fontsource/baloo-2": "^5.3.0",
+    "@fontsource/baloo-tammudu-2": "^5.3.0",
+    "@fontsource/noto-sans-devanagari": "^5.3.0",
+    "@fontsource/noto-sans-telugu": "^5.3.0",
+    "@fontsource/nunito": "^5.3.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.109.0",
     "lucide-react": "^0.453.0",

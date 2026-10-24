@@ -11,96 +11,69 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: {
-          DEFAULT: "var(--primary)",
-          hover: "var(--primary-hover)",
-          foreground: "var(--primary-foreground)",
+        ink: "#111111",
+        cream: "#FFF8DC",
+        canvas: "#FFF8DC",
+        yellow: {
+          DEFAULT: "#FFE14D",
+          bright: "#FFE14D",
+          light: "#FFF199",
         },
-        secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+        cyan: {
+          DEFAULT: "#4DD9E8",
+          bright: "#4DD9E8",
+          light: "#B8F3FA",
         },
-        card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
-          subtle: "var(--card-subtle)",
+        pink: {
+          DEFAULT: "#FF4F9A",
+          bright: "#FF4F9A",
+          light: "#FFB0D2",
         },
-        sidebar: {
-          DEFAULT: "#140513",
-          foreground: "#FFFFFF",
-          muted: "#8A94A6",
-          active: "#AC427C",
+        green: {
+          DEFAULT: "#8DE86A",
+          bright: "#8DE86A",
+          light: "#CCF7BC",
         },
-        plum: {
-          DEFAULT: "#140513",
-          light: "#2B142A",
+        sky: {
+          DEFAULT: "#A9D8F0",
+          bright: "#A9D8F0",
+          light: "#D8EFFB",
         },
-        berry: {
-          DEFAULT: "#AC427C",
-          hover: "#8E3264",
-          light: "#FDF0F6",
-          border: "#E8BBD5",
+        orange: {
+          DEFAULT: "#FF8A3D",
+          bright: "#FF8A3D",
+          light: "#FFC299",
         },
-        peach: {
-          DEFAULT: "#EAA291",
-          hover: "#D98E7D",
-          light: "#FDF5F3",
-          border: "#F5CECA",
-        },
-        warmBrown: {
-          DEFAULT: "#B07040",
-          light: "#FAF1EA",
-        },
-        grey: {
-          DEFAULT: "#646464",
-          light: "#F5F5F5",
-          border: "#E0E0E0",
-        },
-        muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
-        },
-        border: "var(--border)",
-        ring: "var(--ring)",
+        white: "#FFFFFF",
+        // Semantic mappings
+        background: "#FFF8DC",
+        foreground: "#111111",
+        muted: "#E5E0C8",
       },
       fontFamily: {
-        sans: [
-          "var(--font-outfit)",
-          "var(--font-nunito)",
-          "var(--font-devanagari)",
-          "var(--font-telugu)",
-          "system-ui",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "'Segoe UI'",
-          "Roboto",
-          "sans-serif",
-        ],
         heading: [
-          "var(--font-outfit)",
-          "var(--font-devanagari)",
-          "var(--font-telugu)",
-          "system-ui",
+          "'Baloo 2'",
+          "'Baloo Tammudu 2'",
           "sans-serif",
         ],
-        mono: [
-          "ui-monospace",
-          "Menlo",
-          "Monaco",
-          "Consolas",
-          "monospace",
+        sans: [
+          "'Nunito'",
+          "'Noto Sans Devanagari'",
+          "'Noto Sans Telugu'",
+          "sans-serif",
         ],
+      },
+      borderWidth: {
+        "3": "3px",
       },
       boxShadow: {
-        soft: "0 8px 30px rgba(23, 28, 38, 0.04)",
-        card: "0 4px 20px -2px rgba(23, 28, 38, 0.05)",
-        floating: "0 12px 36px -4px rgba(211, 62, 26, 0.15)",
+        hard: "4px 4px 0px #111111",
+        "hard-sm": "2px 2px 0px #111111",
+        "hard-lg": "6px 6px 0px #111111",
       },
       borderRadius: {
-        "3xl": "24px",
-        "4xl": "32px",
+        hand: "18px 14px 20px 15px / 15px 20px 14px 18px",
+        pill: "9999px",
       },
     },
   },
