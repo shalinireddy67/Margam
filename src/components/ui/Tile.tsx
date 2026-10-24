@@ -3,13 +3,17 @@
 import React from "react";
 import Link from "next/link";
 
-export type TileState = "available" | "in_progress" | "coming_soon" | "locked";
+export type ChapterTileState = "available" | "in_progress" | "coming_soon";
+export type LessonTileState = "available" | "in_progress" | "locked";
+export type TileState = ChapterTileState | "locked";
+export type TileKind = "chapter" | "lesson";
 export type TileColor = "yellow" | "cyan" | "green" | "sky" | "orange";
 
 export interface TileProps {
   title: string;
   subtitle?: string;
   state?: TileState;
+  kind?: TileKind;
   color?: TileColor;
   diagnosticHref?: string;
   practiceHref?: string;

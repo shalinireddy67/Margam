@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { notFound } from "next/navigation";
 import {
   Button,
   Card,
@@ -18,10 +19,17 @@ import {
 } from "@/components/ui";
 
 export default function DesignSystemPage() {
+  if (process.env.NODE_ENV === "production") {
+    notFound();
+  }
   const [lang, setLang] = useState<Language>("en");
   const [chipSelected, setChipSelected] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [inputError, setInputError] = useState("");
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const copy = {
     en: {
@@ -211,18 +219,23 @@ export default function DesignSystemPage() {
           </div>
         </section>
 
-        {/* Chapter Tiles (4 Real App States) */}
+        {/* Chapter Tiles (3 Real Chapter States: available, in_progress, coming_soon) */}
         <section aria-labelledby="tiles-heading" className="space-y-4">
-          <h2
-            id="tiles-heading"
-            className="font-heading font-extrabold text-2xl text-[#111111]"
-          >
-            {copy.tiles}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            <h2
+              id="tiles-heading"
+              className="font-heading font-extrabold text-2xl text-[#111111]"
+            >
+              {copy.tiles}
+            </h2>
+            <span className="text-xs font-bold text-[#666666]">
+              Chapter states: available, in progress, coming soon
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Tile
               title="Quadratic Equations"
-              subtitle="Standard form & quadratic formula"
+              subtitle="Class 10 • Chapter 4"
               state="available"
               color="yellow"
               diagnosticHref="#diagnose"
@@ -230,7 +243,7 @@ export default function DesignSystemPage() {
             />
             <Tile
               title="Coordinate Geometry"
-              subtitle="Distance formula & midpoint"
+              subtitle="Class 10 • Chapter 7"
               state="in_progress"
               color="cyan"
               practiceHref="#practice"
@@ -238,13 +251,21 @@ export default function DesignSystemPage() {
             />
             <Tile
               title="Triangles & Similarity"
-              subtitle="BPT theorem & similarity criteria"
+              subtitle="Class 10 • Chapter 6"
               state="coming_soon"
             />
+          </div>
+
+          {/* Lesson Tile (Locked State - For lessons only) */}
+          <div className="pt-2">
+            <p className="text-xs font-extrabold text-[#111111] uppercase tracking-wider mb-2">
+              Lesson Tile (Locked State — Lessons Only)
+            </p>
             <Tile
-              title="Real Numbers"
-              subtitle="Fundamental theorem of arithmetic"
+              title="Concept Remediation: Negative Integers"
+              subtitle="Prerequisite concept • Complete previous lesson to unlock"
               state="locked"
+              kind="lesson"
             />
           </div>
         </section>
