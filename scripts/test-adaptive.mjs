@@ -167,8 +167,11 @@ for (let i = 2; i < dQuestions.length; i++) {
 const diagReport = evaluateChapterDiagnostic("c10-ch04", answers);
 assert.ok(diagReport.totalQuestions >= 2);
 assert.ok(diagReport.scorePercentage < 100);
-console.log(`  Diagnostic Score: ${diagReport.correctCount}/${diagReport.totalQuestions} (${diagReport.scorePercentage}%)`);
-console.log(`  Identified Mistake Tags: [${diagReport.mistakeTags.join(", ")}]`);
+assert.equal(diagReport.gapAnalysis.confirmed, false, "Disparate error tags across different concepts must not confirm a gap");
+console.log(`  Scenario A (Divergent Tags -> No Gap):`);
+console.log(`    Score: ${diagReport.correctCount}/${diagReport.totalQuestions} (${diagReport.scorePercentage}%)`);
+console.log(`    Mistake Tags: [${diagReport.mistakeTags.join(", ")}]`);
+console.log(`    Gap Confirmed: ${diagReport.gapAnalysis.confirmed} (No gap card triggered)`);
 
 // Verify Reachable Class 10 to Class 7 Trace in Chapter 4 Diagnostic
 const c10ToC7Answers = {};
@@ -186,7 +189,10 @@ assert.equal(c10ToC7Report.gapAnalysis.confirmed, true, "Class 10 to 7 gap must 
 assert.equal(c10ToC7Report.gapAnalysis.rootConceptId, "c7-int-02", "Must trace to c7-int-02");
 assert.equal(c10ToC7Report.gapAnalysis.canRoute, true, "c7-int-02 must be routable");
 assert.equal(c10ToC7Report.gapAnalysis.triggerReason, "convergent_tags", "Must trigger via convergent_tags");
-console.log(`  Class 10 -> Class 7 Trace Verified: root = ${c10ToC7Report.gapAnalysis.rootConceptId}, trigger = ${c10ToC7Report.gapAnalysis.triggerReason}`);
+console.log(`  Scenario B (Convergent Tags -> Class 10 to Class 7 Gap):`);
+console.log(`    Mistake Tags: [${c10ToC7Report.mistakeTags.join(", ")}]`);
+console.log(`    Both map to: c7-int-02`);
+console.log(`    Class 10 -> Class 7 Trace Verified: root = ${c10ToC7Report.gapAnalysis.rootConceptId}, trigger = ${c10ToC7Report.gapAnalysis.triggerReason}`);
 console.log("  [PASS] Stage 1 Chapter Diagnostic evaluated with mistake tagging & Class 10 -> Class 7 trace.");
 
 // 6. STAGE 2: Solve (Adaptive Practice)

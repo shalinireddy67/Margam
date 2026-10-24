@@ -190,7 +190,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Supabase Integration Status Note
-The directory `src/lib/supabase/` contains optional helper stubs for planned future remote synchronization. No tracked application file imports `src/lib/supabase/`, and it is intentionally left untracked. The application operates entirely with zero-backend local client storage in full compliance with the DPDP Act 2023. Production builds on Vercel do not require or bundle this directory and build cleanly without it.
+The directory `src/lib/supabase/` contains optional helper stubs for planned future remote synchronization. No tracked application file imports `src/lib/supabase/`, and it is intentionally left untracked. The application operates entirely with zero-backend local client storage, built following data protection principles. Production builds on Vercel do not require or bundle this directory and build cleanly without it.
 
 ---
 

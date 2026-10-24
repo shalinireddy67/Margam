@@ -156,7 +156,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
         </div>
         <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E0E5D4] text-xs font-mono font-bold text-sage">
           <Check className="w-4 h-4" />
-          <span>DPDP Compliant</span>
+          <span>DPDP Principles</span>
         </div>
       </div>
     </section>
