@@ -28,27 +28,35 @@ const config: Config = {
           subtle: "var(--card-subtle)",
         },
         sidebar: {
-          DEFAULT: "#171C26",
+          DEFAULT: "#140513",
           foreground: "#FFFFFF",
           muted: "#8A94A6",
-          active: "#D33E1A",
+          active: "#AC427C",
         },
-        coral: {
-          DEFAULT: "#D33E1A",
-          hover: "#B83212",
-          light: "#FFF1ED",
-          border: "#FCD5CC",
+        plum: {
+          DEFAULT: "#140513",
+          light: "#2B142A",
         },
-        sage: {
-          DEFAULT: "#3A7D3C",
-          hover: "#2F6631",
-          light: "#E8F2DA",
-          border: "#C7DDAE",
+        berry: {
+          DEFAULT: "#AC427C",
+          hover: "#8E3264",
+          light: "#FDF0F6",
+          border: "#E8BBD5",
         },
-        lemon: {
-          DEFAULT: "#C49000",
-          light: "#FFF8E1",
-          border: "#FFE082",
+        peach: {
+          DEFAULT: "#EAA291",
+          hover: "#D98E7D",
+          light: "#FDF5F3",
+          border: "#F5CECA",
+        },
+        warmBrown: {
+          DEFAULT: "#B07040",
+          light: "#FAF1EA",
+        },
+        grey: {
+          DEFAULT: "#646464",
+          light: "#F5F5F5",
+          border: "#E0E0E0",
         },
         muted: {
           DEFAULT: "var(--muted)",

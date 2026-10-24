@@ -14,11 +14,11 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const [activeTab, setActiveTab] = useState("home");
 
   const navLinks = [
-    { id: "home", label: "Home", href: "#home", icon: Home },
-    { id: "diagnostic", label: "Diagnose", href: "#try-diagnostic", icon: Sparkles },
-    { id: "concepts", label: "Concept Map", href: "#concept-pathway", icon: Network },
-    { id: "teachers", label: "Teachers", href: "#teachers", icon: Users },
-    { id: "india", label: "Made for India", href: "#indian-classrooms", icon: Globe },
+    { id: "home", label: "Home", href: "/", icon: Home },
+    { id: "learn", label: "Student Path", href: "/student", icon: Sparkles },
+    { id: "diagnostic", label: "Diagnostic", href: "/#try-diagnostic", icon: Compass },
+    { id: "concepts", label: "Concept Map", href: "/#concept-pathway", icon: Network },
+    { id: "teachers", label: "Teachers", href: "/teacher", icon: Users },
   ];
 
   return (
@@ -114,10 +114,10 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
             {/* Desktop CTA Button */}
             <a
-              href="#try-diagnostic"
+              href="/student"
               className="hidden lg:inline-flex min-h-[48px] px-5 py-2.5 rounded-2xl bg-coral hover:bg-coral-hover text-white text-sm font-heading font-bold items-center gap-2 transition-all shadow-soft cursor-pointer"
             >
-              <span>Try 3 Questions</span>
+              <span>Start Learning</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

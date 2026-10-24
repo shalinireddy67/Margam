@@ -25,9 +25,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono bg-[#1E2533] px-3.5 py-1.5 rounded-full border border-[#2C3545] text-sage-light">
-            <ShieldCheck className="w-4 h-4 text-sage" />
-            <span>DPDP Act 2023 Child Privacy Compliant • 0 Tracking Cookies</span>
+          <div className="flex items-center gap-2 text-xs font-mono bg-[#1E2533] px-3.5 py-1.5 rounded-full border border-[#2C3545] text-slate-300">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>Adheres to DPDP Principles • Strictly Necessary Local Storage Only</span>
           </div>
 
           <button
@@ -42,14 +42,15 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-sidebar-muted">
           <div>
-            © 2026 Margam. Code Kernel &apos;26 Decode Round.
+            © 2026 Margam. Adaptive Mathematics for Indian Classrooms.
           </div>
-          <div className="flex items-center gap-4 text-xs font-heading">
-            <a href="#home" className="hover:text-white transition-colors">Home</a>
-            <a href="#try-diagnostic" className="hover:text-white transition-colors">Diagnostic</a>
-            <a href="#concept-pathway" className="hover:text-white transition-colors">Concept Map</a>
-            <a href="#teachers" className="hover:text-white transition-colors">Teachers</a>
-            <a href="#indian-classrooms" className="hover:text-white transition-colors">India</a>
+          <div className="flex flex-wrap items-center gap-4 text-xs font-heading">
+            <a href="/" className="hover:text-white transition-colors">Home</a>
+            <a href="/student" className="hover:text-white transition-colors">Student Path</a>
+            <a href="/teacher" className="hover:text-white transition-colors">Teacher Tools</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+            <a href="/cookies" className="hover:text-white transition-colors">Cookies</a>
           </div>
         </div>
       </div>

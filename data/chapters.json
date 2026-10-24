@@ -17,7 +17,7 @@
       "Visual Patterns",
       "Number Patterns"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c6-ch02",
@@ -38,7 +38,7 @@
       "Rays",
       "Angles"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c6-ch03",
@@ -218,7 +218,7 @@
       "Large Number Systems",
       "Estimation"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c7-ch02",
@@ -239,7 +239,7 @@
       "Brackets",
       "Simplification"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c7-ch03",
@@ -537,7 +537,7 @@
       "Exponents and Powers",
       "Laws of Exponents"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c8-ch03",
@@ -617,7 +617,7 @@
       "Distributive Law",
       "Multiplication of Algebraic Expressions"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c8-ch07",
@@ -798,7 +798,7 @@
       "Coordinates of Points",
       "Quadrants"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c9-ch02",
@@ -819,7 +819,7 @@
       "Degree of Polynomials",
       "Zeroes of Polynomials"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c9-ch03",
@@ -1081,7 +1081,7 @@
       "Fundamental Theorem of Arithmetic",
       "Revisiting Irrational Numbers"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c10-ch02",
@@ -1100,7 +1100,7 @@
       "Geometrical Meaning of Zeroes",
       "Relationship Between Zeroes and Coefficients"
     ],
-    "status": "in_progress"
+    "status": "full"
   },
   {
     "id": "c10-ch03",

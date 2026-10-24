@@ -126,18 +126,18 @@ export default function Hero({ currentLang }: HeroProps) {
           {/* Primary Action Button (Min 48px, High Contrast WCAG AA) */}
           <div className="pt-8 sm:pt-10 flex flex-wrap items-center gap-4">
             <a
-              href="#try-diagnostic"
+              href="/student"
               className="inline-flex items-center justify-center min-h-[52px] px-8 rounded-2xl bg-coral hover:bg-coral-hover text-white text-base font-heading font-bold transition-all shadow-floating cursor-pointer"
             >
-              <span>{content.ctaMain}</span>
+              <span>Start Learning</span>
               <ArrowRight className="w-5 h-5 ml-2" />
             </a>
 
             <a
-              href="#how-it-works"
+              href="#try-diagnostic"
               className="inline-flex items-center justify-center min-h-[52px] px-6 rounded-2xl bg-background hover:bg-white text-foreground border border-[#E0E5D4] text-sm font-heading font-bold transition-all cursor-pointer"
             >
-              {content.ctaSecondary}
+              <span>{content.ctaMain}</span>
             </a>
           </div>
         </div>

@@ -1,531 +1,3198 @@
 [
   {
-    "conceptId": "c7-int-02",
+    "conceptId": "c6-neg-01",
     "basics_first": {
       "headline": {
-        "en": "Basics-First: The Kirana Shop Debt & Credit Model",
+        "en": "Basics-First: Why Zero Isn't the End of the Line",
+        "hi": "बुनियादी दृष्टिकोण: शून्य संख्याओं का अंत क्यों नहीं है",
+        "te": "ప్రాథమిక విధానం: సున్నా సంఖ్యల అంతం ఎందుకు కాదు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Imagine standing at ground level (floor 0) of an apartment building. Going up to the 1st, 2nd, and 3rd floors feels natural (+1, +2, +3). But what if there is an underground basement parking? We cannot call the basement floor 1, because floor 1 is already above ground! We need negative numbers: -1, -2, -3 to represent levels below the reference point.",
+        "hi": "कल्पना कीजिए कि आप एक इमारत के भूतल (फ्लोर 0) पर खड़े हैं। पहली, दूसरी और तीसरी मंजिल (+1, +2, +3) ऊपर जाना स्वाभाविक लगता है। लेकिन अगर नीचे बेसमेंट पार्किंग हो तो? हम बेसमेंट को 1 नहीं कह सकते क्योंकि 1 ऊपर है! हमें शून्य से नीचे के स्तरों को दर्शाने के लिए ऋणात्मक संख्याओं (-1, -2, -3) की आवश्यकता होती है।",
+        "te": "మీరు ఒక అపార్ట్‌మెంట్ భవనంలోని గ్రౌండ్ ఫ్లోర్ (0) వద్ద నిల్చున్నట్లు ఊహించుకోండి. పైకి 1, 2, 3 అంతస్తులకు వెళ్లడం (+1, +2, +3). కానీ భూమి లోపల బేస్‌మెంట్ పార్కింగ్ ఉంటే? దాన్ని కూడా 1 అనలేం కదా! అందుకే సున్నా కంటే దిగువ స్థానాలను సూచించడానికి మనకు ఋణ సంఖ్యలు (-1, -2, -3) అవసరం.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Elevator buttons: 3, 2, 1, G (Ground/0), -1 (Basement 1), -2 (Basement 2).",
+        "hi": "लिफ्ट के बटन: 3, 2, 1, G (भूतल/0), -1 (बेसमेंट 1), -2 (बेसमेंट 2)।",
+        "te": "లిఫ్ట్ బటన్లు: 3, 2, 1, G (గ్రౌండ్/0), -1 (బేస్‌మెంట్ 1), -2 (బేస్‌మెంట్ 2).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "A river diver begins at water level (0 m). She dives down 8 metres. What integer marks her position?",
+          "hi": "एक गोताखोर जल स्तर (0 m) से शुरू करती है। वह 8 मीटर नीचे गोता लगाती है। कौन सा पूर्णांक उसकी स्थिति दर्शाता है?",
+          "te": "ఒక ఈతగాడు నీటి మట్టం (0 m) నుండి మొదలుపెట్టి 8 మీటర్ల లోతుకు వెళ్తాడు. అతని స్థానాన్ని ఏ పూర్ణ సంఖ్య సూచిస్తుంది?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Water surface is reference point 0 m.",
+            "hi": "जल स्तर संदर्भ बिंदु 0 m है।",
+            "te": "నీటి ఉపరితలం ఆధార బిందువు 0 m.",
+            "reviewed": false
+          },
+          {
+            "en": "Moving downwards is the opposite of upwards (+).",
+            "hi": "नीचे जाना ऊपर (+) जाने का विपरीत है।",
+            "te": "క్రిందికి వెళ్లడం పైకి (+) వెళ్లడానికి వ్యతిరేకం.",
+            "reviewed": false
+          },
+          {
+            "en": "Apply a negative sign to represent the depth.",
+            "hi": "गहराई दर्शाने के लिए ऋण चिह्न लगाएं।",
+            "te": "లోతును సూచించడానికి ఋణ సంకేతాన్ని ఉంచండి.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "-8 m",
+          "hi": "-8 m",
+          "te": "-8 m",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Negative numbers represent opposite directions or quantities below a reference zero.",
+        "hi": "ऋणात्मक संख्याएँ संदर्भ शून्य से विपरीत दिशाओं या नीचे की मात्राओं को दर्शाती हैं।",
+        "te": "ఋణ సంఖ్యలు ఆధార సున్నా కంటే వ్యతిరేక దిశలు లేదా దిగువ పరిమాణాలను సూచిస్తాయి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Opposite Quantities with Direction and Sign",
+        "hi": "मानक दृष्टिकोण: दिशा और चिह्न के साथ विपरीत राशियाँ",
+        "te": "ప్రామాణిక విధానం: దిశ మరియు సంకేతంతో వ్యతిరేక రాశులు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "In mathematics, integers extend the whole numbers to include negative values. For every positive integer +a, there exists an opposite integer -a such that their sum is zero: a + (-a) = 0. Physical situations involving opposites—profit vs loss, above sea level vs below sea level, temperature rise vs temperature drop—are modeled using signed integers.",
+        "hi": "गणित में, पूर्णांक पूर्ण संख्याओं को ऋणात्मक मानों तक विस्तारित करते हैं। प्रत्येक धनात्मक पूर्णांक +a के लिए एक विपरीत पूर्णांक -a होता है जिससे उनका योग शून्य होता है: a + (-a) = 0। लाभ बनाम हानि, समुद्र तल से ऊपर बनाम नीचे जैसी विपरीत स्थितियों को हस्ताक्षरित पूर्णांकों द्वारा दर्शाया जाता है।",
+        "te": "గణితంలో పూర్ణ సంఖ్యలు ఋణ విలువలను కూడా కలిగి ఉంటాయి. ప్రతి ధన పూర్ణ సంఖ్య +a కు ఒక వ్యతిరేక సంఖ్య -a ఉంటుంది, వాటి మొత్తం సున్నా: a + (-a) = 0. లాభం-నష్టం, సముద్ర మట్టం పైకి-క్రిందికి వంటి వ్యతిరేక సందర్భాలను సంకేత పూర్ణ సంఖ్యలతో సూచిస్తారు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Represent a financial loss of ₹650 using an integer.",
+          "hi": "₹650 की वित्तीय हानि को पूर्णांक का उपयोग करके निरूपित कीजिए।",
+          "te": "₹650 ఆర్థిక నష్టాన్ని పూర్ణ సంఖ్య రూపంలో రాయండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Gain or profit is represented by a positive (+) sign.",
+            "hi": "लाभ को धनात्मक (+) चिह्न द्वारा दर्शाया जाता है।",
+            "te": "లాభాన్ని ధన (+) సంకేతంతో సూచిస్తారు.",
+            "reviewed": false
+          },
+          {
+            "en": "Loss is the opposite of profit, taking a negative (-) sign.",
+            "hi": "हानि लाभ का विपरीत है, अतः इसमें ऋण (-) चिह्न लगेगा।",
+            "te": "నష్టం లాభానికి వ్యతిరేకం, కాబట్టి ఋణ (-) సంకేతం వస్తుంది.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "-₹650",
+          "hi": "-₹650",
+          "te": "-₹650",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "An integer's sign tells you its direction relative to zero; its absolute value tells you its magnitude.",
+        "hi": "पूर्णांक का चिह्न शून्य के सापेक्ष उसकी दिशा बताता है; उसका निरपेक्ष मान उसका परिमाण बताता है।",
+        "te": "పూర్ణ సంఖ్య సంకేతం సున్నాకు సంబంధించి దాని దిశను తెలుపుతుంది; సంపూర్ణ విలువ దాని పరిమాణాన్ని తెలుపుతుంది.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Signed Number Convention",
+        "hi": "फास्ट-ट्रैक: हस्ताक्षरित संख्या परिपाटी",
+        "te": "ఫాస్ట్-ట్రాక్: సంకేత సంఖ్యల సంప్రదాయం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Zero is neutral (neither positive nor negative). Values above, to the right, or gains are positive (+). Values below, to the left, or losses are negative (-). Additive inverse: opposite of +x is -x, and opposite of -x is +x.",
+        "hi": "शून्य तटस्थ है (न धनात्मक, न ऋणात्मक)। ऊपर, दाएँ या लाभ के मान धनात्मक (+) हैं। नीचे, बाएँ या हानि के मान ऋणात्मक (-) हैं। योज्य प्रतिलोम: +x का विपरीत -x है, और -x का विपरीत +x है।",
+        "te": "సున్నా తటస్థం. పైకి, కుడివైపుకు లేదా లాభాలకు ధన (+) సంకేతం. క్రిందికి, ఎడమవైపుకు లేదా నష్టాలకు ఋణ (-) సంకేతం. సంకలన విలోమం: +x కు -x, మరియు -x కు +x.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What is the additive inverse of -42?",
+          "hi": "-42 का योज्य प्रतिलोम क्या है?",
+          "te": "-42 యొక్క సంకలన విలోమం ఏమిటి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Change the sign from negative to positive.",
+            "hi": "चिह्न को ऋणात्मक से धनात्मक में बदलें।",
+            "te": "సంకేతాన్ని ఋణం నుండి ధనంగా మార్చండి.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "+42",
+          "hi": "+42",
+          "te": "+42",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "-(-x) = +x.",
+        "hi": "-(-x) = +x.",
+        "te": "-(-x) = +x.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c6-neg-02",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Left-Right Walking Line",
+        "hi": "बुनियादी दृष्टिकोण: बाएँ-दाएँ चलने वाली संख्या रेखा",
+        "te": "ప్రాథమిక విధానం: ఎడమ-కుడి నడిచే సంఖ్యా రేఖ",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Stand on 0 facing right. If you step forward, you reach +1, +2, +3 (getting warmer, getting richer). If you step backward to the left, you reach -1, -2, -3. The further left you walk, the colder and smaller the numbers get. Even though 10 is bigger than 2, being at -10 is far colder than being at -2! That is why -10 < -2.",
+        "hi": "शून्य पर खड़े हों। यदि आप आगे बढ़ते हैं, तो आप +1, +2, +3 पर पहुँचते हैं। यदि आप पीछे बाएँ कदम रखते हैं, तो आप -1, -2, -3 पर पहुँचते हैं। आप जितना अधिक बाईं ओर चलेंगे, संख्याएँ उतनी ही छोटी होती जाएँगी। यद्यपि 10, 2 से बड़ा है, फिर भी -10 तापमान -2 से बहुत ठंडा है! इसलिए -10 < -2।",
+        "te": "సున్నా వద్ద నిలబడండి. కుడివైపునకు వెళ్తే +1, +2, +3 వస్తాయి. ఎడమవైపునకు వెళ్తే -1, -2, -3 వస్తాయి. ఎంత ఎడమకు వెళ్తే అంత చిన్న సంఖ్యలు వస్తాయి. 10 అనేది 2 కంటే పెద్దదే అయినా, -10 ఉష్ణోగ్రత -2 కంటే చాలా తక్కువ! అందుకే -10 < -2.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Thermometer: higher is warmer (greater), lower is colder (smaller). -15°C is below -5°C.",
+        "hi": "थर्मामीटर: ऊपर अधिक गर्म (बड़ा), नीचे अधिक ठंडा (छोटा)। -15°C, -5°C से नीचे होता है।",
+        "te": "థర్మామీటర్: పైకి ఉంటే వేడి (పెద్దది), క్రిందకు ఉంటే చలి (చిన్నది). -15°C అనేది -5°C కంటే కింద ఉంటుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Which integer is greater: -7 or -3?",
+          "hi": "कौन सा पूर्णांक बड़ा है: -7 या -3?",
+          "te": "ఏ పూర్ణ సంఖ్య పెద్దది: -7 లేదా -3?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "-3 is 3 steps left of 0.",
+            "hi": "-3 शून्य से 3 कदम बाईं ओर है।",
+            "te": "-3 సున్నాకి 3 స్థానాలు ఎడమవైపున ఉంది.",
+            "reviewed": false
+          },
+          {
+            "en": "-7 is 7 steps left of 0 (further left).",
+            "hi": "-7 शून्य से 7 कदम बाईं ओर है (अधिक बाएँ)।",
+            "te": "-7 సున్నాకి 7 స్థానాలు ఎడమవైపున ఉంది (మరింత ఎడమకు).",
+            "reviewed": false
+          },
+          {
+            "en": "The number to the right is always greater.",
+            "hi": "दाईं ओर की संख्या सदैव बड़ी होती है।",
+            "te": "కుడివైపు ఉండే సంఖ్య ఎల్లప్పుడూ పెద్దది.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "-3 > -7",
+          "hi": "-3 > -7",
+          "te": "-3 > -7",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "On a number line, any number to the right of another is strictly greater.",
+        "hi": "संख्या रेखा पर, किसी संख्या के दाईं ओर स्थित संख्या सदैव बड़ी होती है।",
+        "te": "సంఖ్యా రేఖపై కుడివైపున ఉండే ఏ సంఖ్య అయినా ఎడమవైపు సంఖ్య కంటే ఖచ్చితంగా పెద్దది.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Number Line Representation and Strict Ordering",
+        "hi": "मानक दृष्टिकोण: संख्या रेखा निरूपण और तुलना",
+        "te": "ప్రామాణిక విధానం: సంఖ్యా రేఖ నిరూపణ మరియు క్రమ అమరిక",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Every real integer corresponds to a distinct point on the number line. Zero separates positive integers on the right from negative integers on the left. For any two integers a and b, a < b if and only if a lies to the left of b. Consequently: any negative < 0 < any positive.",
+        "hi": "प्रत्येक पूर्णांक संख्या रेखा पर एक विशिष्ट बिंदु से मेल खाता है। शून्य दाईं ओर धनात्मक और बाईं ओर ऋणात्मक पूर्णांकों को अलग करता है। किन्हीं दो पूर्णांकों a और b के लिए, a < b यदि और केवल यदि a, b के बाईं ओर स्थित हो। अतः: कोई भी ऋणात्मक < 0 < कोई भी धनात्मक।",
+        "te": "ప్రతి పూర్ణ సంఖ్యకు సంఖ్యా రేఖపై ఒక బిందువు ఉంటుంది. సున్నా కుడివైపున ధన సంఖ్యలను, ఎడమవైపున ఋణ సంఖ్యలను వేరు చేస్తుంది. a అనేది b కి ఎడమవైపు ఉంటే a < b అవుతుంది. అందువల్ల: ఏదైనా ఋణ సంఖ్య < 0 < ఏదైనా ధన సంఖ్య.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Order from least to greatest: 4, -9, 0, -2, 7",
+          "hi": "छोटे से बड़े क्रम में व्यवस्थित करें: 4, -9, 0, -2, 7",
+          "te": "చిన్న నుండి పెద్ద క్రమంలో అమర్చండి: 4, -9, 0, -2, 7",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Identify furthest left on number line: -9.",
+            "hi": "सबसे बाईं ओर की संख्या पहचानें: -9।",
+            "te": "అత్యంత ఎడమవైపున ఉన్న సంఖ్యను గుర్తించండి: -9.",
+            "reviewed": false
+          },
+          {
+            "en": "Next from left: -2, then 0.",
+            "hi": "बाएँ से अगला: -2, फिर 0।",
+            "te": "తర్వాత వచ్చేవి: -2, తర్వాత 0.",
+            "reviewed": false
+          },
+          {
+            "en": "Positive numbers: 4, then 7.",
+            "hi": "धनात्मक संख्याएँ: 4, फिर 7।",
+            "te": "ధన సంఖ్యలు: 4, తర్వాత 7.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "-9 < -2 < 0 < 4 < 7",
+          "hi": "-9 < -2 < 0 < 4 < 7",
+          "te": "-9 < -2 < 0 < 4 < 7",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Ordering rule: negative integers with larger digits have smaller values.",
+        "hi": "क्रम नियम: बड़े अंकों वाले ऋणात्मक पूर्णांकों का मान छोटा होता है।",
+        "te": "క్రమ నియమం: పెద్ద అంకెలు గల ఋణ సంఖ్యల విలువ చిన్నదిగా ఉంటుంది.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Position Rule for Integers",
+        "hi": "फास्ट-ट्रैक: पूर्णांकों के लिए स्थिति नियम",
+        "te": "ఫాస్ట్-ట్రాక్: పూర్ణ సంఖ్యల స్థాన నియమం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "If a and b are positive with a > b, then -a < -b. E.g., since 100 > 5, -100 < -5. Negative numbers reverse inequality signs.",
+        "hi": "यदि a और b धनात्मक हैं और a > b है, तो -a < -b होगा। जैसे 100 > 5 होने पर -100 < -5। ऋणात्मक चिह्न असमानता को उलट देता है।",
+        "te": "a, b ధన సంఖ్యలై a > b అయితే, -a < -b అవుతుంది. ఉదాహరణకు 100 > 5 కాబట్టి -100 < -5. ఋణ సంకేతం అసమానతను తిరగేస్తుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Compare -85 and -84.",
+          "hi": "-85 और -84 की तुलना कीजिए।",
+          "te": "-85 మరియు -84 లను పోల్చండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "85 > 84, therefore -85 < -84.",
+            "hi": "85 > 84, अतः -85 < -84।",
+            "te": "85 > 84, కాబట్టి -85 < -84.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "-85 < -84",
+          "hi": "-85 < -84",
+          "te": "-85 < -84",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Further left = smaller value.",
+        "hi": "अधिक बाएँ = छोटा मान।",
+        "te": "మరింత ఎడమవైపు = తక్కువ విలువ.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c7-int-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Kirana Store Debt and Credit Model",
         "hi": "बुनियादी दृष्टिकोण: किराना दुकान का उधारी और जमा खाता",
         "te": "ప్రాథమిక విధానం: కిరాణా దుకాణం అప్పు మరియు జమ పద్ధతి",
         "reviewed": false
       },
       "explanation": {
-        "en": "Think of positive integers as money in your pocket (credit) and negative integers as money you owe to the local kirana store (debt). If you have ₹20 (+20) and spend ₹35 at the shop, you pay all your ₹20 and still owe ₹15 to the uncle. Therefore, 20 - 35 = -15.",
-        "hi": "धनात्मक पूर्णांकों को अपनी जेब में रखे पैसे (जमा) और ऋणात्मक पूर्णांकों को किराना स्टोर की उधारी (कर्ज) के रूप में सोचें। यदि आपके पास ₹20 (+20) हैं और आप ₹35 का सामान लेते हैं, तो ₹20 देने के बाद भी ₹15 की उधारी बचती है। अतः 20 - 35 = -15।",
-        "te": "ధన పూర్ణ సంఖ్యలను మీ జేబులో ఉన్న డబ్బుగా (జమ), ఋణ పూర్ణ సంఖ్యలను కిరాణా దుకాణంలో ఉన్న అప్పుగా భావించండి. మీ వద్ద ₹20 (+20) ఉండి, మీరు ₹35 విలువైన వస్తువులు కొంటే, మీ ₹20 ఇచ్చిన తర్వాత కూడా ₹15 అప్పు మిగులుతుంది. కాబట్టి 20 - 35 = -15.",
+        "en": "Think of positive integers as money in your pocket (credit) and negative integers as money you owe to the neighborhood shopkeeper (debt). If you have ₹20 (+20) in your pocket and you buy goods worth ₹35, you hand over your ₹20 and still owe ₹15 (-15). What about subtracting a negative? If the shopkeeper forgives a ₹10 debt, taking away a debt is the same as giving you ₹10 cash! That is why subtracting a negative is addition: 50 - (-10) = 50 + 10 = 60.",
+        "hi": "धनात्मक पूर्णांकों को अपनी जेब के पैसे (जमा) और ऋणात्मक को दुकानदार की उधारी (कर्ज) समझें। यदि जेब में ₹20 (+20) हैं और ₹35 का सामान लेते हैं, तो ₹20 देकर भी ₹15 की उधारी (-15) बचती है। और ऋण को घटाना? यदि दुकानदार ₹10 की उधारी माफ कर दे, तो कर्ज हटाना ₹10 नकद मिलने जैसा है! इसीलिए ऋण घटाना जोड़ बन जाता है: 50 - (-10) = 60।",
+        "te": "ధన పూర్ణ సంఖ్యలను జేబులోని డబ్బుగా (జమ), ఋణ సంఖ్యలను దుకాణంలోని అప్పుగా భావించండి. ₹20 ఉండి ₹35 ఖర్చు చేస్తే, ఇంకా ₹15 అప్పు (-15) మిగులుతుంది. మరి ఋణాన్ని తీసివేయడమో? దుకాణదారుడు ₹10 అప్పును రద్దు చేస్తే, అది మీకు ₹10 ఇచ్చినట్లే కదా! అందుకే ఋణాన్ని తీసివేయడం కూడిక అవుతుంది: 50 - (-10) = 50 + 10 = 60.",
         "reviewed": false
       },
       "visualAnalogy": {
-        "en": "Green counters represent +1 rupee; Red counters represent -1 rupee. One green and one red cancel each other out to make zero.",
-        "hi": "हरे टोकन +1 रुपये का प्रतिनिधित्व करते हैं; लाल टोकन -1 रुपये का। एक हरा और एक लाल मिलकर शून्य बन जाते हैं।",
-        "te": "ఆకుపచ్చ నాణేలు +1 రూపాయిని; ఎరుపు నాణేలు -1 రూపాయిని సూచిస్తాయి. ఒక ఆకుపచ్చ మరియు ఒక ఎరుపు నాణెం కలిసి సున్నాగా రద్దవుతాయి.",
+        "en": "Green counters (+1) and Red counters (-1). A green and red pair cancel out to make 0.",
+        "hi": "हरे टोकन (+1) और लाल टोकन (-1)। एक हरा और एक लाल मिलकर शून्य बन जाते हैं।",
+        "te": "ఆకుపచ్చ నాణేలు (+1) మరియు ఎరుపు నాణేలు (-1). ఒక జత కలిసి 0 అవుతాయి.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Calculate: (-8) + 14",
-          "hi": "गणना कीजिए: (-8) + 14",
-          "te": "లెక్కించండి: (-8) + 14",
+          "en": "Calculate: (-12) + 7",
+          "hi": "गणना कीजिए: (-12) + 7",
+          "te": "లెక్కించండి: (-12) + 7",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "You start with an ₹8 debt (-8).",
-            "hi": "आप पर ₹8 की उधारी (-8) है।",
-            "te": "మీరు ₹8 అప్పుతో (-8) మొదలుపెట్టారు.",
+            "en": "Debt of ₹12 combined with ₹7 cash.",
+            "hi": "₹12 की उधारी और ₹7 नकद।",
+            "te": "₹12 అప్పు మరియు ₹7 నగదు.",
             "reviewed": false
           },
           {
-            "en": "You earn ₹14 (+14) and pay off the ₹8 debt.",
-            "hi": "आपको ₹14 मिले और आपने ₹8 की उधारी चुका दी।",
-            "te": "మీకు ₹14 వచ్చాయి, అందులోంచి ₹8 అప్పు చెల్లించారు.",
+            "en": "Pay ₹7 towards the ₹12 debt.",
+            "hi": "₹12 की उधारी में से ₹7 चुकाएं।",
+            "te": "₹12 అప్పులో ₹7 చెల్లించండి.",
             "reviewed": false
           },
           {
-            "en": "After clearing the debt, you have ₹6 left in your pocket.",
-            "hi": "उधारी चुकाने के बाद आपके पास ₹6 नकद बचे।",
-            "te": "అప్పు తీర్చిన తర్వాత మీ జేబులో ₹6 మిగిలాయి.",
+            "en": "₹5 debt remains unpaid.",
+            "hi": "₹5 का कर्ज अभी भी शेष है।",
+            "te": "ఇంకా ₹5 అప్పు మిగిలి ఉంది.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "(-8) + 14 = +6",
-          "hi": "(-8) + 14 = +6",
-          "te": "(-8) + 14 = +6",
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "When signs are different, subtract the smaller number from the larger number and keep the sign of the larger number.",
-        "hi": "जब चिह्न भिन्न हों, तो बड़ी संख्या से छोटी संख्या घटाएँ और बड़ी संख्या का चिह्न लगाएँ।",
-        "te": "సంకేతాలు వేర్వేరుగా ఉన్నప్పుడు, పెద్ద సంఖ్య నుండి చిన్న సంఖ్యను తీసివేసి, పెద్ద సంఖ్య యొక్క సంకేతాన్ని ఉంచండి.",
+        "en": "Same signs add magnitudes; different signs find the difference and keep the larger sign.",
+        "hi": "समान चिह्न जुड़ते हैं; विपरीत चिह्नों में अंतर लेकर बड़ी संख्या का चिह्न लगाते हैं।",
+        "te": "ఒకే సంకేతాలు కూడబడతాయి; వేర్వేరు సంకేతాలు ఉంటే తీసివేసి పెద్ద సంఖ్య సంకేతం ఉంచాలి.",
         "reviewed": false
       }
     },
     "standard": {
       "headline": {
-        "en": "Standard: NCERT Number Line & Sign Preservation Rules",
-        "hi": "मानक दृष्टिकोण: एनसीईआरटी संख्या रेखा और चिह्न नियम",
-        "te": "ప్రామాణిక విధానం: ఎన్‌సిఈఆర్‌టి సంఖ్యా రేఖ మరియు సంకేత నియమాలు",
+        "en": "Standard: Formal Rules for Adding and Subtracting Integers",
+        "hi": "मानक दृष्टिकोण: पूर्णांक योग और व्यवकलन के औपचारिक नियम",
+        "te": "ప్రామాణిక విధానం: పూర్ణ సంఖ్యల సంకలన, వ్యవకలన సూత్రాలు",
         "reviewed": false
       },
       "explanation": {
-        "en": "Rule 1: To add two integers with the same sign, add their absolute values and assign the common sign.\nRule 2: To add two integers with different signs, take the difference of their absolute values and assign the sign of the integer with the greater absolute value.\nRule 3: Subtracting an integer b is identical to adding its additive inverse (-b): a - b = a + (-b).",
-        "hi": "नियम 1: समान चिह्न वाले दो पूर्णांकों को जोड़ने के लिए उनके निरपेक्ष मान जोड़ें और वही चिह्न लगाएँ।\nनियम 2: असमान चिह्नों वाले दो पूर्णांकों को जोड़ने के लिए उनके निरपेक्ष मानों का अंतर निकालें और बड़े निरपेक्ष मान वाले का चिह्न लगाएँ।\nनियम 3: किसी पूर्णांक b को घटाना उसके योज्य प्रतिलोम (-b) को जोड़ने के बराबर है: a - b = a + (-b)।",
-        "te": "నియమం 1: ఒకే సంకేతం గల పూర్ణ సంఖ్యలను కూడటానికి, వాటి సంపూర్ణ విలువలను కూడి ఉమ్మడి సంకేతాన్ని ఉంచాలి.\nనియమం 2: వేర్వేరు సంకేతాలు ఉన్నప్పుడు, సంపూర్ణ విలువల భేదాన్ని కనుగొని పెద్ద విలువ సంకేతాన్ని ఉంచాలి.\nనియమం 3: ఒక పూర్ణ సంఖ్య b ని తీసివేయడం అంటే దాని సంకలన విలోమం (-b) ని కూడటమే: a - b = a + (-b).",
+        "en": "Case 1 (Same signs): Add absolute values and keep the common sign. E.g., (-4) + (-9) = -(4 + 9) = -13. Case 2 (Different signs): Subtract the smaller absolute value from the larger, and keep the sign of the larger absolute value. E.g., (-14) + 6 = -(14 - 6) = -8. Subtraction rule: a - b = a + (-b). To subtract, add the additive inverse.",
+        "hi": "स्थिति 1 (समान चिह्न): निरपेक्ष मानों को जोड़ें और वही चिह्न रखें। जैसे (-4) + (-9) = -13। स्थिति 2 (विपरीत चिह्न): बड़े मान से छोटा मान घटाएं और बड़े का चिह्न रखें। जैसे (-14) + 6 = -8। घटाव नियम: a - b = a + (-b)। घटाने के लिए योज्य प्रतिलोम जोड़ें।",
+        "te": "సందర్భం 1 (ఒకే సంకేతాలు): విలువల మొత్తాన్ని రాసి ఆ సంకేతాన్ని ఉంచండి. ఉదా. (-4) + (-9) = -13. సందర్భం 2 (వేర్వేరు సంకేతాలు): పెద్ద విలువ నుండి చిన్నది తీసివేసి పెద్దదాని సంకేతం ఉంచండి. ఉదా. (-14) + 6 = -8. తీసివేత సూత్రం: a - b = a + (-b).",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Evaluate: (-32) - (-18)",
-          "hi": "मान निकालें: (-32) - (-18)",
-          "te": "సాధించండి: (-32) - (-18)",
+          "en": "Compute: 14 - (-11)",
+          "hi": "गणना कीजिए: 14 - (-11)",
+          "te": "లెక్కించండి: 14 - (-11)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Convert subtraction of (-18) to addition of its inverse (+18): (-32) + 18.",
-            "hi": "(-18) के घटाव को उसके प्रतिलोम (+18) के जोड़ में बदलें: (-32) + 18।",
-            "te": "(-18) తీసివేతను దాని విలోమం (+18) కూడికగా మార్చండి: (-32) + 18.",
+            "en": "Rewrite subtraction of negative as addition: 14 + 11.",
+            "hi": "ऋण घटाने को जोड़ के रूप में लिखें: 14 + 11।",
+            "te": "ఋణాన్ని తీసివేయడాన్ని కూడికగా మార్చండి: 14 + 11.",
             "reviewed": false
           },
           {
-            "en": "Compare absolute values: |-32| = 32 and |18| = 18.",
-            "hi": "निरपेक्ष मानों की तुलना करें: |-32| = 32 और |18| = 18।",
-            "te": "సంపూర్ణ విలువలను పోల్చండి: |-32| = 32 మరియు |18| = 18.",
-            "reviewed": false
-          },
-          {
-            "en": "Find the difference (32 - 18 = 14) and apply the sign of -32 (negative).",
-            "hi": "अंतर ज्ञात करें (32 - 18 = 14) और -32 का ऋणात्मक चिह्न लगाएँ।",
-            "te": "భేదాన్ని కనుగొని (32 - 18 = 14) పెద్ద సంఖ్య -32 సంకేతాన్ని (ఋణ) ఉంచండి.",
+            "en": "Add 14 + 11 = 25.",
+            "hi": "जोड़ें: 14 + 11 = 25।",
+            "te": "కూడండి: 14 + 11 = 25.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "(-32) - (-18) = -14",
-          "hi": "(-32) - (-18) = -14",
-          "te": "(-32) - (-18) = -14",
+          "en": "25",
+          "hi": "25",
+          "te": "25",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Double negatives always resolve into addition: a - (-b) = a + b.",
-        "hi": "दोहरे ऋण हमेशा जोड़ में बदल जाते हैं: a - (-b) = a + b।",
-        "te": "రెండు ఋణ గుర్తులు కలిసినప్పుడు కూడికగా మారుతాయి: a - (-b) = a + b.",
+        "en": "a - (-b) = a + b.",
+        "hi": "a - (-b) = a + b.",
+        "te": "a - (-b) = a + b.",
         "reviewed": false
       }
     },
     "fast_track": {
       "headline": {
-        "en": "Fast-Track: Mental Vector Shifts & Sign Conservation",
-        "hi": "फास्ट-ट्रैक: मानसिक वेक्टर बदलाव और त्वरित गणना",
-        "te": "ఫాస్ట్-ట్రాక్: వేగవంతమైన మానసిక గణన మరియు సంకేత నియమాలు",
+        "en": "Fast-Track: Two-Sign Collapse Rule",
+        "hi": "फास्ट-ट्रैक: दोहरे चिह्न का नियम",
+        "te": "ఫాస్ట్-ట్రాక్: రెండు సంకేతాల నియమం",
         "reviewed": false
       },
       "explanation": {
-        "en": "Treat signs as 1D direction vectors. Plus means right, minus means left. Consecutive signs contract: +(-) is -, -(+) is -, and -(-) is +. Group like-signed terms first in long expressions to calculate instantaneously.",
-        "hi": "चिह्नों को 1D दिशा मानकर सोचें। धन का अर्थ दायाँ, ऋण का अर्थ बायाँ। लगातार आने वाले चिह्न सरल होते हैं: +(-) = -, -(+) = -, और -(-) = +। लंबी गणनाओं में समान चिह्न वाले पदों को पहले जोड़ लें।",
-        "te": "సంకేతాలను ఒక దిశగా భావించండి. ధన గుర్తు కుడివైపు, ఋణ గుర్తు ఎడమవైపు. పక్కపక్కనే వచ్చే సంకేతాలు: +(-) = -, -(+) = -, మరియు -(-) = +. పెద్ద సమాసాలలో ఒకే రకమైన సంకేతాలు ఉన్నవాటిని ముందుగా కలపండి.",
+        "en": "+(+) = +, +(-) = -, -(+) = -, -(-) = +. Simplify double signs first, then evaluate from left to right.",
+        "hi": "+(+) = +, +(-) = -, -(+) = -, -(-) = +। पहले दोहरे चिह्नों को सरल करें, फिर बाएँ से दाएँ हल करें।",
+        "te": "+(+) = +, +(-) = -, -(+) = -, -(-) = +. మొదట రెండు సంకేతాలను ఒకటిగా మార్చి, తర్వాత లెక్కించండి.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Quickly evaluate: 45 - 60 + 15 - (-30) - 10",
-          "hi": "शीघ्र मान ज्ञात करें: 45 - 60 + 15 - (-30) - 10",
-          "te": "త్వరగా లెక్కించండి: 45 - 60 + 15 - (-30) - 10",
+          "en": "Evaluate: -18 - (-5) + (-2)",
+          "hi": "मान निकालें: -18 - (-5) + (-2)",
+          "te": "విలువ కనుగొనండి: -18 - (-5) + (-2)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Contract double negative: 45 - 60 + 15 + 30 - 10.",
-            "hi": "दोहरे ऋण को सरल करें: 45 - 60 + 15 + 30 - 10।",
-            "te": "రెండు ఋణ గుర్తులను కలపండి: 45 - 60 + 15 + 30 - 10.",
+            "en": "Collapse double signs: -18 + 5 - 2.",
+            "hi": "चिह्न सरल करें: -18 + 5 - 2।",
+            "te": "సంకేతాలు మార్చండి: -18 + 5 - 2.",
             "reviewed": false
           },
           {
-            "en": "Group positive terms: (45 + 15 + 30) = 90.",
-            "hi": "धनात्मक पदों को जोड़ें: (45 + 15 + 30) = 90।",
-            "te": "ధన సంఖ్యలను కలపండి: (45 + 15 + 30) = 90.",
+            "en": "-18 + 5 = -13.",
+            "hi": "-18 + 5 = -13।",
+            "te": "-18 + 5 = -13.",
             "reviewed": false
           },
           {
-            "en": "Group negative terms: (-60 - 10) = -70.",
-            "hi": "ऋणात्मक पदों को जोड़ें: (-60 - 10) = -70।",
-            "te": "ఋణ సంఖ్యలను కలపండి: (-60 - 10) = -70.",
-            "reviewed": false
-          },
-          {
-            "en": "Combine: 90 - 70 = 20.",
-            "hi": "अंतिम गणना: 90 - 70 = 20।",
-            "te": "తుది ఫలితం: 90 - 70 = 20.",
+            "en": "-13 - 2 = -15.",
+            "hi": "-13 - 2 = -15।",
+            "te": "-13 - 2 = -15.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "Result = 20",
-          "hi": "परिणाम = 20",
-          "te": "ఫలితం = 20",
+          "en": "-15",
+          "hi": "-15",
+          "te": "-15",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Group all positive contributions and negative contributions separately before finding the final net balance.",
-        "hi": "अंतिम मान निकालने से पहले सभी धनात्मक और ऋणात्मक पदों को अलग-अलग समूहित करें।",
-        "te": "తుది విలువను కనుగొనే ముందు అన్ని ధన మరియు ఋణ భాగాలను విడివిడిగా సమూహపరచండి.",
+        "en": "Two negatives side by side without numbers between them become a positive.",
+        "hi": "दो ऋण चिह्न बिना किसी संख्या के पास आने पर धन बन जाते हैं।",
+        "te": "మధ్యలో సంఖ్య లేకుండా రెండు ఋణ సంకేతాలు పక్కపక్కన వస్తే ధనంగా మారతాయి.",
         "reviewed": false
       }
     }
   },
   {
-    "conceptId": "c8-lin-03",
+    "conceptId": "c7-int-02",
     "basics_first": {
       "headline": {
-        "en": "Basics-First: The Physical Vegetable Weighing Scale (Tarazu)",
-        "hi": "बुनियादी दृष्टिकोण: तराजू का संतुलन मॉडल",
-        "te": "ప్రాథమిక విధానం: సాంప్రదాయ త్రాసు సమతుల్యత పద్ధతి",
+        "en": "Basics-First: Why Does Negative Times Negative Equal Positive?",
+        "hi": "बुनियादी दृष्टिकोण: ऋण गुणा ऋण धन क्यों होता है?",
+        "te": "ప్రాథమిక విధానం: ఋణం × ఋణం = ధనం ఎందుకు అవుతుంది?",
         "reviewed": false
       },
       "explanation": {
-        "en": "Think of an equation as a traditional Indian weighing scale (tarazu) in perfect balance. Whatever you do to one pan, you MUST do the exact same thing to the other pan to keep it level. If you remove 5 kg from the left pan, you must remove 5 kg from the right pan.",
-        "hi": "समीकरण को पूरी तरह संतुलित तराजू के रूप में समझें। तराजू को संतुलित रखने के लिए जो आप एक पलड़े पर करते हैं, वही बिल्कुल दूसरे पलड़े पर भी करना होगा। यदि आप बाईं तरफ से 5 किलो हटाते हैं, तो दाईं तरफ से भी 5 किलो हटाना होगा।",
-        "te": "సమీకరణాన్ని సంపూర్ణ సమతుల్యతలో ఉన్న కూరగాయల త్రాసుగా భావించండి. ఒక పళ్లెంలో ఏం మార్పు చేస్తే, రెండవ పళ్లెంలో కూడా ఖచ్చితంగా అదే చేయాలి. ఎడమవైపు నుండి 5 కిలోలు తీసివేస్తే, కుడివైపు నుండి కూడా 5 కిలోలు తీసివేయాలి.",
+        "en": "Multiplication is repeated addition: 3 × 4 means adding 4 three times (+12). 3 × (-4) means adding a debt of 4 three times (-12). What about (-3) × (-4)? The negative sign out front means 'take away' or 'reverse': take away 3 debts of ₹4. If someone removes ₹12 of debt from your account, you are ₹12 richer! Therefore, (-3) × (-4) = +12.",
+        "hi": "गुणा बार-बार जोड़ना है: 3 × (-4) का अर्थ है ₹4 के कर्ज को 3 बार जोड़ना (-12)। तो (-3) × (-4) क्या है? बाहर का ऋण चिह्न 'हटाने' का संकेत देता है: ₹4 के 3 कर्ज हटाना। आपके खाते से ₹12 का कर्ज हटने पर आप ₹12 अमीर हो जाते हैं! अतः (-3) × (-4) = +12।",
+        "te": "గుణకారం అంటే పునరావృత సంకలనం: 3 × (-4) అంటే ₹4 అప్పును 3 సార్లు కలపడం (-12). మరి (-3) × (-4) అంటే? బయట ఉన్న ఋణ సంకేతం 'తీసివేయడం' లేదా 'రద్దు చేయడం': ₹4 అప్పును 3 సార్లు రద్దు చేయడం. మీ ఖాతా నుండి ₹12 అప్పు రద్దయితే మీకు ₹12 లాభమే కదా! కాబట్టి (-3) × (-4) = +12.",
         "reviewed": false
       },
       "visualAnalogy": {
-        "en": "A brass two-pan balance: LHS weights = RHS weights. The '=' sign is the needle pointing straight up.",
-        "hi": "पीतल का दो-पलड़े वाला तराजू: बायाँ भार = दायाँ भार। '=' का चिह्न सीधी सुई की तरह है।",
-        "te": "ఇత్తడి రెండు పళ్లాల త్రాసు: ఎడమ బరువు = కుడి బరువు. '=' గుర్తు నిటారుగా ఉన్న సూచిక వంటిది.",
+        "en": "A movie playing in reverse: a water tank losing water (-loss) played in reverse (-time) looks like water filling up (+gain)!",
+        "hi": "उलटी चलती फिल्म: पानी की टंकी से पानी खाली होना (-कमी) जब उलटा (-समय) देखा जाए, तो टंकी भरती हुई (+लाभ) दिखती है!",
+        "te": "రివర్స్‌లో ప్లే అయ్యే సినిమా: ట్యాంక్ ఖాళీ అవ్వడం (-నష్టం) రివర్స్‌లో (-సమయం) చూస్తే ట్యాంక్ నిండుతున్నట్లు (+లాభం) కనిపిస్తుంది!",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Find x if 2x + 7 = 19",
-          "hi": "x का मान ज्ञात करें यदि 2x + 7 = 19",
-          "te": "2x + 7 = 19 అయితే x విలువను కనుగొనండి",
+          "en": "Calculate: (-6) × (-9)",
+          "hi": "गणना कीजिए: (-6) × (-9)",
+          "te": "లెక్కించండి: (-6) × (-9)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Both pans are balanced. Left has two mystery pouches (2x) and a 7 kg stone.",
-            "hi": "दोनों पलड़े संतुलित हैं। बाईं ओर दो पोटलियाँ (2x) और 7 किलो का बाट है।",
-            "te": "రెండు పళ్లాలు సమంగా ఉన్నాయి. ఎడమవైపు రెండు రహస్య సంచులు (2x) మరియు 7 కిలోల రాయి ఉన్నాయి.",
+            "en": "Both factors are negative.",
+            "hi": "दोनों पद ऋणात्मक हैं।",
+            "te": "రెండు పదాలు ఋణాత్మకం.",
             "reviewed": false
           },
           {
-            "en": "Remove the 7 kg stone from BOTH pans: 2x = 19 - 7 = 12.",
-            "hi": "दोनों पलड़ों से 7 किलो का बाट हटाएँ: 2x = 19 - 7 = 12।",
-            "te": "రెండు పళ్లాల నుండి 7 కిలోలను తీసివేయండి: 2x = 19 - 7 = 12.",
+            "en": "Negative times negative yields positive.",
+            "hi": "ऋण गुणा ऋण धन होता है।",
+            "te": "ఋణం × ఋణం = ధనం.",
             "reviewed": false
           },
           {
-            "en": "Divide the 12 kg equally into the 2 mystery pouches: x = 12 / 2 = 6 kg.",
-            "hi": "12 किलो को दोनों पोटलियों में बराबर बाँटें: x = 12 / 2 = 6 किलो।",
-            "te": "12 కిలోలను రెండు సంచులకు సమానంగా పంచండి: x = 12 / 2 = 6 కిలోలు.",
+            "en": "6 × 9 = 54.",
+            "hi": "6 × 9 = 54।",
+            "te": "6 × 9 = 54.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "x = 6",
-          "hi": "x = 6",
-          "te": "x = 6",
+          "en": "+54",
+          "hi": "+54",
+          "te": "+54",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Always isolate the variable term first by undoing addition or subtraction, then undo multiplication or division.",
-        "hi": "पहले जोड़ या घटाव को हटाकर चर पद को अकेला करें, फिर गुणा या भाग को हल करें।",
-        "te": "మొదట సంకలనం లేదా వ్యవకలనాన్ని తొలగించి చరరాశిని వేరుచేయండి, ఆ తర్వాత గుణకారం లేదా భాగహారాన్ని సాధించండి.",
+        "en": "Product of like signs is positive; product of unlike signs is negative.",
+        "hi": "समान चिह्नों का गुणनफल धनात्मक होता है; असमान चिह्नों का ऋणात्मक।",
+        "te": "ఒకే సంకేతాల లబ్దం ధనాత్మకం; వేర్వేరు సంకేతాల లబ్దం ఋణాత్మకం.",
         "reviewed": false
       }
     },
     "standard": {
       "headline": {
-        "en": "Standard: Systematic Transposition Method",
-        "hi": "मानक दृष्टिकोण: व्यवस्थित पक्षांतरण विधि",
-        "te": "ప్రామాణిక విధానం: క్రమబద్ధమైన పక్షాంతరీకరణ పద్ధతి",
+        "en": "Standard: The Rules of Signs in Multiplication and Powers",
+        "hi": "मानक दृष्टिकोण: गुणन और घातों में चिह्नों के नियम",
+        "te": "ప్రామాణిక విధానం: గుణకారం మరియు ఘాతాలలో సంకేత సూత్రాలు",
         "reviewed": false
       },
       "explanation": {
-        "en": "Transposition is a mathematical shortcut for balancing. When a term moves across the equal sign (=):\n- Addition (+) changes to Subtraction (-)\n- Subtraction (-) changes to Addition (+)\n- Multiplication (×) changes to Division (÷)\n- Division (÷) changes to Multiplication (×)",
-        "hi": "पक्षांतरण संतुलन विधि का एक सीधा नियम है। जब कोई पद बराबर (=) के पार जाता है:\n- जोड़ (+) घटाव (-) में बदलता है\n- घटाव (-) जोड़ (+) में बदलता है\n- गुणा (×) भाग (÷) में बदलता है\n- भाग (÷) गुणा (×) में बदलता है",
-        "te": "పక్షాంతరీకరణ అనేది సమతుల్య పద్ధతికి త్వరిత రూపం. సమానత్వ గుర్తు (=) దాటినప్పుడు:\n- కూడిక (+) తీసివేత (-) గా మారుతుంది\n- తీసివేత (-) కూడిక (+) గా మారుతుంది\n- గుణకారం (×) భాగహారం (÷) గా మారుతుంది\n- భాగహారం (÷) గుణకారం (×) గా మారుతుంది",
+        "en": "Product Rules: (+) × (+) = (+), (+) × (-) = (-), (-) × (+) = (-), (-) × (-) = (+). When multiplying multiple factors: count the number of negative signs. If odd, the result is negative. If even, the result is positive. Power Rule: (-a)^n is positive if n is even, and negative if n is odd. E.g. (-5)² = +25, but (-5)³ = -125.",
+        "hi": "गुणन नियम: (+) × (+) = (+), (+) × (-) = (-), (-) × (+) = (-), (-) × (-) = (+)। जब कई संख्याओं का गुणा करें: ऋणात्मक चिह्नों की गिनती करें। यदि विषम हो, परिणाम ऋणात्मक होगा; यदि सम हो, परिणाम धनात्मक होगा। घात नियम: यदि घात n सम है तो (-a)^n धनात्मक होगा, यदि n विषम है तो ऋणात्मक होगा। जैसे (-5)² = +25, लेकिन (-5)³ = -125।",
+        "te": "లబ్ద సూత్రాలు: (+) × (+) = (+), (+) × (-) = (-), (-) × (+) = (-), (-) × (-) = (+). బహుళ సంఖ్యలను గుణించేటప్పుడు: ఋణ సంకేతాల సంఖ్యను లెక్కించండి. బేసి అయితే ఫలితం ఋణాత్మకం; సరి అయితే ధనాత్మకం. ఘాత సూత్రం: n సరి సంఖ్య అయితే (-a)^n ధనాత్మకం, బేసి అయితే ఋణాత్మకం. ఉదా. (-5)² = +25, కానీ (-5)³ = -125.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Solve: 4(x - 3) = -20",
-          "hi": "हल कीजिए: 4(x - 3) = -20",
-          "te": "సాధించండి: 4(x - 3) = -20",
+          "en": "Evaluate: (-2)⁴ and (-2)³",
+          "hi": "मान निकालें: (-2)⁴ और (-2)³",
+          "te": "విలువలు కనుగొనండి: (-2)⁴ మరియు (-2)³",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Divide both sides by 4 (transposing factor 4): x - 3 = -20 / 4 = -5.",
-            "hi": "दोनों पक्षों को 4 से भाग दें: x - 3 = -20 / 4 = -5।",
-            "te": "ఇరువైపులా 4 చే భాగించండి: x - 3 = -20 / 4 = -5.",
+            "en": "(-2)⁴ has power 4 (even) => 2⁴ = +16.",
+            "hi": "(-2)⁴ की घात 4 (सम) है => 2⁴ = +16।",
+            "te": "(-2)⁴ ఘాతం 4 (సరి) => 2⁴ = +16.",
             "reviewed": false
           },
           {
-            "en": "Transpose -3 to the right as +3: x = -5 + 3.",
-            "hi": "-3 को दाईं ओर +3 के रूप में पक्षांतरित करें: x = -5 + 3।",
-            "te": "-3 ను కుడివైపుకు +3 గా పక్షాంతరీకరించండి: x = -5 + 3.",
-            "reviewed": false
-          },
-          {
-            "en": "Apply integer addition rules: -5 + 3 = -2.",
-            "hi": "पूर्णांक जोड़ नियम लागू करें: -5 + 3 = -2।",
-            "te": "పూర్ణ సంఖ్యల సంకలన నిబంధన అమలు చేయండి: -5 + 3 = -2.",
+            "en": "(-2)³ has power 3 (odd) => -(2³) = -8.",
+            "hi": "(-2)³ की घात 3 (विषम) है => -(2³) = -8।",
+            "te": "(-2)³ ఘాతం 3 (బేసి) => -(2³) = -8.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "x = -2",
-          "hi": "x = -2",
-          "te": "x = -2",
+          "en": "(-2)⁴ = 16, (-2)³ = -8",
+          "hi": "(-2)⁴ = 16, (-2)³ = -8",
+          "te": "(-2)⁴ = 16, (-2)³ = -8",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Always verify by plugging the solution back into the original equation: 4(-2 - 3) = 4(-5) = -20. Correct!",
-        "hi": "हमेशा मूल समीकरण में मान रखकर सत्यापन करें: 4(-2 - 3) = 4(-5) = -20। बिल्कुल सही!",
-        "te": "ఎల్లప్పుడూ వచ్చిన విలువను అసలు సమీకరణంలో ప్రతిక్షేపించి సరిచూడండి: 4(-2 - 3) = 4(-5) = -20. సరైనది!",
+        "en": "Squaring any real negative number always yields a strictly positive result: (-x)² = +x².",
+        "hi": "किसी भी ऋणात्मक वास्तविक संख्या का वर्ग सदैव धनात्मक होता है: (-x)² = +x²।",
+        "te": "ఏ ఋణ వాస్తవ సంఖ్యను వర్గం చేసినా ఫలితం ఎల్లప్పుడూ ధనాత్మకమే: (-x)² = +x².",
         "reviewed": false
       }
     },
     "fast_track": {
       "headline": {
-        "en": "Fast-Track: Cross-Multiplication & One-Step Algebraic Reductions",
-        "hi": "फास्ट-ट्रैक: तिर्यक गुणन और एक-चरणीय बीजगणितीय हल",
-        "te": "ఫాస్ట్-ట్రాక్: క్రాస్-మల్టిప్లికేషన్ మరియు త్వరిత బీజగణిత సాధన",
+        "en": "Fast-Track: Even/Odd Parity Sign Check",
+        "hi": "फास्ट-ट्रैक: सम/विषम ऋणात्मक चिह्न जाँच",
+        "te": "ఫాస్ట్-ట్రాక్: సరి/బేసి ఋణ సంకేతాల తనిఖీ",
         "reviewed": false
       },
       "explanation": {
-        "en": "For fractional linear equations (ax + b) / c = (dx + e) / f, eliminate fractions in one step using cross-multiplication: f(ax + b) = c(dx + e). Expand and shift terms in mental parallel: collect x terms on the side with the larger positive coefficient to avoid negative signs.",
-        "hi": "भिन्न वाले रैखिक समीकरणों में तिर्यक गुणन से भिन्न समाप्त करें: f(ax + b) = c(dx + e)। ऋणात्मक चिह्नों से बचने के लिए x के पदों को उस तरफ ले जाएँ जहाँ बड़ा गुणांक हो।",
-        "te": "భిన్న రూప సమీకరణాలలో క్రాస్-మల్టిప్లికేషన్ ద్వారా భిన్నాలను సులభంగా తొలగించండి: f(ax + b) = c(dx + e). ఋణ గుర్తులను నివారించడానికి చరరాశి పదాలను పెద్ద గుణకం ఉన్న వైపుకు తరలించండి.",
+        "en": "Even count of negatives = POSITIVE. Odd count of negatives = NEGATIVE. CRITICAL TRAP: -3² = -(3²) = -9, whereas (-3)² = (-3) × (-3) = +9.",
+        "hi": "ऋणात्मक चिह्नों की सम संख्या = धनात्मक। ऋणात्मक चिह्नों की विषम संख्या = ऋणात्मक। महत्वपूर्ण चेतावनी: -3² = -(3²) = -9, जबकि (-3)² = +9।",
+        "te": "సరి సంఖ్యలో ఋణ సంకేతాలు = ధనాత్మకం. బేసి సంఖ్యలో ఋణ సంకేతాలు = ఋణాత్మకం. ముఖ్య గమనిక: -3² = -(3²) = -9, కానీ (-3)² = +9.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Solve mentally: (2x - 1) / 3 = (x + 4) / 2",
-          "hi": "त्वरित हल करें: (2x - 1) / 3 = (x + 4) / 2",
-          "te": "వేగంగా సాధించండి: (2x - 1) / 3 = (x + 4) / 2",
+          "en": "What is (-1)⁹⁹?",
+          "hi": "(-1)⁹⁹ का मान क्या है?",
+          "te": "(-1)⁹⁹ విలువ ఎంత?",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Cross-multiply: 2(2x - 1) = 3(x + 4).",
-            "hi": "तिर्यक गुणा करें: 2(2x - 1) = 3(x + 4)।",
-            "te": "క్రాస్-మల్టిప్లై చేయండి: 2(2x - 1) = 3(x + 4).",
-            "reviewed": false
-          },
-          {
-            "en": "Expand mentally: 4x - 2 = 3x + 12.",
-            "hi": "विस्तार करें: 4x - 2 = 3x + 12।",
-            "te": "విస్తరించండి: 4x - 2 = 3x + 12.",
-            "reviewed": false
-          },
-          {
-            "en": "Subtract 3x from 4x (leaving x) and add 2 to 12 (giving 14).",
-            "hi": "4x में से 3x घटाएँ (x बचा) और 12 में 2 जोड़ें (14 मिला)।",
-            "te": "4x నుండి 3x తీసివేయగా (x మిగులుతుంది), 12 కు 2 కలపగా (14 వస్తుంది).",
+            "en": "99 is odd, so result is -1.",
+            "hi": "99 विषम संख्या है, अतः परिणाम -1 है।",
+            "te": "99 బేసి సంఖ్య, కాబట్టి ఫలితం -1.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "x = 14",
-          "hi": "x = 14",
-          "te": "x = 14",
+          "en": "-1",
+          "hi": "-1",
+          "te": "-1",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Keeping the variable coefficient positive eliminates 80% of sign flip mistakes during transposition.",
-        "hi": "चर के गुणांक को धनात्मक रखने से पक्षांतरण में होने वाली 80% चिह्न त्रुटियाँ समाप्त हो जाती हैं।",
-        "te": "చరరాశి గుణకాన్ని ధన సంఖ్యగా ఉంచడం వలన పక్షాంతరీకరణలో జరిగే 80% సంకేత పొరపాట్లను నివారించవచ్చు.",
+        "en": "Parentheses matter: (-x)² ≠ -x².",
+        "hi": "कोष्ठक महत्वपूर्ण हैं: (-x)² ≠ -x²।",
+        "te": "బ్రాకెట్లు చాలా ముఖ్యం: (-x)² ≠ -x².",
         "reviewed": false
       }
     }
   },
   {
-    "conceptId": "c9-poly-04",
+    "conceptId": "c8-dist-01",
     "basics_first": {
       "headline": {
-        "en": "Basics-First: The Area Rectangle Model for Factoring",
-        "hi": "बुनियादी दृष्टिकोण: आयत क्षेत्रफल मॉडल द्वारा गुणनखंडन",
-        "te": "ప్రాథమిక విధానం: దీర్ఘచతురస్ర వైశాల్యం ద్వారా కారణాంక విభజన",
+        "en": "Basics-First: The Classroom Sweet Box Distribution",
+        "hi": "बुनियादी दृष्टिकोण: कक्षा में मिठाई वितरण",
+        "te": "ప్రాథమిక విధానం: తరగతిలో మిఠాయిల పంపిణీ నమూనా",
         "reviewed": false
       },
       "explanation": {
-        "en": "Factoring a quadratic x² + bx + c means finding the length and breadth of a rectangle whose area is given by the expression. We need two numbers p and q such that their product equals c and their sum equals b. If c is negative, one factor MUST be positive and the other MUST be negative!",
-        "hi": "द्विघात व्यंजक x² + bx + c का गुणनखंड करने का अर्थ है एक आयत की लंबाई और चौड़ाई ज्ञात करना। हमें दो संख्याएँ p और q ऐसी चाहिए जिनका गुणनफल c और योग b हो। यदि c ऋणात्मक है, तो एक संख्या धनात्मक और दूसरी ऋणात्मक होनी ही चाहिए!",
-        "te": "x² + bx + c వర్గ సమాసాన్ని కారణాంకాలుగా మార్చడం అంటే ఆ వైశాల్యం గల దీర్ఘచతురస్ర పొడవు మరియు వెడల్పులను కనుగొనడమే. లబ్దం c మరియు మొత్తం b అయ్యేలా p, q అనే రెండు సంఖ్యలను కనుగొనాలి. c ఋణ సంఖ్య అయితే, ఒక సంఖ్య ఖచ్చితంగా ధన సంఖ్య, మరొకటి ఋణ సంఖ్య కావాలి!",
+        "en": "If a teacher brings 4 sweet boxes into the classroom, and each box contains x laddoos and 3 jalebis, the total sweets is 4(x + 3). You cannot give sweets to the laddoos and ignore the jalebis! You must multiply 4 by x AND 4 by 3: 4x + 12. When the outside number is negative, say -2(x - 5), that negative must multiply BOTH terms inside, reversing their signs: (-2)(x) + (-2)(-5) = -2x + 10.",
+        "hi": "यदि एक शिक्षक कक्षा में 4 डिब्बे लाते हैं, और प्रत्येक डिब्बे में x लड्डू और 3 जलेबियाँ हैं, तो कुल मिठाई 4(x + 3) होगी। आप 4 का गुणा लड्डू से करके जलेबी को छोड़ नहीं सकते! आपको 4 का गुणा x और 3 दोनों से करना होगा: 4x + 12। जब बाहर की संख्या ऋणात्मक हो, जैसे -2(x - 5), तो वह अंदर के दोनों पदों से गुणा होकर चिह्न बदल देगी: -2x + 10।",
+        "te": "ఒక ఉపాధ్యాయుడు 4 మిఠాయి పెట్టెలను తెస్తే, ప్రతి పెట్టెలో x లడ్డూలు, 3 జిలేబీలు ఉంటే మొత్తం మిఠాయిలు 4(x + 3). లడ్డూలను గుణించి జిలేబీలను వదిలేయలేం కదా! 4 తో x ని మరియు 3 ని రెండింటినీ గుణించాలి: 4x + 12. బయట ఋణ సంఖ్య ఉంటే, ఉదాహరణకు -2(x - 5), ఆ ఋణ సంఖ్య లోపలి రెండు పదాలను గుణించి వాటి సంకేతాలను మారుస్తుంది: -2x + 10.",
         "reviewed": false
       },
       "visualAnalogy": {
-        "en": "A grid divided into 4 sections: x² tile in top-left, constant c in bottom-right, and the two middle terms filling the remaining two slots.",
-        "hi": "4 भागों में बंटा ग्रिड: ऊपर बाएँ x², नीचे दाएँ अचर c, और बाकी दो स्थानों में मध्य पद।",
-        "te": "4 విభాగాలుగా విభజించబడిన గ్రిడ్: ఎగువ ఎడమవైపు x², దిగువ కుడివైపు స్థిరపదం c, మిగిలిన రెండు గడులలో మధ్య పదాలు.",
+        "en": "Distributing invitations: Every person inside the house gets a copy of the invitation card from the delivery person.",
+        "hi": "निमंत्रण पत्र वितरण: घर के अंदर के प्रत्येक सदस्य को निमंत्रण पत्र मिलता है।",
+        "te": "ఆహ్వాన పత్రికల పంపిణీ: ఇంటి లోపల ఉన్న ప్రతి ఒక్కరికీ కార్డు అందుతుంది.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Factorise: x² - x - 6",
-          "hi": "गुणनखंड कीजिए: x² - x - 6",
-          "te": "కారణాంకాలుగా మార్చండి: x² - x - 6",
+          "en": "Expand: -5(2x - 3)",
+          "hi": "विस्तार कीजिए: -5(2x - 3)",
+          "te": "విస్తరించండి: -5(2x - 3)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "We need two numbers that multiply to -6 and add up to -1.",
-            "hi": "हमें दो संख्याएँ चाहिए जिनका गुणनफल -6 और योग -1 हो।",
-            "te": "లబ్దం -6 మరియు మొత్తం -1 అయ్యే రెండు సంఖ్యలు కావాలి.",
+            "en": "Multiply -5 by 2x: (-5) × (2x) = -10x.",
+            "hi": "-5 का 2x से गुणा: (-5) × (2x) = -10x।",
+            "te": "-5 తో 2x ని గుణించండి: (-5) × (2x) = -10x.",
             "reviewed": false
           },
           {
-            "en": "Factor pairs of 6 are (1,6) and (2,3). Since product is negative, one has a minus sign.",
-            "hi": "6 के गुणनखंड जोड़े (1,6) और (2,3) हैं। गुणनफल ऋणात्मक है, अतः एक संख्या ऋण होगी।",
-            "te": "6 యొక్క కారకాలు (1,6) మరియు (2,3). లబ్దం ఋణ సంఖ్య కాబట్టి ఒకదానికి ఋణ గుర్తు ఉంటుంది.",
+            "en": "Multiply -5 by -3: (-5) × (-3) = +15.",
+            "hi": "-5 का -3 से गुणा: (-5) × (-3) = +15।",
+            "te": "-5 తో -3 ని గుణించండి: (-5) × (-3) = +15.",
             "reviewed": false
           },
           {
-            "en": "Test -3 and +2: (-3) × (+2) = -6 (correct!) and (-3) + 2 = -1 (correct!).",
-            "hi": "-3 और +2 की जाँच करें: (-3) × (+2) = -6 (सही!) और (-3) + 2 = -1 (सही!)।",
-            "te": "-3 మరియు +2 సరిచూడండి: (-3) × (+2) = -6 (సరైనది!) మరియు (-3) + 2 = -1 (సరైనది!).",
-            "reviewed": false
-          },
-          {
-            "en": "Write as (x - 3)(x + 2). Notice how this relies 100% on Class 7 integer sign rules!",
-            "hi": "(x - 3)(x + 2) के रूप में लिखें। ध्यान दें कि यह पूरी तरह से कक्षा 7 के पूर्णांक नियमों पर निर्भर है!",
-            "te": "(x - 3)(x + 2) గా రాయండి. ఇది పూర్తిగా 7వ తరగతి పూర్ణ సంఖ్యల సంకేత నియమాలపైనే ఆధారపడి ఉందని గమనించండి!",
+            "en": "Combine terms: -10x + 15.",
+            "hi": "पदों को जोड़ें: -10x + 15।",
+            "te": "పదాలను కలపండి: -10x + 15.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "x² - x - 6 = (x - 3)(x + 2)",
-          "hi": "x² - x - 6 = (x - 3)(x + 2)",
-          "te": "x² - x - 6 = (x - 3)(x + 2)",
+          "en": "-10x + 15",
+          "hi": "-10x + 15",
+          "te": "-10x + 15",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "If the constant is negative, the two factors have opposite signs. The larger factor gets the sign of the middle term.",
-        "hi": "यदि अचर पद ऋणात्मक है, तो दोनों गुणनखंडों के चिह्न विपरीत होंगे। बड़े गुणनखंड पर मध्य पद का चिह्न आएगा।",
-        "te": "స్థిరపదం ఋణ సంఖ్య అయితే, రెండు కారణాంకాలకు వేర్వేరు సంకేతాలు ఉంటాయి. పెద్ద కారణాంకానికి మధ్య పదం యొక్క సంకేతం వస్తుంది.",
+        "en": "A negative multiplier flips the sign of every single term inside the parentheses.",
+        "hi": "ऋणात्मक गुणक कोष्ठक के अंदर के प्रत्येक पद का चिह्न उलट देता है।",
+        "te": "ఋణ గుణకం బ్రాకెట్ లోపల ఉన్న ప్రతి పదం యొక్క సంకేతాన్ని మారుస్తుంది.",
         "reviewed": false
       }
     },
     "standard": {
       "headline": {
-        "en": "Standard: NCERT Factor Theorem & Grouping Method",
-        "hi": "मानक दृष्टिकोण: एनसीईआरटी गुणनखंड प्रमेय और समूहन विधि",
-        "te": "ప్రామాణిక విధానం: ఎన్‌సిఈఆర్‌టి కారణాంక సిద్ధాంతం మరియు విభజన పద్ధతి",
+        "en": "Standard: The Distributive Property of Multiplication over Addition/Subtraction",
+        "hi": "मानक दृष्टिकोण: योग और व्यवकलन पर गुणन का वितरण गुणधर्म",
+        "te": "ప్రామాణిక విధానం: సంకలన, వ్యవకలనాలపై గుణకార విభాగ న్యాయం",
         "reviewed": false
       },
       "explanation": {
-        "en": "By the Factor Theorem, if P(a) = 0, then (x - a) is a factor of P(x). For quadratic polynomial ax² + bx + c:\n1. Compute product ac.\n2. Find integers p and q such that p × q = ac and p + q = b.\n3. Split bx into px + qx.\n4. Factor by grouping terms in pairs.",
-        "hi": "गुणनखंड प्रमेय के अनुसार, यदि P(a) = 0 है, तो (x - a) बहुपद P(x) का गुणनखंड है। द्विघात बहुपद ax² + bx + c के लिए:\n1. ac का मान निकालें।\n2. ऐसी संख्याएँ p और q खोजें कि p × q = ac और p + q = b हो।\n3. bx को px + qx में विभाजित करें।\n4. दो-दो पदों का समूह बनाकर उभयनिष्ठ (कॉमन) निकालें।",
-        "te": "కారణాంక సిద్ధాంతం ప్రకారం, P(a) = 0 అయితే (x - a) అనేది P(x) కు కారణాంకం అవుతుంది. ax² + bx + c వర్గ బహుపదికి:\n1. ac లబ్దాన్ని కనుగొనండి.\n2. p × q = ac మరియు p + q = b అయ్యేలా p, q లను కనుగొనండి.\n3. bx ను px + qx గా విభజించండి.\n4. జంటలుగా చేర్చి ఉమ్మడి పదాన్ని తీసి కారణాంకాలు చేయండి.",
+        "en": "The distributive law states that for all real numbers a, b, c: a(b + c) = ab + ac, and a(b - c) = ab - ac. When a is negative, say a = -k: -k(b - c) = (-k)(b) - (-k)(c) = -kb + kc. The most frequent student error in algebra is distributing the multiplier to the first term while forgetting to multiply the second term, or making sign errors on the second term.",
+        "hi": "वितरण नियम कहता है कि सभी वास्तविक संख्याओं a, b, c के लिए: a(b + c) = ab + ac और a(b - c) = ab - ac। जब a ऋणात्मक हो: -k(b - c) = -kb + kc। बीजगणित में सबसे आम छात्र त्रुटि पहले पद से गुणा करना और दूसरे पद को भूल जाना या दूसरे पद पर गलत चिह्न लगाना है।",
+        "te": "విభాగ న్యాయం ప్రకారం a, b, c లకు: a(b + c) = ab + ac మరియు a(b - c) = ab - ac. a ఋణాత్మకం అయితే: -k(b - c) = -kb + kc. విద్యార్థులు సాధారణంగా చేసే తప్పు మొదటి పదాన్ని మాత్రమే గుణించి రెండో పదాన్ని మర్చిపోవడం లేదా రెండో పదం సంకేతంలో తప్పు చేయడం.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Factorise: 2x² + 7x + 3",
-          "hi": "गुणनखंड कीजिए: 2x² + 7x + 3",
-          "te": "కారణాంకాలుగా మార్చండి: 2x² + 7x + 3",
+          "en": "Simplify: 3x - 2(4x - 5)",
+          "hi": "सरल कीजिए: 3x - 2(4x - 5)",
+          "te": "సూక్ష్మీకరించండి: 3x - 2(4x - 5)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Identify ac = 2 × 3 = 6, and b = 7.",
-            "hi": "ac = 2 × 3 = 6 और b = 7 पहचानें।",
-            "te": "ac = 2 × 3 = 6 మరియు b = 7 గుర్తించండి.",
+            "en": "Expand -2(4x - 5) => -8x + 10.",
+            "hi": "-2(4x - 5) का विस्तार => -8x + 10।",
+            "te": "-2(4x - 5) ను విస్తరిస్తే => -8x + 10.",
             "reviewed": false
           },
           {
-            "en": "Find factors of 6 adding to 7: 6 and 1 (6 × 1 = 6, 6 + 1 = 7).",
-            "hi": "6 के ऐसे गुणनखंड जो 7 दें: 6 और 1 (6 × 1 = 6, 6 + 1 = 7)।",
-            "te": "కూడితే 7 వచ్చే 6 కారకాలు: 6 మరియు 1 (6 × 1 = 6, 6 + 1 = 7).",
-            "reviewed": false
-          },
-          {
-            "en": "Split middle term: 2x² + 6x + 1x + 3.",
-            "hi": "मध्य पद को तोड़ें: 2x² + 6x + 1x + 3।",
-            "te": "మధ్య పదాన్ని విభజించండి: 2x² + 6x + 1x + 3.",
-            "reviewed": false
-          },
-          {
-            "en": "Group: 2x(x + 3) + 1(x + 3) = (2x + 1)(x + 3).",
-            "hi": "समूहन करें: 2x(x + 3) + 1(x + 3) = (2x + 1)(x + 3)।",
-            "te": "సమూహపరచండి: 2x(x + 3) + 1(x + 3) = (2x + 1)(x + 3).",
+            "en": "Combine like terms: 3x - 8x + 10 = -5x + 10.",
+            "hi": "समान पद जोड़ें: 3x - 8x + 10 = -5x + 10।",
+            "te": "సజాతి పదాలను కలపండి: 3x - 8x + 10 = -5x + 10.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "(2x + 1)(x + 3)",
-          "hi": "(2x + 1)(x + 3)",
-          "te": "(2x + 1)(x + 3)",
+          "en": "-5x + 10",
+          "hi": "-5x + 10",
+          "te": "-5x + 10",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "Both groups must reveal the exact same binomial factor (x + 3) to factor out cleanly.",
-        "hi": "सटीक गुणनखंडन के लिए दोनों समूहों में बिल्कुल समान द्विपद (x + 3) बचना चाहिए।",
-        "te": "స్పష్టమైన కారణాంక విభజన కోసం రెండు సమూహాలలో ఒకే విధమైన సమాసం (x + 3) మిగలాలి.",
+        "en": "Always distribute the sign along with the coefficient: -a(b - c) = -ab + ac.",
+        "hi": "हमेशा गुणांक के साथ चिह्न का भी वितरण करें: -a(b - c) = -ab + ac।",
+        "te": "ఎల్లప్పుడూ గుణకంతో పాటు సంకేతాన్ని కూడా విభజించండి: -a(b - c) = -ab + ac.",
         "reviewed": false
       }
     },
     "fast_track": {
       "headline": {
-        "en": "Fast-Track: Rapid Root Inspections & Vieta's Shortcuts",
-        "hi": "फास्ट-ट्रैक: त्वरित मूल निरीक्षण और विएटा के सूत्र",
-        "te": "ఫాస్ట్-ట్రాక్: మూలాల త్వరిత పరిశీలన మరియు షార్ట్‌కట్‌లు",
+        "en": "Fast-Track: Bracket Sign Flip Formula",
+        "hi": "फास्ट-ट्रैक: कोष्ठक चिह्न परिवर्तन सूत्र",
+        "te": "ఫాస్ట్-ట్రాక్: బ్రాకెట్ సంకేత మార్పు సూత్రం",
         "reviewed": false
       },
       "explanation": {
-        "en": "For monic quadratics x² + bx + c (a = 1), the sum of roots is -b and the product of roots is c. Immediately inspect factors of c whose difference/sum matches b. For non-monic ax² + bx + c, compute discriminant D = b² - 4ac to check if it factors over integers (D must be a perfect square).",
-        "hi": "जब x² का गुणांक 1 हो (x² + bx + c), तो मूलों का योग -b और गुणनफल c होता है। सीधे c के गुणनखंडों की जाँच करें। ax² + bx + c के लिए विविक्तकर D = b² - 4ac निकालें; यदि D पूर्ण वर्ग है तभी पूर्णांक गुणनखंड संभव हैं।",
-        "te": "x² గుణకం 1 గా ఉన్నప్పుడు (x² + bx + c), మూలాల మొత్తం -b మరియు లబ్దం c అవుతుంది. c కారకాలను వేగంగా పరిశీలించండి. ax² + bx + c కోసం విచక్షణి D = b² - 4ac ను లెక్కించండి; D ఖచ్చిత వర్గం అయితేనే పూర్ణాంక కారణాంకాలు సాధ్యమవుతాయి.",
+        "en": "-(a + b) = -a - b; -(a - b) = -a + b = b - a. Negative in front of parentheses reverses every sign inside.",
+        "hi": "-(a + b) = -a - b; -(a - b) = -a + b = b - a। कोष्ठक के बाहर का ऋण अंदर के सभी चिह्नों को उलट देता है।",
+        "te": "-(a + b) = -a - b; -(a - b) = -a + b = b - a. బ్రాకెట్ బయట ఋణ సంకేతం ఉంటే లోపలి ప్రతి సంకేతం తారుమారవుతుంది.",
         "reviewed": false
       },
       "workedExample": {
         "problem": {
-          "en": "Factorise in under 10 seconds: x² - 11x + 28",
-          "hi": "10 सेकंड में हल करें: x² - 11x + 28",
-          "te": "10 సెకన్లలో సాధించండి: x² - 11x + 28",
+          "en": "Expand: -(7 - 3x)",
+          "hi": "विस्तार कीजिए: -(7 - 3x)",
+          "te": "విస్తరించండి: -(7 - 3x)",
           "reviewed": false
         },
         "steps": [
           {
-            "en": "Product is +28, sum is -11. Both roots must be negative numbers.",
-            "hi": "गुणनफल +28 और योग -11 है। दोनों मूल ऋणात्मक संख्याएँ होंगी।",
-            "te": "లబ్దం +28, మొత్తం -11. రెండు సంఖ్యలు ఋణ సంఖ్యలే కావాలి.",
-            "reviewed": false
-          },
-          {
-            "en": "Factors of 28 adding to 11 are 7 and 4.",
-            "hi": "28 के गुणनखंड जिनका योग 11 है: 7 और 4।",
-            "te": "కూడితే 11 వచ్చే 28 కారకాలు 7 మరియు 4.",
-            "reviewed": false
-          },
-          {
-            "en": "Immediately write (x - 7)(x - 4).",
-            "hi": "तुरंत लिखें: (x - 7)(x - 4)।",
-            "te": "వెంటనే రాయండి: (x - 7)(x - 4).",
+            "en": "Reverse signs: -7 + 3x = 3x - 7.",
+            "hi": "चिह्न उलटें: -7 + 3x = 3x - 7।",
+            "te": "సంకేతాలు మార్చండి: -7 + 3x = 3x - 7.",
             "reviewed": false
           }
         ],
         "solution": {
-          "en": "(x - 7)(x - 4)",
-          "hi": "(x - 7)(x - 4)",
-          "te": "(x - 7)(x - 4)",
+          "en": "3x - 7",
+          "hi": "3x - 7",
+          "te": "3x - 7",
           "reviewed": false
         }
       },
       "keyTakeaway": {
-        "en": "When constant is positive and middle term is negative, both binomials are subtractions (x - p)(x - q).",
-        "hi": "जब अचर धनात्मक और मध्य पद ऋणात्मक हो, तो दोनों गुणनखंड घटाव वाले होते हैं: (x - p)(x - q)।",
-        "te": "స్థిరపదం ధనాత్మకం మరియు మధ్య పదం ఋణాత్మకం అయినప్పుడు, రెండు కారణాంకాలు తీసివేతలే అవుతాయి: (x - p)(x - q).",
+        "en": "-(p - q) = q - p.",
+        "hi": "-(p - q) = q - p.",
+        "te": "-(p - q) = q - p.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c8-dist-02",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Four-Room House Area Model",
+        "hi": "बुनियादी दृष्टिकोण: चार कमरों के घर का क्षेत्रफल मॉडल",
+        "te": "ప్రాథమిక విధానం: నాలుగు గదుల ఇంటి వైశాల్య నమూనా",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Imagine a rectangular plot divided into 4 rooms. The length is (x + 3) and the width is (x + 5). Room 1 area is x · x = x². Room 2 is x · 5 = 5x. Room 3 is 3 · x = 3x. Room 4 is 3 · 5 = 15. The total area is the sum of all 4 rooms: x² + 5x + 3x + 15 = x² + 8x + 15. Every binomial multiplication is just finding the total area of 4 sub-rectangles!",
+        "hi": "कल्पना कीजिए कि एक आयताकार जमीन 4 कमरों में विभाजित है। लंबाई (x + 3) और चौड़ाई (x + 5) है। कमरा 1: x · x = x²। कमरा 2: 5x। कमरा 3: 3x। कमरा 4: 15। कुल क्षेत्रफल चारों कमरों का योग है: x² + 5x + 3x + 15 = x² + 8x + 15। द्विपद गुणा केवल 4 आयतों का क्षेत्रफल जोड़ना है!",
+        "te": "ఒక దీర్ఘచతురస్రాకార స్థలం 4 గదులుగా విభజించబడిందని ఊహించండి. పొడవు (x + 3), వెడల్పు (x + 5). గది 1: x · x = x². గది 2: 5x. గది 3: 3x. గది 4: 15. మొత్తం వైశాల్యం 4 గదుల మొత్తం: x² + 5x + 3x + 15 = x² + 8x + 15. ద్విపదుల గుణకారం అంటే ఈ 4 గదుల వైశాల్యాల మొత్తమే!",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "2x2 grid table: top row x, a; left column x, b. Fill the 4 boxes and sum them.",
+        "hi": "2x2 ग्रिड तालिका: शीर्ष पंक्ति x, a; बायाँ स्तंभ x, b। चारों बक्सों को भरें और जोड़ें।",
+        "te": "2x2 గ్రిడ్ పట్టిక: పై వరుస x, a; ఎడమ నిలువు వరుస x, b. 4 గడులను నింపి కలపండి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Multiply: (x + 2)(x + 6)",
+          "hi": "गुणा कीजिए: (x + 2)(x + 6)",
+          "te": "గుణించండి: (x + 2)(x + 6)",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Multiply x by (x + 6) => x² + 6x.",
+            "hi": "x का (x + 6) से गुणा => x² + 6x।",
+            "te": "x తో (x + 6) ని గుణిస్తే => x² + 6x.",
+            "reviewed": false
+          },
+          {
+            "en": "Multiply 2 by (x + 6) => 2x + 12.",
+            "hi": "2 का (x + 6) से गुणा => 2x + 12।",
+            "te": "2 తో (x + 6) ని గుణిస్తే => 2x + 12.",
+            "reviewed": false
+          },
+          {
+            "en": "Combine middle terms: 6x + 2x = 8x.",
+            "hi": "मध्य पदों को जोड़ें: 6x + 2x = 8x।",
+            "te": "మధ్య పదాలను కలపండి: 6x + 2x = 8x.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x² + 8x + 12",
+          "hi": "x² + 8x + 12",
+          "te": "x² + 8x + 12",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "(x + a)(x + b) produces a quadratic term x², a middle sum term (a + b)x, and a constant product ab.",
+        "hi": "(x + a)(x + b) से द्विघात पद x², मध्य योग पद (a + b)x, और अचर गुणनफल ab प्राप्त होता है।",
+        "te": "(x + a)(x + b) అనేది వర్గ పదం x², మధ్య సంకలన పదం (a + b)x, మరియు స్థిర లబ్దం ab ని ఇస్తుంది.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Double Distributive Law and Like-Term Combination",
+        "hi": "मानक दृष्टिकोण: दोहरा वितरण नियम और समान पदों का संयोजन",
+        "te": "ప్రామాణిక విధానం: ద్వంద్వ విభాగ న్యాయం మరియు సజాతి పదాల కలయిక",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "To multiply two binomials (p + q)(r + s), distribute each term of the first binomial across the second: p(r + s) + q(r + s) = pr + ps + qr + qs. When applied to (x + a)(x + b): x(x + b) + a(x + b) = x² + bx + ax + ab = x² + (a + b)x + ab. Notice how the middle linear coefficient is the algebraic sum (a + b) and the last term is the product (ab).",
+        "hi": "दो द्विपदों (p + q)(r + s) का गुणा करने के लिए: p(r + s) + q(r + s) = pr + ps + qr + qs। (x + a)(x + b) पर लागू करने पर: x² + (a + b)x + ab प्राप्त होता है। ध्यान दें कि मध्य गुणांक बीजीय योग (a + b) है और अंतिम पद गुणनफल (ab) है।",
+        "te": "రెండు ద్విపదులను (p + q)(r + s) గుణించడానికి: p(r + s) + q(r + s) = pr + ps + qr + qs. (x + a)(x + b) కు వర్తింపజేస్తే: x² + (a + b)x + ab వస్తుంది. మధ్య గుణకం బీజగణిత మొత్తం (a + b), చివరి పదం లబ్దం (ab).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Expand: (x - 7)(x + 4)",
+          "hi": "विस्तार कीजिए: (x - 7)(x + 4)",
+          "te": "విస్తరించండి: (x - 7)(x + 4)",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Double distribute: x(x + 4) - 7(x + 4).",
+            "hi": "दोहरा वितरण: x(x + 4) - 7(x + 4)।",
+            "te": "ద్వంద్వ విభజన: x(x + 4) - 7(x + 4).",
+            "reviewed": false
+          },
+          {
+            "en": "Expand: x² + 4x - 7x - 28.",
+            "hi": "विस्तार: x² + 4x - 7x - 28।",
+            "te": "విస్తరించగా: x² + 4x - 7x - 28.",
+            "reviewed": false
+          },
+          {
+            "en": "Combine middle terms: 4x - 7x = -3x.",
+            "hi": "मध्य पदों को जोड़ें: 4x - 7x = -3x।",
+            "te": "మధ్య పదాలను కలపగా: 4x - 7x = -3x.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x² - 3x - 28",
+          "hi": "x² - 3x - 28",
+          "te": "x² - 3x - 28",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Always pay attention to signed addition in the middle term: (-7) + 4 = -3.",
+        "hi": "मध्य पद में चिह्नों के साथ योग पर सदैव ध्यान दें: (-7) + 4 = -3।",
+        "te": "మధ్య పదంలో సంకేతాలతో కూడిన సంకలనంపై దృష్టి పెట్టండి: (-7) + 4 = -3.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Sum & Product Shortcut for Binomials",
+        "hi": "फास्ट-ट्रैक: द्विपदों के लिए योग और गुणनफल शॉर्टकट",
+        "te": "ఫాస్ట్-ట్రాక్: ద్విపదుల సంకలన, లబ్ద సత్వర మార్గం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "(x + a)(x + b) = x² + (sum)x + (product). Where sum = a + b and product = ab. Compute sum and product mentally for instant expansion.",
+        "hi": "(x + a)(x + b) = x² + (योग)x + (गुणनफल)। जहाँ योग = a + b और गुणनफल = ab। तुरंत विस्तार के लिए मानसिक गणना करें।",
+        "te": "(x + a)(x + b) = x² + (మొత్తం)x + (లబ్దం). ఇక్కడ మొత్తం = a + b, లబ్దం = ab. వేగంగా విస్తరించడానికి మనస్సులోనే లెక్కించండి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Expand: (x - 9)(x - 2)",
+          "hi": "विस्तार कीजिए: (x - 9)(x - 2)",
+          "te": "విస్తరించండి: (x - 9)(x - 2)",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Sum: (-9) + (-2) = -11.",
+            "hi": "योग: (-9) + (-2) = -11।",
+            "te": "మొత్తం: (-9) + (-2) = -11.",
+            "reviewed": false
+          },
+          {
+            "en": "Product: (-9) × (-2) = +18.",
+            "hi": "गुणनफल: (-9) × (-2) = +18।",
+            "te": "లబ్దం: (-9) × (-2) = +18.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x² - 11x + 18",
+          "hi": "x² - 11x + 18",
+          "te": "x² - 11x + 18",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Negative × Negative gives Positive constant term.",
+        "hi": "ऋण × ऋण से धनात्मक अचर पद प्राप्त होता है।",
+        "te": "ఋణం × ఋణం ధనాత్మక స్థిర పదాన్ని ఇస్తుంది.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c9-id-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Three Master Algebraic Patterns",
+        "hi": "बुनियादी दृष्टिकोण: तीन प्रमुख बीजीय सर्वसमिकाएँ",
+        "te": "ప్రాథమిక విధానం: మూడు ముఖ్య బీజగణిత సర్వసమీకరణాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "An algebraic identity is an equation that is true for EVERY value of the variables. Think of them as pre-calculated mathematical shortcuts. Instead of doing lengthy double distribution every time, memorize the three patterns: 1) Square of Sum: (a + b)² = a² + 2ab + b². 2) Square of Difference: (a - b)² = a² - 2ab + b². 3) Difference of Squares: (a + b)(a - b) = a² - b².",
+        "hi": "बीजीय सर्वसमिका एक ऐसा समीकरण है जो चरों के प्रत्येक मान के लिए सत्य होता है। ये पहले से निकाले गए शॉर्टकट हैं: 1) योग का वर्ग: (a + b)² = a² + 2ab + b²। 2) अंतर का वर्ग: (a - b)² = a² - 2ab + b²। 3) वर्गों का अंतर: (a + b)(a - b) = a² - b²।",
+        "te": "బీజగణిత సర్వసమీకరణం అంటే చరరాశుల అన్ని విలువల వద్ద నిజమయ్యే సమీకరణం. ఇవి వేగవంతమైన షార్ట్‌కట్‌లు: 1) మొత్తపు వర్గం: (a + b)² = a² + 2ab + b². 2) తేడా వర్గం: (a - b)² = a² - 2ab + b². 3) వర్గాల తేడా: (a + b)(a - b) = a² - b².",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Geometric square of side (a + b): contains one big square a², one small square b², and two identical rectangles ab.",
+        "hi": "(a + b) भुजा वाला ज्यामितीय वर्ग: इसमें एक बड़ा वर्ग a², एक छोटा वर्ग b² और दो समान आयत ab होते हैं।",
+        "te": "(a + b) భుజం గల చతురస్రం: ఇందులో ఒక పెద్ద చతురస్రం a², ఒక చిన్న చతురస్రం b², మరియు రెండు సమాన దీర్ఘచతురస్రాలు ab ఉంటాయి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Expand: (2x + 3)²",
+          "hi": "विस्तार कीजिए: (2x + 3)²",
+          "te": "విస్తరించండి: (2x + 3)²",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "First term squared: (2x)² = 4x².",
+            "hi": "पहले पद का वर्ग: (2x)² = 4x²।",
+            "te": "మొదటి పదం వర్గం: (2x)² = 4x².",
+            "reviewed": false
+          },
+          {
+            "en": "Twice product of terms: 2 × (2x) × 3 = 12x.",
+            "hi": "पदों के गुणनफल का दोगुना: 2 × (2x) × 3 = 12x।",
+            "te": "పదాల లబ్దానికి రెట్టింపు: 2 × (2x) × 3 = 12x.",
+            "reviewed": false
+          },
+          {
+            "en": "Second term squared: 3² = 9.",
+            "hi": "दूसरे पद का वर्ग: 3² = 9।",
+            "te": "రెండవ పదం వర్గం: 3² = 9.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "4x² + 12x + 9",
+          "hi": "4x² + 12x + 9",
+          "te": "4x² + 12x + 9",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "(a + b)² is NEVER equal to just a² + b²; never drop the middle term 2ab!",
+        "hi": "(a + b)² कभी भी केवल a² + b² के बराबर नहीं होता; मध्य पद 2ab कभी न छोड़ें!",
+        "te": "(a + b)² అనేది ఎప్పటికీ a² + b² మాత్రమే కాదు; మధ్య పదం 2ab ను ఎప్పుడూ మర్చిపోవద్దు!",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Applying Standard Identities Fluently",
+        "hi": "मानक दृष्टिकोण: मानक सर्वसमिकाओं का धाराप्रवाह अनुप्रयोग",
+        "te": "ప్రామాణిక విధానం: ప్రామాణిక సర్వసమీకరణాల స్పష్టమైన అనువర్తనం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "When expanding (A ± B)², always identify the core entities A and B: (A + B)² = A² + 2AB + B², and (A - B)² = A² - 2AB + B². When multiplying conjugate binomials (A + B)(A - B), the positive and negative cross-terms cancel: A² - AB + BA - B² = A² - B² (Difference of Squares). This identity is widely used in factorization and mental arithmetic.",
+        "hi": "(A ± B)² का विस्तार करते समय हमेशा A और B को पहचानें: (A + B)² = A² + 2AB + B² और (A - B)² = A² - 2AB + B²। संयुग्मी द्विपदों (A + B)(A - B) का गुणा करने पर मध्य पद निरस्त हो जाते हैं: A² - B²। इसका उपयोग गुणनखंडन और मानसिक गणना में व्यापक रूप से होता है।",
+        "te": "(A ± B)² విస్తరణలో A, B లను స్పష్టంగా గుర్తించండి: (A + B)² = A² + 2AB + B² మరియు (A - B)² = A² - 2AB + B². సంయుగ్మ ద్విపదులను (A + B)(A - B) గుణించినప్పుడు మధ్య పదాలు రద్దయి A² - B² (వర్గాల తేడా) వస్తుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Calculate 52 × 48 mentally using identities.",
+          "hi": "सर्वसमिकाओं का उपयोग करके 52 × 48 की मानसिक गणना कीजिए।",
+          "te": "సర్వసమీకరణాలను ఉపయోగించి 52 × 48 ని మనస్సులోనే లెక్కించండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Rewrite around 50: (50 + 2)(50 - 2).",
+            "hi": "50 के आधार पर लिखें: (50 + 2)(50 - 2)।",
+            "te": "50 ఆధారంగా రాయండి: (50 + 2)(50 - 2).",
+            "reviewed": false
+          },
+          {
+            "en": "Apply difference of squares: 50² - 2² = 2500 - 4.",
+            "hi": "वर्गों का अंतर लागू करें: 50² - 2² = 2500 - 4।",
+            "te": "వర్గాల తేడా సూత్రం వర్తింపజేయండి: 50² - 2² = 2500 - 4.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "2496",
+          "hi": "2496",
+          "te": "2496",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "(A + B)(A - B) = A² - B².",
+        "hi": "(A + B)(A - B) = A² - B².",
+        "te": "(A + B)(A - B) = A² - B².",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Identity Recognition Checklist",
+        "hi": "फास्ट-ट्रैक: सर्वसमिका पहचान चेकलिस्ट",
+        "te": "ఫాస్ట్-ట్రాక్: సర్వసమీకరణాల గుర్తింపు చెక్‌లిస్ట్",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Three terms with two positive perfect squares? Check for (a ± b)². Two perfect squares separated by a minus sign? It is immediately (a - b)(a + b).",
+        "hi": "दो धनात्मक पूर्ण वर्गों वाले तीन पद? (a ± b)² की जाँच करें। ऋण चिह्न द्वारा अलग किए गए दो पूर्ण वर्ग? यह सीधे (a - b)(a + b) है।",
+        "te": "రెండు ధన ఖచ్చిత వర్గాలతో కూడిన మూడు పదాలా? (a ± b)² అవుతుంది. మైనస్‌తో వేరు చేయబడిన రెండు ఖచ్చిత వర్గాలా? నేరుగా (a - b)(a + b) అవుతుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Factorize: 49x² - 36y²",
+          "hi": "गुणनखंड कीजिए: 49x² - 36y²",
+          "te": "కారణాంకాలుగా మార్చండి: 49x² - 36y²",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Write as squares: (7x)² - (6y)².",
+            "hi": "वर्गों के रूप में लिखें: (7x)² - (6y)²।",
+            "te": "వర్గాల రూపంలో రాయండి: (7x)² - (6y)².",
+            "reviewed": false
+          },
+          {
+            "en": "Apply difference of squares: (7x - 6y)(7x + 6y).",
+            "hi": "सर्वसमिका लगाएं: (7x - 6y)(7x + 6y)।",
+            "te": "సూత్రం వర్తింపజేస్తే: (7x - 6y)(7x + 6y).",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "(7x - 6y)(7x + 6y)",
+          "hi": "(7x - 6y)(7x + 6y)",
+          "te": "(7x - 6y)(7x + 6y)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Difference of squares has no middle linear term.",
+        "hi": "वर्गों के अंतर में कोई मध्य पद नहीं होता।",
+        "te": "వర్గాల తేడాలో ఎటువంటి మధ్య పదం ఉండదు.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c9-id-02",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Reverse Detective Method for Factoring",
+        "hi": "बुनियादी दृष्टिकोण: गुणनखंडन की जासूसी विधि",
+        "te": "ప్రాథమిక విధానం: కారణాంక విభజన డిటెక్టివ్ పద్ధతి",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Factoring is simply running multiplication backwards! When we multiplied (x + p)(x + q), we got x² + (p + q)x + pq. So to factor x² + Bx + C, you play detective: find two mystery numbers p and q that satisfy TWO clues: Clue 1: They must MULTIPLY to C. Clue 2: They must ADD to B. If C is positive, both p and q have the same sign. If C is negative, one is positive and one is negative!",
+        "hi": "गुणनखंडन केवल गुणा को उल्टा चलाना है! जब हमने (x + p)(x + q) का गुणा किया, तो हमें x² + (p + q)x + pq मिला। इसलिए x² + Bx + C का गुणनखंड करने के लिए दो सुराग खोजें: सुराग 1: उनका गुणनफल C होना चाहिए। सुराग 2: उनका योग B होना चाहिए। यदि C धनात्मक है, तो दोनों के चिह्न समान होंगे। यदि C ऋणात्मक है, तो एक धनात्मक और एक ऋणात्मक होगा!",
+        "te": "కారణాంకాల విభజన అంటే గుణకారాన్ని వెనుకకు నడపడమే! (x + p)(x + q) ని గుణిస్తే x² + (p + q)x + pq వచ్చింది. కాబట్టి x² + Bx + C ని కారణాంకాలుగా మార్చడానికి రెండు ఆధారాలతో p, q లను కనుక్కోండి: ఆధారం 1: వాటి లబ్దం C కావాలి. ఆధారం 2: వాటి మొత్తం B కావాలి. C ధనాత్మకం అయితే రెండింటికీ ఒకే సంకేతం. C ఋణాత్మకం అయితే ఒకటి ధనం, మరొకటి ఋణం!",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Secret agent keypad: Two numbers unlock the door only if their product and sum match the codes on the door.",
+        "hi": "सीक्रेट एजेंट कीपैड: दो नंबर तभी दरवाजा खोलते हैं जब उनका गुणनफल और योग दरवाजे के कोड से मेल खाए।",
+        "te": "రహస్య కీప్యాడ్: రెండు సంఖ్యల లబ్దం మరియు మొత్తం సరైన కోడ్‌కు సరిపోలితేనే తలుపు తెరుచుకుంటుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Factorize: x² - 8x + 12",
+          "hi": "गुणनखंड कीजिए: x² - 8x + 12",
+          "te": "కారణాంకాలుగా మార్చండి: x² - 8x + 12",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Product is +12, sum is -8.",
+            "hi": "गुणनफल +12 है, योग -8 है।",
+            "te": "లబ్దం +12, మొత్తం -8.",
+            "reviewed": false
+          },
+          {
+            "en": "Since product is positive and sum is negative, both numbers must be negative.",
+            "hi": "चूंकि गुणनफल धनात्मक और योग ऋणात्मक है, दोनों संख्याएँ ऋणात्मक होनी चाहिए।",
+            "te": "లబ్దం ధనం, మొత్తం ఋణం కాబట్టి రెండు సంఖ్యలు ఋణాత్మకం కావాలి.",
+            "reviewed": false
+          },
+          {
+            "en": "Test factor pairs of 12: (-2) × (-6) = 12, and (-2) + (-6) = -8.",
+            "hi": "12 के गुणनखंड जोड़ियों की जाँच करें: (-2) × (-6) = 12, और (-2) + (-6) = -8।",
+            "te": "12 కారకాలను చూడండి: (-2) × (-6) = 12, మరియు (-2) + (-6) = -8.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "(x - 2)(x - 6)",
+          "hi": "(x - 2)(x - 6)",
+          "te": "(x - 2)(x - 6)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Always inspect the sign of the constant term first to determine whether factor signs are identical or opposite.",
+        "hi": "यह निर्धारित करने के लिए कि चिह्नों का स्वरूप समान है या विपरीत, हमेशा अचर पद का चिह्न पहले देखें।",
+        "te": "సంకేతాలు ఒకేలా ఉంటాయా లేక వేర్వేరుగా ఉంటాయా తెలుసుకోవడానికి ఎల్లప్పుడూ మొదట స్థిర పదం సంకేతాన్ని చూడండి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: The Middle-Term Splitting Algorithm",
+        "hi": "मानक दृष्टिकोण: मध्य पद विभाजन कलनविधि",
+        "te": "ప్రామాణిక విధానం: మధ్య పదం విభజన అల్గారిథమ్",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "To factor ax² + bx + c: Step 1: Calculate the product ac. Step 2: Find two integers p and q such that p · q = ac and p + q = b. Step 3: Rewrite the middle term bx as px + qx. Step 4: Factor by grouping the first two terms and the last two terms. Step 5: Extract the common binomial factor.",
+        "hi": "ax² + bx + c का गुणनखंड करने के लिए: चरण 1: ac की गणना करें। चरण 2: ऐसे दो पूर्णांक p और q ज्ञात करें कि p · q = ac और p + q = b हो। चरण 3: मध्य पद bx को px + qx के रूप में लिखें। चरण 4: पहले दो और अंतिम दो पदों का समूह बनाकर गुणनखंड करें। चरण 5: उभयनिष्ठ द्विपद बाहर निकालें।",
+        "te": "ax² + bx + c ని కారణాంకాలుగా మార్చడానికి: దశ 1: ac లబ్దాన్ని లెక్కించండి. దశ 2: p · q = ac మరియు p + q = b అయ్యే p, q లను కనుగొనండి. దశ 3: మధ్య పదం bx ని px + qx గా రాయండి. దశ 4: మొదటి రెండు, చివరి రెండు పదాల నుండి ఉమ్మడి పదాలను తీయండి. దశ 5: ఉమ్మడి ద్విపదాన్ని వేరు చేయండి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Factorize: x² - 3x - 10",
+          "hi": "गुणनखंड कीजिए: x² - 3x - 10",
+          "te": "కారణాంకాలుగా మార్చండి: x² - 3x - 10",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "ac = -10, b = -3.",
+            "hi": "ac = -10, b = -3।",
+            "te": "ac = -10, b = -3.",
+            "reviewed": false
+          },
+          {
+            "en": "Factors of -10 that add to -3 are -5 and +2: (-5)(2) = -10, (-5) + 2 = -3.",
+            "hi": "-10 के ऐसे गुणनखंड जिनका योग -3 हो: -5 और +2।",
+            "te": "-10 యొక్క కారకాలలో మొత్తం -3 అయ్యేవి: -5 మరియు +2.",
+            "reviewed": false
+          },
+          {
+            "en": "Split middle term: x² - 5x + 2x - 10 = x(x - 5) + 2(x - 5).",
+            "hi": "मध्य पद विभाजित करें: x(x - 5) + 2(x - 5)।",
+            "te": "మధ్య పదాన్ని విడదీస్తే: x(x - 5) + 2(x - 5).",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "(x - 5)(x + 2)",
+          "hi": "(x - 5)(x + 2)",
+          "te": "(x - 5)(x + 2)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Factoring quadratic expressions relies directly on integer multiplication and addition rules.",
+        "hi": "द्विघात व्यंजकों का गुणनखंडन सीधे पूर्णांक गुणन और योग नियमों पर निर्भर करता है।",
+        "te": "వర్గ సమాసాల కారణాంక విభజన నేరుగా పూర్ణ సంఖ్యల గుణకార, సంకలన సూత్రాలపై ఆధారపడి ఉంటుంది.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Sign Matrix for Middle Term Splitting",
+        "hi": "फास्ट-ट्रैक: मध्य पद विभाजन के लिए चिह्न मैट्रिक्स",
+        "te": "ఫాస్ట్-ట్రాక్: మధ్య పదం విభజన సంకేతాల మ్యాట్రిక్స్",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "1) If c > 0 and b > 0 => factors are (+, +). 2) If c > 0 and b < 0 => factors are (-, -). 3) If c < 0 and b > 0 => factors are (+, -) with larger magnitude positive. 4) If c < 0 and b < 0 => factors are (+, -) with larger magnitude negative.",
+        "hi": "1) यदि c > 0 और b > 0 => गुणनखंड (+, +)। 2) यदि c > 0 और b < 0 => गुणनखंड (-, -)। 3) यदि c < 0 और b > 0 => गुणनखंड (+, -) जिसमें बड़ा मान धनात्मक। 4) यदि c < 0 और b < 0 => गुणनखंड (+, -) जिसमें बड़ा मान ऋणात्मक।",
+        "te": "1) c > 0 మరియు b > 0 => కారకాలు (+, +). 2) c > 0 మరియు b < 0 => కారకాలు (-, -). 3) c < 0 మరియు b > 0 => కారకాలు (+, -), పెద్దది ధనాత్మకం. 4) c < 0 మరియు b < 0 => కారకాలు (+, -), పెద్దది ఋణాత్మకం.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What are the signs of factors for x² + 2x - 35?",
+          "hi": "x² + 2x - 35 के गुणनखंडों के चिह्न क्या होंगे?",
+          "te": "x² + 2x - 35 కారకాల సంకేతాలు ఏమిటి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "c = -35 (negative) => opposite signs.",
+            "hi": "c = -35 (ऋणात्मक) => विपरीत चिह्न।",
+            "te": "c = -35 (ఋణం) => వేర్వేరు సంకేతాలు.",
+            "reviewed": false
+          },
+          {
+            "en": "b = +2 (positive) => larger number is +7, smaller is -5.",
+            "hi": "b = +2 (धनात्मक) => बड़ी संख्या +7, छोटी -5।",
+            "te": "b = +2 (ధనం) => పెద్దది +7, చిన్నది -5.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "(x + 7)(x - 5)",
+          "hi": "(x + 7)(x - 5)",
+          "te": "(x + 7)(x - 5)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Constant sign determines like vs unlike; linear sign determines the dominant factor sign.",
+        "hi": "अचर का चिह्न समान बनाम विपरीत तय करता है; रैखिक का चिह्न बड़े गुणनखंड का चिह्न तय करता है।",
+        "te": "స్థిర పదం సంకేతం ఒకేలా ఉంటాయా లేదా అని నిర్ణయిస్తుంది; మధ్య పదం పెద్ద కారకం సంకేతాన్ని నిర్ణయిస్తుంది.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c10-quad-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Zero-Product Principle",
+        "hi": "बुनियादी दृष्टिकोण: शून्य-गुणनफल का सिद्धांत",
+        "te": "ప్రాథమిక విధానం: శూన్య-లబ్ద సూత్రం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "If I multiply two hidden numbers A and B together and tell you the result is zero (A × B = 0), what can you be 100% sure of? At least one of them MUST be zero! You cannot multiply two non-zero numbers to get zero. So if (x - 3)(x - 5) = 0, either x - 3 = 0 (which means x = 3) OR x - 5 = 0 (which means x = 5). Notice how the signs flip from the brackets to the roots!",
+        "hi": "यदि मैं दो अज्ञात संख्याओं A और B का गुणा करूँ और कहूँ कि उत्तर शून्य है (A × B = 0), तो आप क्या निष्कर्ष निकालेंगे? उनमें से कम से कम एक संख्या शून्य अवश्य होनी चाहिए! दो गैर-शून्य संख्याओं का गुणा कभी शून्य नहीं हो सकता। अतः यदि (x - 3)(x - 5) = 0 है, तो या तो x - 3 = 0 (x = 3) या x - 5 = 0 (x = 5)। ध्यान दें कि कोष्ठक से मूलों में चिह्न कैसे उलट जाते हैं!",
+        "te": "నేను రెండు రహస్య సంఖ్యలు A మరియు B లబ్దం సున్నా (A × B = 0) అని చెబితే, మీరు దేన్ని ఖచ్చితంగా చెప్పగలరు? వాటిలో కనీసం ఒక్కటైనా సున్నా కావాలి! రెండు సున్నాయేతర సంఖ్యలను గుణిస్తే సున్నా రాదు. కాబట్టి (x - 3)(x - 5) = 0 అయితే, x - 3 = 0 (అంటే x = 3) లేదా x - 5 = 0 (అంటే x = 5). బ్రాకెట్ నుండి మూలాలకు సంకేతాలు ఎలా మారతాయో గమనించండి!",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Two switches in series: If the circuit is broken (= 0), either switch 1 is open or switch 2 is open.",
+        "hi": "श्रृंखला में दो स्विच: यदि परिपथ टूटा हुआ है (= 0), तो या तो स्विच 1 खुला है या स्विच 2।",
+        "te": "రెండు స్విచ్‌లు: సర్క్యూట్ ఆగిపోతే (= 0), స్విచ్ 1 లేదా స్విచ్ 2 ఆఫ్‌లో ఉందని అర్థం.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Solve for x: (x + 4)(x - 9) = 0",
+          "hi": "x के लिए हल कीजिए: (x + 4)(x - 9) = 0",
+          "te": "x విలువను కనుగొనండి: (x + 4)(x - 9) = 0",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Set first factor to 0: x + 4 = 0 => x = -4.",
+            "hi": "पहला गुणनखंड 0 करें: x + 4 = 0 => x = -4।",
+            "te": "మొదటి పదాన్ని 0 కి సమానం చేయండి: x + 4 = 0 => x = -4.",
+            "reviewed": false
+          },
+          {
+            "en": "Set second factor to 0: x - 9 = 0 => x = 9.",
+            "hi": "दूसरा गुणनखंड 0 करें: x - 9 = 0 => x = 9।",
+            "te": "రెండవ పదాన్ని 0 కి సమానం చేయండి: x - 9 = 0 => x = 9.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = -4 or x = 9",
+          "hi": "x = -4 या x = 9",
+          "te": "x = -4 లేదా x = 9",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "A factor of (x - r) gives a root of x = +r; a factor of (x + r) gives a root of x = -r.",
+        "hi": "(x - r) गुणनखंड से मूल x = +r मिलता है; (x + r) गुणनखंड से मूल x = -r मिलता है।",
+        "te": "(x - r) కారణాంకం నుండి మూలం x = +r వస్తుంది; (x + r) కారణాంకం నుండి మూలం x = -r వస్తుంది.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Solving Quadratic Equations by Factoring",
+        "hi": "मानक दृष्टिकोण: गुणनखंडन विधि द्वारा द्विघात समीकरण हल करना",
+        "te": "ప్రామాణిక విధానం: కారణాంక పద్ధతిలో వర్గ సమీకరణాల సాధన",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Step 1: Write the equation in standard form ax² + bx + c = 0 (ensure RHS is strictly zero). Step 2: Factor the LHS completely using middle-term splitting. Step 3: Apply the Zero Product Property: AB = 0 implies A = 0 or B = 0. Step 4: Solve the resulting linear equations to obtain the two roots. Step 5: Verify solutions by substituting back into original equation.",
+        "hi": "चरण 1: समीकरण को मानक रूप ax² + bx + c = 0 में लिखें (दाएँ पक्ष को शून्य करें)। चरण 2: मध्य पद को विभाजित करके बाएँ पक्ष का गुणनखंड करें। चरण 3: शून्य-गुणनफल गुण लागू करें: AB = 0 से A = 0 या B = 0। चरण 4: दोनों रैखिक समीकरणों को हल करके दो मूल प्राप्त करें। चरण 5: मूल समीकरण में मान रखकर सत्यापन करें।",
+        "te": "దశ 1: సమీకరణాన్ని ప్రామాణిక రూపం ax² + bx + c = 0 లో రాయండి (RHS ఖచ్చితంగా 0 కావాలి). దశ 2: మధ్య పదం విభజన ద్వారా కారణాంకాలుగా మార్చండి. దశ 3: శూన్య-లబ్ద నియమాన్ని వర్తింపజేయండి: AB = 0 అయితే A = 0 లేదా B = 0. దశ 4: సరళ సమీకరణాలను సాధించి రెండు మూలాలను కనుగొనండి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Solve: x² - 5x = 6",
+          "hi": "हल कीजिए: x² - 5x = 6",
+          "te": "సాధించండి: x² - 5x = 6",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Set RHS to 0: x² - 5x - 6 = 0.",
+            "hi": "दाएँ पक्ष को 0 करें: x² - 5x - 6 = 0।",
+            "te": "కుడి వైపు 0 చేయండి: x² - 5x - 6 = 0.",
+            "reviewed": false
+          },
+          {
+            "en": "Factor LHS: (x - 6)(x + 1) = 0.",
+            "hi": "गुणनखंड करें: (x - 6)(x + 1) = 0।",
+            "te": "కారణాంకాలుగా మార్చండి: (x - 6)(x + 1) = 0.",
+            "reviewed": false
+          },
+          {
+            "en": "Solve linear equations: x = 6, x = -1.",
+            "hi": "हल करें: x = 6, x = -1।",
+            "te": "సాధనలు: x = 6, x = -1.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = 6, -1",
+          "hi": "x = 6, -1",
+          "te": "x = 6, -1",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Never attempt to factor before setting RHS equal to zero.",
+        "hi": "दाएँ पक्ष को शून्य किए बिना गुणनखंडन का प्रयास कभी न करें।",
+        "te": "కుడి వైపున సున్నా చేయకుండా ఎప్పుడూ కారణాంకాలు కట్టడానికి ప్రయత్నించవద్దు.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Root Inversion Warning",
+        "hi": "फास्ट-ट्रैक: मूल चिह्न परिवर्तन चेतावनी",
+        "te": "ఫాస్ట్-ట్రాక్: మూలాల సంకేత మార్పు హెచ్చరిక",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A common exam error is writing the factor numbers as the roots. If factors are (x - 4)(x + 7) = 0, roots are x = +4 and x = -7. The signs INVERT because x - r = 0 => x = r.",
+        "hi": "परीक्षा में सबसे आम गलती गुणनखंडों की संख्याओं को ही मूल मान लेना है। यदि गुणनखंड (x - 4)(x + 7) = 0 हैं, तो मूल x = +4 और x = -7 हैं। चिह्न उलट जाते हैं क्योंकि x - r = 0 से x = r मिलता है।",
+        "te": "పరీక్షల్లో విద్యార్థులు చేసే సాధారణ తప్పు బ్రాకెట్‌లోని సంఖ్యలనే నేరుగా మూలాలుగా రాయడం. (x - 4)(x + 7) = 0 అయితే, మూలాలు x = +4 మరియు x = -7 అవుతాయి. x - r = 0 నుండి x = r కాబట్టి సంకేతాలు మారుతాయి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Roots of (2x - 1)(x + 3) = 0?",
+          "hi": "(2x - 1)(x + 3) = 0 के मूल क्या हैं?",
+          "te": "(2x - 1)(x + 3) = 0 యొక్క మూలాలు ఏమిటి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "2x - 1 = 0 => x = 1/2.",
+            "hi": "2x - 1 = 0 => x = 1/2।",
+            "te": "2x - 1 = 0 => x = 1/2.",
+            "reviewed": false
+          },
+          {
+            "en": "x + 3 = 0 => x = -3.",
+            "hi": "x + 3 = 0 => x = -3।",
+            "te": "x + 3 = 0 => x = -3.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = 1/2, -3",
+          "hi": "x = 1/2, -3",
+          "te": "x = 1/2, -3",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Always isolate x: ax + b = 0 => x = -b/a.",
+        "hi": "सदैव x को अलग करें: ax + b = 0 => x = -b/a।",
+        "te": "ఎల్లప్పుడూ x ని వేరు చేయండి: ax + b = 0 => x = -b/a.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c10-quad-02",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Master Key Quadratic Formula",
+        "hi": "बुनियादी दृष्टिकोण: मास्टर कुंजी द्विघात सूत्र",
+        "te": "ప్రాథమిక విధానం: మాస్టర్ కీ వర్గ సూత్రం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "What if middle-term splitting doesn't work because the numbers are decimals or large? The Quadratic Formula is the master key that opens EVERY quadratic lock: x = (-b ± √(b² - 4ac)) / (2a). Before touching the square root, look inside at D = b² - 4ac (the Discriminant). If D > 0, you get two real roots. If D = 0, you get one repeated root. If D < 0, you cannot take the square root of a negative number, so there are NO real roots!",
+        "hi": "यदि संख्याएँ जटिल हों और मध्य पद विभाजन काम न करे तो? द्विघात सूत्र वह मास्टर कुंजी है जो प्रत्येक द्विघात समीकरण को हल करती है: x = (-b ± √(b² - 4ac)) / (2a)। वर्गमूल निकालने से पहले अंदर की संख्या D = b² - 4ac (विविक्तकर) को देखें। यदि D > 0, तो दो वास्तविक मूल मिलते हैं। यदि D = 0, तो एक दोहराया गया मूल। यदि D < 0, तो ऋणात्मक का वर्गमूल संभव नहीं, अतः कोई वास्तविक मूल नहीं!",
+        "te": "మధ్య పదం విభజన కష్టంగా ఉన్నప్పుడు ఏమి చేయాలి? వర్గ సూత్రం ప్రతి వర్గ సమీకరణాన్ని సాధించే మాస్టర్ కీ: x = (-b ± √(b² - 4ac)) / (2a). రూట్ తీయడానికి ముందు లోపల ఉన్న D = b² - 4ac (విచక్షణి) ని చూడండి. D > 0 అయితే రెండు వేర్వేరు వాస్తవ మూలాలు వస్తాయి. D = 0 అయితే రెండు సమాన మూలాలు. D < 0 అయితే ఋణ సంఖ్యకు వర్గమూలం ఉండదు కాబట్టి ఎటువంటి వాస్తవ మూలాలు ఉండవు!",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Traffic light for roots: Green (D > 0: two paths forward), Yellow (D = 0: one single path), Red (D < 0: stop, no real path).",
+        "hi": "मूलों के लिए ट्रैफिक लाइट: हरा (D > 0: दो वास्तविक रास्ते), पीला (D = 0: एक रास्ता), लाल (D < 0: रुकें, कोई वास्तविक रास्ता नहीं)।",
+        "te": "ట్రాఫిక్ లైట్: గ్రీన్ (D > 0: రెండు వాస్తవ మార్గాలు), ఎల్లో (D = 0: ఒకే మార్గం), రెడ్ (D < 0: ఆగండి, వాస్తవ మార్గం లేదు).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find D for x² - 4x + 4 = 0 and state the number of roots.",
+          "hi": "x² - 4x + 4 = 0 के लिए D निकालें और मूलों की संख्या बताएं।",
+          "te": "x² - 4x + 4 = 0 సమీకరణానికి D లెక్కించి మూలాల సంఖ్యను చెప్పండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "a = 1, b = -4, c = 4.",
+            "hi": "a = 1, b = -4, c = 4।",
+            "te": "a = 1, b = -4, c = 4.",
+            "reviewed": false
+          },
+          {
+            "en": "D = (-4)² - 4(1)(4) = 16 - 16 = 0.",
+            "hi": "D = (-4)² - 4(1)(4) = 16 - 16 = 0।",
+            "te": "D = (-4)² - 4(1)(4) = 16 - 16 = 0.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "D = 0, exactly one real root (two equal roots)",
+          "hi": "D = 0, ठीक एक वास्तविक मूल (दो बराबर मूल)",
+          "te": "D = 0, ఖచ్చితంగా ఒకే వాస్తవ మూలం (సమాన మూలాలు)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "The discriminant D = b² - 4ac reveals the nature of the roots before solving.",
+        "hi": "विविक्तकर D = b² - 4ac हल करने से पहले ही मूलों की प्रकृति बता देता है।",
+        "te": "విచక్షణి D = b² - 4ac సమీకరణాన్ని సాధించకముందే మూలాల స్వభావాన్ని తెలియజేస్తుంది.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Precise Evaluation of the Quadratic Formula",
+        "hi": "मानक दृष्टिकोण: द्विघात सूत्र का सटीक मूल्यांकन",
+        "te": "ప్రామాణిక విధానం: వర్గ సూత్రం యొక్క ఖచ్చితమైన గణన",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "For standard form ax² + bx + c = 0 with a ≠ 0: x = (-b ± √(b² - 4ac)) / (2a). Three critical sign traps to avoid: Trap 1: b² is ALWAYS non-negative. E.g., if b = -6, b² = (-6)² = +36. Never write -36! Trap 2: -b flips the sign of b. If b = -6, then -b = -(-6) = +6. Trap 3: -4ac becomes positive when c is negative. E.g., -4(1)(-7) = +28.",
+        "hi": "मानक रूप ax² + bx + c = 0 के लिए: x = (-b ± √(b² - 4ac)) / (2a)। तीन महत्वपूर्ण चिह्न सावधानियां: सावधानी 1: b² सदैव धनात्मक होता है। यदि b = -6, तो b² = +36। सावधानी 2: -b चिह्न को उलट देता है: -(-6) = +6। सावधानी 3: यदि c ऋणात्मक है, तो -4ac धनात्मक बन जाता है: -4(1)(-7) = +28।",
+        "te": "ప్రామాణిక రూపం ax² + bx + c = 0 కొరకు: x = (-b ± √(b² - 4ac)) / (2a). మూడు ముఖ్యమైన సంకేత జాగ్రత్తలు: జాగ్రత్త 1: b² ఎల్లప్పుడూ ధనాత్మకం. b = -6 అయితే b² = (-6)² = +36. జాగ్రత్త 2: -b అనేది b సంకేతాన్ని మారుస్తుంది: -(-6) = +6. జాగ్రత్త 3: c ఋణాత్మకం అయితే -4ac ధనాత్మకంగా మారుతుంది: -4(1)(-7) = +28.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Solve x² - 6x - 7 = 0 using the quadratic formula.",
+          "hi": "द्विघात सूत्र का उपयोग करके x² - 6x - 7 = 0 को हल कीजिए।",
+          "te": "వర్గ సూత్రాన్ని ఉపయోగించి x² - 6x - 7 = 0 ని సాధించండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "a = 1, b = -6, c = -7.",
+            "hi": "a = 1, b = -6, c = -7।",
+            "te": "a = 1, b = -6, c = -7.",
+            "reviewed": false
+          },
+          {
+            "en": "D = (-6)² - 4(1)(-7) = 36 + 28 = 64.",
+            "hi": "D = (-6)² - 4(1)(-7) = 36 + 28 = 64।",
+            "te": "D = (-6)² - 4(1)(-7) = 36 + 28 = 64.",
+            "reviewed": false
+          },
+          {
+            "en": "√64 = 8.",
+            "hi": "√64 = 8।",
+            "te": "√64 = 8.",
+            "reviewed": false
+          },
+          {
+            "en": "x = (-(-6) ± 8) / (2 · 1) = (6 ± 8) / 2.",
+            "hi": "x = (6 ± 8) / 2।",
+            "te": "x = (6 ± 8) / 2.",
+            "reviewed": false
+          },
+          {
+            "en": "x = 14/2 = 7 and x = -2/2 = -1.",
+            "hi": "x = 7 और x = -1।",
+            "te": "x = 7 మరియు x = -1.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = 7, -1",
+          "hi": "x = 7, -1",
+          "te": "x = 7, -1",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Always compute D separately first before taking square root and dividing by 2a.",
+        "hi": "वर्गमूल लेने और 2a से भाग देने से पहले हमेशा D की गणना अलग से करें।",
+        "te": "రూట్ తీసి 2a తో భాగించడానికి ముందు ఎల్లప్పుడూ D ని విడిగా లెక్కించండి.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Discriminant Roots Summary",
+        "hi": "फास्ट-ट्रैक: विविक्तकर मूल सारांश",
+        "te": "ఫాస్ట్-ట్రాక్: విచక్షణి మూలాల సారాంశం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "D > 0: Two distinct real roots. D = 0: Two equal real roots (-b/2a). D < 0: No real roots. If D is a perfect square, roots are rational.",
+        "hi": "D > 0: दो भिन्न वास्तविक मूल। D = 0: दो समान वास्तविक मूल (-b/2a)। D < 0: कोई वास्तविक मूल नहीं। यदि D पूर्ण वर्ग है, तो मूल परिमेय होंगे।",
+        "te": "D > 0: రెండు వేర్వేరు వాస్తవ మూలాలు. D = 0: రెండు సమాన వాస్తవ మూలాలు (-b/2a). D < 0: వాస్తవ మూలాలు లేవు. D ఖచ్చిత వర్గం అయితే మూలాలు అకరణీయాలు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What type of roots does 2x² - 4x + 3 = 0 have?",
+          "hi": "2x² - 4x + 3 = 0 के मूलों का प्रकार क्या है?",
+          "te": "2x² - 4x + 3 = 0 కి ఎలాంటి మూలాలు ఉంటాయి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "D = (-4)² - 4(2)(3) = 16 - 24 = -8 < 0.",
+            "hi": "D = 16 - 24 = -8 < 0।",
+            "te": "D = 16 - 24 = -8 < 0.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "No real roots",
+          "hi": "कोई वास्तविक मूल नहीं",
+          "te": "వాస్తవ మూలాలు లేవు",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Negative under square root = no real solutions.",
+        "hi": "वर्गमूल के अंदर ऋणात्मक = कोई वास्तविक हल नहीं।",
+        "te": "వర్గమూలంలో ఋణ సంఖ్య = వాస్తవ సాధనలు ఉండవు.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c6-pat-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Discovering Sequences and Step Rules",
+        "hi": "बुनियादी दृष्टिकोण: अनुक्रम और चरण नियमों की खोज",
+        "te": "ప్రాథమిక విధానం: శ్రేణులు మరియు క్రమ నియమాల ఆవిష్కరణ",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A pattern is an arrangement of numbers or shapes that follows a fixed, predictable rule. When looking at numbers in a line, find what happens as you jump from one number to the next: are you adding the same number every time?",
+        "hi": "एक पैटर्न संख्याओं या आकृतियों की एक ऐसी व्यवस्था है जो एक निश्चित नियम का पालन करती है। जब आप एक पंक्ति में संख्याओं को देखते हैं, तो देखें कि एक संख्या से अगली संख्या पर जाने पर क्या होता है: क्या आप हर बार समान संख्या जोड़ रहे हैं?",
+        "te": "నమూనా (ప్యాటర్న్) అనేది ఒక నిర్దిష్టమైన నియమాన్ని అనుసరించే సంఖ్యలు లేదా ఆకారాల అమరిక. వరుస సంఖ్యలను పరిశీలించినప్పుడు, ఒక సంఖ్య నుండి తర్వాతి సంఖ్యకు వెళ్లేందుకు ప్రతిసారీ ఎంత కలుపుతున్నారో గమనించండి.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Stepping stones on a garden path spaced equally 3 feet apart: stone 1 is at 4 ft, stone 2 at 7 ft, stone 3 at 10 ft.",
+        "hi": "बगीचे के रास्ते पर 3 फीट की दूरी पर रखे पत्थर: पत्थर 1 (4 फीट), पत्थर 2 (7 फीट), पत्थर 3 (10 फीट)।",
+        "te": "తోటలో 3 అడుగుల సమాన దూరంలో ఉన్న రాళ్ళు: 1వ రాయి (4 అడుగులు), 2వ రాయి (7 అడుగులు), 3వ రాయి (10 అడుగులు).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the next term in the sequence: 5, 9, 13, 17, __?",
+          "hi": "अनुक्रम 5, 9, 13, 17, __ में अगला पद ज्ञात कीजिए।",
+          "te": "5, 9, 13, 17, __ శ్రేణిలో తర్వాతి పదాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Subtract the first term from the second: 9 - 5 = 4.",
+            "hi": "दूसरे पद में से पहला पद घटाएं: 9 - 5 = 4।",
+            "te": "రెండో పదం నుండి మొదటి పదాన్ని తీసివేయండి: 9 - 5 = 4.",
+            "reviewed": false
+          },
+          {
+            "en": "Check the next step: 13 - 9 = 4 and 17 - 13 = 4. The rule is '+4'.",
+            "hi": "अगले चरण की जाँच करें: 13 - 9 = 4 और 17 - 13 = 4। नियम है '+4'।",
+            "te": "తర్వాతి దశను సరిచూడండి: 13 - 9 = 4 మరియు 17 - 13 = 4. నియమం '+4'.",
+            "reviewed": false
+          },
+          {
+            "en": "Add 4 to 17: 17 + 4 = 21.",
+            "hi": "17 में 4 जोड़ें: 17 + 4 = 21।",
+            "te": "17 కి 4 కలపండి: 17 + 4 = 21.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Identifying the difference between consecutive numbers reveals the constant step rule.",
+        "hi": "लगातार संख्याओं के बीच के अंतर की पहचान करने से स्थिर चरण नियम का पता चलता है।",
+        "te": "వరుస సంఖ్యల మధ్య తేడాను గుర్తించడం ద్వారా నియమాన్ని సులభంగా కనుగొనవచ్చు.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Generalizing Matchstick and Geometric Patterns",
+        "hi": "मानक दृष्टिकोण: तीलियों और ज्यामितीय पैटर्न का सामान्यीकरण",
+        "te": "ప్రామాణిక విధానం: అగ్గిపుల్లల మరియు రేఖాగణిత నమూనాల సాధారణీకరణ",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "When geometric figures are built sequentially, the total number of parts often forms an arithmetic sequence. For example, making 1 square with matchsticks takes 4 sticks. Adding a connected square shares one side, requiring 3 more sticks. For n connected squares, the rule is 3n + 1 sticks.",
+        "hi": "जब ज्यामितीय आकृतियाँ क्रमिक रूप से बनाई जाती हैं, तो भागों की कुल संख्या एक अंकगणितीय अनुक्रम बनाती है। उदाहरण के लिए, तीलियों से 1 वर्ग बनाने में 4 तीलियाँ लगती हैं। जुड़े हुए दूसरे वर्ग के लिए 3 और तीलियाँ चाहिए। n जुड़े हुए वर्गों के लिए नियम 3n + 1 है।",
+        "te": "జ్యామితీయ ఆకారాలను వరుసగా నిర్మించినప్పుడు, వాటి భాగాల సంఖ్య ఒక క్రమాన్ని ఏర్పరుస్తుంది. ఉదాహరణకు, అగ్గిపుల్లలతో 1 చతురస్రం చేయడానికి 4 పుల్లలు అవసరం. పక్కనే మరొక చతురస్రం కలపడానికి 3 పుల్లలు చాలు. n చతురస్రాలకు అవసరమైన పుల్లల సూత్రం 3n + 1.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "How many matchsticks are needed to form 5 connected squares using the rule S = 3n + 1?",
+          "hi": "नियम S = 3n + 1 का उपयोग करके 5 जुड़े हुए वर्ग बनाने के लिए कितनी तीलियों की आवश्यकता है?",
+          "te": "S = 3n + 1 సూత్రాన్ని ఉపయోగించి 5 కలిపిన చతురస్రాలను రూపొందించడానికి ఎన్ని అగ్గిపుల్లలు కావాలి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Identify n = 5 (the number of squares to construct).",
+            "hi": "पहचानें कि n = 5 (बनाए जाने वाले वर्गों की संख्या)।",
+            "te": "n = 5 (నిర్మించాల్సిన చతురస్రాల సంఖ్య) అని గుర్తించండి.",
+            "reviewed": false
+          },
+          {
+            "en": "Substitute n = 5 into the formula: 3 × 5 + 1.",
+            "hi": "सूत्र में n = 5 रखें: 3 × 5 + 1।",
+            "te": "సూత్రంలో n = 5 ని ప్రతిక్షేపించండి: 3 × 5 + 1.",
+            "reviewed": false
+          },
+          {
+            "en": "Calculate: 15 + 1 = 16 sticks.",
+            "hi": "गणना करें: 15 + 1 = 16 तीलियाँ।",
+            "te": "లెక్కించండి: 15 + 1 = 16 పుల్లలు.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "16 matchsticks",
+          "hi": "16 तीलियाँ",
+          "te": "16 అగ్గిపుల్లలు",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "An algebraic pattern formula allows us to compute the value for any position without drawing every step.",
+        "hi": "एक बीजीय पैटर्न सूत्र हमें प्रत्येक चरण को बनाए बिना किसी भी पद का मान ज्ञात करने की अनुमति देता है।",
+        "te": "బీజగణిత సూత్రం ద్వారా ప్రతి దశను గీయకుండానే ఏ స్థానంలోని విలువనైనా లెక్కించవచ్చు.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Linear Term Formula (dn + c)",
+        "hi": "फास्ट-ट्रैक: रैखिक पद सूत्र (dn + c)",
+        "te": "ఫాస్ట్-ట్రాక్: రేఖీయ పద సూత్రం (dn + c)",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "For any sequence with constant common difference d, the nth term is given by T(n) = dn + (first_term - d). If d = 3 and T(1) = 4, then T(n) = 3n + 1.",
+        "hi": "समान अंतर d वाले किसी भी अनुक्रम के लिए, nवाँ पद T(n) = dn + (पहला पद - d) होता है। यदि d = 3 और T(1) = 4 है, तो T(n) = 3n + 1।",
+        "te": "స్థిరమైన ఉమ్మడి భేదం d కలిగిన శ్రేణిలో nవ పదం T(n) = dn + (మొదటి పదం - d). d = 3 మరియు T(1) = 4 అయితే, T(n) = 3n + 1.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the 10th term of the sequence: 4, 7, 10, 13, ...",
+          "hi": "अनुक्रम 4, 7, 10, 13, ... का 10वाँ पद ज्ञात कीजिए।",
+          "te": "4, 7, 10, 13, ... శ్రేణి యొక్క 10వ పదాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Common difference d = 3; rule is 3n + 1.",
+            "hi": "सार्व अंतर d = 3; नियम 3n + 1 है।",
+            "te": "ఉమ్మడి భేదం d = 3; సూత్రం 3n + 1.",
+            "reviewed": false
+          },
+          {
+            "en": "For n = 10: 3(10) + 1 = 30 + 1 = 31.",
+            "hi": "n = 10 के लिए: 3(10) + 1 = 30 + 1 = 31।",
+            "te": "n = 10 కోసం: 3(10) + 1 = 30 + 1 = 31.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "31",
+          "hi": "31",
+          "te": "31",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Direct substitution into the nth term formula computes distant terms instantly.",
+        "hi": "nवें पद के सूत्र में सीधा मान रखने से दूर के पद तुरंत प्राप्त हो जाते हैं।",
+        "te": "nవ పద సూత్రంలో నేరుగా ప్రతిక్షేపించడం ద్వారా దూరపు పదాలను క్షణాల్లో కనుగొనవచ్చు.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c6-geo-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Points, Lines, Rays, and Angles",
+        "hi": "बुनियादी दृष्टिकोण: बिंदु, रेखाएं, किरणें और कोण",
+        "te": "ప్రాథమిక విధానం: బిందువులు, రేఖలు, కిరణాలు మరియు కోణాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A line segment has two fixed end points. A ray starts at one point and goes forever in one direction. A line extends endlessly in both directions. When two rays share a common starting point (called the vertex), they form an angle.",
+        "hi": "एक रेखाखंड के दो निश्चित अंत बिंदु होते हैं। एक किरण एक बिंदु से शुरू होकर एक दिशा में अनिश्चित काल तक जाती है। एक रेखा दोनों दिशाओं में अंतहीन रूप से फैली होती है। जब दो किरणें एक ही उभयनिष्ठ प्रारंभिक बिंदु (शीर्ष) से निकलती हैं, तो वे एक कोण बनाती हैं।",
+        "te": "రేఖాఖండానికి రెండు చివరి బిందువులు ఉంటాయి. కిరణం ఒక బిందువు వద్ద ప్రారంభమై ఒకే దిశలో అనంతంగా సాగుతుంది. సరళరేఖ రెండు వైపులా అనంతంగా విస్తరిస్తుంది. రెండు కిరణాలు ఒకే శీర్షం వద్ద కలిసినప్పుడు కోణం ఏర్పడుతుంది.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Opening a pair of scissors or a book creates an angle at the hinge. An open book with perpendicular pages forms a 90° right angle.",
+        "hi": "कैंची या किताब खोलने पर कब्जे पर एक कोण बनता है। लंबवत पन्नों वाली खुली किताब 90° का समकोण बनाती है।",
+        "te": "కత్తెర లేదా పుస్తకాన్ని తెరిచినప్పుడు కీలు వద్ద కోణం ఏర్పడుతుంది. లంబంగా తెరిచిన పుస్తకం 90° లంబ కోణాన్ని చూపుతుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "An angle measures 65°. Is it acute, right, obtuse, or straight?",
+          "hi": "एक कोण का माप 65° है। यह न्यूनकोण, समकोण, अधिककोण या ऋजुकोण में से क्या है?",
+          "te": "ఒక కోణం కొలత 65°. ఇది అల్పకోణమా, లంబకోణమా, అధికకోణమా లేదా సరళకోణమా?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Recall: An acute angle is strictly between 0° and 90°.",
+            "hi": "याद रखें: न्यूनकोण 0° और 90° के बीच होता है।",
+            "te": "గుర్తుచేసుకోండి: అల్పకోణం 0° మరియు 90° ల మధ్య ఉంటుంది.",
+            "reviewed": false
+          },
+          {
+            "en": "65° is greater than 0° and less than 90°.",
+            "hi": "65° का मान 0° से अधिक और 90° से कम है।",
+            "te": "65° అనేది 0° కంటే ఎక్కువ మరియు 90° కంటే తక్కువ.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "Acute angle",
+          "hi": "न्यूनकोण",
+          "te": "అల్పకోణం",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Angles less than 90° are acute; exactly 90° is a right angle; between 90° and 180° is obtuse.",
+        "hi": "90° से छोटे कोण न्यूनकोण होते हैं; 90° समकोण होता है; 90° और 180° के बीच अधिककोण होता है।",
+        "te": "90° కంటే తక్కువ ఉంటే అల్పకోణం; సరిగ్గా 90° ఉంటే లంబకోణం; 90° మరియు 180° మధ్య ఉంటే అధికకోణం.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Measuring and Classifying Angles",
+        "hi": "मानक दृष्टिकोण: कोणों को मापना और उनका वर्गीकरण",
+        "te": "ప్రామాణిక విధానం: కోణాల కొలత మరియు వర్గీకరణ",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Angles are measured in degrees (°). A complete revolution is 360°. A straight line forms a straight angle of 180°. Two angles are called complementary if their sum is 90°, and supplementary if their sum is 180°.",
+        "hi": "कोणों को डिग्री (°) में मापा जाता है। एक पूरा चक्कर 360° का होता है। एक सीधी रेखा 180° का ऋजुकोण बनाती है। यदि दो कोणों का योग 90° हो तो वे पूरक कोण कहलाते हैं, और यदि योग 180° हो तो वे संपूरक कोण कहलाते हैं।",
+        "te": "కోణాలను డిగ్రీలలో (°) కొలుస్తారు. ఒక పూర్తి భ్రమణం 360°. సరళరేఖ 180° సరళ కోణాన్ని ఏర్పరుస్తుంది. రెండు కోణాల మొత్తం 90° అయితే అవి పూరక కోణాలు, 180° అయితే సంపూరక కోణాలు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the supplement of an angle measuring 115°.",
+          "hi": "115° माप वाले कोण का संपूरक कोण ज्ञात कीजिए।",
+          "te": "115° కోణం యొక్క సంపూరక కోణాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Supplementary angles sum to 180°.",
+            "hi": "संपूरक कोणों का योग 180° होता है।",
+            "te": "సంపూరక కోణాల మొత్తం 180°.",
+            "reviewed": false
+          },
+          {
+            "en": "Subtract 115° from 180°: 180° - 115° = 65°.",
+            "hi": "180° में से 115° घटाएं: 180° - 115° = 65°।",
+            "te": "180° నుండి 115° తీసివేయండి: 180° - 115° = 65°.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "65°",
+          "hi": "65°",
+          "te": "65°",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Supplementary angles add up to 180°, forming a straight line pair.",
+        "hi": "संपूरक कोणों का योग 180° होता है, जो एक सरल रेखीय युग्म बनाते हैं।",
+        "te": "సంపూరక కోణాల మొత్తం 180° అవుతుంది, ఇవి సరళరేఖపై ఉంటాయి.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Angle Pairs and Intersecting Lines",
+        "hi": "फास्ट-ट्रैक: कोण युग्म और प्रतिच्छेदी रेखाएं",
+        "te": "ఫాస్ట్-ట్రాక్: కోణాల జతలు మరియు ఖండన రేఖలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "When two straight lines intersect, they form two pairs of vertically opposite angles, which are always equal. Adjacent angles on a straight line are supplementary (sum = 180°).",
+        "hi": "जब दो सीधी रेखाएं प्रतिच्छेद करती हैं, तो शीर्षाभिमुख कोणों के दो युग्म बनते हैं, जो हमेशा बराबर होते हैं। एक सरल रेखा पर बने आसन्न कोणों का योग 180° होता है।",
+        "te": "రెండు సరళరేఖలు ఖండించుకున్నప్పుడు శీర్షాభిముఖ కోణాలు సమానంగా ఉంటాయి. సరళరేఖపై ఉన్న ఆసన్న కోణాల మొత్తం 180°.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Two intersecting lines form an angle of 70°. What is the measure of the vertically opposite angle?",
+          "hi": "दो प्रतिच्छेदी रेखाएं 70° का एक कोण बनाती हैं। उसके शीर्षाभिमुख कोण का माप क्या है?",
+          "te": "రెండు ఖండన రేఖలు ఒక కోణాన్ని 70° గా ఏర్పరిస్తే, దాని శీర్షాభిముఖ కోణం ఎంత?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Vertically opposite angles are equal.",
+            "hi": "शीर्षाभिमुख कोण सदैव बराबर होते हैं।",
+            "te": "శీర్షాభిముఖ కోణాలు సమానంగా ఉంటాయి.",
+            "reviewed": false
+          },
+          {
+            "en": "Therefore, the vertically opposite angle is also 70°.",
+            "hi": "अतः शीर्षाभिमुख कोण भी 70° होगा।",
+            "te": "కాబట్టి ఎదురుగా ఉండే శీర్షాభిముఖ కోణం కూడా 70° అవుతుంది.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "70°",
+          "hi": "70°",
+          "te": "70°",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Vertically opposite angles are identical; linear pair angles sum to 180°.",
+        "hi": "शीर्षाभिमुख कोण समान होते हैं; रेखीय युग्म कोणों का योग 180° होता है।",
+        "te": "శీర్షాభిముఖ కోణాలు సమానం; సరళ జత కోణాల మొత్తం 180°.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c7-num-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Understanding Large Numbers and Place Value",
+        "hi": "बुनियादी दृष्टिकोण: बड़ी संख्याओं और स्थानीय मान को समझना",
+        "te": "ప్రాథమిక విధానం: పెద్ద సంఖ్యలు మరియు స్థాన విలువల అవగాహన",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Large numbers help us measure populations, distances between planets, and national budgets. Each digit in a number has a place value determined by its position. Every step to the left multiplies the place value by 10.",
+        "hi": "बड़ी संख्याएँ हमें जनसंख्या, ग्रहों के बीच की दूरी और राष्ट्रीय बजट मापने में मदद करती हैं। किसी संख्या में प्रत्येक अंक का एक स्थानीय मान होता है। बाईं ओर प्रत्येक कदम स्थानीय मान को 10 गुना बढ़ा देता है।",
+        "te": "జనాభా, గ్రహాల మధ్య దూరాలు మరియు ప్రభుత్వ బడ్జెట్లను లెక్కించడానికి పెద్ద సంఖ్యలు సహాయపడతాయి. స్థానాన్ని బట్టి ప్రతి అంకెకు స్థాన విలువ ఉంటుంది. ఎడమవైపుకు వెళ్లే కొద్దీ స్థాన విలువ 10 రెట్లు పెరుగుతుంది.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Currency denominations: ten ₹10 notes make ₹100; ten ₹100 notes make ₹1,000; one hundred ₹1,000 makes ₹1,00,000 (1 Lakh).",
+        "hi": "मुद्रा नोट: दस ₹10 के नोट ₹100 बनाते हैं; दस ₹100 के नोट ₹1,000 बनाते हैं; सौ ₹1,000 के नोट ₹1,00,000 (1 लाख) बनाते हैं।",
+        "te": "కరెన్సీ నోట్లు: పది ₹10 నోట్లు ₹100 అవుతాయి; పది ₹100 నోట్లు ₹1,000 అవుతాయి; వంద ₹1,000 నోట్లు ₹1,00,000 (1 లక్ష) అవుతాయి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "How many thousands make 1 Lakh?",
+          "hi": "1 लाख में कितने हजार होते हैं?",
+          "te": "1 లక్షలో ఎన్ని వేలు ఉంటాయి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "1 Lakh = 1,00,000.",
+            "hi": "1 लाख = 1,00,000।",
+            "te": "1 లక్ష = 1,00,000.",
+            "reviewed": false
+          },
+          {
+            "en": "1 Thousand = 1,000.",
+            "hi": "1 हजार = 1,000।",
+            "te": "1 వేయి = 1,000.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide: 1,00,000 / 1,000 = 100.",
+            "hi": "भाग दें: 1,00,000 / 1,000 = 100।",
+            "te": "భాగించండి: 1,00,000 / 1,000 = 100.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "100 thousands",
+          "hi": "100 हजार",
+          "te": "100 వేలు",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "1 Lakh has 5 zeroes (1,00,000) and equals 100 thousands.",
+        "hi": "1 लाख में 5 शून्य होते हैं (1,00,000) और यह 100 हजार के बराबर होता है।",
+        "te": "1 లక్షలో 5 సున్నాలు ఉంటాయి (1,00,000), ఇది 100 వేలకు సమానం.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Indian vs International Place Value Systems",
+        "hi": "मानक दृष्टिकोण: भारतीय बनाम अंतर्राष्ट्रीय स्थानीय मान प्रणाली",
+        "te": "ప్రామాణిక విధానం: భారతీయ మరియు అంతర్జాతీయ సంఖ్యా మానాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "In the Indian system, commas are placed after the hundreds period (3 digits), and then after every 2 digits (Lakhs, Crores): e.g. 12,34,567. In the International system, commas are placed after every 3 digits (Thousands, Millions, Billions): e.g. 1,234,567. 1 Million equals 10 Lakhs, and 1 Crore equals 10 Millions.",
+        "hi": "भारतीय प्रणाली में अल्पविराम पहले 3 अंकों (सैकड़ा) के बाद, फिर प्रत्येक 2 अंकों (लाख, करोड़) के बाद आता है: जैसे 12,34,567। अंतर्राष्ट्रीय प्रणाली में प्रत्येक 3 अंकों (हजार, मिलियन) के बाद अल्पविराम आता है: जैसे 1,234,567। 1 मिलियन = 10 लाख और 1 करोड़ = 10 मिलियन।",
+        "te": "భారతీయ విధానంలో మొదటి కామా 3 అంకెల తర్వాత, ఆపై ప్రతి 2 అంకెలకి వస్తుంది: ఉదా 12,34,567. అంతర్జాతీయ విధానంలో ప్రతి 3 అంకెలకి కామా వస్తుంది: ఉదా 1,234,567. 1 మిలియన్ = 10 లక్షలు, 1 కోటి = 10 మిలియన్లు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Convert 50 Million into the Indian numeral system (Crores/Lakhs).",
+          "hi": "50 मिलियन को भारतीय संख्या प्रणाली (करोड़/लाख) में बदलिए।",
+          "te": "50 మిలియన్లను భారతీయ సంఖ్యా మానంలోకి (కోట్లు/లక్షలు) మార్చండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "10 Million = 1 Crore.",
+            "hi": "10 मिलियन = 1 करोड़।",
+            "te": "10 మిలియన్లు = 1 కోటి.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide 50 Million by 10: 50 / 10 = 5 Crores.",
+            "hi": "50 मिलियन को 10 से भाग दें: 50 / 10 = 5 करोड़।",
+            "te": "50 మిలియన్లను 10 తో భాగించండి: 50 / 10 = 5 కోట్లు.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "5 Crores",
+          "hi": "5 करोड़",
+          "te": "5 కోట్లు",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "1 Million = 10 Lakhs (10⁶) and 10 Millions = 1 Crore (10⁷).",
+        "hi": "1 मिलियन = 10 लाख (10⁶) और 10 मिलियन = 1 करोड़ (10⁷)।",
+        "te": "1 మిలియన్ = 10 లక్షలు (10⁶) మరియు 10 మిలియన్లు = 1 కోటి (10⁷).",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Powers of 10 and Scientific Notation",
+        "hi": "फास्ट-ट्रैक: 10 की घातें और मानक वैज्ञानिक रूप",
+        "te": "ఫాస్ట్-ట్రాక్: 10 యొక్క ఘాతాలు మరియు శాస్త్రీయ సంకేతం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Very large numbers are compactly written as m × 10ᵏ, where 1 ≤ m < 10 and k is an integer. 1 Crore = 10,000,000 = 10⁷. The population of India (approx. 1.4 billion) is 1.4 × 10⁹.",
+        "hi": "अत्यधिक बड़ी संख्याओं को m × 10ᵏ के रूप में संक्षेप में लिखा जाता है, जहाँ 1 ≤ m < 10। 1 करोड़ = 10⁷। भारत की जनसंख्या (लगभग 1.4 अरब) 1.4 × 10⁹ है।",
+        "te": "చాలా పెద్ద సంఖ్యలను m × 10ᵏ రూపంలో సూచిస్తారు, ఇక్కడ 1 ≤ m < 10. 1 కోటి = 10⁷. భారతదేశ జనాభా (సుమారు 140 కోట్లు) 1.4 × 10⁹.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Express 75,000,000 in standard scientific form.",
+          "hi": "75,000,000 को मानक वैज्ञानिक रूप में व्यक्त कीजिए।",
+          "te": "75,000,000 ను ప్రామాణిక శాస్త్రీయ రూపంలో రాయండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Place decimal point after first non-zero digit: 7.5.",
+            "hi": "पहले गैर-शून्य अंक के बाद दशमलव बिंदु लगाएं: 7.5।",
+            "te": "మొదటి సున్నాయేతర అంకె తర్వాత దశాంశ బిందువును ఉంచండి: 7.5.",
+            "reviewed": false
+          },
+          {
+            "en": "Count places moved from the right: 7 decimal places.",
+            "hi": "दाएं से खिसकाए गए स्थानों की गिनती करें: 7 स्थान।",
+            "te": "కుడి నుండి జరిపిన స్థానాలను లెక్కించండి: 7 స్థానాలు.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "7.5 × 10⁷",
+          "hi": "7.5 × 10⁷",
+          "te": "7.5 × 10⁷",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Moving the decimal left counts positive powers of 10.",
+        "hi": "दशमलव को बाईं ओर ले जाने पर 10 की धनात्मक घात बढ़ती है।",
+        "te": "దశాంశ బిందువును ఎడమవైపు జరిపినప్పుడు 10 యొక్క ధన ఘాతాలు వస్తాయి.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c7-alg-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Order of Operations (BODMAS)",
+        "hi": "बुनियादी दृष्टिकोण: संक्रियाओं का क्रम (BODMAS)",
+        "te": "ప్రాథమిక విధానం: పరిక్రియల క్రమం (BODMAS)",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "When a calculation has more than one operation (+, -, ×, ÷), we must follow an agreed rule so everyone gets the same answer. The rule is BODMAS: Brackets first, then Orders (powers), then Division & Multiplication (left to right), and finally Addition & Subtraction (left to right).",
+        "hi": "जब किसी गणना में एक से अधिक संक्रियाएँ (+, -, ×, ÷) होती हैं, तो हमें एक निश्चित नियम का पालन करना होता है ताकि सभी का उत्तर समान आए। यह नियम BODMAS है: पहले कोष्ठक (Brackets), फिर घात (Orders), फिर भाग और गुणा, अंत में जोड़ और घटाव।",
+        "te": "ఒక లెక్కలో ఒకటి కంటే ఎక్కువ గుర్తులు (+, -, ×, ÷) ఉన్నప్పుడు, అందరికీ ఒకే సమాధానం రావడానికి BODMAS నియమాన్ని పాటిస్తాం: బ్రాకెట్లు మొదట, తర్వాత ఘాతాలు, భాగహారం & గుణకారం, చివరగా సంకలనం & వ్యవకలనం.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Traffic priority rules: emergency vehicles (brackets) go first, then highway traffic (multiplication/division), then side streets (addition/subtraction).",
+        "hi": "यातायात नियम: एम्बुलेंस (कोष्ठक) पहले जाएगी, फिर मुख्य सड़क का ट्रैफिक (गुणा/भाग), फिर साइड की सड़कें (जोड़/घटाव)।",
+        "te": "ట్రాఫిక్ నియమం: అంబులెన్స్ (బ్రాకెట్లు) మొదట వెళ్తుంది, తర్వాత ప్రధాన రహదారి వాహనాలు (గుణకారం/భాగహారం), చివరగా చిన్న వీధులు (కూడిక/తీసివేత).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Evaluate: 18 - 3 × 4 + 2",
+          "hi": "मान ज्ञात कीजिए: 18 - 3 × 4 + 2",
+          "te": "విలువను కనుగొనండి: 18 - 3 × 4 + 2",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Perform multiplication first: 3 × 4 = 12.",
+            "hi": "पहले गुणा करें: 3 × 4 = 12।",
+            "te": "ముందుగా గుణకారం చేయండి: 3 × 4 = 12.",
+            "reviewed": false
+          },
+          {
+            "en": "Substitute back: 18 - 12 + 2.",
+            "hi": "व्यंजक में रखें: 18 - 12 + 2।",
+            "te": "తిరిగి ప్రతిక్షేపించండి: 18 - 12 + 2.",
+            "reviewed": false
+          },
+          {
+            "en": "Calculate left to right: 18 - 12 = 6, and 6 + 2 = 8.",
+            "hi": "बाएं से दाएं हल करें: 18 - 12 = 6, और 6 + 2 = 8।",
+            "te": "ఎడమ నుండి కుడికి లెక్కించండి: 18 - 12 = 6, మరియు 6 + 2 = 8.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Always multiply and divide before adding and subtracting.",
+        "hi": "जोड़ने और घटाने से पहले हमेशा गुणा और भाग करें।",
+        "te": "కూడిక మరియు తీసివేతలకు ముందే గుణకారం, భాగహారాలు చేయాలి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Working with Nested Brackets and Grouping",
+        "hi": "मानक दृष्टिकोण: कोष्ठकों के प्रकार और समूहन",
+        "te": "ప్రామాణిక విధానం: బ్రాకెట్ల రకాలు మరియు సమూహం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Brackets override normal precedence. When brackets are nested inside each other, always evaluate from the innermost brackets outward: round brackets ( ), then curly brackets { }, then square brackets [ ]. A negative sign outside a bracket changes the sign of every term inside when expanded.",
+        "hi": "कोष्ठक सामान्य प्राथमिकता को बदलते हैं। जब कोष्ठक एक दूसरे के अंदर हों, तो सबसे अंदर वाले कोष्ठक ( ) से शुरू करें, फिर मझोले { }, और अंत में बड़े कोष्ठक [ ] को हल करें। कोष्ठक के बाहर ऋण चिह्न अंदर के सभी चिह्नों को बदल देता है।",
+        "te": "బ్రాకెట్లు సాధారణ ప్రాధాన్యతను మారుస్తాయి. బ్రాకెట్ లోపల బ్రాకెట్ ఉన్నప్పుడు, అన్నిటికంటే లోపలి గుండ్రని బ్రాకెట్ ( ), తర్వాత పుష్ప బ్రాకెట్ { }, చివరగా చతురస్ర బ్రాకెట్ [ ] పూర్తిచేయాలి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Simplify: 25 - [10 + {8 - (6 - 2)}]",
+          "hi": "सरल कीजिए: 25 - [10 + {8 - (6 - 2)}]",
+          "te": "సూక్ష్మీకరించండి: 25 - [10 + {8 - (6 - 2)}]",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Innermost round bracket: 6 - 2 = 4.",
+            "hi": "सबसे अंदर का छोटा कोष्ठक: 6 - 2 = 4।",
+            "te": "లోపలి గుండ్రని బ్రాకెట్: 6 - 2 = 4.",
+            "reviewed": false
+          },
+          {
+            "en": "Curly bracket: 8 - 4 = 4.",
+            "hi": "मझोला कोष्ठक: 8 - 4 = 4।",
+            "te": "పుష్ప బ్రాకెట్: 8 - 4 = 4.",
+            "reviewed": false
+          },
+          {
+            "en": "Square bracket: 10 + 4 = 14.",
+            "hi": "बड़ा कोष्ठक: 10 + 4 = 14।",
+            "te": "చతురస్ర బ్రాకెట్: 10 + 4 = 14.",
+            "reviewed": false
+          },
+          {
+            "en": "Final subtraction: 25 - 14 = 11.",
+            "hi": "अंतिम घटाव: 25 - 14 = 11।",
+            "te": "చివరి తీసివేత: 25 - 14 = 11.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "11",
+          "hi": "11",
+          "te": "11",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Solve from inside out: ( ) first, then { }, then [ ].",
+        "hi": "अंदर से बाहर की ओर हल करें: पहले ( ), फिर { }, फिर [ ]।",
+        "te": "లోపలి నుండి బయటకు సాధించండి: మొదట ( ), తర్వాత { }, ఆపై [ ].",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Translating Word Problems to Expressions",
+        "hi": "फास्ट-ट्रैक: शाब्दिक समस्याओं को व्यंजक में बदलना",
+        "te": "ఫాస్ట్-ట్రాక్: రాతపూర్వక లెక్కలను సమాసాలుగా మార్చడం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Translating words to algebraic expressions: '5 more than twice a number' is 2x + 5. 'Product of the sum of a and b with their difference' is (a + b)(a - b). Pay close attention to grouping words like 'sum of ... multiplied by'.",
+        "hi": "शब्दों को बीजीय व्यंजक में बदलना: 'किसी संख्या के दोगुने से 5 अधिक' 2x + 5 है। 'a और b के योग तथा उनके अंतर का गुणनफल' (a + b)(a - b) है।",
+        "te": "పదాలను బీజగణిత సమాసాలుగా మార్చడం: 'ఒక సంఖ్య యొక్క రెట్టింపు కంటే 5 ఎక్కువ' అంటే 2x + 5. 'a మరియు b ల మొత్తం, భేదాల లబ్ధం' అంటే (a + b)(a - b).",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Write an expression for: 'Subtract 7 from the product of 4 and 9, then divide by 5'.",
+          "hi": "व्यंजक लिखिए: '4 और 9 के गुणनफल में से 7 घटाएं, फिर 5 से भाग दें'।",
+          "te": "సమాసాన్ని రాయండి: '4 మరియు 9 ల లబ్ధం నుండి 7 తీసివేసి, ఆపై 5 తో భాగించండి'.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Product of 4 and 9: (4 × 9).",
+            "hi": "4 और 9 का गुणनफल: (4 × 9)।",
+            "te": "4 మరియు 9 ల లబ్ధం: (4 × 9).",
+            "reviewed": false
+          },
+          {
+            "en": "Subtract 7: (4 × 9) - 7.",
+            "hi": "7 घटाएं: (4 × 9) - 7।",
+            "te": "7 తీసివేయండి: (4 × 9) - 7.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide entire result by 5: [(4 × 9) - 7] ÷ 5.",
+            "hi": "परिणाम को 5 से भाग दें: [(4 × 9) - 7] ÷ 5।",
+            "te": "మొత్తం ఫలితాన్ని 5 తో భాగించండి: [(4 × 9) - 7] ÷ 5.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "[(4 × 9) - 7] ÷ 5 (which evaluates to 29/5 = 5.8)",
+          "hi": "[(4 × 9) - 7] ÷ 5 (मान = 29/5 = 5.8)",
+          "te": "[(4 × 9) - 7] ÷ 5 (విలువ = 29/5 = 5.8)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Use brackets to enforce order when word problems group operations before division or multiplication.",
+        "hi": "जब शाब्दिक समस्याओं में भाग या गुणा से पहले किसी संक्रिया का समूहन हो, तो कोष्ठक का उपयोग करें।",
+        "te": "పదాల లెక్కల్లో నిర్దిష్ట క్రమాన్ని పాటించడానికి బ్రాకెట్లను ఉపయోగించండి.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c8-sqr-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Perfect Squares and Square Roots",
+        "hi": "बुनियादी दृष्टिकोण: पूर्ण वर्ग और वर्गमूल",
+        "te": "ప్రాథమిక విధానం: పరిపూర్ణ వర్గాలు మరియు వర్గమూలాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "When a number is multiplied by itself, the product is called a square number. For instance, 6 × 6 = 36, so 36 is a square of 6. The reverse operation is finding the square root: √36 = 6. Square numbers can always be arranged as a square grid of dots.",
+        "hi": "जब किसी संख्या को उसी से गुणा किया जाता है, तो प्राप्त गुणनफल को वर्ग संख्या कहते हैं। उदाहरण के लिए, 6 × 6 = 36, इसलिए 36 संख्या 6 का वर्ग है। इसकी विपरीत क्रिया वर्गमूल निकालना है: √36 = 6।",
+        "te": "ఒక సంఖ్యను అదే సంఖ్యతో గుణించినప్పుడు వచ్చే ఫలితాన్ని వర్గ సంఖ్య అంటారు. ఉదాహరణకు, 6 × 6 = 36, కాబట్టి 36 అనేది 6 యొక్క వర్గం. దీని వ్యతిరేక ప్రక్రియ వర్గమూలం: √36 = 6.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "A square chessboard with 8 rows and 8 columns has 8 × 8 = 64 small squares.",
+        "hi": "8 पंक्तियों और 8 स्तंभों वाले शतरंज के बोर्ड में 8 × 8 = 64 छोटे वर्ग होते हैं।",
+        "te": "8 అడ్డు వరుసలు, 8 నిలువు వరుసలు ఉన్న చదరంగం బోర్డులో 8 × 8 = 64 గడులు ఉంటాయి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Which of these is a perfect square: 45, 64, or 72?",
+          "hi": "इनमें से कौन सी एक पूर्ण वर्ग संख्या है: 45, 64, या 72?",
+          "te": "వీటిలో పరిపూర్ణ వర్గ సంఖ్య ఏది: 45, 64, లేదా 72?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Test integer squares: 6² = 36, 7² = 49 (so 45 is not a square).",
+            "hi": "पूर्णांक वर्गों की जाँच करें: 6² = 36, 7² = 49 (अतः 45 वर्ग नहीं है)।",
+            "te": "వర్గాలను సరిచూడండి: 6² = 36, 7² = 49 (కాబట్టి 45 వర్గం కాదు).",
+            "reviewed": false
+          },
+          {
+            "en": "Test 8: 8 × 8 = 64. 64 is exactly 8².",
+            "hi": "8 की जाँच करें: 8 × 8 = 64। 64 ठीक 8² है।",
+            "te": "8 ని చూడండి: 8 × 8 = 64. 64 అనేది ఖచ్చితంగా 8².",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "64",
+          "hi": "64",
+          "te": "64",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "A perfect square is the product of an integer multiplied by itself.",
+        "hi": "पूर्ण वर्ग किसी पूर्णांक को उसी से गुणा करने पर प्राप्त संख्या होती है।",
+        "te": "ఒక పూర్ణ సంఖ్యను అదే సంఖ్యతో గుణిస్తే వచ్చే సంఖ్యే పరిపూర్ణ వర్గం.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Prime Factorisation Method for Square Roots and Cubes",
+        "hi": "मानक दृष्टिकोण: वर्गमूल और घनमूल के लिए अभाज्य गुणनखंडन विधि",
+        "te": "ప్రామాణిక విధానం: వర్గమూలాలు మరియు ఘనమూలాల కోసం ప్రధాన కారణాంక విభజన",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "To find the square root of a number, break it into prime factors and group identical factors in pairs (twos). For cube roots, group identical factors in triplets (threes). If all factors pair up completely, the number is a perfect square; if all group in triplets, it is a perfect cube.",
+        "hi": "किसी संख्या का वर्गमूल निकालने के लिए, उसके अभाज्य गुणनखंड बनाएं और समान गुणनखंडों के जोड़े (दो-दो) बनाएं। घनमूल के लिए तीन-तीन के समूह बनाएं। यदि सभी गुणनखंडों के जोड़े बन जाते हैं, तो वह पूर्ण वर्ग है।",
+        "te": "ఒక సంఖ్య యొక్క వర్గమూలాన్ని కనుగొనడానికి, దానిని ప్రధాన కారణాంకాలుగా విభజించి సమాన కారణాంకాలను జతలుగా (రెండు చొప్పున) సమూహపరచాలి. ఘనమూలం కోసం మూడేసి చొప్పున సమూహపరచాలి.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the cube root of 216 by prime factorisation.",
+          "hi": "अभाज्य गुणनखंडन द्वारा 216 का घनमूल ज्ञात कीजिए।",
+          "te": "ప్రధాన కారణాంక విభజన పద్ధతి ద్వారా 216 ఘనమూలాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Factorise 216: 216 = 2 × 2 × 2 × 3 × 3 × 3.",
+            "hi": "216 के गुणनखंड करें: 216 = 2 × 2 × 2 × 3 × 3 × 3।",
+            "te": "216 ను కారణాంకాలుగా రాయండి: 216 = 2 × 2 × 2 × 3 × 3 × 3.",
+            "reviewed": false
+          },
+          {
+            "en": "Group into triplets: (2 × 2 × 2) and (3 × 3 × 3).",
+            "hi": "तीन-तीन के समूह बनाएं: (2 × 2 × 2) और (3 × 3 × 3)।",
+            "te": "మూడేసి చొప్పున సమూహపరచండి: (2 × 2 × 2) మరియు (3 × 3 × 3).",
+            "reviewed": false
+          },
+          {
+            "en": "Take one from each group: ∛216 = 2 × 3 = 6.",
+            "hi": "प्रत्येक समूह से एक लें: ∛216 = 2 × 3 = 6।",
+            "te": "ప్రతి సమూహం నుండి ఒకటి తీసుకోండి: ∛216 = 2 × 3 = 6.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Pairs of prime factors give square roots; triplets give cube roots.",
+        "hi": "अभाज्य गुणनखंडों के जोड़े वर्गमूल देते हैं; तीन के समूह घनमूल देते हैं।",
+        "te": "ప్రధాన కారణాంకాల జతలు వర్గమూలాన్ని, త్రయాలు ఘనమూలాన్ని ఇస్తాయి.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Patterns and Unit Digits in Squares",
+        "hi": "फास्ट-ट्रैक: वर्गों में पैटर्न और इकाई अंक",
+        "te": "ఫాస్ట్-ట్రాక్: వర్గాలలో నమూనాలు మరియు ఒకట్ల స్థాన అంకెలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Square numbers can only end in 0, 1, 4, 5, 6, or 9. A number ending in 2, 3, 7, or 8 is NEVER a perfect square! Also, the square of an odd number is always odd, and the square of an even number is always even.",
+        "hi": "पूर्ण वर्ग संख्याओं का इकाई अंक केवल 0, 1, 4, 5, 6 या 9 हो सकता है। 2, 3, 7 या 8 पर समाप्त होने वाली संख्या कभी भी पूर्ण वर्ग नहीं हो सकती! विषम संख्या का वर्ग विषम और सम का वर्ग सम होता है।",
+        "te": "పరిపూర్ణ వర్గ సంఖ్యలు ఎల్లప్పుడూ 0, 1, 4, 5, 6, లేదా 9 తో మాత్రమే అంతమవుతాయి. 2, 3, 7, 8 తో అంతమయ్యే సంఖ్యలు ఎప్పటికీ పరిపూర్ణ వర్గాలు కావు!",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Without calculating, can 1,057 be a perfect square?",
+          "hi": "बिना गणना किए बताएं, क्या 1,057 एक पूर्ण वर्ग हो सकता है?",
+          "te": "లెక్కించకుండా చెప్పండి, 1,057 పరిపూర్ణ వర్గం కాగలదా?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Examine the unit digit: 7.",
+            "hi": "इकाई अंक देखें: 7।",
+            "te": "ఒకట్ల స్థానంలోని అంకెను చూడండి: 7.",
+            "reviewed": false
+          },
+          {
+            "en": "No square number ends with 2, 3, 7, or 8.",
+            "hi": "कोई भी वर्ग संख्या 2, 3, 7 या 8 पर समाप्त नहीं होती।",
+            "te": "ఏ పరిపూర్ణ వర్గం కూడా 2, 3, 7, 8 లతో ముగియదు.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "No, because it ends in 7.",
+          "hi": "नहीं, क्योंकि इसका इकाई अंक 7 है।",
+          "te": "కాదు, ఎందుకంటే దీని ఒకట్ల స్థానంలో 7 ఉంది.",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Numbers ending in 2, 3, 7, 8 are never perfect squares.",
+        "hi": "2, 3, 7, 8 पर समाप्त होने वाली संख्याएँ कभी पूर्ण वर्ग नहीं होतीं।",
+        "te": "2, 3, 7, 8 లతో ముగిసే సంఖ్యలు ఎన్నటికీ పరిపూర్ణ వర్గాలు కావు.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c8-exp-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Exponents and Repeated Multiplication",
+        "hi": "बुनियादी दृष्टिकोण: घातांक और बार-बार गुणा",
+        "te": "ప్రాథమిక విధానం: ఘాతాంకాలు మరియు పునరావృత గుణకారం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Repeated multiplication of the same number can be written compactly using exponents. In the expression 3⁴, 3 is the base and 4 is the exponent (or power). It means multiply 3 by itself 4 times: 3 × 3 × 3 × 3 = 81.",
+        "hi": "एक ही संख्या के बार-बार गुणा को घातांकों द्वारा संक्षेप में लिखा जा सकता है। व्यंजक 3⁴ में, 3 आधार (base) है और 4 घातांक (power) है। इसका अर्थ है 3 को स्वयं से 4 बार गुणा करना: 3 × 3 × 3 × 3 = 81।",
+        "te": "ఒకే సంఖ్యను మళ్లీ మళ్లీ గుణించడాన్ని ఘాతాంకాల ద్వారా సంక్షిప్తంగా రాయవచ్చు. 3⁴ లో 3 ని భూమి అని, 4 ని ఘాతం అని అంటారు. అంటే 3 ని 4 సార్లు గుణించాలి: 3 × 3 × 3 × 3 = 81.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Cell division: 1 cell splits into 2 (2¹), then into 4 (2²), then into 8 (2³), doubling at each generation.",
+        "hi": "कोशिका विभाजन: 1 कोशिका 2 में विभाजित होती है (2¹), फिर 4 में (2²), फिर 8 में (2³), प्रत्येक पीढ़ी में दोगुनी होती है।",
+        "te": "కణ విభజన: 1 కణం 2 గా (2¹), తర్వాత 4 గా (2²), తర్వాత 8 గా (2³) విభజించబడుతుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What is the value of 2⁵?",
+          "hi": "2⁵ का मान क्या है?",
+          "te": "2⁵ విలువ ఎంత?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Expand 2 multiplied 5 times: 2 × 2 × 2 × 2 × 2.",
+            "hi": "2 को 5 बार गुणा के रूप में लिखें: 2 × 2 × 2 × 2 × 2।",
+            "te": "2 ని 5 సార్లు గుణించండి: 2 × 2 × 2 × 2 × 2.",
+            "reviewed": false
+          },
+          {
+            "en": "Calculate step by step: 2×2=4, 4×2=8, 8×2=16, 16×2=32.",
+            "hi": "गणना करें: 2×2=4, 4×2=8, 8×2=16, 16×2=32।",
+            "te": "దశలవారీగా లెక్కించండి: 2×2=4, 4×2=8, 8×2=16, 16×2=32.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Base raised to exponent n means multiplying the base by itself n times.",
+        "hi": "आधार की घात n का अर्थ है आधार को स्वयं से n बार गुणा करना।",
+        "te": "భూమి యొక్క ఘాతం n అంటే ఆ భూమిని n సార్లు గుణించడం.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Laws of Exponents with the Same Base",
+        "hi": "मानक दृष्टिकोण: समान आधार वाले घातांकों के नियम",
+        "te": "ప్రామాణిక విధానం: సమాన భూములు కలిగిన ఘాతాంక న్యాయాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Key exponent laws for non-zero base a: (1) Product rule: aᵐ × aⁿ = aᵐ⁺ⁿ. (2) Quotient rule: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. (3) Power of a power: (aᵐ)ⁿ = aᵐⁿ. (4) Zero exponent: a⁰ = 1. (5) Negative exponent: a⁻ⁿ = 1 / aⁿ.",
+        "hi": "शून्यतर आधार a के लिए मुख्य घातांक नियम: (1) गुणन नियम: aᵐ × aⁿ = aᵐ⁺ⁿ। (2) भाग नियम: aᵐ ÷ aⁿ = aᵐ⁻ⁿ। (3) घात की घात: (aᵐ)ⁿ = aᵐⁿ। (4) शून्य घात: a⁰ = 1। (5) ऋणात्मक घात: a⁻ⁿ = 1 / aⁿ।",
+        "te": "సున్నా కాని భూమి a కి ముఖ్యమైన ఘాతాంక న్యాయాలు: (1) లబ్ద న్యాయం: aᵐ × aⁿ = aᵐ⁺ⁿ. (2) భాగహార న్యాయం: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. (3) ఘాతం యొక్క ఘాతం: (aᵐ)ⁿ = aᵐⁿ. (4) సున్నా ఘాతం: a⁰ = 1. (5) ఋణ ఘాతం: a⁻ⁿ = 1 / aⁿ.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Simplify: (5³ × 5⁴) ÷ 5⁵",
+          "hi": "सरल कीजिए: (5³ × 5⁴) ÷ 5⁵",
+          "te": "సూక్ష్మీకరించండి: (5³ × 5⁴) ÷ 5⁵",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Multiply powers with same base by adding exponents: 5³ × 5⁴ = 5³⁺⁴ = 5⁷.",
+            "hi": "समान आधार वाली घातों को गुणा करते समय घातांक जोड़ें: 5³ × 5⁴ = 5³⁺⁴ = 5⁷।",
+            "te": "సమాన భూములు ఉన్నప్పుడు ఘాతాలను కలపండి: 5³ × 5⁴ = 5³⁺⁴ = 5⁷.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide powers by subtracting exponents: 5⁷ ÷ 5⁵ = 5⁷⁻⁵ = 5².",
+            "hi": "भाग करते समय घातांक घटाएं: 5⁷ ÷ 5⁵ = 5⁷⁻⁵ = 5²।",
+            "te": "భాగహారంలో ఘాతాలను తీసివేయండి: 5⁷ ÷ 5⁵ = 5⁷⁻⁵ = 5².",
+            "reviewed": false
+          },
+          {
+            "en": "Evaluate 5² = 25.",
+            "hi": "5² = 25।",
+            "te": "5² = 25.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "25",
+          "hi": "25",
+          "te": "25",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Multiply $\\rightarrow$ add exponents; Divide $\\rightarrow$ subtract exponents.",
+        "hi": "गुणा $\\rightarrow$ घातांक जोड़ें; भाग $\\rightarrow$ घातांक घटाएं।",
+        "te": "గుణకారం $\\rightarrow$ ఘాతాలను కలపండి; భాగహారం $\\rightarrow$ ఘాతాలను తీసివేయండి.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Negative Exponents and Reciprocals",
+        "hi": "फास्ट-ट्रैक: ऋणात्मक घातांक और व्युत्क्रम",
+        "te": "ఫాస్ట్-ట్రాక్: ఋణ ఘాతాంకాలు మరియు వ్యుత్క్రమాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A negative exponent represents the reciprocal of the positive power: x⁻ⁿ = 1 / xⁿ. Similarly, (a/b)⁻ⁿ = (b/a)ⁿ. For example, 2⁻³ = 1 / 2³ = 1/8.",
+        "hi": "ऋणात्मक घातांक धनात्मक घात के व्युत्क्रम को दर्शाता है: x⁻ⁿ = 1 / xⁿ। इसी प्रकार, (a/b)⁻ⁿ = (b/a)ⁿ। उदाहरण: 2⁻³ = 1 / 2³ = 1/8।",
+        "te": "ఋణ ఘాతం అనేది ధన ఘాతం యొక్క వ్యుత్క్రమాన్ని సూచిస్తుంది: x⁻ⁿ = 1 / xⁿ. అలాగే (a/b)⁻ⁿ = (b/a)ⁿ. ఉదాహరణకు 2⁻³ = 1 / 2³ = 1/8.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Evaluate: (2/3)⁻²",
+          "hi": "मान ज्ञात कीजिए: (2/3)⁻²",
+          "te": "విలువను కనుగొనండి: (2/3)⁻²",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Invert the fraction to make the exponent positive: (3/2)².",
+            "hi": "घात को धनात्मक बनाने के लिए भिन्न को पलटें: (3/2)²।",
+            "te": "ఘాతాన్ని ధనంగా మార్చడానికి భిన్నాన్ని తిరగరాయండి: (3/2)².",
+            "reviewed": false
+          },
+          {
+            "en": "Square numerator and denominator: 3² / 2² = 9/4.",
+            "hi": "अंश और हर का वर्ग करें: 3² / 2² = 9/4।",
+            "te": "లవం మరియు హారాలను వర్గం చేయండి: 3² / 2² = 9/4.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "9/4",
+          "hi": "9/4",
+          "te": "9/4",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Flip the fraction to change a negative exponent to a positive exponent.",
+        "hi": "ऋणात्मक घात को धनात्मक में बदलने के लिए भिन्न को उलट दें।",
+        "te": "ఋణ ఘాతాన్ని ధనంగా మార్చడానికి భిన్నాన్ని తలక్రిందులు చేయండి.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c9-coord-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Navigating the Cartesian Plane",
+        "hi": "बुनियादी दृष्टिकोण: कार्तीय तल पर नेविगेशन",
+        "te": "ప్రాథమిక విధానం: కార్టీసియన్ తలంపై స్థానాలు గుర్తించడం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "René Descartes invented coordinate geometry to pinpoint any point on a flat sheet of paper. We draw two perpendicular number lines: the horizontal x-axis and the vertical y-axis. Their meeting point is called the origin (0, 0). Any position is given as an ordered pair (x, y).",
+        "hi": "रेने देकार्त ने एक समतल सतह पर किसी भी बिंदु की सही स्थिति जानने के लिए निर्देशांक ज्यामिति का आविष्कार किया। हम दो लंबवत संख्या रेखाएं खींचते हैं: क्षैतिज x-अक्ष और ऊर्ध्वाधर y-अक्ष। उनके मिलन बिंदु को मूल बिंदु (0, 0) कहते हैं। किसी भी बिंदु को (x, y) के रूप में लिखा जाता है।",
+        "te": "రెనే డెకార్టే ఒక తలంపై ఏదైనా బిందువు స్థానాన్ని ఖచ్చితంగా గుర్తించడానికి నిరూపక రేఖాగణితాన్ని కనుగొన్నారు. క్షితిజ సమాంతరంగా x-అక్షం, నిలువుగా y-అక్షం ఉంటాయి. అవి కలిసే బిందువును మూలబిందువు (0, 0) అంటారు. ఏదైనా స్థానాన్ని (x, y) జతగా రాస్తారు.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "A classroom seating chart: Row 3, Column 4 pinpoints exactly one desk.",
+        "hi": "कक्षा की बैठक व्यवस्था: पंक्ति 3, स्तंभ 4 ठीक एक डेस्क को दर्शाता है।",
+        "te": "తరగతి గది సీటింగ్ చార్ట్: వరుస 3, నిలువు వరుస 4 ఒక ఖచ్చితమైన బెంచీని సూచిస్తుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Starting at the origin (0, 0), move 4 units right and 3 units down. What are the coordinates?",
+          "hi": "मूल बिंदु (0, 0) से शुरू करके 4 इकाई दाईं ओर और 3 इकाई नीचे जाएं। निर्देशांक क्या होंगे?",
+          "te": "మూలబిందువు (0, 0) నుండి ప్రారంభించి కుడివైపుకు 4 యూనిట్లు, క్రిందికి 3 యూనిట్లు కదలండి. నిరూపకాలు ఏమిటి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Moving right along the x-axis gives positive x: x = +4.",
+            "hi": "x-अक्ष पर दाईं ओर जाने पर धनात्मक x मिलता है: x = +4।",
+            "te": "x-అక్షంపై కుడివైపుకు వెళ్తే ధన x వస్తుంది: x = +4.",
+            "reviewed": false
+          },
+          {
+            "en": "Moving down along the y-axis gives negative y: y = -3.",
+            "hi": "y-अक्ष पर नीचे जाने पर ऋणात्मक y मिलता है: y = -3।",
+            "te": "y-అక్షంపై క్రిందికి వెళ్తే ఋణ y వస్తుంది: y = -3.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "(4, -3)",
+          "hi": "(4, -3)",
+          "te": "(4, -3)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "In (x, y), x measures horizontal step (right +, left -) and y measures vertical step (up +, down -).",
+        "hi": "(x, y) में, x क्षैतिज दूरी (दाएं +, बाएं -) और y ऊर्ध्वाधर दूरी (ऊपर +, नीचे -) मापता है।",
+        "te": "(x, y) లో x క్షితిజ సమాంతర కదలికను, y నిలువు కదలికను సూచిస్తాయి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: The Four Quadrants and Sign Conventions",
+        "hi": "मानक दृष्टिकोण: चार चतुर्थांश और चिह्न परिपाटी",
+        "te": "ప్రామాణిక విధానం: నాలుగు పాదాలు మరియు సంకేత నియమాలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "The axes divide the Cartesian plane into four regions called quadrants: Quadrant I (+, +), Quadrant II (-, +), Quadrant III (-, -), and Quadrant IV (+, -). Points lying on the x-axis have y = 0. Points lying on the y-axis have x = 0.",
+        "hi": "अक्ष कार्तीय तल को चार भागों में बांटते हैं जिन्हें चतुर्थांश कहते हैं: चतुर्थांश I (+, +), चतुर्थांश II (-, +), चतुर्थांश III (-, -), और चतुर्थांश IV (+, -)। x-अक्ष पर स्थित बिंदुओं का y = 0 होता है। y-अक्ष पर स्थित बिंदुओं का x = 0 होता है।",
+        "te": "అక్షాలు కార్టీసియన్ తలాన్ని నాలుగు పాదాలుగా విభజిస్తాయి: పాదం I (+, +), పాదం II (-, +), పాదం III (-, -), పాదం IV (+, -). x-అక్షంపై ఉండే బిందువుల వద్ద y = 0. y-అక్షంపై ఉండే బిందువుల వద్ద x = 0.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "In which quadrant does the point (-5, 8) lie?",
+          "hi": "बिंदु (-5, 8) किस चतुर्थांश में स्थित है?",
+          "te": "(-5, 8) బిందువు ఏ పాదంలో ఉంటుంది?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Inspect signs: x = -5 (negative) and y = +8 (positive).",
+            "hi": "चिह्नों की जाँच करें: x = -5 (ऋणात्मक) और y = +8 (धनात्मक)।",
+            "te": "సంకేతాలను చూడండి: x = -5 (ఋణం) మరియు y = +8 (ధనం).",
+            "reviewed": false
+          },
+          {
+            "en": "Points with (-, +) are in Quadrant II.",
+            "hi": "(-, +) वाले बिंदु चतुर्थांश II में होते हैं।",
+            "te": "(-, +) సంకేతాలు ఉన్న బిందువులు 2వ పాదంలో (Quadrant II) ఉంటాయి.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "Quadrant II",
+          "hi": "चतुर्थांश II",
+          "te": "2వ పాదం (Quadrant II)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Signs (x, y): Q1=(+,+), Q2=(-,+), Q3=(-,-), Q4=(+,-).",
+        "hi": "चिह्न (x, y): Q1=(+,+), Q2=(-,+), Q3=(-,-), Q4=(+,-)।",
+        "te": "సంకేతాలు (x, y): Q1=(+,+), Q2=(-,+), Q3=(-,-), Q4=(+,-).",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Abscissa, Ordinate, and Axis Loci",
+        "hi": "फास्ट-ट्रैक: भुज, कोटि और अक्ष समीकरण",
+        "te": "ఫాస్ట్-ట్రాక్: x-నిరూపకం (భుజం), y-నిరూపకం (కోటి)",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "The x-coordinate is called the abscissa; the y-coordinate is called the ordinate. The equation of the x-axis is y = 0. The equation of the y-axis is x = 0. The distance of a point (x, y) from the y-axis is |x|, and from the x-axis is |y|.",
+        "hi": "x-निर्देशांक को भुज (abscissa) और y-निर्देशांक को कोटि (ordinate) कहते हैं। x-अक्ष का समीकरण y = 0 है। y-अक्ष का समीकरण x = 0 है। बिंदु (x, y) की y-अक्ष से दूरी |x| और x-अक्ष से दूरी |y| होती है।",
+        "te": "x-నిరూపకాన్ని భుజం (abscissa) అని, y-నిరూపకాన్ని కోటి (ordinate) అని అంటారు. x-అక్షం సమీకరణం y = 0. y-అక్షం సమీకరణం x = 0. (x, y) బిందువుకి y-అక్షం నుండి దూరం |x|, x-అక్షం నుండి దూరం |y|.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What is the perpendicular distance of the point P(-6, 4) from the y-axis?",
+          "hi": "बिंदु P(-6, 4) की y-अक्ष से लंबवत दूरी क्या है?",
+          "te": "P(-6, 4) బిందువుకి y-అక్షం నుండి లంబ దూరం ఎంత?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Distance from y-axis is the absolute value of the x-coordinate: |x|.",
+            "hi": "y-अक्ष से दूरी x-निर्देशांक का निरपेक्ष मान |x| होती है।",
+            "te": "y-అక్షం నుండి దూరం అనేది x-నిరూపకం యొక్క సంపూర్ణ విలువ |x|.",
+            "reviewed": false
+          },
+          {
+            "en": "Here x = -6, so |-6| = 6 units.",
+            "hi": "यहाँ x = -6, अतः |-6| = 6 इकाई।",
+            "te": "ఇక్కడ x = -6, కాబట్టి |-6| = 6 యూనిట్లు.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "6 units",
+          "hi": "6 इकाई",
+          "te": "6 యూనిట్లు",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Distance from y-axis = |x|; distance from x-axis = |y| (distance is always positive).",
+        "hi": "y-अक्ष से दूरी = |x|; x-अक्ष से दूरी = |y| (दूरी हमेशा धनात्मक होती है)।",
+        "te": "y-అక్షం నుండి దూరం = |x|; x-అక్షం నుండి దూరం = |y| (దూరం ఎల్లప్పుడూ ధనాత్మకం).",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c9-poly-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: What is a Polynomial?",
+        "hi": "बुनियादी दृष्टिकोण: बहुपद क्या है?",
+        "te": "ప్రాథమిక విధానం: బహుపది అంటే ఏమిటి?",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A polynomial is an algebraic expression where the powers of variables are whole numbers (0, 1, 2, ...). In a linear polynomial, the highest power of the variable is exactly 1 (e.g. 3x + 5). The value of x that makes the polynomial equal to zero is called its zero or root.",
+        "hi": "एक बहुपद एक ऐसा बीजीय व्यंजक है जिसमें चर की घातें पूर्ण संख्याएँ (0, 1, 2, ...) होती हैं। एक रैखिक बहुपद में चर की अधिकतम घात 1 होती है (जैसे 3x + 5)। चर का वह मान जो बहुपद को शून्य बना दे, उसका शून्यक कहलाता है।",
+        "te": "బహుపది అనేది చరరాశి ఘాతాలు పూర్ణాంకాలుగా (0, 1, 2, ...) ఉండే బీజగణిత సమాసం. రేఖీయ బహుపదిలో చరరాశి గరిష్ట ఘాతం 1 (ఉదా 3x + 5). బహుపది విలువను సున్నా చేసే చరరాశి విలువను శూన్యం లేదా మూలం అంటారు.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "A balancing scale: if 2x + 6 balances with 0, finding x means finding what weight counterbalances +6.",
+        "hi": "संतुलन तराजू: यदि 2x + 6 शून्य के साथ संतुलित है, तो x का मान ज्ञात करने का अर्थ है वह मान ढूंढना जो +6 को संतुलित करे।",
+        "te": "త్రాసు: 2x + 6 ని సున్నాతో సమానం చేసినప్పుడు, x విలువ అంటే +6 ని సరిచేసే భారం.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the zero of the linear polynomial p(x) = 2x - 8.",
+          "hi": "रैखिक बहुपद p(x) = 2x - 8 का शून्यक ज्ञात कीजिए।",
+          "te": "p(x) = 2x - 8 అనే రేఖీయ బహుపది యొక్క శూన్యాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Set p(x) = 0: 2x - 8 = 0.",
+            "hi": "p(x) = 0 रखें: 2x - 8 = 0।",
+            "te": "p(x) = 0 గా రాయండి: 2x - 8 = 0.",
+            "reviewed": false
+          },
+          {
+            "en": "Add 8 to both sides: 2x = 8.",
+            "hi": "दोनों पक्षों में 8 जोड़ें: 2x = 8।",
+            "te": "ఇరువైపులా 8 కలపండి: 2x = 8.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide by 2: x = 8 / 2 = 4.",
+            "hi": "2 से भाग दें: x = 8 / 2 = 4।",
+            "te": "2 తో భాగించండి: x = 8 / 2 = 4.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = 4",
+          "hi": "x = 4",
+          "te": "x = 4",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "To find the zero of p(x), solve p(x) = 0.",
+        "hi": "p(x) का शून्यक ज्ञात करने के लिए, समीकरण p(x) = 0 को हल करें।",
+        "te": "p(x) శూన్యాన్ని కనుగొనడానికి, p(x) = 0 సమీకరణాన్ని సాధించండి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Degree of Polynomials and Standard Form ax + b",
+        "hi": "मानक दृष्टिकोण: बहुपद की घात और मानक रूप ax + b",
+        "te": "ప్రామాణిక విధానం: బహుపది పరిమాణం మరియు ప్రామాణిక రూపం ax + b",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "The degree of a polynomial is the highest power of the variable. Degree 1 is linear (ax + b, a ≠ 0), degree 2 is quadratic (ax² + bx + c), degree 3 is cubic. A non-zero linear polynomial has exactly one real zero, given by x = -b/a.",
+        "hi": "बहुपद की घात चर की उच्चतम घात होती है। घात 1 रैखिक (ax + b, a ≠ 0), घात 2 द्विघात, घात 3 त्रिघात होती है। एक रैखिक बहुपद का ठीक एक वास्तविक शून्यक x = -b/a होता है।",
+        "te": "చరరాశి యొక్క గరిష్ట ఘాతాన్ని బహుపది పరిమాణం అంటారు. పరిమాణం 1 ఉంటే రేఖీయ బహుపది (ax + b, a ≠ 0), పరిమాణం 2 ఉంటే వర్గ బహుపది. రేఖీయ బహుపదికి ఖచ్చితంగా ఒకే శూన్యం x = -b/a ఉంటుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "What is the degree of the polynomial 5x³ - 4x² + 7x - 9?",
+          "hi": "बहुपद 5x³ - 4x² + 7x - 9 की घात क्या है?",
+          "te": "5x³ - 4x² + 7x - 9 బహుపది యొక్క పరిమాణం ఎంత?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Identify powers of x: 3 in 5x³, 2 in -4x², 1 in 7x, 0 in -9.",
+            "hi": "x की घातों को पहचानें: 5x³ में 3, -4x² में 2, 7x में 1, -9 में 0।",
+            "te": "x ఘాతాలను గుర్తించండి: 5x³ లో 3, -4x² లో 2, 7x లో 1.",
+            "reviewed": false
+          },
+          {
+            "en": "The highest power is 3.",
+            "hi": "उच्चतम घात 3 है।",
+            "te": "అత్యధిక ఘాతం 3.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Degree = highest exponent of the variable with non-zero coefficient.",
+        "hi": "घात = अशून्य गुणांक वाले चर का उच्चतम घातांक।",
+        "te": "పరిమాణం = సున్నా కాని గుణకం ఉన్న చరరాశి యొక్క గరిష్ట ఘాతం.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Zero of Linear Polynomial Formula x = -b/a",
+        "hi": "फास्ट-ट्रैक: रैखिक बहुपद के शून्यक का सूत्र x = -b/a",
+        "te": "ఫాస్ట్-ట్రాక్: రేఖీయ బహుపది శూన్య సూత్రం x = -b/a",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "For p(x) = ax + b (where a ≠ 0), solving ax + b = 0 yields x = -b/a. Graphically, y = ax + b is a straight line intersecting the x-axis at the point (-b/a, 0).",
+        "hi": "p(x) = ax + b (जहाँ a ≠ 0) के लिए ax + b = 0 हल करने पर x = -b/a प्राप्त होता है। आलेखीय रूप से रेखा y = ax + b x-अक्ष को (-b/a, 0) पर काटती है।",
+        "te": "p(x) = ax + b (a ≠ 0) సమీకరణాన్ని సాధిస్తే x = -b/a వస్తుంది. గ్రాఫ్ రూపంలో y = ax + b సరళరేఖ x-అక్షాన్ని (-b/a, 0) వద్ద ఖండిస్తుంది.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the zero of p(x) = 3x + 12 without graphing.",
+          "hi": "बिना आलेख के p(x) = 3x + 12 का शून्यक ज्ञात कीजिए।",
+          "te": "గ్రాఫ్ లేకుండా p(x) = 3x + 12 శూన్యాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Identify coefficients: a = 3, b = 12.",
+            "hi": "गुणांक पहचानें: a = 3, b = 12।",
+            "te": "గుణకాలను గుర్తించండి: a = 3, b = 12.",
+            "reviewed": false
+          },
+          {
+            "en": "Use formula x = -b/a = -12/3 = -4.",
+            "hi": "सूत्र का उपयोग करें x = -b/a = -12/3 = -4।",
+            "te": "సూత్రం ఉపయోగించండి: x = -b/a = -12/3 = -4.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x = -4",
+          "hi": "x = -4",
+          "te": "x = -4",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "The unique zero of ax + b is always -b/a.",
+        "hi": "ax + b का अद्वितीय शून्यक सदैव -b/a होता है।",
+        "te": "ax + b యొక్క ఏకైక శూన్యం ఎల్లప్పుడూ -b/a.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c10-real-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: The Fundamental Theorem of Arithmetic",
+        "hi": "बुनियादी दृष्टिकोण: अंकगणित की आधारभूत प्रमेय",
+        "te": "ప్రాథమిక విధానం: అంకగణిత ప్రాథమిక సిద్ధాంతం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "Every composite number can be uniquely expressed (factorised) as a product of prime numbers, apart from the order in which the prime factors occur. Primes are the 'building blocks' or 'atoms' of all integers.",
+        "hi": "प्रत्येक भाज्य संख्या को अभाज्य संख्याओं के गुणनफल के रूप में अद्वितीय रूप से व्यक्त किया जा सकता है, भले ही गुणनखंडों का क्रम कुछ भी हो। अभाज्य संख्याएँ सभी पूर्णांकों के 'निर्माण खंड' या 'परमाणु' हैं।",
+        "te": "ప్రతి సంయుక్త సంఖ్యను ప్రధాన సంఖ్యల లబ్దంగా ఏకైకంగా రాయవచ్చు. ప్రధాన సంఖ్యలు అన్ని సంఖ్యల యొక్క మూల స్తంభాలు లాంటివి.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "Building blocks: any Lego castle (composite number) can be dismantled down into fundamental single coloured bricks (prime numbers).",
+        "hi": "लेगो ब्लॉक: किसी भी लेगो महल (भाज्य संख्या) को उसके मूल एकल ईंटों (अभाज्य संख्या) में तोड़ा जा सकता है।",
+        "te": "లెగో ఇటుకలు: ఎంత పెద్ద భవనాన్ని (సంయుక్త సంఖ్య) అయినా ప్రాథమిక రంగు ఇటుకలుగా (ప్రధాన సంఖ్యలు) విడదీయవచ్చు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Express 140 as a product of its prime factors.",
+          "hi": "140 को उसके अभाज्य गुणनखंडों के गुणनफल के रूप में व्यक्त कीजिए।",
+          "te": "140 ని ప్రధాన కారణాంకాల లబ్దంగా రాయండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Divide by 2: 140 ÷ 2 = 70.",
+            "hi": "2 से भाग दें: 140 ÷ 2 = 70।",
+            "te": "2 తో భాగించండి: 140 ÷ 2 = 70.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide by 2: 70 ÷ 2 = 35.",
+            "hi": "2 से भाग दें: 70 ÷ 2 = 35।",
+            "te": "2 తో భాగించండి: 70 ÷ 2 = 35.",
+            "reviewed": false
+          },
+          {
+            "en": "Divide by 5: 35 ÷ 5 = 7 (7 is prime).",
+            "hi": "5 से भाग दें: 35 ÷ 5 = 7 (7 अभाज्य है)।",
+            "te": "5 తో భాగించండి: 35 ÷ 5 = 7 (7 ప్రధాన సంఖ్య).",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "2² × 5 × 7",
+          "hi": "2² × 5 × 7",
+          "te": "2² × 5 × 7",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Every integer greater than 1 has a unique prime factorisation.",
+        "hi": "1 से बड़े प्रत्येक पूर्णांक का एक अद्वितीय अभाज्य गुणनखंडन होता है।",
+        "te": "1 కంటే పెద్దదైన ప్రతి పూర్ణ సంఖ్యకు ఏకైక ప్రధాన కారణాంక విభజన ఉంటుంది.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: HCF and LCM via Prime Factorisation",
+        "hi": "मानक दृष्टिकोण: अभाज्य गुणनखंडन द्वारा HCF और LCM",
+        "te": "ప్రామాణిక విధానం: ప్రధాన కారణాంకాల ద్వారా గ.సా.భా మరియు క.సా.గు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "For any two positive integers a and b: HCF is the product of the smallest powers of each common prime factor. LCM is the product of the greatest powers of all prime factors. Crucial identity: HCF(a, b) × LCM(a, b) = a × b.",
+        "hi": "किन्हीं दो धनात्मक पूर्णांकों a और b के लिए: HCF प्रत्येक उभयनिष्ठ अभाज्य गुणनखंड की सबसे छोटी घात का गुणनफल होता है। LCM सभी अभाज्य गुणनखंडों की सबसे बड़ी घात का गुणनफल होता है। मुख्य सूत्र: HCF(a, b) × LCM(a, b) = a × b।",
+        "te": "ఏవైనా రెండు ధన పూర్ణ సంఖ్యలు a, b లకు: ఉమ్మడి ప్రధాన కారణాంకాల అత్యల్ప ఘాతాల లబ్ధం HCF (గ.సా.భా). అన్ని ప్రధాన కారణాంకాల గరిష్ట ఘాతాల లబ్ధం LCM (క.సా.గు). ముఖ్య సూత్రం: HCF(a, b) × LCM(a, b) = a × b.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "If HCF(12, 18) = 6, find LCM(12, 18) using the identity HCF × LCM = a × b.",
+          "hi": "यदि HCF(12, 18) = 6 है, तो सूत्र HCF × LCM = a × b का उपयोग करके LCM(12, 18) ज्ञात कीजिए।",
+          "te": "HCF(12, 18) = 6 అయితే, HCF × LCM = a × b సూత్రం ద్వారా LCM(12, 18) కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Calculate the product a × b: 12 × 18 = 216.",
+            "hi": "a × b का गुणनफल निकालें: 12 × 18 = 216।",
+            "te": "a × b లబ్ధాన్ని లెక్కించండి: 12 × 18 = 216.",
+            "reviewed": false
+          },
+          {
+            "en": "LCM = (a × b) / HCF = 216 / 6 = 36.",
+            "hi": "LCM = (a × b) / HCF = 216 / 6 = 36।",
+            "te": "LCM = (a × b) / HCF = 216 / 6 = 36.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "For two numbers, HCF(a, b) × LCM(a, b) = a × b.",
+        "hi": "दो संख्याओं के लिए, HCF(a, b) × LCM(a, b) = a × b।",
+        "te": "రెండు సంఖ్యలకు, HCF(a, b) × LCM(a, b) = a × b.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Decimal Expansions and Irrationality",
+        "hi": "फास्ट-ट्रैक: दशमलव प्रसार और अपरिमेयता",
+        "te": "ఫాస్ట్-ట్రాక్: దశాంశ విస్తరణలు మరియు కరణీయ సంఖ్యలు",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A rational number p/q in lowest terms has a terminating decimal expansion if and only if the prime factorisation of q is of the form 2ⁿ5ᵐ (where n, m are non-negative integers). If q has any other prime factor (such as 3 or 7), the expansion is non-terminating repeating.",
+        "hi": "एक परिमेय संख्या p/q का दशमलव प्रसार सांत होता है यदि और केवल यदि q का अभाज्य गुणनखंडन 2ⁿ5ᵐ के रूप का हो। यदि q में कोई अन्य अभाज्य गुणनखंड (जैसे 3 या 7) हो, तो प्रसार असांत आवर्ती होता है।",
+        "te": "ఒక అకరణీయ సంఖ్య p/q లో హారం q యొక్క ప్రధాన కారణాంకాలు 2ⁿ5ᵐ రూపంలో ఉంటేనే అది అంతమయ్యే దశాంశం అవుతుంది. వేరే ఇతర ప్రధాన కారణాంకాలు ఉంటే అది అంతం కాని ఆవర్తన దశాంశం.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Will 17/8 have a terminating or non-terminating decimal expansion?",
+          "hi": "क्या 17/8 का दशमलव प्रसार सांत होगा या असांत?",
+          "te": "17/8 అంతమయ్యే దశాంశ విస్తరణను కలిగి ఉంటుందా లేదా?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Check denominator q = 8.",
+            "hi": "हर q = 8 की जाँच करें।",
+            "te": "హారం q = 8 ని చూడండి.",
+            "reviewed": false
+          },
+          {
+            "en": "Factorise: 8 = 2³ = 2³ × 5⁰. It matches 2ⁿ5ᵐ.",
+            "hi": "गुणनखंड करें: 8 = 2³ = 2³ × 5⁰। यह 2ⁿ5ᵐ के रूप का है।",
+            "te": "కారణాంకాలు: 8 = 2³ = 2³ × 5⁰. ఇది 2ⁿ5ᵐ రూపంలో ఉంది.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "Terminating (17/8 = 2.125)",
+          "hi": "सांत (17/8 = 2.125)",
+          "te": "అంతమయ్యే దశాంశం (17/8 = 2.125)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Terminating decimals require denominator factors of only 2s and 5s.",
+        "hi": "सांत दशमलव के लिए हर में केवल 2 और 5 के गुणनखंड होने चाहिए।",
+        "te": "అంతమయ్యే దశాంశం కావాలంటే హారంలో 2 మరియు 5 లు మాత్రమే ఉండాలి.",
+        "reviewed": false
+      }
+    }
+  },
+  {
+    "conceptId": "c10-poly-01",
+    "basics_first": {
+      "headline": {
+        "en": "Basics-First: Geometrical Meaning of Zeroes",
+        "hi": "बुनियादी दृष्टिकोण: शून्यकों का ज्यामितीय अर्थ",
+        "te": "ప్రాథమిక విధానం: శూన్యాల రేఖాగణిత అర్థం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "The zeroes of a polynomial p(x) correspond precisely to the x-coordinates of the points where the graph of y = p(x) intersects the x-axis. A linear polynomial's graph is a line cutting the x-axis at 1 point. A quadratic polynomial forms a parabola cutting the x-axis at up to 2 points.",
+        "hi": "किसी बहुपद p(x) के शून्यक उन बिंदुओं के x-निर्देशांक होते हैं जहाँ y = p(x) का ग्राफ x-अक्ष को काटता है। रैखिक बहुपद का ग्राफ एक रेखा होती है जो x-अक्ष को 1 बिंदु पर काटती है। द्विघात बहुपद का ग्राफ एक परवलय (parabola) होता है जो अधिकतम 2 बिंदुओं पर काटता है।",
+        "te": "ఒక బహుపది p(x) శూన్యాలు అంటే y = p(x) గ్రాఫ్ x-అక్షాన్ని ఖండించే బిందువుల యొక్క x-నిరూపకాలు. రేఖీయ బహుపది సరళరేఖ 1 బిందువు వద్ద, వర్గ బహుపది పరావలయం గరిష్టంగా 2 బిందువుల వద్ద x-అక్షాన్ని ఖండిస్తాయి.",
+        "reviewed": false
+      },
+      "visualAnalogy": {
+        "en": "A U-shaped roller-coaster track: the points where the track dips down and touches the ground level (sea level) are the zeroes.",
+        "hi": "रोलर-कोस्टर ट्रैक: जिस बिंदु पर ट्रैक जमीन के स्तर को छूता है, वे उसके शून्यक होते हैं।",
+        "te": "రోలర్-కోస్టర్ ట్రాక్: ట్రాక్ నేలను తాకే బిందువులు దాని శూన్యాలు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "If the graph of y = p(x) touches the x-axis at exactly one point and does not cross it, how many real zeroes does it have?",
+          "hi": "यदि y = p(x) का ग्राफ x-अक्ष को ठीक एक बिंदु पर स्पर्श करता है, तो उसके कितने वास्तविक शून्यक हैं?",
+          "te": "y = p(x) గ్రాఫ్ x-అక్షాన్ని కేవలం ఒకే బిందువు వద్ద తాకితే, దానికి ఎన్ని వాస్తవ శూన్యాలు ఉంటాయి?",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Number of real zeroes equals number of contact/intersection points with x-axis.",
+            "hi": "वास्तविक शून्यकों की संख्या x-अक्ष के स्पर्श/प्रतिच्छेद बिंदुओं की संख्या के बराबर होती है।",
+            "te": "వాస్తవ శూన్యాల సంఖ్య x-అక్షాన్ని తాకే లేదా ఖండించే బిందువుల సంఖ్యకు సమానం.",
+            "reviewed": false
+          },
+          {
+            "en": "There is exactly 1 contact point, meaning two coincident (equal) real zeroes.",
+            "hi": "ठीक 1 संपर्क बिंदु है, जिसका अर्थ है दो संपाती (समान) वास्तविक शून्यक।",
+            "te": "ఖచ్చితంగా 1 తాకే బిందువు ఉంది, అంటే సమానమైన శూన్యాలు ఉన్నాయి.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "1 distinct real zero (two equal roots)",
+          "hi": "1 अद्वितीय वास्तविक शून्यक (दो बराबर मूल)",
+          "te": "1 ప్రత్యేక వాస్తవ శూన్యం (రెండు సమాన మూలాలు)",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Intersections with x-axis give the real zeroes of y = p(x).",
+        "hi": "x-अक्ष के साथ प्रतिच्छेद बिंदु y = p(x) के वास्तविक शून्यक देते हैं।",
+        "te": "x-అక్షంతో ఖండన బిందువులు y = p(x) యొక్క వాస్తవ శూన్యాలను ఇస్తాయి.",
+        "reviewed": false
+      }
+    },
+    "standard": {
+      "headline": {
+        "en": "Standard: Zeroes and Coefficients of a Quadratic Polynomial",
+        "hi": "मानक दृष्टिकोण: द्विघात बहुपद के शून्यक और गुणांकों के बीच संबंध",
+        "te": "ప్రామాణిక విధానం: వర్గ బహుపది శూన్యాలు మరియు గుణకాల సంబంధం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "For a quadratic polynomial p(x) = ax² + bx + c (a ≠ 0) with zeroes α and β: Sum of zeroes: α + β = -b/a = -(coefficient of x) / (coefficient of x²). Product of zeroes: αβ = c/a = (constant term) / (coefficient of x²).",
+        "hi": "द्विघात बहुपद p(x) = ax² + bx + c (a ≠ 0) जिसके शून्यक α और β हैं: शून्यकों का योग: α + β = -b/a। शून्यकों का गुणनफल: αβ = c/a।",
+        "te": "వర్గ బహుపది p(x) = ax² + bx + c (a ≠ 0) శూన్యాలు α, β లకు: శూన్యాల మొత్తం: α + β = -b/a. శూన్యాల లబ్ధం: αβ = c/a.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Find the sum and product of zeroes for p(x) = 2x² - 8x + 6.",
+          "hi": "बहुपद p(x) = 2x² - 8x + 6 के शून्यकों का योग और गुणनफल ज्ञात कीजिए।",
+          "te": "p(x) = 2x² - 8x + 6 బహుపది శూన్యాల మొత్తం మరియు లబ్ధాన్ని కనుగొనండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Identify coefficients: a = 2, b = -8, c = 6.",
+            "hi": "गुणांक पहचानें: a = 2, b = -8, c = 6।",
+            "te": "గుణకాలను గుర్తించండి: a = 2, b = -8, c = 6.",
+            "reviewed": false
+          },
+          {
+            "en": "Sum α + β = -(-8)/2 = 8/2 = 4.",
+            "hi": "योग α + β = -(-8)/2 = 8/2 = 4।",
+            "te": "మొత్తం α + β = -(-8)/2 = 8/2 = 4.",
+            "reviewed": false
+          },
+          {
+            "en": "Product αβ = c/a = 6/2 = 3.",
+            "hi": "गुणनफल αβ = c/a = 6/2 = 3।",
+            "te": "లబ్ధం αβ = c/a = 6/2 = 3.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "Sum = 4, Product = 3",
+          "hi": "योग = 4, गुणनफल = 3",
+          "te": "మొత్తం = 4, లబ్ధం = 3",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Sum of zeroes = -b/a; Product of zeroes = c/a.",
+        "hi": "शून्यकों का योग = -b/a; शून्यकों का गुणनफल = c/a।",
+        "te": "శూన్యాల మొత్తం = -b/a; శూన్యాల లబ్ధం = c/a.",
+        "reviewed": false
+      }
+    },
+    "fast_track": {
+      "headline": {
+        "en": "Fast-Track: Forming a Quadratic from Sum and Product",
+        "hi": "फास्ट-ट्रैक: योग और गुणनफल से द्विघात बहुपद बनाना",
+        "te": "ఫాస్ట్-ట్రాక్: శూన్యాల మొత్తం మరియు లబ్ధంతో వర్గ బహుపదిని రూపొందించడం",
+        "reviewed": false
+      },
+      "explanation": {
+        "en": "A quadratic polynomial with zeroes α and β can be constructed directly as k[x² - (α + β)x + αβ], where k is any non-zero real constant. In standard monic form: x² - Sx + P, where S is the sum and P is the product of zeroes.",
+        "hi": "शून्यक α और β वाले द्विघात बहुपद को सीधे k[x² - (α + β)x + αβ] के रूप में बनाया जा सकता है, जहाँ k कोई अशून्य वास्तविक संख्या है।",
+        "te": "α, β శూన్యాలుగా గల వర్గ బహుపదిని నేరుగా k[x² - (α + β)x + αβ] రూపంలో నిర్మించవచ్చు.",
+        "reviewed": false
+      },
+      "workedExample": {
+        "problem": {
+          "en": "Form a quadratic polynomial whose sum of zeroes is -3 and product of zeroes is 2.",
+          "hi": "एक द्विघात बहुपद ज्ञात कीजिए जिसके शून्यकों का योग -3 और गुणनफल 2 है।",
+          "te": "శూన్యాల మొత్తం -3 మరియు లబ్ధం 2 గా గల వర్గ బహుపదిని రాయండి.",
+          "reviewed": false
+        },
+        "steps": [
+          {
+            "en": "Sum S = -3, Product P = 2.",
+            "hi": "योग S = -3, गुणनफल P = 2।",
+            "te": "మొత్తం S = -3, లబ్ధం P = 2.",
+            "reviewed": false
+          },
+          {
+            "en": "Formula: x² - Sx + P = x² - (-3)x + 2 = x² + 3x + 2.",
+            "hi": "सूत्र: x² - Sx + P = x² - (-3)x + 2 = x² + 3x + 2।",
+            "te": "సూత్రం: x² - Sx + P = x² - (-3)x + 2 = x² + 3x + 2.",
+            "reviewed": false
+          }
+        ],
+        "solution": {
+          "en": "x² + 3x + 2",
+          "hi": "x² + 3x + 2",
+          "te": "x² + 3x + 2",
+          "reviewed": false
+        }
+      },
+      "keyTakeaway": {
+        "en": "Quadratic polynomial = x² - (Sum)x + (Product).",
+        "hi": "द्विघात बहुपद = x² - (योग)x + (गुणनफल)।",
+        "te": "వర్గ బహుపది = x² - (మొత్తం)x + (లబ్ధం).",
         "reviewed": false
       }
     }

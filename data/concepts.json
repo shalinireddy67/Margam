@@ -1,380 +1,458 @@
 [
   {
-    "id": "c6-num-01",
+    "id": "c6-pat-01",
     "class": 6,
-    "chapter": "Knowing Our Numbers",
+    "chapterId": "c6-ch01",
+    "chapter": "Patterns in Mathematics",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Whole Numbers and Arithmetic Operations",
-      "hi": "पूर्ण संख्याएँ और अंकगणितीय संक्रियाएँ",
-      "te": "పూర్ణ సంఖ్యలు మరియు అంకగణిత ప్రక్రియలు",
+      "en": "Patterns in Sequences and Shapes",
+      "hi": "क्रम और आकृतियों में पैटर्न",
+      "te": "అనుక్రమాలు మరియు ఆకారాలలో నమూనాలు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Master basic four operations on positive whole numbers with place value fluency.",
-      "hi": "स्थानीय मान की स्पष्टता के साथ धनात्मक पूर्ण संख्याओं पर मूलभूत चार संक्रियाओं में दक्षता प्राप्त करें।",
-      "te": "స్థాన విలువల స్పష్టతతో ధన పూర్ణ సంఖ్యలపై ప్రాథమిక నాలుగు ప్రక్రియలలో పట్టు సాధించడం.",
+      "en": "Identify, extend, and describe repeating and growing patterns in geometric figures and number sequences.",
+      "hi": "ज्यामितीय आकृतियों और संख्या अनुक्रमों में दोहरावदार और बढ़ते पैटर्न की पहचान करें और उनका विस्तार करें।",
+      "te": "జ్యామితీయ ఆకారాలు మరియు సంఖ్యా శ్రేణులలో పునరావృతమయ్యే మరియు వృద్ధి చెందే నమూనాలను గుర్తించి వివరించడం.",
       "reviewed": false
     },
     "prerequisites": []
   },
   {
-    "id": "c6-num-02",
+    "id": "c6-geo-01",
     "class": 6,
-    "chapter": "Integers Foundation",
+    "chapterId": "c6-ch02",
+    "chapter": "Lines and Angles",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Opposites and Negative Numbers on Number Line",
-      "hi": "संख्या रेखा पर विपरीत और ऋणात्मक संख्याएँ",
-      "te": "సంఖ్యా రేఖపై వ్యతిరేక మరియు ఋణ సంఖ్యలు",
+      "en": "Points, Lines, Rays, and Basic Angles",
+      "hi": "बिंदु, रेखाएं, किरणें और बुनियादी कोण",
+      "te": "బిందువులు, రేఖలు, కిరణాలు మరియు ప్రాథమిక కోణాలు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Represent zero as the reference point, positive numbers to the right and negative numbers to the left.",
-      "hi": "शून्य को संदर्भ बिंदु मानकर, दाईं ओर धनात्मक और बाईं ओर ऋणात्मक संख्याओं को निरूपित करें।",
-      "te": "సున్నాను ఆధార బిందువుగా భావించి, కుడివైపు ధన సంఖ్యలను మరియు ఎడమవైపు ఋణ సంఖ్యలను సూచించడం.",
+      "en": "Distinguish between points, line segments, rays, and lines, and classify angles as acute, right, obtuse, or straight.",
+      "hi": "बिंदु, रेखाखंड, किरण और रेखा के बीच अंतर समझें और कोणों को न्यून, सम, अधिक या ऋजु कोण के रूप में वर्गीकृत करें।",
+      "te": "బిందువులు, రేఖాఖండాలు, కిరణాలు మరియు రేఖల మధ్య తేడాలను గుర్తించి, కోణాలను లఘు, లంబ, గురు లేదా సరళ కోణాలుగా వర్గీకరించడం.",
       "reviewed": false
     },
-    "prerequisites": ["c6-num-01"]
+    "prerequisites": [
+      "c6-pat-01"
+    ]
   },
   {
-    "id": "c6-frac-01",
-    "class": 6,
-    "chapter": "Fractions",
-    "name": {
-      "en": "Fraction Foundations and Like Fractions",
-      "hi": "भिन्न की मूल बातें और समान भिन्न",
-      "te": "భిన్నాల ప్రాథమిక అంశాలు మరియు సజాతి భిన్నాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Understand numerator, denominator, equivalent fractions, and addition/subtraction of like fractions.",
-      "hi": "अंश, हर, समतुल्य भिन्न और समान भिन्नों के जोड़/घटाव को समझें।",
-      "te": "లవం, హారం, సమాన భిన్నాలు మరియు సజాతి భిన్నాల సంకలనం/వ్యవకలనం అర్థం చేసుకోవడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c6-num-01"]
-  },
-  {
-    "id": "c6-alg-01",
-    "class": 6,
-    "chapter": "Algebra",
-    "name": {
-      "en": "Introduction to Variables and Expressions",
-      "hi": "चर और व्यंजकों का परिचय",
-      "te": "చరరాశులు మరియు సమాసాల పరిచయం",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Recognize letters as unknown quantities and formulate simple algebraic expressions from word statements.",
-      "hi": "अज्ञात राशियों के रूप में अक्षरों को पहचानें और शाब्दिक कथनों से सरल बीजगणितीय व्यंजक बनाएं।",
-      "te": "తెలియని రాశులుగా అక్షరాలను గుర్తించి, వాక్య రూప ప్రకటనల నుండి సాధారణ బీజగణిత సమాసాలను రూపొందించడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c6-num-01"]
-  },
-  {
-    "id": "c7-int-01",
+    "id": "c7-num-01",
     "class": 7,
-    "chapter": "Integers",
+    "chapterId": "c7-ch01",
+    "chapter": "Large Numbers Around Us",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Negative Numbers and Number Line Ordering",
-      "hi": "ऋणात्मक संख्याएँ और संख्या रेखा क्रम",
-      "te": "ఋణ సంఖ్యలు మరియు సంఖ్యా రేఖ క్రమం",
+      "en": "Large Numbers, Place Value, and Estimation",
+      "hi": "बड़ी संख्याएं, स्थानीय मान और सन्निकटन",
+      "te": "పెద్ద సంఖ్యలు, స్థాన విలువ మరియు అంచనా",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Compare and order integers using number line distances and absolute values.",
-      "hi": "संख्या रेखा की दूरी और निरपेक्ष मान का उपयोग करके पूर्णांकों की तुलना और क्रमबद्ध करें।",
-      "te": "సంఖ్యా రేఖ దూరాలు మరియు సంపూర్ణ విలువల ఆధారంగా పూర్ణ సంఖ్యలను పోల్చడం మరియు అమర్చడం.",
+      "en": "Read, write, and compare numbers into lakhs and crores using Indian place-value periods, and round numbers to estimate quantities.",
+      "hi": "भारतीय स्थानीय मान प्रणाली का उपयोग करके लाख और करोड़ तक की संख्याओं को पढ़ें, लिखें और तुलना करें तथा सन्निकटन करें।",
+      "te": "భారతీయ స్థాన విలువల పద్ధతి ద్వారా లక్షలు మరియు కోట్ల సంఖ్యలను చదవడం, రాయడం, పోల్చడం మరియు సన్నహిత విలువలను అంచనా వేయడం.",
       "reviewed": false
     },
-    "prerequisites": ["c6-num-02"]
-  },
-  {
-    "id": "c7-int-02",
-    "class": 7,
-    "chapter": "Integers",
-    "name": {
-      "en": "Addition and Subtraction of Integers",
-      "hi": "पूर्णांकों का योग एवं व्यवकलन",
-      "te": "పూర్ణ సంఖ్యల సంకలనం మరియు వ్యవకలనం",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Add and subtract signed integers accurately using the debt/credit model and sign preservation rules.",
-      "hi": "ऋण/जमा मॉडल और चिह्न नियमों का उपयोग करके चिह्नों वाले पूर्णांकों को सटीक रूप से जोड़ें और घटाएं।",
-      "te": "అప్పు/జమ మోడల్ మరియు సంకేత నిబంధనల ఆధారంగా పూర్ణ సంఖ్యలను ఖచ్చితంగా కూడటం మరియు తీసివేయడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c7-int-01", "c6-num-01"]
-  },
-  {
-    "id": "c7-int-03",
-    "class": 7,
-    "chapter": "Integers",
-    "name": {
-      "en": "Multiplication and Division of Integers & Sign Rules",
-      "hi": "पूर्णांकों का गुणन और विभाजन एवं चिह्न नियम",
-      "te": "పూర్ణ సంఖ్యల గుణకారం, భాగహారం మరియు సంకేత నియమాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Apply product sign rules: like signs yield positive, unlike signs yield negative.",
-      "hi": "गुणन चिह्न नियम लागू करें: समान चिह्नों से धनात्मक, असमान चिह्नों से ऋणात्मक प्राप्त होता है।",
-      "te": "లబ్ద సంకేత నియమాలను అమలు చేయడం: ఒకే రకమైన సంకేతాలు ధన ఫలితాన్ని, వేర్వేరు సంకేతాలు ఋణ ఫలితాన్ని ఇస్తాయి.",
-      "reviewed": false
-    },
-    "prerequisites": ["c7-int-02"]
-  },
-  {
-    "id": "c7-int-04",
-    "class": 7,
-    "chapter": "Integers",
-    "name": {
-      "en": "Properties of Integer Operations",
-      "hi": "पूर्णांक संक्रियाओं के गुणधर्म",
-      "te": "పూర్ణ సంఖ్యల ప్రక్రియల ధర్మాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Apply closure, commutative, associative, and distributive properties over addition and multiplication.",
-      "hi": "योग और गुणन पर संवरक, क्रमविनिमेय, साहचर्य और वितरण गुणों को लागू करें।",
-      "te": "సంకలనం మరియు గుణకారాలపై సంవృత, స్థిత్యంతర, సహచర మరియు విభాగ న్యాయాలను వర్తింపజేయడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c7-int-03"]
-  },
-  {
-    "id": "c7-frac-01",
-    "class": 7,
-    "chapter": "Fractions and Decimals",
-    "name": {
-      "en": "Rational Numbers and Unlike Fractions",
-      "hi": "परिमेय संख्याएँ और असमान भिन्न",
-      "te": "అకరణీయ సంఖ్యలు మరియు విజాతి భిన్నాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Add, subtract, and multiply rational numbers with different denominators using LCM balancing.",
-      "hi": "ल.स.प. संतुलन का उपयोग करके विभिन्न हरों वाली परिमेय संख्याओं को जोड़ें, घटाएं और गुणा करें।",
-      "te": "క.సా.గు. ఆధారంగా వేర్వేరు హారాలు గల అకరణీయ సంఖ్యలను కూడటం, తీసివేయడం మరియు గుణించడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c6-frac-01", "c7-int-02"]
+    "prerequisites": []
   },
   {
     "id": "c7-alg-01",
     "class": 7,
-    "chapter": "Algebraic Expressions",
+    "chapterId": "c7-ch02",
+    "chapter": "Arithmetic Expressions",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Combining Like Terms and Simplifying Expressions",
-      "hi": "समान पदों को जोड़ना और व्यंजकों का सरलीकरण",
-      "te": "సజాతి పదాలను కలపడం మరియు సమాసాల సూక్ష్మీకరణ",
+      "en": "Arithmetic Expressions and Order of Operations",
+      "hi": "अंकगणितीय व्यंजक और संक्रियाओं का क्रम",
+      "te": "అంకగణిత సమాసాలు మరియు ప్రక్రియల క్రమం",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Identify like algebraic terms and combine their coefficients while maintaining integer sign rules.",
-      "hi": "समान बीजगणितीय पदों को पहचानें और पूर्णांक चिह्न नियमों का पालन करते हुए उनके गुणांकों को जोड़ें।",
-      "te": "సజాతి బీజగణిత పదాలను గుర్తించి, పూర్ణ సంఖ్యల సంకేత నియమాలను పాటిస్తూ వాటి గుణకాలను కలపడం.",
+      "en": "Evaluate numerical expressions containing multiple operations and nested brackets using BODMAS order of operations.",
+      "hi": "BODMAS नियम का उपयोग करके कोष्ठक और विभिन्न संक्रियाओं वाले अंकगणितीय व्यंजकों का मान ज्ञात करें।",
+      "te": "BODMAS నియమాన్ని ఉపయోగించి బ్రాకెట్లు మరియు వివిధ ప్రక్రియలు గల అంకగణిత సమాసాల విలువను లెక్కించడం.",
       "reviewed": false
     },
-    "prerequisites": ["c6-alg-01", "c7-int-02"]
+    "prerequisites": [
+      "c7-num-01"
+    ]
   },
   {
-    "id": "c7-exp-01",
-    "class": 7,
-    "chapter": "Exponents and Powers",
-    "name": {
-      "en": "Laws of Exponents and Powers",
-      "hi": "घातांक और घात के नियम",
-      "te": "ఘాతాంకాలు మరియు ఘాతాల నియమాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Apply product, quotient, and power of a power laws with positive and negative bases.",
-      "hi": "धनात्मक और ऋणात्मक आधारों के साथ गुणन, भागफल और घात की घात के नियमों को लागू करें।",
-      "te": "ధన మరియు ఋణ భూములతో గుణకారం, భాగహారం మరియు ఘాతాల ఘాత నియమాలను వర్తింపజేయడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c6-num-01"]
-  },
-  {
-    "id": "c8-lin-01",
+    "id": "c8-sqr-01",
     "class": 8,
-    "chapter": "Linear Equations in One Variable",
+    "chapterId": "c8-ch01",
+    "chapter": "A Square and a Cube",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Algebraic Expressions vs Equations",
-      "hi": "बीजगणितीय व्यंजक बनाम समीकरण",
-      "te": "బీజగణిత సమాసాలు వర్సెస్ సమీకరణాలు",
+      "en": "Perfect Squares and Square Roots via Prime Factorisation",
+      "hi": "पूर्ण वर्ग और अभाज्य गुणनखंडन द्वारा वर्गमूल",
+      "te": "ఖచ్చిత వర్గాలు మరియు ప్రధాన కారణాంక పద్ధతిలో వర్గమూలాలు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Distinguish an expression from an equation having an equality sign (=) and degree 1.",
-      "hi": "समानता चिह्न (=) और घात 1 वाले समीकरण को व्यंजक से अलग पहचानें।",
-      "te": "సమానత్వ సంకేతం (=) మరియు 1వ తరగతి ఘాతం గల సమీకరణాన్ని సాధారణ సమాసం నుండి వేరుగా గుర్తించడం.",
+      "en": "Identify properties of perfect square numbers and find square roots of numbers using prime factorisation.",
+      "hi": "पूर्ण वर्ग संख्याओं के गुणों को पहचानें और अभाज्य गुणनखंड विधि से वर्गमूल ज्ञात करें।",
+      "te": "ఖచ్చిత వర్గ సంఖ్యల లక్షణాలను గుర్తించి, ప్రధాన కారణాంక విభజన పద్ధతి ద్వారా వర్గమూలాలను కనుగొనడం.",
       "reviewed": false
     },
-    "prerequisites": ["c7-alg-01"]
+    "prerequisites": []
   },
   {
-    "id": "c8-lin-02",
+    "id": "c8-exp-01",
     "class": 8,
-    "chapter": "Linear Equations in One Variable",
+    "chapterId": "c8-ch02",
+    "chapter": "Power Play",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Verification and Solution of Linear Equations",
-      "hi": "रैखिक समीकरणों का सत्यापन और हल",
-      "te": "రేఖీయ సమీకరణాల సాధన మరియు సరిచూడటం",
+      "en": "Exponents, Powers, and Laws of Exponents",
+      "hi": "घातांक, घात और घातांकों के नियम",
+      "te": "ఘాతాంకాలు, ఘాతాలు మరియు ఘాతాంక నియమాలు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Substitute proposed solutions into LHS and RHS to test equality.",
-      "hi": "समानता की जाँच के लिए बाएँ पक्ष (LHS) और दाएँ पक्ष (RHS) में प्रस्तावित हल प्रतिस्थापित करें।",
-      "te": "సమానత్వాన్ని నిర్ధారించడానికి ఎడమ వైపు (LHS) మరియు కుడి వైపు (RHS) లలో ప్రతిపాదిత విలువను ప్రతిక్షేపించడం.",
+      "en": "Express repeated multiplication using exponential notation and apply the laws of exponents: a^m · a^n = a^(m+n) and (a^m)^n = a^(mn).",
+      "hi": "घातांकीय रूप में पुनरावृत्त गुणन व्यक्त करें और घातांक नियमों a^m · a^n = a^(m+n) तथा (a^m)^n = a^(mn) को लागू करें।",
+      "te": "పునరావృత గుణకారాన్ని ఘాతాంక రూపంలో వ్యక్తీకరించడం మరియు a^m · a^n = a^(m+n), (a^m)^n = a^(mn) ఘాతాంక నియమాలను వర్తింపజేయడం.",
       "reviewed": false
     },
-    "prerequisites": ["c8-lin-01", "c7-int-02"]
+    "prerequisites": [
+      "c8-sqr-01"
+    ]
   },
   {
-    "id": "c8-lin-03",
-    "class": 8,
-    "chapter": "Linear Equations in One Variable",
+    "id": "c9-coord-01",
+    "class": 9,
+    "chapterId": "c9-ch01",
+    "chapter": "Orienting Yourself: The Use of Coordinates",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Solving by Transposition and Balancing",
-      "hi": "पक्षांतरण और संतुलन विधि द्वारा हल करना",
-      "te": "పక్షాంతరీకరణ మరియు సమతుల్య పద్ధతి ద్వారా సాధన",
+      "en": "The Cartesian Plane and Plotting Coordinates",
+      "hi": "कार्तीय तल और निर्देशांक आलेखन",
+      "te": "కార్టీసియన్ తలం మరియు నిరూపకాల గుర్తింపు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Transpose additive terms as subtraction, and multiplicative factors as division across the equals sign.",
-      "hi": "समानता चिह्न के पार जोड़ वाले पदों को घटाव और गुणा वाले कारकों को भाग के रूप में पक्षांतरित करें।",
-      "te": "సమానత్వ సంకేతానికి అటువైపు సంకలన పదాలను తీసివేతగా, గుణకార కారకాలను భాగహారంగా పక్షాంతరీకరణ చేయడం.",
+      "en": "Locate points (x, y) on a two-dimensional Cartesian coordinate plane, identifying quadrants, origin (0, 0), and sign conventions of axes.",
+      "hi": "द्विविमीय कार्तीय तल पर बिंदुओं (x, y) की स्थिति ज्ञात करें और चतुर्थांशों, मूल बिंदु (0, 0) तथा अक्षों के चिह्नों को पहचानें।",
+      "te": "ద్విమితీయ కార్టీసియన్ తలంపై బిందువులు (x, y) ను గుర్తించడం, పాదాలు, మూల బిందువు (0, 0) మరియు అక్షాల సంకేతాలను విశ్లేషించడం.",
       "reviewed": false
     },
-    "prerequisites": ["c8-lin-02", "c7-int-03"]
-  },
-  {
-    "id": "c8-lin-04",
-    "class": 8,
-    "chapter": "Linear Equations in One Variable",
-    "name": {
-      "en": "Equations with Variables on Both Sides",
-      "hi": "दोनों पक्षों में चर वाले समीकरण",
-      "te": "ఇరువైపులా చరరాశులు కలిగిన సమీకరణాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Collect all variable terms to one side and constant terms to the opposite side using transposition.",
-      "hi": "पक्षांतरण का उपयोग करके सभी चर पदों को एक तरफ और अचर पदों को दूसरी तरफ एकत्र करें।",
-      "te": "పక్షాంతరీకరణ ద్వారా చరరాశి పదాలన్నింటినీ ఒకవైపుకు, స్థిరరాశులను మరొకవైపుకు చేర్చి సాధించడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c8-lin-03"]
-  },
-  {
-    "id": "c8-lin-05",
-    "class": 8,
-    "chapter": "Linear Equations in One Variable",
-    "name": {
-      "en": "Word Problems: Indian Real-Life Applications",
-      "hi": "इबारती प्रश्न: भारतीय वास्तविक जीवन के अनुप्रयोग",
-      "te": "సమస్యల సాధన: భారతీయ నిత్యజీవిత అనువర్తనాలు",
-      "reviewed": false
-    },
-    "learningObjective": {
-      "en": "Model real scenarios (currency notes, auto fares, perimeter, ages) into algebraic equations and solve.",
-      "hi": "वास्तविक परिदृश्यों (रुपये के नोट, ऑटो किराया, परिमाप, आयु) को समीकरणों में बदलें और हल करें।",
-      "te": "నిజ జీవిత పరిస్థితులను (కరెన్సీ నోట్లు, ఆటో ఛార్జీలు, చుట్టుకొలత, వయస్సులు) బీజగణిత సమీకరణాలుగా మార్చి సాధించడం.",
-      "reviewed": false
-    },
-    "prerequisites": ["c8-lin-04", "c7-frac-01"]
+    "prerequisites": []
   },
   {
     "id": "c9-poly-01",
     "class": 9,
-    "chapter": "Polynomials",
+    "chapterId": "c9-ch02",
+    "chapter": "Introduction to Linear Polynomials",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Polynomials in One Variable and Degree",
-      "hi": "एक चर में बहुपद और बहुपद की घात",
-      "te": "ఒకే చరరాశిలో బహుపదులు మరియు బహుపది తరగతి",
+      "en": "Terms, Coefficients, and Zeroes of Linear Polynomials",
+      "hi": "रैखिक बहुपदों के पद, गुणांक और शून्यक",
+      "te": "రేఖీయ బహుపదుల పదాలు, గుణకాలు మరియు శూన్యాలు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Identify polynomials (non-negative integer exponents) and determine their degree, coefficients, and constants.",
-      "hi": "बहुपदों (अऋणात्मक पूर्णांक घातांक) को पहचानें और उनकी घात, गुणांक और अचर पद निर्धारित करें।",
-      "te": "బహుపదులను (రుణేతర పూర్ణాంక ఘాతాలు) గుర్తించి వాటి తరగతి, గుణకాలు మరియు స్థిరపదాలను కనుగొనడం.",
+      "en": "Identify terms, degree, and coefficients in polynomial expressions, and find zeroes of linear polynomials p(x) = ax + b.",
+      "hi": "बहुपदों में पद, घात और गुणांक पहचानें तथा रैखिक बहुपदों p(x) = ax + b के शून्यक ज्ञात करें।",
+      "te": "బహుపదులలో పదాలు, పరిమాణం మరియు గుణకాలను గుర్తించి, రేఖీయ బహుపది p(x) = ax + b శూన్యాలను కనుగొనడం.",
       "reviewed": false
     },
-    "prerequisites": ["c8-lin-01", "c7-exp-01"]
+    "prerequisites": [
+      "c9-coord-01"
+    ]
   },
   {
-    "id": "c9-poly-02",
-    "class": 9,
-    "chapter": "Polynomials",
+    "id": "c10-real-01",
+    "class": 10,
+    "chapterId": "c10-ch01",
+    "chapter": "Real Numbers",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Zeroes of a Polynomial",
-      "hi": "बहुपद के शून्यक",
-      "te": "బహుపది శూన్య విలువలు",
+      "en": "The Fundamental Theorem of Arithmetic and HCF-LCM",
+      "hi": "अंकगणित की आधारभूत प्रमेय और HCF-LCM",
+      "te": "అంకగణిత ప్రాథమిక సిద్ధాంతం మరియు గ.సా.భా-క.సా.గు",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Evaluate P(x) at given values and determine roots where P(k) = 0.",
-      "hi": "दिए गए मानों पर P(x) का मान निकालें और वे मूल ज्ञात करें जहाँ P(k) = 0 हो।",
-      "te": "ఇచ్చిన విలువల వద్ద P(x) విలువను లెక్కించి, P(k) = 0 అయ్యే మూలాలను కనుగొనడం.",
+      "en": "Express composite numbers as unique products of primes and compute HCF and LCM using prime factorisation, verifying HCF(a, b) · LCM(a, b) = a · b.",
+      "hi": "भाज्य संख्याओं को अभाज्य गुणनखंडों के गुणनफल के रूप में लिखें और HCF तथा LCM ज्ञात कर संबंध HCF(a, b) · LCM(a, b) = a · b का सत्यापन करें।",
+      "te": "సంయుక్త సంఖ్యలను ప్రధాన కారణాంకాల లబ్దంగా రాయడం మరియు ప్రధాన కారణాంక పద్ధతిలో గ.సా.భా, క.సా.గు లను కనుగొని HCF(a, b) · LCM(a, b) = a · b నిరూపించడం.",
       "reviewed": false
     },
-    "prerequisites": ["c9-poly-01", "c8-lin-03"]
+    "prerequisites": []
   },
   {
-    "id": "c9-poly-03",
-    "class": 9,
+    "id": "c10-poly-01",
+    "class": 10,
+    "chapterId": "c10-ch02",
     "chapter": "Polynomials",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Remainder Theorem and Polynomial Division",
-      "hi": "शेषफल प्रमेय और बहुपद विभाजन",
-      "te": "శేష సిద్ధాంతం మరియు బహుపదుల భాగహారం",
+      "en": "Geometrical Meaning of Zeroes and Coefficients of Polynomials",
+      "hi": "बहुपदों के शून्यकों का ज्यामितीय अर्थ और गुणांकों से संबंध",
+      "te": "బహుపది శూన్యాల జ్యామితీయ అర్థం మరియు గుణకాలతో సంబంధం",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Find the remainder when P(x) is divided by (x - a) without performing full long division by computing P(a).",
-      "hi": "P(a) की गणना करके बिना पूर्ण विभाजन किए P(x) को (x - a) से भाग देने पर शेषफल ज्ञात करें।",
-      "te": "పూర్తి భాగహారం చేయకుండానే P(a) విలువను లెక్కించి P(x) ను (x - a) చే భాగించినప్పుడు వచ్చే శేషాన్ని కనుగొనడం.",
+      "en": "Interpret zeroes of polynomials geometrically as x-intercepts of graphs and relate sum and product of zeroes to coefficients: α + β = -b/a and αβ = c/a.",
+      "hi": "ग्राफ के x-प्रतिच्छेद के रूप में शून्यकों का ज्यामितीय अर्थ समझें और शून्यकों के योग व गुणनफल का गुणांकों से संबंध α + β = -b/a, αβ = c/a सत्यापित करें।",
+      "te": "గ్రాఫ్‌లోని x-అంతరఖండాలుగా శూన్యాలను జ్యామితీయంగా అర్థం చేసుకోవడం మరియు శూన్యాల మొత్తం, లబ్దాలను గుణకాలతో α + β = -b/a, αβ = c/a సంబంధపరచడం.",
       "reviewed": false
     },
-    "prerequisites": ["c9-poly-02", "c7-int-03"]
+    "prerequisites": [
+      "c10-real-01"
+    ]
   },
   {
-    "id": "c9-poly-04",
-    "class": 9,
-    "chapter": "Polynomials",
+    "id": "c6-neg-01",
+    "class": 6,
+    "chapterId": "c6-ch10",
+    "chapter": "The Other Side of Zero",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Factor Theorem and Middle-Term Splitting",
-      "hi": "गुणनखंड प्रमेय और मध्य पद का विभाजन",
-      "te": "కారణాంక సిద్ధాంతం మరియు మధ్య పదాన్ని విభజించడం",
+      "en": "Opposite Quantities and Need for Negative Numbers",
+      "hi": "विपरीत राशियाँ और ऋणात्मक संख्याओं की आवश्यकता",
+      "te": "వ్యతిరేక రాశులు మరియు ఋణ సంఖ్యల ఆవశ్యకత",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Factor quadratic polynomials ax² + bx + c by finding factors p, q such that p+q = b and pq = ac.",
-      "hi": "द्विघात बहुपद ax² + bx + c के ऐसे गुणनखंड p, q खोजकर हल करें कि p+q = b और pq = ac हो।",
-      "te": "p+q = b మరియు pq = ac అయ్యే విధంగా p, q కారకాలను కనుగొని ax² + bx + c వర్గ బహుపదిని కారణాంకాలుగా విభజించడం.",
+      "en": "Represent opposite physical quantities (temperatures below zero, depths below sea level, debts) using negative signs with zero as the reference point.",
+      "hi": "शून्य को संदर्भ बिंदु मानकर विपरीत भौतिक राशियों (शून्य से नीचे का तापमान, समुद्र तल से गहराई, उधारी) को ऋण चिह्न से निरूपित करें।",
+      "te": "సున్నాను ఆధార బిందువుగా భావించి వ్యతిరేక భౌతిక రాశులను (సున్నా కంటే తక్కువ ఉష్ణోగ్రతలు, సముద్ర మట్టం కంటే దిగువ లోతులు, అప్పులు) ఋణ సంకేతాలతో సూచించడం.",
       "reviewed": false
     },
-    "prerequisites": ["c9-poly-03", "c7-int-03"]
+    "prerequisites": [
+      "c6-geo-01"
+    ]
   },
   {
-    "id": "c9-poly-05",
-    "class": 9,
-    "chapter": "Polynomials",
+    "id": "c6-neg-02",
+    "class": 6,
+    "chapterId": "c6-ch10",
+    "chapter": "The Other Side of Zero",
+    "subject": "maths",
+    "board": "ncert",
     "name": {
-      "en": "Standard Algebraic Identities",
-      "hi": "मानक बीजीय सर्वसमिकाएँ",
-      "te": "ప్రామాణిక బీజగణిత సర్వసమీకరణాలు",
+      "en": "Integers on the Number Line and Ordering",
+      "hi": "संख्या रेखा पर पूर्णांक और उनकी तुलना",
+      "te": "సంఖ్యా రేఖపై పూర్ణ సంఖ్యలు మరియు పోలిక",
       "reviewed": false
     },
     "learningObjective": {
-      "en": "Apply identities (x+y)², (x-y)², (x²-y²), and (x+a)(x+b) for rapid mental expansion and factor finding.",
-      "hi": "तीव्र विस्तार और गुणनखंडन के लिए (x+y)², (x-y)², (x²-y²) और (x+a)(x+b) सर्वसमिकाओं का उपयोग करें।",
-      "te": "త్వరిత విస్తరణ మరియు కారణాంకాల కోసం (x+y)², (x-y)², (x²-y²), మరియు (x+a)(x+b) సర్వసమీకరణాలను వర్తింపజేయడం.",
+      "en": "Plot positive and negative integers on a horizontal number line and compare them using position (a number further to the left is always smaller, e.g., -8 < -3).",
+      "hi": "संख्या रेखा पर धनात्मक और ऋणात्मक पूर्णांकों को अंकित करें और स्थिति के आधार पर तुलना करें (बाईं ओर की संख्या सदैव छोटी होती है, जैसे -8 < -3)।",
+      "te": "క్షితిజ సమాంతర సంఖ్యా రేఖపై ధన మరియు ఋణ పూర్ణ సంఖ్యలను గుర్తించి, స్థానాన్ని బట్టి పోల్చడం (ఎడమవైపు ఉండే సంఖ్య ఎల్లప్పుడూ చిన్నది, ఉదా. -8 < -3).",
       "reviewed": false
     },
-    "prerequisites": ["c9-poly-04", "c8-lin-01"]
+    "prerequisites": [
+      "c6-neg-01"
+    ]
+  },
+  {
+    "id": "c7-int-01",
+    "class": 7,
+    "chapterId": "c7-ch10",
+    "chapter": "Operations with Integers",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Addition and Subtraction of Signed Integers",
+      "hi": "चिह्नित पूर्णांकों का योग और व्यवकलन",
+      "te": "సంకేతాలు గల పూర్ణ సంఖ్యల సంకలనం మరియు వ్యవకలనం",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Add integers with like and unlike signs using number line movements and credit/debt models, and subtract by adding the additive inverse: a - (-b) = a + b.",
+      "hi": "संख्या रेखा और जमा/ऋण मॉडल का उपयोग करके समान और असमान चिह्नों वाले पूर्णांकों को जोड़ें, और योज्य प्रतिलोम जोड़कर घटाएं: a - (-b) = a + b।",
+      "te": "సంఖ్యా రేఖ మరియు జమ/అప్పు నమూనా ద్వారా ఒకే లేదా వేర్వేరు సంకేతాలు గల పూర్ణ సంఖ్యలను కూడటం, మరియు సంకలన విలోమాన్ని కలపడం ద్వారా తీసివేయడం: a - (-b) = a + b.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c6-neg-02",
+      "c7-alg-01"
+    ]
+  },
+  {
+    "id": "c7-int-02",
+    "class": 7,
+    "chapterId": "c7-ch10",
+    "chapter": "Operations with Integers",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Multiplication of Integers and Rules of Signs",
+      "hi": "पूर्णांकों का गुणन और चिह्नों के नियम",
+      "te": "పూర్ణ సంఖ్యల గుణకారం మరియు సంకేత నియమాలు",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Multiply signed numbers using product sign rules: (+) × (-) = (-) and (-) × (-) = (+), and evaluate powers of negative bases such as (-1)^n.",
+      "hi": "गुणन चिह्न नियमों का उपयोग करके हस्ताक्षरित संख्याओं का गुणा करें: (+) × (-) = (-) और (-) × (-) = (+), तथा ऋणात्मक आधारों की घातें ज्ञात करें।",
+      "te": "లబ్ద సంకేత నియమాలను ఉపయోగించి సంకేత సంఖ్యలను గుణించడం: (+) × (-) = (-) మరియు (-) × (-) = (+), మరియు (-1)^n వంటి ఋణ భూముల ఘాతాలను లెక్కించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c7-int-01"
+    ]
+  },
+  {
+    "id": "c8-dist-01",
+    "class": 8,
+    "chapterId": "c8-ch06",
+    "chapter": "We Distribute, Yet Things Multiply",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "The Distributive Law with Signed Monomials",
+      "hi": "चिह्नित एकपदों के साथ वितरण नियम",
+      "te": "సంకేత ఏకపదులతో విభాగ న్యాయం",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Apply the distributive property a(b + c) = ab + ac to expand expressions where the multiplier is negative, ensuring sign distribution across all interior terms (e.g., -3(x - 5) = -3x + 15).",
+      "hi": "व्यंजकों का विस्तार करने के लिए वितरण गुण a(b + c) = ab + ac लागू करें जहाँ गुणक ऋणात्मक हो, जिससे सभी पदों पर चिह्न सही लगे (जैसे -3(x - 5) = -3x + 15)।",
+      "te": "ఋణ గుణకం ఉన్నప్పుడు సమాసాలను విస్తరించడానికి విభాగ న్యాయం a(b + c) = ab + ac ను వర్తింపజేయడం మరియు లోపలి అన్ని పదాల సంకేతాలను సరిగ్గా మార్చడం (ఉదా. -3(x - 5) = -3x + 15).",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c7-int-02",
+      "c8-exp-01"
+    ]
+  },
+  {
+    "id": "c8-dist-02",
+    "class": 8,
+    "chapterId": "c8-ch06",
+    "chapter": "We Distribute, Yet Things Multiply",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Multiplying Binomials and Combining Like Terms",
+      "hi": "द्विपदों का गुणन और समान पदों का संयोजन",
+      "te": "ద్విపదుల గుణకారం మరియు సజాతి పదాల కలయిక",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Multiply two binomials (x + a)(x + b) using double distribution, combine the linear middle terms ax + bx = (a + b)x, and obtain the quadratic expansion x² + (a + b)x + ab.",
+      "hi": "दोहरे वितरण का उपयोग करके दो द्विपदों (x + a)(x + b) का गुणा करें, मध्य पदों को जोड़ें और द्विघात विस्तार x² + (a + b)x + ab प्राप्त करें।",
+      "te": "ద్వంద్వ విభాగ పద్ధతిలో రెండు ద్విపదులను (x + a)(x + b) గుణించి, మధ్య పదాలను కలిపి వర్గ విస్తరణ x² + (a + b)x + ab సాధించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c8-dist-01"
+    ]
+  },
+  {
+    "id": "c9-id-01",
+    "class": 9,
+    "chapterId": "c9-ch04",
+    "chapter": "Exploring Algebraic Identities",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Standard Algebraic Identities and Patterns",
+      "hi": "मानक बीजीय सर्वसमिकाएँ और पैटर्न",
+      "te": "ప్రామాణిక బీజగణిత సర్వసమీకరణాలు మరియు నమూనాలు",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Recognize and fluently expand standard algebraic identities: (a + b)², (a - b)², and difference of squares a² - b² = (a - b)(a + b).",
+      "hi": "मानक बीजीय सर्वसमिकाओं को पहचानें और धाराप्रवाह विस्तार करें: (a + b)², (a - b)² और वर्गों का अंतर a² - b² = (a - b)(a + b)।",
+      "te": "ప్రామాణిక బీజగణిత సర్వసమీకరణాలను గుర్తించి విస్తరించడం: (a + b)², (a - b)² మరియు వర్గాల తేడా a² - b² = (a - b)(a + b).",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c8-dist-02",
+      "c9-poly-01"
+    ]
+  },
+  {
+    "id": "c9-id-02",
+    "class": 9,
+    "chapterId": "c9-ch04",
+    "chapter": "Exploring Algebraic Identities",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Factoring Quadratic Trinomials by Middle-Term Splitting",
+      "hi": "मध्य पद को तोड़कर द्विघात त्रिपदों का गुणनखंडन",
+      "te": "మధ్య పదాన్ని విభజించి వర్గ త్రిపదుల కారణాంక విభజన",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Factorize quadratic expressions x² + Bx + C by determining factor pairs p, q such that p + q = B and pq = C, correctly reasoning about positive/negative signs.",
+      "hi": "द्विघात व्यंजक x² + Bx + C का गुणनखंड करने के लिए ऐसे p, q ज्ञात करें कि p + q = B और pq = C हो, तथा धनात्मक/ऋणात्मक चिह्नों का सही तर्क लागू करें।",
+      "te": "వర్గ సమాసం x² + Bx + C ని కారణాంకాలుగా మార్చడానికి p + q = B మరియు pq = C అయ్యే జత p, q లను కనుగొని, ధన/ఋణ సంకేతాలను ఖచ్చితంగా విశ్లేషించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c9-id-01",
+      "c7-int-02"
+    ]
+  },
+  {
+    "id": "c10-quad-01",
+    "class": 10,
+    "chapterId": "c10-ch04",
+    "chapter": "Quadratic Equations",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "Standard Form and Solving by Factoring",
+      "hi": "मानक रूप और गुणनखंडन द्वारा हल",
+      "te": "ప్రామాణిక రూపం మరియు కారణాంక పద్ధతిలో సాధన",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Express quadratic equations in standard form ax² + bx + c = 0 and solve by factoring, applying the zero-product property (A · B = 0 implies A = 0 or B = 0).",
+      "hi": "द्विघात समीकरणों को मानक रूप ax² + bx + c = 0 में लिखें और शून्य-गुणनफल नियम का उपयोग करके गुणनखंडन द्वारा हल करें।",
+      "te": "వర్గ సమీకరణాలను ప్రామాణిక రూపం ax² + bx + c = 0 లో రాసి, శూన్య-లబ్ద నియమాన్ని (A · B = 0 అయితే A = 0 లేదా B = 0) వర్తింపజేసి సాధించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c9-id-02",
+      "c10-poly-01"
+    ]
+  },
+  {
+    "id": "c10-quad-02",
+    "class": 10,
+    "chapterId": "c10-ch04",
+    "chapter": "Quadratic Equations",
+    "subject": "maths",
+    "board": "ncert",
+    "name": {
+      "en": "The Quadratic Formula and the Discriminant",
+      "hi": "द्विघात सूत्र और विविक्तकर (डिस्क्रिमिनेंट)",
+      "te": "వర్గ సూత్రం మరియు విచక్షణి (డిస్క్రిమినెంట్)",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Solve ax² + bx + c = 0 using the quadratic formula x = (-b ± √(b² - 4ac)) / (2a) and analyze root types using the discriminant D = b² - 4ac without sign calculation errors.",
+      "hi": "द्विघात सूत्र x = (-b ± √(b² - 4ac)) / (2a) का उपयोग करके समीकरण हल करें और विविक्तकर D = b² - 4ac द्वारा मूलों की प्रकृति का विश्लेषण करें।",
+      "te": "వర్గ సూత్రం x = (-b ± √(b² - 4ac)) / (2a) ను ఉపయోగించి సమీకరణాలను సాధించడం మరియు విచక్షణి D = b² - 4ac ద్వారా మూలాల స్వభావాన్ని విశ్లేషించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c10-quad-01",
+      "c7-int-02"
+    ]
   }
 ]
