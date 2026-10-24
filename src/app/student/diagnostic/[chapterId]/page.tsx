@@ -372,60 +372,98 @@ export default function ChapterDiagnosticPage() {
         )}
 
         {/* CONFIRMATION FAILED: SHOW GAP CARD (WHATEVER THE SCORE) */}
-        {confirmationStatus === "failed" && result?.gapAnalysis.rootConceptId && (
-          <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
-            <div className="flex items-center gap-2 text-rose-950 font-heading font-extrabold text-base">
-              <GitBranch className="w-5 h-5 text-rose-700" />
-              <span>Identified Prerequisite Gap</span>
-            </div>
+        {confirmationStatus === "failed" && result?.gapAnalysis.rootConceptId && (() => {
+          const rootConcept = getConceptById(result.gapAnalysis.rootConceptId);
+          const exactConceptName = rootConcept
+            ? (rootConcept.name[currentLang] || rootConcept.name.en)
+            : result.gapAnalysis.rootConceptId;
 
-            <p className="text-xs text-rose-900 leading-relaxed font-medium">
-              {result.gapAnalysis.plainLanguageReason}
-            </p>
-
-            {/* Visual DAG Journey Path */}
-            {result.gapAnalysis.prerequisitePath.length > 0 && (
-              <div className="bg-white/80 p-4 rounded-2xl border border-rose-200 space-y-2">
-                <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
-                  Learning Journey Backtrack
-                </span>
-                <div className="flex items-center flex-wrap gap-2 text-xs">
-                  {result.gapAnalysis.prerequisitePath.map((nodeId, idx) => {
-                    const nodeConcept = getConceptById(nodeId);
-                    const isLast = idx === result.gapAnalysis.prerequisitePath.length - 1;
-                    return (
-                      <React.Fragment key={nodeId}>
-                        <span
-                          className={`px-2.5 py-1 rounded-xl font-bold border ${
-                            isLast
-                              ? "bg-rose-600 text-white border-rose-700 shadow-xs"
-                              : "bg-slate-100 text-slate-800 border-slate-200"
-                          }`}
-                        >
-                          {nodeConcept ? `Class ${nodeConcept.class}: ${nodeConcept.name.en}` : nodeId}
-                        </span>
-                        {!isLast && <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
-                      </React.Fragment>
-                    );
-                  })}
+          return (
+            <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2 text-rose-950 font-heading font-extrabold text-base">
+                  <GitBranch className="w-5 h-5 text-rose-700" />
+                  <span>Identified Prerequisite Gap</span>
                 </div>
+                {rootConcept && (
+                  <span className="px-3 py-1 rounded-full bg-rose-200 text-rose-900 text-xs font-bold">
+                    Class {rootConcept.class} • Concept ID: {rootConcept.id}
+                  </span>
+                )}
               </div>
-            )}
 
-            {/* CTA Button to Prerequisite Lesson */}
-            <div className="pt-2">
-              <Link
-                href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
-                  result.gapAnalysis.plainLanguageReason
-                )}`}
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
-              >
-                <span>Review Foundational Lesson (Basics-First)</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {/* Exact Concept Name from concepts.json */}
+              <div className="bg-white rounded-2xl p-4 border border-rose-200 shadow-xs space-y-1.5">
+                <span className="text-[11px] font-bold text-rose-700 uppercase tracking-wider block">
+                  Foundational Concept to Review
+                </span>
+                <h3 className="text-lg font-heading font-extrabold text-slate-900 tracking-tight">
+                  {exactConceptName}
+                </h3>
+                {rootConcept && currentLang !== "en" && rootConcept.name.en !== exactConceptName && (
+                  <p className="text-xs text-slate-500 font-medium">
+                    {rootConcept.name.en}
+                  </p>
+                )}
+                {rootConcept && (
+                  <p className="text-xs text-slate-600 leading-relaxed pt-1 border-t border-slate-100 mt-2">
+                    <strong className="text-slate-700">Learning Objective: </strong>
+                    {rootConcept.learningObjective[currentLang] || rootConcept.learningObjective.en}
+                  </p>
+                )}
+              </div>
+
+              <p className="text-xs text-rose-900 leading-relaxed font-medium">
+                {result.gapAnalysis.plainLanguageReason}
+              </p>
+
+              {/* Visual DAG Journey Path */}
+              {result.gapAnalysis.prerequisitePath.length > 0 && (
+                <div className="bg-white/80 p-4 rounded-2xl border border-rose-200 space-y-2">
+                  <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
+                    Learning Journey Backtrack
+                  </span>
+                  <div className="flex items-center flex-wrap gap-2 text-xs">
+                    {result.gapAnalysis.prerequisitePath.map((nodeId, idx) => {
+                      const nodeConcept = getConceptById(nodeId);
+                      const isLast = idx === result.gapAnalysis.prerequisitePath.length - 1;
+                      const nodeConceptName = nodeConcept
+                        ? (nodeConcept.name[currentLang] || nodeConcept.name.en)
+                        : nodeId;
+                      return (
+                        <React.Fragment key={nodeId}>
+                          <span
+                            className={`px-2.5 py-1 rounded-xl font-bold border ${
+                              isLast
+                                ? "bg-rose-600 text-white border-rose-700 shadow-xs"
+                                : "bg-slate-100 text-slate-800 border-slate-200"
+                            }`}
+                          >
+                            {nodeConcept ? `Class ${nodeConcept.class}: ${nodeConceptName}` : nodeId}
+                          </span>
+                          {!isLast && <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* CTA Button to Prerequisite Lesson */}
+              <div className="pt-2">
+                <Link
+                  href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
+                    result.gapAnalysis.plainLanguageReason
+                  )}`}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
+                >
+                  <span>Review Foundational Lesson (Basics-First)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Diagnostic Questions List */}
         <form onSubmit={handleSubmitDiagnostic} className="space-y-6">

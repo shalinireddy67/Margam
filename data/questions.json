@@ -1317,12 +1317,12 @@
       {
         "id": "D",
         "text": {
-          "en": "x = -8, x = 1",
-          "hi": "x = -8, x = 1",
-          "te": "x = -8, x = 1",
+          "en": "No real roots (calculated D = 4 - 32 = -28)",
+          "hi": "कोई वास्तविक मूल नहीं (D = 4 - 32 = -28)",
+          "te": "వాస్తవ మూలాలు లేవు (D = 4 - 32 = -28)",
           "reviewed": false
         },
-        "mistakeTag": "incorrect_discriminant_calculation"
+        "mistakeTag": "sign_error_negative_times_negative_became_negative"
       }
     ],
     "correctAnswer": "B",

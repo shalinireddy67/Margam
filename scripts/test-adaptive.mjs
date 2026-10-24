@@ -169,7 +169,25 @@ assert.ok(diagReport.totalQuestions >= 2);
 assert.ok(diagReport.scorePercentage < 100);
 console.log(`  Diagnostic Score: ${diagReport.correctCount}/${diagReport.totalQuestions} (${diagReport.scorePercentage}%)`);
 console.log(`  Identified Mistake Tags: [${diagReport.mistakeTags.join(", ")}]`);
-console.log("  [PASS] Stage 1 Chapter Diagnostic evaluated with mistake tagging.");
+
+// Verify Reachable Class 10 to Class 7 Trace in Chapter 4 Diagnostic
+const c10ToC7Answers = {};
+for (const q of dQuestions) {
+  if (q.id === "q-c10-form-01") {
+    c10ToC7Answers[q.id] = "A"; // squared_negative_b_as_negative -> c7-int-02
+  } else if (q.id === "q-c10-form-02") {
+    c10ToC7Answers[q.id] = "D"; // sign_error_negative_times_negative_became_negative -> c7-int-02
+  } else {
+    c10ToC7Answers[q.id] = q.correctAnswer;
+  }
+}
+const c10ToC7Report = evaluateChapterDiagnostic("c10-ch04", c10ToC7Answers);
+assert.equal(c10ToC7Report.gapAnalysis.confirmed, true, "Class 10 to 7 gap must be confirmed");
+assert.equal(c10ToC7Report.gapAnalysis.rootConceptId, "c7-int-02", "Must trace to c7-int-02");
+assert.equal(c10ToC7Report.gapAnalysis.canRoute, true, "c7-int-02 must be routable");
+assert.equal(c10ToC7Report.gapAnalysis.triggerReason, "convergent_tags", "Must trigger via convergent_tags");
+console.log(`  Class 10 -> Class 7 Trace Verified: root = ${c10ToC7Report.gapAnalysis.rootConceptId}, trigger = ${c10ToC7Report.gapAnalysis.triggerReason}`);
+console.log("  [PASS] Stage 1 Chapter Diagnostic evaluated with mistake tagging & Class 10 -> Class 7 trace.");
 
 // 6. STAGE 2: Solve (Adaptive Practice)
 console.log("\n6. Testing Stage 2: Solve (Adaptive Practice)...");
