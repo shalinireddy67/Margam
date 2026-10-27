@@ -144,7 +144,7 @@ export function Tile({
         {diagnosticHref && (
           <Link
             href={diagnosticHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#FFFFFF] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
+            className="inline-flex items-center justify-center min-h-[48px] px-3.5 py-1.5 bg-[#FFFFFF] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
           >
             Diagnose
           </Link>
@@ -152,7 +152,7 @@ export function Tile({
         {practiceHref && (
           <Link
             href={practiceHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#FFFFFF] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
+            className="inline-flex items-center justify-center min-h-[48px] px-3.5 py-1.5 bg-[#FFFFFF] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
           >
             Practice
           </Link>
@@ -160,7 +160,7 @@ export function Tile({
         {lessonHref && (
           <Link
             href={lessonHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#111111] text-[#FFFFFF] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
+            className="inline-flex items-center justify-center min-h-[48px] px-3.5 py-1.5 bg-[#111111] text-[#FFFFFF] border-[2px] border-[#111111] rounded-xl font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none no-underline"
           >
             Learn
           </Link>

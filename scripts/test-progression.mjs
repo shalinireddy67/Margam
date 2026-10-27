@@ -9,6 +9,8 @@ import {
   resetProfileToClass,
   getActiveProfile,
   clearActiveProfile,
+  migrateLearnerProfile,
+  CURRENT_PROFILE_VERSION,
 } from "../src/lib/storage";
 import {
   syncClassProgression,
@@ -172,6 +174,44 @@ const unlockedP10 = unlockChapterLessons("c10-ch04");
 assert.equal(unlockedP10?.topicProgress["c10-quad-01"]?.status, "available", "c10-quad-01 unlocked by placement");
 assert.equal(unlockedP10?.topicProgress["c10-quad-02"]?.status, "available", "c10-quad-02 unlocked by placement");
 console.log("  [PASS] Chapter diagnostic eligibility (>= 6) and placement unlock verified.");
+
+// 5. Schema Validation & Legacy Profile Migration (v0 to v1)
+console.log("\n5. Testing Schema Validation & Legacy Profile Migration (v0 to v1)...");
+
+const legacyUnversionedProfile = {
+  id: "legacy_student_123",
+  name: "Aarav Sharma",
+  selectedClass: 10,
+  createdAt: "2026-09-01T10:00:00.000Z",
+  topicProgress: {
+    "c10-quad-01": {
+      conceptId: "c10-quad-01",
+      status: "completed",
+      lessonCompleted: true,
+      worksheetCompleted: true,
+      difficulty: 2,
+    },
+  },
+  // Notice: no 'version' field, no 'consecutiveCorrect', no 'consecutiveIncorrect'
+};
+
+const migrated = migrateLearnerProfile(legacyUnversionedProfile);
+assert.ok(migrated, "Migration of legacy unversioned profile must succeed");
+assert.equal(migrated.version, CURRENT_PROFILE_VERSION, `Migrated profile version must equal ${CURRENT_PROFILE_VERSION}`);
+assert.equal(migrated.id, "legacy_student_123");
+assert.equal(migrated.name, "Aarav Sharma");
+assert.equal(migrated.selectedClass, 10);
+assert.equal(migrated.consecutiveCorrect, 0, "Default consecutiveCorrect initialized");
+assert.equal(migrated.topicProgress["c10-quad-01"]?.status, "completed");
+
+// Test corrupted profile recovery
+const corruptProfile = {
+  id: "", // invalid empty id
+  selectedClass: 99, // invalid grade
+};
+const corruptResult = migrateLearnerProfile(corruptProfile);
+assert.equal(corruptResult, null, "Corrupt profile failing schema must return null to trigger safe reset");
+console.log("  [PASS] Profile schema validation and legacy profile migration verified.");
 
 console.log("\n--------------------------------------------------");
 console.log("  RESULT: ALL PROGRESSION TESTS PASSED (100% OK)    ");

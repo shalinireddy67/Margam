@@ -151,6 +151,7 @@ export interface RemediationGap {
 }
 
 export interface LearnerProfile {
+  version?: number; // Schema version (v1 = 1) for safe migrations
   id: string;
   name: string;
   selectedClass: 6 | 7 | 8 | 9 | 10;

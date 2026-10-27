@@ -9,3 +9,4 @@ export * from "./Toast";
 export * from "./LoadingSkeleton";
 export * from "./StarRating";
 export * from "./MistakeCreature";
+export * from "./WitchCat";
