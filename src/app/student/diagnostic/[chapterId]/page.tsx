@@ -167,19 +167,31 @@ export default function ChapterDiagnosticPage() {
       if (updated) setProfile(updated);
     }
 
-    // Gap Tracing: if triggered, prepare confirmation questions on root concept
+    // Calibrated Gap Tracing Routing:
+    // - low = confirmation check only (confirmation failure -> gap card)
+    // - medium or high = gap card directly
+    // - insufficient = no routing
     if (
       diagResult.gapAnalysis.confirmed &&
       diagResult.gapAnalysis.canRoute &&
       diagResult.gapAnalysis.rootConceptId
     ) {
-      const confirmQs = getConfirmationQuestions(diagResult.gapAnalysis.rootConceptId, 2);
-      if (confirmQs.length > 0) {
-        setConfirmationQuestions(confirmQs);
-        setConfirmationStatus("pending");
-      } else {
-        // If no confirmation questions available, consider gap unconfirmed to protect student
-        setConfirmationStatus("passed");
+      const routing =
+        diagResult.gapAnalysis.routing ||
+        (diagResult.gapAnalysis.confidence === "low" ? "confirmation_only" : "gap_card");
+
+      if (routing === "confirmation_only") {
+        const confirmQs = getConfirmationQuestions(diagResult.gapAnalysis.rootConceptId, 2);
+        if (confirmQs.length > 0) {
+          setConfirmationQuestions(confirmQs);
+          setConfirmationStatus("pending");
+        } else {
+          // If no confirmation questions available, protect student
+          setConfirmationStatus("passed");
+        }
+      } else if (routing === "gap_card") {
+        // Direct routing to gap card for medium or high confidence
+        setConfirmationStatus("failed");
       }
     }
   };

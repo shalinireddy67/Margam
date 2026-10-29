@@ -13,6 +13,9 @@ import {
   Question,
   GapTraceResult,
   TopicProgress,
+  ConfidenceLevel,
+  RoutingAction,
+  CandidateRootCause,
 } from "./types";
 import {
   getConceptById,
@@ -320,88 +323,330 @@ export function traceRootConcept(
   return { rootConceptId, rootConcept };
 }
 
+/**
+ * Pure function: Computes recency weight for a question at questionIndex out of totalQuestions.
+ * Uses exponential recency decay lambda^(totalQuestions - 1 - questionIndex).
+ * Default lambda = 0.9.
+ */
+export function computeRecencyWeight(
+  questionIndex: number,
+  totalQuestions: number,
+  lambda = 0.9
+): number {
+  if (totalQuestions <= 1) return 1.0;
+  const stepsFromEnd = Math.max(0, totalQuestions - 1 - questionIndex);
+  return Math.pow(lambda, stepsFromEnd);
+}
+
+/**
+ * Pure function: Returns all directed prerequisite ancestors up to maxDepth (default 3).
+ * Cycle-protected via visited set.
+ */
+export function getPrerequisitesGraph(
+  conceptId: string,
+  maxDepth = 3
+): Array<{ conceptId: string; depth: number }> {
+  const results: Array<{ conceptId: string; depth: number }> = [];
+  const visited = new Set<string>([conceptId]);
+  const queue: Array<{ id: string; depth: number }> = [{ id: conceptId, depth: 0 }];
+
+  while (queue.length > 0) {
+    const current = queue.shift()!;
+    if (current.depth >= maxDepth) continue;
+
+    const node = getConceptById(current.id);
+    if (!node || !node.prerequisites) continue;
+
+    for (const prereqId of node.prerequisites) {
+      if (!visited.has(prereqId)) {
+        visited.add(prereqId);
+        const nextDepth = current.depth + 1;
+        results.push({ conceptId: prereqId, depth: nextDepth });
+        queue.push({ id: prereqId, depth: nextDepth });
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Pure function: Distance decay factor per level.
+ * Distance decay applies ONLY to evidence propagated up from a tag at a higher level.
+ * Evidence from a tag whose mapped root is concept C counts at full weight for C (depth 0 = 1.0).
+ * Prerequisite ancestors receive 0.7^depth (max depth 3).
+ */
+export function computeDistanceWeight(depth: number): number {
+  if (depth === 0) return 1.0;
+  if (depth > 0 && depth <= 3) return Math.pow(0.7, depth);
+  return 0.0;
+}
+
+export interface ErrorEvent {
+  tag: string;
+  questionIndex?: number;
+  totalQuestions?: number;
+  conceptId?: string;
+}
+
+/**
+ * Pure function: Ranks candidate root causes from error events with recency decay,
+ * distance decay propagation to prerequisites, tie-breaking toward deeper prerequisites,
+ * and calibrated confidence thresholds.
+ */
+export function rankCandidateRootCauses(
+  errorEvents: ErrorEvent[],
+  anchorConceptId: string,
+  minQuestionsRequired = 3
+): CandidateRootCause[] {
+  if (errorEvents.length === 0) return [];
+
+  const candidateMap: Record<
+    string,
+    {
+      conceptId: string;
+      score: number;
+      directEvidenceCount: number;
+      propagatedEvidenceScore: number;
+      isDirectRoot: boolean;
+      tags: Set<string>;
+    }
+  > = {};
+
+  const ensureCandidate = (id: string) => {
+    if (!candidateMap[id]) {
+      candidateMap[id] = {
+        conceptId: id,
+        score: 0,
+        directEvidenceCount: 0,
+        propagatedEvidenceScore: 0,
+        isDirectRoot: false,
+        tags: new Set<string>(),
+      };
+    }
+    return candidateMap[id];
+  };
+
+  const defaultTotalQ = errorEvents.length > 0 ? (errorEvents[0].totalQuestions || Math.max(6, errorEvents.length)) : 6;
+
+  for (let idx = 0; idx < errorEvents.length; idx++) {
+    const ev = errorEvents[idx];
+    const tag = ev.tag;
+    if (!tag) continue;
+
+    const mappedRoot = tagRoots[tag] || ev.conceptId;
+    if (!mappedRoot) continue;
+
+    const qIdx = typeof ev.questionIndex === "number" ? ev.questionIndex : idx;
+    const totalQ = ev.totalQuestions || defaultTotalQ;
+    const recency = computeRecencyWeight(qIdx, totalQ, 0.9);
+
+    // 1. Direct Root Concept C receives full weight (distance weight = 1.0)
+    const directCandidate = ensureCandidate(mappedRoot);
+    directCandidate.score += recency * 1.0;
+    directCandidate.directEvidenceCount += 1;
+    directCandidate.isDirectRoot = true;
+    directCandidate.tags.add(tag);
+
+    // 2. Propagate to prerequisites of C up to depth 3 with distance decay (0.7^d)
+    const prereqs = getPrerequisitesGraph(mappedRoot, 3);
+    for (const p of prereqs) {
+      const distWeight = computeDistanceWeight(p.depth);
+      const contrib = recency * distWeight;
+      const prereqCandidate = ensureCandidate(p.conceptId);
+      prereqCandidate.score += contrib;
+      prereqCandidate.propagatedEvidenceScore += contrib;
+      prereqCandidate.tags.add(tag);
+    }
+  }
+
+  // Anchor concept depth helper for tie-breaking
+  const getConceptDepth = (id: string): number => {
+    const c = getConceptById(id);
+    const gradeLevel = c ? c.class : 10;
+    return 10 - gradeLevel;
+  };
+
+  const candidates: CandidateRootCause[] = Object.values(candidateMap).map((cand) => {
+    const concept = getConceptById(cand.conceptId);
+    const score = Number(cand.score.toFixed(4));
+    const depth = getConceptDepth(cand.conceptId);
+
+    // Calibrated Confidence Thresholds:
+    // < 1.10: insufficient (isolated slip / low evidence)
+    // 1.10 <= score < 2.00: low (recurrent evidence -> confirmation check only)
+    // 2.00 <= score < 2.75: medium (convergent errors -> gap card)
+    // >= 2.75: high (strong repeated evidence -> gap card)
+    let confidence: ConfidenceLevel = "insufficient";
+    let routing: RoutingAction = "none";
+
+    if (score < 1.10) {
+      confidence = "insufficient";
+      routing = "none";
+    } else if (score < 2.00) {
+      confidence = "low";
+      routing = "confirmation_only";
+    } else if (score < 2.75) {
+      confidence = "medium";
+      routing = "gap_card";
+    } else {
+      confidence = "high";
+      routing = "gap_card";
+    }
+
+    const conceptName = concept ? concept.name.en : cand.conceptId;
+    const gradeText = concept ? `Class ${concept.class}` : "foundational";
+    let reason = "";
+
+    if (confidence === "insufficient") {
+      reason = `Single isolated slip or insufficient evidence for ${gradeText} concept "${conceptName}" (score: ${score.toFixed(2)}). Classified as possible careless slip; no routing.`;
+    } else if (confidence === "low") {
+      reason = `Recurrent misconception evidence points to ${gradeText} concept "${conceptName}" (score: ${score.toFixed(2)}). Low confidence routes to confirmation check.`;
+    } else if (confidence === "medium") {
+      reason = `Multiple convergent error patterns establish foundational prerequisite gap in ${gradeText} concept "${conceptName}" (score: ${score.toFixed(2)}). Routes to remedial gap card.`;
+    } else {
+      reason = `Strong persistent error evidence identifies critical prerequisite gap in ${gradeText} concept "${conceptName}" (score: ${score.toFixed(2)}). Routes directly to remedial gap card.`;
+    }
+
+    const prerequisitePath = findPrerequisitePath(anchorConceptId, cand.conceptId);
+
+    return {
+      conceptId: cand.conceptId,
+      concept,
+      score,
+      confidence,
+      routing,
+      depth,
+      directEvidenceCount: cand.directEvidenceCount,
+      propagatedEvidenceScore: Number(cand.propagatedEvidenceScore.toFixed(4)),
+      reason,
+      isDirectRoot: cand.isDirectRoot,
+      prerequisitePath,
+    };
+  });
+
+  // Ranking & Tie-breaking:
+  // 1. Score descending
+  // 2. Tie-break toward deeper prerequisite (higher depth / earlier grade)
+  // 3. Deterministic alphabetical sort on conceptId
+  candidates.sort((a, b) => {
+    if (Math.abs(b.score - a.score) > 0.0001) {
+      return b.score - a.score;
+    }
+    if (b.depth !== a.depth) {
+      return b.depth - a.depth;
+    }
+    return a.conceptId.localeCompare(b.conceptId);
+  });
+
+  return candidates;
+}
+
 export function evaluateGapTracing(
   currentConceptId: string,
-  mistakeTags: string[],
-  minQuestionsRequired = 3
+  mistakeTags: string[] | ErrorEvent[],
+  minQuestionsRequired = 3,
+  assessmentTotalQuestions?: number
 ): GapTraceResult {
-  const tagCounts: Record<string, number> = {};
-  const rootToTags: Record<string, Set<string>> = {};
+  const errorEvents: ErrorEvent[] = [];
+  const defaultTotal = assessmentTotalQuestions || (Array.isArray(mistakeTags) ? Math.max(6, mistakeTags.length) : 6);
 
-  for (const tag of mistakeTags) {
-    if (!tag) continue;
-    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    const rootId = tagRoots[tag];
-    if (rootId) {
-      if (!rootToTags[rootId]) rootToTags[rootId] = new Set();
-      rootToTags[rootId].add(tag);
-    }
-  }
-
-  let confirmedRootId: string | null = null;
-  let triggerReason: "repeated_tag" | "convergent_tags" | null = null;
-
-  // Rule 1: Same mistake tag appeared at least twice
-  for (const [tag, count] of Object.entries(tagCounts)) {
-    if (count >= 2) {
-      const mappedRoot = tagRoots[tag];
-      if (mappedRoot) {
-        confirmedRootId = mappedRoot;
-        triggerReason = "repeated_tag";
-        break;
+  if (Array.isArray(mistakeTags)) {
+    for (let i = 0; i < mistakeTags.length; i++) {
+      const item = mistakeTags[i];
+      if (typeof item === "string") {
+        if (item.trim()) {
+          errorEvents.push({
+            tag: item.trim(),
+            questionIndex: i,
+            totalQuestions: defaultTotal,
+          });
+        }
+      } else if (item && typeof item === "object" && item.tag) {
+        errorEvents.push({
+          tag: item.tag,
+          questionIndex: typeof item.questionIndex === "number" ? item.questionIndex : i,
+          totalQuestions: item.totalQuestions || defaultTotal,
+          conceptId: item.conceptId,
+        });
       }
     }
   }
 
-  // Rule 2: Two different tags point to the same root concept
-  if (!confirmedRootId) {
-    for (const [rootId, tagSet] of Object.entries(rootToTags)) {
-      if (tagSet.size >= 2) {
-        confirmedRootId = rootId;
-        triggerReason = "convergent_tags";
-        break;
-      }
-    }
-  }
+  const rawTags = errorEvents.map((e) => e.tag);
+  const candidates = rankCandidateRootCauses(errorEvents, currentConceptId, minQuestionsRequired);
 
-  if (!confirmedRootId) {
+  if (candidates.length === 0) {
     return {
       confirmed: false,
       rootConceptId: null,
       triggerReason: null,
-      mistakeTags,
+      mistakeTags: rawTags,
       prerequisitePath: [],
       canRoute: false,
+      confidence: "insufficient",
+      routing: "none",
+      score: 0,
+      candidates: [],
       plainLanguageReason:
-        "No recurrent misconception threshold reached (requires same mistake twice or two distinct errors pointing to the same root concept).",
+        "No recurrent misconception threshold reached (isolated slips classified as careless).",
     };
   }
 
-  const rootConcept = getConceptById(confirmedRootId);
-  const prerequisitePath = findPrerequisitePath(currentConceptId, confirmedRootId);
-  const enoughQuestions = hasEnoughQuestions(confirmedRootId, minQuestionsRequired);
+  const topCandidate = candidates[0];
 
-  const plainLanguageReason =
-    triggerReason === "repeated_tag"
-      ? `Student repeatedly exhibited misconception "${mistakeTags[0]?.replace(/_/g, " ")}" which traces to Class ${
-          rootConcept?.class || "foundational"
-        } concept "${rootConcept?.name.en || confirmedRootId}".`
-      : `Multiple distinct errors converge on the same prerequisite: Class ${
-          rootConcept?.class || "foundational"
-        } concept "${rootConcept?.name.en || confirmedRootId}".`;
+  // If top candidate has insufficient confidence, no routing
+  if (topCandidate.confidence === "insufficient") {
+    return {
+      confirmed: false,
+      rootConceptId: null,
+      rootConcept: topCandidate.concept,
+      triggerReason: null,
+      mistakeTags: rawTags,
+      prerequisitePath: topCandidate.prerequisitePath,
+      canRoute: false,
+      confidence: "insufficient",
+      routing: "none",
+      score: topCandidate.score,
+      candidates,
+      plainLanguageReason: topCandidate.reason,
+    };
+  }
+
+  // Determine trigger reason for backward-compatibility with tests:
+  const tagCounts: Record<string, number> = {};
+  for (const t of rawTags) {
+    tagCounts[t] = (tagCounts[t] || 0) + 1;
+  }
+  let triggerReason: "repeated_tag" | "convergent_tags" | "ranked_root" = "ranked_root";
+  for (const count of Object.values(tagCounts)) {
+    if (count >= 2) {
+      triggerReason = "repeated_tag";
+      break;
+    }
+  }
+  if (triggerReason === "ranked_root" && rawTags.length >= 2) {
+    triggerReason = "convergent_tags";
+  }
+
+  const enoughQuestions = hasEnoughQuestions(topCandidate.conceptId, minQuestionsRequired);
 
   return {
     confirmed: true,
-    rootConceptId: confirmedRootId,
-    rootConcept,
+    rootConceptId: topCandidate.conceptId,
+    rootConcept: topCandidate.concept,
     triggerReason,
-    mistakeTags,
-    prerequisitePath,
+    mistakeTags: rawTags,
+    prerequisitePath: topCandidate.prerequisitePath,
     canRoute: enoughQuestions,
+    confidence: topCandidate.confidence,
+    routing: topCandidate.routing,
+    score: topCandidate.score,
+    candidates,
     shortfallReport: enoughQuestions
       ? undefined
-      : `Root concept ${confirmedRootId} has fewer than ${minQuestionsRequired} questions in the question bank. Routing withheld.`,
-    plainLanguageReason,
+      : `Root concept ${topCandidate.conceptId} has fewer than ${minQuestionsRequired} questions in the question bank. Routing withheld.`,
+    plainLanguageReason: topCandidate.reason,
   };
 }
 
@@ -528,9 +773,22 @@ export function evaluateChapterDiagnostic(
   const scorePercentage =
     totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
 
+  // Build structured error events with question indices and recency context
+  const errorEvents: ErrorEvent[] = [];
+  feedback.forEach((f, idx) => {
+    if (!f.isCorrect && f.mistakeTag) {
+      errorEvents.push({
+        tag: f.mistakeTag,
+        questionIndex: idx,
+        totalQuestions: feedback.length,
+        conceptId: f.conceptId,
+      });
+    }
+  });
+
   // Run gap tracing with primary chapter concept as current anchor
   const anchorConceptId = conceptIds[0] || "";
-  const gapAnalysis = evaluateGapTracing(anchorConceptId, mistakeTags, minQuestionsRequired);
+  const gapAnalysis = evaluateGapTracing(anchorConceptId, errorEvents, minQuestionsRequired, feedback.length);
 
   return {
     chapterId,
