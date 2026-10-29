@@ -91,8 +91,14 @@ export interface ChapterTestResult {
       correct: number;
       scorePercentage: number;
       updatedMastery: number;
+      accuracyCategory?: "mastered" | "in_progress" | "needs_attention";
     }
   >;
+  diagnosticAnalysis?: {
+    probableGaps: string[];
+    carelessSlips: string[];
+    insufficientEvidence: string[];
+  };
   weakConcepts: string[];
   strongConcepts: string[];
 }
@@ -943,7 +949,11 @@ export function evaluatePracticeSubmission(
  */
 export function generateChapterTest(
   chapterId: string,
-  totalQuestions = 10
+  totalQuestions = 10,
+  options?: {
+    excludeQuestionIds?: string[];
+    seed?: number;
+  }
 ): {
   questions: Question[];
   conceptAllocation: Record<string, number>;
@@ -954,6 +964,7 @@ export function generateChapterTest(
     return { questions: [], conceptAllocation: {}, shortfall: true };
   }
 
+  const excluded = new Set(options?.excludeQuestionIds || []);
   const conceptAllocation: Record<string, number> = {};
   const selected: Question[] = [];
 
@@ -983,7 +994,7 @@ export function generateChapterTest(
     const share = Math.max(1, Math.round((cw.weight / totalWeight) * totalQuestions));
     conceptAllocation[cw.concept.id] = share;
 
-    const available = getQuestionsByConceptId(cw.concept.id);
+    const available = getQuestionsByConceptId(cw.concept.id).filter((q) => !excluded.has(q.id));
     const matched = available.filter((q) => q.difficulty === cw.targetDiff);
 
     for (const q of matched) {
@@ -1001,7 +1012,7 @@ export function generateChapterTest(
   // Fill any remaining slots up to totalQuestions from the chapter's available question pool
   if (selected.length < totalQuestions) {
     for (const c of chapterConcepts) {
-      const available = getQuestionsByConceptId(c.id);
+      const available = getQuestionsByConceptId(c.id).filter((q) => !excluded.has(q.id));
       for (const q of available) {
         if (selected.length >= totalQuestions) break;
         if (!selected.some((x) => x.id === q.id)) {
@@ -1021,6 +1032,7 @@ export function generateChapterTest(
 /**
  * STAGE 3: Evaluates Chapter Test
  * Computes overall chapter performance and updates per-concept mastery across all tested concepts.
+ * Also evaluates accuracy categories (mastered, in_progress, needs_attention) and diagnostic root-cause indicators.
  */
 export function evaluateChapterTest(
   chapterId: string,
@@ -1041,14 +1053,31 @@ export function evaluateChapterTest(
       correct: 0,
       scorePercentage: 0,
       updatedMastery: 0,
+      accuracyCategory: "needs_attention",
     };
   }
+
+  const incorrectEvents: ErrorEvent[] = [];
+  let answerIndex = 0;
 
   for (const q of chapterQuestions) {
     if (!answers[q.id]) continue;
     totalAnswered++;
     const isCorrect = answers[q.id].trim() === q.correctAnswer;
-    if (isCorrect) totalCorrect++;
+    if (isCorrect) {
+      totalCorrect++;
+    } else {
+      const selectedOpt = q.options?.find((o) => o.id === answers[q.id].trim());
+      if (selectedOpt?.mistakeTag) {
+        incorrectEvents.push({
+          conceptId: q.conceptId,
+          tag: selectedOpt.mistakeTag,
+          questionIndex: answerIndex,
+          totalQuestions: chapterQuestions.length,
+        });
+      }
+    }
+    answerIndex++;
 
     if (conceptBreakdown[q.conceptId]) {
       conceptBreakdown[q.conceptId].total += 1;
@@ -1059,7 +1088,7 @@ export function evaluateChapterTest(
   const weakConcepts: string[] = [];
   const strongConcepts: string[] = [];
 
-  // Update per-concept mastery in storage
+  // Update per-concept mastery in storage and compute blueprint categories
   for (const c of chapterConcepts) {
     const data = conceptBreakdown[c.id];
     if (data && data.total > 0) {
@@ -1070,6 +1099,15 @@ export function evaluateChapterTest(
 
       updateTopicProgress(c.id, { mastery: newMastery });
 
+      // Blueprint accuracy categorization
+      if (data.scorePercentage >= 80) {
+        data.accuracyCategory = "mastered";
+      } else if (data.scorePercentage >= 60) {
+        data.accuracyCategory = "in_progress";
+      } else {
+        data.accuracyCategory = "needs_attention";
+      }
+
       if (newMastery < 60) weakConcepts.push(c.id);
       else if (newMastery >= 80) strongConcepts.push(c.id);
     }
@@ -1078,6 +1116,33 @@ export function evaluateChapterTest(
   const overallPercentage =
     totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
 
+  // Diagnostic analysis from test answers
+  const probableGaps: string[] = [];
+  const carelessSlips: string[] = [];
+  const insufficientEvidence: string[] = [];
+
+  if (incorrectEvents.length > 0) {
+    const anchor = chapterConcepts[0]?.id || "";
+    const ranked = rankCandidateRootCauses(incorrectEvents, anchor, 2);
+    for (const cand of ranked) {
+      if (cand.confidence === "medium" || cand.confidence === "high") {
+        probableGaps.push(cand.conceptId);
+      } else if (cand.confidence === "low") {
+        carelessSlips.push(cand.conceptId);
+      } else {
+        insufficientEvidence.push(cand.conceptId);
+      }
+    }
+  }
+
+  for (const c of chapterConcepts) {
+    if (!conceptBreakdown[c.id] || conceptBreakdown[c.id].total < 2) {
+      if (!insufficientEvidence.includes(c.id)) {
+        insufficientEvidence.push(c.id);
+      }
+    }
+  }
+
   return {
     chapterId,
     totalQuestions: totalAnswered,
@@ -1085,6 +1150,11 @@ export function evaluateChapterTest(
     scorePercentage: overallPercentage,
     passed: overallPercentage >= 70,
     conceptBreakdown,
+    diagnosticAnalysis: {
+      probableGaps,
+      carelessSlips,
+      insufficientEvidence,
+    },
     weakConcepts,
     strongConcepts,
   };
