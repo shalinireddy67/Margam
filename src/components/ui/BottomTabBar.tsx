@@ -44,6 +44,7 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
         {/* Tab 1: Home */}
         <Link
           href="/"
+          prefetch={false}
           aria-current={active === "home" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
@@ -76,6 +77,7 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
         {/* Tab 2: Learn */}
         <Link
           href="/#chapters"
+          prefetch={false}
           aria-current={active === "learn" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
@@ -108,6 +110,7 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
         {/* Tab 3: Stickers */}
         <Link
           href="/student/stickers"
+          prefetch={false}
           aria-current={active === "stickers" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
@@ -140,6 +143,7 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
         {/* Tab 4: Me */}
         <Link
           href="/student/select-class"
+          prefetch={false}
           aria-current={active === "me" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]

@@ -117,10 +117,17 @@ for (const fc of fullChapters) {
   assert(chapterConcepts.length > 0, `Full chapter ${fc.id} (${fc.name.en}) has at least one concept in concepts.json`);
 }
 
-// Check prerequisite reference existence
+// Check prerequisite reference existence and edgeMeta
 for (const c of concepts) {
   for (const prereqId of c.prerequisites) {
     assert(conceptIds.has(prereqId), `Concept ${c.id} references non-existent prerequisite: "${prereqId}"`);
+    assert(c.edgeMeta && c.edgeMeta[prereqId], `Concept ${c.id} missing edgeMeta for prerequisite "${prereqId}"`);
+    if (c.edgeMeta && c.edgeMeta[prereqId]) {
+      const meta = c.edgeMeta[prereqId];
+      assert(typeof meta.reason === "string" && meta.reason.length > 5, `Concept ${c.id} edge ${prereqId} has valid reason`);
+      assert(typeof meta.source === "string" && meta.source.length > 0, `Concept ${c.id} edge ${prereqId} has valid source`);
+      assert(["tentative, pending teacher review", "verified"].includes(meta.status), `Concept ${c.id} edge ${prereqId} has valid status`);
+    }
   }
 }
 

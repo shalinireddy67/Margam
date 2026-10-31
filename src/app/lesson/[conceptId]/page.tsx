@@ -50,6 +50,7 @@ function LessonContent() {
   const [completedNow, setCompletedNow] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [companionContext, setCompanionContext] = useState<CompanionContext>("lesson_start");
+  const [showHint, setShowHint] = useState<Record<string, boolean>>({});
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -201,7 +202,7 @@ function LessonContent() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-grey hover:text-plum py-2 px-3 rounded-xl hover:bg-slate-100 transition-colors"
+            className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 text-xs sm:text-sm font-semibold text-grey hover:text-plum py-2 px-3 rounded-xl hover:bg-slate-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Lessons</span>
@@ -212,7 +213,7 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("en")}
-              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
+              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 currentLang === "en" ? "bg-white text-plum shadow-xs" : "text-grey"
               }`}
             >
@@ -221,7 +222,7 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("hi")}
-              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
+              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 currentLang === "hi" ? "bg-white text-plum shadow-xs" : "text-grey"
               }`}
             >
@@ -230,7 +231,7 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("te")}
-              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
+              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 currentLang === "te" ? "bg-white text-plum shadow-xs" : "text-grey"
               }`}
             >
@@ -365,7 +366,7 @@ function LessonContent() {
               </h2>
               <Link
                 href={`/student/worksheet/${concept.id}`}
-                className="text-xs text-berry hover:underline font-bold"
+                className="min-h-[48px] inline-flex items-center text-xs text-berry hover:underline font-bold"
               >
                 Open Adaptive Practice Runner →
               </Link>
@@ -393,7 +394,7 @@ function LessonContent() {
                   <button
                     type="button"
                     onClick={handleRetryPractice}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-border text-xs font-bold text-plum hover:bg-slate-50 shadow-xs"
+                    className="inline-flex items-center justify-center min-h-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-border text-xs font-bold text-plum hover:bg-slate-50 shadow-xs"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Try Again</span>
@@ -449,7 +450,7 @@ function LessonContent() {
                           <div
                             key={opt.id}
                             onClick={() => handleSelectOption(q.id, opt.id)}
-                            className={`flex items-start gap-3 p-3 rounded-2xl border cursor-pointer transition-all ${borderClass} ${bgClass}`}
+                            className={`min-h-[48px] flex items-start gap-3 p-3 rounded-2xl border cursor-pointer transition-all ${borderClass} ${bgClass}`}
                           >
                             <span
                               className={`w-5 h-5 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 ${
@@ -468,12 +469,40 @@ function LessonContent() {
                       })}
                     </div>
 
+                    {/* Pre-submission Hint Toggle */}
+                    {q.hint && !worksheetResult && (
+                      <div className="pt-1">
+                        <button
+                          type="button"
+                          id={`hint-toggle-${q.id}`}
+                          onClick={() => setShowHint((prev) => ({ ...prev, [q.id]: !prev[q.id] }))}
+                          className="min-h-[48px] inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors cursor-pointer"
+                        >
+                          <span>💡 {showHint[q.id] ? "Hide Hint" : "Need a hint?"}</span>
+                        </button>
+                        {showHint[q.id] && (
+                          <div className="mt-2 p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-950 font-medium">
+                            <span className="font-bold text-amber-900">Hint: </span>
+                            <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {feedbackItem && !feedbackItem.isCorrect && (
-                      <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 space-y-1">
-                        <p className="font-bold">
-                          Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}
+                      <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 space-y-2">
+                        <p className="font-bold text-rose-900 flex items-center gap-1.5">
+                          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                          <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
                         </p>
+                        {q.hint && (
+                          <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950 font-medium">
+                            <span className="font-bold text-amber-900">💡 Hint: </span>
+                            <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
+                          </div>
+                        )}
                         <p className="text-slate-700">
+                          <strong className="text-slate-900">Explanation: </strong>
                           {resolveLocalizedString(feedbackItem.explanation, currentLang).text}
                         </p>
                       </div>
@@ -485,7 +514,7 @@ function LessonContent() {
               {!worksheetResult && (
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 min-h-[46px] px-5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
                 >
                   <span>Submit Practice Answers</span>
                 </button>
@@ -514,7 +543,7 @@ function LessonContent() {
               <button
                 type="button"
                 onClick={handleFinishLesson}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Finish Lesson & Mark Complete</span>
@@ -522,7 +551,7 @@ function LessonContent() {
             ) : (
               <Link
                 href="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-plum font-bold text-xs transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-plum font-bold text-xs transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Return to Lessons</span>

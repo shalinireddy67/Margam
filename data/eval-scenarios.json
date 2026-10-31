@@ -1,0 +1,310 @@
+[
+  {
+    "id": "scenario-01",
+    "name": "Class 10 Sign-Rule Convergence (Smoke Test Baseline)",
+    "description": "Student on Class 10 Quadratics diagnostic makes two sign-rule errors on quad-01 and quad-02.",
+    "chapterId": "c10-ch04",
+    "class": 10,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c10-sol-01", "selectedOption": "B" },
+      { "questionId": "q-c10-sol-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-01", "selectedOption": "A", "mistakeTag": "squared_negative_b_as_negative" },
+      { "questionId": "q-c10-form-02", "selectedOption": "D", "mistakeTag": "sign_error_negative_times_negative_became_negative" },
+      { "questionId": "q-c10-form-03", "selectedOption": "C" },
+      { "questionId": "q-c10-quad-d1-01", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c7-int-02",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  },
+  {
+    "id": "scenario-02",
+    "name": "Class 10 High Performer (Clean Mastery)",
+    "description": "Student answers all 6 questions correctly on Class 10 diagnostic.",
+    "chapterId": "c10-ch04",
+    "class": 10,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c10-sol-01", "selectedOption": "B" },
+      { "questionId": "q-c10-sol-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-01", "selectedOption": "B" },
+      { "questionId": "q-c10-form-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-03", "selectedOption": "C" },
+      { "questionId": "q-c10-quad-d1-01", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": false,
+      "expectedRootConceptId": null,
+      "expectedConfidence": "insufficient",
+      "expectedRouting": "none"
+    }
+  },
+  {
+    "id": "scenario-03",
+    "name": "Class 10 Single Careless Factor Sum Slip",
+    "description": "Student answers 5 correctly and makes 1 isolated factor pair sum error.",
+    "chapterId": "c10-ch04",
+    "class": 10,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c10-sol-01", "selectedOption": "C", "mistakeTag": "incorrect_factor_pair_sum" },
+      { "questionId": "q-c10-sol-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-01", "selectedOption": "B" },
+      { "questionId": "q-c10-form-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-03", "selectedOption": "C" },
+      { "questionId": "q-c10-quad-d1-01", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": false,
+      "expectedRootConceptId": null,
+      "expectedConfidence": "insufficient",
+      "expectedRouting": "none"
+    }
+  },
+  {
+    "id": "scenario-04",
+    "name": "Class 9 Divergent Uncorrelated Slips",
+    "description": "Two isolated errors pointing to distinct unrelated concepts with insufficient evidence for either.",
+    "chapterId": "c9-ch04",
+    "class": 9,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c9-id-01", "selectedOption": "B", "mistakeTag": "forgot_factor_of_two_in_middle_term" },
+      { "questionId": "q-c9-id-02", "selectedOption": "C" },
+      { "questionId": "q-c9-split-01", "selectedOption": "B" },
+      { "questionId": "q-c9-split-02", "selectedOption": "B", "mistakeTag": "sign_error_both_negative_yields_positive_product" },
+      { "questionId": "q-c9-id-d1-01", "selectedOption": "A" },
+      { "questionId": "q-c9-id-d1-02", "selectedOption": "D" }
+    ],
+    "expected": {
+      "hasGap": false,
+      "expectedRootConceptId": null,
+      "expectedConfidence": "insufficient",
+      "expectedRouting": "none"
+    }
+  },
+  {
+    "id": "scenario-05",
+    "name": "Class 9 Repeated Identity Expansion Misconceptions",
+    "description": "Three errors converging on Class 9 identity expansion rules.",
+    "chapterId": "c9-ch04",
+    "class": 9,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c9-id-01", "selectedOption": "A", "mistakeTag": "confused_squared_binomial_with_difference_of_squares" },
+      { "questionId": "q-c9-id-02", "selectedOption": "A", "mistakeTag": "sign_error_difference_of_squares" },
+      { "questionId": "q-c9-split-01", "selectedOption": "B" },
+      { "questionId": "q-c9-split-02", "selectedOption": "C" },
+      { "questionId": "q-c9-id-d1-01", "selectedOption": "B", "mistakeTag": "omitted_middle_linear_terms" },
+      { "questionId": "q-c9-id-d1-02", "selectedOption": "D" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c9-id-01",
+      "expectedConfidence": "medium",
+      "expectedRouting": "gap_card"
+    }
+  },
+  {
+    "id": "scenario-06",
+    "name": "Class 8 Incomplete Bracket Distribution",
+    "description": "Two errors failing to distribute monomial to the second term.",
+    "chapterId": "c8-ch06",
+    "class": 8,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c8-dist-01", "selectedOption": "A", "mistakeTag": "neglected_distributing_to_second_term" },
+      { "questionId": "q-c8-dist-02", "selectedOption": "D", "mistakeTag": "neglected_distributing_to_second_term" },
+      { "questionId": "q-c8-bin-01", "selectedOption": "B" },
+      { "questionId": "q-c8-bin-02", "selectedOption": "B" },
+      { "questionId": "q-c8-dist-d1-01", "selectedOption": "A" },
+      { "questionId": "q-c8-dist-d1-02", "selectedOption": "C" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c8-dist-01",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  },
+  {
+    "id": "scenario-07",
+    "name": "Class 8 Severe Distributive & Sign Collapse (High Confidence)",
+    "description": "Four errors in distributive laws directly caused by integer multiplication sign errors.",
+    "chapterId": "c8-ch06",
+    "class": 8,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c8-dist-01", "selectedOption": "C", "mistakeTag": "sign_error_positive_times_negative" },
+      { "questionId": "q-c8-dist-02", "selectedOption": "A", "mistakeTag": "sign_error_negative_times_negative_became_negative" },
+      { "questionId": "q-c8-bin-01", "selectedOption": "B" },
+      { "questionId": "q-c8-bin-02", "selectedOption": "C", "mistakeTag": "sign_error_constant_product" },
+      { "questionId": "q-c8-dist-d1-01", "selectedOption": "A" },
+      { "questionId": "q-c8-dist-d1-02", "selectedOption": "A", "mistakeTag": "sign_error_positive_times_negative" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c7-int-02",
+      "expectedConfidence": "high",
+      "expectedRouting": "gap_card"
+    }
+  },
+  {
+    "id": "scenario-08",
+    "name": "Class 7 Integer Addition & Subtraction Reversal",
+    "description": "Two errors reversing negative signs during subtraction and addition.",
+    "chapterId": "c7-ch10",
+    "class": 7,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c7-add-01", "selectedOption": "A", "mistakeTag": "lost_negative_sign_on_larger_magnitude" },
+      { "questionId": "q-c7-sub-01", "selectedOption": "A", "mistakeTag": "subtracted_magnitudes_negative" },
+      { "questionId": "q-c7-mul-01", "selectedOption": "B" },
+      { "questionId": "q-c7-mul-02", "selectedOption": "B" },
+      { "questionId": "q-c7-int-d1-01", "selectedOption": "B" },
+      { "questionId": "q-c7-int-d1-02", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c7-int-01",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  },
+  {
+    "id": "scenario-09",
+    "name": "Class 10 Factor Inversion to Class 9 Identities",
+    "description": "Two errors confusing quadratic factor roots with sign inversion in identity factoring.",
+    "chapterId": "c10-ch04",
+    "class": 10,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c10-sol-01", "selectedOption": "C", "mistakeTag": "incorrect_factor_pair_sum" },
+      { "questionId": "q-c10-sol-02", "selectedOption": "D", "mistakeTag": "incorrect_factor_pair_sum" },
+      { "questionId": "q-c10-form-01", "selectedOption": "B" },
+      { "questionId": "q-c10-form-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-03", "selectedOption": "C" },
+      { "questionId": "q-c10-quad-d1-01", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c9-id-02",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  },
+  {
+    "id": "scenario-10",
+    "name": "Class 6 Number Line Ordering Misconception",
+    "description": "Three errors confusing negative numbers order and direction on the number line.",
+    "chapterId": "c6-ch10",
+    "class": 6,
+    "heldOut": false,
+    "responses": [
+      { "questionId": "q-c6-neg-01", "selectedOption": "A", "mistakeTag": "positive_sign_for_below_zero" },
+      { "questionId": "q-c6-neg-02", "selectedOption": "B" },
+      { "questionId": "q-c6-ord-01", "selectedOption": "A", "mistakeTag": "confused_absolute_value_with_signed_value" },
+      { "questionId": "q-c6-ord-02", "selectedOption": "C" },
+      { "questionId": "q-c6-neg-d1-01", "selectedOption": "B", "mistakeTag": "positive_sign_for_below_zero" },
+      { "questionId": "q-c6-neg-d1-02", "selectedOption": "C" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c6-neg-01",
+      "expectedConfidence": "medium",
+      "expectedRouting": "gap_card"
+    }
+  },
+  {
+    "id": "scenario-11-heldout",
+    "name": "Held-Out: Class 7 Flawless Mastery (No Gap)",
+    "description": "Held-out validation case: Student answers 6/6 correctly on Class 7 Integers diagnostic.",
+    "chapterId": "c7-ch10",
+    "class": 7,
+    "heldOut": true,
+    "responses": [
+      { "questionId": "q-c7-add-01", "selectedOption": "B" },
+      { "questionId": "q-c7-sub-01", "selectedOption": "C" },
+      { "questionId": "q-c7-mul-01", "selectedOption": "B" },
+      { "questionId": "q-c7-mul-02", "selectedOption": "B" },
+      { "questionId": "q-c7-int-d1-01", "selectedOption": "B" },
+      { "questionId": "q-c7-int-d1-02", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": false,
+      "expectedRootConceptId": null,
+      "expectedConfidence": "insufficient",
+      "expectedRouting": "none"
+    }
+  },
+  {
+    "id": "scenario-12-heldout",
+    "name": "Held-Out: Class 10 Late-Onset Sign Confusion",
+    "description": "Held-out validation case: Two errors on later questions converging on Class 7 multiplication sign rules.",
+    "chapterId": "c10-ch04",
+    "class": 10,
+    "heldOut": true,
+    "responses": [
+      { "questionId": "q-c10-sol-01", "selectedOption": "B" },
+      { "questionId": "q-c10-sol-02", "selectedOption": "B" },
+      { "questionId": "q-c10-form-01", "selectedOption": "A", "mistakeTag": "squared_negative_b_as_negative" },
+      { "questionId": "q-c10-form-02", "selectedOption": "D", "mistakeTag": "sign_error_negative_times_negative_became_negative" },
+      { "questionId": "q-c10-form-03", "selectedOption": "C" },
+      { "questionId": "q-c10-quad-d1-01", "selectedOption": "A" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c7-int-02",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  },
+  {
+    "id": "scenario-13-heldout",
+    "name": "Held-Out: Class 6 Number Line Positioning Misconceptions",
+    "description": "Held-out validation case: Errors demonstrating failure of negative number line and magnitude concepts.",
+    "chapterId": "c6-ch10",
+    "class": 6,
+    "heldOut": true,
+    "responses": [
+      { "questionId": "q-c6-neg-01", "selectedOption": "A", "mistakeTag": "positive_sign_for_below_zero" },
+      { "questionId": "q-c6-neg-02", "selectedOption": "B" },
+      { "questionId": "q-c6-ord-01", "selectedOption": "A", "mistakeTag": "confused_absolute_value_with_signed_value" },
+      { "questionId": "q-c6-ord-02", "selectedOption": "D", "mistakeTag": "placed_zero_as_smallest" },
+      { "questionId": "q-c6-neg-d1-01", "selectedOption": "A" },
+      { "questionId": "q-c6-neg-d1-02", "selectedOption": "C" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c6-neg-01",
+      "expectedConfidence": "medium",
+      "expectedRouting": "gap_card"
+    }
+  },
+  {
+    "id": "scenario-14-heldout",
+    "name": "Held-Out: Class 8 Distributive Law Failure",
+    "description": "Held-out validation case: Two errors on monomial distribution to second term.",
+    "chapterId": "c8-ch06",
+    "class": 8,
+    "heldOut": true,
+    "responses": [
+      { "questionId": "q-c8-dist-01", "selectedOption": "A", "mistakeTag": "neglected_distributing_to_second_term" },
+      { "questionId": "q-c8-dist-02", "selectedOption": "D", "mistakeTag": "neglected_distributing_to_second_term" },
+      { "questionId": "q-c8-bin-01", "selectedOption": "B" },
+      { "questionId": "q-c8-bin-02", "selectedOption": "B" },
+      { "questionId": "q-c8-dist-d1-01", "selectedOption": "A" },
+      { "questionId": "q-c8-dist-d1-02", "selectedOption": "C" }
+    ],
+    "expected": {
+      "hasGap": true,
+      "expectedRootConceptId": "c8-dist-01",
+      "expectedConfidence": "low",
+      "expectedRouting": "confirmation_only"
+    }
+  }
+]

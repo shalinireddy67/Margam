@@ -25,6 +25,12 @@ export interface Chapter {
   status: "full" | "in_progress";
 }
 
+export interface EdgeMetadata {
+  reason: string;
+  source: string;
+  status: "verified" | "tentative, pending teacher review";
+}
+
 export interface Concept {
   id: string;
   class: number; // 6 to 10
@@ -35,6 +41,7 @@ export interface Concept {
   name: LocalizedString;
   learningObjective: LocalizedString;
   prerequisites: string[]; // IDs of prerequisite concepts (DAG edges)
+  edgeMeta?: Record<string, EdgeMetadata>; // Prerequisite edge metadata
 }
 
 export interface MistakeClassification {
@@ -151,6 +158,7 @@ export interface RemediationGap {
 }
 
 export interface LearnerProfile {
+  version?: number; // Schema version (v1 = 1) for safe migrations
   id: string;
   name: string;
   selectedClass: 6 | 7 | 8 | 9 | 10;
@@ -190,14 +198,35 @@ export interface WorksheetResult {
   feedback: QuestionFeedback[];
 }
 
+export type ConfidenceLevel = "high" | "medium" | "low" | "insufficient";
+export type RoutingAction = "gap_card" | "confirmation_only" | "none";
+
+export interface CandidateRootCause {
+  conceptId: string;
+  concept?: Concept;
+  score: number;
+  confidence: ConfidenceLevel;
+  routing: RoutingAction;
+  depth: number;
+  directEvidenceCount: number;
+  propagatedEvidenceScore: number;
+  reason: string;
+  isDirectRoot: boolean;
+  prerequisitePath: string[];
+}
+
 export interface GapTraceResult {
   confirmed: boolean;
   rootConceptId: string | null;
   rootConcept?: Concept;
-  triggerReason: "repeated_tag" | "convergent_tags" | null;
+  triggerReason: "repeated_tag" | "convergent_tags" | "ranked_root" | "propagated_prereq" | null;
   mistakeTags: string[];
   prerequisitePath: string[]; // For visual display only
   canRoute: boolean;
   shortfallReport?: string;
   plainLanguageReason: string;
+  confidence?: ConfidenceLevel;
+  routing?: RoutingAction;
+  score?: number;
+  candidates?: CandidateRootCause[];
 }

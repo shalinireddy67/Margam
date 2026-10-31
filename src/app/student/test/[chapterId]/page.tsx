@@ -203,7 +203,7 @@ export default function ChapterTestRunnerPage() {
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={handleRetry}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Retake Test</span>
@@ -211,7 +211,7 @@ export default function ChapterTestRunnerPage() {
 
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
                   >
                     <span>Learning Path</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -264,6 +264,7 @@ export default function ChapterTestRunnerPage() {
             return (
               <div
                 key={q.id}
+                data-qid={q.id}
                 className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
               >
                 <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -309,8 +310,9 @@ export default function ChapterTestRunnerPage() {
                     return (
                       <div
                         key={opt.id}
+                        data-oid={opt.id}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
                       >
                         <span
                           className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
@@ -383,7 +385,7 @@ export default function ChapterTestRunnerPage() {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
               >
                 <span>Submit Chapter Test</span>
                 <ArrowRight className="w-4 h-4" />

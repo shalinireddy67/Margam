@@ -5,11 +5,11 @@ import lessonsData from "../../data/lessons.json";
 import tagRootsData from "../../data/tag-roots.json";
 import { Chapter, Concept, Lesson, Question, LocalizedString, SupportedLanguage } from "./types";
 
-export const chapters: Chapter[] = chaptersData as Chapter[];
-export const concepts: Concept[] = conceptsData as Concept[];
-export const questions: Question[] = questionsData as Question[];
-export const lessons: Lesson[] = lessonsData as Lesson[];
-export const tagRoots: Record<string, string> = tagRootsData as Record<string, string>;
+export const chapters: Chapter[] = chaptersData as unknown as Chapter[];
+export const concepts: Concept[] = conceptsData as unknown as Concept[];
+export const questions: Question[] = questionsData as unknown as Question[];
+export const lessons: Lesson[] = lessonsData as unknown as Lesson[];
+export const tagRoots: Record<string, string> = tagRootsData as unknown as Record<string, string>;
 
 /**
  * Returns all NCERT chapters for a specific class (6-10), preserving official curriculum sequence.

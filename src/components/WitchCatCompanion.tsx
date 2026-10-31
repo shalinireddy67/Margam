@@ -113,9 +113,11 @@ export default function WitchCatCompanion({
             type="button"
             onClick={() => setBubbleDismissed(true)}
             aria-label="Dismiss speech bubble"
-            className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-slate-100 hover:bg-slate-200 text-grey hover:text-plum flex items-center justify-center border border-slate-200 shadow-xs transition-colors"
+            className="absolute -top-4 -right-4 min-w-[48px] min-h-[48px] flex items-center justify-center cursor-pointer transition-colors bg-transparent border-0"
           >
-            <X className="w-3 h-3" />
+            <span className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-grey hover:text-plum flex items-center justify-center border border-slate-200 shadow-xs">
+              <X className="w-3.5 h-3.5" />
+            </span>
           </button>
           <p>{currentMessage}</p>
           {/* Bubble tail pointing to cat */}

@@ -26,6 +26,7 @@ import {
   getConceptsByChapter,
   canTakeChapterDiagnostic,
 } from "@/lib/curriculum";
+import { isFeatureEnabled } from "@/lib/flags";
 
 export default function HomePage() {
   const router = useRouter();
@@ -209,7 +210,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 no-underline text-[#111111]"
+              className="inline-flex items-center min-h-[48px] gap-2 no-underline text-[#111111]"
             >
               <div className="w-10 h-10 rounded-[12px_10px_14px_11px] bg-[#FFE14D] border-[3px] border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center shrink-0">
                 <svg
@@ -244,12 +245,14 @@ export default function HomePage() {
 
           {/* Right Controls: Teacher link & Language Toggle */}
           <div className="flex items-center gap-2">
-            <Link
-              href="/teacher"
-              className="hidden sm:inline-flex items-center px-2.5 py-1 min-h-[38px] border-[2px] border-[#111111] rounded-xl bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] text-xs font-heading font-extrabold text-[#111111] no-underline hover:bg-[#FFE14D]/30 active:translate-x-[1px] active:translate-y-[1px]"
-            >
-              {copy.teacherLink}
-            </Link>
+            {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (
+              <Link
+                href="/teacher"
+                className="hidden sm:inline-flex items-center justify-center px-3 py-2 min-h-[48px] min-w-[48px] border-[2px] border-[#111111] rounded-xl bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] text-xs font-heading font-extrabold text-[#111111] no-underline hover:bg-[#FFE14D]/30 active:translate-x-[1px] active:translate-y-[1px]"
+              >
+                {copy.teacherLink}
+              </Link>
+            )}
             <LanguageToggle
               currentLang={currentLang}
               onLanguageChange={setCurrentLang}
@@ -496,7 +499,7 @@ export default function HomePage() {
                   <div className="pt-1">
                     <Link
                       href={`/student/worksheet/${firstActiveGapId}`}
-                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#FF4F9A] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 bg-[#FF4F9A] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
                     >
                       {copy.fixGapBtn}
                     </Link>
@@ -528,7 +531,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={handleResetProfile}
-                    className="text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A] cursor-pointer"
+                    className="min-h-[48px] min-w-[48px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A] cursor-pointer"
                   >
                     {copy.switchProfile}
                   </button>
@@ -613,14 +616,16 @@ export default function HomePage() {
         </section>
 
         {/* Small Teacher link for mobile footer */}
-        <div className="pt-4 text-center sm:hidden">
-          <Link
-            href="/teacher"
-            className="text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A]"
-          >
-            {copy.teacherLink}
-          </Link>
-        </div>
+        {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (
+          <div className="pt-4 text-center sm:hidden">
+            <Link
+              href="/teacher"
+              className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A]"
+            >
+              {copy.teacherLink}
+            </Link>
+          </div>
+        )}
       </main>
 
       {/* Student Bottom Tab Bar (Home active) */}

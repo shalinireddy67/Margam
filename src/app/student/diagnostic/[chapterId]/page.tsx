@@ -167,19 +167,31 @@ export default function ChapterDiagnosticPage() {
       if (updated) setProfile(updated);
     }
 
-    // Gap Tracing: if triggered, prepare confirmation questions on root concept
+    // Calibrated Gap Tracing Routing:
+    // - low = confirmation check only (confirmation failure -> gap card)
+    // - medium or high = gap card directly
+    // - insufficient = no routing
     if (
       diagResult.gapAnalysis.confirmed &&
       diagResult.gapAnalysis.canRoute &&
       diagResult.gapAnalysis.rootConceptId
     ) {
-      const confirmQs = getConfirmationQuestions(diagResult.gapAnalysis.rootConceptId, 2);
-      if (confirmQs.length > 0) {
-        setConfirmationQuestions(confirmQs);
-        setConfirmationStatus("pending");
-      } else {
-        // If no confirmation questions available, consider gap unconfirmed to protect student
-        setConfirmationStatus("passed");
+      const routing =
+        diagResult.gapAnalysis.routing ||
+        (diagResult.gapAnalysis.confidence === "low" ? "confirmation_only" : "gap_card");
+
+      if (routing === "confirmation_only") {
+        const confirmQs = getConfirmationQuestions(diagResult.gapAnalysis.rootConceptId, 2);
+        if (confirmQs.length > 0) {
+          setConfirmationQuestions(confirmQs);
+          setConfirmationStatus("pending");
+        } else {
+          // If no confirmation questions available, protect student
+          setConfirmationStatus("passed");
+        }
+      } else if (routing === "gap_card") {
+        // Direct routing to gap card for medium or high confidence
+        setConfirmationStatus("failed");
       }
     }
   };
@@ -277,7 +289,7 @@ export default function ChapterDiagnosticPage() {
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={handleReset}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Retake</span>
@@ -285,7 +297,7 @@ export default function ChapterDiagnosticPage() {
 
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
                   >
                     <span>Chapter Lessons</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -319,7 +331,7 @@ export default function ChapterDiagnosticPage() {
               {confirmationQuestions.map((q, qIdx) => {
                 const promptData = resolveLocalizedString(q.prompt, currentLang);
                 return (
-                  <div key={q.id} className="bg-white p-4 rounded-2xl border border-sky-100 space-y-2">
+                  <div key={q.id} data-confirm-qid={q.id} className="bg-white p-4 rounded-2xl border border-sky-100 space-y-2">
                     <p className="text-xs font-bold text-sky-950">
                       Check Question {qIdx + 1}: {promptData.text}
                     </p>
@@ -330,8 +342,9 @@ export default function ChapterDiagnosticPage() {
                         return (
                           <div
                             key={opt.id}
+                            data-confirm-oid={opt.id}
                             onClick={() => handleSelectConfirmationOption(q.id, opt.id)}
-                            className={`p-2.5 rounded-xl border text-xs cursor-pointer flex items-center gap-2 transition-all ${
+                            className={`min-h-[48px] p-3 rounded-xl border text-xs cursor-pointer flex items-center gap-2 transition-all ${
                               isSelected
                                 ? "border-primary bg-primary/5 font-semibold"
                                 : "border-slate-200 hover:border-slate-300 bg-white"
@@ -351,7 +364,7 @@ export default function ChapterDiagnosticPage() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-soft transition-all"
+                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-soft transition-all"
               >
                 <span>Verify Prerequisite Understanding</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -452,12 +465,13 @@ export default function ChapterDiagnosticPage() {
               {/* CTA Button to Prerequisite Lesson */}
               <div className="pt-2">
                 <Link
+                  id="fix-this-first-btn"
                   href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
                     result.gapAnalysis.plainLanguageReason
                   )}`}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
+                  className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3.5 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
                 >
-                  <span>Review Foundational Lesson (Basics-First)</span>
+                  <span>Fix this first: Review Foundational Lesson (Basics-First)</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -474,6 +488,7 @@ export default function ChapterDiagnosticPage() {
             return (
               <div
                 key={q.id}
+                data-qid={q.id}
                 className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
               >
                 <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
@@ -526,8 +541,9 @@ export default function ChapterDiagnosticPage() {
                     return (
                       <div
                         key={opt.id}
+                        data-oid={opt.id}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
                       >
                         <span
                           className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
@@ -589,7 +605,7 @@ export default function ChapterDiagnosticPage() {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
               >
                 <span>Submit Diagnostic</span>
                 <ArrowRight className="w-4 h-4" />

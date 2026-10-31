@@ -248,8 +248,17 @@ const testResult = evaluateChapterTest("c10-ch04", testAnswers);
 assert.equal(testResult.scorePercentage, 100);
 assert.equal(testResult.passed, true);
 assert.ok(testResult.conceptBreakdown["c10-quad-01"]);
+assert.equal(testResult.conceptBreakdown["c10-quad-01"].accuracyCategory, "mastered");
+assert.ok(testResult.diagnosticAnalysis, "Diagnostic analysis generated");
 console.log(`  Chapter Test Score: ${testResult.correctCount}/${testResult.totalQuestions} (${testResult.scorePercentage}%)`);
 console.log(`  Concepts Tested: ${Object.keys(testResult.conceptBreakdown).join(", ")}`);
+
+// Test Blueprint disjoint exclusion & shortfall detection
+const diagExcludedIds = ["q-c10-sol-01", "q-c10-form-01", "q-c10-sol-02", "q-c10-form-02", "q-c10-quad-d3-01", "q-c10-form-03"];
+const disjointTest = generateChapterTest("c10-ch04", 10, { excludeQuestionIds: diagExcludedIds });
+assert.equal(disjointTest.shortfall, true, "Correctly flags shortfall when 6 diagnostic questions are excluded from 14-item pool");
+assert.equal(disjointTest.questions.length, 8, "Returns exact 8 available non-diagnostic questions");
+console.log("  [PASS] Blueprint question shortfall and disjoint exclusion correctly enforced.");
 console.log("  [PASS] Stage 3 Chapter Test generation and evaluation verified.");
 
 console.log("\n--------------------------------------------------");

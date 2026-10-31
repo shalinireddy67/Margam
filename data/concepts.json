@@ -18,7 +18,8 @@
       "te": "జ్యామితీయ ఆకారాలు మరియు సంఖ్యా శ్రేణులలో పునరావృతమయ్యే మరియు వృద్ధి చెందే నమూనాలను గుర్తించి వివరించడం.",
       "reviewed": false
     },
-    "prerequisites": []
+    "prerequisites": [],
+    "edgeMeta": {}
   },
   {
     "id": "c6-geo-01",
@@ -41,7 +42,14 @@
     },
     "prerequisites": [
       "c6-pat-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c6-pat-01": {
+        "reason": "Geometric line arrangements and spatial patterns provide concrete intuition for defining formal points, lines, rays, and angles.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c7-num-01",
@@ -62,7 +70,8 @@
       "te": "భారతీయ స్థాన విలువల పద్ధతి ద్వారా లక్షలు మరియు కోట్ల సంఖ్యలను చదవడం, రాయడం, పోల్చడం మరియు సన్నహిత విలువలను అంచనా వేయడం.",
       "reviewed": false
     },
-    "prerequisites": []
+    "prerequisites": [],
+    "edgeMeta": {}
   },
   {
     "id": "c7-alg-01",
@@ -85,7 +94,14 @@
     },
     "prerequisites": [
       "c7-num-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c7-num-01": {
+        "reason": "Generalizing number patterns into algebraic variable expressions requires place value and arithmetic pattern fluency.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c8-sqr-01",
@@ -106,7 +122,8 @@
       "te": "ఖచ్చిత వర్గ సంఖ్యల లక్షణాలను గుర్తించి, ప్రధాన కారణాంక విభజన పద్ధతి ద్వారా వర్గమూలాలను కనుగొనడం.",
       "reviewed": false
     },
-    "prerequisites": []
+    "prerequisites": [],
+    "edgeMeta": {}
   },
   {
     "id": "c8-exp-01",
@@ -129,7 +146,14 @@
     },
     "prerequisites": [
       "c8-sqr-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c8-sqr-01": {
+        "reason": "Laws of exponents and negative powers generalize concepts of squaring, cubing, and square root operations.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c9-coord-01",
@@ -150,7 +174,8 @@
       "te": "ద్విమితీయ కార్టీసియన్ తలంపై బిందువులు (x, y) ను గుర్తించడం, పాదాలు, మూల బిందువు (0, 0) మరియు అక్షాల సంకేతాలను విశ్లేషించడం.",
       "reviewed": false
     },
-    "prerequisites": []
+    "prerequisites": [],
+    "edgeMeta": {}
   },
   {
     "id": "c9-poly-01",
@@ -173,7 +198,14 @@
     },
     "prerequisites": [
       "c9-coord-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c9-coord-01": {
+        "reason": "Plotting polynomial graphs and determining zeroes graphically relies on Cartesian plane coordinates.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c10-real-01",
@@ -194,7 +226,8 @@
       "te": "సంయుక్త సంఖ్యలను ప్రధాన కారణాంకాల లబ్దంగా రాయడం మరియు ప్రధాన కారణాంక పద్ధతిలో గ.సా.భా, క.సా.గు లను కనుగొని HCF(a, b) · LCM(a, b) = a · b నిరూపించడం.",
       "reviewed": false
     },
-    "prerequisites": []
+    "prerequisites": [],
+    "edgeMeta": {}
   },
   {
     "id": "c10-poly-01",
@@ -217,7 +250,14 @@
     },
     "prerequisites": [
       "c10-real-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c10-real-01": {
+        "reason": "Fundamental theorem of arithmetic and prime factorisation support algebraic factorisation and zeroes of polynomials.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c6-neg-01",
@@ -240,7 +280,14 @@
     },
     "prerequisites": [
       "c6-geo-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c6-geo-01": {
+        "reason": "Number line directionality and opposite coordinates extend line segments and ray models.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c6-neg-02",
@@ -263,7 +310,14 @@
     },
     "prerequisites": [
       "c6-neg-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c6-neg-01": {
+        "reason": "Ordering negative integers depends on understanding negative direction and relative distance from zero.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c7-int-01",
@@ -287,7 +341,19 @@
     "prerequisites": [
       "c6-neg-02",
       "c7-alg-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c6-neg-02": {
+        "reason": "Adding and subtracting integers requires comparing directed numbers on a number line.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c7-alg-01": {
+        "reason": "Combining directed values is required when evaluating algebraic expressions with signed coefficients.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c7-int-02",
@@ -310,7 +376,14 @@
     },
     "prerequisites": [
       "c7-int-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c7-int-01": {
+        "reason": "Multiplication of integers builds on repeated addition and subtraction of signed numbers.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c8-dist-01",
@@ -334,7 +407,19 @@
     "prerequisites": [
       "c7-int-02",
       "c8-exp-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c7-int-02": {
+        "reason": "Expanding brackets with signed terms requires correct multiplication of negative and positive coefficients.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c8-exp-01": {
+        "reason": "Distributing monomial variables requires combining variable powers using exponent addition rules.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c8-dist-02",
@@ -357,7 +442,14 @@
     },
     "prerequisites": [
       "c8-dist-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c8-dist-01": {
+        "reason": "Multiplying two binomials extends the distributive law across multiple terms in sequence.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c9-id-01",
@@ -381,7 +473,19 @@
     "prerequisites": [
       "c8-dist-02",
       "c9-poly-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c8-dist-02": {
+        "reason": "Standard algebraic identities (a+b)2, (a-b)2, (a2-b2) are formalizations of binomial expansions.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c9-poly-01": {
+        "reason": "Recognizing identity forms requires understanding polynomial terms, degrees, and like-term combination.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c9-id-02",
@@ -405,7 +509,19 @@
     "prerequisites": [
       "c9-id-01",
       "c7-int-02"
-    ]
+    ],
+    "edgeMeta": {
+      "c9-id-01": {
+        "reason": "Factorisation by splitting the middle term reverses distributive expansion and identity structures.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c7-int-02": {
+        "reason": "Finding two factors with given product and sum requires signed integer factor pairs and sign checking.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c10-quad-01",
@@ -429,7 +545,19 @@
     "prerequisites": [
       "c9-id-02",
       "c10-poly-01"
-    ]
+    ],
+    "edgeMeta": {
+      "c9-id-02": {
+        "reason": "Solving quadratic equations by factorisation directly applies Class 9 middle-term splitting.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c10-poly-01": {
+        "reason": "Roots of a quadratic equation ax2+bx+c=0 correspond directly to the zeroes of polynomial P(x).",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   },
   {
     "id": "c10-quad-02",
@@ -453,6 +581,18 @@
     "prerequisites": [
       "c10-quad-01",
       "c7-int-02"
-    ]
+    ],
+    "edgeMeta": {
+      "c10-quad-01": {
+        "reason": "The quadratic formula derives from completing the square and generalizes root determination.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c7-int-02": {
+        "reason": "Calculating discriminant b2-4ac and roots -b+-sqrt(D) with negative coefficients requires integer sign rules.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   }
 ]
