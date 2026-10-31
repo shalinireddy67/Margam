@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { X, Sparkles } from "lucide-react";
+import { WitchCat, type WitchCatPose } from "@/components/ui/WitchCat";
 
 export type CompanionContext =
   | "greeting"
@@ -19,6 +19,8 @@ interface WitchCatCompanionProps {
   customMessage?: string;
   className?: string;
   mode?: "floating" | "inline";
+  pose?: WitchCatPose;
+  sticker?: boolean;
 }
 
 export default function WitchCatCompanion({
@@ -27,9 +29,22 @@ export default function WitchCatCompanion({
   customMessage,
   className = "",
   mode = "floating",
+  pose: propPose,
+  sticker = true,
 }: WitchCatCompanionProps) {
   const [bubbleDismissed, setBubbleDismissed] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
+
+  const poseMap: Record<CompanionContext, WitchCatPose> = {
+    greeting: "greet",
+    lesson_start: "read",
+    correct: "cheer",
+    incorrect: "oops",
+    completed: "cheer",
+    locked: "think",
+    welcome_back: "greet",
+  };
+  const activePose: WitchCatPose = propPose || poseMap[context] || "greet";
 
   useEffect(() => {
     if (customMessage) {
@@ -40,19 +55,19 @@ export default function WitchCatCompanion({
 
     switch (context) {
       case "greeting":
-        setCurrentMessage(`Hey, ${studentName}! ✨ Ready for today's little learning adventure?`);
+        setCurrentMessage(`Hey, ${studentName}! Ready for today's learning journey?`);
         break;
       case "lesson_start":
         setCurrentMessage("Let's explore this idea together. Take your time reading!");
         break;
       case "correct":
-        setCurrentMessage("You got it! Nicely done! 🌟");
+        setCurrentMessage("You got it! Nicely done!");
         break;
       case "incorrect":
         setCurrentMessage("Not quite yet. Let's understand why from the steps.");
         break;
       case "completed":
-        setCurrentMessage("One more step on your path! Well done, " + studentName + "! 🎉");
+        setCurrentMessage("One more step on your path! Well done, " + studentName + "!");
         break;
       case "locked":
         setCurrentMessage("Let's finish the previous lesson first, then this one opens!");
@@ -77,13 +92,11 @@ export default function WitchCatCompanion({
         className={`flex items-start gap-4 p-4 rounded-3xl bg-peach-light/80 border border-peach-border ${className}`}
       >
         <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float">
-          <Image
-            src="/images/witch-cat-transparent.png"
+          <WitchCat
+            pose={activePose}
+            size={80}
+            sticker={sticker}
             alt="Margam Witch Cat Study Companion"
-            width={80}
-            height={80}
-            className="object-contain drop-shadow-sm select-none"
-            priority
           />
         </div>
 
@@ -134,15 +147,16 @@ export default function WitchCatCompanion({
         className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1"
       >
         <div className="relative w-full h-full animate-gentle-float">
-          <Image
-            src="/images/witch-cat-transparent.png"
+          <WitchCat
+            pose={activePose}
+            size={80}
+            sticker={sticker}
             alt="Margam Witch Cat"
-            width={80}
-            height={80}
-            className="object-contain drop-shadow-md select-none transition-transform group-hover:scale-105"
+            className="transition-transform group-hover:scale-105"
           />
         </div>
       </button>
     </aside>
   );
 }
+
