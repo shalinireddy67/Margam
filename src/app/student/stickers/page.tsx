@@ -1,29 +1,232 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowLeft, Award, Star } from "lucide-react";
+import {
+  Sparkles,
+  ArrowLeft,
+  Award,
+  Star,
+  Lock,
+  RotateCcw,
+  CheckCircle2,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { BottomTabBar } from "@/components/ui/BottomTabBar";
+import {
+  SkeletonCard,
+  EmptyState,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
+
+interface DerivedSticker {
+  id: string;
+  title: string;
+  description: string;
+  unlocked: boolean;
+  unlockedAtLabel?: string;
+  color: "yellow" | "cyan" | "pink" | "green" | "orange";
+  icon: "star" | "sparkles" | "award" | "trending" | "zap";
+}
 
 export default function StickersPage() {
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const initStickers = useCallback(() => {
+    try {
+      setLoading(true);
+      setHasError(false);
+      setErrorMessage(null);
+
+      const active = getActiveProfile();
+      setProfile(active);
+      setLoading(false);
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to load sticker showcase.");
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const active = getActiveProfile();
-    setProfile(active);
-  }, []);
+    initStickers();
+  }, [initStickers]);
+
+  // 1. Loading Skeleton State
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] p-4 sm:p-6 pb-28">
+        <OfflineBanner />
+        <div className="max-w-xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading stickers">
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
+        <BottomTabBar currentTab="stickers" />
+      </div>
+    );
+  }
+
+  // 2. Error State with Retry
+  if (hasError) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28 flex flex-col justify-between">
+        <OfflineBanner />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-full bg-[#FF4F9A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-extrabold text-lg">
+              !
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Sticker Showcase Error
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "Unable to display learner trophy badges."}
+            </p>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initStickers}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
+        <BottomTabBar currentTab="stickers" />
+      </div>
+    );
+  }
+
+  // 3. Locked State: If user has not onboarded
+  if (!profile || !profile.selectedClass) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28 flex flex-col justify-between">
+        <OfflineBanner />
+        <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+          <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
+            <Link
+              href="/"
+              className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Home</span>
+            </Link>
+            <span className="font-heading font-extrabold text-base text-[#111111]">
+              Sticker Showcase
+            </span>
+          </div>
+        </header>
+
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Stickers Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              Start learning on Margam to earn achievement stickers and track your mastery milestones.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              >
+                <span>Get Started</span>
+              </Link>
+            </div>
+          </div>
+        </main>
+        <BottomTabBar currentTab="stickers" />
+      </div>
+    );
+  }
+
+  // Derive all stickers strictly from existing profile fields (no new storage logic)
+  const completedTopics = Object.values(profile.topicProgress).filter((t) => t.status === "completed");
+  const completedCount = completedTopics.length;
+
+  const stickers: DerivedSticker[] = [
+    {
+      id: "first_step",
+      title: "First Step",
+      description: `Began learning in Class ${profile.selectedClass}`,
+      unlocked: true,
+      unlockedAtLabel: "Unlocked on onboarding",
+      color: "green",
+      icon: "star",
+    },
+    {
+      id: "concept_pioneer",
+      title: "Concept Pioneer",
+      description: "Mastered first mathematical concept",
+      unlocked: completedCount >= 1,
+      unlockedAtLabel: completedCount >= 1 ? "1 concept mastered" : "Master 1 concept to unlock",
+      color: "yellow",
+      icon: "award",
+    },
+    {
+      id: "adaptive_climber",
+      title: "Adaptive Climber",
+      description: "Reached Difficulty Level 2 or higher",
+      unlocked: profile.currentDifficulty >= 2,
+      unlockedAtLabel: profile.currentDifficulty >= 2 ? `Level ${profile.currentDifficulty} reached` : "Advance difficulty to unlock",
+      color: "cyan",
+      icon: "trending",
+    },
+    {
+      id: "focus_streak",
+      title: "Focus Streak",
+      description: "Answered 3 questions correctly in a row",
+      unlocked: profile.consecutiveCorrect >= 3,
+      unlockedAtLabel: profile.consecutiveCorrect >= 3 ? "3 correct streak achieved" : "Achieve 3 correct in a row to unlock",
+      color: "pink",
+      icon: "zap",
+    },
+    {
+      id: "mastery_builder",
+      title: "Mastery Builder",
+      description: "Completed 3 sequential concepts",
+      unlocked: completedCount >= 3,
+      unlockedAtLabel: completedCount >= 3 ? `${completedCount} concepts mastered` : `Master 3 concepts to unlock (${completedCount}/3)`,
+      color: "orange",
+      icon: "sparkles",
+    },
+    {
+      id: "top_performer",
+      title: "Top Performer",
+      description: "Reached Difficulty Level 3 in adaptive practice",
+      unlocked: profile.currentDifficulty === 3,
+      unlockedAtLabel: profile.currentDifficulty === 3 ? "Level 3 achieved" : "Reach Difficulty Level 3 to unlock",
+      color: "yellow",
+      icon: "star",
+    },
+  ];
+
+  const unlockedCount = stickers.filter((s) => s.unlocked).length;
 
   return (
     <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28 flex flex-col justify-between">
+      <OfflineBanner />
+
       <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
         <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 text-sm font-extrabold text-[#111111] no-underline"
+            className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
             <span>Home</span>
           </Link>
           <span className="font-heading font-extrabold text-base text-[#111111]">
@@ -32,8 +235,9 @@ export default function StickersPage() {
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-8 w-full flex-1 space-y-6">
-        <div className="p-6 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl shadow-[4px_4px_0px_#111111] text-center space-y-3">
+      <main className="max-w-xl mx-auto px-4 py-6 sm:py-8 w-full flex-1 space-y-6">
+        {/* Showcase Banner */}
+        <div className="p-6 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-2xl sm:rounded-3xl shadow-[4px_4px_0px_#111111] text-center space-y-3">
           <div className="w-16 h-16 rounded-2xl bg-[#FFE14D] border-[3px] border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center mx-auto text-[#111111]">
             <Award className="w-8 h-8" />
           </div>
@@ -42,34 +246,82 @@ export default function StickersPage() {
             Learner Trophy Badges
           </h1>
           <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
-            Earn stickers and companion badges as you master sequential concepts and complete diagnostics!
+            Earn stickers and companion badges as you master sequential concepts and complete diagnostics.
           </p>
+          <div className="pt-1">
+            <span className="inline-block px-3 py-1 bg-[#111111] text-[#FFE14D] rounded-full text-xs font-heading font-extrabold">
+              {unlockedCount} of {stickers.length} Badges Unlocked
+            </span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div className="p-4 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-2xl shadow-[3px_3px_0px_#111111] text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-[#8DE86A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
-              <Star className="w-6 h-6" />
-            </div>
-            <h3 className="font-heading font-extrabold text-sm text-[#111111]">
-              First Step
-            </h3>
-            <p className="text-[11px] font-bold text-[#111111]/70">
-              Completed onboarding
+        {/* 4. Empty State: If no badges unlocked beyond onboarding */}
+        {unlockedCount <= 1 && completedCount === 0 && (
+          <div className="p-4 bg-[#FFFFFF] border-[2px] border-[#111111] rounded-2xl text-center space-y-2">
+            <p className="text-xs font-bold text-[#111111]/80">
+              Complete your first lesson practice to unlock additional mastery badges!
             </p>
           </div>
+        )}
 
-          <div className="p-4 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-2xl shadow-[3px_3px_0px_#111111] text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-[#4DD9E8] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <h3 className="font-heading font-extrabold text-sm text-[#111111]">
-              Witch Cat Friend
-            </h3>
-            <p className="text-[11px] font-bold text-[#111111]/70">
-              Learned with study companion
-            </p>
-          </div>
+        {/* Stickers Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {stickers.map((st) => {
+            const colorClass = {
+              green: "bg-[#8DE86A]",
+              yellow: "bg-[#FFE14D]",
+              cyan: "bg-[#4DD9E8]",
+              pink: "bg-[#FF4F9A]",
+              orange: "bg-[#FF8A3D]",
+            }[st.color];
+
+            return (
+              <div
+                key={st.id}
+                className={`p-4 rounded-2xl border-[3px] border-[#111111] text-center space-y-2 select-none ${
+                  st.unlocked
+                    ? "bg-[#FFFFFF] shadow-[3px_3px_0px_#111111]"
+                    : "bg-[#F3EED2]/50 opacity-70 border-dashed"
+                }`}
+              >
+                <div
+                  className={`w-14 h-14 rounded-full border-[2px] border-[#111111] flex items-center justify-center mx-auto shadow-[2px_2px_0px_#111111] ${
+                    st.unlocked ? colorClass : "bg-[#E8E0BD] text-[#111111]/50"
+                  }`}
+                >
+                  {st.unlocked ? (
+                    st.icon === "star" ? <Star className="w-7 h-7 text-[#111111]" /> :
+                    st.icon === "award" ? <Award className="w-7 h-7 text-[#111111]" /> :
+                    st.icon === "trending" ? <TrendingUp className="w-7 h-7 text-[#111111]" /> :
+                    st.icon === "zap" ? <Zap className="w-7 h-7 text-[#111111]" /> :
+                    <Sparkles className="w-7 h-7 text-[#111111]" />
+                  ) : (
+                    <Lock className="w-6 h-6 text-[#111111]/60" />
+                  )}
+                </div>
+
+                <div className="space-y-0.5">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <h2 className="font-heading font-extrabold text-sm text-[#111111]">
+                      {st.title}
+                    </h2>
+                    {st.unlocked && <CheckCircle2 className="w-3.5 h-3.5 text-[#111111]" />}
+                  </div>
+                  <p className="text-[11px] font-bold text-[#111111]/70 leading-snug">
+                    {st.description}
+                  </p>
+                </div>
+
+                <div className="pt-1 border-t border-[#111111]/10">
+                  <span className={`text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-md ${
+                    st.unlocked ? "bg-[#8DE86A]/40 text-[#111111]" : "text-[#111111]/60"
+                  }`}>
+                    {st.unlockedAtLabel}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </main>
 
