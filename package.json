@@ -11,6 +11,7 @@
     "check:layout": "node scripts/check-layout.mjs",
     "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs && npx tsx scripts/test-draft-translations.mjs",
     "eval": "npx tsx scripts/eval-scenarios.mjs",
+    "generate:class": "node scripts/generate-synthetic-class.mjs",
     "smoke": "node scripts/smoke-test.mjs",
     "clean:ports": "node scripts/cleanup-ports.mjs"
   },
@@ -27,6 +28,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
     "zod": "^4.6.7"
   },
   "devDependencies": {

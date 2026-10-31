@@ -1,311 +1,716 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Compass,
-  Printer,
-  Users,
+  AlertTriangle,
+  CheckCircle2,
+  XCircle,
+  HelpCircle,
+  ArrowRight,
+  TrendingDown,
   Layers,
   Sparkles,
   BookOpen,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  FileText,
-  AlertCircle,
+  Printer,
+  ChevronRight,
+  Smartphone,
+  Info,
+  Network,
+  RotateCcw,
+  Search,
 } from "lucide-react";
-import demoClassData from "../../../data/demo-class.json";
+import syntheticClassData from "../../../data/synthetic-class.json";
+import { getActiveProfile } from "@/lib/storage";
+import { LearnerProfile } from "@/lib/types";
 
 export default function TeacherPage() {
-  const [activeTab, setActiveTab] = useState<"roadmap" | "printable" | "sample_class">("roadmap");
+  const [selectedStudentId, setSelectedStudentId] = useState<string>("stu-synth-01");
+  const [filterAttention, setFilterAttention] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "heatmap" | "misconceptions" | "print">("dashboard");
+  const [localProfile, setLocalProfile] = useState<LearnerProfile | null>(null);
+
+  useEffect(() => {
+    const profile = getActiveProfile();
+    setLocalProfile(profile);
+  }, []);
+
+  const students = syntheticClassData.students;
+  const heatmapConcepts = syntheticClassData.heatmapConcepts;
+  const metrics = syntheticClassData.metrics;
+
+  const filteredStudents = students.filter((s) => {
+    if (filterAttention && !s.needsAttention) return false;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      return (
+        s.name.toLowerCase().includes(q) ||
+        String(s.rollNumber).includes(q) ||
+        (s.persona && s.persona.toLowerCase().includes(q))
+      );
+    }
+    return true;
+  });
+
+  const selectedStudent =
+    students.find((s) => s.id === selectedStudentId) || students[0];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-      {/* Top Bar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-soft">
-              <Compass className="w-5 h-5" />
+    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans selection:bg-yellow-bright">
+      {/* Top Bar with Neo-Brutalist Accent */}
+      <header className="sticky top-0 z-40 bg-white border-b-3 border-ink shadow-hard-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-yellow-bright border-2 border-ink flex items-center justify-center font-heading font-black text-xl text-ink shadow-hard-sm">
+              M
             </div>
-            <span className="font-heading font-extrabold text-xl text-foreground tracking-tight">
-              Margam
-            </span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 ml-1">
-              Teacher Tools (Roadmap)
-            </span>
+            <div>
+              <span className="font-heading font-black text-lg tracking-tight block leading-tight">
+                Margam Teacher
+              </span>
+              <span className="text-[10px] font-bold text-pink-600 block uppercase tracking-wider">
+                Classroom Diagnostics
+              </span>
+            </div>
           </Link>
 
-          <Link
-            href="/student"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-soft transition-all"
-          >
-            <span>Enter Student Learning</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex items-center gap-2">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-yellow-light text-ink border-2 border-ink text-xs font-black shadow-hard-sm">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Synthetic Class</span>
+            </span>
+            <Link
+              href="/student"
+              className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 rounded-xl bg-ink text-cream hover:bg-slate-800 text-xs font-black shadow-hard-sm transition-transform active:translate-y-0.5"
+            >
+              <span>Student View</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
-        {/* Banner with Clear Status Disclaimer */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
-            <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
-            <span>Teacher Experience Roadmap & Classroom Artifacts</span>
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 space-y-6">
+        {/* Synthetic Notice Banner */}
+        <div className="bg-white border-3 border-ink p-4 sm:p-5 rounded-2xl shadow-hard flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-cyan-bright border-2 border-ink flex items-center justify-center shrink-0 mt-0.5 shadow-hard-sm">
+              <Compass className="w-5 h-5 text-ink" />
+            </div>
+            <div>
+              <div className="inline-block px-2.5 py-0.5 rounded-pill bg-pink-light border-2 border-ink text-[11px] font-black uppercase tracking-wider text-ink mb-1">
+                Synthetic class, generated by the Margam engine
+              </div>
+              <h1 className="text-xl sm:text-2xl font-heading font-black tracking-tight leading-tight">
+                {syntheticClassData.className} — {syntheticClassData.chapterName}
+              </h1>
+              <p className="text-xs font-semibold text-slate-600 mt-0.5">
+                Teacher: {syntheticClassData.teacherName} • Chapter ID: {syntheticClassData.chapterId} • 25 Scripted Student Profiles
+              </p>
+            </div>
           </div>
-
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
-            Designed to Empower Indian Teachers, Not Replace Them
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
-            In government schools and multi-grade Indian classrooms, teachers spend hours grading diagnostic tests
-            manually. Margam provides transparent mastery aggregations and offline printable worksheets. Below is an
-            honest preview of currently planned teacher features and sample classroom data.
-          </p>
-
-          {/* Navigation Tabs */}
-          <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
-            <button
-              onClick={() => setActiveTab("roadmap")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeTab === "roadmap"
-                  ? "bg-primary text-white shadow-soft"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-              }`}
-            >
-              Planned Teacher Roadmap
-            </button>
-            <button
-              onClick={() => setActiveTab("printable")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeTab === "printable"
-                  ? "bg-primary text-white shadow-soft"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-              }`}
-            >
-              Printable A4 Worksheet Preview
-            </button>
-            <button
-              onClick={() => setActiveTab("sample_class")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeTab === "sample_class"
-                  ? "bg-primary text-white shadow-soft"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-              }`}
-            >
-              Synthetic Classroom Data ({demoClassData.totalStudents} Students)
-            </button>
+          <div className="flex items-center gap-2 self-stretch sm:self-auto">
+            <span className="text-xs font-black px-3 py-1.5 bg-green-light border-2 border-ink rounded-xl shadow-hard-sm text-center flex-1 sm:flex-none">
+              Engine Status: Active
+            </span>
           </div>
         </div>
 
-        {/* Tab 1: Roadmap View */}
-        {activeTab === "roadmap" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700">
-                <Users className="w-5 h-5" />
-              </div>
-              <h3 className="font-heading font-bold text-base text-foreground">
-                Classroom Learning-Gap Matrix
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Aggregated heatmap showing which students struggle with foundational Class 6 and 7 prerequisites
-                (e.g., negative sign rules) before starting Class 8 polynomials or Class 10 quadratics.
-              </p>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-semibold text-[11px]">
-                Status: Phase 2 Planned Feature
-              </span>
-            </div>
-
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700">
-                <Layers className="w-5 h-5" />
-              </div>
-              <h3 className="font-heading font-bold text-base text-foreground">
-                Suggested Peer Learning Groups
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Algorithmic suggestions that pair students with complementary mastery patterns for 15-minute
-                classroom peer-tutoring activities, with complete teacher override control.
-              </p>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-semibold text-[11px]">
-                Status: Phase 2 Planned Feature
-              </span>
-            </div>
-
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700">
-                <Printer className="w-5 h-5" />
-              </div>
-              <h3 className="font-heading font-bold text-base text-foreground">
-                One-Click Printable Worksheets
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Clean, low-ink A4 printable question sets formatted specifically for Indian government schools
-                with low or intermittent internet connectivity.
-              </p>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[11px] border border-emerald-200">
-                Status: Sample Generator Active Below
-              </span>
-            </div>
-
-            <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-heading font-bold text-base text-foreground">
-                Teacher Decision Sovereignty
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                No automated black-box grading decisions. Teachers retain 100% control over student topic unlocking,
-                custom homework assignments, and classroom pacing.
-              </p>
-              <span className="inline-block px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 font-semibold text-[11px]">
-                Core Architecture Guarantee
-              </span>
-            </div>
+        {/* This Device: Current Student Session Card */}
+        <section className="bg-sky-light/50 border-3 border-ink rounded-2xl p-4 sm:p-5 shadow-hard">
+          <div className="flex items-center gap-2 text-xs font-black text-ink mb-2">
+            <Smartphone className="w-4 h-4 text-ink" />
+            <span className="uppercase tracking-wider">This Device • Active Learner Session</span>
+            <span className="ml-auto text-[11px] font-bold text-slate-600">Local Browser State</span>
           </div>
-        )}
 
-        {/* Tab 2: Printable A4 Preview */}
-        {activeTab === "printable" && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-300 shadow-sm space-y-6 print:border-none print:shadow-none">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+          {localProfile ? (
+            <div className="bg-white border-2 border-ink rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-heading font-extrabold text-foreground">
-                  A4 Remedial Practice Worksheet
-                </h2>
-                <p className="text-xs text-muted-foreground">
-                  Format: Single-sheet print-optimized • Class 8 Mathematics • Distributive Law
+                <div className="flex items-center gap-2">
+                  <span className="font-heading font-black text-base">{localProfile.name}</span>
+                  <span className="px-2 py-0.5 rounded-pill bg-yellow-bright border-2 border-ink text-[10px] font-black">
+                    Class {localProfile.selectedClass}
+                  </span>
+                  <span className="px-2 py-0.5 rounded-pill bg-slate-100 border border-slate-300 text-[10px] font-bold text-slate-700">
+                    Difficulty L{localProfile.currentDifficulty || 1}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 mt-1">
+                  Active topics: {Object.keys(localProfile.topicProgress || {}).length} tracked •
+                  Streak: {localProfile.consecutiveCorrect || 0} correct
                 </p>
               </div>
-              <button
-                onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 transition-colors"
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Link
+                  href="/student"
+                  className="min-h-[48px] px-4 py-2 bg-yellow-bright hover:bg-yellow border-2 border-ink rounded-xl font-heading font-black text-xs shadow-hard-sm flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
+                >
+                  <span>Resume Learning</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-white border-2 border-ink rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <Info className="w-5 h-5 text-slate-500 shrink-0" />
+                <div>
+                  <p className="text-xs font-bold text-slate-700">
+                    No active student profile initialized on this browser device yet.
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    Student answers submitted in the learning flow will immediately appear in local diagnostics.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/student"
+                className="min-h-[48px] px-4 py-2 bg-yellow-bright hover:bg-yellow border-2 border-ink rounded-xl font-heading font-black text-xs shadow-hard-sm flex items-center justify-center gap-1.5 w-full sm:w-auto"
               >
-                <Printer className="w-4 h-4" />
-                <span>Print Worksheet</span>
-              </button>
+                <span>Launch Student Session</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          )}
+        </section>
+
+        {/* Metrics Row */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-white border-3 border-ink rounded-2xl p-4 shadow-hard">
+            <span className="text-[11px] font-bold text-slate-600 block uppercase">Class Average</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-ink mt-0.5">
+              {metrics.averageScore}%
+            </div>
+            <span className="text-[10px] font-bold text-slate-500 block mt-1">
+              Chapter Diagnostic Accuracy
+            </span>
+          </div>
+
+          <div className="bg-pink-light/40 border-3 border-ink rounded-2xl p-4 shadow-hard">
+            <span className="text-[11px] font-bold text-pink-900 block uppercase">Needs Attention</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-pink-700 mt-0.5">
+              {metrics.studentsNeedingAttentionCount} <span className="text-sm font-bold text-ink">/ {syntheticClassData.totalStudents}</span>
+            </div>
+            <span className="text-[10px] font-black text-pink-800 block mt-1">
+              {metrics.studentsNeedingAttentionPercentage}% of students flagged
+            </span>
+          </div>
+
+          <div className="bg-green-light/40 border-3 border-ink rounded-2xl p-4 shadow-hard">
+            <span className="text-[11px] font-bold text-green-900 block uppercase">On Track</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-green-700 mt-0.5">
+              {metrics.studentsOnTrackCount} <span className="text-sm font-bold text-ink">/ {syntheticClassData.totalStudents}</span>
+            </div>
+            <span className="text-[10px] font-black text-green-800 block mt-1">
+              {metrics.studentsOnTrackPercentage}% performing at or above grade
+            </span>
+          </div>
+
+          <div className="bg-cyan-light/40 border-3 border-ink rounded-2xl p-4 shadow-hard flex flex-col justify-between">
+            <div>
+              <span className="text-[11px] font-bold text-cyan-900 block uppercase">Top Missing Prereq</span>
+              <div className="font-heading font-black text-base sm:text-lg text-ink mt-0.5 truncate" title={metrics.topMissingPrerequisite?.conceptName}>
+                {metrics.topMissingPrerequisite?.conceptId}
+              </div>
+              <span className="text-[10px] font-bold text-slate-700 block mt-1 truncate">
+                Class {metrics.topMissingPrerequisite?.class} • {metrics.topMissingPrerequisite?.count} Students ({metrics.topMissingPrerequisite?.percentage}%)
+              </span>
+            </div>
+            <button
+              onClick={() => setActiveTab("print")}
+              className="mt-2 min-h-[40px] px-2 py-1 bg-white hover:bg-yellow-bright border-2 border-ink rounded-xl font-heading font-black text-[10px] text-ink shadow-hard-sm flex items-center justify-center gap-1"
+            >
+              <Printer className="w-3.5 h-3.5" />
+              <span>Print Group Worksheet (A4)</span>
+            </button>
+          </div>
+        </section>
+
+        {/* View Navigation Tabs */}
+        <div className="flex flex-wrap gap-2 border-b-3 border-ink pb-3">
+          <button
+            onClick={() => setActiveTab("dashboard")}
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-black border-2 border-ink transition-transform active:translate-y-0.5 ${
+              activeTab === "dashboard"
+                ? "bg-yellow-bright shadow-hard text-ink"
+                : "bg-white text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Students & Attention ({metrics.studentsNeedingAttentionCount})
+          </button>
+          <button
+            onClick={() => setActiveTab("heatmap")}
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-black border-2 border-ink transition-transform active:translate-y-0.5 ${
+              activeTab === "heatmap"
+                ? "bg-yellow-bright shadow-hard text-ink"
+                : "bg-white text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Concept Heatmap (M/P/G/L)
+          </button>
+          <button
+            onClick={() => setActiveTab("misconceptions")}
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-black border-2 border-ink transition-transform active:translate-y-0.5 ${
+              activeTab === "misconceptions"
+                ? "bg-yellow-bright shadow-hard text-ink"
+                : "bg-white text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Common Misconceptions & Roots
+          </button>
+          <button
+            onClick={() => setActiveTab("print")}
+            className={`min-h-[48px] px-4 py-2 rounded-xl text-xs font-black border-2 border-ink transition-transform active:translate-y-0.5 ${
+              activeTab === "print"
+                ? "bg-yellow-bright shadow-hard text-ink"
+                : "bg-white text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            Printable A4 Remedial Worksheet
+          </button>
+        </div>
+
+        {/* TAB 1: Dashboard & Attention List with Drill-Down */}
+        {activeTab === "dashboard" && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column: Student Roster */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="bg-white border-3 border-ink rounded-2xl p-4 shadow-hard space-y-3">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-heading font-black text-base text-ink">
+                    Cohort Roster ({syntheticClassData.totalStudents})
+                  </h2>
+                  <span className="text-[10px] font-black px-2 py-0.5 rounded-pill bg-slate-100 border border-slate-300">
+                    Synthetic class
+                  </span>
+                </div>
+
+                {/* Search & Filter Controls */}
+                <div className="space-y-2">
+                  <div className="relative">
+                    <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="Search student by name or roll..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border-2 border-ink focus:outline-none focus:ring-2 focus:ring-yellow-bright bg-white"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setFilterAttention(!filterAttention)}
+                      className={`min-h-[44px] flex-1 px-3 py-1.5 rounded-xl text-xs font-black border-2 border-ink transition-all ${
+                        filterAttention
+                          ? "bg-pink-bright text-ink shadow-hard-sm"
+                          : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      }`}
+                    >
+                      {filterAttention ? "Showing Flagged Only" : "Filter: Needs Attention Only"}
+                    </button>
+                    {(filterAttention || searchQuery) && (
+                      <button
+                        onClick={() => {
+                          setFilterAttention(false);
+                          setSearchQuery("");
+                        }}
+                        className="min-h-[44px] px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 border-2 border-ink hover:bg-slate-200"
+                        title="Reset Filters"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Student Scrollable List */}
+                <div className="space-y-2 max-h-[560px] overflow-y-auto pr-1">
+                  {filteredStudents.map((st) => {
+                    const isSelected = st.id === selectedStudentId;
+                    return (
+                      <button
+                        key={st.id}
+                        onClick={() => setSelectedStudentId(st.id)}
+                        className={`w-full text-left p-3 rounded-xl border-2 border-ink transition-all min-h-[48px] flex items-center justify-between gap-2 ${
+                          isSelected
+                            ? "bg-yellow-bright shadow-hard"
+                            : st.needsAttention
+                            ? "bg-pink-light/30 hover:bg-pink-light/60"
+                            : "bg-white hover:bg-slate-50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="w-7 h-7 rounded-lg bg-white border border-ink flex items-center justify-center text-xs font-black shrink-0">
+                            #{st.rollNumber}
+                          </span>
+                          <div className="min-w-0">
+                            <div className="font-heading font-black text-xs text-ink truncate">
+                              {st.name}
+                            </div>
+                            <div className="text-[10px] font-semibold text-slate-600 truncate max-w-[180px]">
+                              {st.attentionReason}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="text-right shrink-0">
+                          <span
+                            className={`inline-block px-2 py-0.5 rounded-pill text-[10px] font-black border border-ink ${
+                              st.diagnosticScore >= 80
+                                ? "bg-green text-ink"
+                                : st.diagnosticScore >= 60
+                                ? "bg-yellow text-ink"
+                                : "bg-pink text-ink"
+                            }`}
+                          >
+                            {st.diagnosticScore}%
+                          </span>
+                          {st.needsAttention && (
+                            <span className="block text-[9px] font-black text-pink-700 uppercase mt-0.5">
+                              Alert
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                  {filteredStudents.length === 0 && (
+                    <div className="text-center py-8 text-xs font-bold text-slate-500">
+                      No students match the current filter.
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* Printable Mock Document */}
-            <div className="p-6 border border-dashed border-slate-300 rounded-2xl bg-white space-y-5 text-xs text-slate-800">
-              <div className="flex justify-between items-center border-b pb-3 border-slate-300">
-                <div>
-                  <h3 className="font-bold text-sm">Margam Adaptive Learning • Classroom Practice</h3>
-                  <p className="text-[11px] text-slate-600">Chapter: We Distribute, Yet Things Multiply</p>
-                </div>
-                <div className="text-right text-[11px]">
-                  <p>Student Name: _________________________</p>
-                  <p>Roll No: ________ Date: _______________</p>
-                </div>
-              </div>
+            {/* Right Column: Evidence Drill-Down Panel */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-5">
+                {/* Header of Selected Student */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b-2 border-ink">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-xl bg-yellow-bright border-2 border-ink flex items-center justify-center font-heading font-black text-sm">
+                        #{selectedStudent.rollNumber}
+                      </span>
+                      <h3 className="font-heading font-black text-lg text-ink">
+                        {selectedStudent.name}
+                      </h3>
+                      <span className="px-2 py-0.5 rounded-pill bg-slate-100 border border-slate-300 text-[10px] font-bold">
+                        {selectedStudent.persona}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-600 mt-1">
+                      {selectedStudent.attentionReason}
+                    </p>
+                  </div>
 
-              <div className="space-y-4">
-                <div>
-                  <p className="font-bold">Q1. Expand the expression using the distributive property: -4(2x - 7)</p>
-                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
-                    <div>(A) -8x - 28</div>
-                    <div>(B) -8x + 28</div>
-                    <div>(C) 8x - 28</div>
-                    <div>(D) -8x - 7</div>
+                  <div className="flex items-center gap-2 self-start sm:self-auto">
+                    <div className="px-3 py-1.5 rounded-xl bg-cream border-2 border-ink text-center shadow-hard-sm">
+                      <span className="block text-[10px] font-bold text-slate-600 uppercase">Score</span>
+                      <span className="font-heading font-black text-base text-ink">
+                        {selectedStudent.correctCount}/{selectedStudent.totalQuestions} ({selectedStudent.diagnosticScore}%)
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <p className="font-bold">Q2. Multiply the two binomials and combine like terms: (x + 3)(x + 7)</p>
-                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
-                    <div>(A) x² + 21</div>
-                    <div>(B) x² + 10x + 21</div>
-                    <div>(C) x² + 10x + 10</div>
-                    <div>(D) x² + 21x + 10</div>
+                {/* Recommended Remedial Concept Card */}
+                {selectedStudent.recommendedRemedialConcept ? (
+                  <div className="bg-yellow-light/60 border-2 border-ink rounded-xl p-4 shadow-hard-sm space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs font-black uppercase text-pink-700">
+                        <AlertTriangle className="w-4 h-4 text-pink-700" />
+                        <span>Recommended Remedial Intervention</span>
+                      </div>
+                      <span className="text-[10px] font-black px-2 py-0.5 rounded-pill bg-white border border-ink">
+                        Confidence: {selectedStudent.recommendedRemedialConcept.confidence}
+                      </span>
+                    </div>
+
+                    <div className="bg-white border-2 border-ink rounded-lg p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-0.5 rounded-pill bg-pink text-ink border border-ink text-[10px] font-black">
+                              Class {selectedStudent.recommendedRemedialConcept.class} Prerequisite
+                            </span>
+                            <span className="font-heading font-black text-sm text-ink">
+                              {selectedStudent.recommendedRemedialConcept.name} ({selectedStudent.recommendedRemedialConcept.conceptId})
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-700 mt-1.5 leading-relaxed">
+                            {selectedStudent.recommendedRemedialConcept.reason}
+                          </p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className="text-[10px] font-bold text-slate-500 block">Ranking Score</span>
+                          <span className="font-heading font-black text-sm text-ink">
+                            {selectedStudent.recommendedRemedialConcept.score.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Prerequisite DAG Path Display */}
+                      {selectedStudent.recommendedRemedialConcept.path && selectedStudent.recommendedRemedialConcept.path.length > 0 && (
+                        <div className="mt-3 pt-2.5 border-t border-slate-200">
+                          <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                            Graph Prerequisite Traversal Path:
+                          </span>
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {selectedStudent.recommendedRemedialConcept.path.map((node, i) => (
+                              <React.Fragment key={node}>
+                                <span className="px-2 py-0.5 bg-yellow-bright border border-ink rounded-md text-[11px] font-black text-ink shadow-hard-sm">
+                                  {node}
+                                </span>
+                                {i < (selectedStudent.recommendedRemedialConcept?.path?.length ?? 0) - 1 && (
+                                  <span className="text-xs font-black text-slate-500">→</span>
+                                )}
+                              </React.Fragment>
+                            ))}
+                          </div>
+                          <div className="mt-3">
+                            <button
+                              onClick={() => {
+                                setActiveTab("print");
+                              }}
+                              className="min-h-[48px] px-3.5 py-1.5 bg-yellow-bright hover:bg-yellow border-2 border-ink rounded-xl font-heading font-black text-xs shadow-hard-sm flex items-center gap-1.5"
+                            >
+                              <Printer className="w-4 h-4" />
+                              <span>Print A4 Worksheet for {selectedStudent.recommendedRemedialConcept.conceptId} Group</span>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-green-light/40 border-2 border-ink rounded-xl p-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-800 shrink-0" />
+                    <span className="text-xs font-bold text-green-900">
+                      No foundational prerequisite gaps detected. Student is on track with Class 10 concepts!
+                    </span>
+                  </div>
+                )}
+
+                {/* Evidence Drill-Down: Actual Answers & Tags */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-heading font-black text-sm text-ink uppercase tracking-wide">
+                      Diagnostic Question Evidence ({selectedStudent.feedback.length} items)
+                    </h4>
+                    <span className="text-[10px] font-bold text-slate-500">
+                      Real answer submissions
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {selectedStudent.feedback.map((item, idx) => (
+                      <div
+                        key={item.questionId}
+                        className={`p-3 rounded-xl border-2 border-ink text-xs ${
+                          item.isCorrect
+                            ? "bg-white"
+                            : "bg-pink-light/30"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            {item.isCorrect ? (
+                              <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0" />
+                            ) : (
+                              <XCircle className="w-4 h-4 text-pink-600 shrink-0" />
+                            )}
+                            <span className="font-bold text-ink">
+                              Q{idx + 1}. ({item.questionId})
+                            </span>
+                            <span className="text-[10px] font-semibold text-slate-500">
+                              [{item.conceptId}]
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2 font-mono text-[11px]">
+                            <span>
+                              Answer: <strong className={item.isCorrect ? "text-green-700" : "text-pink-700 font-bold"}>
+                                {item.selectedOption}
+                              </strong>
+                            </span>
+                            {!item.isCorrect && (
+                              <span className="text-slate-500">
+                                (Correct: <strong>{item.correctAnswer}</strong>)
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {item.mistakeTag && (
+                          <div className="mt-2 pl-6">
+                            <span className="inline-block px-2 py-0.5 rounded-md bg-white border border-pink-400 text-pink-800 text-[10px] font-black">
+                              Tag: {item.mistakeTag.replace(/_/g, " ")}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div>
-                  <p className="font-bold">Q3. Expand and simplify: (x - 5)(x + 8)</p>
-                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
-                    <div>(A) x² - 3x - 40</div>
-                    <div>(B) x² + 3x - 40</div>
-                    <div>(C) x² + 3x + 40</div>
-                    <div>(D) x² - 40</div>
+                {/* Margam Engine Candidates Ranking Table */}
+                {selectedStudent.gapAnalysis.candidates && selectedStudent.gapAnalysis.candidates.length > 0 && (
+                  <div className="space-y-2 pt-2 border-t-2 border-ink">
+                    <h4 className="font-heading font-black text-xs text-ink uppercase tracking-wide">
+                      Engine Candidate Ranking Breakdown
+                    </h4>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-[11px] border-collapse">
+                        <thead>
+                          <tr className="border-b-2 border-ink text-slate-600 font-black">
+                            <th className="py-1">Candidate Concept</th>
+                            <th className="py-1">Class</th>
+                            <th className="py-1">Ranking Score</th>
+                            <th className="py-1">Confidence</th>
+                            <th className="py-1">Routing</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200">
+                          {selectedStudent.gapAnalysis.candidates.map((cand) => (
+                            <tr key={cand.conceptId} className="hover:bg-slate-50">
+                              <td className="py-1.5 font-bold text-ink">
+                                {cand.conceptName} ({cand.conceptId})
+                              </td>
+                              <td className="py-1.5">Class {cand.class}</td>
+                              <td className="py-1.5 font-mono font-black">{cand.score.toFixed(2)}</td>
+                              <td className="py-1.5">
+                                <span className={`px-1.5 py-0.2 rounded text-[10px] font-black ${
+                                  cand.confidence === "high" || cand.confidence === "medium"
+                                    ? "bg-pink-light text-pink-900 border border-pink-400"
+                                    : "bg-slate-100 text-slate-700"
+                                }`}>
+                                  {cand.confidence}
+                                </span>
+                              </td>
+                              <td className="py-1.5 font-mono text-[10px]">{cand.routing}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-300 text-[10px] text-slate-500 flex justify-between">
-                <span>Teacher Signature: _____________________</span>
-                <span>Margam Remedial Print Edition</span>
+                )}
               </div>
             </div>
           </div>
         )}
 
-        {/* Tab 3: Synthetic Class Data */}
-        {activeTab === "sample_class" && (
-          <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-            <div className="flex items-center justify-between">
+        {/* TAB 2: Concept Heatmap (M, P, G, L) */}
+        {activeTab === "heatmap" && (
+          <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-base font-heading font-bold text-foreground">
-                  {demoClassData.className} ({demoClassData.academicYear})
+                <h2 className="font-heading font-black text-lg text-ink">
+                  Classroom Concept Mastery Heatmap (25 × 10 Matrix)
                 </h2>
-                <p className="text-xs text-muted-foreground">
-                  Teacher: {demoClassData.teacherName} • Subject: Mathematics
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Every cell displays a status letter (M, P, G, L) and color token computed directly by the Margam engine.
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold border border-slate-200">
-                Sample Data (Fictional)
-              </span>
+
+              {/* Legend with exact letters and colors */}
+              <div className="flex flex-wrap items-center gap-2 text-xs font-black">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green border-2 border-ink rounded-lg shadow-hard-sm">
+                  <span className="font-heading font-black">M</span>
+                  <span className="text-[10px]">Mastered (≥75%)</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-cyan border-2 border-ink rounded-lg shadow-hard-sm">
+                  <span className="font-heading font-black">P</span>
+                  <span className="text-[10px]">Practicing (50–74%)</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-pink border-2 border-ink rounded-lg shadow-hard-sm">
+                  <span className="font-heading font-black">G</span>
+                  <span className="text-[10px]">Gap Detected</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-yellow border-2 border-ink rounded-lg shadow-hard-sm">
+                  <span className="font-heading font-black">L</span>
+                  <span className="text-[10px]">Learning (&lt;50%)</span>
+                </div>
+              </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+            {/* Matrix Table with Horizontal Scroll */}
+            <div className="overflow-x-auto border-2 border-ink rounded-xl">
+              <table className="w-full text-center border-collapse text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-500">
-                    <th className="py-2 font-bold">Roll</th>
-                    <th className="py-2 font-bold">Name</th>
-                    <th className="py-2 font-bold">Grade</th>
-                    <th className="py-2 font-bold">Signed Numbers (C6)</th>
-                    <th className="py-2 font-bold">Distributive Law (C8)</th>
-                    <th className="py-2 font-bold">Identified Gap</th>
+                  <tr className="bg-yellow-light/60 border-b-2 border-ink">
+                    <th className="p-2.5 text-left font-heading font-black text-xs text-ink sticky left-0 bg-yellow-light z-10 border-r-2 border-ink min-w-[140px]">
+                      Student
+                    </th>
+                    {heatmapConcepts.map((c) => (
+                      <th
+                        key={c.id}
+                        className="p-2 font-heading font-black text-[11px] text-ink border-r border-ink/40 min-w-[70px]"
+                        title={`${c.name} (Class ${c.class})`}
+                      >
+                        <span className="block">{c.shortName}</span>
+                        <span className="text-[9px] font-bold text-slate-600">C{c.class}</span>
+                      </th>
+                    ))}
+                    <th className="p-2 font-heading font-black text-[11px] text-ink min-w-[80px]">
+                      Diag Score
+                    </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {demoClassData.students.slice(0, 10).map((st) => {
-                    const c6Mastery = st.mastery.find((m) => m.conceptId === "c6-neg-01")?.masteryPercentage ?? 0;
-                    const c8Mastery = st.mastery.find((m) => m.conceptId === "c8-dist-01")?.masteryPercentage ?? 0;
-
+                <tbody className="divide-y divide-ink/20">
+                  {students.map((st) => {
+                    const isSelected = st.id === selectedStudentId;
                     return (
-                      <tr key={st.id} className="hover:bg-slate-50">
-                        <td className="py-2 font-semibold text-slate-500">#{st.rollNumber}</td>
-                        <td className="py-2 font-bold text-foreground">{st.name}</td>
-                        <td className="py-2 text-slate-600">Class {st.overallGradeLevel}</td>
-                        <td className="py-2">
-                          <span
-                            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                              c6Mastery >= 75
-                                ? "bg-emerald-50 text-emerald-700"
-                                : "bg-rose-50 text-rose-700"
-                            }`}
-                          >
-                            {c6Mastery}%
-                          </span>
+                      <tr
+                        key={st.id}
+                        onClick={() => {
+                          setSelectedStudentId(st.id);
+                          setActiveTab("dashboard");
+                        }}
+                        className={`cursor-pointer transition-colors ${
+                          isSelected ? "bg-yellow-light/40" : "hover:bg-slate-50"
+                        }`}
+                      >
+                        {/* Student Name Sticky Left */}
+                        <td className="p-2.5 text-left font-bold text-ink sticky left-0 bg-white border-r-2 border-ink whitespace-nowrap z-10">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[10px] font-mono text-slate-500">#{st.rollNumber}</span>
+                            <span className="truncate max-w-[110px]">{st.name}</span>
+                          </div>
                         </td>
-                        <td className="py-2">
-                          <span
-                            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                              c8Mastery >= 75
-                                ? "bg-emerald-50 text-emerald-700"
-                                : "bg-amber-50 text-amber-700"
-                            }`}
-                          >
-                            {c8Mastery}%
-                          </span>
-                        </td>
-                        <td className="py-2 text-slate-600 truncate max-w-[180px]">
-                          {st.diagnosedRootGap?.rationale || "On track"}
+
+                        {/* Concept Cells with Letter + Color */}
+                        {st.heatmap.map((cell) => {
+                          let cellStyle = "bg-white text-ink";
+                          if (cell.status === "M") cellStyle = "bg-green text-ink";
+                          else if (cell.status === "P") cellStyle = "bg-cyan text-ink";
+                          else if (cell.status === "G") cellStyle = "bg-pink text-ink font-black animate-pulse";
+                          else if (cell.status === "L") cellStyle = "bg-yellow text-ink";
+
+                          return (
+                            <td
+                              key={cell.conceptId}
+                              className="p-1.5 border-r border-ink/20 text-center"
+                              title={`${st.name} • ${cell.name}: ${cell.masteryPercentage}% (${cell.status})`}
+                            >
+                              <div
+                                className={`w-8 h-8 mx-auto rounded-lg border-2 border-ink font-heading font-black text-xs flex items-center justify-center shadow-hard-sm ${cellStyle}`}
+                              >
+                                {cell.status}
+                              </div>
+                            </td>
+                          );
+                        })}
+
+                        {/* Overall Diagnostic Score */}
+                        <td className="p-2 font-mono font-black text-xs text-ink">
+                          {st.diagnosticScore}%
                         </td>
                       </tr>
                     );
@@ -313,16 +718,204 @@ export default function TeacherPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-[11px] text-slate-500 text-center pt-2">
-              Showing first 10 students of synthetic cohort. All data generated for prototype validation only.
+            <p className="text-[11px] text-slate-500 text-center">
+              Click any student row to view their full evidence drill-down, question answers, and graph paths.
             </p>
+          </div>
+        )}
+
+        {/* TAB 3: Common Misconceptions & Missing Prerequisites */}
+        {activeTab === "misconceptions" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Common Misconceptions List */}
+            <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b-2 border-ink">
+                <h3 className="font-heading font-black text-base text-ink">
+                  Common Mistake Tags & Frequency
+                </h3>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-pill bg-pink-light border border-ink">
+                  {syntheticClassData.commonMisconceptions.length} Tags Tracked
+                </span>
+              </div>
+              <p className="text-xs text-slate-600">
+                Aggregated misconception patterns detected across the cohort from real diagnostic answer selections.
+              </p>
+
+              <div className="space-y-2.5 max-h-[520px] overflow-y-auto pr-1">
+                {syntheticClassData.commonMisconceptions.map((m) => (
+                  <div
+                    key={m.tag}
+                    className="p-3 bg-white border-2 border-ink rounded-xl shadow-hard-sm space-y-1.5"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-heading font-black text-xs text-ink uppercase">
+                        {m.description}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-pill bg-pink text-ink border border-ink text-[10px] font-black shrink-0">
+                        {m.count} Students ({m.percentage}%)
+                      </span>
+                    </div>
+                    <span className="block font-mono text-[10px] text-slate-500 truncate">
+                      tag: {m.tag}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Frequently Missing Prerequisites */}
+            <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b-2 border-ink">
+                <h3 className="font-heading font-black text-base text-ink">
+                  Frequently Missing Prerequisites
+                </h3>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-pill bg-cyan-light border border-ink">
+                  {syntheticClassData.frequentlyMissingPrerequisites.length} Concepts
+                </span>
+              </div>
+              <p className="text-xs text-slate-600">
+                Foundational concepts diagnosed as root bottlenecks before Class 10 quadratic factoring can succeed.
+              </p>
+
+              <div className="space-y-3 max-h-[520px] overflow-y-auto pr-1">
+                {syntheticClassData.frequentlyMissingPrerequisites.map((p) => (
+                  <div
+                    key={p.conceptId}
+                    className="p-3.5 bg-yellow-light/40 border-2 border-ink rounded-xl shadow-hard-sm space-y-2"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="inline-block px-2 py-0.5 rounded-pill bg-white border border-ink text-[10px] font-black text-ink mb-1">
+                          Class {p.class} Foundational Concept
+                        </span>
+                        <h4 className="font-heading font-black text-xs sm:text-sm text-ink">
+                          {p.conceptName} ({p.conceptId})
+                        </h4>
+                      </div>
+                      <span className="px-2.5 py-1 rounded-xl bg-pink text-ink border-2 border-ink font-heading font-black text-xs shrink-0 shadow-hard-sm">
+                        {p.count} Students ({p.percentage}%)
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-slate-700 leading-relaxed bg-white p-2.5 rounded-lg border border-ink">
+                      {p.learningObjective}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: Printable A4 Worksheet Preview */}
+        {activeTab === "print" && (
+          <div className="bg-white border-3 border-ink rounded-2xl p-6 shadow-hard space-y-5 print:border-none print:shadow-none">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-ink pb-4">
+              <div>
+                <h2 className="font-heading font-black text-lg text-ink">
+                  Print-Ready A4 Remedial Practice Worksheet
+                </h2>
+                <p className="text-xs text-slate-600">
+                  Targeted remediation for top class bottleneck: Class 7 Integer Multiplication & Sign Rules ({metrics.topMissingPrerequisite?.conceptId})
+                </p>
+              </div>
+              <button
+                onClick={() => window.print()}
+                className="min-h-[48px] px-4 py-2 bg-yellow-bright hover:bg-yellow border-2 border-ink rounded-xl font-heading font-black text-xs shadow-hard flex items-center justify-center gap-2 self-start sm:self-auto"
+              >
+                <Printer className="w-4 h-4" />
+                <span>Print Worksheet</span>
+              </button>
+            </div>
+
+            {/* A4 Sheet Preview & Print Container */}
+            <div className="printable-a4-sheet p-6 border-2 border-dashed border-ink rounded-xl bg-white space-y-6 text-xs text-ink max-w-2xl mx-auto">
+              {/* Print media query styling */}
+              <style jsx global>{`
+                @media print {
+                  body {
+                    background: white !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                  }
+                  nav, header, footer, button, .no-print {
+                    display: none !important;
+                  }
+                  .printable-a4-sheet {
+                    display: block !important;
+                    border: 2px solid black !important;
+                    box-shadow: none !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    padding: 18px !important;
+                    margin: 0 !important;
+                  }
+                  @page {
+                    size: A4 portrait;
+                    margin: 12mm;
+                  }
+                }
+              `}</style>
+              <div className="flex justify-between items-center border-b-2 border-ink pb-3">
+                <div>
+                  <h3 className="font-heading font-black text-sm">Margam Adaptive Learning • Targeted Remediation</h3>
+                  <p className="text-[11px] text-slate-600">Topic: Integer Multiplication & Rule of Signs (Class 7 Prerequisite)</p>
+                </div>
+                <div className="text-right text-[11px] font-mono">
+                  <p>Student Name: _______________________</p>
+                  <p>Roll No: _______ Date: _____________</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="font-bold">Q1. Evaluate the signed product: (-4) × (-7)</p>
+                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
+                    <div>(A) -28</div>
+                    <div>(B) 28</div>
+                    <div>(C) -11</div>
+                    <div>(D) 11</div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-bold">Q2. Evaluate (-3)² and compare with -(3²):</p>
+                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
+                    <div>(A) Both equal -9</div>
+                    <div>(B) (-3)² = 9, while -(3²) = -9</div>
+                    <div>(C) Both equal 9</div>
+                    <div>(D) (-3)² = -6, while -(3²) = 6</div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-bold">Q3. Solve for x: (-5) × x = 35</p>
+                  <div className="grid grid-cols-2 gap-2 mt-1.5 pl-4 text-[11px]">
+                    <div>(A) x = 7</div>
+                    <div>(B) x = -7</div>
+                    <div>(C) x = -30</div>
+                    <div>(D) x = 30</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t-2 border-ink text-[10px] text-slate-500 flex justify-between">
+                <span>Teacher Signature: _____________________</span>
+                <span>Margam Remedial Print Edition • Zero Internet Required</span>
+              </div>
+            </div>
           </div>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 py-6 text-center text-xs text-muted-foreground bg-white">
-        Margam • Teacher Partnership & Classroom Practice Tools
+      <footer className="border-t-3 border-ink py-6 text-center text-xs font-bold bg-white mt-12">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <span>Margam • Teacher Partnership & Classroom Practice</span>
+          <span className="text-[11px] font-black px-2 py-0.5 rounded-pill bg-yellow-light border border-ink text-ink">
+            Synthetic class, generated by the Margam engine
+          </span>
+        </div>
       </footer>
     </div>
   );
