@@ -1,22 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  HelpCircle,
   CheckCircle2,
   XCircle,
   AlertCircle,
   ArrowRight,
   ArrowLeft,
   RotateCcw,
-  Sparkles,
   BookOpen,
-  Compass,
   GitBranch,
   ShieldCheck,
   Award,
+  Lock,
 } from "lucide-react";
 import {
   SupportedLanguage,
@@ -25,7 +23,7 @@ import {
   Chapter,
 } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
-import { unlockChapterLessons, syncClassProgression } from "@/lib/progression";
+import { unlockChapterLessons } from "@/lib/progression";
 import {
   chapters,
   canTakeChapterDiagnostic,
@@ -40,6 +38,12 @@ import {
   DiagnosticResult,
 } from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+import {
+  SkeletonCard,
+  EmptyState,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
 
 export default function ChapterDiagnosticPage() {
   const params = useParams();
@@ -54,6 +58,7 @@ export default function ChapterDiagnosticPage() {
   const [placementPassed, setPlacementPassed] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   // Confirmation Step State
   const [confirmationQuestions, setConfirmationQuestions] = useState<Question[]>([]);
@@ -61,43 +66,60 @@ export default function ChapterDiagnosticPage() {
   const [confirmationStatus, setConfirmationStatus] = useState<"pending" | "passed" | "failed" | null>(null);
   const [confirmationSubmitted, setConfirmationSubmitted] = useState(false);
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
-    }
-    setProfile(active);
+  const initDiagnostic = useCallback(() => {
+    try {
+      setLoading(true);
+      setHasError(false);
+      setErrorMessage(null);
 
-    // Verify diagnostic eligibility (total questions >= 6)
-    if (!canTakeChapterDiagnostic(chapterId)) {
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
+      }
+      setProfile(active);
+
+      // Verify diagnostic eligibility (total questions >= 6)
+      if (!canTakeChapterDiagnostic(chapterId)) {
+        setLoading(false);
+        return;
+      }
+
+      const { questions: diagQuestions } = generateChapterDiagnostic(chapterId, 6);
+      setQuestions(diagQuestions);
       setLoading(false);
-      return;
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to initialize diagnostic.");
+      setLoading(false);
     }
-
-    const { questions: diagQuestions } = generateChapterDiagnostic(chapterId, 6);
-    setQuestions(diagQuestions);
-    setLoading(false);
   }, [chapterId, router]);
+
+  useEffect(() => {
+    initDiagnostic();
+  }, [initDiagnostic]);
 
   const currentChapter: Chapter | undefined = chapters.find((c) => c.id === chapterId);
 
+  // 1. Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-muted-foreground">Preparing diagnostic assessment...</p>
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] p-4 sm:p-6 pb-safe">
+        <OfflineBanner />
+        <div className="max-w-3xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading diagnostic assessment">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
       </div>
     );
   }
 
-  // Guard: If chapter has fewer than 6 questions, block diagnostic and inform student
-  const questionCount = getChapterQuestionCount(chapterId);
-  if (!currentChapter || questionCount < 6) {
+  // 2. Error State with Retry
+  if (hasError) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
         <StudentHeader
           profile={profile}
           currentLang={currentLang}
@@ -106,27 +128,92 @@ export default function ChapterDiagnosticPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center mx-auto border border-amber-200">
-              <BookOpen className="w-6 h-6" />
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-full bg-[#FF4F9A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-extrabold text-lg">
+              !
             </div>
-            <h1 className="text-xl font-heading font-bold text-foreground">
-              Lesson-Only Chapter
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Diagnostic Assessment Error
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "We encountered an issue preparing this diagnostic assessment."}
+            </p>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initDiagnostic}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 3. Locked State: If chapter has fewer than 6 questions, block diagnostic and inform student
+  const questionCount = getChapterQuestionCount(chapterId);
+  if (!currentChapter || questionCount < 6) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] rounded-3xl p-8 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#FFE14D] text-[#111111] flex items-center justify-center mx-auto border-[2px] border-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="text-xl font-heading font-extrabold text-[#111111]">
+              Diagnostic Assessment Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
               This chapter has {questionCount} questions available (minimum 6 required for diagnostic placement).
               Please complete this chapter by learning the sequential lessons directly.
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-white text-xs font-bold shadow-soft"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-5 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-extrabold shadow-[2px_2px_0px_#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Return to Chapter Lessons</span>
               </Link>
             </div>
           </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 4. Empty State: If no questions were returned
+  if (questions.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center">
+          <EmptyState
+            title="No Diagnostic Questions Found"
+            description="Questions for this chapter are currently in development."
+            actionLabel="Return to Learning Path"
+            onAction={() => router.push("/")}
+          />
         </main>
       </div>
     );
@@ -227,7 +314,9 @@ export default function ChapterDiagnosticPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+      <OfflineBanner />
+
       <StudentHeader
         profile={profile}
         currentLang={currentLang}
@@ -236,10 +325,10 @@ export default function ChapterDiagnosticPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Header Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-6">
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-2">
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
             <span>Diagnostic Assessment</span>
             <span>•</span>
             <span>Class {currentChapter.class}</span>
@@ -247,11 +336,11 @@ export default function ChapterDiagnosticPage() {
             <span>Chapter {currentChapter.chapterNumber}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
             {currentChapter.name[currentLang] || currentChapter.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+          <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
             Take this 6-question diagnostic to test out of this chapter or identify foundational prerequisite topics.
             A score of 70% or more immediately unlocks this chapter&apos;s lessons.
           </p>
@@ -259,10 +348,10 @@ export default function ChapterDiagnosticPage() {
           {/* Placement Result Banner */}
           {result && (
             <div
-              className={`mt-6 p-5 rounded-2xl border ${
+              className={`mt-4 p-5 rounded-2xl border-[3px] border-[#111111] shadow-[3px_3px_0px_#111111] ${
                 placementPassed
-                  ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                  : "bg-amber-50 border-amber-200 text-amber-950"
+                  ? "bg-[#8DE86A]/30 text-[#111111]"
+                  : "bg-[#FFE14D]/40 text-[#111111]"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -270,17 +359,17 @@ export default function ChapterDiagnosticPage() {
                   <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
                     {placementPassed ? (
                       <>
-                        <Award className="w-5 h-5 text-emerald-700" />
+                        <Award className="w-5 h-5 text-[#111111]" />
                         <span>Placement Passed! Chapter Lessons Unlocked</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-5 h-5 text-amber-700" />
+                        <AlertCircle className="w-5 h-5 text-[#111111]" />
                         <span>Diagnostic Attempted • Complete Lessons in Order</span>
                       </>
                     )}
                   </h3>
-                  <p className="text-xs mt-1">
+                  <p className="text-xs font-bold mt-1 text-[#111111]/80">
                     Score: <strong>{result.correctCount} / {result.totalQuestions}</strong> ({result.scorePercentage}%)
                     {!placementPassed && " • 70% required for instant placement"}
                   </p>
@@ -288,8 +377,9 @@ export default function ChapterDiagnosticPage() {
 
                 <div className="flex items-center gap-2 shrink-0">
                   <button
+                    type="button"
                     onClick={handleReset}
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-[#FFFFFF] border-[2px] border-[#111111] text-xs font-heading font-extrabold text-[#111111] shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Retake</span>
@@ -297,7 +387,7 @@ export default function ChapterDiagnosticPage() {
 
                   <Link
                     href="/"
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                   >
                     <span>Chapter Lessons</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -308,8 +398,8 @@ export default function ChapterDiagnosticPage() {
           )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+            <div className="mt-4 p-3.5 rounded-xl bg-[#FF4F9A]/20 border-[2px] border-[#111111] text-xs font-bold text-[#111111] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#111111]" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -317,13 +407,13 @@ export default function ChapterDiagnosticPage() {
 
         {/* STEP 5 CONFIRMATION CHECK: Interactive Check Before Gap Routing */}
         {result && confirmationQuestions.length > 0 && confirmationStatus === "pending" && (
-          <div className="bg-sky-50 border border-sky-200 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
-            <div className="flex items-center gap-2 text-sky-900 font-heading font-bold text-base">
-              <ShieldCheck className="w-5 h-5 text-sky-700" />
+          <div className="bg-[#4DD9E8]/20 border-[3px] border-[#111111] rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="flex items-center gap-2 text-[#111111] font-heading font-extrabold text-base">
+              <ShieldCheck className="w-5 h-5 text-[#111111]" />
               <span>Prerequisite Check: Quick Verification</span>
             </div>
-            <p className="text-xs text-sky-800 leading-relaxed">
-              We noticed a pattern in your diagnostic answers that might connect to a foundational prerequisite.
+            <p className="text-xs font-bold text-[#111111]/80 leading-relaxed">
+              We noticed a pattern in your diagnostic answers that connects to a foundational prerequisite.
               Please answer these 2 quick questions to confirm whether you already know this concept:
             </p>
 
@@ -331,11 +421,11 @@ export default function ChapterDiagnosticPage() {
               {confirmationQuestions.map((q, qIdx) => {
                 const promptData = resolveLocalizedString(q.prompt, currentLang);
                 return (
-                  <div key={q.id} data-confirm-qid={q.id} className="bg-white p-4 rounded-2xl border border-sky-100 space-y-2">
-                    <p className="text-xs font-bold text-sky-950">
+                  <div key={q.id} data-confirm-qid={q.id} className="bg-[#FFFFFF] p-4 rounded-xl border-[2px] border-[#111111] shadow-[2px_2px_0px_#111111] space-y-2">
+                    <p className="text-xs font-bold text-[#111111]">
                       Check Question {qIdx + 1}: {promptData.text}
                     </p>
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {q.options?.map((opt) => {
                         const isSelected = confirmationAnswers[q.id] === opt.id;
                         const optData = resolveLocalizedString(opt.text, currentLang);
@@ -344,16 +434,16 @@ export default function ChapterDiagnosticPage() {
                             key={opt.id}
                             data-confirm-oid={opt.id}
                             onClick={() => handleSelectConfirmationOption(q.id, opt.id)}
-                            className={`min-h-[48px] p-3 rounded-xl border text-xs cursor-pointer flex items-center gap-2 transition-all ${
+                            className={`min-h-[48px] p-3 rounded-xl border-[2px] border-[#111111] text-xs font-bold cursor-pointer flex items-center gap-2.5 select-none focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none ${
                               isSelected
-                                ? "border-primary bg-primary/5 font-semibold"
-                                : "border-slate-200 hover:border-slate-300 bg-white"
+                                ? "bg-[#FFE14D] shadow-[2px_2px_0px_#111111]"
+                                : "bg-[#FFFFFF] hover:bg-[#FFE14D]/20 shadow-[1px_1px_0px_#111111]"
                             }`}
                           >
-                            <span className="w-5 h-5 rounded-md bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-[10px]">
+                            <span className="w-6 h-6 rounded-md bg-[#111111] text-[#FFFFFF] font-extrabold flex items-center justify-center text-xs shrink-0">
                               {opt.id}
                             </span>
-                            <span>{optData.text}</span>
+                            <span className="flex-1 text-[#111111]">{optData.text}</span>
                           </div>
                         );
                       })}
@@ -364,10 +454,10 @@ export default function ChapterDiagnosticPage() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-soft transition-all"
+                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[3px_3px_0px_#111111] active:translate-x-[2px] active:translate-y-[2px] cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <span>Verify Prerequisite Understanding</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </form>
           </div>
@@ -375,16 +465,16 @@ export default function ChapterDiagnosticPage() {
 
         {/* CONFIRMATION PASSED: No Routing */}
         {confirmationStatus === "passed" && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 mb-6 text-emerald-950 flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-            <div className="text-xs leading-relaxed">
-              <strong className="block text-sm font-bold">Prerequisite Check Passed!</strong>
+          <div className="bg-[#8DE86A]/30 border-[3px] border-[#111111] rounded-2xl sm:rounded-3xl p-5 shadow-[4px_4px_0px_#111111] text-[#111111] flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-[#111111] shrink-0 mt-0.5" />
+            <div className="text-xs font-bold leading-relaxed">
+              <strong className="block text-sm font-heading font-extrabold">Prerequisite Check Passed!</strong>
               You answered the foundational check questions correctly. No prerequisite remediation routing is required.
             </div>
           </div>
         )}
 
-        {/* CONFIRMATION FAILED: SHOW GAP CARD (WHATEVER THE SCORE) */}
+        {/* CONFIRMATION FAILED: SHOW GAP CARD WITH VISUAL PATH & ACTION BUTTON */}
         {confirmationStatus === "failed" && result?.gapAnalysis.rootConceptId && (() => {
           const rootConcept = getConceptById(result.gapAnalysis.rootConceptId);
           const exactConceptName = rootConcept
@@ -392,49 +482,53 @@ export default function ChapterDiagnosticPage() {
             : result.gapAnalysis.rootConceptId;
 
           return (
-            <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
+            <div className="bg-[#FFF5F8] border-[3px] border-[#FF4F9A] rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-[4px_4px_0px_#111111] space-y-4">
               <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2 text-rose-950 font-heading font-extrabold text-base">
-                  <GitBranch className="w-5 h-5 text-rose-700" />
+                <div className="flex items-center gap-2 text-[#111111] font-heading font-extrabold text-base">
+                  <GitBranch className="w-5 h-5 text-[#FF4F9A]" />
                   <span>Identified Prerequisite Gap</span>
                 </div>
                 {rootConcept && (
-                  <span className="px-3 py-1 rounded-full bg-rose-200 text-rose-900 text-xs font-bold">
+                  <span className="px-3 py-1 rounded-full bg-[#FFE14D] border-[2px] border-[#111111] text-[#111111] text-xs font-heading font-extrabold">
                     Class {rootConcept.class} • Concept ID: {rootConcept.id}
                   </span>
                 )}
               </div>
 
               {/* Exact Concept Name from concepts.json */}
-              <div className="bg-white rounded-2xl p-4 border border-rose-200 shadow-xs space-y-1.5">
-                <span className="text-[11px] font-bold text-rose-700 uppercase tracking-wider block">
+              <div className="bg-[#FFFFFF] rounded-2xl p-4 border-[2px] border-[#111111] shadow-[2px_2px_0px_#111111] space-y-1.5">
+                <span className="text-[11px] font-bold text-[#FF4F9A] uppercase tracking-wider block">
                   Foundational Concept to Review
                 </span>
-                <h3 className="text-lg font-heading font-extrabold text-slate-900 tracking-tight">
+                <h3 className="text-lg font-heading font-extrabold text-[#111111] tracking-tight">
                   {exactConceptName}
                 </h3>
                 {rootConcept && currentLang !== "en" && rootConcept.name.en !== exactConceptName && (
-                  <p className="text-xs text-slate-500 font-medium">
+                  <p className="text-xs text-[#111111]/70 font-bold">
                     {rootConcept.name.en}
                   </p>
                 )}
                 {rootConcept && (
-                  <p className="text-xs text-slate-600 leading-relaxed pt-1 border-t border-slate-100 mt-2">
-                    <strong className="text-slate-700">Learning Objective: </strong>
+                  <p className="text-xs text-[#111111]/80 font-bold leading-relaxed pt-1 border-t border-[#111111]/10 mt-2">
+                    <strong className="text-[#111111]">Learning Objective: </strong>
                     {rootConcept.learningObjective[currentLang] || rootConcept.learningObjective.en}
                   </p>
                 )}
               </div>
 
-              <p className="text-xs text-rose-900 leading-relaxed font-medium">
+              {/* Plain Reason */}
+              <div className="p-3.5 bg-[#FFFFFF] border-[2px] border-[#111111] rounded-xl text-xs font-bold text-[#111111] leading-relaxed">
+                <strong className="block text-[11px] uppercase tracking-wider text-[#FF4F9A] mb-1">
+                  Reason for Recommendation:
+                </strong>
                 {result.gapAnalysis.plainLanguageReason}
-              </p>
+              </div>
 
-              {/* Visual DAG Journey Path */}
+              {/* Path of nodes from current class back to root concept */}
               {result.gapAnalysis.prerequisitePath.length > 0 && (
-                <div className="bg-white/80 p-4 rounded-2xl border border-rose-200 space-y-2">
-                  <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
-                    Learning Journey Backtrack
+                <div className="bg-[#FFFFFF] p-4 rounded-2xl border-[2px] border-[#111111] shadow-[2px_2px_0px_#111111] space-y-2">
+                  <span className="text-[11px] font-bold text-[#111111]/70 uppercase tracking-wider block">
+                    Learning Journey Backtrack Path
                   </span>
                   <div className="flex items-center flex-wrap gap-2 text-xs">
                     {result.gapAnalysis.prerequisitePath.map((nodeId, idx) => {
@@ -446,15 +540,15 @@ export default function ChapterDiagnosticPage() {
                       return (
                         <React.Fragment key={nodeId}>
                           <span
-                            className={`px-2.5 py-1 rounded-xl font-bold border ${
+                            className={`px-3 py-1.5 rounded-xl font-heading font-extrabold border-[2px] border-[#111111] ${
                               isLast
-                                ? "bg-rose-600 text-white border-rose-700 shadow-xs"
-                                : "bg-slate-100 text-slate-800 border-slate-200"
+                                ? "bg-[#FF4F9A] text-[#111111] shadow-[2px_2px_0px_#111111]"
+                                : "bg-[#FFE14D]/40 text-[#111111]"
                             }`}
                           >
                             {nodeConcept ? `Class ${nodeConcept.class}: ${nodeConceptName}` : nodeId}
                           </span>
-                          {!isLast && <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
+                          {!isLast && <ArrowRight className="w-4 h-4 text-[#111111] shrink-0" />}
                         </React.Fragment>
                       );
                     })}
@@ -462,17 +556,17 @@ export default function ChapterDiagnosticPage() {
                 </div>
               )}
 
-              {/* CTA Button to Prerequisite Lesson */}
+              {/* One large 'Fix this first' button */}
               <div className="pt-2">
                 <Link
                   id="fix-this-first-btn"
                   href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
                     result.gapAnalysis.plainLanguageReason
                   )}`}
-                  className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3.5 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
+                  className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-4 rounded-2xl bg-[#FF4F9A] text-[#111111] border-[3px] border-[#111111] font-heading font-extrabold text-sm shadow-[4px_4px_0px_#111111] active:translate-x-[2px] active:translate-y-[2px] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                 >
                   <span>Fix this first: Review Foundational Lesson (Basics-First)</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>
@@ -483,19 +577,18 @@ export default function ChapterDiagnosticPage() {
         <form onSubmit={handleSubmitDiagnostic} className="space-y-6">
           {questions.map((q, qIndex) => {
             const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
-            const isAnswered = !!answers[q.id];
 
             return (
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
+                className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-[2px] border-[#111111]/10 pb-3">
+                  <span className="text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100">
+                  <span className="text-xs font-bold text-[#111111] px-2.5 py-0.5 rounded-full bg-[#FFE14D] border-[2px] border-[#111111]">
                     Difficulty Level {q.difficulty}
                   </span>
                 </div>
@@ -504,60 +597,66 @@ export default function ChapterDiagnosticPage() {
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="font-heading font-bold text-base text-foreground leading-relaxed flex items-center flex-wrap gap-2">
+                    <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#111111] leading-relaxed flex items-center flex-wrap gap-2">
                       <span>{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#FFE14D] text-[#111111] border border-[#111111]">
                           Draft Translation
                         </span>
                       )}
-                    </h3>
+                    </h2>
                   );
                 })()}
 
                 {/* Options */}
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2.5 pt-1">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
                     const isCorrectAnswer = q.correctAnswer === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-slate-200 hover:border-slate-300";
-                    let optionBgClass = "bg-white";
+                    let optionBorderClass = "border-[#111111] bg-[#FFFFFF] hover:bg-[#FFE14D]/20";
 
                     if (result) {
                       if (isCorrectAnswer) {
-                        optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
-                        optionBgClass = "bg-emerald-50/60";
+                        optionBorderClass = "border-[#111111] bg-[#8DE86A]/40";
                       } else if (isSelected && !isCorrectAnswer) {
-                        optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
-                        optionBgClass = "bg-rose-50/60";
+                        optionBorderClass = "border-[#111111] bg-[#FF4F9A]/30";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-primary ring-2 ring-primary/20";
-                      optionBgClass = "bg-slate-50";
+                      optionBorderClass = "border-[#111111] bg-[#FFE14D] shadow-[2px_2px_0px_#111111]";
                     }
 
                     return (
                       <div
                         key={opt.id}
                         data-oid={opt.id}
+                        tabIndex={0}
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Option ${opt.id}: ${optData.text}`}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            handleSelectOption(q.id, opt.id);
+                          }
+                        }}
+                        className={`min-h-[48px] flex items-center gap-3 p-3.5 rounded-xl border-[2px] cursor-pointer select-none transition-transform active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none ${optionBorderClass}`}
                       >
                         <span
-                          className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
+                          className={`w-7 h-7 rounded-lg font-heading font-extrabold text-xs flex items-center justify-center shrink-0 border-[2px] border-[#111111] ${
                             isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-700"
+                              ? "bg-[#111111] text-[#FFFFFF]"
+                              : "bg-[#FFFFFF] text-[#111111]"
                           }`}
                         >
                           {opt.id}
                         </span>
-                        <div className="flex-1 text-xs sm:text-sm text-foreground font-medium pt-0.5 flex items-center flex-wrap gap-2">
+                        <div className="flex-1 text-xs sm:text-sm text-[#111111] font-bold flex items-center flex-wrap gap-2">
                           <span>{optData.text}</span>
                           {optData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#FFE14D] text-[#111111] border border-[#111111]">
                               Draft
                             </span>
                           )}
@@ -570,21 +669,21 @@ export default function ChapterDiagnosticPage() {
                 {/* Feedback Post-Submission */}
                 {feedbackItem && (
                   <div
-                    className={`mt-4 p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
+                    className={`mt-4 p-4 rounded-xl border-[2px] border-[#111111] text-xs font-bold leading-relaxed space-y-1.5 ${
                       feedbackItem.isCorrect
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                        : "bg-rose-50/80 border-rose-200 text-rose-950"
+                        ? "bg-[#8DE86A]/30 text-[#111111]"
+                        : "bg-[#FF4F9A]/20 text-[#111111]"
                     }`}
                   >
-                    <div className="flex items-center gap-2 font-bold">
+                    <div className="flex items-center gap-2 font-heading font-extrabold text-sm">
                       {feedbackItem.isCorrect ? (
                         <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                          <CheckCircle2 className="w-4 h-4 text-[#111111]" />
                           <span>Correct</span>
                         </>
                       ) : (
                         <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
+                          <XCircle className="w-4 h-4 text-[#111111]" />
                           <span>
                             Misconception: {feedbackItem.mistakeTag ? feedbackItem.mistakeTag.replace(/_/g, " ") : "Incorrect Answer"}
                           </span>
@@ -598,14 +697,14 @@ export default function ChapterDiagnosticPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-between gap-4">
-              <span className="text-xs text-muted-foreground font-semibold">
+            <div className="sticky bottom-4 z-30 bg-[#FFF8DC]/95 border-[3px] border-[#111111] p-4 rounded-2xl shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
+              <span className="text-xs font-bold text-[#111111]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <span>Submit Diagnostic</span>
                 <ArrowRight className="w-4 h-4" />
@@ -615,7 +714,7 @@ export default function ChapterDiagnosticPage() {
         </form>
       </main>
 
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
+      <footer className="border-t-[3px] border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
         Margam Adaptive Mathematics • Diagnostic Engine
       </footer>
     </div>
