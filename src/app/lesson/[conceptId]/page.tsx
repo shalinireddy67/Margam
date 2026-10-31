@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -11,7 +11,9 @@ import {
   AlertCircle,
   RotateCcw,
   BookOpen,
-  GitBranch,
+  Lock,
+  ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 import {
   SupportedLanguage,
@@ -33,6 +35,12 @@ import {
 } from "@/lib/curriculum";
 import { selectLessonVariant } from "@/lib/adaptive";
 import WitchCatCompanion, { CompanionContext } from "@/components/WitchCatCompanion";
+import {
+  SkeletonCard,
+  EmptyState,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
 
 function LessonContent() {
   const params = useParams();
@@ -52,38 +60,135 @@ function LessonContent() {
   const [companionContext, setCompanionContext] = useState<CompanionContext>("lesson_start");
   const [showHint, setShowHint] = useState<Record<string, boolean>>({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockedReason, setLockedReason] = useState<string>("");
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
+  const initLesson = useCallback(() => {
+    try {
+      setIsLoaded(false);
+      setHasError(false);
+      setErrorMessage(null);
+      setIsLocked(false);
+
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
+      }
+
+      const concept = getConceptById(conceptId);
+      // Allow remediation if arriving from gap card or if concept belongs to lower class
+      const allowRemediation = fromGap || (concept ? concept.class < active.selectedClass : false);
+      const access = canAccessTopic(conceptId, active, allowRemediation);
+
+      if (!access.accessible) {
+        setIsLocked(true);
+        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this lesson.");
+        setIsLoaded(true);
+        return;
+      }
+
+      // Opening records in_progress
+      const updated = recordTopicOpened(conceptId);
+      setProfile(updated || active);
+      setIsLoaded(true);
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to load lesson.");
+      setIsLoaded(true);
     }
-
-    const concept = getConceptById(conceptId);
-    // Allow remediation if arriving from gap card or if concept belongs to lower class
-    const allowRemediation = fromGap || (concept ? concept.class < active.selectedClass : false);
-    const access = canAccessTopic(conceptId, active, allowRemediation);
-
-    if (!access.accessible) {
-      alert(access.reason || "You cannot access this lesson yet.");
-      router.replace("/");
-      return;
-    }
-
-    // Opening does NOT complete the lesson, but records in_progress
-    const updated = recordTopicOpened(conceptId);
-    setProfile(updated || active);
-    setIsLoaded(true);
   }, [conceptId, fromGap, router]);
 
+  useEffect(() => {
+    initLesson();
+  }, [initLesson]);
+
+  // 1. Loading Skeleton State
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAF8F6]">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-berry border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-grey">Loading lesson...</p>
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] p-4 sm:p-6 pb-safe">
+        <OfflineBanner />
+        <div className="max-w-3xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
+      </div>
+    );
+  }
+
+  // 2. Locked State: Student has not met prerequisites
+  if (isLocked) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+          <div className="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+            <Link
+              href="/"
+              className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Lessons</span>
+            </Link>
+          </div>
+        </header>
+
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Lesson Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {lockedReason}
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              >
+                <span>Return to Learning Path</span>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 3. Error State with Retry
+  if (hasError) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-full bg-[#FF4F9A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-extrabold text-lg">
+              !
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Lesson Error
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "We encountered an error loading this lesson."}
+            </p>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initLesson}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -92,20 +197,31 @@ function LessonContent() {
   const lesson = getLessonByConceptId(conceptId);
   const questions = getQuestionsByConceptId(conceptId);
 
+  // 4. Empty State: Lesson content not found
   if (!concept || !lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAF8F6] p-4">
-        <div className="bg-white p-6 rounded-3xl border border-border max-w-sm text-center space-y-3">
-          <h2 className="text-base font-bold text-plum">Lesson Not Found</h2>
-          <p className="text-xs text-grey">This lesson content is not yet available.</p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-berry text-white text-xs font-bold"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Lessons</span>
-          </Link>
-        </div>
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+          <div className="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+            <Link
+              href="/"
+              className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Lessons</span>
+            </Link>
+          </div>
+        </header>
+
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center">
+          <EmptyState
+            title="Lesson Content Unavailable"
+            description="The pedagogical variants for this topic are currently being prepared."
+            actionLabel="Return to Learning Path"
+            onAction={() => router.push("/")}
+          />
+        </main>
       </div>
     );
   }
@@ -113,8 +229,7 @@ function LessonContent() {
   const topicProgress = profile.topicProgress[conceptId];
   const isCompleted = topicProgress?.status === "completed" || completedNow;
 
-  // Requirement 2: Choose variant with selectLessonVariant from concept's mastery.
-  // If the student arrives from a gap card, show basics_first. Show the one-line reason on the page.
+  // Pedagogical variant selection
   let variantKey: "basics_first" | "standard" | "fast_track" = "standard";
   let variantReason = "";
 
@@ -136,7 +251,7 @@ function LessonContent() {
 
   const activeVariant = lesson[variantKey] || lesson.standard;
 
-  // Explicit Lesson Completion
+  // Finish Lesson
   const handleFinishLesson = () => {
     const res = completeLesson(conceptId);
     if (res.success && res.profile) {
@@ -146,14 +261,14 @@ function LessonContent() {
     }
   };
 
-  // Practice Option Select
+  // Option Select
   const handleSelectOption = (questionId: string, optionId: string) => {
     if (worksheetResult) return;
     setAnswers((prev) => ({ ...prev, [questionId]: optionId }));
     setErrorMessage(null);
   };
 
-  // Worksheet Submission with Contextual Companion Feedback
+  // Submit Practice
   const handleSubmitPractice = (e: React.FormEvent) => {
     e.preventDefault();
     const submission = {
@@ -163,31 +278,13 @@ function LessonContent() {
     };
 
     const res = submitWorksheet(submission);
-    if (!res.success) {
-      setErrorMessage(res.error || "Please answer at least one question.");
-      return;
-    }
-
-    if (res.result && res.profile) {
+    if (res.success && res.result) {
       setWorksheetResult(res.result);
-      setProfile(res.profile);
-      setCompletedNow(true);
+      if (res.profile) setProfile(res.profile);
 
-      if (res.result.correctCount === res.result.totalQuestions) {
-        setCompanionContext("correct");
-      } else if (res.result.correctCount > 0) {
-        setCompanionContext("completed");
-      } else {
-        setCompanionContext("incorrect");
-      }
+      const allCorrect = res.result.correctCount === res.result.totalQuestions;
+      setCompanionContext(allCorrect ? "correct" : "incorrect");
     }
-  };
-
-  const handleRetryPractice = () => {
-    setAnswers({});
-    setWorksheetResult(null);
-    setErrorMessage(null);
-    setCompanionContext("lesson_start");
   };
 
   const headlineData = resolveLocalizedString(activeVariant.headline, currentLang);
@@ -196,25 +293,26 @@ function LessonContent() {
   const workedSolution = resolveLocalizedString(activeVariant.workedExample.solution, currentLang);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F6] flex flex-col justify-between text-plum font-sans">
+    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+      <OfflineBanner />
+
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <header className="sticky top-0 z-40 bg-[#FFFFFF] border-b-[3px] border-[#111111]">
+        <div className="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 text-xs sm:text-sm font-semibold text-grey hover:text-plum py-2 px-3 rounded-xl hover:bg-slate-100 transition-colors"
+            className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Lessons</span>
+            <span>Class Lessons</span>
           </Link>
 
-          {/* Language Switcher */}
-          <div className="flex items-center gap-1 bg-[#FDF5F3] p-1 rounded-xl border border-peach-border/70">
+          <div className="flex items-center gap-1 bg-[#FFF8DC] p-1 rounded-xl border-[2px] border-[#111111]">
             <button
               type="button"
               onClick={() => setCurrentLang("en")}
-              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                currentLang === "en" ? "bg-white text-plum shadow-xs" : "text-grey"
+              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+                currentLang === "en" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
               EN
@@ -222,8 +320,8 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("hi")}
-              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                currentLang === "hi" ? "bg-white text-plum shadow-xs" : "text-grey"
+              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+                currentLang === "hi" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
               हिन्दी
@@ -231,8 +329,8 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("te")}
-              className={`min-h-[48px] min-w-[48px] flex items-center justify-center px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                currentLang === "te" ? "bg-white text-plum shadow-xs" : "text-grey"
+              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+                currentLang === "te" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
               తెలుగు
@@ -241,229 +339,182 @@ function LessonContent() {
         </div>
       </header>
 
-      {/* Main Lesson Body */}
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
-        {/* Gap Reason Banner (Shown when arriving from Gap Card) */}
-        {fromGap && (
-          <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-5 shadow-sm text-rose-950 space-y-2">
-            <div className="flex items-center gap-2 font-heading font-extrabold text-sm text-rose-800">
-              <GitBranch className="w-4 h-4 text-rose-600 shrink-0" />
-              <span>Remedial Journey • Basics-First Lesson</span>
-            </div>
-            <p className="text-xs text-rose-900 leading-relaxed font-semibold">
-              {variantReason}
-            </p>
-          </div>
-        )}
-
-        {/* Title & Objective */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-3">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+        {/* Section 1: Concept Header & Style Chip */}
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
           <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-bold text-grey">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
               <span>Class {concept.class}</span>
               <span>•</span>
               <span>{concept.chapter}</span>
             </div>
 
-            {/* Pedagogical Variant Indicator */}
-            <span
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
+            {/* Style Chip with Variant */}
+            <div
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] ${
                 variantKey === "basics_first"
-                  ? "bg-rose-50 border-rose-200 text-rose-800"
+                  ? "bg-[#FF4F9A] text-[#111111]"
                   : variantKey === "fast_track"
-                  ? "bg-purple-50 border-purple-200 text-purple-800"
-                  : "bg-peach-light border-peach-border text-plum"
+                  ? "bg-[#8DE86A] text-[#111111]"
+                  : "bg-[#FFE14D] text-[#111111]"
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>
                 Variant: {variantKey === "basics_first" ? "Basics-First" : variantKey === "fast_track" ? "Fast-Track" : "Standard"}
               </span>
-            </span>
+            </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-plum tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-plum bg-[#FDF5F3] p-3.5 rounded-2xl border border-peach-border/80 leading-relaxed font-medium">
-            <strong>Goal:</strong> {concept.learningObjective[currentLang] || concept.learningObjective.en}
-          </p>
+          {/* One-Line Reason */}
+          <div className="p-3 bg-[#FFF8DC] rounded-xl border-[2px] border-[#111111] text-xs font-bold text-[#111111] leading-relaxed">
+            <span className="uppercase tracking-wider text-[10px] text-[#111111]/70 block mb-0.5">Teaching Strategy</span>
+            {variantReason}
+          </div>
 
-          {/* Show the one-line reason on the page */}
-          {!fromGap && (
-            <p className="text-xs text-slate-500 italic pt-1">
-              {variantReason}
-            </p>
-          )}
+          <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
+            <strong className="text-[#111111]">Learning Goal: </strong>
+            {concept.learningObjective[currentLang] || concept.learningObjective.en}
+          </p>
         </div>
 
-        {/* Conceptual Explanation */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-4">
-          <h2 className="text-lg font-bold text-plum flex items-center flex-wrap gap-2">
+        {/* Section 2: Core Idea & Conceptual Explanation */}
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+          <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
+            <BookOpen className="w-4 h-4 text-[#111111]" />
+            <span>Core Concept</span>
+          </div>
+
+          <h2 className="text-lg font-heading font-extrabold text-[#111111] flex items-center flex-wrap gap-2">
             <span>{headlineData.text}</span>
             {headlineData.isDraft && (
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#FFE14D] text-[#111111] border border-[#111111]">
                 Draft
               </span>
             )}
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
+          <p className="text-sm font-medium text-[#111111] leading-relaxed">
             {explanationData.text}
           </p>
-
-          {/* Visual Analogy if present in variant */}
-          {activeVariant.visualAnalogy && (
-            <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs sm:text-sm text-amber-950 font-medium">
-              <strong>Intuition:</strong> {resolveLocalizedString(activeVariant.visualAnalogy, currentLang).text}
-            </div>
-          )}
         </div>
 
-        {/* Worked Examples */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-5">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-berry" />
-            <h2 className="text-xs font-bold text-plum uppercase tracking-wider">
-              Worked Example
-            </h2>
+        {/* Section 3: Visual Analogy / Intuition */}
+        {activeVariant.visualAnalogy && (
+          <div className="bg-[#4DD9E8]/20 rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-2">
+            <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-[#111111] uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 text-[#111111]" />
+              <span>Real-World Intuition</span>
+            </div>
+            <p className="text-xs sm:text-sm font-bold text-[#111111] leading-relaxed">
+              {resolveLocalizedString(activeVariant.visualAnalogy, currentLang).text}
+            </p>
+          </div>
+        )}
+
+        {/* Section 4: Worked Example */}
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4">
+          <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
+            <CheckCircle2 className="w-4 h-4 text-[#111111]" />
+            <span>Worked Example</span>
           </div>
 
-          <div className="bg-[#FAF8F6] p-4 rounded-2xl border border-border">
-            <p className="text-xs font-bold text-grey uppercase mb-1">Problem:</p>
-            <p className="text-sm font-semibold text-plum">
+          <div className="bg-[#FFF8DC] p-4 rounded-xl border-[2px] border-[#111111] space-y-1">
+            <p className="text-[11px] font-heading font-extrabold text-[#111111]/70 uppercase">Problem</p>
+            <p className="text-sm font-heading font-extrabold text-[#111111]">
               {workedProblem.text}
             </p>
           </div>
 
-          <div className="space-y-2">
-            <p className="text-xs font-bold text-grey uppercase">Steps:</p>
+          <div className="space-y-2.5">
+            <p className="text-[11px] font-heading font-extrabold text-[#111111]/70 uppercase">Steps</p>
             {activeVariant.workedExample.steps.map((step, i) => (
-              <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                <span className="w-5 h-5 rounded-full bg-peach-light text-plum font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5 border border-peach-border/60">
+              <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-[#111111]">
+                <span className="w-6 h-6 rounded-lg bg-[#FFE14D] text-[#111111] font-heading font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 border-[2px] border-[#111111]">
                   {i + 1}
                 </span>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed pt-0.5">
                   {resolveLocalizedString(step, currentLang).text}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 flex items-center gap-2 text-xs sm:text-sm text-emerald-950 font-bold">
-            <Check className="w-4 h-4 text-emerald-700 shrink-0" />
+          <div className="bg-[#8DE86A]/40 border-[2px] border-[#111111] rounded-xl p-3.5 flex items-center gap-2 text-xs sm:text-sm text-[#111111] font-heading font-extrabold shadow-[2px_2px_0px_#111111]">
+            <Check className="w-4 h-4 text-[#111111] shrink-0" />
             <span>Result: {workedSolution.text}</span>
           </div>
         </div>
 
-        {/* Practice Questions / Worksheet (if available) */}
+        {/* Section 5: Check Your Understanding (Practice Questions) */}
         {questions.length > 0 && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-6">
-            <div className="flex items-center justify-between border-b border-border/70 pb-3">
-              <h2 className="text-base font-bold text-plum">
-                Practice Questions
+          <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-5">
+            <div className="flex items-center justify-between border-b-[2px] border-[#111111]/10 pb-3">
+              <h2 className="text-base font-heading font-extrabold text-[#111111]">
+                Check Your Understanding
               </h2>
               <Link
                 href={`/student/worksheet/${concept.id}`}
-                className="min-h-[48px] inline-flex items-center text-xs text-berry hover:underline font-bold"
+                className="min-h-[48px] inline-flex items-center text-xs font-heading font-extrabold text-[#111111] underline hover:text-[#FF4F9A] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
-                Open Adaptive Practice Runner →
+                <span>Full Worksheet</span>
+                <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </Link>
             </div>
 
-            {worksheetResult && (
-              <div
-                className={`p-4 rounded-2xl border ${
-                  worksheetResult.scorePercentage >= 70
-                    ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                    : "bg-[#FDF5F3] border-peach-border text-plum"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-bold">
-                      Score: {worksheetResult.correctCount} / {worksheetResult.totalQuestions} Correct ({worksheetResult.scorePercentage}%)
-                    </p>
-                    <p className="text-xs text-grey mt-0.5">
-                      {worksheetResult.scorePercentage >= 70
-                        ? "Great work! Lesson completed."
-                        : "Attempt recorded."}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleRetryPractice}
-                    className="inline-flex items-center justify-center min-h-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-border text-xs font-bold text-plum hover:bg-slate-50 shadow-xs"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Try Again</span>
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {errorMessage && (
-              <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-                <span>{errorMessage}</span>
-              </div>
-            )}
-
             <form onSubmit={handleSubmitPractice} className="space-y-6">
-              {questions.slice(0, 3).map((q, idx) => {
+              {questions.slice(0, 2).map((q, qIndex) => {
                 const feedbackItem = worksheetResult?.feedback.find((f) => f.questionId === q.id);
                 const qPrompt = resolveLocalizedString(q.prompt, currentLang);
 
                 return (
-                  <div key={q.id} className="space-y-3 pt-2">
-                    <p className="text-xs font-bold text-grey uppercase tracking-wider">
-                      Question {idx + 1}
+                  <div key={q.id} data-qid={q.id} className="p-4 rounded-2xl border-[2px] border-[#111111] space-y-3">
+                    <p className="text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
+                      Practice Question {qIndex + 1}
                     </p>
-                    <p className="text-sm font-semibold text-plum leading-relaxed">
+                    <p className="text-sm font-heading font-extrabold text-[#111111]">
                       {qPrompt.text}
                     </p>
 
-                    <div className="space-y-2 pt-1">
+                    <div className="space-y-2">
                       {q.options?.map((opt) => {
                         const isSelected = answers[q.id] === opt.id;
                         const isCorrectAnswer = q.correctAnswer === opt.id;
                         const optText = resolveLocalizedString(opt.text, currentLang);
 
-                        let borderClass = "border-border hover:border-peach-border";
-                        let bgClass = "bg-white";
-
+                        let optClass = "bg-[#FFFFFF] border-[#111111] hover:bg-[#FFE14D]/20";
                         if (worksheetResult) {
-                          if (isCorrectAnswer) {
-                            borderClass = "border-emerald-500 ring-1 ring-emerald-500";
-                            bgClass = "bg-emerald-50/60";
-                          } else if (isSelected && !isCorrectAnswer) {
-                            borderClass = "border-rose-400 ring-1 ring-rose-400";
-                            bgClass = "bg-rose-50/60";
-                          }
+                          if (isCorrectAnswer) optClass = "bg-[#8DE86A]/40 border-[#111111]";
+                          else if (isSelected) optClass = "bg-[#FF4F9A]/30 border-[#111111]";
                         } else if (isSelected) {
-                          borderClass = "border-berry ring-2 ring-berry/20";
-                          bgClass = "bg-[#FDF5F3]";
+                          optClass = "bg-[#FFE14D] border-[#111111] shadow-[2px_2px_0px_#111111]";
                         }
 
                         return (
                           <div
                             key={opt.id}
+                            data-oid={opt.id}
+                            tabIndex={0}
+                            role="radio"
+                            aria-checked={isSelected}
+                            aria-label={`Option ${opt.id}: ${optText.text}`}
                             onClick={() => handleSelectOption(q.id, opt.id)}
-                            className={`min-h-[48px] flex items-start gap-3 p-3 rounded-2xl border cursor-pointer transition-all ${borderClass} ${bgClass}`}
+                            onKeyDown={(e) => {
+                              if (e.key === " " || e.key === "Enter") {
+                                e.preventDefault();
+                                handleSelectOption(q.id, opt.id);
+                              }
+                            }}
+                            className={`min-h-[48px] p-3 rounded-xl border-[2px] cursor-pointer flex items-center gap-3 select-none active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none ${optClass}`}
                           >
-                            <span
-                              className={`w-5 h-5 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 ${
-                                isSelected
-                                  ? "bg-berry text-white"
-                                  : "bg-[#FDF5F3] text-plum border border-peach-border/70"
-                              }`}
-                            >
+                            <span className="w-6 h-6 rounded-md bg-[#111111] text-[#FFFFFF] font-extrabold text-xs flex items-center justify-center shrink-0">
                               {opt.id}
                             </span>
-                            <span className="text-xs sm:text-sm text-slate-800 font-medium">
-                              {optText.text}
-                            </span>
+                            <span className="text-xs font-bold text-[#111111] flex-1">{optText.text}</span>
                           </div>
                         );
                       })}
@@ -476,13 +527,14 @@ function LessonContent() {
                           type="button"
                           id={`hint-toggle-${q.id}`}
                           onClick={() => setShowHint((prev) => ({ ...prev, [q.id]: !prev[q.id] }))}
-                          className="min-h-[48px] inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors cursor-pointer"
+                          className="min-h-[48px] inline-flex items-center gap-1.5 px-3 py-2 text-xs font-heading font-extrabold text-[#111111] bg-[#FFE14D]/40 hover:bg-[#FFE14D] border-[2px] border-[#111111] rounded-xl transition-colors cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                         >
-                          <span>💡 {showHint[q.id] ? "Hide Hint" : "Need a hint?"}</span>
+                          <HelpCircle className="w-4 h-4 text-[#111111]" />
+                          <span>{showHint[q.id] ? "Hide Hint" : "Need a hint?"}</span>
                         </button>
                         {showHint[q.id] && (
-                          <div className="mt-2 p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-950 font-medium">
-                            <span className="font-bold text-amber-900">Hint: </span>
+                          <div className="mt-2 p-2.5 rounded-lg bg-[#FFE14D]/30 border-[2px] border-[#111111] text-xs font-bold text-[#111111]">
+                            <span className="font-heading font-extrabold">Hint: </span>
                             <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
                           </div>
                         )}
@@ -490,19 +542,19 @@ function LessonContent() {
                     )}
 
                     {feedbackItem && !feedbackItem.isCorrect && (
-                      <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 space-y-2">
-                        <p className="font-bold text-rose-900 flex items-center gap-1.5">
-                          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                      <div className="p-3.5 rounded-xl bg-[#FF4F9A]/20 border-[2px] border-[#111111] text-xs font-bold text-[#111111] space-y-2">
+                        <p className="font-heading font-extrabold text-[#111111] flex items-center gap-1.5">
+                          <AlertCircle className="w-4 h-4 text-[#FF4F9A] shrink-0" />
                           <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
                         </p>
                         {q.hint && (
-                          <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950 font-medium">
-                            <span className="font-bold text-amber-900">💡 Hint: </span>
+                          <div className="p-2.5 rounded-lg bg-[#FFE14D]/30 border-[2px] border-[#111111] text-[#111111]">
+                            <span className="font-heading font-extrabold">Hint: </span>
                             <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
                           </div>
                         )}
-                        <p className="text-slate-700">
-                          <strong className="text-slate-900">Explanation: </strong>
+                        <p className="text-[#111111]/80">
+                          <strong className="text-[#111111]">Explanation: </strong>
                           {resolveLocalizedString(feedbackItem.explanation, currentLang).text}
                         </p>
                       </div>
@@ -514,7 +566,7 @@ function LessonContent() {
               {!worksheetResult && (
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                 >
                   <span>Submit Practice Answers</span>
                 </button>
@@ -523,52 +575,42 @@ function LessonContent() {
           </div>
         )}
 
-        {/* Completion Footer */}
-        <div className="bg-white p-6 rounded-3xl border border-border shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            {isCompleted ? (
-              <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
-                <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                <span>Lesson Completed • Next Lesson Unlocked</span>
-              </div>
-            ) : (
-              <p className="text-xs text-grey">
-                Finish reviewing this lesson variant to mark this topic complete.
-              </p>
-            )}
+        {/* Sticky Next Button Bar */}
+        <div className="sticky bottom-4 z-30 bg-[#FFF8DC]/95 border-[3px] border-[#111111] p-4 rounded-2xl shadow-[4px_4px_0px_#111111] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
+            <span className="text-xs font-heading font-extrabold text-[#111111] block">
+              {isCompleted ? "Topic Mastered!" : "Finished Reviewing?"}
+            </span>
+            <span className="text-[11px] font-bold text-[#111111]/70 block">
+              {isCompleted ? "You can proceed to the next concept or chapter test." : "Advance to update your concept mastery."}
+            </span>
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             {!isCompleted ? (
               <button
                 type="button"
                 onClick={handleFinishLesson}
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 rounded-2xl bg-berry hover:bg-berry-hover text-white font-bold text-xs shadow-soft transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 rounded-xl bg-[#FFE14D] text-[#111111] border-[2px] border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Finish Lesson & Mark Complete</span>
+                <span>Next: Finish Lesson & Complete</span>
               </button>
             ) : (
               <Link
                 href="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-plum font-bold text-xs transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Return to Lessons</span>
+                <span>Next: Return to Learning Path</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             )}
           </div>
         </div>
       </main>
 
-      <WitchCatCompanion
-        studentName={profile.name}
-        context={companionContext}
-        mode="floating"
-      />
-
-      <footer className="border-t border-border py-4 text-center text-xs text-grey bg-white">
-        Margam • Sequentially Adaptive Mathematics
+      <footer className="border-t-[3px] border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+        Margam Adaptive Mathematics • Lesson Workspace
       </footer>
     </div>
   );
@@ -578,8 +620,11 @@ export default function LessonPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#FAF8F6]">
-          <div className="w-8 h-8 border-3 border-berry border-t-transparent rounded-full animate-spin" />
+        <div className="min-h-screen bg-[#FFF8DC] text-[#111111] p-4 sm:p-6 pb-safe">
+          <div className="max-w-3xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
         </div>
       }
     >
