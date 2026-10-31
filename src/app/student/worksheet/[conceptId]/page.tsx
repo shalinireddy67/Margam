@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  FileText,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   AlertCircle,
   ArrowRight,
   ArrowLeft,
   RotateCcw,
-  Sparkles,
-  BookOpen,
   TrendingUp,
   TrendingDown,
-  Star,
+  Lock,
 } from "lucide-react";
 import {
   SupportedLanguage,
@@ -35,6 +31,30 @@ import {
   PracticeResult,
 } from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+import {
+  SkeletonCard,
+  EmptyState,
+  OfflineBanner,
+  Button,
+  StarRating,
+  MistakeCreature,
+  MistakeCreatureType,
+} from "@/components/ui";
+
+function getMistakeCreatureType(tag?: string): MistakeCreatureType {
+  if (!tag) return "calculation_slip";
+  const t = tag.toLowerCase();
+  if (t.includes("sign") || t.includes("negative") || t.includes("minus") || t.includes("inverse") || t.includes("root")) {
+    return "sign_slip";
+  }
+  if (t.includes("fraction") || t.includes("denom") || t.includes("numerator") || t.includes("divide")) {
+    return "fraction_fumble";
+  }
+  if (t.includes("distribut") || t.includes("bracket") || t.includes("expand") || t.includes("parenthes") || t.includes("identity")) {
+    return "distribution_dodge";
+  }
+  return "calculation_slip";
+}
 
 export default function AdaptivePracticeRunnerPage() {
   const params = useParams();
@@ -49,59 +69,163 @@ export default function AdaptivePracticeRunnerPage() {
   const [result, setResult] = useState<PracticeResult | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockedReason, setLockedReason] = useState<string>("");
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
+  const initPractice = useCallback(() => {
+    try {
+      setLoading(true);
+      setHasError(false);
+      setErrorMessage(null);
+      setIsLocked(false);
+
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
+      }
+
+      // Allow remediation access if user is practicing a lower-class concept
+      const access = canAccessTopic(conceptId, active, true);
+      if (!access.accessible) {
+        setIsLocked(true);
+        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this practice.");
+        setLoading(false);
+        return;
+      }
+
+      setProfile(active);
+
+      // Select adaptive practice questions matching student's per-concept difficulty level
+      const practiceData = selectPracticeQuestions(conceptId, 3);
+      setQuestions(practiceData.questions);
+      setDifficultyLevel(practiceData.targetDifficulty);
+      setLoading(false);
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to load practice questions.");
+      setLoading(false);
     }
-
-    // Allow remediation access if user is practicing a lower-class concept
-    const access = canAccessTopic(conceptId, active, true);
-    if (!access.accessible) {
-      alert(access.reason || "You cannot access this practice worksheet yet.");
-      router.replace("/");
-      return;
-    }
-
-    setProfile(active);
-
-    // Select adaptive practice questions matching student's per-concept difficulty level
-    const practiceData = selectPracticeQuestions(conceptId, 3);
-    setQuestions(practiceData.questions);
-    setDifficultyLevel(practiceData.targetDifficulty);
-    setLoading(false);
   }, [conceptId, router]);
 
+  useEffect(() => {
+    initPractice();
+  }, [initPractice]);
+
+  // 1. Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-muted-foreground">Loading adaptive practice...</p>
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] p-4 sm:p-6 pb-safe">
+        <OfflineBanner />
+        <div className="max-w-3xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading adaptive practice">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
+      </div>
+    );
+  }
+
+  // 2. Locked State
+  if (isLocked) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Practice Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {lockedReason}
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              >
+                <span>Return to Learning Path</span>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 3. Error State with Retry
+  if (hasError) {
+    return (
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-[3px] border-[#111111] rounded-3xl p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 rounded-full bg-[#FF4F9A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-extrabold text-lg">
+              !
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Practice Error
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "We encountered an issue preparing practice questions."}
+            </p>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initPractice}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
 
   const concept = getConceptById(conceptId);
 
+  // 4. Empty State
   if (!concept || questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 max-w-md text-center">
-          <h2 className="text-lg font-bold text-foreground">No Questions Found</h2>
-          <p className="text-xs text-muted-foreground mt-2">
-            Practice questions for this topic are currently being prepared.
-          </p>
-          <Link
-            href="/"
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold"
-          >
-            Return to Learning Path
-          </Link>
-        </div>
+      <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center">
+          <EmptyState
+            title="No Questions Found"
+            description="Practice questions for this topic are currently being assembled."
+            actionLabel="Return to Learning Path"
+            onAction={() => router.push("/")}
+          />
+        </main>
       </div>
     );
   }
@@ -125,7 +249,7 @@ export default function AdaptivePracticeRunnerPage() {
       return;
     }
 
-    // Evaluate submission through the adaptive engine
+    // Evaluate submission through adaptive engine
     const practiceRes = evaluatePracticeSubmission(conceptId, answers);
     setResult(practiceRes);
     setDifficultyLevel(practiceRes.updatedDifficulty);
@@ -139,23 +263,15 @@ export default function AdaptivePracticeRunnerPage() {
     setResult(null);
     setErrorMessage(null);
 
-    // Refresh questions based on updated difficulty
     const practiceData = selectPracticeQuestions(conceptId, 3);
     setQuestions(practiceData.questions);
     setDifficultyLevel(practiceData.targetDifficulty);
   };
 
-  const renderStars = (level: number) => {
-    return (
-      <span className="inline-flex items-center text-amber-500 font-bold tracking-wider">
-        {"★".repeat(level)}
-        <span className="text-slate-300">{"★".repeat(3 - level)}</span>
-      </span>
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] flex flex-col justify-between pb-safe">
+      <OfflineBanner />
+
       <StudentHeader
         profile={profile}
         currentLang={currentLang}
@@ -164,38 +280,40 @@ export default function AdaptivePracticeRunnerPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
-        {/* Title Header Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-6">
-          <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+        {/* Header Card */}
+        <div className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
               <span>Adaptive Practice</span>
               <span>•</span>
               <span>Class {concept.class}</span>
             </div>
 
-            {/* Difficulty Badge with 1 to 3 stars */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-xs font-bold text-amber-950">
-              <span>Difficulty Level {difficultyLevel}</span>
-              {renderStars(difficultyLevel)}
+            {/* Difficulty stars with aria-label */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FFE14D] border-[2px] border-[#111111] shadow-[2px_2px_0px_#111111]">
+              <span className="text-xs font-heading font-extrabold text-[#111111]">
+                Difficulty {difficultyLevel} of 3
+              </span>
+              <StarRating rating={difficultyLevel} max={3} size="sm" />
             </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 mt-2">
+          <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
             Solve these 3 targeted questions to advance your mastery. Your difficulty level automatically adjusts based on your performance.
           </p>
 
           {/* Result Banner on Submission */}
           {result && (
             <div
-              className={`mt-6 p-5 rounded-2xl border ${
+              className={`mt-4 p-5 rounded-2xl border-[3px] border-[#111111] shadow-[3px_3px_0px_#111111] ${
                 result.scorePercentage >= 70
-                  ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                  : "bg-amber-50 border-amber-200 text-amber-950"
+                  ? "bg-[#8DE86A]/30 text-[#111111]"
+                  : "bg-[#FFE14D]/40 text-[#111111]"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -203,59 +321,60 @@ export default function AdaptivePracticeRunnerPage() {
                   <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
                     {result.scorePercentage >= 70 ? (
                       <>
-                        <CheckCircle2 className="w-5 h-5 text-emerald-700" />
+                        <CheckCircle2 className="w-5 h-5 text-[#111111]" />
                         <span>Practice Complete! Mastery Updated to {result.updatedMastery}%</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-5 h-5 text-amber-700" />
+                        <AlertCircle className="w-5 h-5 text-[#111111]" />
                         <span>Practice Attempted • Mastery at {result.updatedMastery}%</span>
                       </>
                     )}
                   </h3>
 
-                  <p className="text-xs mt-1">
+                  <p className="text-xs font-bold mt-1 text-[#111111]/80">
                     Score: <strong>{result.correctCount} / {result.totalQuestions}</strong> ({result.scorePercentage}%)
                   </p>
 
-                  {/* One-Line Note when the Level Changes */}
-                  <div className="mt-3 text-xs font-bold flex items-center gap-2">
+                  {/* One line when the level changes */}
+                  <div className="mt-3 text-xs font-bold">
                     {result.difficultyChanged === "promoted" && (
-                      <span className="inline-flex items-center gap-1.5 text-emerald-800 bg-emerald-100 px-3 py-1 rounded-xl">
-                        <TrendingUp className="w-4 h-4 text-emerald-700" />
-                        Promoted to Difficulty Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)}! Keep going!
-                      </span>
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#8DE86A] border-[2px] border-[#111111] text-[#111111] font-heading font-extrabold">
+                        <TrendingUp className="w-4 h-4 text-[#111111]" />
+                        <span>Promoted to Difficulty Level {result.updatedDifficulty}! Well done on advancing.</span>
+                      </div>
                     )}
 
                     {result.difficultyChanged === "demoted" && (
-                      <span className="inline-flex items-center gap-1.5 text-amber-900 bg-amber-100 px-3 py-1 rounded-xl">
-                        <TrendingDown className="w-4 h-4 text-amber-700" />
-                        Adjusted to Difficulty Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)} to reinforce core foundations.
-                      </span>
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FF4F9A] border-[2px] border-[#111111] text-[#111111] font-heading font-extrabold">
+                        <TrendingDown className="w-4 h-4 text-[#111111]" />
+                        <span>Adjusted to Difficulty Level {result.updatedDifficulty} to reinforce core foundations.</span>
+                      </div>
                     )}
 
                     {result.difficultyChanged === "maintained" && (
-                      <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-xl">
-                        Difficulty maintained at Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)}.
-                      </span>
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FFFFFF] border-[2px] border-[#111111] text-[#111111] font-heading font-extrabold">
+                        <span>Difficulty maintained at Level {result.updatedDifficulty}.</span>
+                      </div>
                     )}
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
                   <button
+                    type="button"
                     onClick={handleRetry}
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-[#FFFFFF] border-[2px] border-[#111111] text-xs font-heading font-extrabold text-[#111111] shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Practice Next Set</span>
+                    <span>Try Again</span>
                   </button>
 
                   <Link
                     href="/"
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
                   >
-                    <span>Back to Lessons</span>
+                    <span>Learning Path</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -264,8 +383,8 @@ export default function AdaptivePracticeRunnerPage() {
           )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+            <div className="mt-4 p-3.5 rounded-xl bg-[#FF4F9A]/20 border-[2px] border-[#111111] text-xs font-bold text-[#111111] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#111111]" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -274,80 +393,87 @@ export default function AdaptivePracticeRunnerPage() {
         {/* Practice Questions List */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {questions.map((q, qIndex) => {
-            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
             const isAnswered = !!answers[q.id];
+            const isCorrect = answers[q.id] === q.correctAnswer;
+            const promptData = resolveLocalizedString(q.prompt, currentLang);
+            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
 
             return (
               <div
                 key={q.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
+                data-qid={q.id}
+                className="bg-[#FFFFFF] rounded-2xl sm:rounded-3xl p-5 sm:p-7 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-[2px] border-[#111111]/10 pb-3">
+                  <span className="text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100 flex items-center gap-1">
-                    Level {q.difficulty} {renderStars(q.difficulty)}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[11px] font-bold text-[#111111] px-2 py-0.5 rounded-full bg-[#FFE14D] border-[2px] border-[#111111]">
+                      Level {q.difficulty}
+                    </span>
+                    <StarRating rating={q.difficulty} max={3} size="sm" />
+                  </div>
                 </div>
 
-                {/* Question Prompt */}
-                {(() => {
-                  const promptData = resolveLocalizedString(q.prompt, currentLang);
-                  return (
-                    <h3 className="font-heading font-bold text-base text-foreground leading-relaxed flex items-center flex-wrap gap-2">
-                      <span>{promptData.text}</span>
-                      {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                          Draft Translation
-                        </span>
-                      )}
-                    </h3>
-                  );
-                })()}
+                <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#111111] leading-relaxed flex items-center flex-wrap gap-2">
+                  <span>{promptData.text}</span>
+                  {promptData.isDraft && (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#FFE14D] text-[#111111] border border-[#111111]">
+                      Draft Translation
+                    </span>
+                  )}
+                </h2>
 
                 {/* Options */}
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2.5 pt-1">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
                     const isCorrectAnswer = q.correctAnswer === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-slate-200 hover:border-slate-300";
-                    let optionBgClass = "bg-white";
+                    let optionBorderClass = "border-[#111111] bg-[#FFFFFF] hover:bg-[#FFE14D]/20";
 
                     if (result) {
                       if (isCorrectAnswer) {
-                        optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
-                        optionBgClass = "bg-emerald-50/60";
+                        optionBorderClass = "border-[#111111] bg-[#8DE86A]/40";
                       } else if (isSelected && !isCorrectAnswer) {
-                        optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
-                        optionBgClass = "bg-rose-50/60";
+                        optionBorderClass = "border-[#111111] bg-[#FF4F9A]/30";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-primary ring-2 ring-primary/20";
-                      optionBgClass = "bg-slate-50";
+                      optionBorderClass = "border-[#111111] bg-[#FFE14D] shadow-[2px_2px_0px_#111111]";
                     }
 
                     return (
                       <div
                         key={opt.id}
+                        data-oid={opt.id}
+                        tabIndex={0}
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Option ${opt.id}: ${optData.text}`}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            handleSelectOption(q.id, opt.id);
+                          }
+                        }}
+                        className={`min-h-[48px] flex items-center gap-3 p-3.5 rounded-xl border-[2px] cursor-pointer select-none transition-transform active:translate-x-[1px] active:translate-y-[1px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none ${optionBorderClass}`}
                       >
                         <span
-                          className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
+                          className={`w-7 h-7 rounded-lg font-heading font-extrabold text-xs flex items-center justify-center shrink-0 border-[2px] border-[#111111] ${
                             isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-700"
+                              ? "bg-[#111111] text-[#FFFFFF]"
+                              : "bg-[#FFFFFF] text-[#111111]"
                           }`}
                         >
                           {opt.id}
                         </span>
-                        <div className="flex-1 text-xs sm:text-sm text-foreground font-medium pt-0.5 flex items-center flex-wrap gap-2">
+                        <div className="flex-1 text-xs sm:text-sm text-[#111111] font-bold flex items-center flex-wrap gap-2">
                           <span>{optData.text}</span>
                           {optData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#FFE14D] text-[#111111] border border-[#111111]">
                               Draft
                             </span>
                           )}
@@ -357,48 +483,61 @@ export default function AdaptivePracticeRunnerPage() {
                   })}
                 </div>
 
-                {/* Question Feedback Post-Submission with Mistake Hint */}
+                {/* Question Feedback Post-Submission with Mistake Creature SVG */}
                 {feedbackItem && (
                   <div
-                    className={`mt-4 p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
+                    className={`mt-4 p-4 rounded-xl border-[2px] border-[#111111] text-xs font-bold leading-relaxed space-y-3 ${
                       feedbackItem.isCorrect
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                        : "bg-rose-50/80 border-rose-200 text-rose-950"
+                        ? "bg-[#8DE86A]/30 text-[#111111]"
+                        : "bg-[#FF4F9A]/20 text-[#111111]"
                     }`}
                   >
-                    <div className="flex items-center gap-2 font-bold">
-                      {feedbackItem.isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                          <span>Correct! Well reasoned.</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
-                          <span>
-                            Mistake Hint:{" "}
-                            {feedbackItem.mistakeTag
-                              ? feedbackItem.mistakeTag.replace(/_/g, " ")
-                              : "Review calculation rule"}
-                          </span>
-                        </>
+                    <div className="flex items-start gap-3">
+                      {!feedbackItem.isCorrect && (
+                        <div className="shrink-0 p-1.5 bg-[#FFFFFF] border-[2px] border-[#111111] rounded-xl shadow-[2px_2px_0px_#111111]">
+                          <MistakeCreature
+                            type={getMistakeCreatureType(feedbackItem.mistakeTag)}
+                            size="sm"
+                          />
+                        </div>
                       )}
-                    </div>
 
-                    {/* Explanation */}
-                    {(() => {
-                      const expData = resolveLocalizedString(q.explanation, currentLang);
-                      return (
-                        <p className="text-slate-700 pt-1 flex items-center flex-wrap gap-1.5">
-                          <strong>Explanation:</strong> <span>{expData.text}</span>
-                          {expData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center gap-2 font-heading font-extrabold text-sm">
+                          {feedbackItem.isCorrect ? (
+                            <>
+                              <CheckCircle2 className="w-4 h-4 text-[#111111]" />
+                              <span>Correct! Well reasoned.</span>
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="w-4 h-4 text-[#111111]" />
+                              <span>
+                                Mistake Hint:{" "}
+                                {feedbackItem.mistakeTag
+                                  ? feedbackItem.mistakeTag.replace(/_/g, " ")
+                                  : "Review calculation rule"}
+                              </span>
+                            </>
                           )}
-                        </p>
-                      );
-                    })()}
+                        </div>
+
+                        {/* Explanation */}
+                        {(() => {
+                          const expData = resolveLocalizedString(q.explanation, currentLang);
+                          return (
+                            <p className="text-[#111111]/80 pt-1 flex items-center flex-wrap gap-1.5">
+                              <strong className="text-[#111111]">Explanation:</strong> <span>{expData.text}</span>
+                              {expData.isDraft && (
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#FFE14D] text-[#111111] border border-[#111111]">
+                                  Draft
+                                </span>
+                              )}
+                            </p>
+                          );
+                        })()}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -407,14 +546,14 @@ export default function AdaptivePracticeRunnerPage() {
 
           {/* Submission Bar */}
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-between gap-4">
-              <span className="text-xs text-muted-foreground font-semibold">
+            <div className="sticky bottom-4 z-30 bg-[#FFF8DC]/95 border-[3px] border-[#111111] p-4 rounded-2xl shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
+              <span className="text-xs font-bold text-[#111111]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-[#111111] text-[#FFE14D] border-[2px] border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <span>Submit Practice</span>
                 <ArrowRight className="w-4 h-4" />
@@ -424,7 +563,7 @@ export default function AdaptivePracticeRunnerPage() {
         </form>
       </main>
 
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
+      <footer className="border-t-[3px] border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
         Margam Adaptive Mathematics • Practice Workspace
       </footer>
     </div>
