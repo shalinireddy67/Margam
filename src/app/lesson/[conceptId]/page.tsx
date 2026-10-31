@@ -33,6 +33,7 @@ import {
 } from "@/lib/curriculum";
 import { selectLessonVariant } from "@/lib/adaptive";
 import WitchCatCompanion, { CompanionContext } from "@/components/WitchCatCompanion";
+import { WitchCat } from "@/components/ui/WitchCat";
 
 function LessonContent() {
   const params = useParams();
@@ -300,25 +301,37 @@ function LessonContent() {
 
         {/* Conceptual Explanation */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-border shadow-card space-y-4">
-          <h2 className="text-lg font-bold text-plum flex items-center flex-wrap gap-2">
-            <span>{headlineData.text}</span>
-            {headlineData.isDraft && (
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
-                Draft
-              </span>
-            )}
-          </h2>
-
-          <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
-            {explanationData.text}
-          </p>
-
-          {/* Visual Analogy if present in variant */}
-          {activeVariant.visualAnalogy && (
-            <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs sm:text-sm text-amber-950 font-medium">
-              <strong>Intuition:</strong> {resolveLocalizedString(activeVariant.visualAnalogy, currentLang).text}
+          <div className="flex flex-col sm:flex-row items-start gap-5">
+            <div className="shrink-0 p-2.5 bg-[#FFF8DC] border-[3px] border-[#111111] rounded-2xl shadow-[3px_3px_0px_#111111]">
+              <WitchCat
+                pose="read"
+                size={88}
+                sticker={false}
+                alt="Margam Witch Cat reading the maths lesson"
+              />
             </div>
-          )}
+            <div className="flex-1 space-y-3">
+              <h2 className="text-lg font-bold text-plum flex items-center flex-wrap gap-2">
+                <span>{headlineData.text}</span>
+                {headlineData.isDraft && (
+                  <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">
+                    Draft
+                  </span>
+                )}
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
+                {explanationData.text}
+              </p>
+
+              {/* Visual Analogy if present in variant */}
+              {activeVariant.visualAnalogy && (
+                <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs sm:text-sm text-amber-950 font-medium">
+                  <strong>Intuition:</strong> {resolveLocalizedString(activeVariant.visualAnalogy, currentLang).text}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Worked Examples */}
@@ -491,20 +504,32 @@ function LessonContent() {
 
                     {feedbackItem && !feedbackItem.isCorrect && (
                       <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-950 space-y-2">
-                        <p className="font-bold text-rose-900 flex items-center gap-1.5">
-                          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
-                          <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
-                        </p>
-                        {q.hint && (
-                          <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950 font-medium">
-                            <span className="font-bold text-amber-900">💡 Hint: </span>
-                            <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
+                        <div className="flex items-start gap-3">
+                          <div className="shrink-0 pt-0.5">
+                            <WitchCat
+                              pose="oops"
+                              size={56}
+                              sticker={true}
+                              alt="Margam Witch Cat offering mistake hint"
+                            />
                           </div>
-                        )}
-                        <p className="text-slate-700">
-                          <strong className="text-slate-900">Explanation: </strong>
-                          {resolveLocalizedString(feedbackItem.explanation, currentLang).text}
-                        </p>
+                          <div className="flex-1 space-y-1.5">
+                            <p className="font-bold text-rose-900 flex items-center gap-1.5">
+                              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                              <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
+                            </p>
+                            {q.hint && (
+                              <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-950 font-medium">
+                                <span className="font-bold text-amber-900">💡 Hint: </span>
+                                <span>{resolveLocalizedString(q.hint, currentLang).text}</span>
+                              </div>
+                            )}
+                            <p className="text-slate-700">
+                              <strong className="text-slate-900">Explanation: </strong>
+                              {resolveLocalizedString(feedbackItem.explanation, currentLang).text}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -525,17 +550,29 @@ function LessonContent() {
 
         {/* Completion Footer */}
         <div className="bg-white p-6 rounded-3xl border border-border shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            {isCompleted ? (
-              <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
-                <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                <span>Lesson Completed • Next Lesson Unlocked</span>
+          <div className="flex items-center gap-3">
+            {isCompleted && (
+              <div className="shrink-0">
+                <WitchCat
+                  pose="cheer"
+                  size={64}
+                  sticker={true}
+                  alt="Margam Witch Cat celebrating lesson completion"
+                />
               </div>
-            ) : (
-              <p className="text-xs text-grey">
-                Finish reviewing this lesson variant to mark this topic complete.
-              </p>
             )}
+            <div>
+              {isCompleted ? (
+                <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-700" />
+                  <span>Lesson Completed • Next Lesson Unlocked</span>
+                </div>
+              ) : (
+                <p className="text-xs text-grey">
+                  Finish reviewing this lesson variant to mark this topic complete.
+                </p>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">

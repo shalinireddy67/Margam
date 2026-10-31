@@ -66,6 +66,8 @@ export function WitchCat({
 
   return (
     <svg
+      data-testid="witch-cat"
+      data-pose={pose}
       width={dimension}
       height={dimension}
       viewBox="0 0 160 160"
@@ -73,7 +75,7 @@ export function WitchCat({
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label={alt || defaultAlt}
-      className={`shrink-0 select-none ${className}`}
+      className={`shrink-0 select-none motion-reduce:animate-none motion-reduce:transition-none ${className}`}
     >
       {/* ----------------- STICKER BACKING (Optional / for Pink & Cyan) ----------------- */}
       {sticker && (

@@ -91,7 +91,7 @@ export default function WitchCatCompanion({
         aria-label="Study companion greeting"
         className={`flex items-start gap-4 p-4 rounded-3xl bg-peach-light/80 border border-peach-border ${className}`}
       >
-        <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float">
+        <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float motion-reduce:animate-none">
           <WitchCat
             pose={activePose}
             size={80}
@@ -121,7 +121,7 @@ export default function WitchCatCompanion({
     >
       {/* Speech Bubble (Dismissible) */}
       {!bubbleDismissed && currentMessage && (
-        <div className="pointer-events-auto max-w-[260px] sm:max-w-[290px] mb-2 p-3.5 rounded-2xl bg-white border border-peach-border shadow-soft text-plum text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="pointer-events-auto max-w-[260px] sm:max-w-[290px] mb-2 p-3.5 rounded-2xl bg-white border border-peach-border shadow-soft text-plum text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200 motion-reduce:animate-none">
           <button
             type="button"
             onClick={() => setBubbleDismissed(true)}
@@ -144,15 +144,15 @@ export default function WitchCatCompanion({
         onClick={toggleBubble}
         aria-label="Witch Cat Companion - Click for message"
         title="Click to hear from your study companion"
-        className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1"
+        className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1 motion-reduce:transition-none"
       >
-        <div className="relative w-full h-full animate-gentle-float">
+        <div className="relative w-full h-full animate-gentle-float motion-reduce:animate-none">
           <WitchCat
             pose={activePose}
             size={80}
             sticker={sticker}
             alt="Margam Witch Cat"
-            className="transition-transform group-hover:scale-105"
+            className="transition-transform group-hover:scale-105 motion-reduce:transform-none"
           />
         </div>
       </button>

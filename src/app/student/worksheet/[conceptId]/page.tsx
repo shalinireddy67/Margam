@@ -35,6 +35,7 @@ import {
   PracticeResult,
 } from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+import { WitchCat } from "@/components/ui/WitchCat";
 
 export default function AdaptivePracticeRunnerPage() {
   const params = useParams();
@@ -199,8 +200,17 @@ export default function AdaptivePracticeRunnerPage() {
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0">
+                    <WitchCat
+                      pose={result.scorePercentage >= 70 ? "cheer" : "think"}
+                      size={72}
+                      sticker={true}
+                      alt="Margam Witch Cat reviewing practice results"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
                     {result.scorePercentage >= 70 ? (
                       <>
                         <CheckCircle2 className="w-5 h-5 text-emerald-700" />
@@ -241,6 +251,7 @@ export default function AdaptivePracticeRunnerPage() {
                     )}
                   </div>
                 </div>
+              </div>
 
                 <div className="flex items-center gap-2 shrink-0">
                   <button
@@ -366,39 +377,55 @@ export default function AdaptivePracticeRunnerPage() {
                         : "bg-rose-50/80 border-rose-200 text-rose-950"
                     }`}
                   >
-                    <div className="flex items-center gap-2 font-bold">
-                      {feedbackItem.isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                          <span>Correct! Well reasoned.</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
-                          <span>
-                            Mistake Hint:{" "}
-                            {feedbackItem.mistakeTag
-                              ? feedbackItem.mistakeTag.replace(/_/g, " ")
-                              : "Review calculation rule"}
-                          </span>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Explanation */}
-                    {(() => {
-                      const expData = resolveLocalizedString(q.explanation, currentLang);
-                      return (
-                        <p className="text-slate-700 pt-1 flex items-center flex-wrap gap-1.5">
-                          <strong>Explanation:</strong> <span>{expData.text}</span>
-                          {expData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
+                    <div className="flex items-start gap-3">
+                      <div className="shrink-0 pt-0.5">
+                        <WitchCat
+                          pose={feedbackItem.isCorrect ? "cheer" : "oops"}
+                          size={56}
+                          sticker={true}
+                          alt={
+                            feedbackItem.isCorrect
+                              ? "Margam Witch Cat cheering correct answer"
+                              : "Margam Witch Cat offering mistake hint"
+                          }
+                        />
+                      </div>
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center gap-2 font-bold text-sm">
+                          {feedbackItem.isCorrect ? (
+                            <>
+                              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                              <span>Correct! Well reasoned.</span>
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="w-4 h-4 text-rose-600" />
+                              <span>
+                                Mistake Hint:{" "}
+                                {feedbackItem.mistakeTag
+                                  ? feedbackItem.mistakeTag.replace(/_/g, " ")
+                                  : "Review calculation rule"}
+                              </span>
+                            </>
                           )}
-                        </p>
-                      );
-                    })()}
+                        </div>
+
+                        {/* Explanation */}
+                        {(() => {
+                          const expData = resolveLocalizedString(q.explanation, currentLang);
+                          return (
+                            <p className="text-slate-700 pt-1 flex items-center flex-wrap gap-1.5">
+                              <strong>Explanation:</strong> <span>{expData.text}</span>
+                              {expData.isDraft && (
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                                  Draft
+                                </span>
+                              )}
+                            </p>
+                          );
+                        })()}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
