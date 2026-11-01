@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Also fetch students for these classes
-    const classIds = (classes || []).map((c) => c.id);
+    const classIds = (classes || []).map((c: any) => c.id);
     let members: any[] = [];
     if (classIds.length > 0) {
       const { data: memberRows } = await admin

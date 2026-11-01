@@ -15,7 +15,7 @@ export function getSupabaseServerClient(): SupabaseClient | null {
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
-  const cookieStore = cookies();
+  const cookieStore = cookies() as any;
 
   return createServerClient(url, key, {
     cookies: {

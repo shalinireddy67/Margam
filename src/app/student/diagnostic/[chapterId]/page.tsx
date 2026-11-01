@@ -14,6 +14,7 @@ import {
   GitBranch,
   ShieldCheck,
   Award,
+  Sparkles,
 } from "lucide-react";
 import {
   SupportedLanguage,
@@ -307,9 +308,9 @@ export default function ChapterDiagnosticPage() {
 
       if (diagResult.passed) {
         setPlacementPassed(true);
-        const unlockRes = unlockChapterLessons(chapterId);
-        if (unlockRes.success && unlockRes.profile) {
-          setProfile(unlockRes.profile);
+        const updatedProfile = unlockChapterLessons(chapterId);
+        if (updatedProfile) {
+          setProfile(updatedProfile);
         }
       }
 
@@ -403,7 +404,7 @@ export default function ChapterDiagnosticPage() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
-            {currentChapter?.title[currentLang] || currentChapter?.title.en || chapterId}
+            {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
           </h1>
 
           <p className="text-xs sm:text-sm text-[#111111] bg-[#F2D16B]/30 p-3.5 border-2 border-[#111111] leading-relaxed font-bold">
