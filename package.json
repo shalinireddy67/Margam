@@ -9,7 +9,7 @@
     "lint": "next lint",
     "validate": "node scripts/validate-content.mjs",
     "check:layout": "node scripts/check-layout.mjs",
-    "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs && npx tsx scripts/test-draft-translations.mjs && npx tsx scripts/test-login-security.mjs && npx tsx scripts/test-smart-revision.mjs",
+    "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs && npx tsx scripts/test-draft-translations.mjs && npx tsx scripts/test-login-security.mjs && npx tsx scripts/test-smart-revision.mjs && npx tsx scripts/test-student-journey.mjs",
     "test:auth": "npx tsx scripts/test-login-security.mjs",
     "test:bundle": "node scripts/test-bundle-secrets.mjs",
     "eval": "npx tsx scripts/eval-scenarios.mjs",

@@ -8,7 +8,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Sparkles,
-  Check,
   AlertCircle,
   RotateCcw,
   BookOpen,
@@ -36,7 +35,6 @@ import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   OfflineBanner,
-  Button,
 } from "@/components/ui";
 
 interface PracticeFeedbackItem {
@@ -145,7 +143,7 @@ function LessonContent() {
   // Loading Skeleton State
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
           <SkeletonCard />
@@ -158,13 +156,13 @@ function LessonContent() {
   // Locked State
   if (isLocked) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-16">
         <OfflineBanner />
-        <header className="sticky top-0 z-40 bg-[#7EC8E3] border-b-4 border-[#111111]">
+        <header className="sticky top-0 z-40 bg-[#173B19]/95 backdrop-blur-md border-b-3 border-[#315B2A] shadow-[0px_4px_0px_#102610]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
             <Link
               href="/"
-              className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 border-2 border-[#111111] bg-[#FFFFFF] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline"
+              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 border-2 border-[#102610] bg-[#102610] text-[#D8D8D0] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline hover:text-[#F2F0DF]"
             >
               <ArrowLeft className="w-4 h-4 mr-1.5" />
               <span>Back to Lessons</span>
@@ -173,20 +171,20 @@ function LessonContent() {
         </header>
 
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-[#FFFFFF] border-4 border-[#111111] p-8 shadow-[4px_4px_0px_#111111] space-y-4">
-            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+          <div className="bg-[#173B19] border-3 border-[#315B2A] p-8 shadow-[6px_6px_0px_#102610] space-y-4">
+            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#102610] flex items-center justify-center mx-auto text-[#102610]">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
               Lesson Locked
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] leading-relaxed">
               {lockedReason || "You must complete prerequisite topics before accessing this lesson."}
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#79B82A] text-[#102610] border-2 border-[#102610] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>
@@ -203,13 +201,13 @@ function LessonContent() {
 
   if (!concept || !lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3] p-4">
-        <div className="bg-[#FFFFFF] p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] max-w-sm text-center space-y-3">
-          <h2 className="font-heading font-extrabold text-base text-[#111111]">Lesson Not Found</h2>
-          <p className="text-xs font-bold text-[#111111]/70">This lesson content is not yet available.</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#102610] minecraft-grid-bg p-4 text-[#F2F0DF]">
+        <div className="bg-[#173B19] p-6 border-3 border-[#315B2A] shadow-[6px_6px_0px_#102610] max-w-sm text-center space-y-3">
+          <h2 className="font-heading font-extrabold text-base text-[#F2F0DF]">Lesson Not Found</h2>
+          <p className="text-xs font-bold text-[#D8D8D0]">This lesson content is not yet available.</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-[#111111] bg-[#F2D16B] text-[#111111] text-xs font-heading font-bold shadow-[2px_2px_0px_#111111]"
+            className="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-[#102610] bg-[#79B82A] text-[#102610] text-xs font-heading font-bold shadow-[2px_2px_0px_#102610]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Lessons</span>
@@ -279,6 +277,7 @@ function LessonContent() {
           conceptId,
           studentId: profile.id,
           answers,
+          profile,
         }),
       });
 
@@ -320,26 +319,29 @@ function LessonContent() {
   const workedSolution = resolveLocalizedString(activeVariant.workedExample.solution, currentLang);
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] font-sans pb-24">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg flex flex-col justify-between text-[#F2F0DF] pb-24">
       <OfflineBanner />
+
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-[#7EC8E3] border-b-4 border-[#111111]">
+      <header className="sticky top-0 z-40 bg-[#173B19]/95 backdrop-blur-md border-b-3 border-[#315B2A] shadow-[0px_4px_0px_#102610]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <Link
             href="/"
-            className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 text-xs sm:text-sm font-heading font-extrabold text-[#111111] py-2 px-3 border-2 border-[#111111] bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] no-underline"
+            className="inline-flex items-center justify-center min-h-[44px] gap-2 text-xs font-heading font-extrabold text-[#D8D8D0] hover:text-[#F2F0DF] py-2 px-3 border-2 border-[#315B2A] bg-[#102610] shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Lessons</span>
           </Link>
 
           {/* Language Switcher */}
-          <div className="flex items-center gap-1 bg-[#FFFFFF] p-1 border-2 border-[#111111] shadow-[2px_2px_0px_#111111]">
+          <div className="flex items-center gap-1 bg-[#102610] p-1 border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610]">
             <button
               type="button"
               onClick={() => setCurrentLang("en")}
-              className={`min-h-[40px] min-w-[40px] flex items-center justify-center px-2.5 py-1 text-xs font-bold border-2 transition-all ${
-                currentLang === "en" ? "bg-[#79B82A] border-[#102610] text-[#102610]" : "border-transparent text-[#D8D8D0]"
+              className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
+                currentLang === "en"
+                  ? "bg-[#79B82A] border-[#102610] text-[#102610]"
+                  : "border-transparent text-[#D8D8D0] hover:text-[#F2F0DF]"
               }`}
             >
               EN
@@ -347,8 +349,10 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("hi")}
-              className={`min-h-[40px] min-w-[40px] flex items-center justify-center px-2.5 py-1 text-xs font-bold border-2 transition-all ${
-                currentLang === "hi" ? "bg-[#79B82A] border-[#102610] text-[#102610]" : "border-transparent text-[#D8D8D0]"
+              className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
+                currentLang === "hi"
+                  ? "bg-[#79B82A] border-[#102610] text-[#102610]"
+                  : "border-transparent text-[#D8D8D0] hover:text-[#F2F0DF]"
               }`}
             >
               हिन्दी
@@ -356,8 +360,10 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("te")}
-              className={`min-h-[40px] min-w-[40px] flex items-center justify-center px-2.5 py-1 text-xs font-bold border-2 transition-all ${
-                currentLang === "te" ? "bg-[#79B82A] border-[#102610] text-[#102610]" : "border-transparent text-[#D8D8D0]"
+              className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
+                currentLang === "te"
+                  ? "bg-[#79B82A] border-[#102610] text-[#102610]"
+                  : "border-transparent text-[#D8D8D0] hover:text-[#F2F0DF]"
               }`}
             >
               తెలుగు
@@ -370,12 +376,12 @@ function LessonContent() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Remediation Gap Alert if fromGap is true */}
         {fromGap && (
-          <div className="p-4 sm:p-5 bg-[#F2D16B] border-4 border-[#111111] shadow-[4px_4px_0px_#111111] text-[#111111] space-y-2">
-            <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider">
-              <GitBranch className="w-4 h-4 text-[#111111]" />
+          <div className="p-4 sm:p-5 bg-[#173B19] border-3 border-[#E5B834] border-l-[8px] border-l-[#E5B834] shadow-[4px_4px_0px_#102610] text-[#F2F0DF] space-y-2">
+            <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-[#E5B834]">
+              <GitBranch className="w-4 h-4 text-[#E5B834]" />
               <span>Diagnostic Remediation Route</span>
             </div>
-            <p className="text-xs sm:text-sm font-bold leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold leading-relaxed text-[#D8D8D0]">
               {variantReason}
             </p>
           </div>
@@ -392,12 +398,12 @@ function LessonContent() {
 
             {/* Pedagogical Variant Indicator */}
             <span
-              className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-heading font-extrabold border-2 border-[#111111] shadow-[2px_2px_0px_#111111] ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-heading font-extrabold border-2 border-[#102610] shadow-[2px_2px_0px_#102610] ${
                 variantKey === "basics_first"
-                  ? "bg-[#D9453D] text-[#FFFFFF]"
+                  ? "bg-[#D9453D] text-[#F2F0DF]"
                   : variantKey === "fast_track"
-                  ? "bg-[#5DB84A] text-[#111111]"
-                  : "bg-[#F2D16B] text-[#111111]"
+                  ? "bg-[#79B82A] text-[#102610]"
+                  : "bg-[#F2D16B] text-[#102610]"
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -412,17 +418,17 @@ function LessonContent() {
           </h1>
 
           <p className="text-xs sm:text-sm text-[#D8D8D0] bg-[#102610] p-3.5 border-2 border-[#315B2A] leading-relaxed font-medium">
-            <strong>Goal:</strong> {concept.learningObjective[currentLang] || concept.learningObjective.en}
+            <strong className="text-[#79B82A]">Goal:</strong> {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
           {!fromGap && (
-            <p className="text-xs text-[#111111]/80 italic pt-1 font-bold">
+            <p className="text-xs text-[#D8D8D0]/80 italic pt-1 font-medium">
               {variantReason}
             </p>
           )}
         </div>
 
-        {/* Lesson Body Content with Witch Cat Companion */}
+        {/* Lesson Body Content with Companion */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
           {/* Main Conceptual Explanation */}
           <div className="md:col-span-8 space-y-6">
@@ -434,19 +440,19 @@ function LessonContent() {
                     pose="read"
                     size={88}
                     sticker={false}
-                    alt="Margam Witch Cat reading the maths lesson"
+                    alt="Margam Learning Companion reading the maths lesson"
                   />
                 </div>
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#79B82A]">
-                    <BookOpen className="w-4 h-4 text-[#111111]" />
+                    <BookOpen className="w-4 h-4 text-[#79B82A]" />
                     <span>Core Concept</span>
                   </div>
 
                   <h2 className="text-base sm:text-lg font-heading font-extrabold text-[#F2F0DF] flex items-center flex-wrap gap-2">
                     <span>{headlineData.text}</span>
                     {headlineData.isDraft && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-[#F2D16B] text-[#111111] border border-[#111111]">
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-[#F2D16B] text-[#102610] border border-[#102610]">
                         Draft
                       </span>
                     )}
@@ -467,18 +473,18 @@ function LessonContent() {
 
             {/* Step-by-Step Worked Example Card */}
             <div className="bg-[#173B19] p-6 sm:p-7 border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4 text-[#F2F0DF]">
-              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111]/70">
-                <Sparkles className="w-4 h-4 text-[#111111]" />
+              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#79B82A]">
+                <Sparkles className="w-4 h-4 text-[#79B82A]" />
                 <span>Step-by-Step Example</span>
               </div>
 
               <div className="p-4 bg-[#102610] border-2 border-[#315B2A] space-y-1">
-                <p className="text-xs font-heading font-bold text-[#111111]/70 uppercase tracking-wider">Problem</p>
+                <p className="text-xs font-heading font-bold text-[#E5B834] uppercase tracking-wider">Problem</p>
                 <p className="text-xs sm:text-sm font-bold text-[#F2F0DF]">{workedProblem.text}</p>
               </div>
 
               <div className="p-4 bg-[#102610] border-2 border-[#4F8A24] space-y-1">
-                <p className="text-xs font-heading font-bold text-[#3C8A2E] uppercase tracking-wider">Solution</p>
+                <p className="text-xs font-heading font-bold text-[#79B82A] uppercase tracking-wider">Solution</p>
                 <p className="text-xs sm:text-sm text-[#D8D8D0] font-medium whitespace-pre-line leading-relaxed">
                   {workedSolution.text}
                 </p>
@@ -486,7 +492,7 @@ function LessonContent() {
             </div>
           </div>
 
-          {/* Side Column: Witch Cat Companion */}
+          {/* Side Column: Mascot Companion Dialogue */}
           <div className="md:col-span-4 sticky top-24 space-y-4">
             <div className="bg-[#173B19] p-4 sm:p-5 border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] flex flex-col items-center text-center text-[#F2F0DF]">
               <WitchCatCompanion
@@ -507,14 +513,14 @@ function LessonContent() {
                   Check Your Understanding
                 </h2>
                 <p className="text-xs font-bold text-[#D8D8D0]/80 mt-0.5">
-                  Try this quick problem to verify concept mastery.
+                  Try this quick problem to verify concept comprehension.
                 </p>
               </div>
 
               {worksheetResult && (
                 <button
                   onClick={handleRetryPractice}
-                  className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1 px-3 py-1.5 border-2 border-[#111111] bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] text-xs font-heading font-bold text-[#111111] active:translate-x-[1px] active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center min-h-[44px] gap-1 px-3 py-1.5 border-2 border-[#315B2A] bg-[#102610] shadow-[2px_2px_0px_#102610] text-xs font-heading font-bold text-[#D8D8D0] hover:text-[#F2F0DF] active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Try Again</span>
@@ -523,7 +529,7 @@ function LessonContent() {
             </div>
 
             {errorMessage && (
-              <div className="p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold text-[#111111] flex items-center gap-2">
+              <div className="p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold text-[#F2F0DF] flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-[#D9453D] shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -536,10 +542,10 @@ function LessonContent() {
 
                 return (
                   <div key={q.id} className="space-y-3 pt-2">
-                    <p className="text-xs font-heading font-bold text-[#111111]/70 uppercase tracking-wider">
+                    <p className="text-xs font-heading font-bold text-[#79B82A] uppercase tracking-wider">
                       Question {idx + 1}
                     </p>
-                    <p className="text-sm font-bold text-[#111111] leading-relaxed">
+                    <p className="text-sm font-bold text-[#F2F0DF] leading-relaxed">
                       {qPrompt.text}
                     </p>
 
@@ -588,7 +594,7 @@ function LessonContent() {
                             >
                               {opt.id}
                             </span>
-                            <span className="text-xs sm:text-sm text-[#111111] font-bold">
+                            <span className="text-xs sm:text-sm font-bold leading-snug">
                               {optText.text}
                             </span>
                           </div>
@@ -598,14 +604,14 @@ function LessonContent() {
 
                     {/* Needs Review Feedback and Mistake Hint */}
                     {feedbackItem && !feedbackItem.isCorrect && (
-                      <div className="p-3.5 bg-[#D9453D]/10 border-2 border-[#111111] text-xs text-[#111111] space-y-2">
+                      <div className="p-3.5 bg-[#102610] border-2 border-[#D9453D] text-xs text-[#F2F0DF] space-y-2">
                         <div className="flex items-start gap-3">
                           <div className="shrink-0 pt-0.5">
                             <WitchCat
                               pose="oops"
                               size={56}
                               sticker={true}
-                              alt="Margam Witch Cat offering mistake hint"
+                              alt="Margam Learning Companion offering mistake hint"
                             />
                           </div>
                           <div className="flex-1 space-y-1.5">
@@ -614,14 +620,14 @@ function LessonContent() {
                               <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
                             </p>
                             {feedbackItem.hint && (
-                              <div className="p-2.5 bg-[#F2D16B]/40 border border-[#111111] text-[#111111] font-bold">
+                              <div className="p-2.5 bg-[#173B19] border border-[#E5B834] text-[#E5B834] font-bold">
                                 <span className="font-heading">💡 Hint: </span>
                                 <span>{feedbackItem.hint}</span>
                               </div>
                             )}
                             {feedbackItem.explanation && (
-                              <p className="text-[#111111] font-medium">
-                                <strong className="font-heading">Explanation: </strong>
+                              <p className="text-[#D8D8D0] font-medium">
+                                <strong className="font-heading text-[#79B82A]">Explanation: </strong>
                                 {feedbackItem.explanation}
                               </p>
                             )}
@@ -636,9 +642,9 @@ function LessonContent() {
               {!worksheetResult && (
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 bg-[#111111] text-[#F2D16B] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer transition-colors"
                 >
-                  <span>Submit Practice Answers</span>
+                  <span>Submit Practice Answer</span>
                 </button>
               )}
             </form>
@@ -646,34 +652,44 @@ function LessonContent() {
         )}
 
         {/* Sticky Next Button Bar */}
-        <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="sticky bottom-4 z-30 bg-[#173B19] border-3 border-[#315B2A] p-4 shadow-[0px_4px_0px_#102610] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#F2F0DF]">
           <div className="text-center sm:text-left">
-            <span className="text-xs font-heading font-extrabold text-[#111111] block">
-              {isCompleted ? "Topic Mastered!" : "Finished Reviewing?"}
+            <span className="text-xs font-heading font-extrabold text-[#79B82A] block">
+              {isCompleted ? "Topic Completed!" : "Finished Reviewing?"}
             </span>
-            <span className="text-[11px] font-bold text-[#111111]/70 block">
-              {isCompleted ? "You can proceed to the next concept or chapter test." : "Advance to update your concept mastery."}
+            <span className="text-[11px] font-bold text-[#D8D8D0] block">
+              {isCompleted
+                ? "You can now attempt the full practice worksheet or return to your path."
+                : "Mark this lesson completed to unlock practice and next topics."}
             </span>
           </div>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
             {!isCompleted ? (
               <button
                 type="button"
                 onClick={handleFinishLesson}
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DB84A] text-[#111111] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer transition-colors"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Next: Finish Lesson & Complete</span>
               </button>
             ) : (
-              <Link
-                href="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
-              >
-                <span>Next: Return to Learning Path</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
+              <>
+                <Link
+                  href={`/student/worksheet/${conceptId}`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                >
+                  <span>Attempt Practice Worksheet</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/"
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-4 py-2.5 bg-[#102610] text-[#D8D8D0] hover:text-[#F2F0DF] border-2 border-[#315B2A] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610] no-underline transition-colors"
+                >
+                  <span>Return to Path</span>
+                </Link>
+              </>
             )}
           </div>
         </div>
@@ -690,7 +706,7 @@ export default function LessonPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+        <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
           <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
             <SkeletonCard />
             <SkeletonCard />
