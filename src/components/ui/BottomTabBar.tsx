@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Home, Sparkles, Award, User } from "lucide-react";
 
 export interface BottomTabBarProps {
   currentTab?: "home" | "learn" | "stickers" | "me";
@@ -35,8 +36,8 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
       className={`
         fixed left-0 right-0 bottom-0 z-40
         flex justify-center
-        bg-[#173B19] border-t-3 border-[#315B2A]
-        shadow-[0px_-3px_0px_#102610]
+        bg-[#5A3720] border-t-4 border-[#422816]
+        shadow-[0px_-4px_0px_rgba(0,0,0,0.35)]
         pb-[env(safe-area-inset-bottom,0px)]
         ${className}
       `.trim()}
@@ -53,25 +54,18 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
             font-heading font-extrabold text-[10px]
             no-underline select-none transition-colors
             ${active === "home"
-              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
+              ? "bg-[#5DAA3A] text-[#FFF7E6] border-t-4 border-t-[#FFE9A8] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#FFF7E6] hover:text-[#FFE9A8] hover:bg-[#7A4B2A]/60"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="7" y="1" width="2" height="2" fill="currentColor" />
-            <rect x="5" y="3" width="6" height="2" fill="currentColor" />
-            <rect x="3" y="5" width="10" height="2" fill="currentColor" />
-            <rect x="1" y="7" width="14" height="2" fill="currentColor" />
-            <rect x="2" y="9" width="12" height="6" fill={active === "home" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="1" />
-            <rect x="6" y="10" width="4" height="5" fill={active === "home" ? "#79B82A" : "currentColor"} />
-          </svg>
+          <Home className="w-5 h-5 shrink-0" aria-hidden="true" />
           <span>Home</span>
         </Link>
 
         {/* Tab 2: Learn */}
         <Link
-          href="/#chapters"
+          href="/student"
           prefetch={false}
           aria-current={active === "learn" ? "page" : undefined}
           className={`
@@ -80,23 +74,16 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
             font-heading font-extrabold text-[10px]
             no-underline select-none transition-colors
             ${active === "learn"
-              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
+              ? "bg-[#5DAA3A] text-[#FFF7E6] border-t-4 border-t-[#FFE9A8] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#FFF7E6] hover:text-[#FFE9A8] hover:bg-[#7A4B2A]/60"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="2" y="2" width="12" height="12" fill={active === "learn" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
-            <rect x="7" y="2" width="2" height="12" fill="currentColor" />
-            <rect x="4" y="5" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
-            <rect x="10" y="5" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
-            <rect x="4" y="9" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
-            <rect x="10" y="9" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
-          </svg>
+          <Sparkles className="w-5 h-5 shrink-0" aria-hidden="true" />
           <span>Learn</span>
         </Link>
 
-        {/* Tab 3: Stickers */}
+        {/* Tab 3: Badges / Stickers */}
         <Link
           href="/student/stickers"
           prefetch={false}
@@ -107,26 +94,16 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
             font-heading font-extrabold text-[10px]
             no-underline select-none transition-colors
             ${active === "stickers"
-              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
+              ? "bg-[#5DAA3A] text-[#FFF7E6] border-t-4 border-t-[#FFE9A8] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#FFF7E6] hover:text-[#FFE9A8] hover:bg-[#7A4B2A]/60"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="7" y="1" width="2" height="2" fill="currentColor" />
-            <rect x="6" y="3" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="1" y="5" width="14" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="3" y="7" width="10" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="4" y="9" width="8" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="3" y="11" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="9" y="11" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
-            <rect x="2" y="13" width="3" height="2" fill="currentColor" />
-            <rect x="11" y="13" width="3" height="2" fill="currentColor" />
-          </svg>
-          <span>Stickers</span>
+          <Award className="w-5 h-5 shrink-0" aria-hidden="true" />
+          <span>Badges</span>
         </Link>
 
-        {/* Tab 4: Me */}
+        {/* Tab 4: Me / Profile */}
         <Link
           href="/student/select-class"
           prefetch={false}
@@ -137,16 +114,13 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
             font-heading font-extrabold text-[10px]
             no-underline select-none transition-colors
             ${active === "me"
-              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
+              ? "bg-[#5DAA3A] text-[#FFF7E6] border-t-4 border-t-[#FFE9A8] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#FFF7E6] hover:text-[#FFE9A8] hover:bg-[#7A4B2A]/60"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="5" y="2" width="6" height="5" fill={active === "me" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
-            <rect x="2" y="9" width="12" height="6" fill={active === "me" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
-          </svg>
-          <span>Me</span>
+          <User className="w-5 h-5 shrink-0" aria-hidden="true" />
+          <span>Profile</span>
         </Link>
       </div>
     </nav>

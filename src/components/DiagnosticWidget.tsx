@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles, BookOpen, Compass, Award } from "lucide-react";
+import { CheckCircle2, ArrowRight, RotateCcw, Sparkles, BookOpen, Award } from "lucide-react";
 import conceptsData from "../../data/concepts.json";
 import lessonsData from "../../data/lessons.json";
 import { SupportedLanguage } from "@/lib/types";
-import { ProgressBar } from "@/components/ui";
+import { ProgressBar, Button } from "@/components/ui";
 
 interface DiagnosticWidgetProps {
   currentLang?: SupportedLanguage;
@@ -66,7 +66,6 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
   );
 
   const currentQuestions = sampleQuestions;
-
   const activeQ = currentQuestions[currentStep];
 
   const handleSelectOption = (optionId: string) => {
@@ -98,22 +97,22 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
         "Answer 3 quick math questions from Class 9 down to Class 7. Margam checks your answers and pinpoints where you need a quick boost.",
       stepLabel: `Question ${currentStep + 1} of ${currentQuestions.length}`,
       nextBtn: "Next Question",
-      finishBtn: "See My Result",
-      restartBtn: "Try Again",
-      resultTitle: "Diagnostic Complete",
+      finishBtn: "View Diagnostic Map",
+      restartBtn: "Restart Diagnostic",
+      resultTitle: "Diagnostic Assessment Complete",
       resultScore: "1 of 3 Correct",
-      gapFoundLabel: "Diagnosed Prerequisite Gap:",
-      gapFoundTitle: "Class 7 Integer Subtraction & Sign Rules",
+      gapFoundLabel: "Identified Prerequisite Learning Gap:",
+      gapFoundTitle: "Class 7 Integer Multiplication & Sign Rules",
       gapRationale:
-        "You understand polynomial terms, but sign flips like (-3) × (+2) = -6 cause small errors that cascade through quadratic factoring.",
-      lessonPreviewBtn: "Preview 3 Lesson Styles",
-      hideLessonBtn: "Hide Lesson Styles",
+        "You understand polynomial expansion, but careless sign inversion rules like (-3) × (+2) = -6 prevent correct solutions in advanced algebra.",
+      lessonPreviewBtn: "Preview 3 Teaching Variations",
+      hideLessonBtn: "Hide Teaching Variations",
     },
     hi: {
-      badge: "इंटरैक्टिव डायग्नोस्टिक",
-      headline: "3 प्रश्नों से समझें अपनी सीखने की राह",
+      badge: "सक्रिय जाँच",
+      headline: "3 प्रश्नों से अपना स्तर जानें",
       subhead:
-        "कक्षा 9 से कक्षा 7 तक के 3 त्वरित प्रश्नों के उत्तर दें। मार्गम् बताएगा कि आपको कहाँ थोड़ी और मदद चाहिए।",
+        "कक्षा 9 से कक्षा 7 तक के 3 सरल प्रश्नों के उत्तर दें। मार्गम आपके उत्तरों का विश्लेषण कर वास्तविक अंतर ढूँढता है।",
       stepLabel: `प्रश्न ${currentStep + 1} / ${currentQuestions.length}`,
       nextBtn: "अगला प्रश्न",
       finishBtn: "परिणाम देखें",
@@ -151,20 +150,20 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
     <section id="try-diagnostic" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral-light text-coral border border-coral-border text-xs sm:text-sm font-heading font-bold">
-          <Sparkles className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#422816] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_rgba(0,0,0,0.35)] text-xs font-heading font-bold text-[#FFE9A8]">
+          <Sparkles className="w-4 h-4 text-[#5DAA3A]" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-heading text-xl sm:text-3xl font-extrabold text-[#FFE9A8] tracking-tight drop-shadow-[2px_2px_0px_#2B1B0F]">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#FFF7E6]/90 text-sm sm:text-base leading-relaxed">
           {t.subhead}
         </p>
       </div>
 
-      {/* Main Diagnostic Card Canvas */}
-      <div className="bg-white rounded-3xl sm:rounded-4xl p-6 sm:p-10 border border-[#E0E5D4] shadow-card max-w-3xl mx-auto">
+      {/* Main Diagnostic Card Canvas - Blocky Voxel Panel */}
+      <div className="bg-[#7A4B2A] border-4 border-[#422816] rounded-[2px] p-6 sm:p-10 shadow-[inset_2px_2px_0px_rgba(255,255,255,0.25),inset_-2px_-2px_0px_rgba(0,0,0,0.4),6px_6px_0px_rgba(0,0,0,0.35)] max-w-3xl mx-auto">
         {!submitted && activeQ ? (
           <div className="space-y-6">
             {/* Step Progress Bar & Indicator */}
@@ -172,9 +171,9 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
               const activeConcept = conceptsData.find((c) => c.id === activeQ.conceptId);
               return (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold">
-                    <span className="text-coral uppercase tracking-wider">{t.stepLabel}</span>
-                    <span className="text-muted-foreground">
+                  <div className="flex items-center justify-between text-xs font-heading font-bold">
+                    <span className="text-[#FFE9A8] uppercase tracking-wider">{t.stepLabel}</span>
+                    <span className="text-[#FFF7E6]/80 text-[11px]">
                       Class {activeConcept?.class || 9} • {activeConcept?.chapter || "Mathematics"}
                     </span>
                   </div>
@@ -188,14 +187,17 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
               );
             })()}
 
-            {/* Question Text */}
-            <div className="py-2">
-              <h3 className="font-heading text-lg sm:text-2xl font-bold text-foreground leading-snug">
+            {/* Question Text inside Light Block Tile */}
+            <div className="p-4 sm:p-6 bg-[#FFF7E6] border-4 border-[#5A3720] rounded-[2px] shadow-[inset_2px_2px_0px_#FFFFFF,3px_3px_0px_rgba(0,0,0,0.35)]">
+              <span className="inline-block text-[10px] font-heading font-bold text-[#7A4B2A] uppercase mb-1">
+                Question {currentStep + 1}
+              </span>
+              <h3 className="font-sans text-lg sm:text-xl font-bold text-[#2B1B0F] leading-snug">
                 {activeQ.prompt[currentLang]}
               </h3>
             </div>
 
-            {/* Options List with Min 48px Touch Targets */}
+            {/* Options List with Min 48px Touch Targets & Water-Blue Selection */}
             <div className="space-y-3">
               {activeQ.options.map((opt) => {
                 const isSelected = selectedAnswers[currentStep] === opt.id;
@@ -204,42 +206,44 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                     key={opt.id}
                     type="button"
                     onClick={() => handleSelectOption(opt.id)}
-                    className={`w-full min-h-[52px] p-4 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    className={`w-full min-h-[54px] p-4 rounded-[2px] border-4 text-left flex items-center justify-between transition-transform active:translate-x-[2px] active:translate-y-[2px] cursor-pointer ${
                       isSelected
-                        ? "border-coral bg-coral-light text-foreground shadow-xs font-bold"
-                        : "border-[#E0E5D4] bg-background/50 hover:bg-background text-foreground/90 font-medium"
+                        ? "border-[#3FA7C9] bg-[#FFE9A8] text-[#2B1B0F] shadow-[inset_2px_2px_0px_#FFFFFF,4px_4px_0px_rgba(0,0,0,0.35)] font-bold ring-2 ring-[#3FA7C9]"
+                        : "border-[#5A3720] bg-[#FFF7E6] hover:bg-[#FFE9D6] text-[#2B1B0F] shadow-[4px_4px_0px_rgba(0,0,0,0.35)] font-medium"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span
-                        className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-mono font-bold shrink-0 ${
-                          isSelected ? "bg-coral text-white" : "bg-white border border-[#E0E5D4] text-muted-foreground"
+                        className={`w-8 h-8 rounded-[2px] flex items-center justify-center text-xs font-heading font-bold shrink-0 border-2 ${
+                          isSelected
+                            ? "bg-[#3FA7C9] text-[#FFF7E6] border-[#1E6F8C]"
+                            : "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]"
                         }`}
                       >
                         {opt.id.toUpperCase()}
                       </span>
-                      <span className="text-sm sm:text-base font-sans">{opt.text[currentLang]}</span>
+                      <span className="text-base sm:text-lg font-sans font-bold">{opt.text[currentLang]}</span>
                     </div>
-                    {isSelected && <CheckCircle2 className="w-5 h-5 text-coral shrink-0" />}
+                    {isSelected && <CheckCircle2 className="w-5 h-5 text-[#1E6F8C] shrink-0" />}
                   </button>
                 );
               })}
             </div>
 
             {/* Action Bar */}
-            <div className="pt-4 border-t border-[#E0E5D4] flex items-center justify-between">
-              <div className="text-xs text-muted-foreground font-mono">
-                {selectedAnswers[currentStep] ? "Option selected" : "Select an answer above"}
+            <div className="pt-4 border-t-2 border-[#5A3720] flex items-center justify-between">
+              <div className="text-xs text-[#FFF7E6]/75 font-mono">
+                {selectedAnswers[currentStep] ? "✓ Option selected" : "Select an answer tile above"}
               </div>
 
               <button
                 type="button"
                 disabled={!selectedAnswers[currentStep]}
                 onClick={handleNext}
-                className={`min-h-[48px] px-6 rounded-2xl text-sm font-heading font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                className={`min-h-[48px] px-6 rounded-[2px] text-xs sm:text-sm font-heading font-bold flex items-center gap-2 transition-all select-none ${
                   selectedAnswers[currentStep]
-                    ? "bg-coral hover:bg-coral-hover text-white shadow-soft"
-                    : "bg-background text-muted-foreground border border-[#E0E5D4] cursor-not-allowed opacity-60"
+                    ? "voxel-btn-primary cursor-pointer"
+                    : "bg-[#5E5E5E] text-[#D9D9D9] border-3 border-[#3F3F3F] cursor-not-allowed opacity-60"
                 }`}
               >
                 <span>{currentStep === currentQuestions.length - 1 ? t.finishBtn : t.nextBtn}</span>
@@ -250,38 +254,42 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
         ) : (
           /* Result & Root Gap Analysis Card */
           <div className="space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E0E5D4] pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-sage-light text-sage flex items-center justify-center font-bold">
-                  <Award className="w-5 h-5" />
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#5A3720] pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-[2px] bg-[#5DAA3A] border-3 border-[#2F6B22] text-[#FFF7E6] flex items-center justify-center font-bold shadow-[inset_1px_1px_0px_rgba(255,255,255,0.5)]">
+                  <Award className="w-6 h-6 text-[#FFE9A8]" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-xl text-foreground">
+                  <h3 className="font-heading font-bold text-base sm:text-lg text-[#FFE9A8] drop-shadow-[1px_1px_0px_#2B1B0F]">
                     {t.resultTitle}
                   </h3>
-                  <p className="text-xs text-muted-foreground font-mono">{t.resultScore}</p>
+                  <p className="text-xs text-[#FFF7E6]/80 font-mono">{t.resultScore}</p>
                 </div>
               </div>
 
-              <button
-                type="button"
+              <Button
+                variant="dirt"
+                size="sm"
                 onClick={handleRestart}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-background border border-[#E0E5D4] text-xs font-heading font-bold text-foreground hover:bg-white transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>{t.restartBtn}</span>
-              </button>
+              </Button>
             </div>
 
-            {/* Root Gap Diagnostic Callout */}
-            <div className="bg-[#F9F7E8] rounded-3xl p-6 border-2 border-coral-border space-y-3">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-coral">
-                {t.gapFoundLabel}
-              </span>
-              <h4 className="font-heading text-xl sm:text-2xl font-bold text-foreground">
+            {/* Root Gap Diagnostic Callout (Cracked / Highlight Block) */}
+            <div className="bg-[#FFF7E6] rounded-[2px] p-6 border-4 border-[#E04A3F] shadow-[inset_2px_2px_0px_#FFFFFF,4px_4px_0px_rgba(0,0,0,0.35)] space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#E04A3F] border border-[#2B1B0F]" />
+                <span className="text-xs font-heading font-bold uppercase tracking-wider text-[#E04A3F]">
+                  {t.gapFoundLabel}
+                </span>
+              </div>
+              <h4 className="font-heading text-base sm:text-xl font-bold text-[#2B1B0F]">
                 {t.gapFoundTitle}
               </h4>
-              <p className="text-xs sm:text-sm text-foreground/85 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-[#2B1B0F]/90 leading-relaxed font-sans font-medium">
                 {t.gapRationale}
               </p>
             </div>
@@ -291,23 +299,23 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
               <button
                 type="button"
                 onClick={() => setShowLessonPreview(!showLessonPreview)}
-                className="w-full min-h-[48px] px-5 rounded-2xl bg-background hover:bg-white border border-[#E0E5D4] text-xs sm:text-sm font-heading font-bold text-foreground flex items-center justify-center gap-2 transition-all cursor-pointer"
+                className="w-full min-h-[48px] px-5 rounded-[2px] voxel-btn-secondary text-xs sm:text-sm font-heading font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
-                <BookOpen className="w-4 h-4 text-coral" />
+                <BookOpen className="w-4 h-4 text-[#FFE9A8]" />
                 <span>{showLessonPreview ? t.hideLessonBtn : t.lessonPreviewBtn}</span>
               </button>
 
               {showLessonPreview && rootLesson && (
-                <div className="mt-4 p-5 rounded-2xl bg-background border border-[#E0E5D4] space-y-4">
+                <div className="mt-4 p-5 rounded-[2px] bg-[#FFF7E6] border-4 border-[#5A3720] shadow-[inset_2px_2px_0px_#FFFFFF,4px_4px_0px_rgba(0,0,0,0.35)] space-y-4 text-[#2B1B0F]">
                   {/* Variant Switcher Pills */}
                   <div className="flex flex-wrap gap-2 text-xs font-heading font-bold">
                     <button
                       type="button"
                       onClick={() => setSelectedVariant("basics_first")}
-                      className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                      className={`px-3 py-2 rounded-[2px] border-2 transition-all cursor-pointer ${
                         selectedVariant === "basics_first"
-                          ? "bg-coral text-white"
-                          : "bg-white text-muted-foreground border border-[#E0E5D4]"
+                          ? "bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+                          : "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]"
                       }`}
                     >
                       Basics-First (Kirana Model)
@@ -315,10 +323,10 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                     <button
                       type="button"
                       onClick={() => setSelectedVariant("standard")}
-                      className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                      className={`px-3 py-2 rounded-[2px] border-2 transition-all cursor-pointer ${
                         selectedVariant === "standard"
-                          ? "bg-coral text-white"
-                          : "bg-white text-muted-foreground border border-[#E0E5D4]"
+                          ? "bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+                          : "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]"
                       }`}
                     >
                       Standard (NCERT Formal)
@@ -326,10 +334,10 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                     <button
                       type="button"
                       onClick={() => setSelectedVariant("fast_track")}
-                      className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                      className={`px-3 py-2 rounded-[2px] border-2 transition-all cursor-pointer ${
                         selectedVariant === "fast_track"
-                          ? "bg-coral text-white"
-                          : "bg-white text-muted-foreground border border-[#E0E5D4]"
+                          ? "bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+                          : "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]"
                       }`}
                     >
                       Fast-Track (Shortcut)
@@ -337,11 +345,11 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                   </div>
 
                   {/* Headline & Explanation */}
-                  <div className="space-y-1.5">
-                    <h5 className="font-heading font-bold text-base text-foreground">
+                  <div className="space-y-1.5 pt-2 border-t-2 border-[#5A3720]/20">
+                    <h5 className="font-heading font-bold text-sm sm:text-base text-[#2B1B0F]">
                       {rootLesson[selectedVariant].headline[currentLang]}
                     </h5>
-                    <p className="text-xs text-foreground/80 leading-relaxed font-sans">
+                    <p className="text-xs sm:text-sm text-[#2B1B0F]/85 leading-relaxed font-sans">
                       {rootLesson[selectedVariant].explanation[currentLang]}
                     </p>
                   </div>

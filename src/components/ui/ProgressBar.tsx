@@ -15,7 +15,7 @@ export function ProgressBar({
   value,
   max = 100,
   segments = 10,
-  color = "pixelgreen",
+  color = "grass",
   className = "",
   ariaLabel,
 }: ProgressBarProps) {
@@ -24,16 +24,16 @@ export function ProgressBar({
   const filledCount = Math.round(ratio * safeSegments);
 
   const fillColors = {
-    pixelgreen: "bg-[#79B82A]",
-    grass: "bg-[#4F8A24]",
-    gold: "bg-[#E5B834]",
-    sand: "bg-[#E5B834]",
-    sky: "bg-[#79B82A]",
-    red: "bg-[#D9453D]",
-    darkgrass: "bg-[#315B2A]",
+    grass: "bg-[#5DAA3A]",
+    pixelgreen: "bg-[#5DAA3A]",
+    darkgrass: "bg-[#2F6B22]",
+    gold: "bg-[#F4C542]",
+    sand: "bg-[#FFE9A8]",
+    sky: "bg-[#3FA7C9]",
+    red: "bg-[#E04A3F]",
   };
 
-  const activeColor = fillColors[color] || fillColors.pixelgreen;
+  const activeColor = fillColors[color] || fillColors.grass;
 
   return (
     <div
@@ -51,9 +51,12 @@ export function ProgressBar({
             key={i}
             className={`
               flex-1 h-3 sm:h-3.5
-              border-2 border-[#102610] rounded-none
+              border-2 border-[#422816] rounded-[2px]
               box-border
-              ${isFilled ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(255,255,255,0.5)]` : "bg-[#20251F]/70"}
+              ${isFilled
+                ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(255,255,255,0.6),inset_-1px_-1px_0px_rgba(0,0,0,0.3)]`
+                : "bg-[#3F2615]/80 shadow-[inset_1px_1px_0px_rgba(0,0,0,0.5)]"
+              }
             `.trim()}
           />
         );

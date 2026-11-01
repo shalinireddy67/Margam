@@ -50,24 +50,24 @@ export function Tile({
       <div
         className={`
           flex flex-col justify-between
-          border-3 border-dashed border-[#315B2A] rounded-none
-          bg-[#173B19]/50 p-4 sm:p-5 text-[#D8D8D0]
-          shadow-[4px_4px_0px_#102610]
+          border-4 border-dashed border-[#A06A3C] rounded-[2px]
+          bg-[#5A3720]/60 p-4 sm:p-5 text-[#D9D9D9]
+          shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3),4px_4px_0px_rgba(0,0,0,0.35)]
           ${className}
         `.trim()}
       >
         <div>
-          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D8D8D0]/80 leading-tight">
+          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D9D9D9] leading-tight">
             {title}
           </h3>
           {subtitle && (
-            <p className="text-xs font-bold text-[#D8D8D0]/60 mt-1">
+            <p className="text-xs font-bold text-[#D9D9D9]/70 mt-1">
               {subtitle}
             </p>
           )}
         </div>
         <div className="mt-4">
-          <span className="inline-block border-2 border-[#102610] rounded-none px-3 py-1 bg-[#20251F] text-[10px] font-heading font-bold text-[#D8D8D0]">
+          <span className="inline-block border-2 border-[#3F3F3F] rounded-[2px] px-3 py-1 bg-[#5E5E5E] text-[10px] font-heading font-bold text-[#D9D9D9]">
             COMING SOON
           </span>
         </div>
@@ -81,9 +81,9 @@ export function Tile({
       <div
         className={`
           flex flex-col justify-between
-          border-3 border-[#102610] rounded-none
-          bg-[#20251F] shadow-[4px_4px_0px_#102610]
-          p-4 sm:p-5 opacity-80 text-[#D8D8D0]
+          border-4 border-[#3F3F3F] rounded-[2px]
+          bg-[#5E5E5E] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.2),4px_4px_0px_rgba(0,0,0,0.35)]
+          p-4 sm:p-5 text-[#D9D9D9]
           ${className}
         `.trim()}
       >
@@ -91,28 +91,28 @@ export function Tile({
           <div className="flex items-center justify-between mb-2">
             <svg
               viewBox="0 0 16 16"
-              className="w-5 h-5 text-[#79B82A]"
+              className="w-5 h-5 text-[#FFE9A8]"
               role="img"
               aria-label="Locked"
               shapeRendering="crispEdges"
             >
-              <rect x="5" y="2" width="6" height="2" fill="#79B82A" />
-              <rect x="4" y="3" width="2" height="4" fill="#79B82A" />
-              <rect x="10" y="3" width="2" height="4" fill="#79B82A" />
-              <rect x="3" y="7" width="10" height="7" fill="#173B19" stroke="#102610" strokeWidth="2" />
-              <rect x="7" y="9" width="2" height="2" fill="#E5B834" />
+              <rect x="5" y="2" width="6" height="2" fill="#D9D9D9" />
+              <rect x="4" y="3" width="2" height="4" fill="#D9D9D9" />
+              <rect x="10" y="3" width="2" height="4" fill="#D9D9D9" />
+              <rect x="3" y="7" width="10" height="7" fill="#7A4B2A" stroke="#422816" strokeWidth="2" />
+              <rect x="7" y="9" width="2" height="2" fill="#FFE9A8" />
             </svg>
           </div>
-          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D8D8D0] leading-tight">
+          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D9D9D9] leading-tight">
             {title}
           </h3>
           {subtitle && (
-            <p className="text-xs font-bold text-[#D8D8D0]/60 mt-1">
+            <p className="text-xs font-bold text-[#D9D9D9]/70 mt-1">
               {subtitle}
             </p>
           )}
         </div>
-        <p className="text-xs font-bold text-[#D8D8D0]/60 mt-4 font-heading">
+        <p className="text-xs font-bold text-[#D9D9D9]/70 mt-4 font-heading">
           LOCKED
         </p>
       </div>
@@ -126,9 +126,10 @@ export function Tile({
     <div
       className={`
         flex flex-col justify-between
-        border-3 ${isDashed ? "border-[#79B82A]" : "border-[#315B2A]"} rounded-none
-        bg-[#173B19] text-[#F2F0DF] shadow-[4px_4px_0px_#102610]
-        hover:border-[#79B82A] transition-all
+        border-4 ${isDashed ? "border-[#F4C542] border-t-[8px] border-t-[#5DAA3A]" : "border-[#422816] border-t-[6px] border-t-[#5DAA3A]"} rounded-[2px]
+        bg-[#7A4B2A] text-[#FFF7E6]
+        shadow-[inset_2px_2px_0px_rgba(255,255,255,0.25),inset_-2px_-2px_0px_rgba(0,0,0,0.4),4px_4px_0px_rgba(0,0,0,0.35)]
+        hover:border-[#FFE9A8] transition-all
         p-4 sm:p-5
         ${className}
       `.trim()}
@@ -136,21 +137,21 @@ export function Tile({
       <div>
         <div className="flex items-center justify-between gap-2 mb-2">
           {state === "in_progress" ? (
-            <span className="inline-flex items-center px-2 py-0.5 bg-[#4F8A24] text-[#F2F0DF] border border-[#102610] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#102610]">
+            <span className="inline-flex items-center px-2 py-0.5 bg-[#5DAA3A] text-[#FFF7E6] border border-[#2F6B22] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
               IN PROGRESS
             </span>
           ) : (
-            <span className="inline-flex items-center px-2 py-0.5 bg-[#20251F] text-[#79B82A] border border-[#102610] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#102610]">
+            <span className="inline-flex items-center px-2 py-0.5 bg-[#5A3720] text-[#FFE9A8] border border-[#422816] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
               READY
             </span>
           )}
         </div>
         {icon && <div className="mb-3 h-12 w-full flex items-center justify-center">{icon}</div>}
-        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF] leading-tight">
+        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] leading-tight">
           {title}
         </h3>
         {subtitle && (
-          <p className="text-xs font-bold text-[#D8D8D0]/80 mt-1">
+          <p className="text-xs font-bold text-[#FFF7E6]/80 mt-1">
             {subtitle}
           </p>
         )}
@@ -160,7 +161,7 @@ export function Tile({
         {diagnosticHref && (
           <Link
             href={diagnosticHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] rounded-none font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-2 border-[#204514] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
           >
             Diagnose
           </Link>
@@ -168,7 +169,7 @@ export function Tile({
         {practiceHref && (
           <Link
             href={practiceHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#E5B834] hover:bg-[#F2D16B] text-[#102610] border-2 border-[#102610] rounded-none font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#FFE9A8] to-[#F4C542] text-[#2B1B0F] border-2 border-[#7A4B2A] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.6),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
           >
             Practice
           </Link>
@@ -176,7 +177,7 @@ export function Tile({
         {lessonHref && (
           <Link
             href={lessonHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#4F8A24] hover:bg-[#5E9E2C] text-[#F2F0DF] border-2 border-[#102610] rounded-none font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#6EB5FF] to-[#3FA7C9] text-[#FFF7E6] border-2 border-[#1E6F8C] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
           >
             Learn
           </Link>
