@@ -18,13 +18,13 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
         className={`
           inline-flex items-center justify-center
           min-h-[48px] px-4 py-2
-          border-[3px] border-[#111111] rounded-full
-          font-heading font-extrabold text-base
+          border-4 border-[#111111] rounded-none
+          font-heading font-extrabold text-xs sm:text-sm
           box-border cursor-pointer select-none
-          transition-transform active:translate-x-[2px] active:translate-y-[2px]
+          active:translate-x-[4px] active:translate-y-[4px]
           ${selected
-            ? "bg-[#111111] text-[#FFFFFF] shadow-[2px_2px_0px_#111111]"
-            : "bg-[#FFFFFF] text-[#111111] shadow-[4px_4px_0px_#111111] hover:bg-[#F9F9F9]"
+            ? "bg-[#111111] text-[#FFFFFF] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.3),2px_2px_0px_#111111] active:shadow-none"
+            : "bg-[#FFFFFF] text-[#111111] shadow-[4px_4px_0px_#111111] hover:bg-[#F2D16B] active:shadow-none"
           }
           ${className}
         `.trim()}

@@ -26,7 +26,7 @@ export function LanguageToggle({
     <div
       role="group"
       aria-label="Language selection"
-      className={`inline-flex border-4 border-[#111111] bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] overflow-hidden ${className}`.trim()}
+      className={`inline-flex border-4 border-[#111111] rounded-none bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] overflow-hidden ${className}`.trim()}
     >
       {languages.map(({ code, label, ariaLabel }) => {
         const isActive = currentLang === code;
@@ -42,10 +42,10 @@ export function LanguageToggle({
             className={`
               min-w-[48px] min-h-[48px] px-1.5 py-1
               font-bold text-xs select-none
-              border-0 cursor-pointer
+              border-0 rounded-none cursor-pointer
               flex items-center justify-center
               transition-none
-              ${code !== "en" ? "border-l-2 border-[#111111]" : ""}
+              ${code !== "en" ? "border-l-4 border-[#111111]" : ""}
               ${isActive
                 ? "bg-[#111111] text-[#FFFFFF]"
                 : "bg-transparent text-[#111111] hover:bg-[#F2D16B]"
