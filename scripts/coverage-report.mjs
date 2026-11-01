@@ -16,26 +16,27 @@ if (!fs.existsSync(chaptersPath)) {
 
 const chapters = JSON.parse(fs.readFileSync(chaptersPath, "utf-8"));
 
-console.log("=========================================================================================");
-console.log("                       MARGAM — CHAPTER QUESTION COVERAGE REPORT                         ");
-console.log("=========================================================================================\n");
+console.log("====================================================================================================================");
+console.log("                                     MARGAM — CHAPTER QUESTION COVERAGE REPORT                                      ");
+console.log("====================================================================================================================\n");
 
 let totalReady = 0;
 let totalNotReady = 0;
 let totalVerifiedQuestions = 0;
+const notReadyList = [];
 
 // Group by Class (6 to 10)
 const classes = [6, 7, 8, 9, 10];
 
+console.log(
+  `Class | ${"Chapter ID".padEnd(10)} | ${"Chapter Title".padEnd(34)} | ${"Verified Questions".padEnd(18)} | ${"D1 / D2 / D3 Counts".padEnd(20)} | Status`
+);
+console.log(
+  `------+------------+------------------------------------+--------------------+----------------------+-----------`
+);
+
 for (const grade of classes) {
   const gradeChapters = chapters.filter((c) => c.class === grade);
-  console.log(`-----------------------------------------------------------------------------------------`);
-  console.log(`  CLASS ${grade} (${gradeChapters.length} Chapters)`);
-  console.log(`-----------------------------------------------------------------------------------------`);
-  console.log(
-    `  ${"ID".padEnd(10)} | ${"Ch#".padEnd(4)} | ${"Chapter Name".padEnd(30)} | ${"Diff 1".padEnd(6)} | ${"Diff 2".padEnd(6)} | ${"Diff 3".padEnd(6)} | ${"Total".padEnd(5)} | ${"Status"}`
-  );
-  console.log(`  ${"-".repeat(10)}-+-${"-".repeat(4)}-+-${"-".repeat(30)}-+-${"-".repeat(6)}-+-${"-".repeat(6)}-+-${"-".repeat(6)}-+-${"-".repeat(5)}-+-${"-".repeat(10)}`);
 
   for (const ch of gradeChapters) {
     const qFile = path.join(questionsDir, `${ch.id}.json`);
@@ -49,7 +50,7 @@ for (const grade of classes) {
       }
     }
 
-    // A question is verified if verified !== false
+    // Exact verification rule: question is verified if q.verified !== false
     const verifiedQuestions = questions.filter((q) => q.verified !== false);
 
     const d1 = verifiedQuestions.filter((q) => q.difficulty === 1).length;
@@ -59,29 +60,67 @@ for (const grade of classes) {
 
     totalVerifiedQuestions += total;
 
+    // Exact eligibility rule: total verified questions >= 6
     const isReady = total >= 6;
     if (isReady) {
       totalReady++;
     } else {
       totalNotReady++;
+      const neededTotal = Math.max(0, 6 - total);
+      const neededD1 = Math.max(0, 2 - d1);
+      const neededD2 = Math.max(0, 2 - d2);
+      const neededD3 = Math.max(0, 2 - d3);
+      notReadyList.push({
+        class: grade,
+        id: ch.id,
+        chapterNumber: ch.chapterNumber,
+        title: ch.name?.en || ch.name || ch.id,
+        current: total,
+        d1,
+        d2,
+        d3,
+        neededTotal,
+        neededD1,
+        neededD2,
+        neededD3,
+      });
     }
 
-    const statusLabel = isReady ? "\x1b[32mREADY\x1b[0m" : "\x1b[31mNOT READY\x1b[0m";
+    const statusLabel = isReady ? "READY" : "NOT READY";
     const chName = ch.name?.en || ch.name || ch.id;
-    const truncatedName = chName.length > 30 ? chName.slice(0, 27) + "..." : chName;
+    const truncatedName = chName.length > 34 ? chName.slice(0, 31) + "..." : chName;
+    const dCounts = `D1: ${d1} | D2: ${d2} | D3: ${d3}`;
 
     console.log(
-      `  ${ch.id.padEnd(10)} | ${String(ch.chapterNumber).padStart(2).padEnd(4)} | ${truncatedName.padEnd(30)} | ${String(d1).padStart(3).padEnd(6)} | ${String(d2).padStart(3).padEnd(6)} | ${String(d3).padStart(3).padEnd(6)} | ${String(total).padStart(3).padEnd(5)} | ${statusLabel}`
+      `  ${String(grade).padEnd(3)} | ${ch.id.padEnd(10)} | ${truncatedName.padEnd(34)} | ${String(total).padStart(10).padEnd(18)} | ${dCounts.padEnd(20)} | ${statusLabel}`
     );
   }
-  console.log("\n");
 }
 
-console.log("=========================================================================================");
-console.log(`SUMMARY:`);
-console.log(`  Total Chapters:           ${chapters.length}`);
-console.log(`  READY (>= 6 questions):   \x1b[32m${totalReady}\x1b[0m`);
-console.log(`  NOT READY (< 6 questions): \x1b[31${totalNotReady > 0 ? "m" : "2m"}${totalNotReady}\x1b[0m`);
-console.log(`  Total Verified Questions: ${totalVerifiedQuestions}`);
-console.log("=========================================================================================");
+console.log("\n====================================================================================================================");
+console.log("TOTALS & SUMMARY");
+console.log("====================================================================================================================");
+console.log(`Total Chapters Analyzed:           ${chapters.length}`);
+console.log(`READY (>= 6 verified questions):    ${totalReady}`);
+console.log(`NOT READY (< 6 verified questions): ${totalNotReady}`);
+console.log(`Total Verified Questions in Bank:  ${totalVerifiedQuestions}`);
 
+console.log("\n====================================================================================================================");
+console.log(`NOT READY CHAPTERS DEFICIT BREAKDOWN (${notReadyList.length} Chapters)`);
+console.log("Questions needed to reach threshold of 6 (and balanced 2 per difficulty tier [D1, D2, D3]):");
+console.log("====================================================================================================================");
+console.log(
+  `Class | ${"Chapter ID".padEnd(10)} | ${"Chapter Title".padEnd(34)} | Current | Needed to 6 | Balanced Deficit (D1 / D2 / D3)`
+);
+console.log(
+  `------+------------+------------------------------------+---------+-------------+----------------------------------`
+);
+
+for (const item of notReadyList) {
+  const truncatedName = item.title.length > 34 ? item.title.slice(0, 31) + "..." : item.title;
+  const balancedDeficit = `+${item.neededD1} D1 | +${item.neededD2} D2 | +${item.neededD3} D3`;
+  console.log(
+    `  ${String(item.class).padEnd(3)} | ${item.id.padEnd(10)} | ${truncatedName.padEnd(34)} | ${String(item.current).padStart(4).padEnd(7)} | ${("+" + item.neededTotal + " needed").padEnd(11)} | ${balancedDeficit}`
+  );
+}
+console.log("====================================================================================================================\n");
