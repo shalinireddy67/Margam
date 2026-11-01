@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateChapterDiagnostic } from "@/lib/adaptive";
+import { canTakeChapterDiagnostic } from "@/lib/curriculum";
 import { sanitizeQuestion } from "@/lib/server/questions";
 import { createSignedSession } from "@/lib/server/session";
 import { isRateLimited } from "@/lib/server/rate-limit";
@@ -29,6 +30,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Too many diagnostic requests. Please try again later." },
         { status: 429 }
+      );
+    }
+
+    // Readiness check: chapter must have concepts and >= 6 verified questions
+    if (!canTakeChapterDiagnostic(chapterId)) {
+      return NextResponse.json(
+        { error: "Diagnostic not available for this chapter" },
+        { status: 400 }
       );
     }
 

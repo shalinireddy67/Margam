@@ -2,6 +2,7 @@ import chaptersData from "../../data/chapters.json";
 import conceptsData from "../../data/concepts.json";
 import lessonsData from "../../data/lessons.json";
 import tagRootsData from "../../data/tag-roots.json";
+import chapterCountsFallback from "../../data/chapter-counts.json";
 import { Chapter, Concept, Lesson, Question, LocalizedString, SupportedLanguage } from "./types";
 
 export const chapters: Chapter[] = chaptersData as unknown as Chapter[];
@@ -10,26 +11,44 @@ export const lessons: Lesson[] = lessonsData as unknown as Lesson[];
 export const tagRoots: Record<string, string> = tagRootsData as unknown as Record<string, string>;
 
 /**
- * Static map of question counts per chapter to determine eligibility without
- * loading full question bodies into client JavaScript bundles.
+ * Computes verified question counts dynamically from data/questions/*.json on the server/Node,
+ * while safely falling back to data/chapter-counts.json in client browser bundles so that
+ * question content (correctAnswer, mistakeTag) is never bundled into client JS.
  */
-export const chapterQuestionCounts: Record<string, number> = {
-  "c6-ch10": 13,
-  "c7-ch10": 13,
-  "c8-ch06": 13,
-  "c9-ch04": 13,
-  "c10-ch04": 14,
-  "c6-ch01": 9,
-  "c6-ch02": 2,
-  "c7-ch01": 2,
-  "c7-ch02": 9,
-  "c8-ch01": 2,
-  "c8-ch02": 9,
-  "c9-ch01": 2,
-  "c9-ch02": 9,
-  "c10-ch01": 2,
-  "c10-ch02": 9,
-};
+function computeChapterQuestionCounts(): Record<string, number> {
+  if (typeof window !== "undefined") {
+    return chapterCountsFallback as Record<string, number>;
+  }
+
+  try {
+    const fs = (eval("require"))("fs");
+    const path = (eval("require"))("path");
+    const questionsDir = path.join(process.cwd(), "data", "questions");
+    if (fs.existsSync(questionsDir)) {
+      const counts: Record<string, number> = {};
+      const files = fs.readdirSync(questionsDir);
+      for (const file of files) {
+        if (!file.endsWith(".json")) continue;
+        const chapterId = path.basename(file, ".json");
+        try {
+          const content = JSON.parse(fs.readFileSync(path.join(questionsDir, file), "utf-8"));
+          if (Array.isArray(content)) {
+            counts[chapterId] = content.filter((q: any) => q.verified !== false).length;
+          }
+        } catch {
+          counts[chapterId] = 0;
+        }
+      }
+      return counts;
+    }
+  } catch {
+    // fallback if fs fails in restricted runtime
+  }
+
+  return chapterCountsFallback as Record<string, number>;
+}
+
+export const chapterQuestionCounts: Record<string, number> = computeChapterQuestionCounts();
 
 /**
  * Returns all NCERT chapters for a specific class (6-10), preserving official curriculum sequence.
@@ -121,17 +140,28 @@ export function getQuestionsByChapterId(chapterId: string): Question[] {
 }
 
 /**
- * Returns the total count of questions available in a chapter.
+ * Returns the total count of verified questions available in a chapter.
  */
 export function getChapterQuestionCount(chapterId: string): number {
+  if (typeof window === "undefined") {
+    const questions = getQuestionsByChapterId(chapterId);
+    if (questions && questions.length > 0) {
+      return questions.filter((q) => q.verified !== false).length;
+    }
+  }
   return chapterQuestionCounts[chapterId] || 0;
 }
 
 /**
- * RULE: "Take diagnostic" is only available on chapters whose questions total 6 or more.
- * Other chapters stay lesson-only (no empty or tiny diagnostics).
+ * RULE: "Take diagnostic" is only available on chapters that:
+ * 1. Have at least one concept in data/concepts.json (matching generateChapterDiagnostic)
+ * 2. Have at least 6 verified questions (q.verified !== false)
  */
 export function canTakeChapterDiagnostic(chapterId: string): boolean {
+  const chapterConcepts = getConceptsByChapter(chapterId);
+  if (chapterConcepts.length === 0) {
+    return false;
+  }
   return getChapterQuestionCount(chapterId) >= 6;
 }
 

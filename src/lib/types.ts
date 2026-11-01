@@ -67,6 +67,7 @@ export interface Question {
   explanation: LocalizedString;
   hint: LocalizedString;
   contextTag?: "indian_real_world" | "pure_math" | "classroom";
+  verified?: boolean;
 }
 
 export interface LessonVariantContent {

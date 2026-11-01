@@ -750,8 +750,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {gradeChapters.map((chapter) => {
-              const isFull = chapter.status === "full";
-              const isReady = isFull && canTakeChapterDiagnostic(chapter.id);
+              const isReady = canTakeChapterDiagnostic(chapter.id);
               const chapterConcepts = getConceptsByChapter(chapter.id);
               const hasStarted =
                 isReady &&

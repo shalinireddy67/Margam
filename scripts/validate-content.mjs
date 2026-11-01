@@ -32,6 +32,7 @@ const questionsPath = path.join(rootDir, "data", "questions.json");
 const lessonsPath = path.join(rootDir, "data", "lessons.json");
 const demoClassPath = path.join(rootDir, "data", "demo-class.json");
 const tagRootsPath = path.join(rootDir, "data", "tag-roots.json");
+const chapterCountsPath = path.join(rootDir, "data", "chapter-counts.json");
 
 assert(fs.existsSync(chaptersPath), "chapters.json exists");
 assert(fs.existsSync(conceptsPath), "concepts.json exists");
@@ -39,6 +40,7 @@ assert(fs.existsSync(questionsPath), "questions.json exists");
 assert(fs.existsSync(lessonsPath), "lessons.json exists");
 assert(fs.existsSync(demoClassPath), "demo-class.json exists");
 assert(fs.existsSync(tagRootsPath), "tag-roots.json exists");
+assert(fs.existsSync(chapterCountsPath), "chapter-counts.json exists");
 
 if (errorCount > 0) {
   console.error("Critical files missing! Aborting validation.");
@@ -83,6 +85,23 @@ for (const ch of chapters) {
 const fullChapters = chapters.filter(c => c.status === "full");
 assert(fullChapters.length === 15, `Expected exactly 15 full chapters (10 for Ch 1 & 2 across 5 classes + 5 pilot chapters), found ${fullChapters.length}`);
 console.log(`  [PASS] All ${chapters.length} chapters valid (${fullChapters.length} full-build chapters).`);
+
+// 2b. Validate Chapter Counts (data/chapter-counts.json)
+console.log("\n1b. Validating Computed Chapter Question Counts (data/chapter-counts.json)...");
+const chapterCounts = JSON.parse(fs.readFileSync(chapterCountsPath, "utf-8"));
+for (const ch of chapters) {
+  const qPath = path.join(rootDir, "data", "questions", `${ch.id}.json`);
+  let diskVerifiedCount = 0;
+  if (fs.existsSync(qPath)) {
+    const qs = JSON.parse(fs.readFileSync(qPath, "utf-8"));
+    diskVerifiedCount = qs.filter((q) => q.verified !== false).length;
+  }
+  assert(
+    chapterCounts[ch.id] === diskVerifiedCount,
+    `chapter-counts.json count for ${ch.id} (${chapterCounts[ch.id]}) matches disk verified questions (${diskVerifiedCount})`
+  );
+}
+console.log(`  [PASS] All ${chapters.length} chapter counts in chapter-counts.json match verified question totals on disk.`);
 
 // 3. Validate Concepts & DAG
 console.log("\n2. Validating Concepts & Prerequisite DAG...");
