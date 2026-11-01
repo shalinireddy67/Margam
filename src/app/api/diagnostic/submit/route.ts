@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { evaluateChapterDiagnostic, getConfirmationQuestions } from "@/lib/adaptive";
 import { sanitizeQuestion } from "@/lib/server/questions";
+import { getQuestionById } from "@/lib/curriculum";
+import { evaluateAwardedXp } from "@/lib/server/xp-evaluator";
 import { verifySessionToken, createSignedSession } from "@/lib/server/session";
 import {
   isRateLimited,
@@ -134,6 +136,23 @@ export async function POST(req: NextRequest) {
 
     const passed = diagResult.scorePercentage >= 70;
 
+    // Evaluate purely server-derived XP
+    const xpEvaluation = evaluateAwardedXp({
+      eventType: "diagnostic",
+      evaluatedQuestions: diagResult.feedback.map((f) => {
+        const q = getQuestionById(f.questionId);
+        return {
+          questionId: f.questionId,
+          isCorrect: f.isCorrect,
+          difficulty: (q?.difficulty as 1 | 2 | 3) || 1,
+        };
+      }),
+      gapResolved: false,
+      previousQuestionHistory: body.studentHistory?.questionHistory || {},
+      todayXpEarned: body.studentHistory?.todayXpEarned || 0,
+      lastActiveIstDate: body.studentHistory?.lastActiveIstDate,
+    });
+
     // Return graded output to client (no answer keys or distractor tags returned in questions)
     return NextResponse.json({
       score: diagResult.correctCount,
@@ -142,6 +161,12 @@ export async function POST(req: NextRequest) {
       passed,
       mistakeTags: diagResult.mistakeTags,
       gapAnalysis: diagResult.gapAnalysis,
+      xpAwarded: xpEvaluation.awardedXp,
+      grossXp: xpEvaluation.grossXp,
+      isCapped: xpEvaluation.isCapped,
+      newDailyTotal: xpEvaluation.newDailyTotal,
+      xpBreakdown: xpEvaluation.breakdown,
+      updatedQuestionHistory: xpEvaluation.updatedQuestionHistory,
       feedback: diagResult.feedback.map((f) => ({
         questionId: f.questionId,
         isCorrect: f.isCorrect,

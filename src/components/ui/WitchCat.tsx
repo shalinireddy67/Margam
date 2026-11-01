@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-export type WitchCatPose = "greet" | "read" | "think" | "cheer" | "oops";
+export type WitchCatPose = "greet" | "read" | "think" | "cheer" | "oops" | "sleepy";
 export type CompanionPose = WitchCatPose;
 
 export interface WitchCatProps {
@@ -47,14 +47,15 @@ export function WitchCat({
     think: "Margam Zombie Chicken Jockey companion thinking carefully",
     cheer: "Margam Zombie Chicken Jockey companion celebrating your victory!",
     oops: "Margam Zombie Chicken Jockey companion offering encouragement",
+    sleepy: "Margam Zombie Chicken Jockey companion resting peacefully at night",
   }[pose];
 
   const animationClass =
     pose === "cheer"
       ? "animate-companion-bounce"
       : pose === "greet"
-      ? "animate-companion-hop"
-      : "animate-companion-float";
+        ? "animate-companion-hop"
+        : "animate-companion-float";
 
   return (
     <div
@@ -115,6 +116,14 @@ export function WitchCat({
         {pose === "greet" && (
           <div className="absolute -top-1.5 -left-1.5 text-xs animate-pulse">
             👋
+          </div>
+        )}
+
+        {pose === "sleepy" && (
+          <div className="absolute -top-2 -right-1 flex gap-0.5 items-center select-none font-pixel text-[10px] text-[#6EB5FF] animate-pulse">
+            <span>z</span>
+            <span className="text-xs">Z</span>
+            <span className="text-sm">z</span>
           </div>
         )}
       </div>

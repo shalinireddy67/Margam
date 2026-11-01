@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { evaluateChapterTest } from "@/lib/adaptive";
-import { getConceptById } from "@/lib/curriculum";
+import { getConceptById, getQuestionById } from "@/lib/curriculum";
+import { evaluateAwardedXp } from "@/lib/server/xp-evaluator";
 import { verifySessionToken } from "@/lib/server/session";
 import {
   isRateLimited,
@@ -129,6 +130,24 @@ export async function POST(req: NextRequest) {
           `Review the foundational concepts: ${testResult.weakConcepts.join(", ")} before retesting.`,
         ];
 
+    // Server-derived XP evaluation
+    const xpEvaluation = evaluateAwardedXp({
+      eventType: "test",
+      evaluatedQuestions: Object.entries(answers).map(([qid, optId]) => {
+        const q = getQuestionById(qid);
+        const isCorrect = q ? q.correctAnswer === optId : false;
+        return {
+          questionId: qid,
+          isCorrect,
+          difficulty: (q?.difficulty as 1 | 2 | 3) || 1,
+        };
+      }),
+      gapResolved: false,
+      previousQuestionHistory: body.studentHistory?.questionHistory || {},
+      todayXpEarned: body.studentHistory?.todayXpEarned || 0,
+      lastActiveIstDate: body.studentHistory?.lastActiveIstDate,
+    });
+
     // Return graded output to client
     return NextResponse.json({
       score: testResult.correctCount,
@@ -138,6 +157,12 @@ export async function POST(req: NextRequest) {
       strongConcepts,
       weakConcepts,
       nextSteps,
+      xpAwarded: xpEvaluation.awardedXp,
+      grossXp: xpEvaluation.grossXp,
+      isCapped: xpEvaluation.isCapped,
+      newDailyTotal: xpEvaluation.newDailyTotal,
+      xpBreakdown: xpEvaluation.breakdown,
+      updatedQuestionHistory: xpEvaluation.updatedQuestionHistory,
       feedback: Object.entries(answers).map(([qid, optId]) => ({
         questionId: qid,
         chosenOption: optId,

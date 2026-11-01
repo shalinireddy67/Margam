@@ -196,6 +196,25 @@ export interface LearnerProfile {
   currentDifficulty: 1 | 2 | 3; // profile-level fallback
   activeGap?: RemediationGap | null;
   resolvedGaps?: ResolvedGapRecord[];
+  // Gamification fields:
+  xp?: number;
+  level?: number;
+  rank?: "Wood" | "Stone" | "Iron" | "Gold" | "Diamond" | string;
+  dailyXp?: {
+    date: string;
+    xp: number;
+  };
+  streak?: {
+    current: number;
+    longest: number;
+    lastActiveDate: string;
+    freezeTokens: number;
+    lastFreezeEarnedDate?: string;
+  };
+  answeredQuestionsHistory?: Record<string, string>;
+  unlockedBadgeIds?: string[];
+  soundEnabled?: boolean;
+  optOutOfLeaderboard?: boolean;
 }
 
 export interface AttemptComparison {

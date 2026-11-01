@@ -42,6 +42,16 @@ import {
   OfflineBanner,
   Button,
 } from "@/components/ui";
+import {
+  PixelConfetti,
+  FloatingXp,
+  MistakeCreatureCard,
+  SegmentedXpBar,
+  LevelUpModal,
+} from "@/components/ui/PixelEffects";
+import { playPopSound, playGentleOopsSound } from "@/lib/sound";
+import { applyAwardedXpToProfile } from "@/lib/gamification";
+import { getLevelProgress } from "@/lib/xp-config";
 
 interface SanitizedOption {
   id: string;
@@ -121,6 +131,11 @@ interface DiagnosticResultResponse {
   }>;
   confirmationQuestions?: ClientQuestion[];
   confirmationToken?: string | null;
+  xpAwarded?: number;
+  grossXp?: number;
+  isCapped?: boolean;
+  newDailyTotal?: number;
+  updatedQuestionHistory?: Record<string, string>;
 }
 
 export default function ChapterDiagnosticPage() {
@@ -139,6 +154,9 @@ export default function ChapterDiagnosticPage() {
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showLevelUp, setShowLevelUp] = useState<{ newLevel: number; rank: any } | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [awardedXpAnim, setAwardedXpAnim] = useState<number>(0);
 
   // Confirmation Step State
   const [confirmationQuestions, setConfirmationQuestions] = useState<ClientQuestion[]>([]);
@@ -340,6 +358,11 @@ export default function ChapterDiagnosticPage() {
           chapterId,
           studentId: profile.id,
           answers,
+          studentHistory: {
+            questionHistory: profile.answeredQuestionsHistory || {},
+            todayXpEarned: profile.dailyXp?.xp || 0,
+            lastActiveIstDate: profile.dailyXp?.date,
+          },
         }),
       });
 
@@ -387,8 +410,32 @@ export default function ChapterDiagnosticPage() {
         setConfirmationStatus("pending");
       }
 
-      const refreshed = getActiveProfile();
-      if (refreshed) setProfile(refreshed);
+      // Apply server-derived XP, streaks, levels, and badges
+      const currentProf = getActiveProfile() || profile;
+      if (currentProf) {
+        const xpOutcome = applyAwardedXpToProfile(
+          currentProf,
+          diagResult.xpAwarded || 0,
+          diagResult.newDailyTotal || 0,
+          diagResult.updatedQuestionHistory
+        );
+        saveProfile(xpOutcome.updatedProfile);
+        setProfile(xpOutcome.updatedProfile);
+
+        if (diagResult.xpAwarded && diagResult.xpAwarded > 0) {
+          setAwardedXpAnim(diagResult.xpAwarded);
+          setShowConfetti(true);
+          playPopSound();
+          setTimeout(() => setShowConfetti(false), 2200);
+        } else if (!diagResult.passed) {
+          playGentleOopsSound();
+        }
+
+        if (xpOutcome.leveledUp) {
+          const levelInfo = getLevelProgress(xpOutcome.updatedProfile.xp || 0);
+          setShowLevelUp({ newLevel: xpOutcome.newLevel, rank: levelInfo.rank });
+        }
+      }
     } catch (err: any) {
       setErrorMessage(err.message || "Failed to submit diagnostic.");
     } finally {
@@ -459,7 +506,21 @@ export default function ChapterDiagnosticPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6 relative">
+        <PixelConfetti active={showConfetti} />
+        <FloatingXp xp={awardedXpAnim} active={showConfetti} />
+        {showLevelUp && (
+          <LevelUpModal
+            newLevel={showLevelUp.newLevel}
+            rank={showLevelUp.rank}
+            onClose={() => setShowLevelUp(null)}
+          />
+        )}
+
+        {/* Student XP Progress Track */}
+        {profile && (
+          <SegmentedXpBar currentXp={profile.xp || 0} />
+        )}
         {/* Assessment Header Card */}
         <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
@@ -870,14 +931,12 @@ export default function ChapterDiagnosticPage() {
                       )}
                     </div>
 
-                    {/* Misconception Guidance */}
-                    {!feedbackItem.isCorrect && feedbackItem.educationalFeedback && (
-                      <div className="p-3 bg-[#5A3720] border border-[#FFE9A8] text-xs text-[#FFF7E6] leading-relaxed">
-                        <span className="font-heading font-bold text-[10px] text-[#FFE9A8] uppercase block mb-1">
-                          💡 What happened:
-                        </span>
-                        <p>{feedbackItem.educationalFeedback}</p>
-                      </div>
+                    {/* Kind Mistake Creature Guidance */}
+                    {!feedbackItem.isCorrect && (
+                      <MistakeCreatureCard
+                        tag={feedbackItem.tag || feedbackItem.misconceptionCategory}
+                        hint={feedbackItem.educationalFeedback}
+                      />
                     )}
 
                     {/* Step-by-Step Solution */}

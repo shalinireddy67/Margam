@@ -24,7 +24,7 @@ import {
   LearnerProfile,
   AttemptComparison,
 } from "@/lib/types";
-import { getActiveProfile } from "@/lib/storage";
+import { getActiveProfile, saveProfile } from "@/lib/storage";
 import { canAccessTopic } from "@/lib/progression";
 import {
   getConceptById,
@@ -36,6 +36,16 @@ import {
   SkeletonCard,
   OfflineBanner,
 } from "@/components/ui";
+import {
+  PixelConfetti,
+  FloatingXp,
+  MistakeCreatureCard,
+  SegmentedXpBar,
+  LevelUpModal,
+} from "@/components/ui/PixelEffects";
+import { playPopSound, playGentleOopsSound } from "@/lib/sound";
+import { applyAwardedXpToProfile } from "@/lib/gamification";
+import { getLevelProgress } from "@/lib/xp-config";
 
 interface SanitizedOption {
   id: string;
@@ -79,13 +89,17 @@ interface PracticeResultResponse {
     correctAnswer?: string;
     tag?: string;
     hint?: any;
-    mistakeTag?: string;
     misconceptionCategory?: string;
     educationalFeedback?: string;
     explanation?: any;
     conceptId?: string;
   }>;
   mistakeHint?: string;
+  xpAwarded?: number;
+  grossXp?: number;
+  isCapped?: boolean;
+  newDailyTotal?: number;
+  updatedQuestionHistory?: Record<string, string>;
 }
 
 export default function AdaptivePracticeRunnerPage() {
@@ -110,6 +124,9 @@ export default function AdaptivePracticeRunnerPage() {
   const [hasError, setHasError] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
   const [lockedReason, setLockedReason] = useState<string>("");
+  const [showLevelUp, setShowLevelUp] = useState<{ newLevel: number; rank: any } | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [awardedXpAnim, setAwardedXpAnim] = useState<number>(0);
 
   const initPractice = useCallback(() => {
     try {
@@ -301,6 +318,11 @@ export default function AdaptivePracticeRunnerPage() {
           currentDifficulty: difficultyLevel,
           profile,
           isPersonalized,
+          studentHistory: {
+            questionHistory: profile.answeredQuestionsHistory || {},
+            todayXpEarned: profile.dailyXp?.xp || 0,
+            lastActiveIstDate: profile.dailyXp?.date,
+          },
         }),
       });
 
@@ -313,6 +335,33 @@ export default function AdaptivePracticeRunnerPage() {
       setResult(practiceRes);
       if (practiceRes.nextDifficulty) {
         setDifficultyLevel(practiceRes.nextDifficulty);
+      }
+
+      // Apply server-derived XP, streaks, levels, and badges
+      const currentProf = getActiveProfile() || profile;
+      if (currentProf) {
+        const xpOutcome = applyAwardedXpToProfile(
+          currentProf,
+          practiceRes.xpAwarded || 0,
+          practiceRes.newDailyTotal || 0,
+          practiceRes.updatedQuestionHistory
+        );
+        saveProfile(xpOutcome.updatedProfile);
+        setProfile(xpOutcome.updatedProfile);
+
+        if (practiceRes.xpAwarded && practiceRes.xpAwarded > 0) {
+          setAwardedXpAnim(practiceRes.xpAwarded);
+          setShowConfetti(true);
+          playPopSound();
+          setTimeout(() => setShowConfetti(false), 2200);
+        } else if (!practiceRes.passed) {
+          playGentleOopsSound();
+        }
+
+        if (xpOutcome.leveledUp) {
+          const levelInfo = getLevelProgress(xpOutcome.updatedProfile.xp || 0);
+          setShowLevelUp({ newLevel: xpOutcome.newLevel, rank: levelInfo.rank });
+        }
       }
 
       const refreshed = getActiveProfile();
@@ -351,7 +400,21 @@ export default function AdaptivePracticeRunnerPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6 relative">
+        <PixelConfetti active={showConfetti} />
+        <FloatingXp xp={awardedXpAnim} active={showConfetti} />
+        {showLevelUp && (
+          <LevelUpModal
+            newLevel={showLevelUp.newLevel}
+            rank={showLevelUp.rank}
+            onClose={() => setShowLevelUp(null)}
+          />
+        )}
+
+        {/* Student XP Progress Track */}
+        {profile && (
+          <SegmentedXpBar currentXp={profile.xp || 0} />
+        )}
         {/* Title Header Card */}
         <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
@@ -417,16 +480,16 @@ export default function AdaptivePracticeRunnerPage() {
           {result && (
             <div className="space-y-4 mt-6">
               {result.gapResolved && (
-                <div className="p-5 bg-[#422816] border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-2">
+                <div className="animate-voxel-glow p-5 bg-[#2F6B22]/40 border-3 border-[#5DAA3A] border-l-[8px] border-l-[#79B82A] shadow-[0_0_15px_rgba(93,170,58,0.5)] space-y-2">
                   <div className="flex items-center gap-2 text-[#FFE9A8] font-heading font-extrabold text-xs uppercase tracking-wider">
                     <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
-                    <span>Foundational Prerequisite Gap Resolved!</span>
+                    <span>✨ Foundational Prerequisite Gap Resolved! (+50 XP Bonus)</span>
                   </div>
                   <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#FFF7E6]">
                     Foundation Successfully Repaired!
                   </h3>
                   <p className="text-xs sm:text-sm text-[#E5D7BE] leading-relaxed">
-                    You scored <strong>{result.percentage}%</strong> and demonstrated mastery on this foundational topic. This concept is now marked as resolved in your learner profile!
+                    You scored <strong>{result.percentage}%</strong> and demonstrated mastery on this foundational topic. This block is now illuminated on your Concept Pathway!
                   </p>
                 </div>
               )}
@@ -721,13 +784,11 @@ export default function AdaptivePracticeRunnerPage() {
                           )}
                         </div>
 
-                        {!feedbackItem.isCorrect && feedbackItem.educationalFeedback && (
-                          <div className="p-3 bg-[#5A3720] border border-[#FFE9A8] text-xs text-[#FFF7E6] leading-relaxed">
-                            <span className="font-heading font-bold text-[10px] text-[#FFE9A8] uppercase block mb-1">
-                              💡 Educational Note:
-                            </span>
-                            <p>{feedbackItem.educationalFeedback}</p>
-                          </div>
+                        {!feedbackItem.isCorrect && (
+                          <MistakeCreatureCard
+                            tag={feedbackItem.tag || feedbackItem.misconceptionCategory}
+                            hint={feedbackItem.educationalFeedback}
+                          />
                         )}
 
                         {feedbackItem.explanation && (

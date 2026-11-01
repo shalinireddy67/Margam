@@ -5,6 +5,8 @@ import {
   updateMastery,
 } from "@/lib/adaptive";
 import { verifySessionToken } from "@/lib/server/session";
+import { getQuestionById } from "@/lib/curriculum";
+import { evaluateAwardedXp } from "@/lib/server/xp-evaluator";
 import {
   isRateLimited,
   isDuplicateSubmission,
@@ -147,6 +149,23 @@ export async function POST(req: NextRequest) {
       mistakeHint = `Error pattern noticed: ${wrongFb.mistakeTag.replace(/_/g, " ")}. Try checking signs and operations carefully.`;
     }
 
+    // Server-derived XP evaluation
+    const xpEvaluation = evaluateAwardedXp({
+      eventType: "practice",
+      evaluatedQuestions: practiceResult.feedback.map((f) => {
+        const q = getQuestionById(f.questionId);
+        return {
+          questionId: f.questionId,
+          isCorrect: f.isCorrect,
+          difficulty: (q?.difficulty as 1 | 2 | 3) || 1,
+        };
+      }),
+      gapResolved: Boolean(practiceResult.gapResolved),
+      previousQuestionHistory: body.studentHistory?.questionHistory || profile?.answeredQuestionsHistory || {},
+      todayXpEarned: body.studentHistory?.todayXpEarned || profile?.dailyXp?.xp || 0,
+      lastActiveIstDate: body.studentHistory?.lastActiveIstDate || profile?.dailyXp?.date,
+    });
+
     return NextResponse.json({
       score: practiceResult.correctCount,
       total: practiceResult.totalQuestions,
@@ -157,6 +176,12 @@ export async function POST(req: NextRequest) {
       consecutiveCorrect: newConsecutiveCorrect,
       consecutiveIncorrect: newConsecutiveIncorrect,
       gapResolved: practiceResult.gapResolved,
+      xpAwarded: xpEvaluation.awardedXp,
+      grossXp: xpEvaluation.grossXp,
+      isCapped: xpEvaluation.isCapped,
+      newDailyTotal: xpEvaluation.newDailyTotal,
+      xpBreakdown: xpEvaluation.breakdown,
+      updatedQuestionHistory: xpEvaluation.updatedQuestionHistory,
       comparison: practiceResult.comparison,
       nextRevisionAt: practiceResult.nextRevisionAt,
       revisionLevel: practiceResult.revisionLevel,

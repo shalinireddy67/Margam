@@ -15,7 +15,7 @@ import {
   ProgressBar,
   type Language,
 } from "@/components/ui";
-import { LearnerProfile } from "@/lib/types";
+import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
   createLearnerProfile,
@@ -31,6 +31,11 @@ import {
 } from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
 import { WitchCat } from "@/components/ui/WitchCat";
+import { isIstNightTime } from "@/lib/xp-config";
+import { SegmentedXpBar } from "@/components/ui/PixelEffects";
+import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
+import ConceptPathway from "@/components/ConceptPathway";
+import { evaluateStudentBadges } from "@/lib/badges";
 import { getCatGreeting } from "@/lib/greetings";
 import { Sparkles, Compass, Award, BookOpen, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
@@ -299,12 +304,14 @@ export default function HomePage() {
                 {/* Companion Mascot Welcome */}
                 <div className="shrink-0 flex flex-col items-center justify-center p-3 bg-[#422816] border-2 border-[#7A4B2A] shadow-[4px_4px_0px_rgba(0,0,0,0.4)]">
                   <WitchCat
-                    pose="greet"
+                    pose={isIstNightTime() ? "sleepy" : "greet"}
                     size={110}
                     sticker={false}
-                    alt="Margam Zombie Chicken Jockey companion welcoming you"
+                    alt="Margam companion welcoming you"
                   />
-                  <span className="text-[9px] font-heading text-[#FFE9A8] mt-1">Study Companion</span>
+                  <span className="text-[9px] font-heading text-[#FFE9A8] mt-1">
+                    {isIstNightTime() ? "Maru (Resting zZz)" : "Study Companion"}
+                  </span>
                 </div>
               </div>
 
@@ -510,6 +517,9 @@ export default function HomePage() {
                   color="pixelgreen"
                 />
               </div>
+
+              {/* Segmented XP Progress */}
+              <SegmentedXpBar currentXp={profile.xp || 0} />
 
               {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
@@ -728,6 +738,15 @@ export default function HomePage() {
         )}
 
         {/* ================================================================= */}
+        {/* CLASS QUEST LEADERBOARD                                           */}
+        {/* ================================================================= */}
+        {profile && (
+          <section id="class-leaderboard" aria-labelledby="leaderboard-heading" className="space-y-4">
+            <ClassLeaderboard classId="demo-sec-10a" />
+          </section>
+        )}
+
+        {/* ================================================================= */}
         {/* CHAPTERS GRID (Minecraft Voxel Tiles)                             */}
         {/* ================================================================= */}
         <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
@@ -804,6 +823,9 @@ export default function HomePage() {
             })}
           </div>
         </section>
+
+        {/* Concept Pathway & Prerequisite Graph */}
+        <ConceptPathway currentLang={currentLang as SupportedLanguage} />
 
         {/* Small Teacher link for mobile footer */}
         {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (

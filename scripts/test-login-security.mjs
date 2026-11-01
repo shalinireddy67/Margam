@@ -100,6 +100,57 @@ class RlsPolicyEngine {
     this.classMembers = new Map();
     this.attempts = [];
     this.conceptMastery = new Map();
+    this.xpEvents = [];
+  }
+
+  // xp_events RLS: strictly server-written via service_role only
+  insertXpEvent(callerRole, event) {
+    if (callerRole !== "service_role") {
+      return { success: false, error: "42501: permission denied for table xp_events (client write forbidden)" };
+    }
+    this.xpEvents.push(event);
+    return { success: true };
+  }
+
+  // xp_events RLS: auth.uid() = student_id OR owning teacher
+  selectXpEvents(authUid) {
+    return this.xpEvents.filter((xe) => {
+      if (xe.studentId === authUid) return true;
+      const cls = this.classes.get(xe.classId);
+      return cls && cls.teacherId === authUid;
+    });
+  }
+
+  // class_weekly_leaderboard RPC / RLS: enrolled student OR owning teacher ONLY
+  selectClassLeaderboard(authUid, classId) {
+    const cls = this.classes.get(classId);
+    if (!cls) return null;
+    const isTeacher = cls.teacherId === authUid;
+    const isEnrolled = Array.from(this.classMembers.values()).some(
+      (cm) => cm.classId === classId && cm.studentId === authUid
+    );
+    if (!isTeacher && !isEnrolled) {
+      return null; // Access denied: not a member of class
+    }
+
+    // Filter students where opt_out_leaderboard = true or hidden_by_teacher = true
+    const memberStudents = Array.from(this.classMembers.values())
+      .filter((cm) => cm.classId === classId && !cm.hiddenByTeacher)
+      .map((cm) => {
+        const prof = this.profiles.get(cm.studentId);
+        if (!prof || prof.optOutLeaderboard) return null;
+        const totalXp = this.xpEvents
+          .filter((xe) => xe.studentId === cm.studentId && (xe.classId === classId || !xe.classId))
+          .reduce((sum, xe) => sum + xe.amount, 0);
+        return {
+          studentId: cm.studentId,
+          displayName: prof.username || "Anonymous Student",
+          weeklyXp: totalXp,
+        };
+      })
+      .filter(Boolean);
+
+    return memberStudents.sort((a, b) => b.weeklyXp - a.weeklyXp);
   }
 
   // Profiles RLS: auth.uid() = id OR (teacher enrolled in class)
@@ -248,6 +299,63 @@ const hash1 = hashRecoveryCode(rawRecoveryCode);
 const hash2 = hashRecoveryCode(rawRecoveryCode.toLowerCase());
 assert(hash1 === hash2, "Recovery code hash is case-insensitive and deterministic");
 assert(hash1.length === 64, "Recovery code hash is standard 256-bit SHA-256 hex");
+
+console.log("");
+
+// ==============================================================================
+// TEST SUITE 5: XP_EVENTS LEDGER & CLASS LEADERBOARD PRIVACY (RLS)
+// ==============================================================================
+console.log("--------------------------------------------------");
+console.log("  TEST 5: xp_events Ledger & Class Leaderboard RLS ");
+console.log("--------------------------------------------------");
+
+// 1. Direct student/client write to xp_events MUST be rejected
+const directWrite = engine.insertXpEvent("authenticated", {
+  studentId: studentA.id,
+  classId: class1.id,
+  amount: 999,
+  reason: "cheat",
+});
+assert(!directWrite.success, "Direct client write to xp_events REJECTED by RLS (server-written only)");
+
+// 2. Server-side service_role write MUST succeed
+const serverWrite1 = engine.insertXpEvent("service_role", {
+  studentId: studentA.id,
+  classId: class1.id,
+  amount: 50,
+  reason: "correct_answer",
+});
+const serverWrite2 = engine.insertXpEvent("service_role", {
+  studentId: studentB.id,
+  classId: class2.id,
+  amount: 80,
+  reason: "chapter_test",
+});
+assert(serverWrite1.success && serverWrite2.success, "Server service_role can append verified XP ledger events");
+
+// 3. Student A can read only own XP events
+const aEvents = engine.selectXpEvents(studentA.id);
+assert(aEvents.length === 1 && aEvents[0].studentId === studentA.id, "Student A reads only their own XP events");
+assert(!aEvents.some((e) => e.studentId === studentB.id), "Student A CANNOT read Student B's XP events");
+
+// 4. Non-member student CANNOT read other class leaderboard
+const breachBoard = engine.selectClassLeaderboard(studentA.id, class2.id);
+assert(breachBoard === null, "Non-member Student A CANNOT read Class 8B leaderboard (RLS blocked)");
+
+// 5. Enrolled member CAN read own class leaderboard
+const ownBoard = engine.selectClassLeaderboard(studentA.id, class1.id);
+assert(ownBoard !== null && ownBoard.length === 1, "Enrolled Student A CAN read Class 10A leaderboard");
+
+// 6. Student opt-out privacy check
+studentB.optOutLeaderboard = true;
+const class2BoardWithOptOut = engine.selectClassLeaderboard(teacher2.id, class2.id);
+assert(!class2BoardWithOptOut.some((s) => s.studentId === studentB.id), "Opted-out Student B is hidden from class leaderboard");
+
+// 7. Teacher cross-class isolation on leaderboard
+const t1Class2Board = engine.selectClassLeaderboard(teacher1.id, class2.id);
+assert(t1Class2Board === null, "Teacher 1 CANNOT read Teacher 2's class leaderboard (RLS blocked)");
+const t1Class1Board = engine.selectClassLeaderboard(teacher1.id, class1.id);
+assert(t1Class1Board !== null, "Teacher 1 CAN read own class leaderboard");
 
 console.log("\n==================================================");
 console.log(`  RESULT: ${passed} PASSED | ${failed} FAILED`);

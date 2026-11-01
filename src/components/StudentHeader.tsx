@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Volume2, VolumeX, Flame } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
 import { Logo } from "@/components/ui";
+import { isSoundEnabled, setSoundEnabled, playPopSound } from "@/lib/sound";
+import { getLevelProgress } from "@/lib/xp-config";
 
 interface StudentHeaderProps {
   profile: LearnerProfile | null;
@@ -21,6 +23,20 @@ export default function StudentHeader({
   backHref,
   backLabel = "Back to Learning Path",
 }: StudentHeaderProps) {
+  const [soundOn, setSoundOn] = useState(false);
+
+  useEffect(() => {
+    setSoundOn(isSoundEnabled());
+  }, []);
+
+  const toggleSound = () => {
+    const next = !soundOn;
+    setSoundOn(next);
+    setSoundEnabled(next);
+    if (next) playPopSound();
+  };
+
+  const levelInfo = profile ? getLevelProgress(profile.xp || 0) : null;
   const gradeNames: Record<number, string> = {
     6: "Class 6 • Ganita Prakash",
     7: "Class 7 • Ganita Prakash",
@@ -65,8 +81,46 @@ export default function StudentHeader({
           )}
         </div>
 
-        {/* Right: Language Switcher & Profile Details */}
+        {/* Right: Sound Toggle, Streak, Level, & Language Switcher */}
         <div className="flex items-center gap-2 shrink-0">
+          {profile && (
+            <div className="hidden xs:flex items-center gap-1.5">
+              {/* Level & Rank Pill */}
+              <div
+                className="flex items-center gap-1 px-2.5 py-1 bg-[#422816] border-2 border-[#7A4B2A] rounded-[2px] text-xs font-heading font-bold text-[#FFE9A8] shadow-[2px_2px_0px_rgba(0,0,0,0.35)]"
+                title={`${levelInfo?.rank.name} Rank • Level ${levelInfo?.level} (${profile.xp || 0} XP)`}
+              >
+                <span>{levelInfo?.rank.badge}</span>
+                <span className="hidden sm:inline">{levelInfo?.rank.name}</span>
+                <span>Lv {levelInfo?.level}</span>
+              </div>
+
+              {/* Streak Flame Pill */}
+              <div
+                className="flex items-center gap-1 px-2 py-1 bg-[#422816] border-2 border-[#7A4B2A] rounded-[2px] text-xs font-heading font-bold text-[#FFB36B] shadow-[2px_2px_0px_rgba(0,0,0,0.35)]"
+                title={`Daily Streak: ${profile.streak?.current || 0} days`}
+              >
+                <Flame className="w-3.5 h-3.5 text-[#FF8A3D] fill-[#FF8A3D]" />
+                <span>{profile.streak?.current || 0}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Sound Toggle */}
+          <button
+            type="button"
+            onClick={toggleSound}
+            aria-label={soundOn ? "Mute sound effects" : "Enable sound effects"}
+            title={soundOn ? "Sound Effects: ON" : "Sound Effects: OFF"}
+            className={`min-h-[38px] min-w-[38px] px-2 flex items-center justify-center text-xs font-bold rounded-[2px] border-2 transition-all cursor-pointer ${
+              soundOn
+                ? "bg-[#5DAA3A] text-[#FFE9A8] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.35)]"
+                : "bg-[#422816] text-[#A68A72] border-[#7A4B2A] hover:text-[#FFE9A8] shadow-[2px_2px_0px_rgba(0,0,0,0.35)]"
+            }`}
+          >
+            {soundOn ? <Volume2 className="w-4 h-4 text-[#FFE9A8]" /> : <VolumeX className="w-4 h-4" />}
+          </button>
+
           {/* Language Switcher */}
           <div className="shrink-0 flex items-center gap-1 bg-[#422816] p-1 border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_rgba(0,0,0,0.35)]">
             <button

@@ -88,6 +88,24 @@ export const LearnerProfileSchema = z.object({
   currentDifficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]).default(1),
   activeGap: RemediationGapSchema.nullable().optional(),
   resolvedGaps: z.array(ResolvedGapRecordSchema).optional().default([]),
+  xp: z.number().int().default(0).optional(),
+  level: z.number().int().default(1).optional(),
+  rank: z.string().default("Wood").optional(),
+  dailyXp: z.object({
+    date: z.string(),
+    xp: z.number(),
+  }).optional(),
+  streak: z.object({
+    current: z.number().default(0),
+    longest: z.number().default(0),
+    lastActiveDate: z.string(),
+    freezeTokens: z.number().default(1),
+    lastFreezeEarnedDate: z.string().optional(),
+  }).optional(),
+  answeredQuestionsHistory: z.record(z.string(), z.string()).optional(),
+  unlockedBadgeIds: z.array(z.string()).optional(),
+  soundEnabled: z.boolean().optional(),
+  optOutOfLeaderboard: z.boolean().optional(),
 });
 
 /**

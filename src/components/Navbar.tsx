@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Home, Sparkles, Network, Users, Compass } from "lucide-react";
+import { Home, Sparkles, Network, Users, Compass, Volume2, VolumeX } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 import { Logo } from "@/components/ui";
+import { isSoundEnabled, setSoundEnabled, playPopSound } from "@/lib/sound";
 
 interface NavbarProps {
   currentLang: SupportedLanguage;

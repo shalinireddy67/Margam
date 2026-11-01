@@ -20,16 +20,24 @@ import {
   Network,
   RotateCcw,
   Search,
+  Trophy,
+  Flame,
+  TrendingUp,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
 import { LearnerProfile } from "@/lib/types";
+import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 
 export default function TeacherPage() {
   const [selectedStudentId, setSelectedStudentId] = useState<string>("stu-synth-01");
   const [filterAttention, setFilterAttention] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"dashboard" | "heatmap" | "misconceptions" | "print">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "heatmap" | "misconceptions" | "print" | "leaderboard">("dashboard");
+  const [leaderboardEnabled, setLeaderboardEnabled] = useState(true);
+  const [hiddenStudentIds, setHiddenStudentIds] = useState<Set<string>>(new Set(["stu-synth-07"]));
   const [localProfile, setLocalProfile] = useState<LearnerProfile | null>(null);
 
   useEffect(() => {
@@ -272,6 +280,16 @@ export default function TeacherPage() {
           >
             Printable A4 Remedial Worksheet
           </button>
+          <button
+            onClick={() => setActiveTab("leaderboard")}
+            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+              activeTab === "leaderboard"
+                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
+                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+            }`}
+          >
+            Quest Board & XP
+          </button>
         </div>
 
         {/* TAB 1: Dashboard & Attention List with Drill-Down */}
@@ -389,6 +407,78 @@ export default function TeacherPage() {
 
             {/* Right Column: Evidence Drill-Down Panel */}
             <div className="lg:col-span-7 space-y-4">
+              {/* Weekly Quest & Gamification Pulse Card */}
+              <div className="bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-3 text-[#FFF7E6]">
+                <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-2">
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4 text-[#FFE9A8]" />
+                    <span className="font-heading font-extrabold text-xs text-[#FFE9A8] uppercase tracking-wider">
+                      Weekly Class XP Pulse
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] text-[#E5D7BE]">Leaderboard:</span>
+                    <button
+                      type="button"
+                      onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
+                      className={`text-[10px] font-heading font-bold px-2 py-0.5 border cursor-pointer ${
+                        leaderboardEnabled
+                          ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514]"
+                          : "bg-[#422816] text-[#A68A72] border-[#7A4B2A]"
+                      }`}
+                    >
+                      {leaderboardEnabled ? "Active" : "Disabled"}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {/* Leaders */}
+                  <div className="p-2.5 bg-[#422816] border border-[#7A4B2A] space-y-1">
+                    <span className="text-[10px] font-heading font-bold text-[#FFE9A8] uppercase block">
+                      👑 XP Leaders
+                    </span>
+                    <div className="text-xs space-y-0.5">
+                      <div className="flex justify-between font-bold text-[#FFF7E6]">
+                        <span>1. Aarav S.</span>
+                        <span className="text-[#FFE9A8]">390 XP</span>
+                      </div>
+                      <div className="flex justify-between text-[#E5D7BE]">
+                        <span>2. Diya S.</span>
+                        <span>340 XP</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Most Improved */}
+                  <div className="p-2.5 bg-[#422816] border border-[#7A4B2A] space-y-1">
+                    <span className="text-[10px] font-heading font-bold text-[#5DAA3A] uppercase block">
+                      📈 Most Improved
+                    </span>
+                    <div className="text-xs space-y-0.5">
+                      <div className="flex justify-between font-bold text-[#5DAA3A]">
+                        <span>Rohan P.</span>
+                        <span>+48%</span>
+                      </div>
+                      <div className="flex justify-between text-[#E5D7BE]">
+                        <span>Ananya G.</span>
+                        <span>+35%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Needs Encouragement */}
+                  <div className="p-2.5 bg-[#422816] border border-[#E04A3F] space-y-1">
+                    <span className="text-[10px] font-heading font-bold text-[#E04A3F] uppercase block">
+                      ⚠️ Needs Encouragement
+                    </span>
+                    <div className="text-xs text-[#E5D7BE] space-y-0.5">
+                      <div className="truncate font-bold text-[#FFE9A8]">Kavya R. (8d idle)</div>
+                      <div className="truncate text-[11px] text-[#D9D9D9]/70">No quests logged this week</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-5 text-[#FFF7E6]">
                 {/* Header of Selected Student */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b-2 border-[#7A4B2A]">
@@ -902,6 +992,82 @@ export default function TeacherPage() {
               <div className="pt-4 border-t-2 border-ink text-[10px] text-slate-500 flex justify-between">
                 <span>Teacher Signature: _____________________</span>
                 <span>Margam Remedial Print Edition • Zero Internet Required</span>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* TAB 5: Quest Board & Teacher Controls */}
+        {activeTab === "leaderboard" && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-7 space-y-4">
+              <ClassLeaderboard classId="demo-sec-10a" />
+            </div>
+
+            <div className="lg:col-span-5 space-y-4">
+              {/* Teacher Board Controls */}
+              <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
+                <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-3">
+                  <h3 className="font-heading font-extrabold text-sm text-[#FFE9A8] uppercase tracking-wider">
+                    Leaderboard Controls
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
+                    className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
+                      leaderboardEnabled
+                        ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+                        : "bg-[#422816] text-[#A68A72] border-[#7A4B2A]"
+                    }`}
+                  >
+                    {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
+                  </button>
+                </div>
+
+                <p className="text-xs text-[#E5D7BE] leading-relaxed">
+                  As the classroom educator, you can enable or disable the public quest board for this cohort, or hide individual students to ensure healthy, friendly learning motivation.
+                </p>
+
+                {/* Individual Student Visibility Table */}
+                <div className="space-y-2 pt-2">
+                  <span className="text-[11px] font-heading font-bold text-[#FFE9A8] uppercase block">
+                    Student Visibility Controls
+                  </span>
+                  <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-1">
+                    {syntheticClassData.students.map((st) => {
+                      const isHidden = hiddenStudentIds.has(st.id);
+                      return (
+                        <div
+                          key={st.id}
+                          className="p-2.5 bg-[#422816] border border-[#7A4B2A] flex items-center justify-between text-xs"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="font-heading font-bold text-[#FFF7E6]">
+                              #{st.rollNumber} {st.name}
+                            </span>
+                            {isHidden && (
+                              <span className="text-[9px] bg-[#E04A3F] text-[#FFF7E6] px-1 font-bold">
+                                Hidden
+                              </span>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const next = new Set(hiddenStudentIds);
+                              if (next.has(st.id)) next.delete(st.id);
+                              else next.add(st.id);
+                              setHiddenStudentIds(next);
+                            }}
+                            className="min-h-[32px] px-2 py-0.5 bg-[#5A3720] hover:bg-[#7A4B2A] border border-[#7A4B2A] text-[11px] font-heading font-bold text-[#FFE9A8] flex items-center gap-1 cursor-pointer"
+                          >
+                            {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
+                            <span>{isHidden ? "Show" : "Hide"}</span>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

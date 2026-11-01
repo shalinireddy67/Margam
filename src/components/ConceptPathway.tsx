@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowRight, CheckCircle2, ChevronRight, Info, Network, Layers } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowRight, CheckCircle2, ChevronRight, Info, Network, Layers, Sparkles } from "lucide-react";
 import conceptsData from "../../data/concepts.json";
 import { SupportedLanguage } from "@/lib/types";
+import { getActiveProfile } from "@/lib/storage";
 
 interface ConceptPathwayProps {
   currentLang: SupportedLanguage;
@@ -11,6 +12,14 @@ interface ConceptPathwayProps {
 
 export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
   const [selectedConceptId, setSelectedConceptId] = useState<string>("c9-poly-04");
+  const [resolvedGapIds, setResolvedGapIds] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const prof = getActiveProfile();
+    if (prof?.resolvedGaps && prof.resolvedGaps.length > 0) {
+      setResolvedGapIds(new Set(prof.resolvedGaps.map((g) => g.rootConceptId)));
+    }
+  }, []);
 
   const selectedConcept =
     conceptsData.find((c) => c.id === selectedConceptId) || conceptsData[0];
@@ -99,12 +108,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class7Concepts.map((c) => {
                 const isSelected = selectedConceptId === c.id;
+                const isResolvedGap = resolvedGapIds.has(c.id);
                 return (
                   <button
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer relative ${
+                      isResolvedGap ? "animate-voxel-glow border-[#5DAA3A] bg-[#2F6B22]/20 shadow-[0_0_12px_rgba(93,170,58,0.5)]" : ""
+                    } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
                         : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
@@ -112,7 +124,11 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
-                      {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
+                      {isResolvedGap ? (
+                        <span className="text-[10px] font-heading font-extrabold text-[#79B82A]">✨ GAP FIXED</span>
+                      ) : (
+                        c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>
+                      )}
                     </div>
                     <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
@@ -137,12 +153,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class8Concepts.map((c) => {
                 const isSelected = selectedConceptId === c.id;
+                const isResolvedGap = resolvedGapIds.has(c.id);
                 return (
                   <button
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer relative ${
+                      isResolvedGap ? "animate-voxel-glow border-[#5DAA3A] bg-[#2F6B22]/20 shadow-[0_0_12px_rgba(93,170,58,0.5)]" : ""
+                    } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
                         : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
@@ -150,7 +169,11 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
-                      {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
+                      {isResolvedGap ? (
+                        <span className="text-[10px] font-heading font-extrabold text-[#79B82A]">✨ GAP FIXED</span>
+                      ) : (
+                        c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>
+                      )}
                     </div>
                     <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
@@ -175,12 +198,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class9Concepts.map((c) => {
                 const isSelected = selectedConceptId === c.id;
+                const isResolvedGap = resolvedGapIds.has(c.id);
                 return (
                   <button
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer relative ${
+                      isResolvedGap ? "animate-voxel-glow border-[#5DAA3A] bg-[#2F6B22]/20 shadow-[0_0_12px_rgba(93,170,58,0.5)]" : ""
+                    } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
                         : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
@@ -188,7 +214,11 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
-                      {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
+                      {isResolvedGap ? (
+                        <span className="text-[10px] font-heading font-extrabold text-[#79B82A]">✨ GAP FIXED</span>
+                      ) : (
+                        c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>
+                      )}
                     </div>
                     <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
