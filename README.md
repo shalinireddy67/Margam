@@ -1,188 +1,189 @@
 # Margam (मार्गम् / మార్గం)
 > **Every learner has a path. Find yours.**  
-> *Adaptive Mathematics Learning Platform for Indian Students in Classes 6–10*
+> *Adaptive Mathematics Learning & Explainable Prerequisite Remediation Platform for Indian Classes 6–10*
 
-[![Next.js App Router](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-kernel2k26.vercel.app-5DB84A?style=for-the-badge&logo=vercel)](https://kernel2k26.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
-[![NCERT Aligned](https://img.shields.io/badge/NCERT-Classes%206--10-orange)](#starter-mathematics-chapters)
-[![DPDP Act 2023](https://img.shields.io/badge/Privacy-DPDP%20Act%202023-047857)](#privacy-accessibility--performance)
-[![Validation](https://img.shields.io/badge/Validation%20Suite-100%25%20Passing-success)](#content-validation-tests)
+[![Design](https://img.shields.io/badge/Design-Retro%20Pixel%20Art-F2D16B)](#visual-design-system--pixel-art-theme)
+[![NCERT Aligned](https://img.shields.io/badge/NCERT-Classes%206--10-5DB84A)](#curriculum-dag--mathematics-chains)
+[![Multilingual](https://img.shields.io/badge/Languages-EN%20%7C%20HI%20%7C%20TE-7EC8E3)](#multilingual-support--translation-workflow)
+[![Privacy](https://img.shields.io/badge/Privacy-DPDP%20Act%202023%20Compliant-3C8A2E)](#privacy-student-safety--dpdp-act)
+[![Security](https://img.shields.io/badge/Bundle%20Audit-Zero%20Client%20Leaks-D9453D)](#server-side-security--zero-client-secret-leaks)
+[![Tests](https://img.shields.io/badge/Test%20Suite-100%25%20Passing-success)](#automated-testing--validation-suite)
 
 ---
 
-## 1. Product Overview
+## 1. Executive Summary & Core Philosophy
 
-**Margam** represents an individual student's path toward mathematical mastery. Built for **Code Kernel '26 (Decode Round)**, Margam addresses the reality of Indian middle and secondary classrooms: **mathematics builds sequentially**, and when a student struggles with a higher-grade concept, the breakdown is almost always an unaddressed prerequisite from an earlier grade.
+**Margam** is an intelligent, explainable mathematics remediation platform designed for Indian middle and high school students (Classes 6 to 10). Built for **Code Kernel '26**, Margam solves a foundational challenge in Indian classrooms: **mathematics is cumulative**. When a student struggles with Class 10 Quadratic Equations or Class 9 Polynomials, the root breakdown is almost always an unaddressed misconception from middle school (such as integer sign distribution or fraction arithmetic).
 
-Instead of assigning blind repetitive drills or replacing classroom teachers with opaque AI chatbots, Margam provides:
-1. **Explainable Prerequisite Backtracking:** Tracing struggles in high-school algebra back to middle-school integer operations via a Directed Acyclic Graph (DAG).
-2. **Three-Stage Adaptation:** Adapting **Learn** (3 distinct teaching variants), **Solve** (adaptive difficulty 1–3 with mistake classification), and **Test** (formative checkpoints).
-3. **Teacher Empowerment:** Providing class mastery heatmaps, automated peer remedial grouping, and print-ready single-sheet A4 worksheets for students with limited device access.
-4. **Child Privacy by Design:** 0 tracking cookies, 0 third-party surveillance scripts, and strictly localized sessions adhering to the **Digital Personal Data Protection (DPDP) Act 2023**.
-
----
-
-## 2. The Problem We Are Solving
-
-In typical Indian classrooms with 40–50 students:
-- A student scores **38% on a Class 9 Polynomials test**. The score confirms struggle, but completely conceals *why*.
-- Teachers assume the child cannot grasp algebraic factoring and assign 40 more quadratic factoring problems.
-- The student experiences mounting math anxiety because the real breakdown is in **Class 7 Integer Sign Operations** ($(-3) \times (+2) = -6$, but $(-3) + 2 = -1$).
-- **Margam's Solution:** Traverses backwards across the NCERT DAG to identify the root cause within minutes, delivers a 10-minute visual remedial lesson (using concrete Indian models like Kirana store debt/credit), and restores confidence before returning to Class 9.
-
-### The Central Learning Loop
-$$\text{DIAGNOSE} \longrightarrow \text{ADAPT} \longrightarrow \text{CHECK AGAIN}$$
+Instead of superficial practice drills or generic chatbots, Margam provides:
+1. **Explainable Prerequisite Backtracking:** When a student errs, Margam evaluates mistake patterns across a Directed Acyclic Graph (DAG) to isolate foundational gaps up to 3 grades prior.
+2. **Three-Stage Adaptation:**
+   - **Stage 1 (Diagnostic):** Low-stakes diagnostic test isolating specific conceptual gaps.
+   - **Stage 2 (Solve / Adaptive Practice):** Stepped practice (Difficulty 1–3) with bespoke mistake-creature feedback.
+   - **Stage 3 (Chapter Test):** Rigorous blueprint-constrained summative assessment with weak/strong concept partitioning.
+3. **Three Pedagogical Lesson Styles:** Every concept offers *Basics-First* (intuitive real-world models), *Standard* (rigorous NCERT steps), and *Fast-Track* (high-speed visual summaries).
+4. **Privacy-by-Design & Zero Surveillance:** Full adherence to India's **DPDP Act 2023**—no emails, no phone numbers, and no advertising trackers.
+5. **Zero Client Bundle Leaks:** Answer keys and distractor mistake tags are 100% stripped from client JavaScript bundles and evaluated strictly via server-side cryptographically signed sessions.
 
 ---
 
-## 3. Tech Stack
+## 2. Complete Architecture & Feature Matrix
 
-- **Framework:** Next.js 14.2 (App Router, Server Components + selective Client Components)
-- **Language:** TypeScript 5.6 (strict mode enabled)
-- **Styling:** Vanilla Tailwind CSS 3.4 with custom design tokens:
-  - Background: Warm linen cream (`#FAF8F5` / `#F4EFEA`)
-  - Typography & Structure: Midnight Navy (`#0B192C` / `#132238`)
-  - Distinctive Accent: Terracotta Vermilion (`#C2410C`) & Saffron Amber (`#D97706`)
-  - Positive Mastery: Restrained Emerald Green (`#047857`)
-- **Icons:** Lucide React (lightweight SVG icons)
-- **Validation:** Native Node.js test script (`scripts/validate-content.mjs`)
-- **Zero Heavy Overheads:** No external font dependencies, no paid LLM grading lock-ins.
+```mermaid
+graph TD
+    User([Student / Teacher]) --> WebApp[Next.js 14 App Router]
+    
+    subgraph ClientLayer ["Client Presentation (Pixel-Art UI)"]
+        Landing["Landing Page (Hero, Cat Mascot)"]
+        DiagUI["Diagnostic & Gap Card ('Fix this first')"]
+        LessonUI["3-Style Lesson Switcher"]
+        PracticeUI["Adaptive Practice (Difficulty 1-3 & Mistake SVGs)"]
+        TestUI["Summative Chapter Test"]
+        StickersUI["Gamified Sticker Badges"]
+        AuthUI["Email-Free Student & Teacher Login"]
+    end
+    
+    subgraph ServerLayer ["Server Security & API Routes"]
+        DiagAPI["POST /api/diagnostic/start & submit"]
+        PracticeAPI["POST /api/practice/start & submit"]
+        TestAPI["POST /api/test/start & submit"]
+        AuthAPI["POST /api/auth/student-signup & login"]
+        RateLimiter["Server Sliding-Window Rate Limiter"]
+        SessionSigner["HMAC-SHA256 Short-Lived Session Signer"]
+        LockoutGuard["15-Min Failed Login Lockout"]
+    end
 
----
+    subgraph DataLayer ["Data Stores & Knowledge Base"]
+        DAG["NCERT DAG (concepts.json - 20 nodes)"]
+        QBank["Chapter Split Questions (data/questions/*.json)"]
+        Taxonomy["Misconception Mappings (tag-roots.json)"]
+        Supabase["PostgreSQL + Row-Level Security (RLS)"]
+        LocalStorage["Client Dual-Mode Offline Storage"]
+    end
 
-## 4. Architecture & File Structure
-
-```
-kernel2k26/
-├── .env.example                       # Documented environment variables (public vs server-only)
-├── .gitignore                         # Configured for node_modules, .next, .env*.local
-├── package.json                       # Scripts: dev, build, start, validate, test, test:auth
-├── tsconfig.json                      # Strict TypeScript compiler options with @/* aliases
-├── tailwind.config.ts                 # Margam bespoke color palette & typographic scale
-├── next.config.mjs                    # Next.js production configuration
-├── README.md                          # Master documentation (this file)
-├── supabase/
-│   └── migrations/
-│       └── 20261101_initial_schema.sql # Profiles, classes, members, attempts, concept_mastery + RLS
-├── data/
-│   ├── concepts.json                  # 20-node pilot NCERT DAG with EN/HI/TE translations & audit flags
-│   ├── questions.json                 # Question bank with deterministic answers & mistake tags
-│   ├── lessons.json                   # 3 variants per concept (Basics-first, Standard, Fast-track)
-│   ├── demo-class.json                # Synthetic 25-student dataset for Class 8A
-│   └── tag-roots.json                 # Error misconception taxonomy
-├── scripts/
-│   ├── validate-content.mjs           # Automated test suite for DAG cycles & schema integrity
-│   ├── test-progression.mjs           # Multi-grade progression, class locking & migration tests
-│   ├── test-gap-tracing.mjs           # Root concept resolution & recency/distance decay tests
-│   ├── test-adaptive.mjs              # Mastery formulas & 3-stage adaptive engine tests
-│   └── test-login-security.mjs        # RLS cross-student isolation, teacher scoping & 15-min lockout
-└── src/
-    ├── app/
-    │   ├── api/
-    │   │   ├── auth/                  # Student/teacher signup, login (15-min lockout), logout, me
-    │   │   ├── sync/                  # Local guest profile import & progress cloud mirroring
-    │   │   └── teacher/               # Class creation & scoped student roster routes
-    │   ├── login/                     # Unified login & email-free student signup with recovery codes
-    │   ├── layout.tsx                 # Root layout with SEO, semantic HTML, and skip links
-    │   ├── page.tsx                   # Master landing page assembling sections A through K
-    │   ├── privacy/                   # DPDP Act notice, dual storage (guest vs cloud), data minimization
-    │   ├── student/                   # Student dashboard, diagnostic, worksheets, and chapter test
-    │   ├── teacher/                   # Teacher class roster & mastery grouping analytics
-    │   └── globals.css                # CSS variables, print styles, and focus outlines
-    └── lib/
-        ├── flags.ts                   # Feature flags (FEATURE_LOGIN, FEATURE_TUTOR, etc.)
-        ├── storage.ts                 # Dual storage engine (Guest Mode vs Supabase Mode sync)
-        ├── server/
-        │   ├── lockout.ts             # 15-minute server lockout after 5 consecutive failures
-        │   └── auth-helpers.ts        # Synthetic address generator, recovery codes, mock store
-        ├── supabase/
-        │   ├── client.ts              # Browser Supabase client (anon key only)
-        │   ├── server.ts              # Server-side cookie-based Supabase client
-        │   ├── admin.ts               # Privileged server-only Supabase admin client (server-only)
-        │   └── types.ts               # Strict Database schema types
-        ├── types.ts                   # TypeScript interfaces for concepts, questions, and mastery
-        └── adaptive.ts                # Pure adaptive engine (diagnostics, worksheets, tests)
+    WebApp --> ClientLayer
+    ClientLayer --> ServerLayer
+    ServerLayer --> DataLayer
 ```
 
 ---
 
-## 5. Concept Graph (DAG)
+## 3. Curriculum DAG & Mathematics Chains
 
-The curriculum is structured as a **Directed Acyclic Graph** in `data/concepts.json`. Every node defines an NCERT-aligned concept with learning objectives and prerequisite pointers:
+Margam covers all **67 official NCERT Mathematics chapters** across Classes 6 to 10, featuring two complete 5-grade pilot remediation chains:
 
 ```
-[c6-num-01: Whole Numbers]
-    ├── [c6-num-02: Opposites & Negatives] ──> [c7-int-01: Number Line] ──> [c7-int-02: Integer Addition/Subtraction]
-    │                                                                               │
-    ├── [c6-frac-01: Fractions Basics] ────> [c7-frac-01: Rational Numbers]         │
-    │                                                                               ▼
-    └── [c6-alg-01: Variables] ──> [c7-alg-01: Like Terms] ──> [c8-lin-01: Expressions]
-                                                                        │
-                                [c7-int-03: Sign Rules] ◄───────────────┤
-                                           │                            ▼
-                                           │              [c8-lin-03: Transposition & Balancing]
-                                           │                            │
-                                           │                            ▼
-                                           └────────────► [c9-poly-04: Factoring by Splitting Middle Term]
+[PILOT CHAIN 1: Integers to Quadratic Equations]
+Class 6: Negative Numbers (c6-neg-01) 
+   └──> Class 7: Integer Multiplication & Signs (c7-int-02) 
+           └──> Class 8: Distributive Property & Binomials (c8-dist-01) 
+                   └──> Class 9: Algebraic Identities & Factoring (c9-id-01) 
+                           └──> Class 10: Quadratic Equations (c10-quad-01)
+
+[PILOT CHAIN 2: Sequences to Polynomial Zeroes]
+Class 6: Patterns in Sequences & Shapes (c6-pat-01) 
+   └──> Class 7: Arithmetic Expressions & BODMAS (c7-alg-01) 
+           └──> Class 8: Laws of Exponents & Powers (c8-exp-01) 
+                   └──> Class 9: Terms & Zeroes of Polynomials (c9-poly-01) 
+                           └──> Class 10: Geometrical Meaning of Zeroes (c10-poly-01)
 ```
 
-### Starter Mathematics Chapters:
-1. **Class 7: Integers** (`c7-int-01` to `c7-int-04`)
-2. **Class 8: Linear Equations in One Variable** (`c8-lin-01` to `c8-lin-05`)
-3. **Class 9: Polynomials** (`c9-poly-01` to `c9-poly-05`)
+### Question Bank & Content Metrics:
+- **121 Original Multiple-Choice Questions** (9 questions per core pilot concept: 3 Difficulty-1, 3 Difficulty-2, 3 Difficulty-3).
+- **4 Options Each (`A`, `B`, `C`, `D`)**:
+  - `correctAnswer`: Exact numerical/algebraic solution.
+  - Distractors: Every incorrect option has a concrete cognitive mistake tag linked to root misconceptions in `tag-roots.json`.
+- **253 Curated Mistake Tags** mapped to ancestor remedial concepts.
+- **20 Three-Variant Lessons** (60 bespoke learning experiences in English, Hindi, and Telugu).
 
 ---
 
-## 6. Question and Lesson Data Schemas
+## 4. Visual Design System — Pixel Art Theme
 
-### Question Bank Schema (`data/questions.json`)
-```json
-{
-  "id": "q-poly-02",
-  "conceptId": "c9-poly-02",
-  "difficulty": 2,
-  "type": "multiple_choice",
-  "prompt": {
-    "en": "Evaluate the polynomial P(x) = x² - 3x - 4 at x = -2.",
-    "hi": "x = -2 पर बहुपद P(x) = x² - 3x - 4 का मान ज्ञात कीजिए।",
-    "te": "x = -2 వద్ద P(x) = x² - 3x - 4 బహుపది విలువను లెక్కించండి.",
-    "reviewed": false
-  },
-  "options": [
-    { "id": "A", "text": { "en": "6", "hi": "6", "te": "6", "reviewed": false } },
-    { "id": "B", "text": { "en": "-6", "hi": "-6", "te": "-6", "reviewed": false }, "mistakeTag": "sign_error_integer_product" }
-  ],
-  "correctAnswer": "A",
-  "explanation": { "en": "...", "hi": "...", "te": "...", "reviewed": false },
-  "hint": { "en": "...", "hi": "...", "te": "...", "reviewed": false }
-}
-```
-
-### Three Lesson Pedagogical Variants (`data/lessons.json`)
-Every supported concept provides three genuinely distinct teaching variants in English, Hindi, and Telugu:
-1. **Basics-First:** Grounded in tangible Indian mental models (e.g. Kirana store ledger balances, two-pan weighing scales, Leh winter temperatures).
-2. **Standard:** Structured, formal NCERT steps with explicit algebraic rules and verification checks.
-3. **Fast-Track:** High-density conceptual summaries, vector direction shifts, and mental shortcuts for rapid learners.
+Margam features an authentic, retro 16-bit blocky video game aesthetic with zero external font CDNs:
+- **Typography:** Self-hosted *Press Start 2P* pixel font for English headings, buttons, and badges.
+- **Pixel Palette (WCAG AA Compliant):**
+  - **Grass Green (`#5DB84A`)** & **Dark Grass (`#3C8A2E`)**: Primary actions, success indicators, and growth metrics.
+  - **Dirt Brown (`#8B5A2B`)**: Earthy foundational cards and structural outlines.
+  - **Stone Grey (`#9AA0A6`)**: Inactive states, borders, and neutral cards.
+  - **Sand Yellow (`#F2D16B`)**: Highlights, tooltips, and star ratings.
+  - **Sky Blue (`#7EC8E3`)**: Navigation, hints, and informational chips.
+  - **Redstone Red (`#D9453D`)**: Mistake creatures and error alerts.
+  - **Ink (`#111111`)**: Deep high-contrast borders and typography.
+- **Physical Feedback:** 4px hard block drop-shadows with 4px active translation states on clicks.
+- **Witch Cat Companion (*Maru*):** Interactive animated SVG mascot responding to time of day, diagnostic progress, and user achievements.
+- **Mistake Creatures:** Handcrafted SVG pixel creatures visualizing specific cognitive slips (*Sign Slip*, *Fraction Fumble*, *Distribution Dodge*, *Calculation Slip*).
 
 ---
 
-## 7. Synthetic Demo Class Dataset (`data/demo-class.json`)
+## 5. Server-Side Security & Zero Client Secret Leaks
 
-To prepare for Phase 3's teacher dashboard without violating student privacy, the repository includes a fictional class of **25 students (Class 8A)** with realistic mastery profiles:
-- **Foundational Master:** Aarav Sharma (Roll #1) — 90%+ across all concepts.
-- **Negative Integer Gap:** Ananya Reddy (Roll #2) & Utkarsh Tiwari (Roll #21) — 45% mastery in transposition due to root integer sign subtraction errors.
-- **Fraction Gap:** Eashan Verma (Roll #6) — struggles with fractional equations ($x/3 + 1/2 = 5$) due to unaddressed Class 6 LCM fraction addition.
+To ensure academic honesty and tamper-resistance:
+1. **Answer Key Stripping:** Client bundles contain zero instances of `correctAnswer` or `mistakeTag`.
+2. **Server-Side Grading:** Diagnostics, practice questions, and chapter tests are validated exclusively via backend server routes (`/api/diagnostic/*`, `/api/practice/*`, `/api/test/*`).
+3. **Signed Sessions:** Test requests receive short-lived HMAC-SHA256 session tokens. A student cannot tamper with question parameters or grade another student's attempt.
+4. **Rate Limiting:** Sliding-window rate limiters block automated submission spam or brute-forcing.
 
 ---
 
-## 8. Setup and Local Development
+## 6. Privacy, Student Safety & DPDP Act
+
+Adhering strictly to India's **Digital Personal Data Protection (DPDP) Act 2023**:
+- **Email-Free Student Registration:** Students choose a unique username and password. Synthetic unrouteable addresses (`username@student.margam.local`) are generated internally for Supabase Auth compatibility. No personal email or phone number is ever requested.
+- **One-Time Recovery Codes:** Students receive a 16-character recovery code (`XXXX-XXXX-XXXX-XXXX`) upon signup, stored only as a deterministic SHA-256 hash.
+- **Teacher Consent Verification:** Teachers verify school or guardian consent during registration.
+- **Row-Level Security (RLS):**
+  - Students can only view and update their own attempts and mastery data.
+  - Teachers can only view profiles and mastery of students enrolled in their assigned classes.
+- **Server Lockout:** 5 consecutive failed login attempts trigger an automatic, server-enforced **15-minute account lockout**.
+
+---
+
+## 7. Multilingual Support & Translation Workflow
+
+All official chapters, concepts, learning objectives, questions, options, hints, explanations, and lessons are localized across three languages:
+- **English** (`en`)
+- **Hindi** (`hi`)
+- **Telugu** (`te`)
+
+### Translation Review Tooling:
+- **Export Script (`scripts/export-translations.mjs`)**:
+  Exports all 2,834 Hindi and Telugu strings into `translations-review.csv` with unique compound IDs and English source text:
+  ```bash
+  node scripts/export-translations.mjs
+  ```
+- **Import Script (`scripts/import-translations.mjs`)**:
+  Reads the corrected CSV, applies text corrections, and updates `reviewed: true` exclusively for rows marked approved by language reviewers:
+  ```bash
+  node scripts/import-translations.mjs translations-review.csv
+  ```
+
+---
+
+## 8. Automated Testing & Validation Suite
+
+Margam incorporates a complete test suite covering curriculum DAG acyclicity, deterministic mathematical correctness, RLS security policies, and production bundle isolation:
+
+| Command | Suite | Purpose |
+| :--- | :--- | :--- |
+| `npm run validate` | **Content & Math Validation** | Verifies DAG acyclicity (DFS), 121 question schemas, 253 mistake tags, and 121 deterministic math answers. |
+| `npm run test:auth` | **Security & RLS Suite** | Simulates PostgreSQL RLS policies, teacher scoping, student cross-isolation, and 15-minute lockouts. |
+| `npm run test:bundle` | **Bundle Secret Audit** | Scans production `.next/static` JavaScript and HTML files to verify zero client answer leaks. |
+| `npm run smoke` | **E2E Visual Smoke Test** | Headless Playwright test verifying 60 screenshots across EN, HI, and TE at 360x800 and desktop resolutions. |
+| `npm test` | **Master Test Runner** | Executes all progression, gap tracing, adaptive engine, and authentication tests. |
+
+---
+
+## 9. Setup & Local Development
 
 ### Prerequisites
-- **Node.js:** `v20.x` or later (LTS recommended)
-- **npm:** `10.x` or later
+- **Node.js:** `v20.x` or later
+- **npm:** `v10.x` or later
 
-### Installation & Run
+### Installation
 ```bash
 # 1. Clone the repository
 git clone https://github.com/shalinireddy67/kernel2k26.git
@@ -191,90 +192,82 @@ cd kernel2k26
 # 2. Install dependencies
 npm install
 
-# 3. Run automated content & DAG validation suite
+# 3. Run validation and security tests
 npm run validate
+npm run test:auth
 
-# 4. Start local development server
+# 4. Start the development server
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Supabase Integration Status Note
-The directory `src/lib/supabase/` contains optional helper stubs for planned future remote synchronization. No tracked application file imports `src/lib/supabase/`, and it is intentionally left untracked. The application operates entirely with zero-backend local client storage, built following data protection principles. Production builds on Vercel do not require or bundle this directory and build cleanly without it.
+Open [http://localhost:3000](http://localhost:3000) to access Margam locally.
 
 ---
 
-## 9. Content Validation Tests
+## 10. Deployment on Vercel
 
-Run the automated test suite at any time:
-```bash
-npm test
-# or
-npm run validate
-```
+Margam is configured for continuous production deployment on Vercel.
 
-### Checks Performed by `scripts/validate-content.mjs`:
-- [x] **Acyclicity (DFS):** Mathematically verifies that the concept graph contains **0 cycles**.
-- [x] **Prerequisite Integrity:** Proves that all referenced prerequisites exist in `concepts.json`.
-- [x] **Question Schemas:** Checks unique IDs, valid difficulties (1–3), and deterministic answer matching.
-- [x] **Multilingual Translation Coverage:** Verifies non-empty strings across EN, HI, and TE for all prompts, hints, and explanations.
-- [x] **Pedagogical Variants:** Proves all three variants (`basics_first`, `standard`, `fast_track`) exist for core concepts.
-- [x] **Demo Student Integrity:** Verifies student mastery records link to valid concept IDs.
+Live URL: **[https://kernel2k26.vercel.app](https://kernel2k26.vercel.app)**
 
----
-
-## 10. Privacy, Accessibility & Performance
-
-- **Zero Tracking Cookies:** No analytics or surveillance scripts.
-- **DPDP Act 2023 Principles:** Collects zero personal data in Phase 1. Subsequent student access uses ephemeral class codes and roll numbers.
-- **Accessibility:** Touch targets $\ge 44\text{px}$, visible focus indicators, WCAG AA color contrast, and semantic ARIA attributes.
-- **A4 Print Engine:** Clean print stylesheet for generating single-sheet classroom worksheets (`window.print()`).
-
----
-
-## 11. Four-Phase Project Roadmap
-
-| Phase | Timeline | Focus | Status |
-|---|---|---|---|
-| **Phase 1** | 21–24 Oct 2026 | Architecture, design system, landing page, concept DAG, question bank, 3 lesson variants, content validation, interactive simulator | **COMPLETED** |
-| **Phase 2** | 25–27 Oct 2026 | Student onboarding (class code), diagnostic flow, adaptive Learn/Solve/Test practice engine, mistake classification | Planned |
-| **Phase 3** | 28–29 Oct 2026 | Teacher dashboard, mastery heatmap, peer grouping engine, 1-page A4 worksheet generator | Planned |
-| **Phase 4** | 30–31 Oct 2026 | Full UI multilingual localization, PWA offline caching, low-data mode, production audit | Planned |
-
----
-
-## 12. Deployment Instructions for Vercel
-
-To deploy Margam on Vercel:
-
-### Option A: Via Vercel Web Dashboard (Recommended)
-1. Push your changes to GitHub: `git push origin main`.
-2. Go to [https://vercel.com/new](https://vercel.com/new) and log in.
-3. Import the GitHub repository: `shalinireddy67/kernel2k26`.
-4. Configure Environment Variables in the Vercel Project Settings:
-   - `NEXT_PUBLIC_APP_NAME="Margam"`
-   - `NEXT_PUBLIC_DEFAULT_LOCALE="en"`
-   - `NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS="false"`
-   - `NEXT_PUBLIC_DEMO_UNLOCK="false"`  
-     > **CRITICAL PRODUCTION RULE:** `NEXT_PUBLIC_DEMO_UNLOCK` must **STAY `false`** on Vercel and all production environments to enforce standard curriculum progression and placement rules. Setting it to `true` is intended solely for local offline test execution.
-5. Click **Deploy**. Vercel will build and deploy the production bundle with automatic SSL and edge caching.
-
-### Option B: Via Vercel CLI
-```bash
-# 1. Install Vercel CLI globally
-npm install -g vercel
-
-# 2. Login to Vercel
-vercel login
-
-# 3. Deploy to production
-vercel --prod
+### Environment Variables
+Configure the following in Vercel Project Settings:
+```env
+NEXT_PUBLIC_APP_NAME="Margam"
+NEXT_PUBLIC_DEFAULT_LOCALE="en"
+NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS="false"
+NEXT_PUBLIC_DEMO_UNLOCK="false"
+SESSION_SECRET="your-strong-random-session-secret"
+NEXT_PUBLIC_SUPABASE_URL="https://your-supabase-project.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
+SUPABASE_SERVICE_ROLE_KEY="your-server-only-service-role-key"
 ```
 
 ---
 
-## 13. License & Attribution
+## 11. Project Directory Structure
 
-- Built for **Code Kernel '26** (Decode Round, 21–24 October 2026).
-- Official Problem Statement: *Adaptive Learning for Classes 6 to 10*.
+```
+kernel2k26/
+├── data/
+│   ├── chapters.json                  # Catalogue of 67 official NCERT mathematics chapters
+│   ├── concepts.json                  # 20-node concept DAG across Classes 6 to 10
+│   ├── demo-class.json                # Synthetic 25-student mastery dataset
+│   ├── lessons.json                   # 3-variant pedagogical lessons (Basics-first, Standard, Fast-track)
+│   ├── questions.json                 # Master bank of 121 original questions
+│   ├── questions/                     # Chapter-split question files for server-only loading
+│   └── tag-roots.json                 # Taxonomy of 253 cognitive mistake tags
+├── scripts/
+│   ├── validate-content.mjs           # Content DAG & deterministic math test runner
+│   ├── test-login-security.mjs        # RLS policies, teacher scoping, and lockout verification
+│   ├── test-bundle-secrets.mjs        # Production bundle client leak auditor
+│   ├── export-translations.mjs        # CSV exporter for Hindi and Telugu translation review
+│   ├── import-translations.mjs        # CSV importer for approved translations
+│   └── smoke-test.mjs                 # Multi-language browser smoke test runner
+├── supabase/
+│   └── migrations/
+│       └── 20261101_initial_schema.sql # Profiles, classes, members, attempts, and RLS policies
+├── src/
+│   ├── app/
+│   │   ├── api/                       # Hardened server routes (auth, diagnostic, practice, test, sync)
+│   │   ├── student/                   # Diagnostic runner, lesson reader, practice, stickers
+│   │   ├── teacher/                   # Teacher class management and student rosters
+│   │   ├── login/                     # Email-free student signup and teacher authentication
+│   │   └── (legal)/                   # /privacy, /terms, and /cookies in plain language
+│   ├── components/                    # Modular pixel-art UI components (Navbar, MaruCat, MistakeBadges)
+│   └── lib/
+│       ├── adaptive.ts                # Pure adaptive engine and prerequisite distance-decay ranking
+│       ├── curriculum.ts              # Curriculum and chapter question counts
+│       ├── storage.ts                 # Dual-mode local guest & Supabase cloud sync
+│       ├── types.ts                   # Strict TypeScript domain interfaces
+│       └── server/                    # Signed sessions, rate limiters, lockout enforcement
+└── tailwind.config.ts                 # Pixel art color tokens, shadows, and spacing
+```
+
+---
+
+## 12. License & Attribution
+
+- Built for **Code Kernel '26** (Decode Round, October–November 2026).
+- Official Track: *Adaptive Mathematics Learning for Classes 6 to 10*.
 - Repository: [https://github.com/shalinireddy67/kernel2k26](https://github.com/shalinireddy67/kernel2k26)
