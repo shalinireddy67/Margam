@@ -15,7 +15,7 @@ export function SkeletonLine({
   return (
     <div
       style={{ width, height }}
-      className={`bg-[#E8E0BD] rounded-lg border-[2px] border-[#111111]/10 ${className}`.trim()}
+      className={`bg-[#9AA0A6] border-2 border-[#111111] rounded-none ${className}`.trim()}
       aria-hidden="true"
     />
   );
@@ -26,7 +26,7 @@ export function SkeletonCard({ className = "" }: { className?: string }) {
     <div
       aria-label="Loading..."
       role="status"
-      className={`border-[3px] border-[#111111] rounded-[18px_14px_20px_15px/15px_20px_14px_18px] p-5 bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] space-y-3 ${className}`.trim()}
+      className={`border-4 border-[#111111] rounded-none p-5 bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] space-y-3 ${className}`.trim()}
     >
       <SkeletonLine width="60%" height="24px" />
       <SkeletonLine width="90%" height="16px" />
@@ -56,37 +56,23 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div
-      className={`border-[3px] border-dashed border-[#111111] rounded-[18px_14px_20px_15px/15px_20px_14px_18px] p-6 text-center bg-[#FFFFFF] space-y-3 ${className}`.trim()}
+      className={`border-4 border-dashed border-[#111111] rounded-none p-6 text-center bg-[#FFFFFF] space-y-3 ${className}`.trim()}
     >
       <svg
-        viewBox="0 0 64 64"
-        className="w-16 h-16 mx-auto"
+        viewBox="0 0 16 16"
+        className="w-16 h-16 mx-auto text-[#111111]"
         aria-hidden="true"
+        shapeRendering="crispEdges"
       >
-        <rect
-          x="10"
-          y="10"
-          width="44"
-          height="44"
-          rx="12"
-          fill="#FFF8DC"
-          stroke="#111111"
-          strokeWidth="3"
-        />
-        <circle cx="24" cy="28" r="3.5" fill="#111111" />
-        <circle cx="40" cy="28" r="3.5" fill="#111111" />
-        <path
-          d="M24 42q8-6 16 0"
-          fill="none"
-          stroke="#111111"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
+        <rect x="2" y="2" width="12" height="12" fill="#F2D16B" stroke="#111111" strokeWidth="2" />
+        <rect x="5" y="6" width="2" height="2" fill="#111111" />
+        <rect x="9" y="6" width="2" height="2" fill="#111111" />
+        <rect x="5" y="10" width="6" height="1" fill="#111111" />
       </svg>
-      <h3 className="font-heading font-extrabold text-xl text-[#111111]">
+      <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#111111]">
         {title}
       </h3>
-      <p className="text-sm font-bold text-[#666666] max-w-sm mx-auto">
+      <p className="text-sm font-bold text-[#444444] max-w-sm mx-auto">
         {description}
       </p>
       {actionLabel && onAction && (

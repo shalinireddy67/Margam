@@ -8,5 +8,7 @@ export * from "./BottomTabBar";
 export * from "./Toast";
 export * from "./LoadingSkeleton";
 export * from "./StarRating";
+export * from "./ProgressBar";
 export * from "./MistakeCreature";
+export * from "./Logo";
 export * from "./WitchCat";

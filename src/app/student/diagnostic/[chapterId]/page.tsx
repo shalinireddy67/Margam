@@ -378,15 +378,15 @@ export default function ChapterDiagnosticPage() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
+                  <h3 className="font-heading font-extrabold text-sm sm:text-base flex items-start sm:items-center gap-2">
                     {placementPassed ? (
                       <>
-                        <Award className="w-5 h-5 text-emerald-700" />
+                        <Award className="w-5 h-5 text-emerald-700 shrink-0" />
                         <span>Placement Passed! Chapter Lessons Unlocked</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-5 h-5 text-amber-700" />
+                        <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
                         <span>Diagnostic Attempted • Complete Lessons in Order</span>
                       </>
                     )}
@@ -397,7 +397,7 @@ export default function ChapterDiagnosticPage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     onClick={handleReset}
                     className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"

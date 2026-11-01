@@ -5,6 +5,7 @@ import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles, BookOpen, Compa
 import conceptsData from "../../data/concepts.json";
 import lessonsData from "../../data/lessons.json";
 import { SupportedLanguage } from "@/lib/types";
+import { ProgressBar } from "@/components/ui";
 
 interface DiagnosticWidgetProps {
   currentLang?: SupportedLanguage;
@@ -177,12 +178,12 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                       Class {activeConcept?.class || 9} • {activeConcept?.chapter || "Mathematics"}
                     </span>
                   </div>
-                  <div className="w-full h-2.5 bg-background rounded-full overflow-hidden border border-[#E0E5D4]">
-                    <div
-                      className="h-full bg-coral rounded-full transition-all duration-300"
-                      style={{ width: `${((currentStep + 1) / currentQuestions.length) * 100}%` }}
-                    />
-                  </div>
+                  <ProgressBar
+                    value={currentStep + 1}
+                    max={currentQuestions.length}
+                    segments={currentQuestions.length}
+                    color="grass"
+                  />
                 </div>
               );
             })()}

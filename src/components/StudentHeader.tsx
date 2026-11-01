@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Compass, User, Globe, AlertTriangle, ArrowLeft } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
+import { Logo } from "@/components/ui";
 
 interface StudentHeaderProps {
   profile: LearnerProfile | null;
@@ -32,7 +33,7 @@ export default function StudentHeader({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border transition-all">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-2 sm:px-6 h-16 flex items-center justify-between gap-1.5 sm:gap-4">
         {/* Left: Brand + Back or Grade Scope */}
         <div className="flex items-center gap-3">
           {backHref ? (
@@ -46,11 +47,9 @@ export default function StudentHeader({
           ) : (
             <Link
               href="/"
-              className="flex items-center min-h-[48px] gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex items-center min-h-[48px] gap-2 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-soft">
-                <Compass className="w-5 h-5" />
-              </div>
+              <Logo className="w-8 h-8 rounded-none border-2 border-[#111111]" ariaLabel="Margam" />
               <span className="font-heading font-extrabold text-xl text-foreground tracking-tight">
                 Margam
               </span>
@@ -112,7 +111,7 @@ export default function StudentHeader({
                 <div className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-slate-700">
                   <User className="w-3.5 h-3.5" />
                 </div>
-                <span className="max-w-[100px] truncate">{profile.name}</span>
+                <span className="hidden sm:inline max-w-[100px] truncate">{profile.name}</span>
               </button>
 
               {showProfileMenu && (

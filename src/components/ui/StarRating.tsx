@@ -16,28 +16,59 @@ const sizeClasses = {
 };
 
 /**
- * Hand-drawn 5-pointed star SVG
+ * Square pixel star SVG on 16x16 grid with crispEdges
  */
-function HandStar({ filled, className }: { filled: boolean; className?: string }) {
+function PixelStar({ filled, className }: { filled: boolean; className?: string }) {
+  const fillColor = filled ? "#F2D16B" : "#FFFFFF";
   return (
     <svg
-      viewBox="0 0 28 28"
+      viewBox="0 0 16 16"
       className={className}
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
+      shapeRendering="crispEdges"
     >
-      <path
-        d="M14 2.5L17.4 9.5L25 10.6L19.5 16L20.8 23.5L14 20L7.2 23.5L8.5 16L3 10.6L10.6 9.5L14 2.5Z"
-        fill={filled ? "#FFE14D" : "#FFFFFF"}
-        stroke="#111111"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {filled && (
-        <circle cx="11.5" cy="11.5" r="1" fill="#111111" />
-      )}
+      {/* Pixel star fill base */}
+      <rect x="6" y="2" width="4" height="3" fill={fillColor} />
+      <rect x="1" y="5" width="14" height="3" fill={fillColor} />
+      <rect x="4" y="8" width="8" height="3" fill={fillColor} />
+      <rect x="2" y="11" width="4" height="3" fill={fillColor} />
+      <rect x="10" y="11" width="4" height="3" fill={fillColor} />
+
+      {/* Pixel star 1px ink outline */}
+      {/* Top tip */}
+      <rect x="7" y="1" width="2" height="1" fill="#111111" />
+      <rect x="6" y="2" width="1" height="2" fill="#111111" />
+      <rect x="9" y="2" width="1" height="2" fill="#111111" />
+
+      {/* Shoulder to arm tops */}
+      <rect x="1" y="4" width="5" height="1" fill="#111111" />
+      <rect x="10" y="4" width="5" height="1" fill="#111111" />
+
+      {/* Arm outer tips */}
+      <rect x="0" y="5" width="1" height="3" fill="#111111" />
+      <rect x="15" y="5" width="1" height="3" fill="#111111" />
+
+      {/* Arm bottom lines */}
+      <rect x="1" y="8" width="3" height="1" fill="#111111" />
+      <rect x="12" y="8" width="3" height="1" fill="#111111" />
+
+      {/* Waist indents */}
+      <rect x="4" y="9" width="1" height="2" fill="#111111" />
+      <rect x="11" y="9" width="1" height="2" fill="#111111" />
+
+      {/* Outer legs */}
+      <rect x="1" y="11" width="1" height="3" fill="#111111" />
+      <rect x="14" y="11" width="1" height="3" fill="#111111" />
+
+      {/* Feet bottoms */}
+      <rect x="2" y="14" width="4" height="1" fill="#111111" />
+      <rect x="10" y="14" width="4" height="1" fill="#111111" />
+
+      {/* Inner legs & crotch */}
+      <rect x="6" y="12" width="1" height="2" fill="#111111" />
+      <rect x="9" y="12" width="1" height="2" fill="#111111" />
+      <rect x="7" y="11" width="2" height="1" fill="#111111" />
     </svg>
   );
 }
@@ -57,7 +88,7 @@ export function StarRating({
       aria-label={`Difficulty ${safeRating} of ${max}`}
     >
       {Array.from({ length: max }).map((_, index) => (
-        <HandStar
+        <PixelStar
           key={index}
           filled={index < safeRating}
           className={sizeClasses[size]}

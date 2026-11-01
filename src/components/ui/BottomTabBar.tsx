@@ -35,7 +35,7 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
       className={`
         fixed left-0 right-0 bottom-0 z-40
         flex justify-center
-        bg-[#FFFFFF] border-t-[3px] border-[#111111]
+        bg-[#FFFFFF] border-t-4 border-[#111111]
         pb-[env(safe-area-inset-bottom,0px)]
         ${className}
       `.trim()}
@@ -48,28 +48,22 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           aria-current={active === "home" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
-            flex flex-col items-center justify-center gap-0.5
-            font-heading font-extrabold text-xs text-[#111111]
+            flex flex-col items-center justify-center gap-1
+            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
             no-underline select-none
-            transition-colors
             ${active === "home"
-              ? "bg-[#FFE14D] border-l-[3px] border-r-[3px] border-[#111111]"
-              : "hover:bg-[#FFF8DC]"
+              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
+              : "hover:bg-[#F2D16B]/20"
             }
           `.trim()}
         >
-          <svg
-            viewBox="0 0 26 26"
-            className="w-6 h-6"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 13L13 4l10 9v9H3z"
-              fill={active === "home" ? "#111111" : "none"}
-              stroke="#111111"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
+          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="7" y="1" width="2" height="2" fill="#111111" />
+            <rect x="5" y="3" width="6" height="2" fill="#111111" />
+            <rect x="3" y="5" width="10" height="2" fill="#111111" />
+            <rect x="1" y="7" width="14" height="2" fill="#111111" />
+            <rect x="2" y="9" width="12" height="6" fill={active === "home" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="1" />
+            <rect x="6" y="10" width="4" height="5" fill={active === "home" ? "#F2D16B" : "#111111"} />
           </svg>
           <span>Home</span>
         </Link>
@@ -81,28 +75,22 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           aria-current={active === "learn" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
-            flex flex-col items-center justify-center gap-0.5
-            font-heading font-extrabold text-xs text-[#111111]
+            flex flex-col items-center justify-center gap-1
+            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
             no-underline select-none
-            transition-colors
             ${active === "learn"
-              ? "bg-[#FFE14D] border-l-[3px] border-r-[3px] border-[#111111]"
-              : "hover:bg-[#FFF8DC]"
+              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
+              : "hover:bg-[#F2D16B]/20"
             }
           `.trim()}
         >
-          <svg
-            viewBox="0 0 26 26"
-            className="w-6 h-6"
-            aria-hidden="true"
-          >
-            <path
-              d="M3 5h9v16H3zM14 5h9v16h-9z"
-              fill={active === "learn" ? "#111111" : "none"}
-              stroke="#111111"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
+          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="2" y="2" width="12" height="12" fill={active === "learn" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
+            <rect x="7" y="2" width="2" height="12" fill="#111111" />
+            <rect x="4" y="5" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
+            <rect x="10" y="5" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
+            <rect x="4" y="9" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
+            <rect x="10" y="9" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
           </svg>
           <span>Learn</span>
         </Link>
@@ -114,28 +102,25 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           aria-current={active === "stickers" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
-            flex flex-col items-center justify-center gap-0.5
-            font-heading font-extrabold text-xs text-[#111111]
+            flex flex-col items-center justify-center gap-1
+            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
             no-underline select-none
-            transition-colors
             ${active === "stickers"
-              ? "bg-[#FFE14D] border-l-[3px] border-r-[3px] border-[#111111]"
-              : "hover:bg-[#FFF8DC]"
+              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
+              : "hover:bg-[#F2D16B]/20"
             }
           `.trim()}
         >
-          <svg
-            viewBox="0 0 26 26"
-            className="w-6 h-6"
-            aria-hidden="true"
-          >
-            <path
-              d="M13 3l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"
-              fill={active === "stickers" ? "#111111" : "none"}
-              stroke="#111111"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
+          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="7" y="1" width="2" height="2" fill="#111111" />
+            <rect x="6" y="3" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="1" y="5" width="14" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="3" y="7" width="10" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="4" y="9" width="8" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="3" y="11" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="9" y="11" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
+            <rect x="2" y="13" width="3" height="2" fill="#111111" />
+            <rect x="11" y="13" width="3" height="2" fill="#111111" />
           </svg>
           <span>Stickers</span>
         </Link>
@@ -147,35 +132,18 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           aria-current={active === "me" ? "page" : undefined}
           className={`
             flex-1 min-h-[64px]
-            flex flex-col items-center justify-center gap-0.5
-            font-heading font-extrabold text-xs text-[#111111]
+            flex flex-col items-center justify-center gap-1
+            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
             no-underline select-none
-            transition-colors
             ${active === "me"
-              ? "bg-[#FFE14D] border-l-[3px] border-r-[3px] border-[#111111]"
-              : "hover:bg-[#FFF8DC]"
+              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
+              : "hover:bg-[#F2D16B]/20"
             }
           `.trim()}
         >
-          <svg
-            viewBox="0 0 26 26"
-            className="w-6 h-6"
-            aria-hidden="true"
-          >
-            <circle
-              cx="13"
-              cy="9"
-              r="5"
-              fill={active === "me" ? "#111111" : "none"}
-              stroke="#111111"
-              strokeWidth="2.5"
-            />
-            <path
-              d="M4 23c1-6 17-6 18 0"
-              fill="none"
-              stroke="#111111"
-              strokeWidth="2.5"
-            />
+          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="5" y="2" width="6" height="5" fill={active === "me" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
+            <rect x="2" y="9" width="12" height="6" fill={active === "me" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
           </svg>
           <span>Me</span>
         </Link>

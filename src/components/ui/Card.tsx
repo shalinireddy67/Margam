@@ -9,7 +9,13 @@ export type CardColor =
   | "pink"
   | "green"
   | "sky"
-  | "orange";
+  | "orange"
+  | "grass"
+  | "darkgrass"
+  | "dirt"
+  | "stone"
+  | "sand"
+  | "red";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: CardColor;
@@ -20,12 +26,18 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const colorStyles: Record<CardColor, string> = {
   white: "bg-[#FFFFFF] text-[#111111]",
-  yellow: "bg-[#FFE14D] text-[#111111]",
-  cyan: "bg-[#4DD9E8] text-[#111111]",
-  pink: "bg-[#FF4F9A] text-[#111111]",
-  green: "bg-[#8DE86A] text-[#111111]",
-  sky: "bg-[#A9D8F0] text-[#111111]",
-  orange: "bg-[#FF8A3D] text-[#111111]",
+  sand: "bg-[#F2D16B] text-[#111111]",
+  yellow: "bg-[#F2D16B] text-[#111111]",
+  sky: "bg-[#7EC8E3] text-[#111111]",
+  cyan: "bg-[#7EC8E3] text-[#111111]",
+  grass: "bg-[#5DB84A] text-[#111111]",
+  green: "bg-[#5DB84A] text-[#111111]",
+  darkgrass: "bg-[#3C8A2E] text-[#FFFFFF]",
+  dirt: "bg-[#8B5A2B] text-[#FFFFFF]",
+  orange: "bg-[#8B5A2B] text-[#FFFFFF]",
+  stone: "bg-[#9AA0A6] text-[#111111]",
+  red: "bg-[#D9453D] text-[#FFFFFF]",
+  pink: "bg-[#D9453D] text-[#FFFFFF]",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -44,12 +56,11 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={`
-          border-[3px] border-[#111111]
-          rounded-[18px_14px_20px_15px/15px_20px_14px_18px]
+          border-4 border-[#111111] rounded-none
           p-4 sm:p-5
           ${dashed ? "border-dashed shadow-none" : "border-solid shadow-[4px_4px_0px_#111111]"}
-          ${interactive ? "cursor-pointer active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#111111] transition-transform" : ""}
-          ${colorStyles[color]}
+          ${interactive ? "cursor-pointer active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none" : ""}
+          ${colorStyles[color] || colorStyles.white}
           ${className}
         `.trim()}
         {...props}
