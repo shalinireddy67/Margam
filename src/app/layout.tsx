@@ -3,7 +3,7 @@ import "./globals.css";
 import { SITE_NAME, SITE_TAGLINE, SITE_DESCRIPTION } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | Adaptive Learning Platform for Classes 6–10`,
+  title: `${SITE_NAME} | Adaptive Mathematics Platform for Classes 6–10`,
   description: `${SITE_TAGLINE} — ${SITE_DESCRIPTION}`,
   keywords: [
     "Adaptive Learning",
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#173B19",
+  themeColor: "#5A3720",
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-full flex flex-col bg-[#102610] text-[#F2F0DF] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden minecraft-grid-bg">
+      <body className="min-h-full flex flex-col bg-[#5A3720] text-[#FFF7E6] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden voxel-grid-bg">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

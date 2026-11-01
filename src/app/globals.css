@@ -135,34 +135,62 @@
 @tailwind utilities;
 
 :root {
-  --forest: #173B19;
-  --grass: #4F8A24;
-  --pixelgreen: #79B82A;
-  --darkgreen: #102610;
-  --mutedgreen: #315B2A;
-  --warmwhite: #F2F0DF;
-  --lightgrey: #D8D8D0;
+  /* Blocky Voxel World Palette (from reference images) */
+  --sky-day: #6EB5FF;
+  --sky-sunset: #FFB36B;
+  --sky-pink: #FF8FA3;
+  --sunglow: #FFE9A8;
+
+  --grass: #5DAA3A;
+  --grass-dark: #2F6B22;
+  --grass-light: #7BC458;
+
+  --dirt: #7A4B2A;
+  --dirt-dark: #5A3720;
+  --dirt-light: #A06A3C;
+  --dirt-border: #422816;
+
+  --stone: #8B8B8B;
+  --stone-dark: #5E5E5E;
+  --stone-light: #D9D9D9;
+
+  --water: #3FA7C9;
+  --water-dark: #1E6F8C;
+  --water-light: #62C4E3;
+
+  --flower-red: #E04A3F;
+  --flower-yellow: #F4C542;
+  --flower-purple: #B070C9;
+  --flower-white: #FFFFFF;
+
+  --voxel-text-light: #2B1B0F;
+  --voxel-text-dark: #FFF7E6;
+  --voxel-panel-light: #FFF7E6;
+  --voxel-panel-dark: #5A3720;
+
+  --ink: #2B1B0F;
+  --bg: #5A3720;
+  --r: 2px;
+  --border-pixel: 4px solid #422816;
+  --shadow-pixel: 4px 4px 0px rgba(0, 0, 0, 0.35);
+
+  /* Legacy aliases mapped to Voxel palette */
+  --forest: #2F6B22;
+  --pixelgreen: #5DAA3A;
+  --darkgreen: #2F6B22;
+  --mutedgreen: #2F6B22;
+  --warmwhite: #FFF7E6;
+  --lightgrey: #D9D9D9;
   --charcoal: #20251F;
-  --gold: #E5B834;
-
-  --ink: #20251F;
-  --dirt: #8B5A2B;
-  --stone: #9AA0A6;
-  --sky: #4F8A24;
-  --sand: #E5B834;
-  --red: #D9453D;
+  --gold: #F4C542;
+  --sand: #FFE9A8;
+  --red: #E04A3F;
   --white: #FFFFFF;
-  --bg: #102610;
-  --r: 0px;
-  --border-pixel: 4px solid #20251F;
-  --shadow-pixel: 4px 4px 0px #102610;
-
-  /* Legacy token aliases mapped to Minecraft palette */
-  --yellow: #E5B834;
-  --cyan: #79B82A;
-  --pink: #D9453D;
-  --green: #4F8A24;
-  --orange: #E5B834;
+  --yellow: #F4C542;
+  --cyan: #3FA7C9;
+  --pink: #FF8FA3;
+  --green: #5DAA3A;
+  --orange: #FFB36B;
 }
 
 @layer base {
@@ -388,46 +416,193 @@ button[aria-pressed="true"] {
 }
 
 
-/* Minecraft-Inspired Grid & Voxel Styles */
-.minecraft-grid-bg {
-  background-color: #102610;
+/* Blocky Voxel World Grid & Palette Styles */
+.minecraft-grid-bg, .voxel-grid-bg {
+  background-color: #5A3720;
   background-image: 
-    linear-gradient(to right, rgba(79, 138, 36, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(79, 138, 36, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(to right, rgba(160, 106, 60, 0.16) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(160, 106, 60, 0.16) 2px, transparent 2px);
+  background-size: 32px 32px;
 }
 
-.minecraft-grass-pattern {
-  background-color: #173B19;
-  background-image: radial-gradient(#4F8A24 15%, transparent 16%), radial-gradient(#315B2A 15%, transparent 16%);
+.minecraft-grass-pattern, .voxel-dirt-pattern {
+  background-color: #5A3720;
+  background-image: radial-gradient(#7A4B2A 15%, transparent 16%), radial-gradient(#422816 15%, transparent 16%);
   background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
 }
 
-.voxel-card {
-  background-color: #173B19;
-  border: 3px solid #315B2A;
-  box-shadow: 4px 4px 0px #102610;
-  color: #F2F0DF;
+/* Sky Sunset Gradients from Reference Images */
+.voxel-sky-gradient {
+  background: linear-gradient(180deg, #6EB5FF 0%, #FFB36B 50%, #FF8FA3 100%);
 }
 
-.voxel-card-light {
-  background-color: #F2F0DF;
-  border: 4px solid #20251F;
-  box-shadow: 4px 4px 0px #102610;
-  color: #20251F;
+.voxel-sky-calm {
+  background: linear-gradient(180deg, #EBF5FF 0%, #FFE9D6 60%, #FFDEE5 100%);
+}
+
+.voxel-sunset-overlay {
+  background: linear-gradient(180deg, rgba(43, 27, 15, 0.35) 0%, rgba(90, 55, 32, 0.8) 70%, rgba(43, 27, 15, 0.95) 100%);
+}
+
+/* Chunky Beveled Voxel Cards */
+.voxel-card, .voxel-panel {
+  background-color: #7A4B2A;
+  border: 4px solid #422816;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.28),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.45),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #FFF7E6;
+  border-radius: 2px;
+}
+
+.voxel-card-light, .voxel-panel-light {
+  background-color: #FFF7E6;
+  border: 4px solid #5A3720;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 0px rgba(90, 55, 32, 0.25),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #2B1B0F;
+  border-radius: 2px;
+}
+
+.voxel-card-stone, .voxel-panel-stone {
+  background-color: #8B8B8B;
+  border: 4px solid #3F3F3F;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.35),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.45),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #FFF7E6;
+  border-radius: 2px;
 }
 
 .voxel-card-translucent {
-  background-color: rgba(23, 59, 25, 0.92);
-  border: 2px solid #4F8A24;
-  box-shadow: 4px 4px 0px #102610;
+  background-color: rgba(90, 55, 32, 0.92);
+  border: 3px solid #A06A3C;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.25),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.45),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
-  color: #F2F0DF;
+  color: #FFF7E6;
+  border-radius: 2px;
 }
 
 .grass-top-border {
-  border-top: 6px solid #79B82A !important;
+  border-top: 6px solid #5DAA3A !important;
+}
+
+/* Primary Grass-Top / Dirt-Bottom Button */
+.voxel-btn-primary {
+  background: linear-gradient(180deg, #5DAA3A 0%, #5DAA3A 48%, #468828 48%, #2F6B22 100%);
+  border: 3px solid #204514;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.4),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #FFF7E6;
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 1px 1px 0px #1C4514;
+  transition: transform 0.05s steps(2);
+  border-radius: 2px;
+}
+.voxel-btn-primary:active:not(:disabled) {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 
+    inset 2px 2px 0px rgba(0, 0, 0, 0.5),
+    2px 2px 0px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Secondary Stone Button */
+.voxel-btn-secondary {
+  background: linear-gradient(180deg, #9E9E9E 0%, #8B8B8B 48%, #757575 48%, #5E5E5E 100%);
+  border: 3px solid #3F3F3F;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.4),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #FFF7E6;
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 1px 1px 0px #2A2A2A;
+  transition: transform 0.05s steps(2);
+  border-radius: 2px;
+}
+.voxel-btn-secondary:active:not(:disabled) {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 
+    inset 2px 2px 0px rgba(0, 0, 0, 0.5),
+    2px 2px 0px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Gold Highlight Button */
+.voxel-btn-gold {
+  background: linear-gradient(180deg, #FFE9A8 0%, #F4C542 48%, #E0B030 48%, #C6961E 100%);
+  border: 3px solid #7A4B2A;
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.6),
+    inset -2px -2px 0px rgba(0, 0, 0, 0.35),
+    4px 4px 0px rgba(0, 0, 0, 0.35);
+  color: #2B1B0F;
+  font-family: 'Press Start 2P', monospace;
+  transition: transform 0.05s steps(2);
+  border-radius: 2px;
+}
+.voxel-btn-gold:active:not(:disabled) {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 
+    inset 2px 2px 0px rgba(0, 0, 0, 0.4),
+    2px 2px 0px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* XP Progress Bar */
+.voxel-xp-bar {
+  background: #20251F;
+  border: 3px solid #422816;
+  box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.voxel-xp-fill {
+  background: repeating-linear-gradient(
+    90deg,
+    #5DAA3A 0px,
+    #5DAA3A 16px,
+    #468828 16px,
+    #468828 18px
+  );
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  height: 100%;
+}
+
+/* Floating Blocky Clouds (CSS only, slow drift) */
+@keyframes cloud-drift {
+  0% {
+    transform: translateX(-150px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px));
+  }
+}
+.voxel-cloud {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    inset 4px 4px 0px #FFFFFF,
+    inset -4px -4px 0px #D9D9D9,
+    4px 4px 0px rgba(0, 0, 0, 0.12);
+  animation: cloud-drift 65s linear infinite;
+  pointer-events: none;
+  border-radius: 2px;
+}
+.voxel-cloud-slow {
+  animation-duration: 95s;
+}
+.voxel-cloud-fast {
+  animation-duration: 45s;
 }
 
 /* Companion Keyframe Animations */
