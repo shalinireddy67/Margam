@@ -191,8 +191,8 @@ export default function HomePage() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFF8DC]">
-        <div className="p-6 border-[3px] border-[#111111] rounded-2xl bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3]">
+        <div className="p-6 border-4 border-[#111111] rounded-none bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
           <p className="font-heading font-extrabold text-lg text-[#111111]">Loading Margam...</p>
         </div>
       </div>
@@ -200,12 +200,12 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28">
+    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28">
       {/* Offline Status Listener */}
       <OfflineBanner />
 
       {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-[#FFF8DC]/95 backdrop-blur-none border-b-[3px] border-[#111111]">
+      <header className="sticky top-0 z-30 bg-[#7EC8E3] backdrop-blur-none border-b-4 border-[#111111]">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           {/* Logo & Grade Info */}
           <div className="flex items-center gap-2 sm:gap-3">
@@ -617,6 +617,33 @@ export default function HomePage() {
           </div>
         )}
       </main>
+
+      {/* Repeating Pixel Grass Strip at the bottom of the landing page only (inline SVG, tiny) */}
+      <div className="w-full overflow-hidden leading-none select-none mt-10" aria-hidden="true">
+        <svg
+          viewBox="0 0 320 16"
+          preserveAspectRatio="none"
+          className="w-full h-5 sm:h-6 block"
+          shapeRendering="crispEdges"
+        >
+          <defs>
+            <pattern id="pixel-grass-strip" width="32" height="16" patternUnits="userSpaceOnUse">
+              <rect x="0" y="4" width="32" height="12" fill="#5DB84A" />
+              <rect x="0" y="12" width="32" height="4" fill="#3C8A2E" />
+              <rect x="2" y="0" width="4" height="4" fill="#5DB84A" />
+              <rect x="10" y="0" width="4" height="4" fill="#5DB84A" />
+              <rect x="18" y="0" width="4" height="4" fill="#5DB84A" />
+              <rect x="26" y="0" width="4" height="4" fill="#5DB84A" />
+              <rect x="6" y="4" width="2" height="2" fill="#3C8A2E" />
+              <rect x="14" y="4" width="2" height="2" fill="#3C8A2E" />
+              <rect x="22" y="4" width="2" height="2" fill="#3C8A2E" />
+              <rect x="30" y="4" width="2" height="2" fill="#3C8A2E" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="16" fill="url(#pixel-grass-strip)" />
+        </svg>
+        <div className="w-full h-4 sm:h-5 bg-[#8B5A2B] border-t-2 border-[#111111]" />
+      </div>
 
       {/* Student Bottom Tab Bar (Home active) */}
       <BottomTabBar currentTab="home" />

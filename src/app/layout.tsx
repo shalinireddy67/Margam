@@ -32,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#FFF8DC",
+  themeColor: "#7EC8E3",
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-full flex flex-col bg-[#FFF8DC] text-[#111111] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
+      <body className="min-h-full flex flex-col bg-[#7EC8E3] text-[#111111] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

@@ -16,8 +16,8 @@ export default function StickersPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC] text-[#111111] pb-28 flex flex-col justify-between">
-      <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28 flex flex-col justify-between">
+      <header className="border-b-4 border-[#111111] bg-[#FFFFFF]">
         <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link
             href="/"

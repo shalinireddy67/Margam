@@ -16,10 +16,10 @@ export default function RootErrorBoundary({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC] flex items-center justify-center p-4 text-[#111111]">
-      <div className="max-w-md w-full bg-white border-[3px] border-[#111111] rounded-2xl p-6 sm:p-8 shadow-[6px_6px_0_#111111] space-y-6 text-center">
+    <div className="min-h-screen bg-[#7EC8E3] flex items-center justify-center p-4 text-[#111111]">
+      <div className="max-w-md w-full bg-white border-4 border-[#111111] rounded-none p-6 sm:p-8 shadow-[4px_4px_0_#111111] space-y-6 text-center">
         {/* Warning Icon Badge */}
-        <div className="w-16 h-16 mx-auto rounded-full bg-[#FFE14D] border-[3px] border-[#111111] flex items-center justify-center shadow-[3px_3px_0_#111111]">
+        <div className="w-16 h-16 mx-auto rounded-none bg-[#F2D16B] border-4 border-[#111111] flex items-center justify-center shadow-[2px_2px_0_#111111]">
           <AlertTriangle className="w-8 h-8 text-[#111111]" />
         </div>
 

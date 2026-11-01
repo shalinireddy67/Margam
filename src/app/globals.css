@@ -339,6 +339,46 @@
   }
 }
 
+/* Motion Rules: 2-step "blink" on selection & block press */
+@keyframes pixel-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.pixel-blink,
+[aria-selected="true"],
+[data-selected="true"],
+button[aria-pressed="true"] {
+  animation: pixel-blink 0.24s steps(2, start) 1;
+}
+
+/* No fade-in on scroll */
+.fade-in,
+.scroll-fade,
+[data-animate="fade"] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Honour prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
+
 /* Print Stylesheet */
 @media print {
   @page {
