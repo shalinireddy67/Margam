@@ -1,1 +1,546 @@
-[]
+[
+  {
+    "id": "q-c10-lin-01",
+    "conceptId": "c10-lin-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "For what condition do the lines a₁x + b₁y + c₁ = 0 and a₂x + b₂y + c₂ = 0 represent parallel lines (no solution)?",
+      "hi": "रेखाएँ a₁x + b₁y + c₁ = 0 और a₂x + b₂y + c₂ = 0 किस स्थिति में समांतर रेखाएँ (कोई हल नहीं) दर्शाती हैं?",
+      "te": "a₁x + b₁y + c₁ = 0 మరియు a₂x + b₂y + c₂ = 0 రేఖలు ఏ నిబంధన ప్రకారం సమాంతర రేఖలను (సాధన లేదు) సూచిస్తాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "a₁/a₂ ≠ b₁/b₂",
+          "hi": "a₁/a₂ ≠ b₁/b₂",
+          "te": "a₁/a₂ ≠ b₁/b₂",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "a₁/a₂ = b₁/b₂ ≠ c₁/c₂",
+          "hi": "a₁/a₂ = b₁/b₂ ≠ c₁/c₂",
+          "te": "a₁/a₂ = b₁/b₂ ≠ c₁/c₂",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+          "hi": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+          "te": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "a₁/a₂ ≠ c₁/c₂",
+          "hi": "a₁/a₂ ≠ c₁/c₂",
+          "te": "a₁/a₂ ≠ c₁/c₂",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Parallel lines never intersect, meaning there is no common solution. The condition is a₁/a₂ = b₁/b₂ ≠ c₁/c₂.",
+      "hi": "समानांतर रेखाएँ कभी प्रतिच्छेद नहीं करतीं, अर्थात कोई उभयनिष्ठ हल नहीं होता। शर्त है a₁/a₂ = b₁/b₂ ≠ c₁/c₂।",
+      "te": "సమాంతర రేఖలు ఎప్పుడూ ఖండించుకోవు, అంటే ఉమ్మడి సాధన ఉండదు. నిబంధన a₁/a₂ = b₁/b₂ ≠ c₁/c₂.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Parallel lines have the same slope (a₁/a₂ = b₁/b₂) but different intercepts.",
+      "hi": "समानांतर रेखाओं की ढाल समान होती है परंतु अंतःखंड भिन्न होते हैं।",
+      "te": "సమాంతర రేఖల వాలు సమానంగా ఉంటుంది కానీ అంతరఖండాలు వేరుగా ఉంటాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-02",
+    "conceptId": "c10-lin-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the value of y if x = 3 is substituted into the equation 2x + y = 10.",
+      "hi": "यदि x = 3 को समीकरण 2x + y = 10 में प्रतिस्थापित किया जाए, तो y का मान ज्ञात कीजिए।",
+      "te": "2x + y = 10 సమీకరణంలో x = 3 ప్రతిక్షేపిస్తే y విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Substitute x = 3: 2(3) + y = 10 => 6 + y = 10 => y = 10 - 6 = 4.",
+      "hi": "x = 3 रखें: 2(3) + y = 10 => 6 + y = 10 => y = 10 - 6 = 4।",
+      "te": "x = 3 ప్రతిక్షేపించండి: 2(3) + y = 10 => 6 + y = 10 => y = 10 - 6 = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply 2 by 3 first, then subtract the result from 10.",
+      "hi": "पहले 2 को 3 से गुणा करें, फिर परिणाम को 10 में से घटाएँ।",
+      "te": "ముందుగా 2 ని 3 తో గుణించి, ఆ ఫలితాన్ని 10 నుండి తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-03",
+    "conceptId": "c10-lin-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If a pair of linear equations is consistent and has a unique solution, the lines represented by them are:",
+      "hi": "यदि रैखिक समीकरणों का एक युग्म संगत है और इसका एक अद्वितीय हल है, तो उनके द्वारा निरूपित रेखाएँ होंगी:",
+      "te": "రెండు రేఖీయ సమీకరణాల జత అనుకూలమైనదై ఏకైక సాధన కలిగి ఉంటే, ఆ రేఖలు:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Parallel lines",
+          "hi": "समांतर रेखाएँ",
+          "te": "సమాంతర రేఖలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Coincident lines",
+          "hi": "संपाती रेखाएँ",
+          "te": "ఏకీభవించే రేఖలు",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_point_on_x_axis_instead_of_y_axis"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Intersecting at one point",
+          "hi": "एक बिंदु पर प्रतिच्छेद करती रेखाएँ",
+          "te": "ఒకే బిందువు వద్ద ఖండించుకునే రేఖలు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Perpendicular only",
+          "hi": "केवल लंबवत रेखाएँ",
+          "te": "కేవలం లంబ రేఖలు మాత్రమే",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_degree_with_single_axis_point"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "A unique solution means the two straight lines meet at exactly one coordinate point (x, y). Thus, the lines intersect at one point.",
+      "hi": "अद्वितीय हल का अर्थ है कि दोनों सीधी रेखाएँ ठीक एक बिंदु (x, y) पर मिलती हैं। अतः रेखाएँ प्रतिच्छेद करती हैं।",
+      "te": "ఏకైక సాధన అంటే రెండు సరళరేఖలు సరిగ్గా ఒక బిందువు (x, y) వద్ద కలుస్తాయి. కాబట్టి అవి ఖండన రేఖలు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Think geometrically: one solution corresponds to one point of intersection.",
+      "hi": "ज्यामितीय रूप से सोचें: एक हल का अर्थ है प्रतिच्छेद का एक बिंदु।",
+      "te": "రేఖాగణితంగా ఆలోచించండి: ఒక సాధన అంటే ఒక ఖండన బిందువు.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-04",
+    "conceptId": "c10-lin-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Solve the system: x + y = 14 and x - y = 4. What is the value of x?",
+      "hi": "निकाय को हल कीजिए: x + y = 14 और x - y = 4। x का मान क्या है?",
+      "te": "x + y = 14 మరియు x - y = 4 వ్యవస్థను సాధించండి. x విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "negated_constant_term"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Add the two equations: (x + y) + (x - y) = 14 + 4 => 2x = 18 => x = 9. (And y = 5).",
+      "hi": "दोनों समीकरणों को जोड़ें: 2x = 18 => x = 9 (और y = 5)।",
+      "te": "రెండు సమీకరణాలను కలపండి: 2x = 18 => x = 9 (మరియు y = 5).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add both equations together to eliminate the variable y immediately.",
+      "hi": "चर y को तुरंत समाप्त करने के लिए दोनों समीकरणों को जोड़ें।",
+      "te": "y చరరాశిని తొలగించడానికి రెండు సమీకరణాలను కలపండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-05",
+    "conceptId": "c10-lin-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "For which value of k will the pair of equations 2x + 3y = 7 and 4x + ky = 14 have infinitely many solutions?",
+      "hi": "k के किस मान के लिए समीकरण युग्म 2x + 3y = 7 और 4x + ky = 14 के अपरिमित रूप से अनेक हल होंगे?",
+      "te": "k ఏ విలువకు 2x + 3y = 7 మరియు 4x + ky = 14 సమీకరణాల జతకు అనంతమైన సాధనలు ఉంటాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "For infinitely many solutions: a₁/a₂ = b₁/b₂ = c₁/c₂. Here 2/4 = 3/k = 7/14. Since 2/4 = 1/2, 3/k = 1/2 => k = 6.",
+      "hi": "अपरिमित रूप से अनेक हलों के लिए: a₁/a₂ = b₁/b₂ = c₁/c₂। 2/4 = 3/k = 7/14 => 1/2 = 3/k => k = 6।",
+      "te": "అనంతమైన సాధనల కోసం: a₁/a₂ = b₁/b₂ = c₁/c₂. 2/4 = 3/k = 7/14 => 1/2 = 3/k => k = 6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Coincident lines require all three coefficient ratios to be equal.",
+      "hi": "संपाती रेखाओं के लिए तीनों गुणांकों का अनुपात बराबर होना चाहिए।",
+      "te": "ఏకీభవించే రేఖల కోసం మూడు గుణకాల నిష్పత్తులు సమానంగా ఉండాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-06",
+    "conceptId": "c10-lin-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Solve for y from 3x + 2y = 11 and 2x + 3y = 4.",
+      "hi": "3x + 2y = 11 और 2x + 3y = 4 से y का मान ज्ञात कीजिए।",
+      "te": "3x + 2y = 11 మరియు 2x + 3y = 4 నుండి y విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Multiply 1st eq by 2: 6x + 4y = 22. Multiply 2nd eq by 3: 6x + 9y = 12. Subtract 1st from 2nd: 5y = -10 => y = -2.",
+      "hi": "पहले समीकरण को 2 से और दूसरे को 3 से गुणा करें: 6x + 4y = 22 और 6x + 9y = 12। घटाने पर: 5y = -10 => y = -2।",
+      "te": "మొదటి సమీకరణాన్ని 2 తో, రెండవదాన్ని 3 తో గుణించండి: 6x + 4y = 22 మరియు 6x + 9y = 12. తీసివేస్తే: 5y = -10 => y = -2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Make the coefficients of x equal by multiplying both equations.",
+      "hi": "दोनों समीकरणों को गुणा करके x के गुणांक बराबर करें।",
+      "te": "రెండు సమీకరణాలను గుణించి x గుణకాలను సమానం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-07",
+    "conceptId": "c10-lin-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "word_problem",
+    "verified": false,
+    "prompt": {
+      "en": "The sum of the digits of a two-digit number is 9. Also, nine times this number is twice the number obtained by reversing the order of the digits. Find the number.",
+      "hi": "दो अंकों की एक संख्या के अंकों का योग 9 है। इस संख्या का 9 गुना, संख्या के अंकों को पलटने से बनी संख्या का 2 गुना है। वह संख्या ज्ञात कीजिए।",
+      "te": "రెండు అంకెల సంఖ్యలోని అంకెల మొత్తం 9. ఈ సంఖ్యకు 9 రెట్లు, అంకెల క్రమాన్ని తిరగరాయగా వచ్చే సంఖ్యకు రెట్టింపు. ఆ సంఖ్యను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "81",
+          "hi": "81",
+          "te": "81",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "27",
+          "hi": "27",
+          "te": "27",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Let tens digit be x and units digit be y. Number is 10x + y. x + y = 9. 9(10x + y) = 2(10y + x) => 90x + 9y = 20y + 2x => 88x = 11y => y = 8x. Since x + 8x = 9 => 9x = 9 => x = 1, y = 8. The number is 18.",
+      "hi": "दहाई का अंक x और इकाई का y मानें: x + y = 9 और 9(10x + y) = 2(10y + x) => 88x = 11y => y = 8x। 9x = 9 => x = 1, y = 8। संख्या 18 है।",
+      "te": "పదుల స్థానం x, ఒకట్ల స్థానం y అనుకుంటే: x + y = 9 మరియు 9(10x + y) = 2(10y + x) => 88x = 11y => y = 8x. 9x = 9 => x = 1, y = 8. ఆ సంఖ్య 18.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Represent a two-digit number with tens digit x and units digit y as 10x + y.",
+      "hi": "दो अंकों की संख्या को 10x + y के रूप में निरूपित करें।",
+      "te": "రెండు అంకెల సంఖ్యను 10x + y గా సూచించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-lin-08",
+    "conceptId": "c10-lin-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the values of a and b for which the system 2x + 3y = 7 and (a - b)x + (a + b)y = 3a + b - 2 has infinitely many solutions.",
+      "hi": "a और b के वे मान ज्ञात कीजिए जिनके लिए 2x + 3y = 7 और (a - b)x + (a + b)y = 3a + b - 2 के अपरिमित रूप से अनेक हल हों।",
+      "te": "2x + 3y = 7 మరియు (a - b)x + (a + b)y = 3a + b - 2 వ్యవస్థకు అనంతమైన సాధనలు ఉండటానికి a మరియు b విలువలను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "a = 3, b = 2",
+          "hi": "a = 3, b = 2",
+          "te": "a = 3, b = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "a = 5, b = 1",
+          "hi": "a = 5, b = 1",
+          "te": "a = 5, b = 1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "a = 1, b = 5",
+          "hi": "a = 1, b = 5",
+          "te": "a = 1, b = 5",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "a = 4, b = 2",
+          "hi": "a = 4, b = 2",
+          "te": "a = 4, b = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficient"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Ratio equality: 2/(a - b) = 3/(a + b) = 7/(3a + b - 2). From first pair: 2a + 2b = 3a - 3b => a = 5b. From second: 3/(6b) = 7/(16b - 2) => 1/(2b) = 7/(16b - 2) => 16b - 2 = 14b => 2b = 2 => b = 1, a = 5.",
+      "hi": "2/(a - b) = 3/(a + b) = 7/(3a + b - 2)। पहली जोड़ी से: a = 5b। दूसरी जोड़ी में रखने पर: 2b = 2 => b = 1, a = 5।",
+      "te": "2/(a - b) = 3/(a + b) = 7/(3a + b - 2). మొదటి జత నుండి: a = 5b. రెండవ జతలో ప్రతిక్షేపిస్తే: b = 1, a = 5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Equate the ratio pairs 2/(a-b) = 3/(a+b) and 3/(a+b) = 7/(3a+b-2) to form two linear equations in a and b.",
+      "hi": "a और b में दो समीकरण बनाने के लिए अनुपातों की तुलना करें।",
+      "te": "a మరియు b లలో రెండు సమీకరణాలను రూపొందించడానికి నిష్పత్తులను పోల్చండి.",
+      "reviewed": false
+    }
+  }
+]

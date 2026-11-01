@@ -594,5 +594,143 @@
         "status": "tentative, pending teacher review"
       }
     }
+  },
+  {
+    "id": "c10-lin-01",
+    "chapterId": "c10-ch03",
+    "chapter": "Pair of Linear Equations in Two Variables",
+    "subject": "maths",
+    "board": "ncert",
+    "class": 10,
+    "name": {
+      "en": "Pairs of Linear Equations in Two Variables and Consistency",
+      "hi": "दो चरों में रैखिक समीकरण युग्म और संगतता",
+      "te": "రెండు చరరాశులలో రేఖీయ సమీకరణాల జత మరియు అనుకూలత",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Solve pairs of linear equations in two variables algebraically and graphically, and determine consistency using coefficient ratios.",
+      "hi": "दो चरों में रैखिक समीकरण युग्म को बीजगणितीय और आलेखीय रूप से हल करें तथा गुणांकों के अनुपात से संगतता निर्धारित करें।",
+      "te": "రెండు చరరాశులలో రేఖీయ సమీకరణాల జతను బీజగణిత మరియు గ్రాఫ్ పద్ధతులలో సాధించడం, గుణకాల నిష్పత్తులతో అనుకూలతను నిర్ధారించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c9-poly-01",
+      "c9-coord-01"
+    ],
+    "edgeMeta": {
+      "c9-poly-01": {
+        "reason": "Understanding linear polynomials and zero values is required before formulating simultaneous linear equations.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c9-coord-01": {
+        "reason": "Plotting points and linear equations on the Cartesian plane is required for graphical interpretation of intersections.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
+  },
+  {
+    "id": "c10-ap-01",
+    "chapterId": "c10-ch05",
+    "chapter": "Arithmetic Progressions",
+    "subject": "maths",
+    "board": "ncert",
+    "class": 10,
+    "name": {
+      "en": "nth Term and Sum of First n Terms of an Arithmetic Progression",
+      "hi": "समांतर श्रेणी का n-वां पद और प्रथम n पदों का योग",
+      "te": "అంకశ్రేఢి n-వ పదం మరియు మొదటి n పదాల మొత్తం",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Identify arithmetic progressions, calculate the common difference, find the nth term, and compute the sum of the first n terms.",
+      "hi": "समांतर श्रेणी की पहचान करें, सार्व अंतर ज्ञात करें, n-वां पद निकालें और प्रथम n पदों के योग की गणना करें।",
+      "te": "అంకశ్రేఢిని గుర్తించడం, సామాన్య భేదాన్ని కనుగొనడం, n-వ పదాన్ని మరియు మొదటి n పదాల మొత్తాన్ని లెక్కించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c8-dist-01",
+      "c7-alg-01"
+    ],
+    "edgeMeta": {
+      "c8-dist-01": {
+        "reason": "Expanding and simplifying expressions like a + (n - 1)d requires distributive property proficiency.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c7-alg-01": {
+        "reason": "Evaluating sequences and substituting values into algebraic expressions is essential for computing nth terms.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
+  },
+  {
+    "id": "c10-tri-01",
+    "chapterId": "c10-ch06",
+    "chapter": "Triangles",
+    "subject": "maths",
+    "board": "ncert",
+    "class": 10,
+    "name": {
+      "en": "Similarity Criteria and Basic Proportionality Theorem",
+      "hi": "त्रिभुजों की समरूपता की कसौटियाँ और आधारभूत आनुपातिकता प्रमेय",
+      "te": "త్రిభుజాల సారూప్యతా నియమాలు మరియు ప్రాథమిక అనుపాత సిద్ధాంతం",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Apply the Basic Proportionality Theorem (Thales theorem) and similarity criteria (AAA, SSS, SAS) to solve geometric problems.",
+      "hi": "आधारभूत आनुपातिकता प्रमेय (थेल्स प्रमेय) और समरूपता की कसौटियों (AAA, SSS, SAS) का उपयोग कर ज्यामितीय प्रश्नों को हल करें।",
+      "te": "ప్రాథమిక అనుపాత సిద్ధాంతం (థేల్స్ సిద్ధాంతం) మరియు సారూప్యతా నియమాలను ఉపయోగించి రేఖాగణిత సమస్యలను సాధించడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c6-geo-01"
+    ],
+    "edgeMeta": {
+      "c6-geo-01": {
+        "reason": "Fundamental understanding of lines, angles, and transversals is required to prove parallel line ratios and angle equality.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
+  },
+  {
+    "id": "c10-geom-01",
+    "chapterId": "c10-ch07",
+    "chapter": "Coordinate Geometry",
+    "subject": "maths",
+    "board": "ncert",
+    "class": 10,
+    "name": {
+      "en": "Distance Formula and Section Formula on the Coordinate Plane",
+      "hi": "निर्देशांक तल पर दूरी सूत्र और विभाजन सूत्र",
+      "te": "నిరూపక తలంలో దూర సూత్రం మరియు విభజన సూత్రం",
+      "reviewed": false
+    },
+    "learningObjective": {
+      "en": "Calculate distances between points using the distance formula and find coordinates of points dividing segments using the section formula.",
+      "hi": "दूरी सूत्र का उपयोग करके बिंदुओं के बीच की दूरी निकालें और विभाजन सूत्र से रेखाखंड को विभाजित करने वाले बिंदुओं के निर्देशांक ज्ञात करें।",
+      "te": "దూర సూత్రం ఉపయోగించి బిందువుల మధ్య దూరాన్ని లెక్కించడం మరియు విభజన సూత్రంతో నిరూపకాలను కనుగొనడం.",
+      "reviewed": false
+    },
+    "prerequisites": [
+      "c9-coord-01",
+      "c8-sqr-01"
+    ],
+    "edgeMeta": {
+      "c9-coord-01": {
+        "reason": "Plotting points and calculating coordinate differences is the direct prerequisite for distance on Cartesian plane.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      },
+      "c8-sqr-01": {
+        "reason": "Evaluating square roots of sums of squares sqrt((x2-x1)^2 + (y2-y1)^2) requires square root arithmetic.",
+        "source": "team_curriculum_analysis",
+        "status": "tentative, pending teacher review"
+      }
+    }
   }
 ]

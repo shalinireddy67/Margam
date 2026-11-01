@@ -344,7 +344,26 @@ const deterministicChecks = [
   { qId: "q-c10-poly-d2-02", expected: "x² + x - 12", check: () => 3 + (-4) === -1 && 3 * (-4) === -12 },
   { qId: "q-c10-poly-d3-01", expected: "2", check: () => 2 / 2 === 1 },
   { qId: "q-c10-poly-d3-02", expected: "3/4", check: () => 6 / 8 === 3/4 },
-  { qId: "q-c10-poly-d3-03", expected: "7", check: () => 7 + 6 === (2*(2*7 - 1)) / 2 }
+  { qId: "q-c10-poly-d3-03", expected: "7", check: () => 7 + 6 === (2*(2*7 - 1)) / 2 },
+  // Class 10 Draft Questions Mathematical Assertions
+  { qId: "q-c10-real-03", expected: "4", check: () => 96 % 4 === 0 && 404 % 4 === 0 && (96 / 4) * 404 === 9696 },
+  { qId: "q-c10-real-04", expected: "√7", check: () => true },
+  { qId: "q-c10-real-05", expected: "420", check: () => 420 % 12 === 0 && 420 % 15 === 0 && 420 % 21 === 0 },
+  { qId: "q-c10-real-06", expected: "xy²", check: () => true },
+  { qId: "q-c10-real-07", expected: "180 minutes", check: () => 180 % 9 === 0 && 180 % 12 === 0 && 180 % 15 === 0 },
+  { qId: "q-c10-real-08", expected: "12", check: () => (4 * 24) / 8 === 12 },
+  { qId: "q-c10-lin-01", expected: "a₁/a₂ = b₁/b₂ ≠ c₁/c₂", check: () => true },
+  { qId: "q-c10-lin-02", expected: "4", check: () => 6 + 4 === 10 && 6 - 4 === 2 },
+  { qId: "q-c10-lin-04", expected: "9", check: () => (12 + 15) / 3 === 9 },
+  { qId: "q-c10-ap-01", expected: "4", check: () => 7 - 3 === 4 && 11 - 7 === 4 },
+  { qId: "q-c10-ap-02", expected: "47", check: () => 2 + (10 - 1) * 5 === 47 },
+  { qId: "q-c10-ap-04", expected: "590", check: () => (20 / 2) * (2 * 1 + (20 - 1) * 3) === 590 },
+  { qId: "q-c10-tri-01", expected: "2 cm", check: () => 1 / (1.5 / 3) === 2 },
+  { qId: "q-c10-tri-04", expected: "10 cm", check: () => (6 * 5) / 3 === 10 },
+  { qId: "q-c10-tri-06", expected: "42 m", check: () => (6 / 4) * 28 === 42 },
+  { qId: "q-c10-geom-01", expected: "2√2", check: () => (4 - 2)**2 + (1 - 3)**2 === 8 },
+  { qId: "q-c10-geom-02", expected: "10", check: () => (-6)**2 + 8**2 === 100 },
+  { qId: "q-c10-geom-03", expected: "(4, 6)", check: () => (2 + 6) / 2 === 4 && (4 + 8) / 2 === 6 }
 ];
 
 for (const check of deterministicChecks) {

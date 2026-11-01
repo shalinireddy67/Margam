@@ -1,1 +1,546 @@
-[]
+[
+  {
+    "id": "q-c10-tri-01",
+    "conceptId": "c10-tri-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "In triangle ABC, DE || BC intersecting AB at D and AC at E. If AD = 1.5 cm, DB = 3 cm, and AE = 1 cm, find EC (using Basic Proportionality Theorem).",
+      "hi": "त्रिभुज ABC में, DE || BC है जो AB को D और AC को E पर प्रतिच्छेद करती है। यदि AD = 1.5 सेमी, DB = 3 सेमी, और AE = 1 सेमी है, तो EC ज्ञात कीजिए।",
+      "te": "ΔABC లో, DE || BC. AD = 1.5 సెం.మీ, DB = 3 సెం.మీ, AE = 1 సెం.మీ అయితే EC విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2 cm",
+          "hi": "2 सेमी",
+          "te": "2 సెం.మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3 cm",
+          "hi": "3 सेमी",
+          "te": "3 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1.5 cm",
+          "hi": "1.5 सेमी",
+          "te": "1.5 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4.5 cm",
+          "hi": "4.5 सेमी",
+          "te": "4.5 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "By BPT: AD/DB = AE/EC => 1.5/3 = 1/EC => 1/2 = 1/EC => EC = 2 cm.",
+      "hi": "आधारभूत आनुपातिकता प्रमेय (BPT) से: AD/DB = AE/EC => 1.5/3 = 1/EC => EC = 2 सेमी।",
+      "te": "ప్రాథమిక అనుపాత సిద్ధాంతం ప్రకారం: AD/DB = AE/EC => 1.5/3 = 1/EC => EC = 2 సెం.మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set up the proportion AD/DB = AE/EC and cross-multiply.",
+      "hi": "अनुपात AD/DB = AE/EC बनाएँ और तिर्यक गुणा करें।",
+      "te": "AD/DB = AE/EC నిష్పత్తిని వేసి అడ్డగుణకారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-02",
+    "conceptId": "c10-tri-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If two triangles ABC and PQR are similar such that ∠A = 45° and ∠B = 75°, then the measure of ∠R is:",
+      "hi": "यदि दो त्रिभुज ABC और PQR समरूप हैं और ∠A = 45° तथा ∠B = 75° है, तो ∠R का मान क्या है?",
+      "te": "రెండు త్రిభుజాలు ABC మరియు PQR సరూపాలుగా ఉండి ∠A = 45° మరియు ∠B = 75° అయితే, ∠R కొలత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "45°",
+          "hi": "45°",
+          "te": "45°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_right_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "55°",
+          "hi": "55°",
+          "te": "55°",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "60°",
+          "hi": "60°",
+          "te": "60°",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "75°",
+          "hi": "75°",
+          "te": "75°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_straight_angle_with_complete_angle"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "In ΔABC, sum of angles is 180°: ∠C = 180° - (45° + 75°) = 60°. Since ΔABC ~ ΔPQR, corresponding angle ∠R = ∠C = 60°.",
+      "hi": "ΔABC में: ∠C = 180° - (45° + 75°) = 60°। समरूप त्रिभुजों में संगत कोण बराबर होते हैं: ∠R = ∠C = 60°।",
+      "te": "ΔABC లో: ∠C = 180° - (45° + 75°) = 60°. సరూప త్రిభుజాలలో అనురూప కోణాలు సమానం కాబట్టి ∠R = ∠C = 60°.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "First find the third angle of triangle ABC using the angle sum property.",
+      "hi": "पहले त्रिभुज के तीनों कोणों के योग गुणधर्म से त्रिभुज ABC का तीसरा कोण ज्ञात करें।",
+      "te": "మొదట త్రిభుజ కోణాల మొత్తం ధర్మం ద్వారా ΔABC లో మూడవ కోణాన్ని కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-03",
+    "conceptId": "c10-tri-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Two figures having the same shape but not necessarily the same size are called:",
+      "hi": "समान आकार (shape) परंतु आवश्यक रूप से समान माप (size) न रखने वाली दो आकृतियाँ क्या कहलाती हैं?",
+      "te": "ఒకే ఆకారం కలిగి ఉండి, ఒకే పరిమాణం తప్పనిసరిగా ఉండాల్సిన అవసరం లేని రెండు పటాలను ఏమంటారు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Congruent figures",
+          "hi": "सर्वांगसम आकृतियाँ",
+          "te": "సర్వసమాన పటాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_right_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Similar figures",
+          "hi": "समरूप आकृतियाँ",
+          "te": "సరూప పటాలు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Equal figures",
+          "hi": "बराबर आकृतियाँ",
+          "te": "సమాన పటాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_degree_with_single_axis_point"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Symmetric figures",
+          "hi": "सममित आकृतियाँ",
+          "te": "సౌష్టవ పటాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_perpendicular_rays"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "By definition, figures that have the same shape but possibly different sizes are similar figures. Congruent figures must also have the exact same size.",
+      "hi": "परिभाषा के अनुसार, समान आकार परंतु भिन्न माप वाली आकृतियाँ समरूप कहलाती हैं। सर्वांगसम आकृतियों का माप भी समान होना आवश्यक है।",
+      "te": "నిర్వచనం ప్రకారం, ఒకే ఆకారం ఉండి పరిమాణం మారే పటాలను సరూప పటాలు అంటారు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Recall that 'congruent' means same shape AND same size, while 'similar' requires only same shape.",
+      "hi": "याद रखें कि सर्वांगसम में आकार और माप दोनों समान होते हैं, जबकि समरूप में केवल आकार समान होना पर्याप्त है।",
+      "te": "సర్వసమానం అంటే ఆకారం మరియు పరిమాణం రెండూ సమానం, సరూపం అంటే కేవలం ఆకారం మాత్రమే సమానం అని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-04",
+    "conceptId": "c10-tri-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "In a right triangle ABC right-angled at B, if AB = 6 cm and BC = 8 cm, find the length of the hypotenuse AC.",
+      "hi": "एक समकोण त्रिभुज ABC में जिसका कोण B समकोण है, यदि AB = 6 सेमी और BC = 8 सेमी है, तो कर्ण AC की लंबाई ज्ञात कीजिए।",
+      "te": "B వద్ద లంబకోణం కలిగిన లంబకోణ త్రిభుజం ABC లో, AB = 6 సెం.మీ మరియు BC = 8 సెం.మీ అయితే కర్ణం AC పొడవు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "14 cm",
+          "hi": "14 सेमी",
+          "te": "14 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "12 cm",
+          "hi": "12 सेमी",
+          "te": "12 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9 cm",
+          "hi": "9 सेमी",
+          "te": "9 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "10 cm",
+          "hi": "10 सेमी",
+          "te": "10 సెం.మీ",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "By Pythagoras Theorem: AC² = AB² + BC² = 6² + 8² = 36 + 64 = 100 => AC = √100 = 10 cm.",
+      "hi": "पाइथागोरस प्रमेय से: AC² = 6² + 8² = 36 + 64 = 100 => AC = 10 सेमी।",
+      "te": "పైథాగరస్ సిద్ధాంతం ప్రకారం: AC² = 6² + 8² = 36 + 64 = 100 => AC = 10 సెం.మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Square both legs, add the results, and take the square root.",
+      "hi": "दोनों भुजाओं का वर्ग करें, जोड़ें और वर्गमूल लें।",
+      "te": "రెండు భుజాలను వర్గం చేసి, కూడి, వర్గమూలం కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-05",
+    "conceptId": "c10-tri-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If triangle ABC ~ triangle DEF such that 2AB = DE and BC = 8 cm, find EF.",
+      "hi": "यदि त्रिभुज ABC ~ त्रिभुज DEF इस प्रकार है कि 2AB = DE और BC = 8 सेमी है, तो EF ज्ञात कीजिए।",
+      "te": "త్రిభుజం ABC ~ త్రిభుజం DEF మరియు 2AB = DE, BC = 8 సెం.మీ అయితే EF ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "16 cm",
+          "hi": "16 सेमी",
+          "te": "16 సెం.మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4 cm",
+          "hi": "4 सेमी",
+          "te": "4 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "10 cm",
+          "hi": "10 सेमी",
+          "te": "10 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_fraction_divided_product_by_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "12 cm",
+          "hi": "12 सेमी",
+          "te": "12 సెం.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Since ΔABC ~ ΔDEF, ratio of corresponding sides is equal: AB/DE = BC/EF. Given DE = 2AB, AB/(2AB) = 8/EF => 1/2 = 8/EF => EF = 16 cm.",
+      "hi": "समरूप त्रिभुजों की संगत भुजाएँ समानुपाती होती हैं: AB/DE = BC/EF => 1/2 = 8/EF => EF = 16 सेमी।",
+      "te": "సరూప త్రిభుజాల అనురూప భుజాల నిష్పత్తి సమానం: AB/DE = BC/EF => 1/2 = 8/EF => EF = 16 సెం.మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The scale factor from ΔABC to ΔDEF is 2.",
+      "hi": "ΔABC से ΔDEF का स्केल फैक्टर 2 है।",
+      "te": "ΔABC నుండి ΔDEF కి స్కేల్ ఫ్యాక్టర్ 2.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-06",
+    "conceptId": "c10-tri-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "word_problem",
+    "verified": false,
+    "prompt": {
+      "en": "A vertical pole of length 6 m casts a shadow 4 m long on the ground, and at the same time a tower casts a shadow 28 m long. Find the height of the tower.",
+      "hi": "6 मीटर लंबाई वाला एक ऊर्ध्वाधर खंभा जमीन पर 4 मीटर लंबी छाया डालता है, और उसी समय एक मीनार 28 मीटर लंबी छाया डालती है। मीनार की ऊँचाई ज्ञात कीजिए।",
+      "te": "6 మీటర్ల పొడవు గల నిలువు స్తంభం నేలపై 4 మీటర్ల నీడను ఏర్పరుస్తుంది, అదే సమయంలో ఒక టవర్ 28 మీటర్ల నీడను ఏర్పరుస్తుంది. టవర్ ఎత్తు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36 m",
+          "hi": "36 मीटर",
+          "te": "36 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "40 m",
+          "hi": "40 मीटर",
+          "te": "40 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "42 m",
+          "hi": "42 मीटर",
+          "te": "42 మీటర్లు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "48 m",
+          "hi": "48 मीटर",
+          "te": "48 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "At the same time, the angle of elevation of the sun is the same, so the triangles formed by the objects and their shadows are similar. (Height of tower) / (Pole height) = (Tower shadow) / (Pole shadow) => H / 6 = 28 / 4 = 7 => H = 6 × 7 = 42 m.",
+      "hi": "सूर्य का उन्नयन कोण समान होने से बने त्रिभुज समरूप हैं: H/6 = 28/4 => H = 6 × 7 = 42 मीटर।",
+      "te": "సూర్యుని ఉన్నతి కోణం ఒకేలా ఉండటం వల్ల ఏర్పడే త్రిభుజాలు సరూపాలు: H/6 = 28/4 => H = 6 × 7 = 42 మీటర్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set up the proportion (Height of tower) / 28 = 6 / 4.",
+      "hi": "समानुपात (मीनार की ऊँचाई)/28 = 6/4 बनाएँ।",
+      "te": "(టవర్ ఎత్తు)/28 = 6/4 అనుపాతాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-07",
+    "conceptId": "c10-tri-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "word_problem",
+    "verified": false,
+    "prompt": {
+      "en": "A ladder 10 m long reaches a window 8 m above the ground. Find the distance of the foot of the ladder from the base of the wall.",
+      "hi": "10 मीटर लंबी एक सीढ़ी जमीन से 8 मीटर ऊँची खिड़की तक पहुँचती है। दीवार के आधार से सीढ़ी के पाद की दूरी ज्ञात कीजिए।",
+      "te": "10 మీటర్ల పొడవు గల నిచ్చెన నేల నుండి 8 మీటర్ల ఎత్తులో ఉన్న కిటికీని తాకుతుంది. గోడ అడుగు భాగం నుండి నిచ్చెన అడుగు భాగం ఎంత దూరంలో ఉంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4 m",
+          "hi": "4 मीटर",
+          "te": "4 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "6 m",
+          "hi": "6 मीटर",
+          "te": "6 మీటర్లు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8 m",
+          "hi": "8 मीटर",
+          "te": "8 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "√164 m",
+          "hi": "√164 मीटर",
+          "te": "√164 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The ladder, wall, and ground form a right-angled triangle. Hypotenuse = 10 m, vertical leg = 8 m. Base d = √(10² - 8²) = √(100 - 64) = √36 = 6 m.",
+      "hi": "सीढ़ी, दीवार और जमीन समकोण त्रिभुज बनाते हैं। d = √(10² - 8²) = √(100 - 64) = √36 = 6 मीटर।",
+      "te": "నిచ్చెన, గోడ మరియు నేల లంబకోణ త్రిభుజాన్ని ఏర్పరుస్తాయి. d = √(10² - 8²) = √(100 - 64) = √36 = 6 మీటర్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "In Pythagoras theorem, base² = hypotenuse² - height².",
+      "hi": "पाइथागोरस प्रमेय में, आधार² = कर्ण² - लंब² होता है।",
+      "te": "పైథాగరస్ సిద్ధాంతంలో, భూమి² = కర్ణం² - ఎత్తు².",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-tri-08",
+    "conceptId": "c10-tri-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "In an equilateral triangle ABC of side 2a, find the length of each of its altitudes.",
+      "hi": "भुजा 2a वाले एक समबाहु त्रिभुज ABC में, इसके प्रत्येक शीर्षलंब की लंबाई ज्ञात कीजिए।",
+      "te": "2a భుజం గల సమబాహు త్రిభుజం ABC లో దాని ప్రతి ఉన్నతి పొడవు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "a√3",
+          "hi": "a√3",
+          "te": "a√3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2a√3",
+          "hi": "2a√3",
+          "te": "2a√3",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_exponent_on_variable"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3a",
+          "hi": "3a",
+          "te": "3a",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "a√2",
+          "hi": "a√2",
+          "te": "a√2",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The altitude of an equilateral triangle bisects the base into lengths a. In the right triangle: h² + a² = (2a)² => h² + a² = 4a² => h² = 3a² => h = a√3.",
+      "hi": "समबाहु त्रिभुज का शीर्षलंब आधार को दो बराबर भागों (a) में बाँटता है। h² + a² = (2a)² => h² = 3a² => h = a√3।",
+      "te": "సమబాహు త్రిభుజం యొక్క ఉన్నతి భూమిని a పొడవు గల రెండు సమాన భాగాలుగా విభజిస్తుంది. h² + a² = 4a² => h² = 3a² => h = a√3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The altitude splits the equilateral triangle into two 30-60-90 right triangles with base a and hypotenuse 2a.",
+      "hi": "शीर्षलंब समबाहु त्रिभुज को दो समकोण त्रिभुजों में विभाजित करता है जिनका आधार a और कर्ण 2a है।",
+      "te": "ఉన్నతి సమబాహు త్రిభుజాన్ని భూమి a, కర్ణం 2a గల రెండు లంబకోణ త్రిభుజాలుగా విభజిస్తుంది.",
+      "reviewed": false
+    }
+  }
+]

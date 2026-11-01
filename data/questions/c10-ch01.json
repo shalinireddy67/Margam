@@ -132,5 +132,413 @@
       "te": "LCM = (a × b) / HCF. ముందుగా 306 / 9 = 34 చేయండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c10-real-03",
+    "conceptId": "c10-real-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the HCF of 96 and 404 using prime factorisation.",
+      "hi": "अभाज्य गुणनखंडन विधि द्वारा 96 और 404 का HCF ज्ञात कीजिए।",
+      "te": "ప్రధాన కారణాంకాల పద్ధతి ద్వారా 96 మరియు 404 ల HCF కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "extra_factor_of_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "composite_number_fourteen_included"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "96 = 2⁵ × 3 and 404 = 2² × 101. The common prime factor is 2, with smallest exponent 2. Thus HCF = 2² = 4.",
+      "hi": "96 = 2⁵ × 3 और 404 = 2² × 101 है। उभयनिष्ठ अभाज्य गुणनखंड 2 है जिसकी न्यूनतम घात 2 है। अतः HCF = 2² = 4।",
+      "te": "96 = 2⁵ × 3 మరియు 404 = 2² × 101. ఉమ్మడి ప్రధాన కారణాంకం 2, కనిష్ట ఘాతం 2. కాబట్టి HCF = 2² = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find the prime factors of both numbers and take the product of smallest powers of common prime factors.",
+      "hi": "दोनों संख्याओं के अभाज्य गुणनखंड ज्ञात करें और उभयनिष्ठ गुणनखंडों की न्यूनतम घात लें।",
+      "te": "రెండు సంఖ్యల ప్రధాన కారణాంకాలను కనుగొని ఉమ్మడి కారణాంకాల కనిష్ట ఘాతాల లబ్దం తీసుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-04",
+    "conceptId": "c10-real-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Which of the following is an irrational number?",
+      "hi": "निम्नलिखित में से कौन-सी एक अपरिमेय संख्या है?",
+      "te": "కింది వాటిలో ఏది కరణీయ సంఖ్య?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "√4",
+          "hi": "√4",
+          "te": "√4",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "0.375",
+          "hi": "0.375",
+          "te": "0.375",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "√7",
+          "hi": "√7",
+          "te": "√7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "22/7",
+          "hi": "22/7",
+          "te": "22/7",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "√4 = 2 (rational), 0.375 = 375/1000 = 3/8 (rational), 22/7 is p/q form (rational). √7 cannot be written as p/q with integers p, q; hence it is irrational.",
+      "hi": "√4 = 2 (परिमेय), 0.375 = 3/8 (परिमेय), 22/7 p/q रूप में है। √7 को p/q के रूप में व्यक्त नहीं किया जा सकता, अतः यह अपरिमेय है।",
+      "te": "√4 = 2 (అకరణీయ), 0.375 = 3/8 (అకరణీయ), 22/7 p/q రూపంలో ఉంది. √7 ను పూర్ణసంఖ్యల p/q రూపంలో రాయలేము, కాబట్టి ఇది కరణీయ సంఖ్య.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The square root of any non-square prime number is always irrational.",
+      "hi": "किसी भी अभाज्य संख्या का वर्गमूल सदैव अपरिमेय होता है।",
+      "te": "ఏదైనా ప్రధాన సంఖ్య యొక్క వర్గమూలం ఎల్లప్పుడూ కరణీయ సంఖ్య అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-05",
+    "conceptId": "c10-real-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the LCM of 12, 15 and 21 using the prime factorisation method.",
+      "hi": "अभाज्य गुणनखंडन विधि द्वारा 12, 15 और 21 का LCM ज्ञात कीजिए।",
+      "te": "ప్రధాన కారణాంకాల పద్ధతి ద్వారా 12, 15 మరియు 21 ల LCM కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "420",
+          "hi": "420",
+          "te": "420",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "210",
+          "hi": "210",
+          "te": "210",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "840",
+          "hi": "840",
+          "te": "840",
+          "reviewed": false
+        },
+        "mistakeTag": "extra_factor_of_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "12 = 2² × 3, 15 = 3 × 5, 21 = 3 × 7. LCM = 2² × 3 × 5 × 7 = 4 × 3 × 5 × 7 = 420.",
+      "hi": "12 = 2² × 3, 15 = 3 × 5, 21 = 3 × 7। LCM = 2² × 3 × 5 × 7 = 420।",
+      "te": "12 = 2² × 3, 15 = 3 × 5, 21 = 3 × 7. LCM = 2² × 3 × 5 × 7 = 420.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "LCM is the product of the greatest power of each prime factor involved in the numbers.",
+      "hi": "LCM संख्याओं में शामिल प्रत्येक अभाज्य गुणनखंड की उच्चतम घात का गुणनफल होता है।",
+      "te": "LCM అనేది సంఖ్యలలోని ప్రతి ప్రధాన కారణాంకం యొక్క గరిష్ట ఘాతాల లబ్దం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-06",
+    "conceptId": "c10-real-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If two positive integers a and b are written as a = x³y² and b = xy³, where x, y are prime numbers, then HCF(a, b) is:",
+      "hi": "यदि दो धनात्मक पूर्णांक a और b को a = x³y² और b = xy³ के रूप में लिखा जाता है, जहाँ x, y अभाज्य संख्याएँ हैं, तो HCF(a, b) क्या है?",
+      "te": "రెండు ధన పూర్ణసంఖ్యలు a మరియు b లను a = x³y² మరియు b = xy³ గా రాస్తే (ఇక్కడ x, y ప్రధాన సంఖ్యలు), HCF(a, b) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "xy",
+          "hi": "xy",
+          "te": "xy",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "xy²",
+          "hi": "xy²",
+          "te": "xy²",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x³y³",
+          "hi": "x³y³",
+          "te": "x³y³",
+          "reviewed": false
+        },
+        "mistakeTag": "extra_factor_of_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x²y²",
+          "hi": "x²y²",
+          "te": "x²y²",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "HCF takes the minimum power of each common prime factor: for x it is min(3, 1) = 1, for y it is min(2, 3) = 2. Thus HCF = x¹y² = xy².",
+      "hi": "HCF प्रत्येक उभयनिष्ठ अभाज्य गुणनखंड की न्यूनतम घात लेता है: x के लिए min(3, 1) = 1, y के लिए min(2, 3) = 2। अतः HCF = xy²।",
+      "te": "HCF ఉమ్మడి ప్రధాన కారణాంకాల కనిష్ట ఘాతాలను తీసుకుంటుంది: x కి 1, y కి 2. కాబట్టి HCF = xy².",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that HCF uses the smallest exponent of each common prime.",
+      "hi": "याद रखें कि HCF प्रत्येक उभयनिष्ठ अभाज्य गुणनखंड की सबसे छोटी घात का उपयोग करता है।",
+      "te": "HCF ప్రతి ఉమ్మడి ప్రధాన కారణాంకం యొక్క కనిష్ట ఘాతాన్ని ఉపయోగిస్తుందని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-07",
+    "conceptId": "c10-real-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "word_problem",
+    "verified": false,
+    "prompt": {
+      "en": "Three bells toll together at intervals of 9, 12, 15 minutes respectively. If they start tolling together, after what minimum time will they toll together next?",
+      "hi": "तीन घंटियाँ क्रमशः 9, 12, 15 मिनट के अंतराल पर बजती हैं। यदि वे एक साथ बजना शुरू करती हैं, तो अगली बार वे कितने न्यूनतम समय बाद एक साथ बजेंगी?",
+      "te": "మూడు గంటలు వరుసగా 9, 12, 15 నిమిషాల వ్యవధిలో మోగుతాయి. అవి ఒకేసారి మోగడం ప్రారంభిస్తే, తర్వాత ఎంత కనీస సమయం తర్వాత మళ్లీ కలిసి మోగుతాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36 minutes",
+          "hi": "36 मिनट",
+          "te": "36 నిమిషాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "60 minutes",
+          "hi": "60 मिनट",
+          "te": "60 నిమిషాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "factored_into_composites_not_primes"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "90 minutes",
+          "hi": "90 मिनट",
+          "te": "90 నిమిషాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "180 minutes",
+          "hi": "180 मिनट",
+          "te": "180 నిమిషాలు",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "The time interval after which they toll together is LCM(9, 12, 15). 9 = 3², 12 = 2² × 3, 15 = 3 × 5. LCM = 2² × 3² × 5 = 4 × 9 × 5 = 180 minutes.",
+      "hi": "वह समय अंतराल LCM(9, 12, 15) है। 9 = 3², 12 = 2² × 3, 15 = 3 × 5। LCM = 2² × 3² × 5 = 180 मिनट।",
+      "te": "మళ్లీ కలిసి మోగే సమయం LCM(9, 12, 15). 9 = 3², 12 = 2² × 3, 15 = 3 × 5. LCM = 2² × 3² × 5 = 180 నిమిషాలు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Problems asking for when periodic events repeat next require finding the LCM.",
+      "hi": "आवर्ती घटनाओं के एक साथ अगली बार घटने के लिए LCM ज्ञात किया जाता है।",
+      "te": "పునరావృతమయ్యే సంఘటనలు మళ్లీ ఎప్పుడు కలిసి జరుగుతాయో కనుగొనడానికి LCM అవసరం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-08",
+    "conceptId": "c10-real-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If HCF(a, 8) = 4 and LCM(a, 8) = 24, what is the value of a?",
+      "hi": "यदि HCF(a, 8) = 4 और LCM(a, 8) = 24 है, तो a का मान क्या है?",
+      "te": "HCF(a, 8) = 4 మరియు LCM(a, 8) = 24 అయితే, a విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "extra_factor_of_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using the formula HCF(a, b) × LCM(a, b) = a × b: 4 × 24 = a × 8 => 96 = 8a => a = 96 / 8 = 12.",
+      "hi": "HCF(a, b) × LCM(a, b) = a × b सूत्र का उपयोग करें: 4 × 24 = a × 8 => 96 = 8a => a = 12।",
+      "te": "HCF(a, b) × LCM(a, b) = a × b సూత్రం ద్వారా: 4 × 24 = a × 8 => 96 = 8a => a = 12.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Recall that the product of two positive integers equals the product of their HCF and LCM.",
+      "hi": "याद रखें कि दो धनात्मक पूर्णांकों का गुणनफल उनके HCF और LCM के गुणनफल के बराबर होता है।",
+      "te": "రెండు ధన పూర్ణసంఖ్యల లబ్దం వాటి HCF మరియు LCM ల లబ్దానికి సమానమని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
   }
 ]

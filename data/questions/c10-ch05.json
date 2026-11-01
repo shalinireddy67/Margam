@@ -1,1 +1,546 @@
-[]
+[
+  {
+    "id": "q-c10-ap-01",
+    "conceptId": "c10-ap-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "What is the common difference d of the AP: 3, 7, 11, 15, ...?",
+      "hi": "AP: 3, 7, 11, 15, ... का सार्व अंतर d क्या है?",
+      "te": "AP: 3, 7, 11, 15, ... యొక్క సాధారణ భేదం d ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The common difference d = a₂ - a₁ = 7 - 3 = 4.",
+      "hi": "सार्व अंतर d = a₂ - a₁ = 7 - 3 = 4।",
+      "te": "సాధారణ భేదం d = a₂ - a₁ = 7 - 3 = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the first term from the second term.",
+      "hi": "दूसरे पद में से पहला पद घटाएँ।",
+      "te": "రెండవ పదం నుండి మొదటి పదాన్ని తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-02",
+    "conceptId": "c10-ap-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the 10th term of the AP: 2, 7, 12, ...",
+      "hi": "AP: 2, 7, 12, ... का 10वां पद ज्ञात कीजिए।",
+      "te": "AP: 2, 7, 12, ... యొక్క 10వ పదాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "47",
+          "hi": "47",
+          "te": "47",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "50",
+          "hi": "50",
+          "te": "50",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "45",
+          "hi": "45",
+          "te": "45",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "52",
+          "hi": "52",
+          "te": "52",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_four_by_three"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Here a = 2, d = 7 - 2 = 5. a₁₀ = a + (10 - 1)d = 2 + 9(5) = 2 + 45 = 47.",
+      "hi": "यहाँ a = 2, d = 5। a₁₀ = 2 + (10 - 1)5 = 2 + 45 = 47।",
+      "te": "ఇక్కడ a = 2, d = 5. a₁₀ = 2 + (10 - 1)5 = 2 + 45 = 47.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Use the formula aₙ = a + (n - 1)d.",
+      "hi": "aₙ = a + (n - 1)d सूत्र का उपयोग करें।",
+      "te": "aₙ = a + (n - 1)d సూత్రాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-03",
+    "conceptId": "c10-ap-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Which term of the AP: 21, 18, 15, ... is -81?",
+      "hi": "AP: 21, 18, 15, ... का कौन-सा पद -81 है?",
+      "te": "AP: 21, 18, 15, ... లో ఎన్నవ పదం -81 అవుతుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "34th term",
+          "hi": "34वां पद",
+          "te": "34వ పదం",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "30th term",
+          "hi": "30वां पद",
+          "te": "30వ పదం",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "35th term",
+          "hi": "35वां पद",
+          "te": "35వ పదం",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "36th term",
+          "hi": "36वां पद",
+          "te": "36వ పదం",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "a = 21, d = 18 - 21 = -3. aₙ = a + (n - 1)d => -81 = 21 + (n - 1)(-3) => -102 = -3(n - 1) => n - 1 = 34 => n = 35.",
+      "hi": "a = 21, d = -3। -81 = 21 + (n - 1)(-3) => -102 = -3(n - 1) => n - 1 = 34 => n = 35।",
+      "te": "a = 21, d = -3. -81 = 21 + (n - 1)(-3) => -102 = -3(n - 1) => n - 1 = 34 => n = 35.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Note that d is negative because the AP is decreasing.",
+      "hi": "ध्यान दें कि श्रेणी घट रही है इसलिए d ऋणात्मक है।",
+      "te": "శ్రేఢి తగ్గుతోంది కాబట్టి d ఋణాత్మకం అని గమనించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-04",
+    "conceptId": "c10-ap-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "Find the sum of the first 20 terms of the AP: 1, 4, 7, 10, ...",
+      "hi": "AP: 1, 4, 7, 10, ... के प्रथम 20 पदों का योग ज्ञात कीजिए।",
+      "te": "AP: 1, 4, 7, 10, ... యొక్క మొదటి 20 పదాల మొత్తం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "570",
+          "hi": "570",
+          "te": "570",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "590",
+          "hi": "590",
+          "te": "590",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "600",
+          "hi": "600",
+          "te": "600",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "620",
+          "hi": "620",
+          "te": "620",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "a = 1, d = 3, n = 20. S₂₀ = (20/2) × [2(1) + (20 - 1)(3)] = 10 × [2 + 57] = 10 × 59 = 590.",
+      "hi": "a = 1, d = 3, n = 20। S₂₀ = (20/2) × [2(1) + 19(3)] = 10 × 59 = 590।",
+      "te": "a = 1, d = 3, n = 20. S₂₀ = 10 × [2 + 57] = 10 × 59 = 590.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Use Sₙ = n/2 * [2a + (n - 1)d].",
+      "hi": "Sₙ = n/2 * [2a + (n - 1)d] सूत्र का उपयोग करें।",
+      "te": "Sₙ = n/2 * [2a + (n - 1)d] సూత్రాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-05",
+    "conceptId": "c10-ap-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If the 3rd and 9th terms of an AP are 4 and -8 respectively, find the common difference d.",
+      "hi": "यदि किसी AP के तीसरे और 9वें पद क्रमशः 4 और -8 हैं, तो सार्व अंतर d ज्ञात कीजिए।",
+      "te": "ఒక AP లో 3వ మరియు 9వ పదాలు వరుసగా 4 మరియు -8 అయితే, సాధారణ భేదం d ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "a₃ = a + 2d = 4, a₉ = a + 8d = -8. Subtracting gives (a + 8d) - (a + 2d) = -8 - 4 => 6d = -12 => d = -2.",
+      "hi": "a + 2d = 4 और a + 8d = -8। घटाने पर: 6d = -12 => d = -2।",
+      "te": "a + 2d = 4 మరియు a + 8d = -8. తీసివేస్తే: 6d = -12 => d = -2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract a₃ from a₉ to eliminate the first term a.",
+      "hi": "पहला पद a समाप्त करने के लिए a₉ में से a₃ घटाएँ।",
+      "te": "మొదటి పదం a ని తొలగించడానికి a₉ నుండి a₃ ని తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-06",
+    "conceptId": "c10-ap-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "How many multiples of 4 lie between 10 and 250?",
+      "hi": "10 और 250 के बीच में 4 के कितने गुणज हैं?",
+      "te": "10 మరియు 250 ల మధ్య 4 యొక్క గుణిజాలు ఎన్ని ఉన్నాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "59",
+          "hi": "59",
+          "te": "59",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "61",
+          "hi": "61",
+          "te": "61",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "62",
+          "hi": "62",
+          "te": "62",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_place_value"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "First multiple > 10 is 12. Last multiple < 250 is 248. AP: 12, 16, ..., 248. 248 = 12 + (n - 1)4 => 236 = 4(n - 1) => n - 1 = 59 => n = 60.",
+      "hi": "पहला गुणज 12 और अंतिम 248 है। 248 = 12 + (n - 1)4 => 236 = 4(n - 1) => n - 1 = 59 => n = 60।",
+      "te": "మొదటి గుణిజం 12 మరియు చివరిది 248. 248 = 12 + (n - 1)4 => n - 1 = 59 => n = 60.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Identify the first and last multiples of 4 within the range and form an AP.",
+      "hi": "दी गई सीमा में 4 के पहले और अंतिम गुणज ज्ञात करें और एक AP बनाएँ।",
+      "te": "పరిధిలోని 4 యొక్క మొదటి మరియు చివరి గుణిజాలను గుర్తించి AP ని రూపొందించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-07",
+    "conceptId": "c10-ap-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": false,
+    "prompt": {
+      "en": "If the sum of the first n terms of an AP is given by Sₙ = 3n² + 5n, find the 15th term.",
+      "hi": "यदि किसी AP के प्रथम n पदों का योग Sₙ = 3n² + 5n द्वारा दिया गया है, तो 15वां पद ज्ञात कीजिए।",
+      "te": "ఒక AP లో మొదటి n పదాల మొత్తం Sₙ = 3n² + 5n అయితే, 15వ పదం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "88",
+          "hi": "88",
+          "te": "88",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "90",
+          "hi": "90",
+          "te": "90",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "95",
+          "hi": "95",
+          "te": "95",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "92",
+          "hi": "92",
+          "te": "92",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "aₙ = Sₙ - Sₙ₋₁. a₁₅ = S₁₅ - S₁₄ = [3(15)² + 5(15)] - [3(14)² + 5(14)] = [3(225) + 75] - [3(196) + 70] = 750 - 658 = 92.",
+      "hi": "a₁₅ = S₁₅ - S₁₄ = [3(225) + 75] - [3(196) + 70] = 750 - 658 = 92।",
+      "te": "a₁₅ = S₁₅ - S₁₄ = [3(225) + 75] - [3(196) + 70] = 750 - 658 = 92.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Use the identity aₙ = Sₙ - Sₙ₋₁ for n = 15.",
+      "hi": "n = 15 के लिए संबंध aₙ = Sₙ - Sₙ₋₁ का उपयोग करें।",
+      "te": "n = 15 కొరకు aₙ = Sₙ - Sₙ₋₁ సంబంధాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-ap-08",
+    "conceptId": "c10-ap-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "word_problem",
+    "verified": false,
+    "prompt": {
+      "en": "A contract on a construction job specifies a penalty for delay of completion beyond a certain date as follows: ₹200 for the first day, ₹250 for the second day, ₹300 for the third day, etc. How much money does the contractor have to pay as penalty if he delays the work by 30 days?",
+      "hi": "निर्माण कार्य के एक ठेके में एक निश्चित तिथि से विलंब होने पर जुर्माना इस प्रकार लगाया जाता है: पहले दिन ₹200, दूसरे दिन ₹250, तीसरे दिन ₹300 इत्यादि। यदि ठेकेदार 30 दिन का विलंब करता है, तो उसे जुर्माने के रूप में कितनी राशि देनी होगी?",
+      "te": "ఒక నిర్మాణ కాంట్రాక్ట్‌లో పని ఆలస్యమైతే జరిమానా ఈ విధంగా ఉంటుంది: మొదటి రోజు ₹200, రెండవ రోజు ₹250, మూడవ రోజు ₹300 మొదలైనవి. కాంట్రాక్టర్ 30 రోజులు ఆలస్యం చేస్తే జరిమానాగా ఎంత చెల్లించాలి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "₹25,500",
+          "hi": "₹25,500",
+          "te": "₹25,500",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "₹27,750",
+          "hi": "₹27,750",
+          "te": "₹27,750",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "₹28,500",
+          "hi": "₹28,500",
+          "te": "₹28,500",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "₹30,000",
+          "hi": "₹30,000",
+          "te": "₹30,000",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "This is an AP with a = 200, d = 50, n = 30. Total penalty = S₃₀ = (30/2) × [2(200) + (30 - 1)(50)] = 15 × [400 + 1450] = 15 × 1850 = ₹27,750.",
+      "hi": "यह a = 200, d = 50, n = 30 वाली AP है। S₃₀ = 15 × [400 + 1450] = 15 × 1850 = ₹27,750।",
+      "te": "ఇది a = 200, d = 50, n = 30 గల AP. S₃₀ = 15 × [400 + 1450] = 15 × 1850 = ₹27,750.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate the sum S₃₀ of the AP with first term 200 and common difference 50.",
+      "hi": "प्रथम पद 200 और सार्व अंतर 50 वाली AP के प्रथम 30 पदों का योग S₃₀ ज्ञात करें।",
+      "te": "మొదటి పదం 200, సాధారణ భేదం 50 గా గల AP యొక్క S₃₀ మొత్తాన్ని లెక్కించండి.",
+      "reviewed": false
+    }
+  }
+]
