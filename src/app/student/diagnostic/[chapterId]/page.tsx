@@ -51,7 +51,7 @@ import {
 } from "@/components/ui/PixelEffects";
 import { playPopSound, playGentleOopsSound } from "@/lib/sound";
 import { applyAwardedXpToProfile } from "@/lib/gamification";
-import { getLevelProgress } from "@/lib/xp-config";
+import { getLevelProgress, isIstNightTime } from "@/lib/xp-config";
 
 interface SanitizedOption {
   id: string;
@@ -237,9 +237,9 @@ export default function ChapterDiagnosticPage() {
   // Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+      <div className="min-h-[100dvh] bg-[#2A1E17] text-[#FFF7E6] p-4 sm:p-6 pb-28 flex flex-col justify-center items-center">
         <OfflineBanner />
-        <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading diagnostic assessment">
+        <div className="max-w-2xl w-full mx-auto space-y-4 pt-4" role="status" aria-label="Loading diagnostic assessment">
           <SkeletonCard />
           <SkeletonCard />
         </div>
@@ -250,7 +250,7 @@ export default function ChapterDiagnosticPage() {
   // Error State with Retry
   if (hasError) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-16">
+      <div className="min-h-[100dvh] bg-[#2A1E17] text-[#FFF7E6] flex flex-col justify-between">
         <OfflineBanner />
         <StudentHeader
           profile={profile}
@@ -259,15 +259,15 @@ export default function ChapterDiagnosticPage() {
           backHref="/"
           backLabel="Back to Lessons"
         />
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-[#173B19] border-3 border-[#D9453D] p-8 shadow-[6px_6px_0px_#102610] space-y-4">
-            <div className="w-12 h-12 bg-[#D9453D] border-2 border-[#102610] flex items-center justify-center mx-auto text-[#FFFFFF] font-heading font-extrabold text-lg">
+        <main className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
+          <div className="bg-[#5A3720] border-4 border-[#422816] p-6 sm:p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 w-full">
+            <div className="w-14 h-14 bg-[#E04A3F] border-3 border-[#422816] flex items-center justify-center mx-auto text-[#FFFFFF] font-heading font-extrabold text-lg shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
               !
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
+            <h1 className="font-heading font-extrabold text-xl text-[#FFF7E6]">
               Diagnostic Assessment Error
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] leading-relaxed">
+            <p className="text-xs sm:text-sm font-medium text-[#E5D7BE] leading-relaxed">
               {errorMessage || "We encountered an issue preparing this diagnostic assessment."}
             </p>
             <div className="pt-2">
@@ -275,7 +275,7 @@ export default function ChapterDiagnosticPage() {
                 variant="pixelgreen"
                 size="default"
                 onClick={initDiagnostic}
-                className="w-full sm:w-auto min-h-[48px] text-[#102610]"
+                className="w-full sm:w-auto min-h-[48px]"
               >
                 <span>Try Again</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
@@ -287,10 +287,10 @@ export default function ChapterDiagnosticPage() {
     );
   }
 
-  // Guard: If chapter has fewer than 6 questions
+  // Guard: If chapter has fewer than 6 questions (Vertically centered properly on mobile & desktop)
   if (!canTakeChapterDiagnostic(chapterId)) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg flex flex-col justify-between text-[#F2F0DF] pb-16">
+      <div className="min-h-[100dvh] bg-[#2A1E17] text-[#FFF7E6] flex flex-col justify-between">
         <StudentHeader
           profile={profile}
           currentLang={currentLang}
@@ -298,21 +298,21 @@ export default function ChapterDiagnosticPage() {
           backHref="/"
           backLabel="Back to Path"
         />
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-[#173B19] p-8 border-3 border-[#315B2A] shadow-[6px_6px_0px_#102610] space-y-4">
-            <div className="w-12 h-12 bg-[#E5B834] border-2 border-[#102610] flex items-center justify-center mx-auto">
-              <BookOpen className="w-6 h-6 text-[#102610]" />
+        <main className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
+          <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 w-full">
+            <div className="w-14 h-14 bg-[#FFE9A8] border-3 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center justify-center mx-auto">
+              <BookOpen className="w-7 h-7 text-[#2B1B0F]" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
+            <h1 className="font-heading font-extrabold text-xl text-[#FFF7E6]">
               Diagnostic Not Available
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] leading-relaxed">
+            <p className="text-xs sm:text-sm font-medium text-[#E5D7BE] leading-relaxed max-w-md mx-auto">
               This chapter is still being built. Try another chapter or come back soon.
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#79B82A] text-[#102610] border-2 border-[#102610] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610] no-underline"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] text-xs font-heading font-extrabold shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
               >
                 <span>Return to Learning Path</span>
               </Link>
@@ -506,7 +506,7 @@ export default function ChapterDiagnosticPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6 relative">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 relative">
         <PixelConfetti active={showConfetti} />
         <FloatingXp xp={awardedXpAnim} active={showConfetti} />
         {showLevelUp && (
@@ -519,36 +519,42 @@ export default function ChapterDiagnosticPage() {
 
         {/* Student XP Progress Track */}
         {profile && (
-          <SegmentedXpBar currentXp={profile.xp || 0} />
-        )}
-        {/* Assessment Header Card */}
-        <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
-          <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#FFE9A8]">
-              <span>Chapter Diagnostic</span>
-              <span>•</span>
-              <span>Class {profile.selectedClass}</span>
-            </div>
-            <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[#FFE9A8]">
-              Intelligent Learning Gap Engine
-            </span>
+          <div className="max-w-[720px] lg:max-w-none mx-auto mb-6">
+            <SegmentedXpBar currentXp={profile.xp || 0} />
           </div>
+        )}
 
-          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#FFF7E6] tracking-wide drop-shadow-[2px_2px_0px_#422816]">
-            {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
-          </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Main Question Column: Focused max 720px width, centered on desktop */}
+          <div className="lg:col-span-8 max-w-[720px] mx-auto w-full space-y-6">
+            {/* Assessment Header Card */}
+            <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#FFE9A8]">
+                  <span>Chapter Diagnostic</span>
+                  <span>•</span>
+                  <span>Class {profile.selectedClass}</span>
+                </div>
+                <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[#FFE9A8]">
+                  Intelligent Learning Gap Engine
+                </span>
+              </div>
 
-          <p className="text-xs sm:text-sm text-[#E5D7BE] bg-[#422816] p-3.5 border-2 border-[#7A4B2A] leading-relaxed font-medium">
-            Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
-          </p>
+              <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#FFF7E6] tracking-wide drop-shadow-[2px_2px_0px_#422816]">
+                {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
+              </h1>
 
-          {errorMessage && (
-            <div className="p-3.5 bg-[#E04A3F]/20 border-2 border-[#E04A3F] text-xs font-bold flex items-center gap-2 text-[#FFF7E6]">
-              <AlertCircle className="w-4 h-4 shrink-0 text-[#E04A3F]" />
-              <span>{errorMessage}</span>
+              <p className="text-xs sm:text-sm text-[#E5D7BE] bg-[#422816] p-3.5 border-2 border-[#7A4B2A] leading-relaxed font-medium">
+                Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
+              </p>
+
+              {errorMessage && (
+                <div className="p-3.5 bg-[#E04A3F]/20 border-2 border-[#E04A3F] text-xs font-bold flex items-center gap-2 text-[#FFF7E6]">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-[#E04A3F]" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
             </div>
-          )}
-        </div>
 
         {/* ================================================================= */}
         {/* COMPREHENSIVE LEARNING GAP REPORT (WHEN RESULT IS AVAILABLE)      */}
@@ -830,18 +836,18 @@ export default function ChapterDiagnosticPage() {
                   </div>
                 </div>
 
-                {/* Question Prompt */}
+                {/* Question Prompt: Larger readable font on desktop */}
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#FFF7E6] leading-relaxed flex items-center flex-wrap gap-2">
-                      <span>{promptData.text}</span>
+                    <div className="font-sans text-base sm:text-lg lg:text-xl font-medium text-[#FFF7E6] leading-relaxed flex items-center flex-wrap gap-2">
+                      <span className="break-words">{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
+                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-heading font-bold bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
                           Draft Translation
                         </span>
                       )}
-                    </h3>
+                    </div>
                   );
                 })()}
 
@@ -1038,6 +1044,72 @@ export default function ChapterDiagnosticPage() {
             </form>
           </div>
         )}
+          </div>
+
+          {/* Desktop Side Companion & Progress Panel (Hidden on mobile & tablet) */}
+          <aside className="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 select-none">
+            {/* Companion Reaction Card */}
+            <div className="p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] text-center space-y-3">
+              <div className="flex justify-center">
+                <WitchCat
+                  pose={result ? (result.passed ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
+                  size={96}
+                  sticker={false}
+                  alt="Margam companion cheering you on"
+                />
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
+                  Companion Study Guide
+                </span>
+                <p className="text-xs text-[#FFF7E6] leading-relaxed font-sans font-medium">
+                  {result
+                    ? result.passed
+                      ? "Incredible work! You conquered the prerequisites for this chapter."
+                      : "We found the exact concept to practice. You've got this!"
+                    : "Take your time! No rush, every question diagnoses your foundational skills."}
+                </p>
+              </div>
+            </div>
+
+            {/* Live Progress Card */}
+            <div className="p-4 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-3">
+              <div className="flex items-center justify-between text-xs font-heading font-bold text-[#FFE9A8]">
+                <span>Question Progress</span>
+                <span>{Object.keys(answers).length} / {questions.length} Answered</span>
+              </div>
+              {/* Progress Blocks */}
+              <div className="grid grid-cols-6 gap-1.5">
+                {questions.map((q, idx) => {
+                  const isDone = !!answers[q.id];
+                  return (
+                    <div
+                      key={q.id}
+                      className={`h-4 border-2 border-[#422816] flex items-center justify-center text-[9px] font-heading font-extrabold ${
+                        isDone
+                          ? "bg-[#5DAA3A] text-[#FFF7E6]"
+                          : "bg-[#422816] text-[#A68A72]"
+                      }`}
+                    >
+                      {idx + 1}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Diagnostic Quest Bounty */}
+            <div className="p-4 bg-[#422816] border-2 border-[#7A4B2A] space-y-2 text-xs">
+              <div className="flex items-center gap-1.5 text-[#FFE9A8] font-heading font-extrabold">
+                <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
+                <span>Diagnostic Bounty</span>
+              </div>
+              <p className="text-[11px] text-[#E5D7BE] leading-relaxed">
+                Complete this diagnostic to earn <strong className="text-[#FFE9A8]">+30 XP</strong> and unlock personalized practice worksheets!
+              </p>
+            </div>
+          </aside>
+        </div>
       </main>
 
       <footer className="border-t-4 border-[#422816] py-4 text-center text-xs font-heading text-[#E5D7BE]/70 bg-[#1A1614]">

@@ -75,7 +75,7 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
   }[currentLang];
 
   return (
-    <section id="concept-pathway" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
+    <section id="concept-pathway" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-[1200px] mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
@@ -85,15 +85,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
         <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans font-medium">
           {t.subhead}
         </p>
       </div>
 
       {/* Grid: Graph Columns + Right Inspector */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left: 3 Grade Columns */}
-        <div className="lg:col-span-8 space-y-6">
+        {/* Left: 3 Grade Columns with smooth mobile panning */}
+        <div className="lg:col-span-8 space-y-6 overflow-x-auto pb-2 -mx-1 px-1 sm:mx-0 sm:px-0">
           {/* Class 7 Column */}
           <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-5 sm:p-6 space-y-3">
             <div className="flex items-center justify-between pb-2 border-b-2 border-[#E5D7BE]">

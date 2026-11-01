@@ -22,10 +22,10 @@ export function Toast({
     type === "error"
       ? "bg-[#D9453D] text-[#FFF7E6]"
       : type === "success"
-      ? "bg-[#5DAA3A] text-[#FFF7E6]"
-      : type === "offline"
-      ? "bg-[#FFE9A8] text-[#2B1B0F]"
-      : "bg-[#FFF7E6] text-[#2B1B0F]";
+        ? "bg-[#5DAA3A] text-[#FFF7E6]"
+        : type === "offline"
+          ? "bg-[#FFE9A8] text-[#2B1B0F]"
+          : "bg-[#FFF7E6] text-[#2B1B0F]";
 
   return (
     <div
@@ -88,7 +88,7 @@ export function OfflineBanner() {
   return (
     <div
       role="status"
-      className="fixed top-2 left-4 right-4 z-50 max-w-[480px] mx-auto p-3 bg-[#FFE9A8] border-[3px] border-[#422816] rounded-none shadow-[4px_4px_0px_#1B120C] flex items-center justify-between gap-2"
+      className="fixed top-2 sm:top-4 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-[480px] sm:max-w-md mx-auto sm:mx-0 p-3 bg-[#FFE9A8] border-[3px] border-[#422816] rounded-none shadow-[4px_4px_0px_#1B120C] flex items-center justify-between gap-2"
     >
       <p className="text-xs font-bold text-[#2B1B0F] m-0">
         You are offline. Saved lessons and questions still work.

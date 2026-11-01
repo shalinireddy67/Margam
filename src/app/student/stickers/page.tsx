@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
-import { BottomTabBar } from "@/components/ui/BottomTabBar";
+import { Navigation } from "@/components/Navigation";
 import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
@@ -63,13 +63,13 @@ export default function StickersPage() {
   // 1. Loading Skeleton State
   if (loading) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] p-4 sm:p-6 pb-28">
+      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] p-4 sm:p-6 pb-28 flex flex-col justify-between">
         <OfflineBanner />
-        <div className="max-w-xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading stickers">
+        <Navigation currentTab="stickers" profile={profile} />
+        <div className="max-w-2xl mx-auto w-full space-y-4 pt-4 flex-1" role="status" aria-label="Loading stickers">
           <SkeletonCard />
           <SkeletonCard />
         </div>
-        <BottomTabBar currentTab="stickers" />
       </div>
     );
   }
@@ -77,9 +77,10 @@ export default function StickersPage() {
   // 2. Error State with Retry
   if (hasError) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
+      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
         <OfflineBanner />
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+        <Navigation currentTab="stickers" profile={profile} />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center items-center text-center my-auto">
           <div className="bg-[#FFF7E6] border-[3px] border-[#422816] rounded-none p-8 shadow-[4px_4px_0px_#1B120C] space-y-4">
             <div className="w-12 h-12 bg-[#D9453D] border-[2px] border-[#422816] flex items-center justify-center mx-auto text-[#FFF7E6] font-pixel text-lg">
               !
@@ -103,7 +104,6 @@ export default function StickersPage() {
             </div>
           </div>
         </main>
-        <BottomTabBar currentTab="stickers" />
       </div>
     );
   }
@@ -111,24 +111,10 @@ export default function StickersPage() {
   // 3. Locked State: If user has not onboarded
   if (!profile || !profile.selectedClass) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
+      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
         <OfflineBanner />
-        <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6]">
-          <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
-            <Link
-              href="/"
-              className="inline-flex items-center min-h-[48px] gap-2 font-pixel text-xs text-[#FFF7E6] no-underline focus-visible:outline-none"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Home</span>
-            </Link>
-            <span className="font-pixel text-xs text-[#FFE9A8]">
-              Sticker Showcase
-            </span>
-          </div>
-        </header>
-
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+        <Navigation currentTab="stickers" />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center items-center text-center my-auto">
           <div className="bg-[#FFF7E6] border-[3px] border-[#422816] rounded-none p-8 shadow-[4px_4px_0px_#1B120C] space-y-4">
             <div className="w-12 h-12 bg-[#FFE9A8] border-[2px] border-[#422816] flex items-center justify-center mx-auto text-[#2B1B0F]">
               <Lock className="w-6 h-6" />
@@ -149,7 +135,6 @@ export default function StickersPage() {
             </div>
           </div>
         </main>
-        <BottomTabBar currentTab="stickers" />
       </div>
     );
   }
@@ -218,27 +203,17 @@ export default function StickersPage() {
   const unlockedCount = stickers.filter((s) => s.unlocked).length;
 
   return (
-    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
+    <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
       <OfflineBanner />
 
-      <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6]">
-        <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center min-h-[48px] gap-2 font-pixel text-xs text-[#FFF7E6] no-underline focus-visible:outline-none"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Home</span>
-          </Link>
-          <span className="font-pixel text-xs text-[#FFE9A8]">
-            Sticker Showcase
-          </span>
-        </div>
-      </header>
+      <Navigation
+        currentTab="stickers"
+        profile={profile}
+      />
 
-      <main className="max-w-xl mx-auto px-4 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8 pb-28 lg:pb-12">
         {/* Showcase Banner */}
-        <div className="p-6 bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] text-center space-y-4">
+        <div className="p-6 sm:p-8 bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] text-center space-y-4 max-w-2xl mx-auto">
           <div className="w-16 h-16 bg-[#FFE9A8] border-[3px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center mx-auto text-[#2B1B0F]">
             <Award className="w-8 h-8" />
           </div>
@@ -258,15 +233,15 @@ export default function StickersPage() {
 
         {/* 4. Empty State: If no badges unlocked beyond onboarding */}
         {unlockedCount <= 1 && completedCount === 0 && (
-          <div className="p-4 bg-[#FFF7E6] border-[2px] border-[#422816] text-center space-y-2">
+          <div className="p-4 bg-[#FFF7E6] border-[2px] border-[#422816] text-center space-y-2 max-w-md mx-auto">
             <p className="text-xs font-semibold text-[#5A3720]">
               Complete your first lesson practice to unlock additional mastery badges!
             </p>
           </div>
         )}
 
-        {/* Stickers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        {/* Stickers Grid: 1 col on mobile, 2 on tablet, 3 to 4 on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {stickers.map((st) => {
             const colorClass = {
               green: "bg-[#5DAA3A] text-[#FFF7E6]",
@@ -325,8 +300,6 @@ export default function StickersPage() {
           })}
         </div>
       </main>
-
-      <BottomTabBar currentTab="stickers" />
     </div>
   );
 }

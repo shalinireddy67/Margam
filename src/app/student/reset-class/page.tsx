@@ -30,9 +30,9 @@ export default function ResetClassPage() {
   };
 
   return (
-    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
+    <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
       <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6] shadow-[0px_4px_0px_#1B120C]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 border-2 border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center shrink-0">
               <Logo className="w-full h-full" ariaLabel="Margam" />
@@ -45,7 +45,7 @@ export default function ResetClassPage() {
         </div>
       </header>
 
-      <main className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center">
+      <main className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center items-center my-auto">
         <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-6 text-center">
           <div className="flex justify-center mb-2">
             <WitchCat pose="oops" size={80} sticker={false} alt="Margam companion warning" />

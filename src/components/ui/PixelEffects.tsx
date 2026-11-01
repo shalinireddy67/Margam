@@ -63,9 +63,9 @@ export function FloatingXp({
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-none absolute -top-8 right-4 z-40 animate-xp-float motion-reduce:animate-none flex items-center gap-1 px-2.5 py-1 bg-[#2F6B22] text-[#FFE9A8] border-2 border-[#102610] shadow-[2px_2px_0px_#102610] font-heading font-extrabold text-xs"
+      className="pointer-events-none fixed top-16 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-8 sm:top-20 z-50 animate-xp-float motion-reduce:animate-none flex items-center gap-1.5 px-3 py-1.5 bg-[#2F6B22] text-[#FFE9A8] border-2 border-[#102610] shadow-[3px_3px_0px_#102610] font-heading font-extrabold text-xs"
     >
-      <Sparkles className="w-3.5 h-3.5 text-[#FFE9A8]" />
+      <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
       <span>+{xp} XP</span>
     </div>
   );
@@ -237,9 +237,9 @@ export function LevelUpModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="levelup-title"
-      className="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      className="fixed inset-0 bg-black/75 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-sm"
     >
-      <div className="animate-block-rise max-w-sm w-full bg-[#5A3720] border-4 border-[#A06A3C] shadow-[8px_8px_0px_#1B120C] p-6 text-center text-[#FFF7E6] relative">
+      <div className="animate-block-rise max-w-sm w-full bg-[#5A3720] border-t-4 border-x-0 border-b-0 sm:border-4 border-[#A06A3C] rounded-t-2xl sm:rounded-[2px] shadow-[8px_8px_0px_#1B120C] p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] sm:pb-6 text-center text-[#FFF7E6] relative">
         <div className="w-16 h-16 mx-auto mb-3 bg-[#FFE9A8] border-3 border-[#422816] shadow-[3px_3px_0px_#1B120C] flex items-center justify-center text-3xl select-none">
           {rank.badge}
         </div>

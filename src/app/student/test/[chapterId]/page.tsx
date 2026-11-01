@@ -308,7 +308,7 @@ export default function ChapterTestRunnerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between pb-24">
+    <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between pb-24">
       <OfflineBanner />
 
       <StudentHeader
@@ -319,7 +319,7 @@ export default function ChapterTestRunnerPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Header Card */}
         <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-3">
           <div className="flex items-center gap-2 text-xs font-pixel text-[#5DAA3A]">

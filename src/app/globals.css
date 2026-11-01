@@ -204,6 +204,7 @@
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    min-height: 100dvh;
   }
 
   /* Default / English Body */
@@ -233,34 +234,48 @@
     letter-spacing: -0.02em;
   }
 
-  /* Font sizes calibrated for Press Start 2P so wide pixel letters never clip at 360px */
+  /* Font sizes calibrated with fluid clamp() so wide pixel letters scale gracefully from mobile to desktop */
   h1 {
-    font-size: 1.05rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.75rem);
     line-height: 1.45;
     margin: 0 0 10px;
   }
 
   h2 {
-    font-size: 0.85rem;
+    font-size: clamp(0.9rem, 2vw, 1.35rem);
     line-height: 1.4;
     margin: 0 0 8px;
   }
 
   h3 {
-    font-size: 0.75rem;
+    font-size: clamp(0.78rem, 1.6vw, 1.1rem);
     line-height: 1.35;
     margin: 0;
   }
 
-  /* Specific heading overrides on mobile so wide pixel typography does not push viewport */
-  .font-heading.text-2xl,
-  .font-heading.text-3xl {
-    font-size: 0.95rem !important;
-    line-height: 1.4 !important;
+  /* Specific mobile-only heading overrides so wide pixel typography does not push small 360px viewports */
+  @media (max-width: 767px) {
+    .font-heading.text-2xl,
+    .font-heading.text-3xl {
+      font-size: clamp(0.95rem, 4vw, 1.15rem) !important;
+      line-height: 1.4 !important;
+    }
+    .font-heading.text-xl {
+      font-size: clamp(0.8rem, 3.5vw, 0.95rem) !important;
+      line-height: 1.35 !important;
+    }
   }
-  .font-heading.text-xl {
-    font-size: 0.8rem !important;
-    line-height: 1.35 !important;
+
+  /* Math & Formula Container Overflow Rules: formulas scroll internally without page blowout */
+  .katex-display,
+  .katex,
+  .math-formula,
+  pre,
+  code {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Language toggle buttons must preserve system / local glyphs */
@@ -437,8 +452,18 @@ button[aria-pressed="true"] {
   background: linear-gradient(180deg, #6EB5FF 0%, #FFB36B 50%, #FF8FA3 100%);
 }
 
-.voxel-sky-calm {
+.voxel-sky-calm, .bg-voxel-sky {
   background: linear-gradient(180deg, #EBF5FF 0%, #FFE9D6 60%, #FFDEE5 100%);
+}
+
+/* Responsive background attachment: scroll on mobile to avoid repaint jitter, fixed on desktop */
+.responsive-bg-fixed {
+  background-attachment: scroll;
+}
+@media (min-width: 1024px) {
+  .responsive-bg-fixed {
+    background-attachment: fixed;
+  }
 }
 
 .voxel-sunset-overlay {

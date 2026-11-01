@@ -9,12 +9,12 @@ import {
   Tile,
   Input,
   LanguageToggle,
-  BottomTabBar,
   OfflineBanner,
   Logo,
   ProgressBar,
   type Language,
 } from "@/components/ui";
+import { Navigation } from "@/components/Navigation";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
@@ -220,56 +220,16 @@ export default function HomePage() {
       {/* Offline Status Listener */}
       <OfflineBanner />
 
-      {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-[#5A3720] border-b-4 border-[#422816] shadow-[0px_4px_0px_rgba(0,0,0,0.4)]">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-          {/* Logo & Grade Info */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              href="/"
-              className="inline-flex items-center min-h-[44px] gap-2.5 no-underline text-[#FFF7E6]"
-            >
-              <div className="w-10 h-10 rounded-none bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center justify-center shrink-0">
-                <Logo className="w-6 h-6" ariaLabel={copy.appName} />
-              </div>
-              <div>
-                <span className="font-heading font-extrabold text-xl sm:text-2xl text-[#FFE9A8] tracking-wider leading-none block drop-shadow-[2px_2px_0px_#422816]">
-                  {copy.appName.toUpperCase()}
-                </span>
-                <span className="text-[10px] font-heading font-bold text-[#E5D7BE] block mt-0.5">
-                  {copy.tagline}
-                </span>
-              </div>
-            </Link>
+      {/* Unified Responsive Navigation (Top Navbar on Desktop, Left Rail on Tablet, Bottom Bar on Mobile) */}
+      <Navigation
+        currentTab="home"
+        currentLang={currentLang as SupportedLanguage}
+        onLanguageChange={(lang) => setCurrentLang(lang as Language)}
+        profile={profile}
+      />
 
-            {profile && (
-              <span className="hidden sm:inline-block px-2.5 py-1 border-2 border-[#422816] bg-[#5DAA3A] text-[10px] font-heading font-extrabold text-[#FFF7E6] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-                {copy.classBadge} {profile.selectedClass}
-              </span>
-            )}
-          </div>
-
-          {/* Right Controls: Teacher link & Language Toggle */}
-          <div className="flex items-center gap-2">
-            {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (
-              <Link
-                href="/teacher"
-                className="hidden sm:inline-flex items-center justify-center px-3 py-1.5 min-h-[42px] border-2 border-[#422816] bg-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] text-xs font-heading font-bold text-[#FFF7E6] hover:bg-[#7A4B2A] active:translate-x-0.5 active:translate-y-0.5 transition-colors"
-              >
-                {copy.teacherLink}
-              </Link>
-            )}
-
-            <LanguageToggle
-              currentLang={currentLang}
-              onLanguageChange={setCurrentLang}
-            />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content Container */}
-      <main className="max-w-5xl mx-auto px-4 pt-6 sm:pt-8 space-y-8">
+      {/* Main Content Container: Fluid padding, centered max-w-[1200px], safe-area bottom */}
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-8 md:pl-28 lg:pl-8 pb-28 lg:pb-12">
         {/* ================================================================= */}
         {/* ONBOARDING (For First-Time Visitors)                              */}
         {/* ================================================================= */}
@@ -279,7 +239,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden p-6 sm:p-8 bg-[#5A3720] border-4 border-[#422816] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] border-t-4 border-t-[#FFE9A8] space-y-5">
               {/* Subtle Sunset Realm Wallpaper Layer */}
               <div
-                className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none select-none"
+                className="absolute inset-0 bg-cover bg-center opacity-20 pointer-events-none select-none responsive-bg-fixed"
                 style={{ backgroundImage: "url('/assets/refs/sunset-lake.webp')" }}
                 aria-hidden="true"
               />
@@ -647,7 +607,7 @@ export default function HomePage() {
 
             {/* Revision Cards Grid */}
             {revisionQueue.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {revisionQueue.map((item) => {
                   const isCritical = item.priority === "critical_gap";
                   const isNeedsPractice = item.priority === "needs_practice";
@@ -767,7 +727,7 @@ export default function HomePage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {gradeChapters.map((chapter) => {
               const isReady = canTakeChapterDiagnostic(chapter.id);
               const chapterConcepts = getConceptsByChapter(chapter.id);
@@ -868,9 +828,6 @@ export default function HomePage() {
         </svg>
         <div className="w-full h-5 sm:h-6 bg-[#5A3720] border-t-2 border-[#422816]" />
       </div>
-
-      {/* Student Bottom Tab Bar */}
-      <BottomTabBar currentTab="home" />
     </div>
   );
 }

@@ -69,7 +69,7 @@ export default function TeacherPage() {
     <div className="min-h-screen bg-[#2A1E17] text-[#FFF7E6] flex flex-col font-sans">
       {/* Top Bar with Voxel Wood Style */}
       <header className="sticky top-0 z-40 bg-[#5A3720] border-b-4 border-[#422816] shadow-[0px_4px_0px_rgba(0,0,0,0.4)] text-[#FFF7E6]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 bg-[#FFE9A8] border-2 border-[#422816] flex items-center justify-center font-heading font-black text-xl text-[#2B1B0F] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
               M
@@ -101,7 +101,7 @@ export default function TeacherPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 space-y-6">
         {/* Synthetic Notice Banner */}
         <div className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
           <div className="flex items-start gap-3">
