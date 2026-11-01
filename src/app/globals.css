@@ -126,20 +126,31 @@
 
 :root {
   --ink: #111111;
-  --yellow: #FFE14D;
-  --cyan: #4DD9E8;
-  --pink: #FF4F9A;
-  --green: #8DE86A;
-  --sky: #A9D8F0;
-  --orange: #FF8A3D;
+  --grass: #5DB84A;
+  --darkgrass: #3C8A2E;
+  --dirt: #8B5A2B;
+  --stone: #9AA0A6;
+  --sky: #7EC8E3;
+  --sand: #F2D16B;
+  --red: #D9453D;
   --white: #FFFFFF;
-  --bg: #FFF8DC;
-  --r: 18px 14px 20px 15px / 15px 20px 14px 18px;
+  --bg: #7EC8E3;
+  --r: 0px;
+  --border-pixel: 4px solid #111111;
+  --shadow-pixel: 4px 4px 0px #111111;
+
+  /* Legacy token aliases mapped to pixel palette */
+  --yellow: #F2D16B;
+  --cyan: #7EC8E3;
+  --pink: #D9453D;
+  --green: #5DB84A;
+  --orange: #8B5A2B;
 }
 
 @layer base {
-  * {
+  *, *::before, *::after {
     box-sizing: border-box;
+    border-radius: 0 !important;
   }
 
   html, body {
@@ -221,14 +232,21 @@
     touch-action: manipulation;
   }
 
-  /* 3px Focus Ring with Yellow Glow */
+  /* 4px Ink Border & Hard Pixel Shadow */
+  button:active:not(:disabled),
+  [role="button"]:active:not(:disabled) {
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0px 0px 0px #111111 !important;
+  }
+
+  /* 4px Focus Ring with Sand Yellow Glow */
   button:focus-visible,
   a:focus-visible,
   input:focus-visible,
   select:focus-visible {
-    outline: 3px solid var(--ink) !important;
-    outline-offset: 3px !important;
-    box-shadow: 0 0 0 7px var(--yellow) !important;
+    outline: 4px solid var(--ink) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 6px var(--sand) !important;
   }
 
   /* Skip to content link */
@@ -237,11 +255,10 @@
     top: -100px;
     left: 1rem;
     z-index: 9999;
-    background-color: var(--yellow);
+    background-color: var(--sand);
     color: var(--ink);
-    border: 3px solid var(--ink);
-    box-shadow: 3px 3px 0px var(--ink);
-    border-radius: 9999px;
+    border: 4px solid var(--ink);
+    box-shadow: 4px 4px 0px var(--ink);
     padding: 0.75rem 1.25rem;
     font-weight: 800;
     text-decoration: none;
@@ -250,54 +267,6 @@
 
   .skip-to-content:focus {
     top: 1rem;
-  }
-}
-
-/* Animations */
-.bounce {
-  animation: bounce-scale 0.5s ease;
-}
-
-.wobble {
-  animation: wobble-rot 0.5s ease;
-}
-
-@keyframes bounce-scale {
-  30% {
-    transform: scale(1.12, 0.88);
-  }
-  60% {
-    transform: scale(0.94, 1.1);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
-}
-
-@keyframes wobble-rot {
-  25% {
-    transform: rotate(-3deg);
-  }
-  75% {
-    transform: rotate(3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-/* Respect prefers-reduced-motion: disable wobble & bounce */
-@media (prefers-reduced-motion: reduce) {
-  .bounce,
-  .wobble {
-    animation: none !important;
-  }
-
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 

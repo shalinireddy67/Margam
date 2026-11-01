@@ -32,7 +32,7 @@ export default function StudentHeader({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-border transition-all">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-2 sm:px-6 h-16 flex items-center justify-between gap-1.5 sm:gap-4">
         {/* Left: Brand + Back or Grade Scope */}
         <div className="flex items-center gap-3">
           {backHref ? (
