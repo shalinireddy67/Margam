@@ -20,6 +20,7 @@ export type CardColor =
   | "dirt"
   | "stone"
   | "sand"
+  | "gold"
   | "red";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {

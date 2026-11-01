@@ -65,14 +65,14 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
     <section id="indian-classrooms" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <Globe className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
@@ -80,60 +80,60 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
       {/* 3 Simple Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Card 1: Vernacular */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 flex flex-col justify-between space-y-4">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-2xl bg-coral-light text-coral flex items-center justify-center font-bold">
+            <div className="w-10 h-10 bg-[#E04A3F] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-white flex items-center justify-center font-bold">
               <Globe className="w-5 h-5" />
             </div>
-            <h3 className="font-heading text-lg font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.card1Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.card1Desc}
             </p>
           </div>
-          <div className="flex gap-1.5 text-xs font-mono font-bold text-foreground pt-3 border-t border-[#E0E5D4]">
-            <span className="px-2.5 py-1 rounded-xl bg-background border border-[#E0E5D4]">English</span>
-            <span className="px-2.5 py-1 rounded-xl bg-background border border-[#E0E5D4]">हिन्दी</span>
-            <span className="px-2.5 py-1 rounded-xl bg-background border border-[#E0E5D4]">తెలుగు</span>
+          <div className="flex gap-1.5 text-xs font-pixel text-[#2B1B0F] pt-3 border-t-2 border-[#E5D7BE]">
+            <span className="px-2.5 py-1 bg-white border border-[#422816]">English</span>
+            <span className="px-2.5 py-1 bg-white border border-[#422816]">हिन्दी</span>
+            <span className="px-2.5 py-1 bg-white border border-[#422816]">తెలుగు</span>
           </div>
         </div>
 
         {/* Card 2: Real Contexts */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 flex flex-col justify-between space-y-4">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-2xl bg-lemon-light text-lemon flex items-center justify-center font-bold">
+            <div className="w-10 h-10 bg-[#F4C542] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-[#2B1B0F] flex items-center justify-center font-bold">
               <FileText className="w-5 h-5" />
             </div>
-            <h3 className="font-heading text-lg font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.card2Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.card2Desc}
             </p>
           </div>
-          <span className="text-xs font-mono text-muted-foreground font-semibold pt-3 border-t border-[#E0E5D4] block">
+          <span className="text-xs font-pixel text-[#7A4B2A] pt-3 border-t-2 border-[#E5D7BE] block">
             ₹ Rupees • Auto Fares • Cricket Run Rates
           </span>
         </div>
 
         {/* Card 3: Printable Worksheets */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 flex flex-col justify-between space-y-4">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-2xl bg-sage-light text-sage flex items-center justify-center font-bold">
+            <div className="w-10 h-10 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-white flex items-center justify-center font-bold">
               <Printer className="w-5 h-5" />
             </div>
-            <h3 className="font-heading text-lg font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.card3Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.card3Desc}
             </p>
           </div>
           <button
             type="button"
             onClick={handlePrint}
-            className="w-full min-h-[48px] px-4 rounded-2xl bg-sage text-white text-xs font-heading font-bold hover:bg-sage-hover flex items-center justify-center gap-2 transition-all cursor-pointer shadow-soft"
+            className="w-full min-h-[48px] px-4 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <Printer className="w-4 h-4" />
             <span>{t.printBtn}</span>
@@ -142,20 +142,20 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
       </div>
 
       {/* DPDP Act Privacy Bar */}
-      <div className="bg-[#F9F7E8] rounded-3xl p-5 sm:p-6 border border-[#E0E5D4] shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-[#5A3720] text-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-2xl bg-white border border-[#E0E5D4] text-sage flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 bg-[#FFF7E6] border-[2px] border-[#422816] text-[#5DAA3A] flex items-center justify-center shrink-0">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="font-heading font-bold text-sm sm:text-base text-foreground">
+            <h4 className="font-pixel text-sm sm:text-base text-[#FFF7E6]">
               {t.privacyTitle}
             </h4>
-            <p className="text-xs text-muted-foreground">{t.privacyDesc}</p>
+            <p className="text-xs text-[#E5D7BE] font-sans">{t.privacyDesc}</p>
           </div>
         </div>
-        <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E0E5D4] text-xs font-mono font-bold text-sage">
-          <Check className="w-4 h-4" />
+        <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-[#FFE9A8] border border-[#422816] text-xs font-pixel text-[#2B1B0F]">
+          <Check className="w-4 h-4 text-[#5DAA3A]" />
           <span>DPDP Principles</span>
         </div>
       </div>

@@ -91,33 +91,33 @@ export default function Hero({ currentLang }: HeroProps) {
     <section id="home" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
         {/* Left Editorial Card: Clear Main Idea */}
-        <div className="lg:col-span-7 bg-white rounded-3xl sm:rounded-4xl p-6 sm:p-10 border border-[#E0E5D4] shadow-card flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] p-6 sm:p-10 flex flex-col justify-between">
           <div className="space-y-5">
             {/* Pill Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#5DAA3A] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
               <Compass className="w-4 h-4" />
               <span>{content.badge}</span>
             </div>
 
             {/* Main Headline (Ages 11-16) */}
-            <h1 className="font-heading text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-[1.15]">
+            <h1 className="font-pixel text-2xl sm:text-4xl text-[#2B1B0F] tracking-wide leading-tight">
               {content.headline}
             </h1>
 
             {/* Short Simple Subhead */}
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl font-normal">
+            <p className="text-[#5A3720] text-base sm:text-lg leading-relaxed max-w-xl font-sans font-semibold">
               {content.subhead}
             </p>
 
             {/* 3 Quick Chips */}
             <div className="flex flex-wrap gap-2 pt-1">
-              <span className="px-3 py-1.5 rounded-xl bg-background border border-[#E0E5D4] text-xs font-heading font-bold text-foreground">
+              <span className="px-3 py-1.5 bg-white border-[2px] border-[#422816] font-pixel text-xs text-[#2B1B0F]">
                 {content.chip1}
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-background border border-[#E0E5D4] text-xs font-heading font-bold text-foreground">
+              <span className="px-3 py-1.5 bg-white border-[2px] border-[#422816] font-pixel text-xs text-[#2B1B0F]">
                 {content.chip2}
               </span>
-              <span className="px-3 py-1.5 rounded-xl bg-background border border-[#E0E5D4] text-xs font-heading font-bold text-foreground">
+              <span className="px-3 py-1.5 bg-white border-[2px] border-[#422816] font-pixel text-xs text-[#2B1B0F]">
                 {content.chip3}
               </span>
             </div>
@@ -127,32 +127,32 @@ export default function Hero({ currentLang }: HeroProps) {
           <div className="pt-8 sm:pt-10 flex flex-wrap items-center gap-4">
             <a
               href="/student"
-              className="inline-flex items-center justify-center min-h-[52px] px-8 rounded-2xl bg-coral hover:bg-coral-hover text-white text-base font-heading font-bold transition-all shadow-floating cursor-pointer"
+              className="inline-flex items-center justify-center min-h-[52px] px-8 bg-[#5DAA3A] hover:bg-[#4E9330] text-white font-pixel text-xs border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer no-underline"
             >
               <span>Start Learning</span>
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </a>
 
             <a
               href="#try-diagnostic"
-              className="inline-flex items-center justify-center min-h-[52px] px-6 rounded-2xl bg-background hover:bg-white text-foreground border border-[#E0E5D4] text-sm font-heading font-bold transition-all cursor-pointer"
+              className="inline-flex items-center justify-center min-h-[52px] px-6 bg-[#FFF7E6] hover:bg-[#FFE9A8] text-[#2B1B0F] border-[2px] border-[#422816] font-pixel text-xs shadow-[2px_2px_0px_#1B120C] transition-all cursor-pointer no-underline"
             >
               <span>{content.ctaMain}</span>
             </a>
           </div>
         </div>
 
-        {/* Right Card: Sample Student Progress Dashboard (Inspired by Dribbble Reference) */}
-        <div className="lg:col-span-5 bg-[#F9F7E8] rounded-3xl sm:rounded-4xl p-6 sm:p-8 border border-[#E0E5D4] shadow-card flex flex-col justify-between relative overflow-hidden">
-          {/* Top Label clearly declaring "Sample student" as instructed */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#E0E5D4]">
+        {/* Right Card: Sample Student Progress Dashboard */}
+        <div className="lg:col-span-5 bg-[#5A3720] text-[#FFF7E6] border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+          {/* Top Label */}
+          <div className="flex items-center justify-between pb-4 border-b border-[#7A4B2A]">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-coral animate-pulse" />
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="w-2.5 h-2.5 bg-[#E04A3F] border border-[#422816]" />
+              <span className="font-pixel text-xs uppercase tracking-wider text-[#FFE9A8]">
                 {content.sampleCardLabel}
               </span>
             </div>
-            <span className="text-xs font-mono font-bold bg-white px-2.5 py-1 rounded-full border border-[#E0E5D4] text-sage">
+            <span className="font-pixel text-xs bg-[#5DAA3A] text-white px-2.5 py-1 border border-[#422816]">
               Live Demo
             </span>
           </div>
@@ -160,17 +160,17 @@ export default function Hero({ currentLang }: HeroProps) {
           {/* Student Profile Row */}
           <div className="py-5 flex items-center justify-between">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-coral-light border border-coral-border flex items-center justify-center text-coral font-bold text-lg font-heading">
+              <div className="w-12 h-12 bg-[#FFF7E6] border-[2px] border-[#422816] flex items-center justify-center text-[#2B1B0F] font-pixel text-base">
                 AS
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-heading font-bold text-base text-foreground">
+                  <h3 className="font-pixel text-base text-[#FFF7E6]">
                     {content.sampleName}
                   </h3>
-                  <CheckCircle2 className="w-4 h-4 text-sage" />
+                  <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />
                 </div>
-                <p className="text-xs text-muted-foreground font-medium">
+                <p className="text-xs text-[#E5D7BE] font-sans">
                   {content.sampleGrade}
                 </p>
               </div>
@@ -178,53 +178,53 @@ export default function Hero({ currentLang }: HeroProps) {
 
             {/* Streak & XP Pills */}
             <div className="flex flex-col items-end gap-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-coral border border-coral-border text-xs font-heading font-bold shadow-xs">
-                <Flame className="w-3.5 h-3.5 text-coral" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FFF7E6] text-[#E04A3F] border border-[#422816] font-pixel text-xs shadow-xs">
+                <Flame className="w-3.5 h-3.5 text-[#E04A3F]" />
                 <span>{content.streakLabel}</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white text-lemon border border-lemon-border text-xs font-heading font-bold shadow-xs">
-                <Award className="w-3.5 h-3.5 text-lemon" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816] font-pixel text-xs shadow-xs">
+                <Award className="w-3.5 h-3.5 text-[#2B1B0F]" />
                 <span>{content.xpLabel}</span>
               </span>
             </div>
           </div>
 
           {/* Visual Progress Ring & Indicator */}
-          <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E0E5D4] space-y-3">
-            <div className="flex items-center justify-between text-xs font-heading font-bold">
-              <span className="text-muted-foreground">{content.progressLabel}</span>
-              <span className="text-sage">{content.progressValue}</span>
+          <div className="bg-[#FFF7E6] text-[#2B1B0F] border-[2px] border-[#422816] p-4 sm:p-5 space-y-3">
+            <div className="flex items-center justify-between text-xs font-pixel">
+              <span className="text-[#5A3720]">{content.progressLabel}</span>
+              <span className="text-[#5DAA3A]">{content.progressValue}</span>
             </div>
 
             {/* Simple Visual Progress Bar */}
-            <div className="w-full h-3 bg-background rounded-full overflow-hidden p-0.5 border border-[#E0E5D4]">
-              <div className="h-full bg-sage rounded-full w-2/3 transition-all duration-500" />
+            <div className="w-full h-3 bg-white border border-[#422816] overflow-hidden p-0.5">
+              <div className="h-full bg-[#5DAA3A] w-2/3 transition-all duration-500" />
             </div>
 
             {/* Clean Prerequisite Nodes Preview */}
-            <div className="pt-2 border-t border-[#E0E5D4] space-y-2">
+            <div className="pt-2 border-t border-[#422816]/20 space-y-2">
               <div className="flex items-center justify-between text-xs font-medium">
-                <span className="text-foreground">{content.node1}</span>
-                <span className="px-2 py-0.5 rounded-full bg-sage-light text-sage font-bold text-[11px]">
+                <span className="text-[#2B1B0F] font-semibold">{content.node1}</span>
+                <span className="px-2 py-0.5 bg-[#5DAA3A] text-white font-pixel text-[10px]">
                   {content.statusSolved}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs font-medium">
-                <span className="text-foreground font-bold">{content.node2}</span>
-                <span className="px-2 py-0.5 rounded-full bg-coral-light text-coral font-bold text-[11px] border border-coral-border">
+                <span className="text-[#2B1B0F] font-bold">{content.node2}</span>
+                <span className="px-2 py-0.5 bg-[#FFE9A8] text-[#2B1B0F] font-pixel text-[10px] border border-[#422816]">
                   {content.statusTarget}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs font-medium">
-                <span className="text-muted-foreground">{content.node3}</span>
-                <span className="text-[11px] text-muted-foreground font-mono">Next Step</span>
+                <span className="text-[#5A3720]">{content.node3}</span>
+                <span className="text-[10px] font-pixel text-[#7A4B2A]">Next Step</span>
               </div>
             </div>
           </div>
 
           {/* Bottom Achievement Chip */}
-          <div className="mt-4 p-3 rounded-2xl bg-white border border-[#E0E5D4] flex items-center gap-2.5 text-xs text-foreground font-heading font-bold">
-            <Sparkles className="w-4 h-4 text-coral shrink-0" />
+          <div className="mt-4 p-3 bg-[#FFE9A8] text-[#2B1B0F] border-[2px] border-[#422816] flex items-center gap-2.5 text-xs font-pixel">
+            <Sparkles className="w-4 h-4 text-[#5DAA3A] shrink-0" />
             <span className="truncate">{content.recentAchievement}</span>
           </div>
         </div>

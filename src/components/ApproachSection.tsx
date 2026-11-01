@@ -83,81 +83,81 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
     <section id="how-it-works" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <BookOpen className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
 
-      {/* 3 Step Cards (Inspired by Dribbble Reference subject cards) */}
+      {/* 3 Step Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Step 1: Learn */}
-        <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4 card-hover">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 sm:p-7 flex flex-col justify-between space-y-4">
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-coral-light border border-coral-border flex items-center justify-center text-coral">
+            <div className="w-12 h-12 bg-[#E04A3F] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
               <BookOpen className="w-6 h-6" />
             </div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-coral">
+            <span className="font-pixel text-xs tracking-wider text-[#A03028]">
               {t.step1Tag}
             </span>
-            <h3 className="font-heading text-xl font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.step1Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.step1Desc}
             </p>
           </div>
-          <div className="pt-3 border-t border-[#E0E5D4] flex items-center justify-between text-xs font-heading font-bold text-coral">
+          <div className="pt-3 border-t-2 border-[#E5D7BE] flex items-center justify-between text-xs font-pixel text-[#A03028]">
             <span>Visual & Real-Life Models</span>
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>
 
         {/* Step 2: Solve */}
-        <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4 card-hover">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 sm:p-7 flex flex-col justify-between space-y-4">
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-lemon-light border border-lemon-border flex items-center justify-center text-lemon">
+            <div className="w-12 h-12 bg-[#F4C542] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-[#2B1B0F]">
               <CheckSquare className="w-6 h-6" />
             </div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-lemon">
+            <span className="font-pixel text-xs tracking-wider text-[#8A6310]">
               {t.step2Tag}
             </span>
-            <h3 className="font-heading text-xl font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.step2Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.step2Desc}
             </p>
           </div>
-          <div className="pt-3 border-t border-[#E0E5D4] flex items-center justify-between text-xs font-heading font-bold text-lemon">
+          <div className="pt-3 border-t-2 border-[#E5D7BE] flex items-center justify-between text-xs font-pixel text-[#8A6310]">
             <span>3 Progressive Levels</span>
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>
 
         {/* Step 3: Test */}
-        <div className="bg-white rounded-3xl p-6 sm:p-7 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-4 card-hover">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 sm:p-7 flex flex-col justify-between space-y-4">
           <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-sage-light border border-sage-border flex items-center justify-center text-sage">
+            <div className="w-12 h-12 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
               <Award className="w-6 h-6" />
             </div>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-sage">
+            <span className="font-pixel text-xs tracking-wider text-[#2F6B22]">
               {t.step3Tag}
             </span>
-            <h3 className="font-heading text-xl font-bold text-foreground">
+            <h3 className="font-pixel text-base text-[#2B1B0F]">
               {t.step3Title}
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
               {t.step3Desc}
             </p>
           </div>
-          <div className="pt-3 border-t border-[#E0E5D4] flex items-center justify-between text-xs font-heading font-bold text-sage">
+          <div className="pt-3 border-t-2 border-[#E5D7BE] flex items-center justify-between text-xs font-pixel text-[#2F6B22]">
             <span>Formative Progress Card</span>
             <ArrowRight className="w-4 h-4" />
           </div>
@@ -167,51 +167,51 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
       {/* 2 Clean Preview Cards (Gap Report & Printable Worksheet) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Sample Report Card */}
-        <div className="bg-[#F9F7E8] rounded-3xl p-6 border border-[#E0E5D4] space-y-3">
+        <div className="bg-[#5A3720] text-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase text-coral">
+            <span className="font-pixel text-xs uppercase text-[#FFE9A8]">
               Sample Output
             </span>
-            <span className="text-xs font-mono bg-white px-2 py-0.5 rounded-full border border-[#E0E5D4]">
+            <span className="font-pixel text-xs bg-[#FFE9A8] text-[#2B1B0F] px-2.5 py-0.5 border border-[#422816]">
               {t.reportStudent}
             </span>
           </div>
-          <h4 className="font-heading text-lg font-bold text-foreground">
+          <h4 className="font-pixel text-base text-[#FFF7E6]">
             {t.reportTitle}
           </h4>
-          <div className="p-3 bg-white rounded-2xl border border-[#E0E5D4] space-y-1">
-            <div className="text-xs text-muted-foreground font-medium">Diagnosed Root Cause:</div>
-            <div className="text-sm font-bold text-coral font-heading">{t.reportGap}</div>
-            <div className="text-xs text-foreground/80 pt-1 font-mono">
+          <div className="p-3 bg-[#FFF7E6] text-[#2B1B0F] border-[2px] border-[#422816] space-y-1">
+            <div className="text-xs text-[#5A3720] font-semibold">Diagnosed Root Cause:</div>
+            <div className="text-sm font-bold text-[#E04A3F]">{t.reportGap}</div>
+            <div className="text-xs text-[#2B1B0F] pt-1 font-mono">
               Action: 10-min number line practice before revisiting quadratic factoring.
             </div>
           </div>
         </div>
 
         {/* Printable Worksheet Card */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-3">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 flex flex-col justify-between space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase text-sage">
+            <span className="font-pixel text-xs uppercase text-[#5DAA3A]">
               Printable Resource
             </span>
-            <span className="text-xs font-mono bg-sage-light text-sage px-2 py-0.5 rounded-full font-bold">
+            <span className="font-pixel text-xs bg-[#5DAA3A] text-white px-2.5 py-0.5 border border-[#422816]">
               A4 Format
             </span>
           </div>
           <div>
-            <h4 className="font-heading text-lg font-bold text-foreground">
+            <h4 className="font-pixel text-base text-[#2B1B0F]">
               {t.worksheetTitle}
             </h4>
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1">
+            <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed mt-1 font-sans">
               {t.worksheetDesc}
             </p>
           </div>
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex items-center justify-center min-h-[48px] px-5 rounded-2xl bg-background hover:bg-white text-foreground border border-[#E0E5D4] text-xs font-heading font-bold gap-2 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center min-h-[48px] px-5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] gap-2 transition-all cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-sage" />
+            <Printer className="w-4 h-4 text-white" />
             <span>{t.printBtn}</span>
           </button>
         </div>

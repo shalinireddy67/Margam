@@ -450,7 +450,7 @@ export default function ChapterDiagnosticPage() {
   const foundGapsCount = result?.conceptBreakdown?.filter((c) => c.status === "foundational_gap").length || 0;
 
   return (
-    <div className="min-h-screen bg-[#102610] minecraft-grid-bg flex flex-col justify-between text-[#F2F0DF] pb-24">
+    <div className="min-h-screen bg-[#2A1E17] flex flex-col justify-between text-[#FFF7E6] pb-24">
       <OfflineBanner />
       <StudentHeader
         profile={profile}
@@ -462,29 +462,29 @@ export default function ChapterDiagnosticPage() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
         {/* Assessment Header Card */}
-        <div className="bg-[#173B19] p-6 sm:p-8 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] space-y-4 text-[#F2F0DF]">
+        <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
+            <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#FFE9A8]">
               <span>Chapter Diagnostic</span>
               <span>•</span>
               <span>Class {profile.selectedClass}</span>
             </div>
-            <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#102610] border border-[#315B2A] text-[#E5B834]">
+            <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[#FFE9A8]">
               Intelligent Learning Gap Engine
             </span>
           </div>
 
-          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#F2F0DF] tracking-wide drop-shadow-[2px_2px_0px_#102610]">
+          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#FFF7E6] tracking-wide drop-shadow-[2px_2px_0px_#422816]">
             {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
           </h1>
 
-          <p className="text-xs sm:text-sm text-[#D8D8D0] bg-[#102610] p-3.5 border-2 border-[#315B2A] leading-relaxed font-medium">
+          <p className="text-xs sm:text-sm text-[#E5D7BE] bg-[#422816] p-3.5 border-2 border-[#7A4B2A] leading-relaxed font-medium">
             Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
           </p>
 
           {errorMessage && (
-            <div className="p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold flex items-center gap-2 text-[#F2F0DF]">
-              <AlertCircle className="w-4 h-4 shrink-0 text-[#D9453D]" />
+            <div className="p-3.5 bg-[#E04A3F]/20 border-2 border-[#E04A3F] text-xs font-bold flex items-center gap-2 text-[#FFF7E6]">
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#E04A3F]" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -497,15 +497,15 @@ export default function ChapterDiagnosticPage() {
           <div className="space-y-6">
             {/* A. Overall Assessment Summary Box */}
             <div
-              className={`p-6 sm:p-8 border-3 shadow-[6px_6px_0px_#102610] space-y-6 ${
+              className={`p-6 sm:p-8 border-4 border-[#422816] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-6 bg-[#5A3720] ${
                 result.passed
-                  ? "bg-[#173B19] border-[#79B82A]"
-                  : "bg-[#173B19] border-[#E5B834]"
+                  ? "border-t-4 border-t-[#5DAA3A]"
+                  : "border-t-4 border-t-[#FFE9A8]"
               }`}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b-2 border-[#315B2A] pb-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b-2 border-[#7A4B2A] pb-5">
                 <div className="flex items-center gap-4">
-                  <div className="shrink-0 p-2 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610]">
+                  <div className="shrink-0 p-2 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
                     <WitchCat
                       pose={result.passed ? "cheer" : "think"}
                       size={74}
@@ -514,17 +514,17 @@ export default function ChapterDiagnosticPage() {
                     />
                   </div>
                   <div>
-                    <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#79B82A] block">
+                    <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#FFE9A8] block">
                       Diagnostic Evaluation Complete
                     </span>
-                    <h2 className="font-heading font-extrabold text-lg sm:text-2xl text-[#F2F0DF] mt-0.5">
+                    <h2 className="font-heading font-extrabold text-lg sm:text-2xl text-[#FFF7E6] mt-0.5">
                       {result.passed
                         ? "Chapter Mastery Unlocked! 🎉"
                         : foundGapsCount > 0
                         ? "Foundational Gap Identified"
                         : "Practice Recommended"}
                     </h2>
-                    <p className="text-xs text-[#D8D8D0] font-medium mt-1">
+                    <p className="text-xs text-[#E5D7BE] font-medium mt-1">
                       {result.passed
                         ? "You demonstrated strong mastery of the chapter prerequisites. All chapter quests are unlocked!"
                         : "We analyzed your error patterns. Strengthening prerequisite concepts will make this chapter effortless."}
@@ -534,7 +534,7 @@ export default function ChapterDiagnosticPage() {
 
                 <Link
                   href="/"
-                  className="self-start sm:self-center inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                  className="self-start sm:self-center inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                 >
                   <span>Return to Learning Path</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -543,35 +543,35 @@ export default function ChapterDiagnosticPage() {
 
               {/* 4-Stat Metric Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] text-center space-y-1">
-                  <span className="text-[10px] font-heading font-bold uppercase text-[#D8D8D0]/70 block">
+                <div className="p-3.5 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-1">
+                  <span className="text-[10px] font-heading font-bold uppercase text-[#E5D7BE]/80 block">
                     Questions
                   </span>
-                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#F2F0DF]">
+                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#FFF7E6]">
                     {result.total}
                   </span>
                 </div>
-                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] text-center space-y-1">
-                  <span className="text-[10px] font-heading font-bold uppercase text-[#D8D8D0]/70 block">
+                <div className="p-3.5 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-1">
+                  <span className="text-[10px] font-heading font-bold uppercase text-[#E5D7BE]/80 block">
                     Correct
                   </span>
-                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#79B82A]">
+                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#5DAA3A]">
                     {result.score}
                   </span>
                 </div>
-                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] text-center space-y-1">
-                  <span className="text-[10px] font-heading font-bold uppercase text-[#D8D8D0]/70 block">
+                <div className="p-3.5 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-1">
+                  <span className="text-[10px] font-heading font-bold uppercase text-[#E5D7BE]/80 block">
                     Gaps Traced
                   </span>
-                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#E5B834]">
+                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#FFE9A8]">
                     {foundGapsCount}
                   </span>
                 </div>
-                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] text-center space-y-1">
-                  <span className="text-[10px] font-heading font-bold uppercase text-[#D8D8D0]/70 block">
+                <div className="p-3.5 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-1">
+                  <span className="text-[10px] font-heading font-bold uppercase text-[#E5D7BE]/80 block">
                     Accuracy
                   </span>
-                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#79B82A]">
+                  <span className="text-lg sm:text-xl font-heading font-extrabold text-[#5DAA3A]">
                     {result.percentage}%
                   </span>
                 </div>
@@ -580,25 +580,25 @@ export default function ChapterDiagnosticPage() {
 
             {/* D. Next Action Recommendation Banner (Single clear CTA) */}
             {result.nextAction && (
-              <div className="p-6 bg-[#173B19] border-3 border-[#E5B834] border-l-[8px] border-l-[#E5B834] shadow-[6px_6px_0px_#102610] space-y-3">
-                <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-[#E5B834] uppercase tracking-wider">
-                  <Target className="w-4 h-4 text-[#E5B834]" />
+              <div className="p-6 bg-[#422816] border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-3">
+                <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider">
+                  <Target className="w-4 h-4 text-[#FFE9A8]" />
                   <span>Immediate Recommended Next Action</span>
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-1">
-                    <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#F2F0DF]">
+                    <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#FFF7E6]">
                       {result.nextAction.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#D8D8D0] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#E5D7BE] leading-relaxed">
                       {result.nextAction.description}
                     </p>
                   </div>
 
                   <Link
                     href={result.nextAction.href}
-                    className="inline-flex items-center justify-center shrink-0 min-h-[46px] px-5 py-2.5 bg-[#E5B834] hover:bg-[#F2D16B] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                    className="inline-flex items-center justify-center shrink-0 min-h-[46px] px-5 py-2.5 bg-[#FFE9A8] hover:bg-[#FFF2CC] text-[#2B1B0F] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[3px_3px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                   >
                     <span>Start This Quest</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -609,41 +609,41 @@ export default function ChapterDiagnosticPage() {
 
             {/* B. Concept-Level Analysis */}
             {result.conceptBreakdown && result.conceptBreakdown.length > 0 && (
-              <div className="p-6 sm:p-7 bg-[#173B19] border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4">
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#315B2A] pb-3">
-                  <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF] flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-[#79B82A]" />
+              <div className="p-6 sm:p-7 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-4">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
+                  <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-[#5DAA3A]" />
                     <span>Concept-Level Mastery Analysis</span>
                   </h3>
-                  <span className="text-[10px] font-heading text-[#D8D8D0]/70 uppercase">
+                  <span className="text-[10px] font-heading text-[#E5D7BE]/80 uppercase">
                     Diagnosed against Prerequisite Graph
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   {result.conceptBreakdown.map((cb) => {
-                    let badgeClass = "bg-[#4F8A24] text-[#F2F0DF]";
+                    let badgeClass = "bg-[#5DAA3A] text-[#FFF7E6]";
                     let statusLabel = "Mastered";
-                    let borderClass = "border-[#4F8A24]";
+                    let borderClass = "border-[#5DAA3A]";
 
                     if (cb.status === "foundational_gap") {
-                      badgeClass = "bg-[#D9453D] text-[#FFFFFF]";
+                      badgeClass = "bg-[#E04A3F] text-[#FFFFFF]";
                       statusLabel = `Foundational Gap (Class ${cb.class})`;
-                      borderClass = "border-[#D9453D] bg-[#2A1515]";
+                      borderClass = "border-[#E04A3F] bg-[#3B1917]";
                     } else if (cb.status === "needs_practice") {
-                      badgeClass = "bg-[#E5B834] text-[#102610]";
+                      badgeClass = "bg-[#FFE9A8] text-[#2B1B0F]";
                       statusLabel = "Needs Practice";
-                      borderClass = "border-[#E5B834]";
+                      borderClass = "border-[#FFE9A8]";
                     } else if (cb.status === "unassessed") {
-                      badgeClass = "bg-[#315B2A] text-[#D8D8D0]";
+                      badgeClass = "bg-[#7A4B2A] text-[#E5D7BE]";
                       statusLabel = "Not Assessed";
-                      borderClass = "border-[#315B2A]";
+                      borderClass = "border-[#7A4B2A]";
                     }
 
                     return (
                       <div
                         key={cb.conceptId}
-                        className={`p-4 bg-[#102610] border-2 ${borderClass} space-y-2`}
+                        className={`p-4 bg-[#422816] border-2 ${borderClass} space-y-2`}
                       >
                         <div className="flex items-center justify-between gap-2">
                           <span
@@ -676,13 +676,13 @@ export default function ChapterDiagnosticPage() {
 
             {/* C. Recommended Learning Path (Following Prerequisite Graph) */}
             {result.learningPath && result.learningPath.length > 0 && (
-              <div className="p-6 sm:p-7 bg-[#173B19] border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4">
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#315B2A] pb-3">
-                  <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF] flex items-center gap-2">
-                    <GitBranch className="w-4 h-4 text-[#79B82A]" />
+              <div className="p-6 sm:p-7 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-4">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
+                  <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] flex items-center gap-2">
+                    <GitBranch className="w-4 h-4 text-[#5DAA3A]" />
                     <span>Your Recommended Learning Roadmap</span>
                   </h3>
-                  <span className="text-[10px] font-heading text-[#79B82A]">
+                  <span className="text-[10px] font-heading text-[#FFE9A8]">
                     {result.learningPath.length} Steps
                   </span>
                 </div>
@@ -692,24 +692,24 @@ export default function ChapterDiagnosticPage() {
                     return (
                       <div
                         key={step.stepNumber}
-                        className="p-4 bg-[#102610] border-2 border-[#315B2A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[#79B82A] transition-colors"
+                        className="p-4 bg-[#422816] border-2 border-[#7A4B2A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[#FFE9A8] transition-colors"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="w-7 h-7 bg-[#79B82A] text-[#102610] font-heading font-extrabold text-xs flex items-center justify-center shrink-0 border border-[#102610]">
+                          <div className="w-7 h-7 bg-[#5DAA3A] text-[#FFF7E6] font-heading font-extrabold text-xs flex items-center justify-center shrink-0 border border-[#422816]">
                             {step.stepNumber}
                           </div>
                           <div>
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-heading font-bold text-xs sm:text-sm text-[#F2F0DF]">
+                              <span className="font-heading font-bold text-xs sm:text-sm text-[#FFF7E6]">
                                 {step.title}
                               </span>
                               {step.isFoundational && (
-                                <span className="text-[9px] font-heading font-extrabold px-1.5 py-0.5 bg-[#D9453D] text-[#FFFFFF] border border-[#102610]">
+                                <span className="text-[9px] font-heading font-extrabold px-1.5 py-0.5 bg-[#E04A3F] text-[#FFFFFF] border border-[#422816]">
                                   Prerequisite
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-[#D8D8D0] mt-0.5 leading-relaxed">
+                            <p className="text-xs text-[#E5D7BE] mt-0.5 leading-relaxed">
                               {step.description}
                             </p>
                           </div>
@@ -717,7 +717,7 @@ export default function ChapterDiagnosticPage() {
 
                         <Link
                           href={step.href}
-                          className="self-end sm:self-center inline-flex items-center justify-center px-3.5 py-1.5 bg-[#315B2A] hover:bg-[#4F8A24] text-[#F2F0DF] border border-[#102610] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610] no-underline transition-colors shrink-0"
+                          className="self-end sm:self-center inline-flex items-center justify-center px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors shrink-0"
                         >
                           <span>Open Quest</span>
                           <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -735,11 +735,11 @@ export default function ChapterDiagnosticPage() {
         {/* DIAGNOSTIC QUESTIONS & STEP-BY-STEP REVIEW                        */}
         {/* ================================================================= */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="flex items-center justify-between border-b-2 border-[#315B2A] pb-2">
-            <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#F2F0DF]">
+          <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-2">
+            <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#FFF7E6]">
               {result ? "Diagnostic Questions Review & Educational Feedback" : "Assessment Questions"}
             </h2>
-            <span className="text-xs font-heading font-bold text-[#79B82A]">
+            <span className="text-xs font-heading font-bold text-[#FFE9A8]">
               {questions.length} Total Questions
             </span>
           </div>
@@ -752,18 +752,18 @@ export default function ChapterDiagnosticPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-[#173B19] p-6 sm:p-7 border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4 text-[#F2F0DF]"
+                className="bg-[#5A3720] p-6 sm:p-7 border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-4 text-[#FFF7E6]"
               >
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#315B2A] pb-3">
-                  <span className="text-xs font-heading font-bold text-[#79B82A] uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
+                  <span className="text-xs font-heading font-bold text-[#FFE9A8] uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 border border-[#102610] bg-[#4F8A24] text-[#F2F0DF]">
+                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 border border-[#422816] bg-[#5DAA3A] text-[#FFF7E6]">
                       Level {q.difficulty}
                     </span>
                     {isAnswered && !result && (
-                      <span className="text-[10px] font-heading font-bold bg-[#79B82A] text-[#102610] px-2 py-0.5 border border-[#102610]">
+                      <span className="text-[10px] font-heading font-bold bg-[#FFE9A8] text-[#2B1B0F] px-2 py-0.5 border border-[#422816]">
                         Answered
                       </span>
                     )}
@@ -774,10 +774,10 @@ export default function ChapterDiagnosticPage() {
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#F2F0DF] leading-relaxed flex items-center flex-wrap gap-2">
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#FFF7E6] leading-relaxed flex items-center flex-wrap gap-2">
                       <span>{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#E5B834] text-[#102610] border border-[#102610]">
+                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
                           Draft Translation
                         </span>
                       )}
@@ -791,25 +791,25 @@ export default function ChapterDiagnosticPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-2 border-[#315B2A]";
-                    let optionBgClass = "bg-[#102610] text-[#D8D8D0] hover:border-[#79B82A] hover:bg-[#315B2A]/40";
+                    let optionBorderClass = "border-2 border-[#7A4B2A]";
+                    let optionBgClass = "bg-[#422816] text-[#E5D7BE] hover:border-[#3FA7C9] hover:bg-[#5A3720]";
 
                     if (result && feedbackItem) {
                       const isCorrectAnswer = feedbackItem.correctAnswer === opt.id;
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#79B82A]";
-                        optionBgClass = "bg-[#4F8A24] text-[#F2F0DF]";
+                        optionBorderClass = "border-2 border-[#2F6B22]";
+                        optionBgClass = "bg-[#5DAA3A] text-[#FFF7E6]";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#D9453D]";
-                        optionBgClass = "bg-[#8B2323] text-[#F2F0DF]";
+                        optionBorderClass = "border-2 border-[#8B2323]";
+                        optionBgClass = "bg-[#E04A3F] text-[#FFF7E6]";
                       } else if (isCorrectAnswer) {
                         // Highlight actual correct answer when student made a mistake
-                        optionBorderClass = "border-2 border-[#79B82A]";
-                        optionBgClass = "bg-[#173B19] text-[#79B82A] border-dashed";
+                        optionBorderClass = "border-2 border-[#5DAA3A]";
+                        optionBgClass = "bg-[#422816] text-[#5DAA3A] border-dashed";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-2 border-[#79B82A]";
-                      optionBgClass = "bg-[#4F8A24] text-[#F2F0DF] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_#102610]";
+                      optionBorderClass = "border-2 border-[#1E6F8C]";
+                      optionBgClass = "bg-[#3FA7C9] text-[#FFF7E6] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.4)]";
                     }
 
                     return (
@@ -830,15 +830,15 @@ export default function ChapterDiagnosticPage() {
                       >
                         <div className="flex items-center gap-3">
                           <span
-                            className={`w-6 h-6 border-2 border-[#102610] font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
+                            className={`w-6 h-6 border-2 font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
                               isSelected
-                                ? "bg-[#79B82A] text-[#102610]"
-                                : "bg-[#173B19] text-[#79B82A]"
+                                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816]"
+                                : "bg-[#422816] text-[#FFE9A8] border-[#7A4B2A]"
                             }`}
                           >
                             {opt.id}
                           </span>
-                          <span className="text-xs sm:text-sm font-bold text-[#F2F0DF] leading-snug">
+                          <span className="text-xs sm:text-sm font-bold text-[#FFF7E6] leading-snug">
                             {optData.text}
                           </span>
                         </div>
@@ -846,12 +846,12 @@ export default function ChapterDiagnosticPage() {
                         {result && feedbackItem && (
                           isSelected ? (
                             feedbackItem.isCorrect ? (
-                              <CheckCircle2 className="w-5 h-5 text-[#79B82A] shrink-0" />
+                              <CheckCircle2 className="w-5 h-5 text-[#5DAA3A] shrink-0" />
                             ) : (
-                              <XCircle className="w-5 h-5 text-[#D9453D] shrink-0" />
+                              <XCircle className="w-5 h-5 text-[#E04A3F] shrink-0" />
                             )
                           ) : feedbackItem.correctAnswer === opt.id ? (
-                            <span className="text-[10px] font-heading font-bold text-[#79B82A] px-2 py-0.5 bg-[#102610] border border-[#79B82A]">
+                            <span className="text-[10px] font-heading font-bold text-[#5DAA3A] px-2 py-0.5 bg-[#422816] border border-[#5DAA3A]">
                               Correct Solution
                             </span>
                           ) : null
@@ -863,17 +863,17 @@ export default function ChapterDiagnosticPage() {
 
                 {/* Educational Feedback Post-Submission */}
                 {feedbackItem && (
-                  <div className="mt-4 p-4 bg-[#102610] border-2 border-[#315B2A] space-y-3">
+                  <div className="mt-4 p-4 bg-[#422816] border-2 border-[#7A4B2A] space-y-3">
                     <div className="flex items-center gap-2 font-heading font-extrabold text-xs sm:text-sm">
                       {feedbackItem.isCorrect ? (
                         <>
-                          <CheckCircle2 className="w-4 h-4 text-[#79B82A]" />
-                          <span className="text-[#79B82A]">Correct Answer! Excellent conceptual grasp.</span>
+                          <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />
+                          <span className="text-[#5DAA3A]">Correct Answer! Excellent conceptual grasp.</span>
                         </>
                       ) : (
                         <>
-                          <AlertCircle className="w-4 h-4 text-[#E5B834]" />
-                          <span className="text-[#E5B834]">
+                          <AlertCircle className="w-4 h-4 text-[#FFE9A8]" />
+                          <span className="text-[#FFE9A8]">
                             {feedbackItem.misconceptionCategory
                               ? `Concept Insight: ${feedbackItem.misconceptionCategory.replace(/_/g, " ").toUpperCase()}`
                               : "Conceptual Check"}
@@ -884,8 +884,8 @@ export default function ChapterDiagnosticPage() {
 
                     {/* Misconception Guidance */}
                     {!feedbackItem.isCorrect && feedbackItem.educationalFeedback && (
-                      <div className="p-3 bg-[#173B19] border border-[#E5B834] text-xs text-[#F2F0DF] leading-relaxed">
-                        <span className="font-heading font-bold text-[10px] text-[#E5B834] uppercase block mb-1">
+                      <div className="p-3 bg-[#5A3720] border border-[#FFE9A8] text-xs text-[#FFF7E6] leading-relaxed">
+                        <span className="font-heading font-bold text-[10px] text-[#FFE9A8] uppercase block mb-1">
                           💡 What happened:
                         </span>
                         <p>{feedbackItem.educationalFeedback}</p>
@@ -894,8 +894,8 @@ export default function ChapterDiagnosticPage() {
 
                     {/* Step-by-Step Solution */}
                     {feedbackItem.explanation && (
-                      <div className="p-3 bg-[#102610] border border-[#315B2A] text-xs text-[#D8D8D0] leading-relaxed space-y-1">
-                        <span className="font-heading font-bold text-[10px] text-[#79B82A] uppercase block">
+                      <div className="p-3 bg-[#422816] border border-[#7A4B2A] text-xs text-[#E5D7BE] leading-relaxed space-y-1">
+                        <span className="font-heading font-bold text-[10px] text-[#5DAA3A] uppercase block">
                           Step-by-step Solution:
                         </span>
                         <p>{resolveLocalizedString(feedbackItem.explanation, currentLang).text}</p>
@@ -904,8 +904,8 @@ export default function ChapterDiagnosticPage() {
 
                     {/* Helpful Hint */}
                     {feedbackItem.hint && (
-                      <div className="p-2.5 bg-[#173B19] border border-[#315B2A] text-xs text-[#79B82A] flex items-center gap-2">
-                        <HelpCircle className="w-4 h-4 shrink-0 text-[#79B82A]" />
+                      <div className="p-2.5 bg-[#5A3720] border border-[#7A4B2A] text-xs text-[#FFE9A8] flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4 shrink-0 text-[#FFE9A8]" />
                         <span>{resolveLocalizedString(feedbackItem.hint, currentLang).text}</span>
                       </div>
                     )}
@@ -916,15 +916,15 @@ export default function ChapterDiagnosticPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-[#173B19] border-3 border-[#315B2A] p-4 shadow-[0px_4px_0px_#102610] flex items-center justify-between gap-4 text-[#F2F0DF]">
-              <span className="text-xs font-heading font-bold text-[#79B82A]">
+            <div className="sticky bottom-4 z-30 bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[0px_4px_0px_rgba(0,0,0,0.5)] flex items-center justify-between gap-4 text-[#FFF7E6]">
+              <span className="text-xs font-heading font-bold text-[#FFE9A8]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50 transition-colors"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[3px_3px_0px_rgba(0,0,0,0.4)] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50 transition-colors"
               >
                 <span>{submitting ? "Evaluating..." : "Submit Diagnostic Assessment"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -935,9 +935,9 @@ export default function ChapterDiagnosticPage() {
 
         {/* Confirmation Step (if triggered by low confidence) */}
         {confirmationQuestions.length > 0 && (
-          <div className="mt-8 bg-[#173B19] p-6 sm:p-8 border-3 border-[#E5B834] shadow-[6px_6px_0px_#102610] space-y-4">
-            <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#E5B834]">
-              <ShieldCheck className="w-4 h-4 text-[#E5B834]" />
+          <div className="mt-8 bg-[#5A3720] p-6 sm:p-8 border-4 border-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4">
+            <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#FFE9A8]">
+              <ShieldCheck className="w-4 h-4 text-[#FFE9A8]" />
               <span>Diagnostic Confirmation Step</span>
             </div>
             <h2 className="font-heading font-extrabold text-base text-[#F2F0DF]">
@@ -949,11 +949,11 @@ export default function ChapterDiagnosticPage() {
 
             <form onSubmit={handleConfirmationSubmit} className="space-y-4 pt-2">
               {confirmationQuestions.map((cq, cqIdx) => (
-                <div key={cq.id} className="p-4 bg-[#102610] border-2 border-[#315B2A] space-y-2">
-                  <p className="text-xs font-heading font-bold text-[#79B82A]">
+                <div key={cq.id} className="p-4 bg-[#422816] border-2 border-[#7A4B2A] space-y-2">
+                  <p className="text-xs font-heading font-bold text-[#FFE9A8]">
                     Confirmation #{cqIdx + 1}
                   </p>
-                  <p className="text-sm font-bold text-[#F2F0DF]">
+                  <p className="text-sm font-bold text-[#FFF7E6]">
                     {resolveLocalizedString(cq.prompt, currentLang).text}
                   </p>
                   <div className="space-y-1.5 pt-1">
@@ -966,11 +966,11 @@ export default function ChapterDiagnosticPage() {
                         onClick={() => handleConfirmationSelect(cq.id, cOpt.id)}
                         className={`min-h-[44px] p-2.5 border-2 text-xs font-bold cursor-pointer flex items-center gap-2.5 ${
                           confirmationAnswers[cq.id] === cOpt.id
-                            ? "border-[#79B82A] bg-[#4F8A24] text-[#F2F0DF] shadow-[2px_2px_0px_#102610]"
-                            : "border-[#315B2A] bg-[#102610] text-[#D8D8D0]"
+                            ? "border-[#1E6F8C] bg-[#3FA7C9] text-[#FFF7E6] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
+                            : "border-[#7A4B2A] bg-[#5A3720] text-[#E5D7BE]"
                         }`}
                       >
-                        <span className="w-5 h-5 border border-[#102610] bg-[#173B19] flex items-center justify-center font-heading text-[10px] text-[#79B82A]">
+                        <span className="w-5 h-5 border border-[#422816] bg-[#422816] flex items-center justify-center font-heading text-[10px] text-[#FFE9A8]">
                           {cOpt.id}
                         </span>
                         <span>{resolveLocalizedString(cOpt.text, currentLang).text}</span>
@@ -983,7 +983,7 @@ export default function ChapterDiagnosticPage() {
               {!confirmationSubmitted && (
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#E5B834] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610]"
+                  className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#FFE9A8] text-[#2B1B0F] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
                 >
                   Confirm Diagnostic Result
                 </button>
@@ -993,7 +993,7 @@ export default function ChapterDiagnosticPage() {
         )}
       </main>
 
-      <footer className="border-t-3 border-[#315B2A] py-4 text-center text-xs font-heading text-[#D8D8D0]/60 bg-[#0F2610]">
+      <footer className="border-t-4 border-[#422816] py-4 text-center text-xs font-heading text-[#E5D7BE]/70 bg-[#1A1614]">
         Margam Adaptive Mathematics • Intelligent Learning Gap Engine
       </footer>
     </div>

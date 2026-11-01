@@ -3,35 +3,39 @@ import { Compass, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
-      <header className="border-b border-slate-200 bg-white">
+    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
+      <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6] shadow-[0px_4px_0px_#1B120C]">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center text-white">
+            <div className="w-8 h-8 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
               <Compass className="w-4 h-4" />
             </div>
-            <span className="font-heading font-extrabold text-lg text-foreground">Margam</span>
+            <span className="font-pixel text-base text-[#FFE9A8]">MARGAM</span>
           </Link>
         </div>
       </header>
 
-      <main className="max-w-md mx-auto px-4 py-16 text-center space-y-4">
-        <span className="text-4xl font-extrabold text-primary">404</span>
-        <h1 className="text-xl font-heading font-bold text-foreground">Page Not Found</h1>
-        <p className="text-xs text-muted-foreground">
-          The requested mathematics resource or route does not exist.
-        </p>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-white text-xs font-bold shadow-soft"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Return to Margam Home</span>
-        </Link>
+      <main className="max-w-md mx-auto px-4 py-16 text-center">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] p-8 space-y-4">
+          <span className="font-pixel text-3xl sm:text-4xl text-[#D9453D] block">404</span>
+          <h1 className="font-pixel text-lg text-[#2B1B0F]">Page Not Found</h1>
+          <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed font-sans">
+            The requested mathematics realm or learning route does not exist.
+          </p>
+          <div className="pt-2">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] no-underline"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Return to Realm Home</span>
+            </Link>
+          </div>
+        </div>
       </main>
 
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
-        Margam
+      <footer className="border-t-2 border-[#422816]/20 py-4 text-center text-xs text-[#5A3720] bg-[#FFF7E6]">
+        Margam Educational Platform
       </footer>
     </div>
   );

@@ -16,6 +16,7 @@ export type TileColor =
   | "grass"
   | "sand"
   | "dirt"
+  | "wood"
   | "stone"
   | "forest"
   | "pixelgreen";

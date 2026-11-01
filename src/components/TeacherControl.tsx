@@ -82,64 +82,64 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
     <section id="teachers" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <Users className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
 
       {/* 3 Pillars */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-coral-light text-coral flex items-center justify-center font-bold">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-6 space-y-3">
+          <div className="w-10 h-10 bg-[#E04A3F] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-white flex items-center justify-center font-bold">
             <Layers className="w-5 h-5" />
           </div>
-          <h3 className="font-heading text-lg font-bold text-foreground">
+          <h3 className="font-pixel text-base text-[#2B1B0F]">
             {t.pillar1Title}
           </h3>
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
             {t.pillar1Desc}
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-lemon-light text-lemon flex items-center justify-center font-bold">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-6 space-y-3">
+          <div className="w-10 h-10 bg-[#F4C542] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-[#2B1B0F] flex items-center justify-center font-bold">
             <Users className="w-5 h-5" />
           </div>
-          <h3 className="font-heading text-lg font-bold text-foreground">
+          <h3 className="font-pixel text-base text-[#2B1B0F]">
             {t.pillar2Title}
           </h3>
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
             {t.pillar2Desc}
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-[#E0E5D4] shadow-card space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-sage-light text-sage flex items-center justify-center font-bold">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-6 space-y-3">
+          <div className="w-10 h-10 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] text-white flex items-center justify-center font-bold">
             <Sliders className="w-5 h-5" />
           </div>
-          <h3 className="font-heading text-lg font-bold text-foreground">
+          <h3 className="font-pixel text-base text-[#2B1B0F]">
             {t.pillar3Title}
           </h3>
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#5A3720] leading-relaxed font-sans">
             {t.pillar3Desc}
           </p>
         </div>
       </div>
 
       {/* Interactive Grouping Demo Card */}
-      <div className="bg-[#F9F7E8] rounded-3xl sm:rounded-4xl p-6 sm:p-8 border border-[#E0E5D4] shadow-card space-y-6">
-        <div className="flex flex-wrap items-center justify-between border-b border-[#E0E5D4] pb-4 gap-2">
-          <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground">
+      <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] p-6 sm:p-8 space-y-6">
+        <div className="flex flex-wrap items-center justify-between border-b-2 border-[#E5D7BE] pb-4 gap-2">
+          <h3 className="font-pixel text-base sm:text-lg text-[#2B1B0F]">
             {t.previewTitle}
           </h3>
-          <span className="text-xs font-mono bg-white px-3 py-1 rounded-full border border-[#E0E5D4] text-muted-foreground font-semibold">
+          <span className="font-pixel text-xs bg-[#FFE9A8] px-3 py-1 border border-[#422816] text-[#2B1B0F]">
             Teacher: Mrs. Lakshmi Devi
           </span>
         </div>
@@ -149,10 +149,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("integers")}
-            className={`min-h-[48px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-heading font-bold transition-all cursor-pointer ${
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
               activeGroupTab === "integers"
-                ? "bg-coral text-white shadow-soft"
-                : "bg-white border border-[#E0E5D4] text-foreground hover:bg-background"
+                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
             }`}
           >
             {t.tabIntegers}
@@ -161,10 +161,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("transposition")}
-            className={`min-h-[48px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-heading font-bold transition-all cursor-pointer ${
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
               activeGroupTab === "transposition"
-                ? "bg-lemon text-foreground shadow-soft"
-                : "bg-white border border-[#E0E5D4] text-foreground hover:bg-background"
+                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
             }`}
           >
             {t.tabTransposition}
@@ -173,10 +173,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("fractions")}
-            className={`min-h-[48px] px-4 py-2 rounded-2xl text-xs sm:text-sm font-heading font-bold transition-all cursor-pointer ${
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
               activeGroupTab === "fractions"
-                ? "bg-sage text-white shadow-soft"
-                : "bg-white border border-[#E0E5D4] text-foreground hover:bg-background"
+                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
             }`}
           >
             {t.tabFractions}
@@ -184,10 +184,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
         </div>
 
         {/* Student Cards in Selected Group */}
-        <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#E0E5D4] space-y-3">
-          <div className="flex items-center justify-between text-xs font-heading font-bold text-coral">
+        <div className="bg-white/80 border-[2px] border-[#422816] p-4 sm:p-5 space-y-3">
+          <div className="flex items-center justify-between text-xs font-pixel text-[#E04A3F]">
             <span>Students Needing Focused 10-Minute Review:</span>
-            <span className="hidden sm:inline bg-coral-light px-2.5 py-0.5 rounded-full border border-coral-border">
+            <span className="hidden sm:inline bg-[#FFE9A8] text-[#2B1B0F] px-2.5 py-0.5 border border-[#422816]">
               {t.actionLabel}
             </span>
           </div>
@@ -201,22 +201,22 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
             ).map((student) => (
               <div
                 key={student.id}
-                className="p-3.5 rounded-2xl bg-background border border-[#E0E5D4] space-y-1.5"
+                className="p-3.5 bg-[#FFF7E6] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] space-y-1.5"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-heading font-bold text-xs sm:text-sm text-foreground">
+                  <span className="font-bold text-xs sm:text-sm text-[#2B1B0F]">
                     {student.name}
                   </span>
-                  <span className="text-[10px] font-mono text-muted-foreground bg-white px-2 py-0.5 rounded-full border border-[#E0E5D4]">
+                  <span className="text-[10px] font-mono text-[#7A4B2A] bg-white px-2 py-0.5 border border-[#422816]">
                     #{student.rollNumber}
                   </span>
                 </div>
-                <div className="text-[11px] text-muted-foreground line-clamp-2">
+                <div className="text-[11px] text-[#5A3720] line-clamp-2 font-sans">
                   {student.diagnosedRootGap?.rationale}
                 </div>
-                <div className="pt-1 flex items-center justify-between text-[10px] font-mono font-bold text-coral">
+                <div className="pt-1 flex items-center justify-between text-[10px] font-mono font-bold text-[#E04A3F]">
                   <span>Prereq: {student.diagnosedRootGap?.rootPrerequisiteId}</span>
-                  <span className="uppercase text-muted-foreground">
+                  <span className="uppercase text-[#7A4B2A]">
                     {student.diagnosedRootGap?.recommendedVariant}
                   </span>
                 </div>

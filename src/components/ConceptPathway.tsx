@@ -69,14 +69,14 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
     <section id="concept-pathway" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <Network className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
@@ -86,15 +86,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
         {/* Left: 3 Grade Columns */}
         <div className="lg:col-span-8 space-y-6">
           {/* Class 7 Column */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E0E5D4] shadow-card space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E0E5D4]">
+          <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-5 sm:p-6 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b-2 border-[#E5D7BE]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-coral inline-block" />
-                <span className="text-xs font-heading font-bold uppercase tracking-wider text-coral">
+                <span className="w-3 h-3 bg-[#E04A3F] border border-[#422816] inline-block" />
+                <span className="font-pixel text-xs tracking-wider text-[#A03028]">
                   {t.class7Title}
                 </span>
               </div>
-              <span className="text-xs font-mono text-muted-foreground">4 Topics</span>
+              <span className="text-xs font-mono text-[#7A4B2A] font-bold">4 Topics</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class7Concepts.map((c) => {
@@ -104,17 +104,17 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "border-coral bg-coral-light text-foreground shadow-xs font-bold"
-                        : "border-[#E0E5D4] bg-background/50 hover:bg-background text-foreground/80 font-medium"
+                        ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
+                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-1">
+                    <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
                       {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
                     </div>
-                    <div className="text-xs sm:text-sm font-heading leading-snug">
+                    <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
                     </div>
                   </button>
@@ -124,15 +124,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
           </div>
 
           {/* Class 8 Column */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E0E5D4] shadow-card space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E0E5D4]">
+          <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-5 sm:p-6 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b-2 border-[#E5D7BE]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-lemon inline-block" />
-                <span className="text-xs font-heading font-bold uppercase tracking-wider text-lemon">
+                <span className="w-3 h-3 bg-[#F4C542] border border-[#422816] inline-block" />
+                <span className="font-pixel text-xs tracking-wider text-[#8A6310]">
                   {t.class8Title}
                 </span>
               </div>
-              <span className="text-xs font-mono text-muted-foreground">5 Topics</span>
+              <span className="text-xs font-mono text-[#7A4B2A] font-bold">5 Topics</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class8Concepts.map((c) => {
@@ -142,17 +142,17 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "border-lemon bg-lemon-light text-foreground shadow-xs font-bold"
-                        : "border-[#E0E5D4] bg-background/50 hover:bg-background text-foreground/80 font-medium"
+                        ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
+                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-1">
+                    <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
                       {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
                     </div>
-                    <div className="text-xs sm:text-sm font-heading leading-snug">
+                    <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
                     </div>
                   </button>
@@ -162,15 +162,15 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
           </div>
 
           {/* Class 9 Column */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E0E5D4] shadow-card space-y-3">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E0E5D4]">
+          <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[4px_4px_0px_#1B120C] p-5 sm:p-6 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b-2 border-[#E5D7BE]">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-sage inline-block" />
-                <span className="text-xs font-heading font-bold uppercase tracking-wider text-sage">
+                <span className="w-3 h-3 bg-[#5DAA3A] border border-[#422816] inline-block" />
+                <span className="font-pixel text-xs tracking-wider text-[#2F6B22]">
                   {t.class9Title}
                 </span>
               </div>
-              <span className="text-xs font-mono text-muted-foreground">5 Topics</span>
+              <span className="text-xs font-mono text-[#7A4B2A] font-bold">5 Topics</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {class9Concepts.map((c) => {
@@ -180,17 +180,17 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedConceptId(c.id)}
-                    className={`min-h-[48px] p-3 rounded-2xl border text-left transition-all cursor-pointer ${
+                    className={`min-h-[48px] p-3 border-[2px] text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "border-sage bg-sage-light text-foreground shadow-xs font-bold"
-                        : "border-[#E0E5D4] bg-background/50 hover:bg-background text-foreground/80 font-medium"
+                        ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
+                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground mb-1">
+                    <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
                       <span>{c.id}</span>
                       {c.prerequisites.length > 0 && <span>{c.prerequisites.length} prereq</span>}
                     </div>
-                    <div className="text-xs sm:text-sm font-heading leading-snug">
+                    <div className="text-xs sm:text-sm font-semibold leading-snug">
                       {c.name[currentLang]}
                     </div>
                   </button>
@@ -202,40 +202,40 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
 
         {/* Right: Concept Inspector Card */}
         <div className="lg:col-span-4 sticky top-24">
-          <div className="bg-[#F9F7E8] rounded-3xl p-6 border border-[#E0E5D4] shadow-card space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E0E5D4]">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+          <div className="bg-[#5A3720] text-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#7A4B2A]">
+              <span className="font-pixel text-xs uppercase tracking-wider text-[#FFE9A8]">
                 {t.inspectorTitle}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white text-xs font-bold text-coral border border-[#E0E5D4]">
+              <span className="px-2.5 py-0.5 bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816] font-pixel text-xs">
                 Class {selectedConcept.class}
               </span>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[11px] font-mono text-muted-foreground">{selectedConcept.id}</span>
-              <h3 className="font-heading text-lg font-bold text-foreground">
+              <span className="text-[11px] font-mono text-[#E5D7BE]">{selectedConcept.id}</span>
+              <h3 className="font-pixel text-base text-[#FFF7E6] leading-snug">
                 {selectedConcept.name[currentLang]}
               </h3>
             </div>
 
             {/* Learning Objective */}
-            <div className="p-3.5 bg-white rounded-2xl border border-[#E0E5D4] space-y-1">
-              <span className="text-[10px] font-mono font-bold uppercase text-muted-foreground block">
+            <div className="p-3.5 bg-[#FFF7E6] text-[#2B1B0F] border-[2px] border-[#422816] space-y-1">
+              <span className="font-pixel text-[10px] uppercase text-[#7A4B2A] block">
                 {t.objectiveLabel}
               </span>
-              <p className="text-xs text-foreground/85 leading-relaxed font-sans">
+              <p className="text-xs text-[#2B1B0F] leading-relaxed font-sans">
                 {selectedConcept.learningObjective[currentLang]}
               </p>
             </div>
 
             {/* Prerequisites */}
             <div className="space-y-2">
-              <span className="text-[10px] font-mono font-bold uppercase text-muted-foreground block">
+              <span className="font-pixel text-[10px] uppercase text-[#FFE9A8] block">
                 {t.prereqLabel} ({selectedConcept.prerequisites.length})
               </span>
               {selectedConcept.prerequisites.length === 0 ? (
-                <p className="text-xs text-muted-foreground italic bg-white p-3 rounded-2xl border border-[#E0E5D4]">
+                <p className="text-xs text-[#FFF7E6] italic bg-[#422816] p-3 border border-[#7A4B2A]">
                   {t.noPrereq}
                 </p>
               ) : (
@@ -247,12 +247,12 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                         key={pId}
                         type="button"
                         onClick={() => setSelectedConceptId(pId)}
-                        className="w-full min-h-[44px] p-2.5 rounded-xl bg-white border border-[#E0E5D4] text-left flex items-center justify-between text-xs hover:border-coral transition-colors cursor-pointer"
+                        className="w-full min-h-[44px] p-2.5 bg-[#FFF7E6] border-[2px] border-[#422816] text-[#2B1B0F] text-left flex items-center justify-between text-xs hover:bg-[#FFE9A8] transition-colors cursor-pointer"
                       >
-                        <span className="font-heading font-bold text-foreground">
+                        <span className="font-bold">
                           {pConcept ? pConcept.name[currentLang] : pId}
                         </span>
-                        <span className="text-[10px] font-mono text-coral font-bold">{pId}</span>
+                        <span className="text-[10px] font-mono text-[#7A4B2A] font-bold">{pId}</span>
                       </button>
                     );
                   })}
@@ -260,7 +260,7 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
               )}
             </div>
 
-            <div className="pt-2 border-t border-[#E0E5D4] text-[11px] font-mono text-sage text-center">
+            <div className="pt-2 border-t border-[#7A4B2A] text-[11px] font-mono text-[#FFE9A8] text-center">
               {t.verifiedTag}
             </div>
           </div>

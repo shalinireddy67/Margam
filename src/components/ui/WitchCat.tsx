@@ -68,7 +68,7 @@ export function WitchCat({
     >
       {/* Optional Sticker / Block Backing */}
       {sticker && (
-        <div className="absolute inset-0 bg-[#173B19]/80 border-2 border-[#4F8A24] shadow-[3px_3px_0px_#102610] backdrop-blur-xs -z-10" />
+        <div className="absolute inset-0 bg-[#5A3720] border-2 border-[#422816] shadow-[3px_3px_0px_rgba(0,0,0,0.4)] -z-10" />
       )}
 
       {/* Mascot Container with Subtle Minecraft Animation */}
@@ -78,7 +78,7 @@ export function WitchCat({
           alt={alt || defaultAlt}
           width={mascotWidth}
           height={mascotHeight}
-          className="object-contain drop-shadow-[2px_3px_0px_rgba(16,38,16,0.6)]"
+          className="object-contain drop-shadow-[2px_3px_0px_rgba(43,27,15,0.7)]"
           style={{
             maxHeight: "100%",
             maxWidth: "100%",
@@ -88,7 +88,7 @@ export function WitchCat({
 
         {/* Pose Badges & Expressions without altering mascot */}
         {pose === "think" && (
-          <div className="absolute -top-1 -right-2 bg-[#E5B834] text-[#102610] border-2 border-[#102610] shadow-[2px_2px_0px_#102610] px-1.5 py-0.5 text-[9px] font-heading font-extrabold animate-bounce">
+          <div className="absolute -top-1 -right-2 bg-[#FFE9A8] text-[#2B1B0F] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] px-1.5 py-0.5 text-[9px] font-heading font-extrabold animate-bounce">
             ?
           </div>
         )}
@@ -101,13 +101,13 @@ export function WitchCat({
         )}
 
         {pose === "oops" && (
-          <div className="absolute -top-1 -right-2 bg-[#4F8A24] text-[#F2F0DF] border-2 border-[#102610] shadow-[2px_2px_0px_#102610] px-1 py-0.5 text-[8px] font-heading font-bold">
+          <div className="absolute -top-1 -right-2 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] px-1 py-0.5 text-[8px] font-heading font-bold">
             🛡️
           </div>
         )}
 
         {pose === "read" && (
-          <div className="absolute -bottom-1 -right-1 bg-[#173B19] text-[#E5B834] border border-[#4F8A24] px-1 py-0.5 text-[8px] font-heading">
+          <div className="absolute -bottom-1 -right-1 bg-[#5A3720] text-[#FFE9A8] border border-[#7A4B2A] px-1 py-0.5 text-[8px] font-heading">
             📖
           </div>
         )}

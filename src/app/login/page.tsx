@@ -194,37 +194,37 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between">
+    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
       {/* Header */}
-      <header className="border-b-3 border-[#315B2A] bg-[#173B19] shadow-[0px_4px_0px_#102610]">
+      <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6] shadow-[0px_4px_0px_#1B120C]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center text-white">
+            <div className="w-8 h-8 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
               <Compass className="w-4 h-4" />
             </div>
-            <span className="font-heading font-extrabold text-lg text-foreground">Margam</span>
+            <span className="font-pixel text-base text-[#FFE9A8]">MARGAM</span>
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D8D8D0] hover:text-[#F2F0DF]"
+            className="inline-flex items-center gap-1.5 text-xs font-pixel text-[#FFE9A8] hover:text-white"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Home</span>
+            <span>Return to Realm</span>
           </Link>
         </div>
       </header>
 
       {/* Main Container */}
       <main className="max-w-md mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
-        <div className="bg-[#173B19] p-6 sm:p-8 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] space-y-6 text-[#F2F0DF]">
+        <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-6 text-[#2B1B0F]">
           {/* Logo & Headline */}
           <div className="text-center space-y-1">
-            <h1 className="text-2xl font-heading font-extrabold text-[#79B82A] drop-shadow-[2px_2px_0px_#102610]">
+            <h1 className="text-xl sm:text-2xl font-pixel text-[#2B1B0F]">
               {mode === "student-signup" && "Student Sign-Up"}
               {mode === "teacher-signup" && "Teacher Sign-Up"}
               {mode === "signin" && "Sign In to Margam"}
             </h1>
-            <p className="text-xs text-[#D8D8D0]">
+            <p className="text-xs text-[#5A3720] font-sans font-semibold">
               {mode === "student-signup" && "No email or phone required. Pure privacy."}
               {mode === "teacher-signup" && "Organize classes and view student mastery paths."}
               {mode === "signin" && "Resume your cloud-synced learning journey."}
@@ -233,15 +233,15 @@ export default function LoginPage() {
 
           {/* Mode Switcher Tabs */}
           {!recoveryCode && !createdClassCode && (
-            <div className="grid grid-cols-3 gap-1 bg-[#102610] p-1 border-2 border-[#315B2A] text-xs font-bold text-center">
+            <div className="grid grid-cols-3 gap-1 bg-[#5A3720] p-1 border-[2px] border-[#422816] text-xs font-pixel text-center">
               <button
                 type="button"
                 onClick={() => {
                   setMode("student-signup");
                   resetMessages();
                 }}
-                className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "student-signup" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
+                className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
+                  mode === "student-signup" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
                 }`}
               >
                 Student
@@ -252,8 +252,8 @@ export default function LoginPage() {
                   setMode("teacher-signup");
                   resetMessages();
                 }}
-                className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "teacher-signup" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
+                className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
+                  mode === "teacher-signup" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
                 }`}
               >
                 Teacher
@@ -264,8 +264,8 @@ export default function LoginPage() {
                   setMode("signin");
                   resetMessages();
                 }}
-                className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "signin" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
+                className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
+                  mode === "signin" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
                 }`}
               >
                 Sign In
@@ -276,18 +276,18 @@ export default function LoginPage() {
           {/* Alerts */}
           {errorMessage && (
             <div
-              className={`p-3.5 rounded-xl text-xs font-semibold flex items-start gap-2 ${
-                isLocked ? "bg-amber-50 border border-amber-300 text-amber-900" : "bg-rose-50 border border-rose-200 text-rose-800"
+              className={`p-3.5 border-[2px] border-[#422816] text-xs font-semibold flex items-start gap-2 ${
+                isLocked ? "bg-[#FFE9A8] text-[#2B1B0F]" : "bg-[#D9453D] text-white"
               }`}
             >
-              <AlertTriangle className="w-4 h-4 shrink-0 text-amber-600 mt-0.5" />
+              <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {successMessage && !recoveryCode && !createdClassCode && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800 flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 shrink-0 text-emerald-600" />
+            <div className="p-3.5 border-[2px] border-[#422816] bg-[#5DAA3A] text-white text-xs font-semibold flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 shrink-0 text-white" />
               <span>{successMessage}</span>
             </div>
           )}
@@ -295,24 +295,24 @@ export default function LoginPage() {
           {/* RECOVERY CODE DISPLAY (STUDENT SIGN-UP ONLY) */}
           {recoveryCode && (
             <div className="space-y-4 animate-in fade-in">
-              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-300 space-y-2.5">
-                <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
-                  <KeyRound className="w-4 h-4 text-amber-700" />
+              <div className="p-4 bg-[#FFE9A8] border-[2px] border-[#422816] space-y-2.5 text-[#2B1B0F]">
+                <div className="flex items-center gap-2 font-pixel text-xs">
+                  <KeyRound className="w-4 h-4 text-[#A06A3C]" />
                   <span>One-Time Account Recovery Code</span>
                 </div>
-                <p className="text-xs text-amber-950 leading-relaxed font-semibold">
+                <p className="text-xs text-[#2B1B0F] leading-relaxed font-semibold font-sans">
                   ⚠️ <strong>IMPORTANT:</strong> Passwords cannot be reset by email because we do not collect your email or phone.
                   This code is shown <strong>ONLY ONCE</strong>.
                 </p>
 
-                <div className="bg-white p-3 rounded-xl border border-amber-300 flex items-center justify-between gap-2">
-                  <code className="font-mono text-sm sm:text-base font-extrabold tracking-wider text-foreground select-all">
+                <div className="bg-white p-3 border-[2px] border-[#422816] flex items-center justify-between gap-2">
+                  <code className="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#2B1B0F] select-all">
                     {recoveryCode}
                   </code>
                   <button
                     type="button"
                     onClick={copyRecoveryCode}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 transition-colors"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border border-[#422816] transition-colors"
                   >
                     <Copy className="w-3.5 h-3.5" />
                     <span>{copiedRecovery ? "Copied!" : "Copy"}</span>
@@ -320,12 +320,12 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <label className="flex items-start gap-2.5 text-xs text-slate-700 cursor-pointer pt-1">
+              <label className="flex items-start gap-2.5 text-xs text-[#5A3720] cursor-pointer pt-1 font-semibold">
                 <input
                   type="checkbox"
                   checked={savedRecoveryCodeCheckbox}
                   onChange={(e) => setSavedRecoveryCodeCheckbox(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary"
+                  className="mt-0.5 w-4 h-4 rounded-none accent-[#5DAA3A]"
                 />
                 <span>I have written down or saved my recovery code in a safe place.</span>
               </label>
@@ -334,7 +334,7 @@ export default function LoginPage() {
                 type="button"
                 disabled={!savedRecoveryCodeCheckbox}
                 onClick={() => router.push("/student")}
-                className="w-full min-h-[48px] py-3 rounded-2xl bg-primary hover:bg-primary-hover disabled:opacity-50 text-white text-xs sm:text-sm font-bold shadow-soft transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>Continue to Learning Path</span>
               </button>
@@ -344,16 +344,16 @@ export default function LoginPage() {
           {/* TEACHER CLASS CREATED DISPLAY */}
           {createdClassCode && (
             <div className="space-y-4 animate-in fade-in">
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2.5">
-                <div className="flex items-center gap-2 text-emerald-950 font-bold text-sm">
-                  <Sparkles className="w-4 h-4 text-emerald-700" />
+              <div className="p-4 bg-[#FFE9A8] border-[2px] border-[#422816] space-y-2.5 text-[#2B1B0F]">
+                <div className="flex items-center gap-2 font-pixel text-xs">
+                  <Sparkles className="w-4 h-4 text-[#5DAA3A]" />
                   <span>Class Code Generated!</span>
                 </div>
-                <p className="text-xs text-emerald-900 leading-relaxed">
+                <p className="text-xs text-[#2B1B0F] leading-relaxed font-sans font-semibold">
                   Share this class code with your students so they can link their diagnostics and worksheets to your dashboard:
                 </p>
-                <div className="bg-white p-3 rounded-xl border border-emerald-300 flex items-center justify-between">
-                  <code className="font-mono text-base font-extrabold tracking-widest text-foreground">
+                <div className="bg-white p-3 border-[2px] border-[#422816] flex items-center justify-between">
+                  <code className="font-mono text-base font-extrabold tracking-widest text-[#2B1B0F]">
                     {createdClassCode}
                   </code>
                   <button
@@ -363,7 +363,7 @@ export default function LoginPage() {
                       setCopiedRecovery(true);
                       setTimeout(() => setCopiedRecovery(false), 2000);
                     }}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-800 transition-colors"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border border-[#422816] transition-colors"
                   >
                     <Copy className="w-3.5 h-3.5" />
                     <span>{copiedRecovery ? "Copied!" : "Copy"}</span>
@@ -374,7 +374,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => router.push("/teacher")}
-                className="w-full min-h-[48px] py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-bold shadow-soft transition-all cursor-pointer"
+                className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer"
               >
                 Open Teacher Dashboard
               </button>
@@ -388,28 +388,28 @@ export default function LoginPage() {
               {mode === "student-signup" && (
                 <form onSubmit={handleStudentSignUp} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Choose Username <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Choose Username <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-muted-foreground absolute left-3 top-3.5" />
+                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="text"
                         required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="e.g. aryabhata_10"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Password (6+ characters) <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password (6+ characters) <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
-                      <Lock className="w-4 h-4 text-muted-foreground absolute left-3 top-3.5" />
+                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="password"
                         required
@@ -417,20 +417,20 @@ export default function LoginPage() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground block">
-                        Class / Grade <span className="text-rose-500">*</span>
+                      <label className="text-xs font-bold text-[#2B1B0F] block">
+                        Class / Grade <span className="text-[#D9453D]">*</span>
                       </label>
                       <select
                         value={selectedClass}
                         onChange={(e) => setSelectedClass(Number(e.target.value))}
-                        className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] text-xs sm:text-sm bg-white font-semibold focus:outline-none"
                       >
                         <option value={6}>Class 6</option>
                         <option value={7}>Class 7</option>
@@ -441,22 +441,22 @@ export default function LoginPage() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground block">
-                        Class Code <span className="text-muted-foreground text-[10px]">(Optional)</span>
+                      <label className="text-xs font-bold text-[#2B1B0F] block">
+                        Class Code <span className="text-[#7A4B2A] text-[10px]">(Optional)</span>
                       </label>
                       <input
                         type="text"
                         value={classCode}
                         onChange={(e) => setClassCode(e.target.value.toUpperCase())}
                         placeholder="MGM-8A"
-                        className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm uppercase focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold uppercase focus:outline-none"
                       />
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 flex items-start gap-2">
-                    <Info className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                    <span>
+                  <div className="p-3 bg-[#FFE9A8] border-[2px] border-[#422816] text-[11px] text-[#2B1B0F] flex items-start gap-2">
+                    <Info className="w-3.5 h-3.5 text-[#5A3720] shrink-0 mt-0.5" />
+                    <span className="font-semibold">
                       Passwords cannot be reset by email because no email or phone number is collected. A one-time recovery code will be provided.
                     </span>
                   </div>
@@ -464,7 +464,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full min-h-[48px] py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-bold shadow-soft transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span>{loading ? "Creating Student Account..." : "Create Student Account"}</span>
                   </button>
@@ -475,8 +475,8 @@ export default function LoginPage() {
               {mode === "teacher-signup" && (
                 <form onSubmit={handleTeacherSignUp} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Teacher Full Name <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Teacher Full Name <span className="text-[#D9453D]">*</span>
                     </label>
                     <input
                       type="text"
@@ -484,13 +484,13 @@ export default function LoginPage() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. S. Ramanujan"
-                      className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      School / Professional Email <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      School / Professional Email <span className="text-[#D9453D]">*</span>
                     </label>
                     <input
                       type="email"
@@ -498,13 +498,13 @@ export default function LoginPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="teacher@school.edu.in"
-                      className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Password (6+ characters) <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password (6+ characters) <span className="text-[#D9453D]">*</span>
                     </label>
                     <input
                       type="password"
@@ -513,14 +513,14 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground block">
-                        First Class Name <span className="text-rose-500">*</span>
+                      <label className="text-xs font-bold text-[#2B1B0F] block">
+                        First Class Name <span className="text-[#D9453D]">*</span>
                       </label>
                       <input
                         type="text"
@@ -528,18 +528,18 @@ export default function LoginPage() {
                         value={className}
                         onChange={(e) => setClassName(e.target.value)}
                         placeholder="Class 8 Section A"
-                        className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-foreground block">
-                        Class Grade <span className="text-rose-500">*</span>
+                      <label className="text-xs font-bold text-[#2B1B0F] block">
+                        Class Grade <span className="text-[#D9453D]">*</span>
                       </label>
                       <select
                         value={selectedClass}
                         onChange={(e) => setSelectedClass(Number(e.target.value))}
-                        className="w-full min-h-[48px] px-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] text-xs sm:text-sm bg-white font-semibold focus:outline-none"
                       >
                         <option value={6}>Class 6</option>
                         <option value={7}>Class 7</option>
@@ -550,13 +550,13 @@ export default function LoginPage() {
                     </div>
                   </div>
 
-                  <label className="flex items-start gap-2.5 text-xs text-slate-700 cursor-pointer pt-1">
+                  <label className="flex items-start gap-2.5 text-xs text-[#5A3720] cursor-pointer pt-1 font-semibold">
                     <input
                       type="checkbox"
                       required
                       checked={consentConfirmed}
                       onChange={(e) => setConsentConfirmed(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary"
+                      className="mt-0.5 w-4 h-4 rounded-none accent-[#5DAA3A]"
                     />
                     <span>
                       I confirm school or guardian consent to manage student class data under applicable privacy guidelines.
@@ -566,7 +566,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full min-h-[48px] py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-bold shadow-soft transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span>{loading ? "Creating Teacher Account..." : "Create Teacher Account & Class"}</span>
                   </button>
@@ -577,35 +577,35 @@ export default function LoginPage() {
               {mode === "signin" && (
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Username or Email <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Username or Email <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-muted-foreground absolute left-3 top-3.5" />
+                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="text"
                         required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Student username or teacher email"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-foreground block">
-                      Password <span className="text-rose-500">*</span>
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
-                      <Lock className="w-4 h-4 text-muted-foreground absolute left-3 top-3.5" />
+                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="password"
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
                       />
                     </div>
                   </div>
@@ -613,7 +613,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     disabled={loading || isLocked}
-                    className="w-full min-h-[48px] py-3 rounded-2xl bg-primary hover:bg-primary-hover disabled:opacity-50 text-white text-xs sm:text-sm font-bold shadow-soft transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <span>{loading ? "Authenticating..." : "Sign In"}</span>
                   </button>
@@ -623,10 +623,10 @@ export default function LoginPage() {
           )}
 
           {/* Guest Mode Navigation Link */}
-          <div className="pt-4 border-t border-slate-100 text-center">
+          <div className="pt-4 border-t-2 border-[#E5D7BE] text-center">
             <Link
               href="/student"
-              className="text-xs font-semibold text-[#D8D8D0] hover:text-[#F2F0DF] inline-flex items-center gap-1.5 min-h-[40px] px-2 py-1 rounded-lg"
+              className="text-xs font-pixel text-[#5A3720] hover:text-[#2B1B0F] inline-flex items-center gap-1.5 min-h-[40px] px-2 py-1"
             >
               <span>Continue in Guest Mode (Local Storage Only)</span>
               <ArrowLeft className="w-3 h-3 rotate-180" />
@@ -636,7 +636,7 @@ export default function LoginPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
+      <footer className="border-t-2 border-[#422816]/20 py-4 text-center text-xs text-[#5A3720] bg-[#FFF7E6]">
         Margam • DPDP-Compliant Student & Teacher Authentication
       </footer>
     </div>

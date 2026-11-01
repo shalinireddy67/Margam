@@ -64,14 +64,14 @@ export default function ProblemSection({ currentLang }: ProblemSectionProps) {
     <section id="problem" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-coral-light text-coral border border-coral-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E04A3F] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <AlertCircle className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
@@ -79,83 +79,83 @@ export default function ProblemSection({ currentLang }: ProblemSectionProps) {
       {/* 2 Clean Comparison Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
         {/* Card 1: Traditional Tests */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E0E5D4] shadow-card flex flex-col justify-between space-y-5">
+        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 sm:p-8 flex flex-col justify-between space-y-5">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-background border border-[#E0E5D4] text-xs font-mono font-bold text-muted-foreground uppercase">
+              <span className="px-3 py-1 bg-[#D9D9D9] border-[2px] border-[#422816] font-pixel text-xs text-[#2B1B0F] uppercase">
                 {t.card1Tag}
               </span>
-              <XCircle className="w-5 h-5 text-coral" />
+              <XCircle className="w-6 h-6 text-[#E04A3F]" />
             </div>
 
-            <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground">
+            <h3 className="font-pixel text-lg sm:text-xl text-[#2B1B0F]">
               {t.card1Title}
             </h3>
 
-            <ul className="space-y-3 pt-2 text-sm text-muted-foreground font-medium">
+            <ul className="space-y-3 pt-2 text-sm text-[#5A3720] font-sans font-semibold">
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-background border border-[#E0E5D4] text-foreground text-xs flex items-center justify-center shrink-0 mt-0.5 font-mono">
+                <span className="w-5 h-5 bg-[#D9D9D9] border border-[#422816] text-[#2B1B0F] text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   1
                 </span>
                 <span>{t.card1Point1}</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-background border border-[#E0E5D4] text-foreground text-xs flex items-center justify-center shrink-0 mt-0.5 font-mono">
+                <span className="w-5 h-5 bg-[#D9D9D9] border border-[#422816] text-[#2B1B0F] text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   2
                 </span>
                 <span>{t.card1Point2}</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-background border border-[#E0E5D4] text-foreground text-xs flex items-center justify-center shrink-0 mt-0.5 font-mono">
+                <span className="w-5 h-5 bg-[#D9D9D9] border border-[#422816] text-[#2B1B0F] text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   3
                 </span>
-                <span className="text-foreground font-semibold">{t.card1Point3}</span>
+                <span className="text-[#E04A3F] font-bold">{t.card1Point3}</span>
               </li>
             </ul>
           </div>
 
-          <div className="pt-4 border-t border-[#E0E5D4] text-xs font-mono text-muted-foreground">
+          <div className="pt-4 border-t-2 border-[#E5D7BE] text-xs font-pixel text-[#7A4B2A]">
             Symptom-treating approach
           </div>
         </div>
 
         {/* Card 2: Margam Prerequisite Tracing */}
-        <div className="bg-[#F9F7E8] rounded-3xl p-6 sm:p-8 border-2 border-sage-border shadow-card flex flex-col justify-between space-y-5">
+        <div className="bg-[#5A3720] text-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] p-6 sm:p-8 flex flex-col justify-between space-y-5">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-sage-light border border-sage-border text-xs font-mono font-bold text-sage uppercase">
+              <span className="px-3 py-1 bg-[#5DAA3A] border-[2px] border-[#422816] font-pixel text-xs text-white uppercase">
                 {t.card2Tag}
               </span>
-              <CheckCircle2 className="w-5 h-5 text-sage" />
+              <CheckCircle2 className="w-6 h-6 text-[#5DAA3A]" />
             </div>
 
-            <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground">
+            <h3 className="font-pixel text-lg sm:text-xl text-[#FFF7E6]">
               {t.card2Title}
             </h3>
 
-            <ul className="space-y-3 pt-2 text-sm text-foreground/90 font-medium">
+            <ul className="space-y-3 pt-2 text-sm text-[#FFF7E6] font-sans font-semibold">
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-sage text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                <span className="w-5 h-5 bg-[#5DAA3A] border border-[#422816] text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   ✓
                 </span>
                 <span>{t.card2Point1}</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-sage text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                <span className="w-5 h-5 bg-[#5DAA3A] border border-[#422816] text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   ✓
                 </span>
                 <span>{t.card2Point2}</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="w-5 h-5 rounded-full bg-sage text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                <span className="w-5 h-5 bg-[#5DAA3A] border border-[#422816] text-white text-xs flex items-center justify-center shrink-0 mt-0.5 font-pixel">
                   ✓
                 </span>
-                <span className="text-sage font-bold">{t.card2Point3}</span>
+                <span className="text-[#FFE9A8] font-bold">{t.card2Point3}</span>
               </li>
             </ul>
           </div>
 
-          <div className="pt-4 border-t border-[#E0E5D4] text-xs font-mono text-sage font-bold flex items-center gap-1.5">
+          <div className="pt-4 border-t border-[#7A4B2A] text-xs font-pixel text-[#FFE9A8] flex items-center gap-1.5">
             <span>Root-cause elimination approach</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </div>

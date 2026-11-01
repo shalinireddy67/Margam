@@ -91,14 +91,14 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
     <section id="roadmap" className="px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-7xl mx-auto">
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-light text-sage border border-sage-border text-xs sm:text-sm font-heading font-bold">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#5DAA3A] text-white border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] font-pixel text-xs">
           <Calendar className="w-4 h-4" />
           <span>{t.badge}</span>
         </div>
-        <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+        <h2 className="font-pixel text-2xl sm:text-3xl text-[#2B1B0F] tracking-wide">
           {t.headline}
         </h2>
-        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+        <p className="text-[#5A3720] text-sm sm:text-base leading-relaxed font-sans">
           {t.subhead}
         </p>
       </div>
@@ -108,22 +108,22 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
         {phases.map((p) => (
           <div
             key={p.num}
-            className={`rounded-3xl p-6 border flex flex-col justify-between space-y-4 shadow-card ${
+            className={`p-6 border-[3px] border-[#422816] flex flex-col justify-between space-y-4 shadow-[4px_4px_0px_#1B120C] ${
               p.done
-                ? "bg-white border-sage-border ring-2 ring-sage/20"
-                : "bg-white/80 border-[#E0E5D4]"
+                ? "bg-[#FFF7E6]"
+                : "bg-white/80"
             }`}
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-heading font-extrabold text-lg text-foreground">
+                <span className="font-pixel text-sm text-[#2B1B0F]">
                   {p.num}
                 </span>
                 <span
-                  className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                  className={`text-xs font-pixel px-2.5 py-0.5 border ${
                     p.done
-                      ? "bg-sage-light text-sage border-sage-border"
-                      : "bg-background text-muted-foreground border-[#E0E5D4]"
+                      ? "bg-[#5DAA3A] text-white border-[#422816]"
+                      : "bg-[#D9D9D9] text-[#2B1B0F] border-[#422816]"
                   }`}
                 >
                   {p.done ? t.phase1Status : t.phasePlanned}
@@ -131,27 +131,27 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
               </div>
 
               <div>
-                <h3 className="font-heading font-bold text-base text-foreground">
+                <h3 className="font-pixel text-xs sm:text-sm text-[#2B1B0F]">
                   {p.name}
                 </h3>
-                <span className="text-xs font-mono text-muted-foreground">{p.dates}</span>
+                <span className="text-xs font-mono text-[#7A4B2A]">{p.dates}</span>
               </div>
 
-              <ul className="space-y-2 pt-2 border-t border-[#E0E5D4] text-xs font-sans text-muted-foreground">
+              <ul className="space-y-2 pt-2 border-t-2 border-[#E5D7BE] text-xs font-sans text-[#5A3720] font-semibold">
                 {p.points.map((pt, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="text-sage font-bold">✓</span>
+                    <span className="text-[#5DAA3A] font-bold">✓</span>
                     <span>{pt}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="pt-2 border-t border-[#E0E5D4] text-xs font-mono font-bold">
+            <div className="pt-2 border-t-2 border-[#E5D7BE] text-xs font-pixel">
               {p.done ? (
-                <span className="text-sage">Implemented & Verified</span>
+                <span className="text-[#5DAA3A]">Implemented & Verified</span>
               ) : (
-                <span className="text-muted-foreground">Upcoming Sprint</span>
+                <span className="text-[#7A4B2A]">Upcoming Sprint</span>
               )}
             </div>
           </div>

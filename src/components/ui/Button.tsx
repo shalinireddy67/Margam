@@ -3,6 +3,8 @@
 import React from "react";
 
 export type ButtonVariant =
+  | "primary"
+  | "outline"
   | "yellow"
   | "cyan"
   | "pink"
@@ -35,6 +37,10 @@ export interface ButtonProps
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
+  // Aliases
+  primary: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
+  outline: "bg-[#FFF7E6] text-[#2B1B0F] border-[#422816] hover:bg-[#FFE9A8]",
+
   // Primary Grass-top look
   grass: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
   pixelgreen: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
