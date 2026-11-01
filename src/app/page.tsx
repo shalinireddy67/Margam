@@ -11,6 +11,7 @@ import {
   LanguageToggle,
   BottomTabBar,
   OfflineBanner,
+  Logo,
   type Language,
 } from "@/components/ui";
 import { LearnerProfile } from "@/lib/types";
@@ -212,19 +213,8 @@ export default function HomePage() {
               href="/"
               className="inline-flex items-center min-h-[48px] gap-2 no-underline text-[#111111]"
             >
-              <div className="w-10 h-10 rounded-[12px_10px_14px_11px] bg-[#FFE14D] border-[3px] border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center shrink-0">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 text-[#111111]"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
+              <div className="w-10 h-10 rounded-none bg-[#F2D16B] border-4 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center shrink-0">
+                <Logo className="w-6 h-6" ariaLabel={copy.appName} />
               </div>
               <div>
                 <span className="font-heading font-extrabold text-2xl text-[#111111] tracking-tight leading-none block">

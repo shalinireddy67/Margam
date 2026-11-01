@@ -34,179 +34,165 @@ export function MistakeCreature({
     case "sign_slip":
       return (
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 16 16"
           className={`${containerSize} ${className}`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label={alt || "Sign Slip mistake creature: a cheeky pink blob juggling plus and minus signs"}
+          shapeRendering="crispEdges"
         >
-          {/* Shadow */}
-          <ellipse cx="50" cy="92" rx="36" ry="6" fill="#111111" />
-          {/* Body */}
-          <path
-            d="M 22 75 C 16 55 18 32 35 20 C 50 10 70 14 80 30 C 88 44 86 66 76 80 C 64 88 34 88 22 75 Z"
-            fill="#FF4F9A"
-            stroke="#111111"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
-          {/* Uneven googly eyes */}
-          <circle cx="38" cy="38" r="8" fill="#FFFFFF" stroke="#111111" strokeWidth="3" />
-          <circle cx="40" cy="38" r="3.5" fill="#111111" />
-          <circle cx="62" cy="40" r="10" fill="#FFFFFF" stroke="#111111" strokeWidth="3" />
-          <circle cx="60" cy="42" r="4.5" fill="#111111" />
-          {/* Cheeky mouth */}
-          <path
-            d="M 40 58 Q 50 68 62 58"
-            stroke="#111111"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            fill="none"
-          />
-          {/* Horns / Hair tufts */}
-          <path d="M 32 18 L 30 6 L 40 14" stroke="#111111" strokeWidth="3" fill="#FF4F9A" strokeLinejoin="round" />
-          <path d="M 66 14 L 74 6 L 70 18" stroke="#111111" strokeWidth="3" fill="#FF4F9A" strokeLinejoin="round" />
-          {/* Floating plus & minus signs */}
-          <g transform="translate(10, 36) rotate(-12)">
-            <rect x="0" y="0" width="16" height="16" rx="4" fill="#FFE14D" stroke="#111111" strokeWidth="2.5" />
-            <path d="M 8 3 L 8 13 M 3 8 L 13 8" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" />
-          </g>
-          <g transform="translate(76, 42) rotate(15)">
-            <rect x="0" y="0" width="16" height="16" rx="4" fill="#FFE14D" stroke="#111111" strokeWidth="2.5" />
-            <path d="M 3 8 L 13 8" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" />
-          </g>
+          {/* Shadow / Base */}
+          <rect x="4" y="14" width="8" height="1" fill="#111111" />
+
+          {/* Body Outline */}
+          <rect x="4" y="4" width="8" height="10" fill="#111111" />
+          <rect x="3" y="5" width="10" height="8" fill="#111111" />
+          <rect x="4" y="2" width="2" height="3" fill="#111111" />
+          <rect x="10" y="2" width="2" height="3" fill="#111111" />
+
+          {/* Redstone Red Body Fill */}
+          <rect x="5" y="5" width="6" height="8" fill="#D9453D" />
+          <rect x="4" y="6" width="8" height="6" fill="#D9453D" />
+          <rect x="4" y="2" width="1" height="2" fill="#D9453D" />
+          <rect x="11" y="2" width="1" height="2" fill="#D9453D" />
+
+          {/* Googly Eyes */}
+          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="6" y="7" width="1" height="1" fill="#111111" />
+          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="7" width="1" height="1" fill="#111111" />
+
+          {/* Cheeky Mouth */}
+          <rect x="6" y="10" width="4" height="1" fill="#111111" />
+          <rect x="9" y="9" width="1" height="1" fill="#111111" />
+
+          {/* Juggling Plus Sign (Left) */}
+          <rect x="1" y="4" width="3" height="1" fill="#111111" />
+          <rect x="2" y="3" width="1" height="3" fill="#111111" />
+          <rect x="1" y="4" width="3" height="1" fill="#F2D16B" />
+          <rect x="2" y="3" width="1" height="3" fill="#F2D16B" />
+
+          {/* Juggling Minus Sign (Right) */}
+          <rect x="12" y="4" width="3" height="1" fill="#111111" />
+          <rect x="12" y="4" width="3" height="1" fill="#F2D16B" />
         </svg>
       );
 
     case "fraction_fumble":
       return (
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 16 16"
           className={`${containerSize} ${className}`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label={alt || "Fraction Fumble mistake creature: a split cyan creature balancing a fraction line"}
+          shapeRendering="crispEdges"
         >
-          {/* Shadow */}
-          <ellipse cx="50" cy="92" rx="34" ry="6" fill="#111111" />
           {/* Top Block (Numerator) */}
-          <rect
-            x="30"
-            y="14"
-            width="40"
-            height="32"
-            rx="8"
-            fill="#4DD9E8"
-            stroke="#111111"
-            strokeWidth="3.5"
-          />
+          <rect x="4" y="1" width="8" height="6" fill="#111111" />
+          <rect x="5" y="2" width="6" height="4" fill="#7EC8E3" />
           {/* Top Block Face */}
-          <circle cx="43" cy="28" r="4" fill="#111111" />
-          <circle cx="57" cy="28" r="4" fill="#111111" />
-          <circle cx="50" cy="38" r="3" fill="#111111" />
+          <rect x="6" y="3" width="1" height="2" fill="#111111" />
+          <rect x="9" y="3" width="1" height="2" fill="#111111" />
+          <rect x="7" y="5" width="2" height="1" fill="#111111" />
+
           {/* Division Bar */}
-          <rect
-            x="14"
-            y="49"
-            width="72"
-            height="8"
-            rx="4"
-            fill="#FFE14D"
-            stroke="#111111"
-            strokeWidth="3"
-          />
+          <rect x="1" y="7" width="14" height="3" fill="#111111" />
+          <rect x="2" y="8" width="12" height="1" fill="#F2D16B" />
+
           {/* Bottom Block (Denominator) */}
-          <rect
-            x="24"
-            y="60"
-            width="52"
-            height="28"
-            rx="8"
-            fill="#4DD9E8"
-            stroke="#111111"
-            strokeWidth="3.5"
-          />
-          {/* Bottom Block Face (Dizzy eyes) */}
-          <path d="M 38 70 L 46 76 M 46 70 L 38 76" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M 54 70 L 62 76 M 62 70 L 54 76" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M 44 82 Q 50 80 56 82" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+          <rect x="3" y="10" width="10" height="5" fill="#111111" />
+          <rect x="4" y="11" width="8" height="3" fill="#7EC8E3" />
+          {/* Bottom Block Dizzy Cross Eyes */}
+          <rect x="5" y="11" width="1" height="1" fill="#111111" />
+          <rect x="6" y="12" width="1" height="1" fill="#111111" />
+          <rect x="5" y="12" width="1" height="1" fill="#111111" />
+          <rect x="6" y="11" width="1" height="1" fill="#111111" />
+          <rect x="9" y="11" width="1" height="1" fill="#111111" />
+          <rect x="10" y="12" width="1" height="1" fill="#111111" />
+          <rect x="9" y="12" width="1" height="1" fill="#111111" />
+          <rect x="10" y="11" width="1" height="1" fill="#111111" />
+          {/* Wobbly mouth */}
+          <rect x="7" y="13" width="2" height="1" fill="#111111" />
         </svg>
       );
 
     case "distribution_dodge":
       return (
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 16 16"
           className={`${containerSize} ${className}`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label={alt || "Distribution Dodge mistake creature: a curious yellow blob peeking out from parentheses"}
+          shapeRendering="crispEdges"
         >
-          {/* Shadow */}
-          <ellipse cx="50" cy="92" rx="36" ry="6" fill="#111111" />
-          {/* Body */}
-          <path
-            d="M 28 85 C 24 50 30 30 50 24 C 70 30 76 50 72 85 Z"
-            fill="#FFE14D"
-            stroke="#111111"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
-          {/* Eyes looking sideways */}
-          <circle cx="44" cy="46" r="7" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="46" cy="46" r="3.5" fill="#111111" />
-          <circle cx="62" cy="46" r="7" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="64" cy="46" r="3.5" fill="#111111" />
-          {/* Cute tooth smirk */}
-          <path d="M 46 64 Q 54 70 64 63" stroke="#111111" strokeWidth="3" strokeLinecap="round" fill="none" />
-          {/* Big Parentheses Shielding It */}
-          <path
-            d="M 20 20 C 8 38 8 66 20 84"
-            stroke="#111111"
-            strokeWidth="5"
-            strokeLinecap="round"
-            fill="none"
-          />
-          <path
-            d="M 80 20 C 92 38 92 66 80 84"
-            stroke="#111111"
-            strokeWidth="5"
-            strokeLinecap="round"
-            fill="none"
-          />
+          {/* Left Parenthesis Shield */}
+          <rect x="2" y="2" width="2" height="2" fill="#111111" />
+          <rect x="1" y="4" width="2" height="8" fill="#111111" />
+          <rect x="2" y="12" width="2" height="2" fill="#111111" />
+
+          {/* Right Parenthesis Shield */}
+          <rect x="12" y="2" width="2" height="2" fill="#111111" />
+          <rect x="13" y="4" width="2" height="8" fill="#111111" />
+          <rect x="12" y="12" width="2" height="2" fill="#111111" />
+
+          {/* Body Outline */}
+          <rect x="4" y="4" width="8" height="10" fill="#111111" />
+          <rect x="5" y="3" width="6" height="12" fill="#111111" />
+
+          {/* Sand Yellow Body Fill */}
+          <rect x="5" y="4" width="6" height="10" fill="#F2D16B" />
+          <rect x="4" y="5" width="8" height="8" fill="#F2D16B" />
+
+          {/* Sideways Looking Eyes */}
+          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="6" y="6" width="1" height="2" fill="#111111" />
+          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="10" y="6" width="1" height="2" fill="#111111" />
+
+          {/* Smirk */}
+          <rect x="6" y="10" width="3" height="1" fill="#111111" />
+          <rect x="9" y="9" width="1" height="1" fill="#111111" />
         </svg>
       );
 
     case "calculation_slip":
       return (
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 16 16"
           className={`${containerSize} ${className}`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label={alt || "Calculation Slip mistake creature: a friendly orange monster with spiral energy"}
+          shapeRendering="crispEdges"
         >
-          {/* Shadow */}
-          <ellipse cx="50" cy="92" rx="32" ry="6" fill="#111111" />
-          {/* Star-like bouncy body */}
-          <path
-            d="M 50 14 L 62 34 L 86 36 L 70 54 L 76 78 L 52 68 L 26 80 L 30 55 L 14 38 L 38 34 Z"
-            fill="#FF8A3D"
-            stroke="#111111"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
-          {/* Eyes with spiral/dizzy look */}
-          <circle cx="42" cy="46" r="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="42" cy="46" r="2.5" fill="#111111" />
-          <circle cx="60" cy="46" r="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="60" cy="46" r="2.5" fill="#111111" />
-          {/* Open astonished mouth */}
-          <ellipse cx="51" cy="58" rx="5" ry="4" fill="#111111" />
+          {/* Spiky Outline */}
+          <rect x="7" y="1" width="2" height="3" fill="#111111" />
+          <rect x="1" y="7" width="3" height="2" fill="#111111" />
+          <rect x="12" y="7" width="3" height="2" fill="#111111" />
+          <rect x="4" y="4" width="8" height="8" fill="#111111" />
+          <rect x="3" y="5" width="10" height="6" fill="#111111" />
+          <rect x="3" y="12" width="3" height="3" fill="#111111" />
+          <rect x="10" y="12" width="3" height="3" fill="#111111" />
+
+          {/* Dirt Brown Body Fill */}
+          <rect x="4" y="5" width="8" height="6" fill="#8B5A2B" />
+          <rect x="5" y="4" width="6" height="8" fill="#8B5A2B" />
+          <rect x="7" y="2" width="2" height="2" fill="#8B5A2B" />
+          <rect x="2" y="7" width="2" height="2" fill="#8B5A2B" />
+          <rect x="12" y="7" width="2" height="2" fill="#8B5A2B" />
+          <rect x="4" y="12" width="2" height="2" fill="#8B5A2B" />
+          <rect x="10" y="12" width="2" height="2" fill="#8B5A2B" />
+
+          {/* Astonished Eyes */}
+          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="5" y="6" width="1" height="1" fill="#111111" />
+          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="1" height="1" fill="#111111" />
+
+          {/* Astonished Open Mouth */}
+          <rect x="7" y="9" width="2" height="2" fill="#111111" />
         </svg>
       );
 
@@ -214,33 +200,37 @@ export function MistakeCreature({
     default:
       return (
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 16 16"
           className={`${containerSize} ${className}`}
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label={alt || "Curious math helper creature"}
+          shapeRendering="crispEdges"
         >
-          {/* Shadow */}
-          <ellipse cx="50" cy="92" rx="34" ry="6" fill="#111111" />
-          {/* Round bouncy green body */}
-          <path
-            d="M 24 60 C 20 34 38 18 52 18 C 72 18 82 36 78 62 C 74 86 32 86 24 60 Z"
-            fill="#8DE86A"
-            stroke="#111111"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
-          {/* Big happy eyes */}
-          <circle cx="42" cy="42" r="8" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="44" cy="42" r="4" fill="#111111" />
-          <circle cx="62" cy="42" r="8" fill="#FFFFFF" stroke="#111111" strokeWidth="2.5" />
-          <circle cx="64" cy="42" r="4" fill="#111111" />
-          {/* Big happy smile */}
-          <path d="M 40 56 Q 52 68 64 56" stroke="#111111" strokeWidth="3" strokeLinecap="round" fill="none" />
-          {/* Little spark antenna */}
-          <path d="M 52 18 L 52 6" stroke="#111111" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="52" cy="4" r="3.5" fill="#FFE14D" stroke="#111111" strokeWidth="2" />
+          {/* Spark Antenna */}
+          <rect x="7" y="0" width="2" height="2" fill="#F2D16B" />
+          <rect x="7" y="2" width="2" height="2" fill="#111111" />
+
+          {/* Body Outline */}
+          <rect x="4" y="4" width="8" height="10" fill="#111111" />
+          <rect x="3" y="5" width="10" height="8" fill="#111111" />
+          <rect x="4" y="14" width="3" height="2" fill="#111111" />
+          <rect x="9" y="14" width="3" height="2" fill="#111111" />
+
+          {/* Grass Green Body Fill */}
+          <rect x="5" y="5" width="6" height="8" fill="#5DB84A" />
+          <rect x="4" y="6" width="8" height="6" fill="#5DB84A" />
+
+          {/* Big Happy Eyes */}
+          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="6" y="6" width="1" height="1" fill="#111111" />
+          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="1" height="1" fill="#111111" />
+
+          {/* Big Happy Smile */}
+          <rect x="6" y="10" width="4" height="1" fill="#111111" />
+          <rect x="5" y="9" width="1" height="1" fill="#111111" />
+          <rect x="10" y="9" width="1" height="1" fill="#111111" />
         </svg>
       );
   }

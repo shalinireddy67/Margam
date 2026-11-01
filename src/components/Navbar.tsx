@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Home, Sparkles, Network, Users, Globe, Compass, ArrowRight } from "lucide-react";
 import { SITE_NAME } from "@/config/site";
 import { SupportedLanguage } from "@/lib/types";
+import { Logo } from "@/components/ui";
 
 interface NavbarProps {
   currentLang: SupportedLanguage;
@@ -32,9 +33,8 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             className="flex items-center gap-2.5 min-h-[48px] rounded-2xl pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral"
             aria-label="Margam Home"
           >
-            {/* Simple Geometric Logo */}
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-coral flex items-center justify-center text-white shadow-soft">
-              <Compass className="w-5 h-5 sm:w-6 sm:h-6" />
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-none border-2 border-[#111111] flex items-center justify-center shrink-0">
+              <Logo className="w-full h-full" ariaLabel="Margam Logo" />
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-extrabold text-xl sm:text-2xl text-foreground tracking-tight leading-none">

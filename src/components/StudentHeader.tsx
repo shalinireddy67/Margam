@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Compass, User, Globe, AlertTriangle, ArrowLeft } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
+import { Logo } from "@/components/ui";
 
 interface StudentHeaderProps {
   profile: LearnerProfile | null;
@@ -46,11 +47,9 @@ export default function StudentHeader({
           ) : (
             <Link
               href="/"
-              className="flex items-center min-h-[48px] gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex items-center min-h-[48px] gap-2 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-soft">
-                <Compass className="w-5 h-5" />
-              </div>
+              <Logo className="w-8 h-8 rounded-none border-2 border-[#111111]" ariaLabel="Margam" />
               <span className="font-heading font-extrabold text-xl text-foreground tracking-tight">
                 Margam
               </span>
