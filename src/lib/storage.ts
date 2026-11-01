@@ -167,7 +167,15 @@ export function isSupabaseMode(): boolean {
  */
 export function getActiveProfile(): LearnerProfile | null {
   if (typeof window === "undefined") {
-    return globalStore.__margam_memory_store__ || null;
+    const mem = globalStore.__margam_memory_store__;
+    if (!mem) return null;
+    const parsed = LearnerProfileSchema.safeParse(mem);
+    if (!parsed.success) {
+      console.warn("Learner profile in memory failed schema validation. Resetting to null.");
+      globalStore.__margam_memory_store__ = null;
+      return null;
+    }
+    return mem;
   }
 
   try {
@@ -184,12 +192,14 @@ export function getActiveProfile(): LearnerProfile | null {
     }
 
     if (!parsedJson || typeof parsedJson !== "object") {
+      window.localStorage.removeItem(STORAGE_KEY);
       return null;
     }
 
     const migrated = migrateLearnerProfile(parsedJson as Record<string, unknown>);
     if (!migrated) {
       console.warn("Learner profile could not be validated or migrated. Clearing invalid data.");
+      window.localStorage.removeItem(STORAGE_KEY);
       return null;
     }
 

@@ -47,7 +47,7 @@ export function validateEnv(): AppEnv {
     showDraftTranslations: process.env.NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS === "true",
     featureLogin: process.env.NEXT_PUBLIC_FEATURE_LOGIN === "true",
     featureTutor: process.env.NEXT_PUBLIC_FEATURE_TUTOR === "true",
-    featureTeacherTools: process.env.NEXT_PUBLIC_FEATURE_TEACHER_TOOLS === "true",
+    featureTeacherTools: process.env.NEXT_PUBLIC_FEATURE_TEACHER_TOOLS !== "false",
   };
 }
 
