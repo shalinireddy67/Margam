@@ -112,7 +112,13 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
               </button>
             </div>
 
-            {/* Desktop CTA Button */}
+            {/* Desktop Sign In & CTA */}
+            <a
+              href="/login"
+              className="hidden sm:inline-flex min-h-[48px] px-4 py-2 rounded-2xl border border-[#E0E5D4] hover:bg-slate-50 text-foreground text-xs sm:text-sm font-heading font-bold items-center transition-all cursor-pointer"
+            >
+              <span>Sign In</span>
+            </a>
             <a
               href="/student"
               className="hidden lg:inline-flex min-h-[48px] px-5 py-2.5 rounded-2xl bg-coral hover:bg-coral-hover text-white text-sm font-heading font-bold items-center gap-2 transition-all shadow-soft cursor-pointer"

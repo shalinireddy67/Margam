@@ -35,24 +35,41 @@ export default function PrivacyPage() {
           </div>
 
           <section className="space-y-2">
-            <h2 className="font-heading font-bold text-base text-foreground">1. Privacy by Architecture</h2>
+            <h2 className="font-heading font-bold text-base text-foreground">1. Privacy by Architecture & Data Minimization</h2>
             <p>
               Margam is designed with radical data minimization. We do not require, collect, or store student email
-              addresses, telephone numbers, Aadhaar numbers, biometric data, or residential addresses.
+              addresses, telephone numbers, Aadhaar numbers, biometric data, or residential addresses. Student accounts
+              require only a self-chosen username and password.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-heading font-bold text-base text-foreground">2. Local Browser Storage Only</h2>
+            <h2 className="font-heading font-bold text-base text-foreground">2. Dual Storage: Guest Mode & Cloud Sync</h2>
             <p>
-              In this prototype phase, student learning progression, lesson completions, and practice worksheet scores
-              are stored strictly within your local browser storage (<code>localStorage</code>). No personal data or
-              student attempt logs are transmitted to external surveillance databases or third-party advertising networks.
+              <strong>Guest Mode:</strong> Students can use Margam entirely offline or without creating an account. Learning progression, diagnostic results, and worksheet attempts stay strictly within local browser storage (<code>localStorage</code>).
+            </p>
+            <p>
+              <strong>Supabase Mode (Cloud Sync):</strong> When creating an account, an internal, non-mailable address is generated solely for authentication. Learning progress is synced via server-only routes with PostgreSQL Row-Level Security (RLS). Students read and write only their own records.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-heading font-bold text-base text-foreground">3. Single-Grade Learner Isolation</h2>
+            <h2 className="font-heading font-bold text-base text-foreground">3. One-Time Recovery Codes & Account Security</h2>
+            <p>
+              Because Margam does not collect student email addresses or phone numbers, passwords cannot be reset via email.
+              During sign-up, a one-time cryptographic recovery code is displayed once to the student and stored exclusively as a SHA-256 hash. Login endpoints enforce a 15-minute lockout after 5 consecutive failed attempts to prevent automated credential attacks.
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="font-heading font-bold text-base text-foreground">4. Teacher Accounts & Guardian Consent</h2>
+            <p>
+              Teacher registration requires professional school verification and explicit confirmation of school or guardian consent. Teachers create private class codes and can view only students who deliberately join their specific class code. Teachers cannot access records of students enrolled with other educators.
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="font-heading font-bold text-base text-foreground">5. Single-Grade Learner Isolation</h2>
             <p>
               To maintain academic integrity and prevent multi-grade data confusion, each learner profile is locked to
               one selected class. Switching grades requires a deliberate reset that clears local progress, preventing
@@ -61,7 +78,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-heading font-bold text-base text-foreground">4. Alignment with DPDP Act 2023</h2>
+            <h2 className="font-heading font-bold text-base text-foreground">6. Alignment with DPDP Act 2023</h2>
             <p>
               We adhere strictly to the foundational principles of the Digital Personal Data Protection (DPDP) Act 2023:
               purpose limitation, collection minimization, transparent user choice, and storage security. We do not
@@ -70,7 +87,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-heading font-bold text-base text-foreground">5. Contact & Questions</h2>
+            <h2 className="font-heading font-bold text-base text-foreground">7. Contact & Questions</h2>
             <p>
               For queries or feedback regarding our open mathematical tools, contact us via the Margam repository.
             </p>

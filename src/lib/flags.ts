@@ -16,7 +16,7 @@ function parseBool(val: string | undefined, defaultVal = false): boolean {
 }
 
 export const flags: FeatureFlags = {
-  FEATURE_LOGIN: parseBool(process.env.NEXT_PUBLIC_FEATURE_LOGIN, false),
+  FEATURE_LOGIN: parseBool(process.env.NEXT_PUBLIC_FEATURE_LOGIN, true),
   FEATURE_TUTOR: parseBool(process.env.NEXT_PUBLIC_FEATURE_TUTOR, false),
   FEATURE_TEACHER_TOOLS: parseBool(process.env.NEXT_PUBLIC_FEATURE_TEACHER_TOOLS, false),
 };

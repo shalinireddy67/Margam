@@ -128,6 +128,15 @@ export default function StudentHeader({
                   </div>
 
                   <Link
+                    href="/login"
+                    onClick={() => setShowProfileMenu(false)}
+                    className="flex items-center gap-2 w-full p-2 rounded-xl text-xs font-semibold text-primary hover:bg-primary/5 transition-colors mb-1"
+                  >
+                    <User className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Cloud Sync / Sign In</span>
+                  </Link>
+
+                  <Link
                     href="/student/reset-class"
                     onClick={() => setShowProfileMenu(false)}
                     className="flex items-center gap-2 w-full p-2 rounded-xl text-xs font-semibold text-amber-700 hover:bg-amber-50 transition-colors"
