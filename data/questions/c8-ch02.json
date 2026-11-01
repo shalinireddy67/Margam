@@ -132,5 +132,467 @@
       "te": "(a^m)^n = a^(mn) కావున (2³)² = 2⁶.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c8-exp-d1-01",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Simplify using the product law of exponents: 5² × 5⁵.",
+      "hi": "घातांकों के गुणन नियम का उपयोग करके सरल करें: 5² × 5⁵।",
+      "te": "ఘాతాంకాల గుణకార నియమాన్ని ఉపయోగించి సూక్ష్మీకరించండి: 5² × 5⁵.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5⁷",
+          "hi": "5⁷",
+          "te": "5⁷",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5¹⁰",
+          "hi": "5¹⁰",
+          "te": "5¹⁰",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_exponents_instead_of_adding_in_product_rule"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "25⁷",
+          "hi": "25⁷",
+          "te": "25⁷",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "5³",
+          "hi": "5³",
+          "te": "5³",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_exponents_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "By the product rule aᵐ × aⁿ = aᵐ⁺ⁿ, keeping base 5: 5²⁺⁵ = 5⁷.",
+      "hi": "गुणन नियम aᵐ × aⁿ = aᵐ⁺ⁿ के अनुसार आधार 5 रहेगा: 5²⁺⁵ = 5⁷।",
+      "te": "గుణకార నియమం aᵐ × aⁿ = aᵐ⁺ⁿ ప్రకారం భూమి 5 ఉంటుంది: 5²⁺⁵ = 5⁷.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When bases are identical, add the powers.",
+      "hi": "जब आधार समान हों, तो घातों को जोड़ें।",
+      "te": "భూములు సమానంగా ఉన్నప్పుడు ఘాతాంకాలను కలపండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d1-02",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "What is the value of any non-zero number raised to the zero power, such as 7⁰?",
+      "hi": "किसी भी गैर-शून्य संख्या की घात 0 होने पर उसका मान क्या होता है, जैसे 7⁰?",
+      "te": "సున్న కాకుండా ఏదైనా సంఖ్య యొక్క ఘాతం 0 అయితే దాని విలువ ఎంత, ఉదాహరణకు 7⁰?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "0",
+          "hi": "0",
+          "te": "0",
+          "reviewed": false
+        },
+        "mistakeTag": "zero_power_confused_with_zero_multiplication"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "zero_power_confused_with_first_power"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "undefined",
+          "hi": "अपरिभाषित",
+          "te": "నిర్వచించబడలేదు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_power_with_division_by_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "By the zero exponent rule, a⁰ = 1 for any non-zero real number a. 7⁰ = 1.",
+      "hi": "शून्य घातांक नियम के अनुसार, किसी भी अशून्य संख्या a के लिए a⁰ = 1 होता है। अतः 7⁰ = 1।",
+      "te": "శూన్య ఘాతాంక నియమం ప్రకారం, శూన్యేతర సంఖ్య a కి a⁰ = 1. కాబట్టి 7⁰ = 1.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Consider 7¹ ÷ 7¹ = 7¹⁻¹ = 7⁰, which equals 7 ÷ 7.",
+      "hi": "विचार करें 7¹ ÷ 7¹ = 7¹⁻¹ = 7⁰, जो 7 ÷ 7 = 1 के बराबर है।",
+      "te": "7¹ ÷ 7¹ = 7¹⁻¹ = 7⁰ ను గమనించండి, ఇది 7 ÷ 7 = 1 కి సమానం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d2-01",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Simplify the power of a power expression: (4³)².",
+      "hi": "घात की घात वाले व्यंजक को सरल करें: (4³)²।",
+      "te": "ఘాతం యొక్క ఘాతాన్ని సూక్ష్మీకరించండి: (4³)².",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4⁶",
+          "hi": "4⁶",
+          "te": "4⁶",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4⁵",
+          "hi": "4⁵",
+          "te": "4⁵",
+          "reviewed": false
+        },
+        "mistakeTag": "added_exponents_instead_of_multiplying_in_power_of_power"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4⁹",
+          "hi": "4⁹",
+          "te": "4⁹",
+          "reviewed": false
+        },
+        "mistakeTag": "raised_exponent_to_power_instead_of_multiplying"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16³",
+          "hi": "16³",
+          "te": "16³",
+          "reviewed": false
+        },
+        "mistakeTag": "applied_outer_power_to_base_only"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "By the power of a power rule (aᵐ)ⁿ = aᵐˣⁿ: (4³)² = 4³ˣ² = 4⁶.",
+      "hi": "नियम (aᵐ)ⁿ = aᵐˣⁿ के अनुसार: (4³)² = 4³ˣ² = 4⁶।",
+      "te": "(aᵐ)ⁿ = aᵐˣⁿ నియమం ప్రకారం: (4³)² = 4³ˣ² = 4⁶.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply the inner power 3 by the outer power 2.",
+      "hi": "भीतरी घात 3 को बाहरी घात 2 से गुणा करें।",
+      "te": "లోపలి ఘాతం 3 ను వెలుపలి ఘాతం 2 తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d2-02",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate the negative exponent expression: 2⁻⁴.",
+      "hi": "ऋणात्मक घातांक व्यंजक का मान ज्ञात करें: 2⁻⁴।",
+      "te": "రుణ ఘాతాంకం యొక్క విలువను కనుగొనండి: 2⁻⁴.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1/16",
+          "hi": "1/16",
+          "te": "1/16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_base_by_negative_exponent"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-16",
+          "hi": "-16",
+          "te": "-16",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_negative_exponent_with_negative_result"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "1/8",
+          "hi": "1/8",
+          "te": "1/8",
+          "reviewed": false
+        },
+        "mistakeTag": "miscalculated_power_of_two"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "A negative exponent represents the reciprocal: a⁻ⁿ = 1/(aⁿ). Thus 2⁻⁴ = 1/(2⁴) = 1/16.",
+      "hi": "ऋणात्मक घातांक व्युत्क्रम को दर्शाता है: a⁻ⁿ = 1/(aⁿ)। अतः 2⁻⁴ = 1/(2⁴) = 1/16।",
+      "te": "రుణ ఘాతాంకం విలోమాన్ని సూచిస్తుంది: a⁻ⁿ = 1/(aⁿ). కాబట్టి 2⁻⁴ = 1/(2⁴) = 1/16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Rewrite with a positive exponent in the denominator.",
+      "hi": "हर में धनात्मक घात के साथ फिर से लिखें।",
+      "te": "హారంలో ధన ఘాతాంకంగా రాయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d3-01",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Simplify the expression and express in prime powers: (3⁻⁵ × 10⁻⁵ × 125) / (5⁻⁷ × 6⁻⁵).",
+      "hi": "व्यंजक को सरल कीजिए और अभाज्य घातों में व्यक्त कीजिए: (3⁻⁵ × 10⁻⁵ × 125) / (5⁻⁷ × 6⁻⁵)।",
+      "te": "సమాసాన్ని సూక్ష్మీకరించి ప్రధాన కారణాంకాల ఘాతాలుగా రాయండి: (3⁻⁵ × 10⁻⁵ × 125) / (5⁻⁷ × 6⁻⁵).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5⁵",
+          "hi": "5⁵",
+          "te": "5⁵",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5³",
+          "hi": "5³",
+          "te": "5³",
+          "reviewed": false
+        },
+        "mistakeTag": "cancelled_factors_with_incorrect_powers"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_all_terms_cancel_completely"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "5⁻²",
+          "hi": "5⁻²",
+          "te": "5⁻²",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_exponents_in_wrong_order_in_quotient"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Decompose into prime bases: 10⁻⁵ = 2⁻⁵ × 5⁻⁵, 125 = 5³, 6⁻⁵ = 2⁻⁵ × 3⁻⁵. Numerator = 3⁻⁵ × 2⁻⁵ × 5⁻²; Denominator = 5⁻⁷ × 2⁻⁵ × 3⁻⁵. Cancelling 2⁻⁵ and 3⁻⁵ yields 5⁻² / 5⁻⁷ = 5⁻²⁻⁽⁻⁷⁾ = 5⁵.",
+      "hi": "अभाज्य आधारों में तोड़ें: 10 = 2 × 5, 125 = 5³, 6 = 2 × 3। अंश और हर में समान पद कटने के बाद 5⁻² / 5⁻⁷ = 5⁵ बचता है।",
+      "te": "ప్రధాన కారణాంకాలుగా విడదీయండి: 10 = 2 × 5, 125 = 5³, 6 = 2 × 3. సవరించగా 5⁻² / 5⁻⁷ = 5⁵ వస్తుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Factor 10, 6, and 125 into powers of 2, 3, and 5.",
+      "hi": "10, 6 और 125 को 2, 3 और 5 की अभाज्य घातों में बदलें।",
+      "te": "10, 6 మరియు 125 లను 2, 3, 5 ల ప్రధాన ఘాతాలుగా రాయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d3-02",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find the value of x in the exponential equation: (2/3)³ × (2/3)⁵ = (2/3)²ˣ.",
+      "hi": "घातांकीय समीकरण में x का मान ज्ञात कीजिए: (2/3)³ × (2/3)⁵ = (2/3)²ˣ।",
+      "te": "ఘాతాంక సమీకరణంలో x విలువను కనుగొనండి: (2/3)³ × (2/3)⁵ = (2/3)²ˣ.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_variable_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7.5",
+          "hi": "7.5",
+          "te": "7.5",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_exponents_instead_of_adding_in_product_rule"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "divided_powers_in_exponential_equation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Left side: (2/3)³⁺⁵ = (2/3)⁸. Equating exponents since bases are equal: 2x = 8 => x = 4.",
+      "hi": "बायां पक्ष: (2/3)⁸। आधार समान होने के कारण घातों की तुलना करें: 2x = 8 => x = 4।",
+      "te": "ఎడమవైపు: (2/3)³⁺⁵ = (2/3)⁸. భూములు సమానం కాబట్టి ఘాతాలను పోల్చగా: 2x = 8 => x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add exponents on the left, then set equal to 2x.",
+      "hi": "बाईं ओर की घातों को जोड़ें, फिर 2x के बराबर रखें।",
+      "te": "ఎడమవైపు ఘాతాలను కూడి, 2x కు సమానం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-d3-03",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate the numeric value: [(1/3)⁻² - (1/2)⁻³] ÷ (1/4)⁻².",
+      "hi": "संख्यात्मक मान ज्ञात कीजिए: [(1/3)⁻² - (1/2)⁻³] ÷ (1/4)⁻²।",
+      "te": "విలువను లెక్కించండి: [(1/3)⁻² - (1/2)⁻³] ÷ (1/4)⁻².",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1/16",
+          "hi": "1/16",
+          "te": "1/16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_division_by_power_of_fraction"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-1/16",
+          "hi": "-1/16",
+          "te": "-1/16",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction_of_inverted_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_instead_of_dividing_by_divisor"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "(1/3)⁻² = 3² = 9. (1/2)⁻³ = 2³ = 8. Inside brackets: 9 - 8 = 1. Divisor: (1/4)⁻² = 4² = 16. Result = 1 ÷ 16 = 1/16.",
+      "hi": "(1/3)⁻² = 9, (1/2)⁻³ = 8। कोष्ठक के अंदर: 9 - 8 = 1। भाजक: (1/4)⁻² = 16। परिणाम: 1 ÷ 16 = 1/16।",
+      "te": "(1/3)⁻² = 9, (1/2)⁻³ = 8. బ్రాకెట్ లోపల: 9 - 8 = 1. భాజకం: (1/4)⁻² = 16. ఫలితం: 1 ÷ 16 = 1/16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Invert each fraction when changing negative powers to positive.",
+      "hi": "ऋणात्मक घात को धनात्मक में बदलते समय प्रत्येक भिन्न को उलट दें।",
+      "te": "రుణ ఘాతాలను ధన ఘాతాలుగా మార్చేటప్పుడు భిన్నాలను తిరగరాయండి.",
+      "reviewed": false
+    }
   }
 ]

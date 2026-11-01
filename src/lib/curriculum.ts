@@ -19,16 +19,16 @@ export const chapterQuestionCounts: Record<string, number> = {
   "c8-ch06": 13,
   "c9-ch04": 13,
   "c10-ch04": 14,
-  "c6-ch01": 2,
+  "c6-ch01": 9,
   "c6-ch02": 2,
   "c7-ch01": 2,
-  "c7-ch02": 2,
+  "c7-ch02": 9,
   "c8-ch01": 2,
-  "c8-ch02": 2,
+  "c8-ch02": 9,
   "c9-ch01": 2,
-  "c9-ch02": 2,
+  "c9-ch02": 9,
   "c10-ch01": 2,
-  "c10-ch02": 2,
+  "c10-ch02": 9,
 };
 
 /**

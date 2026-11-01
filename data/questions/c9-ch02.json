@@ -132,5 +132,467 @@
       "te": "3x - 12 = 0 సమీకరణాన్ని x కోసం సాధించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c9-poly-d1-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "What is the degree of the polynomial P(x) = 7x³ - 4x² + 9x - 12?",
+      "hi": "बहुपद P(x) = 7x³ - 4x² + 9x - 12 की घात (degree) क्या है?",
+      "te": "బహుపది P(x) = 7x³ - 4x² + 9x - 12 యొక్క పరిమాణం (degree) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "counted_number_of_terms_instead_of_highest_power"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_leading_coefficient_with_degree"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "selected_middle_exponent_as_degree"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The degree of a polynomial is the highest exponent of the variable. Here, the highest power of x is 3.",
+      "hi": "बहुपद की घात चर की उच्चतम घात होती है। यहाँ x की उच्चतम घात 3 है।",
+      "te": "బహుపది పరిమాణం అంటే చరరాశి యొక్క గరిష్ట ఘాతాంకం. ఇక్కడ x గరిష్ట ఘాతం 3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Look for the greatest exponent among all terms.",
+      "hi": "सभी पदों में सबसे बड़ा घातांक देखें।",
+      "te": "అన్ని పదాలలో గరిష్ట ఘాతాంకాన్ని చూడండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d1-02",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial P(x) = 2x - 8.",
+      "hi": "रैखिक बहुपद P(x) = 2x - 8 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది P(x) = 2x - 8 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_sign_when_transposing_constant"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficient_of_x"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        },
+        "mistakeTag": "treated_constant_term_directly_as_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "To find the zero, solve P(x) = 0: 2x - 8 = 0 => 2x = 8 => x = 4.",
+      "hi": "शून्यक ज्ञात करने के लिए P(x) = 0 रखें: 2x - 8 = 0 => 2x = 8 => x = 4।",
+      "te": "శూన్యం కోసం P(x) = 0 చేయండి: 2x - 8 = 0 => 2x = 8 => x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set the expression equal to zero and isolate x.",
+      "hi": "व्यंजक को शून्य के बराबर रखें और x का मान ज्ञात करें।",
+      "te": "సమాసాన్ని సున్నాకి సమానం చేసి x విలువను సాధించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d2-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial Q(x) = 3x + 7.",
+      "hi": "रैखिक बहुपद Q(x) = 3x + 7 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది Q(x) = 3x + 7 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-7/3",
+          "hi": "-7/3",
+          "te": "-7/3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "7/3",
+          "hi": "7/3",
+          "te": "7/3",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_sign_when_transposing_constant"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-3/7",
+          "hi": "-3/7",
+          "te": "-3/7",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_fraction_divided_coefficient_by_constant"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Set Q(x) = 0: 3x + 7 = 0 => 3x = -7 => x = -7/3.",
+      "hi": "Q(x) = 0 रखें: 3x + 7 = 0 => 3x = -7 => x = -7/3।",
+      "te": "Q(x) = 0 సమీకరించండి: 3x + 7 = 0 => 3x = -7 => x = -7/3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "For any linear polynomial ax + b, the zero is given by x = -b/a.",
+      "hi": "किसी भी रैखिक बहुपद ax + b के लिए शून्यक x = -b/a होता है।",
+      "te": "ఏదైనా రేఖీయ బహుపది ax + b కి శూన్యం x = -b/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d2-02",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "What is the coefficient of x in the expanded polynomial P(x) = (2x - 3)(x + 5)?",
+      "hi": "विस्तारित बहुपद P(x) = (2x - 3)(x + 5) में x का गुणांक क्या है?",
+      "te": "విస్తరించిన బహుపది P(x) = (2x - 3)(x + 5) లో x యొక్క గుణకం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "missed_inner_product_term_in_expansion"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-3",
+          "hi": "-3",
+          "te": "-3",
+          "reviewed": false
+        },
+        "mistakeTag": "missed_outer_product_term_in_expansion"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-15",
+          "hi": "-15",
+          "te": "-15",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_linear_coefficient"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Expanding: (2x)(x) + (2x)(5) + (-3)(x) + (-3)(5) = 2x² + 10x - 3x - 15 = 2x² + 7x - 15. The coefficient of x is 7.",
+      "hi": "विस्तार करने पर: 2x² + 10x - 3x - 15 = 2x² + 7x - 15। x का गुणांक 7 है।",
+      "te": "విస్తరించగా: 2x² + 10x - 3x - 15 = 2x² + 7x - 15. x గుణకం 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Combine the middle terms: 10x and -3x.",
+      "hi": "मध्य पदों 10x और -3x को जोड़ें।",
+      "te": "మధ్య పదాలైన 10x మరియు -3x లను కూడండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d3-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "If x = 2 is a zero of the polynomial P(x) = 2x³ - 3x² + kx - 6, find the value of the constant k.",
+      "hi": "यदि x = 2 बहुपद P(x) = 2x³ - 3x² + kx - 6 का एक शून्यक है, तो अचर k का मान ज्ञात कीजिए।",
+      "te": "x = 2 అనేది బహుపది P(x) = 2x³ - 3x² + kx - 6 యొక్క శూన్యమైతే, స్థిరరాశి k విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-1",
+          "hi": "-1",
+          "te": "-1",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_solving_linear_equation"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_instead_of_adding_in_polynomial_evaluation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Since x = 2 is a zero, P(2) = 0: 2(2)³ - 3(2)² + k(2) - 6 = 2(8) - 3(4) + 2k - 6 = 16 - 12 + 2k - 6 = 2k - 2 = 0 => 2k = 2 => k = 1.",
+      "hi": "क्योंकि x = 2 एक शून्यक है, P(2) = 0: 16 - 12 + 2k - 6 = 0 => 2k - 2 = 0 => k = 1।",
+      "te": "x = 2 శూన్యం కాబట్టి, P(2) = 0: 16 - 12 + 2k - 6 = 0 => 2k - 2 = 0 => k = 1.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute x = 2 into P(x) and set the entire equation equal to zero.",
+      "hi": "P(x) में x = 2 रखें और पूरे समीकरण को शून्य के बराबर रखें।",
+      "te": "P(x) లో x = 2 ప్రతిక్షేపించి సమీకరణాన్ని సున్నాకి సమానం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d3-02",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "By the Remainder Theorem, what is the remainder when P(x) = x⁴ - 3x² + 4x - 5 is divided by (x + 2)?",
+      "hi": "शेषफल प्रमेय द्वारा, जब P(x) = x⁴ - 3x² + 4x - 5 को (x + 2) से भाग दिया जाता है, तो शेषफल क्या होगा?",
+      "te": "శేష సిద్ధాంతం ప్రకారం, P(x) = x⁴ - 3x² + 4x - 5 ను (x + 2) చే భాగించినప్పుడు వచ్చే శేషం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-9",
+          "hi": "-9",
+          "te": "-9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "evaluated_at_positive_root_instead_of_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        },
+        "mistakeTag": "squared_negative_number_as_negative_slip"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-1",
+          "hi": "-1",
+          "te": "-1",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Remainder = P(-2) = (-2)⁴ - 3(-2)² + 4(-2) - 5 = 16 - 3(4) - 8 - 5 = 16 - 12 - 8 - 5 = -9.",
+      "hi": "शेषफल = P(-2) = 16 - 12 - 8 - 5 = -9।",
+      "te": "శేషం = P(-2) = 16 - 12 - 8 - 5 = -9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "For divisor (x + 2), evaluate P(x) at x = -2.",
+      "hi": "भाजक (x + 2) के लिए, x = -2 पर P(x) का मान ज्ञात करें।",
+      "te": "భాజకం (x + 2) కోసం, x = -2 వద్ద P(x) విలువను లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-d3-03",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find all zeroes of the factored polynomial P(x) = (3x - 2)(2x + 5).",
+      "hi": "गुणनखंडित बहुपद P(x) = (3x - 2)(2x + 5) के सभी शून्यक ज्ञात कीजिए।",
+      "te": "కారణాంకాలుగా మార్చబడిన బహుపది P(x) = (3x - 2)(2x + 5) యొక్క అన్ని శూన్యాలను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 2/3, x = -5/2",
+          "hi": "x = 2/3, x = -5/2",
+          "te": "x = 2/3, x = -5/2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -2/3, x = 5/2",
+          "hi": "x = -2/3, x = 5/2",
+          "te": "x = -2/3, x = 5/2",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 3/2, x = -2/5",
+          "hi": "x = 3/2, x = -2/5",
+          "te": "x = 3/2, x = -2/5",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_fraction_divided_coefficient_by_constant"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 2, x = -5",
+          "hi": "x = 2, x = -5",
+          "te": "x = 2, x = -5",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficients_of_x"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Set each factor to zero: 3x - 2 = 0 => x = 2/3; 2x + 5 = 0 => x = -5/2.",
+      "hi": "प्रत्येक गुणनखंड को शून्य के बराबर रखें: 3x - 2 = 0 => x = 2/3; 2x + 5 = 0 => x = -5/2।",
+      "te": "ప్రతి కారణాంకాన్ని సున్నాకి సమానం చేయండి: 3x - 2 = 0 => x = 2/3; 2x + 5 = 0 => x = -5/2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Solve 3x - 2 = 0 and 2x + 5 = 0 separately.",
+      "hi": "3x - 2 = 0 और 2x + 5 = 0 को अलग-अलग हल करें।",
+      "te": "3x - 2 = 0 మరియు 2x + 5 = 0 లను వేర్వేరుగా సాధించండి.",
+      "reviewed": false
+    }
   }
 ]
