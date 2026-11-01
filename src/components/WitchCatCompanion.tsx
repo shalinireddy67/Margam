@@ -30,7 +30,7 @@ export default function WitchCatCompanion({
   className = "",
   mode = "floating",
   pose: propPose,
-  sticker = true,
+  sticker = false,
 }: WitchCatCompanionProps) {
   const [bubbleDismissed, setBubbleDismissed] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -55,28 +55,28 @@ export default function WitchCatCompanion({
 
     switch (context) {
       case "greeting":
-        setCurrentMessage(`Hey, ${studentName}! Ready for today's learning journey?`);
+        setCurrentMessage(`Hey ${studentName}! Ready to build your math realm today?`);
         break;
       case "lesson_start":
-        setCurrentMessage("Let's explore this idea together. Take your time reading!");
+        setCurrentMessage("Let's break down this concept block by block. Read carefully!");
         break;
       case "correct":
-        setCurrentMessage("You got it! Nicely done!");
+        setCurrentMessage("Spot on! That's how we master it!");
         break;
       case "incorrect":
-        setCurrentMessage("Not quite yet. Let's understand why from the steps.");
+        setCurrentMessage("Don't worry, every mistake shows where our foundation needs support.");
         break;
       case "completed":
-        setCurrentMessage("One more step on your path! Well done, " + studentName + "!");
+        setCurrentMessage(`Quest cleared! Great job strengthening your path, ${studentName}!`);
         break;
       case "locked":
-        setCurrentMessage("Let's finish the previous lesson first, then this one opens!");
+        setCurrentMessage("Complete the previous block to unlock this new lesson!");
         break;
       case "welcome_back":
-        setCurrentMessage(`Welcome back, ${studentName}! Let's continue where you left off.`);
+        setCurrentMessage(`Welcome back to your realm, ${studentName}! Let's pick up where we left off.`);
         break;
       default:
-        setCurrentMessage("Ready to begin? Let's take it one step at a time!");
+        setCurrentMessage("Ready to conquer new math concepts? Let's go!");
     }
     setBubbleDismissed(false);
   }, [context, customMessage, studentName]);
@@ -89,23 +89,23 @@ export default function WitchCatCompanion({
     return (
       <aside
         aria-label="Study companion greeting"
-        className={`flex items-start gap-4 p-4 rounded-3xl bg-peach-light/80 border border-peach-border ${className}`}
+        className={`flex items-start gap-4 p-4 bg-[#173B19]/90 border-2 border-[#4F8A24] shadow-[4px_4px_0px_#102610] text-[#F2F0DF] ${className}`}
       >
-        <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float motion-reduce:animate-none">
+        <div className="relative shrink-0 w-16 h-24 flex items-center justify-center">
           <WitchCat
             pose={activePose}
-            size={80}
+            size={90}
             sticker={sticker}
-            alt="Margam Witch Cat Study Companion"
+            alt="Margam Learning Companion"
           />
         </div>
 
-        <div className="flex-1 space-y-1 pt-1">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-plum">
-            <Sparkles className="w-3.5 h-3.5 text-berry" />
-            <span>Study Companion</span>
+        <div className="flex-1 space-y-1.5 pt-1">
+          <div className="flex items-center gap-1.5 text-xs font-heading font-extrabold text-[#79B82A]">
+            <Sparkles className="w-3.5 h-3.5 text-[#E5B834]" />
+            <span>LEARNING COMPANION</span>
           </div>
-          <p className="text-xs sm:text-sm text-plum font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#F2F0DF] font-medium leading-relaxed">
             {currentMessage}
           </p>
         </div>
@@ -113,50 +113,53 @@ export default function WitchCatCompanion({
     );
   }
 
-  // Floating Mode: Positioned in non-obstructive bottom corner
+  // Floating Mode: Positioned in bottom corner
   return (
     <aside
       aria-label="Floating study companion"
-      className={`fixed bottom-4 right-4 z-30 flex flex-col items-end pointer-events-none ${className}`}
+      className={`fixed bottom-4 right-4 z-40 flex flex-col items-end pointer-events-none ${className}`}
     >
       {/* Speech Bubble (Dismissible) */}
       {!bubbleDismissed && currentMessage && (
-        <div className="pointer-events-auto max-w-[260px] sm:max-w-[290px] mb-2 p-3.5 rounded-2xl bg-white border border-peach-border shadow-soft text-plum text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200 motion-reduce:animate-none">
-          <button
-            type="button"
-            onClick={() => setBubbleDismissed(true)}
-            aria-label="Dismiss speech bubble"
-            className="absolute -top-4 -right-4 min-w-[48px] min-h-[48px] flex items-center justify-center cursor-pointer transition-colors bg-transparent border-0"
-          >
-            <span className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-grey hover:text-plum flex items-center justify-center border border-slate-200 shadow-xs">
-              <X className="w-3.5 h-3.5" />
+        <div className="pointer-events-auto max-w-[270px] sm:max-w-[310px] mb-2 p-3 bg-[#F2F0DF] border-3 border-[#20251F] shadow-[4px_4px_0px_#102610] text-[#20251F] text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200 motion-reduce:animate-none">
+          <div className="flex items-center justify-between pb-1 mb-1 border-b border-[#20251F]/20 text-[10px] font-heading font-bold text-[#173B19]">
+            <span className="flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-[#4F8A24]" />
+              COMPANION
             </span>
-          </button>
-          <p>{currentMessage}</p>
-          {/* Bubble tail pointing to cat */}
-          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white border-b border-r border-peach-border rotate-45" />
+            <button
+              type="button"
+              onClick={() => setBubbleDismissed(true)}
+              aria-label="Dismiss speech bubble"
+              className="text-[#20251F]/60 hover:text-[#20251F] p-0.5 border-0 bg-transparent cursor-pointer font-bold"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <p className="font-semibold text-xs text-[#20251F]">{currentMessage}</p>
+          {/* Minecraft block tail */}
+          <div className="absolute -bottom-2 right-6 w-3 h-3 bg-[#F2F0DF] border-b-2 border-r-2 border-[#20251F] rotate-45" />
         </div>
       )}
 
-      {/* Cat Avatar (Clickable to re-open bubble) */}
+      {/* Mascot Avatar (Clickable to re-open bubble) */}
       <button
         type="button"
         onClick={toggleBubble}
-        aria-label="Witch Cat Companion - Click for message"
-        title="Click to hear from your study companion"
-        className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1 motion-reduce:transition-none"
+        aria-label="Learning Companion - Click for message"
+        title="Click to hear from your learning companion"
+        className="pointer-events-auto group relative w-16 h-24 sm:w-20 sm:h-28 flex items-center justify-center p-1 cursor-pointer bg-transparent border-0 outline-none focus-visible:ring-2 focus-visible:ring-[#E5B834]"
       >
-        <div className="relative w-full h-full animate-gentle-float motion-reduce:animate-none">
-          <WitchCat
-            pose={activePose}
-            size={80}
-            sticker={sticker}
-            alt="Margam Witch Cat"
-            className="transition-transform group-hover:scale-105 motion-reduce:transform-none"
-          />
-        </div>
+        <WitchCat
+          pose={activePose}
+          size={100}
+          sticker={sticker}
+          alt="Margam Learning Companion"
+          className="transition-transform group-hover:scale-105 motion-reduce:transform-none"
+        />
       </button>
     </aside>
   );
 }
 
+export const LearningCompanionWidget = WitchCatCompanion;

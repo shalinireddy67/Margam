@@ -322,7 +322,7 @@ export default function ChapterTestRunnerPage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Header Card */}
         <div className="bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
+          <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
             <span>Chapter Mastery Test</span>
             <span>•</span>
             <span>Class {currentChapter.class}</span>
@@ -330,7 +330,7 @@ export default function ChapterTestRunnerPage() {
             <span>Chapter {currentChapter.chapterNumber}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#F2F0DF] tracking-wide drop-shadow-[2px_2px_0px_#102610]">
             {currentChapter.name[currentLang] || currentChapter.name.en}
           </h1>
 
@@ -365,8 +365,8 @@ export default function ChapterTestRunnerPage() {
             <div
               className={`mt-6 p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-5 ${
                 result.passed
-                  ? "bg-[#5DB84A]/30 text-[#111111]"
-                  : "bg-[#F2D16B]/40 text-[#111111]"
+                  ? "bg-[#173B19] border-3 border-[#79B82A] text-[#F2F0DF]"
+                  : "bg-[#173B19] border-3 border-[#E5B834] text-[#F2F0DF]"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -500,9 +500,9 @@ export default function ChapterTestRunnerPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-[#FFFFFF] p-6 sm:p-7 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
+                className="bg-[#173B19] p-6 sm:p-7 border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4 text-[#F2F0DF]"
               >
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#111111] pb-3">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#315B2A] pb-3">
                   <span className="text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
@@ -525,20 +525,20 @@ export default function ChapterTestRunnerPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-2 border-[#111111]";
-                    let optionBgClass = "bg-[#FFFFFF]";
+                    let optionBorderClass = "border-2 border-[#315B2A]";
+                    let optionBgClass = "bg-[#102610] text-[#D8D8D0] hover:border-[#79B82A] hover:bg-[#315B2A]/40";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#111111]";
-                        optionBgClass = "bg-[#5DB84A]/30";
+                        optionBorderClass = "border-2 border-[#79B82A]";
+                        optionBgClass = "bg-[#4F8A24] text-[#F2F0DF]";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#111111]";
-                        optionBgClass = "bg-[#D9453D]/30";
+                        optionBorderClass = "border-2 border-[#D9453D]";
+                        optionBgClass = "bg-[#8B2323] text-[#F2F0DF]";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-2 border-[#111111]";
-                      optionBgClass = "bg-[#F2D16B] shadow-[2px_2px_0px_#111111]";
+                      optionBorderClass = "border-2 border-[#79B82A]";
+                      optionBgClass = "bg-[#4F8A24] text-[#F2F0DF] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_#102610]";
                     }
 
                     return (
@@ -591,15 +591,15 @@ export default function ChapterTestRunnerPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
-              <span className="text-xs font-heading font-bold text-[#111111]">
+            <div className="sticky bottom-4 z-30 bg-[#173B19] border-3 border-[#315B2A] p-4 shadow-[0px_4px_0px_#102610] flex items-center justify-between gap-4 text-[#F2F0DF]">
+              <span className="text-xs font-heading font-bold text-[#79B82A]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 bg-[#111111] text-[#F2D16B] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50 transition-colors"
               >
                 <span>{submitting ? "Evaluating..." : "Submit Chapter Test"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -609,7 +609,7 @@ export default function ChapterTestRunnerPage() {
         </form>
       </main>
 
-      <footer className="border-t-4 border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+      <footer className="border-t-3 border-[#315B2A] py-4 text-center text-xs font-heading text-[#D8D8D0]/60 bg-[#0F2610]">
         Margam Adaptive Mathematics • Chapter Assessment
       </footer>
     </div>

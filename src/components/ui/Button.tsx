@@ -13,6 +13,11 @@ export type ButtonVariant =
   | "ink"
   | "grass"
   | "darkgrass"
+  | "pixelgreen"
+  | "forest"
+  | "gold"
+  | "warmwhite"
+  | "charcoal"
   | "dirt"
   | "stone"
   | "sand"
@@ -30,33 +35,40 @@ export interface ButtonProps
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  // Pixel palette aliases
-  sand: "bg-[#F2D16B] text-[#111111] hover:bg-[#E5C254]",
-  yellow: "bg-[#F2D16B] text-[#111111] hover:bg-[#E5C254]",
-  sky: "bg-[#7EC8E3] text-[#111111] hover:bg-[#68B7D4]",
-  cyan: "bg-[#7EC8E3] text-[#111111] hover:bg-[#68B7D4]",
-  grass: "bg-[#5DB84A] text-[#111111] hover:bg-[#4EA33D]",
-  green: "bg-[#5DB84A] text-[#111111] hover:bg-[#4EA33D]",
-  darkgrass: "bg-[#3C8A2E] text-[#FFFFFF] hover:bg-[#2F7323]",
+  // Minecraft pixel palette
+  pixelgreen: "bg-[#79B82A] text-[#102610] hover:bg-[#8CD033]",
+  grass: "bg-[#4F8A24] text-[#F2F0DF] hover:bg-[#5E9E2C]",
+  darkgrass: "bg-[#315B2A] text-[#F2F0DF] hover:bg-[#3E7234]",
+  forest: "bg-[#173B19] text-[#F2F0DF] hover:bg-[#214E23]",
+  gold: "bg-[#E5B834] text-[#102610] hover:bg-[#F2D16B]",
+  warmwhite: "bg-[#F2F0DF] text-[#20251F] hover:bg-[#FFFFFF]",
+  charcoal: "bg-[#20251F] text-[#F2F0DF] hover:bg-[#315B2A]",
+
+  // Backward compatible aliases
+  sand: "bg-[#E5B834] text-[#102610] hover:bg-[#F2D16B]",
+  yellow: "bg-[#E5B834] text-[#102610] hover:bg-[#F2D16B]",
+  sky: "bg-[#79B82A] text-[#102610] hover:bg-[#8CD033]",
+  cyan: "bg-[#79B82A] text-[#102610] hover:bg-[#8CD033]",
+  green: "bg-[#4F8A24] text-[#F2F0DF] hover:bg-[#5E9E2C]",
   dirt: "bg-[#8B5A2B] text-[#FFFFFF] hover:bg-[#774B22]",
-  orange: "bg-[#8B5A2B] text-[#FFFFFF] hover:bg-[#774B22]",
-  stone: "bg-[#9AA0A6] text-[#111111] hover:bg-[#858C92]",
+  orange: "bg-[#E5B834] text-[#102610] hover:bg-[#F2D16B]",
+  stone: "bg-[#9AA0A6] text-[#102610] hover:bg-[#858C92]",
   red: "bg-[#D9453D] text-[#FFFFFF] hover:bg-[#C2362E]",
   pink: "bg-[#D9453D] text-[#FFFFFF] hover:bg-[#C2362E]",
-  white: "bg-[#FFFFFF] text-[#111111] hover:bg-[#EAEAEA]",
-  ink: "bg-[#111111] text-[#FFFFFF] hover:bg-[#222222]",
+  white: "bg-[#F2F0DF] text-[#20251F] hover:bg-[#FFFFFF]",
+  ink: "bg-[#20251F] text-[#F2F0DF] hover:bg-[#315B2A]",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "min-h-[48px] px-3.5 py-2 text-xs",
-  default: "min-h-[50px] px-4 py-2.5 text-xs sm:text-sm",
+  sm: "min-h-[44px] px-3.5 py-1.5 text-xs",
+  default: "min-h-[48px] px-4 py-2.5 text-xs sm:text-sm",
   lg: "min-h-[54px] px-5 py-3 text-sm sm:text-base",
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      variant = "yellow",
+      variant = "grass",
       size = "default",
       wobble = false,
       bounce = false,
@@ -73,17 +85,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={`
           inline-flex items-center justify-center text-center font-heading
-          border-4 border-[#111111] rounded-none
-          box-border select-none
+          border-3 border-[#102610] rounded-none
+          box-border select-none cursor-pointer
           ${disabled
-            ? "bg-[#9AA0A6] text-[#444444] border-[#111111] shadow-none cursor-not-allowed opacity-75"
-            : `shadow-[inset_3px_3px_0px_rgba(255,255,255,0.45),inset_-3px_-3px_0px_rgba(0,0,0,0.35),4px_4px_0px_#111111]
-               active:translate-x-[4px] active:translate-y-[4px]
-               active:shadow-[inset_3px_3px_0px_rgba(0,0,0,0.4),inset_-3px_-3px_0px_rgba(255,255,255,0.2),0px_0px_0px_#111111]
-               cursor-pointer`
+            ? "bg-[#9AA0A6] text-[#444444] border-[#102610] shadow-none cursor-not-allowed opacity-75"
+            : `shadow-[inset_2px_2px_0px_rgba(255,255,255,0.35),inset_-2px_-2px_0px_rgba(0,0,0,0.4),3px_3px_0px_#102610]
+               active:translate-x-[2px] active:translate-y-[2px] active:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)]`
           }
-          ${variantStyles[variant] || variantStyles.yellow}
           ${sizeStyles[size]}
+          ${variantStyles[variant] || variantStyles.grass}
           ${className}
         `.trim()}
         {...props}
@@ -95,3 +105,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+export default Button;

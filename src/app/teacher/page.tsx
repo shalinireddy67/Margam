@@ -58,9 +58,9 @@ export default function TeacherPage() {
     students.find((s) => s.id === selectedStudentId) || students[0];
 
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans selection:bg-yellow-bright">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col font-sans">
       {/* Top Bar with Neo-Brutalist Accent */}
-      <header className="sticky top-0 z-40 bg-white border-b-3 border-ink shadow-hard-sm">
+      <header className="sticky top-0 z-40 bg-[#173B19]/95 backdrop-blur-md border-b-3 border-[#315B2A] shadow-[0px_4px_0px_#102610] text-[#F2F0DF]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-yellow-bright border-2 border-ink flex items-center justify-center font-heading font-black text-xl text-ink shadow-hard-sm">

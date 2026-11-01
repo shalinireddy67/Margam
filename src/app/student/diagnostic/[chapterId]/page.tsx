@@ -30,6 +30,7 @@ import {
   resolveLocalizedString,
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
+import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   EmptyState,
@@ -379,7 +380,7 @@ export default function ChapterDiagnosticPage() {
     : undefined;
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] pb-24">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg flex flex-col justify-between text-[#F2F0DF] pb-24">
       <OfflineBanner />
       <StudentHeader
         profile={profile}
@@ -391,23 +392,23 @@ export default function ChapterDiagnosticPage() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
         {/* Assessment Header Card */}
-        <div className="bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] mb-6 space-y-3">
+        <div className="bg-[#173B19] p-6 sm:p-8 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] mb-6 space-y-4 text-[#F2F0DF]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
+            <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
               <span>Chapter Diagnostic</span>
               <span>•</span>
               <span>Class {profile.selectedClass}</span>
             </div>
-            <span className="text-xs font-heading font-bold px-2 py-0.5 bg-[#F2D16B] border border-[#111111]">
+            <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#102610] border border-[#315B2A] text-[#E5B834]">
               Diagnostic Engine
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#F2F0DF] tracking-wide drop-shadow-[2px_2px_0px_#102610]">
             {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
           </h1>
 
-          <p className="text-xs sm:text-sm text-[#111111] bg-[#F2D16B]/30 p-3.5 border-2 border-[#111111] leading-relaxed font-bold">
+          <p className="text-xs sm:text-sm text-[#D8D8D0] bg-[#102610] p-3.5 border-2 border-[#315B2A] leading-relaxed font-medium">
             Answer these 6 questions. Our adaptive engine identifies root-cause prerequisites and adjusts your learning journey.
           </p>
 
@@ -415,7 +416,7 @@ export default function ChapterDiagnosticPage() {
           {result && (
             <div
               className={`mt-6 p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4 ${
-                result.passed ? "bg-[#5DB84A]/30" : "bg-[#F2D16B]/50"
+                result.passed ? "bg-[#173B19] border-3 border-[#79B82A] text-[#F2F0DF]" : "bg-[#173B19] border-3 border-[#E5B834] text-[#F2F0DF]"
               }`}
             >
               <div className="flex items-center justify-between gap-3 flex-wrap">
@@ -426,12 +427,12 @@ export default function ChapterDiagnosticPage() {
                     <AlertCircle className="w-8 h-8 text-[#D9453D]" />
                   )}
                   <div>
-                    <h2 className="font-heading font-extrabold text-lg text-[#111111]">
+                    <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#F2F0DF]">
                       {result.passed
                         ? "Diagnostic Passed! Chapter Lessons Unlocked"
                         : "Diagnostic Complete • Practice Recommended"}
                     </h2>
-                    <p className="text-xs font-bold text-[#111111]/80">
+                    <p className="text-xs font-bold text-[#D8D8D0]">
                       Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
                     </p>
                   </div>
@@ -439,7 +440,7 @@ export default function ChapterDiagnosticPage() {
 
                 <Link
                   href="/"
-                  className="inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                 >
                   <span>Return to Learning Path</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -448,25 +449,25 @@ export default function ChapterDiagnosticPage() {
 
               {/* GAP CARD: Root-Cause Remediation Suggestion */}
               {result.gapAnalysis?.hasGap && rootConcept && (
-                <div className="p-5 bg-[#FFFFFF] border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+                <div className="p-5 bg-[#102610] border-3 border-[#E5B834] shadow-[4px_4px_0px_#102610] space-y-3 text-[#F2F0DF]">
                   <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#D9453D] uppercase tracking-wider">
                     <GitBranch className="w-4 h-4 text-[#D9453D]" />
                     <span>Identified Foundational Gap (Class {rootConcept.class})</span>
                   </div>
 
-                  <h3 className="font-heading font-extrabold text-base text-[#111111]">
+                  <h3 className="font-heading font-extrabold text-base text-[#79B82A]">
                     {rootConcept.name[currentLang] || rootConcept.name.en}
                   </h3>
 
-                  <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#D8D8D0] leading-relaxed">
                     {result.gapAnalysis.plainLanguageReason ||
                       `We detected recurring calculation misconceptions rooted in Class ${rootConcept.class} prerequisites.`}
                   </p>
 
                   {/* Prerequisite Path Journey Steps */}
                   {result.gapAnalysis.prerequisitePath && result.gapAnalysis.prerequisitePath.length > 0 && (
-                    <div className="p-3 bg-[#F2D16B]/30 border-2 border-[#111111] space-y-2">
-                      <span className="text-[10px] font-heading font-bold text-[#111111]/70 uppercase tracking-wider block">
+                    <div className="p-3 bg-[#173B19] border-2 border-[#315B2A] space-y-2">
+                      <span className="text-[10px] font-heading font-bold text-[#79B82A] uppercase tracking-wider block">
                         Prerequisite Journey:
                       </span>
                       <div className="flex items-center gap-1.5 flex-wrap text-xs font-heading font-bold">
@@ -497,7 +498,7 @@ export default function ChapterDiagnosticPage() {
                       href={`/lesson/${rootConcept.id}?fromGap=true&reason=${encodeURIComponent(
                         result.gapAnalysis.plainLanguageReason || ""
                       )}`}
-                      className="inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-[#F2D16B] text-[#111111] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#E5B834] hover:bg-[#F2D16B] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                     >
                       <Sparkles className="w-4 h-4 mr-1.5" />
                       <span>Review Foundational Lesson (Class {rootConcept.class})</span>
@@ -526,14 +527,14 @@ export default function ChapterDiagnosticPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-[#FFFFFF] p-6 sm:p-7 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
+                className="bg-[#173B19] p-6 sm:p-7 border-3 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-4 text-[#F2F0DF]"
               >
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#111111] pb-3">
-                  <span className="text-xs font-heading font-bold text-[#111111]/70 uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#315B2A] pb-3">
+                  <span className="text-xs font-heading font-bold text-[#79B82A] uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-heading font-bold px-2 py-0.5 border border-[#111111] bg-[#F2D16B]">
+                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 border border-[#102610] bg-[#4F8A24] text-[#F2F0DF]">
                       Level {q.difficulty}
                     </span>
                     {isAnswered && !result && (
@@ -548,7 +549,7 @@ export default function ChapterDiagnosticPage() {
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#111111] leading-relaxed flex items-center flex-wrap gap-2">
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#F2F0DF] leading-relaxed flex items-center flex-wrap gap-2">
                       <span>{promptData.text}</span>
                       {promptData.isDraft && (
                         <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#F2D16B] border border-[#111111]">
@@ -565,20 +566,20 @@ export default function ChapterDiagnosticPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-2 border-[#111111]";
-                    let optionBgClass = "bg-[#FFFFFF]";
+                    let optionBorderClass = "border-2 border-[#315B2A]";
+                    let optionBgClass = "bg-[#102610] text-[#D8D8D0] hover:border-[#79B82A] hover:bg-[#315B2A]/40";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#111111]";
-                        optionBgClass = "bg-[#5DB84A]/30";
+                        optionBorderClass = "border-2 border-[#79B82A]";
+                        optionBgClass = "bg-[#4F8A24] text-[#F2F0DF]";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#111111]";
-                        optionBgClass = "bg-[#D9453D]/30";
+                        optionBorderClass = "border-2 border-[#D9453D]";
+                        optionBgClass = "bg-[#8B2323] text-[#F2F0DF]";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-2 border-[#111111]";
-                      optionBgClass = "bg-[#F2D16B] shadow-[2px_2px_0px_#111111]";
+                      optionBorderClass = "border-2 border-[#79B82A]";
+                      optionBgClass = "bg-[#4F8A24] text-[#F2F0DF] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_#102610]";
                     }
 
                     return (
@@ -599,10 +600,10 @@ export default function ChapterDiagnosticPage() {
                       >
                         <div className="flex items-center gap-3">
                           <span
-                            className={`w-6 h-6 border-2 border-[#111111] font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
+                            className={`w-6 h-6 border-2 border-[#102610] font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
                               isSelected
-                                ? "bg-[#111111] text-[#FFFFFF]"
-                                : "bg-[#FFFFFF] text-[#111111]"
+                                ? "bg-[#79B82A] text-[#102610]"
+                                : "bg-[#173B19] text-[#79B82A]"
                             }`}
                           >
                             {opt.id}
@@ -652,15 +653,15 @@ export default function ChapterDiagnosticPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
-              <span className="text-xs font-heading font-bold text-[#111111]">
+            <div className="sticky bottom-4 z-30 bg-[#173B19] border-3 border-[#315B2A] p-4 shadow-[0px_4px_0px_#102610] flex items-center justify-between gap-4 text-[#F2F0DF]">
+              <span className="text-xs font-heading font-bold text-[#79B82A]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 bg-[#111111] text-[#F2D16B] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50 transition-colors"
               >
                 <span>{submitting ? "Evaluating..." : "Submit Diagnostic Assessment"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -729,7 +730,7 @@ export default function ChapterDiagnosticPage() {
         )}
       </main>
 
-      <footer className="border-t-4 border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+      <footer className="border-t-3 border-[#315B2A] py-4 text-center text-xs font-heading text-[#D8D8D0]/60 bg-[#0F2610]">
         Margam Adaptive Mathematics • Diagnostic Engine
       </footer>
     </div>

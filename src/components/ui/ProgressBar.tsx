@@ -6,7 +6,7 @@ export interface ProgressBarProps {
   value: number; // Current progress value
   max?: number;  // Max progress value (default 100)
   segments?: number; // Total number of discrete square blocks (default 10)
-  color?: "grass" | "sand" | "sky" | "red" | "darkgrass";
+  color?: "grass" | "sand" | "sky" | "red" | "darkgrass" | "gold" | "pixelgreen";
   className?: string;
   ariaLabel?: string;
 }
@@ -15,7 +15,7 @@ export function ProgressBar({
   value,
   max = 100,
   segments = 10,
-  color = "grass",
+  color = "pixelgreen",
   className = "",
   ariaLabel,
 }: ProgressBarProps) {
@@ -24,14 +24,16 @@ export function ProgressBar({
   const filledCount = Math.round(ratio * safeSegments);
 
   const fillColors = {
-    grass: "bg-[#5DB84A]",
-    sand: "bg-[#F2D16B]",
-    sky: "bg-[#7EC8E3]",
+    pixelgreen: "bg-[#79B82A]",
+    grass: "bg-[#4F8A24]",
+    gold: "bg-[#E5B834]",
+    sand: "bg-[#E5B834]",
+    sky: "bg-[#79B82A]",
     red: "bg-[#D9453D]",
-    darkgrass: "bg-[#3C8A2E]",
+    darkgrass: "bg-[#315B2A]",
   };
 
-  const activeColor = fillColors[color] || fillColors.grass;
+  const activeColor = fillColors[color] || fillColors.pixelgreen;
 
   return (
     <div
@@ -49,9 +51,9 @@ export function ProgressBar({
             key={i}
             className={`
               flex-1 h-3 sm:h-3.5
-              border-2 border-[#111111] rounded-none
+              border-2 border-[#102610] rounded-none
               box-border
-              ${isFilled ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]` : "bg-[#FFFFFF]"}
+              ${isFilled ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(255,255,255,0.5)]` : "bg-[#20251F]/70"}
             `.trim()}
           />
         );
@@ -59,3 +61,5 @@ export function ProgressBar({
     </div>
   );
 }
+
+export default ProgressBar;

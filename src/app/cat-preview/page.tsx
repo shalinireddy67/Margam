@@ -104,7 +104,7 @@ export default function CatPreviewPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FFF8DC] p-4 md:p-8 font-sans text-[#111111]">
+    <main className="min-h-screen bg-[#102610] minecraft-grid-bg p-4 md:p-8 font-sans text-[#F2F0DF]">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header Banner */}
         <header className="border-[3px] border-[#111111] bg-[#FFE14D] p-6 rounded-2xl shadow-[6px_6px_0_#111111]">

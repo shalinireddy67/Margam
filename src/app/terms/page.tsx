@@ -201,7 +201,7 @@ function TermsView() {
   const showOfflineBanner = !isOnline || stateParam === "offline";
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-safe">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-safe">
       {showOfflineBanner && (
         <div className="fixed top-2 left-4 right-4 z-50 max-w-[480px] mx-auto">
           <Toast
@@ -213,17 +213,17 @@ function TermsView() {
       )}
 
       {/* Header */}
-      <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+      <header className="border-b-3 border-[#315B2A] bg-[#173B19] shadow-[0px_4px_0px_#102610] text-[#F2F0DF]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-3">
           <Link
             href="/"
             aria-label="Margam Home"
             className="flex items-center gap-2.5 min-h-[48px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none rounded-none p-1"
           >
-            <div className="w-9 h-9 rounded-none bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center text-[#111111] shadow-[2px_2px_0px_#111111]">
+            <div className="w-9 h-9 rounded-none bg-[#79B82A] text-[#102610] border-[2px] border-[#315B2A] flex items-center justify-center text-[#F2F0DF] shadow-[2px_2px_0px_#102610]">
               <Compass className="w-5 h-5" aria-hidden="true" />
             </div>
-            <span className="font-heading font-extrabold text-xl text-[#111111]">
+            <span className="font-heading font-extrabold text-xl text-[#F2F0DF]">
               Margam
             </span>
           </Link>
@@ -235,7 +235,7 @@ function TermsView() {
             />
             <Link
               href="/"
-              className="min-h-[48px] min-w-[48px] px-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#111111] bg-[#FFFFFF] border-[2px] border-[#111111] rounded-none shadow-[2px_2px_0px_#111111] hover:bg-[#FFE14D] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              className="min-h-[48px] min-w-[48px] px-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#F2F0DF] bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
             >
               <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               <span className="hidden sm:inline">{content.backText}</span>
@@ -256,19 +256,19 @@ function TermsView() {
 
         {/* Locked state */}
         {!isLoading && isLocked && (
-          <div className="bg-[#FFFFFF] border-4 border-[#111111] rounded-none shadow-[4px_4px_0px_#111111] p-6 sm:p-8 text-center space-y-4">
-            <div className="w-14 h-14 mx-auto rounded-none bg-[#FFE14D] border-4 border-[#111111] flex items-center justify-center shadow-[3px_3px_0px_#111111]">
-              <Lock className="w-7 h-7 text-[#111111]" aria-hidden="true" />
+          <div className="bg-[#173B19] border-4 border-[#315B2A] rounded-none shadow-[4px_4px_0px_#102610] p-6 sm:p-8 text-center space-y-4">
+            <div className="w-14 h-14 mx-auto rounded-none bg-[#79B82A] text-[#102610] border-4 border-[#315B2A] flex items-center justify-center shadow-[3px_3px_0px_#102610]">
+              <Lock className="w-7 h-7 text-[#F2F0DF]" aria-hidden="true" />
             </div>
-            <h1 className="text-xl font-heading font-extrabold text-[#111111]">
+            <h1 className="text-xl font-heading font-extrabold text-[#F2F0DF]">
               {content.lockedTitle}
             </h1>
-            <p className="text-sm font-bold text-[#555555]">
+            <p className="text-sm font-bold text-[#D8D8D0]">
               {content.lockedMessage}
             </p>
             <Link
               href="/"
-              className="inline-flex items-center justify-center min-h-[48px] px-6 text-sm font-extrabold bg-[#FFE14D] border-4 border-[#111111] rounded-none shadow-[3px_3px_0px_#111111] hover:bg-[#FFD700] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              className="inline-flex items-center justify-center min-h-[48px] px-6 text-sm font-extrabold bg-[#79B82A] text-[#102610] border-4 border-[#315B2A] rounded-none shadow-[3px_3px_0px_#102610] hover:bg-[#FFD700] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
             >
               {content.backText}
             </Link>
@@ -277,11 +277,11 @@ function TermsView() {
 
         {/* Error state with retry */}
         {!isLoading && !isLocked && hasError && (
-          <div className="bg-[#FFFFFF] border-4 border-[#111111] rounded-none shadow-[4px_4px_0px_#111111] p-6 sm:p-8 text-center space-y-4">
-            <h1 className="text-xl font-heading font-extrabold text-[#111111]">
+          <div className="bg-[#173B19] border-4 border-[#315B2A] rounded-none shadow-[4px_4px_0px_#102610] p-6 sm:p-8 text-center space-y-4">
+            <h1 className="text-xl font-heading font-extrabold text-[#F2F0DF]">
               {content.errorTitle}
             </h1>
-            <p className="text-sm font-bold text-[#555555]">
+            <p className="text-sm font-bold text-[#D8D8D0]">
               {content.errorMessage}
             </p>
             <Button
@@ -308,36 +308,36 @@ function TermsView() {
 
         {/* Normal content view */}
         {!isLoading && !isLocked && !hasError && !isEmpty && (
-          <div className="bg-[#FFFFFF] p-6 sm:p-8 rounded-none border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-6">
-            <div className="flex items-start justify-between gap-4 pb-4 border-b-[2px] border-[#111111]">
+          <div className="bg-[#173B19] p-6 sm:p-8 rounded-none border-4 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-6">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b-[2px] border-[#315B2A]">
               <div className="flex items-start gap-3">
-                <div className="w-12 h-12 rounded-none bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center shadow-[2px_2px_0px_#111111] shrink-0 mt-0.5">
+                <div className="w-12 h-12 rounded-none bg-[#79B82A] text-[#102610] border-[2px] border-[#315B2A] flex items-center justify-center shadow-[2px_2px_0px_#102610] shrink-0 mt-0.5">
                   <BookCheck
-                    className="w-6 h-6 text-[#111111]"
+                    className="w-6 h-6 text-[#F2F0DF]"
                     aria-hidden="true"
                   />
                 </div>
                 <div>
-                  <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#111111]">
+                  <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#F2F0DF]">
                     {content.title}
                   </h1>
-                  <p className="text-xs sm:text-sm font-bold text-[#555555] mt-0.5">
+                  <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] mt-0.5">
                     {content.subtitle}
                   </p>
                 </div>
               </div>
-              <span className="shrink-0 text-xs font-black px-2.5 py-1 bg-[#4DD9E8] border-[2px] border-[#111111] rounded-none shadow-[2px_2px_0px_#111111]">
+              <span className="shrink-0 text-xs font-black px-2.5 py-1 bg-[#4DD9E8] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610]">
                 {content.badge}
               </span>
             </div>
 
-            <div className="space-y-5 text-sm sm:text-base leading-relaxed text-[#111111]">
+            <div className="space-y-5 text-sm sm:text-base leading-relaxed text-[#F2F0DF]">
               {content.sections.map((sec, idx) => (
                 <section
                   key={idx}
-                  className="p-4 bg-[#7EC8E3] border-[2px] border-[#111111] rounded-none space-y-1.5"
+                  className="p-4 bg-[#102610] minecraft-grid-bg border-[2px] border-[#315B2A] rounded-none space-y-1.5"
                 >
-                  <h2 className="font-heading font-extrabold text-base text-[#111111]">
+                  <h2 className="font-heading font-extrabold text-base text-[#F2F0DF]">
                     {sec.title}
                   </h2>
                   <p className="font-medium text-[#222222]">{sec.body}</p>
@@ -348,18 +348,18 @@ function TermsView() {
             {/* Cross navigation between policies */}
             <nav
               aria-label="Related policies"
-              className="pt-4 border-t-[2px] border-[#111111] flex flex-wrap gap-3"
+              className="pt-4 border-t-[2px] border-[#315B2A] flex flex-wrap gap-3"
             >
               <Link
                 href="/privacy"
-                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#FFFFFF] border-[2px] border-[#111111] rounded-none shadow-[2px_2px_0px_#111111] hover:bg-[#FFE14D] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <FileText className="w-4 h-4" aria-hidden="true" />
                 <span>Privacy Notice</span>
               </Link>
               <Link
                 href="/cookies"
-                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#FFFFFF] border-[2px] border-[#111111] rounded-none shadow-[2px_2px_0px_#111111] hover:bg-[#FFE14D] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
                 <FileText className="w-4 h-4" aria-hidden="true" />
                 <span>Cookie Policy</span>
@@ -370,7 +370,7 @@ function TermsView() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-[3px] border-[#111111] py-4 text-center text-xs font-bold text-[#555555] bg-[#FFFFFF]">
+      <footer className="border-t-[3px] border-[#315B2A] py-4 text-center text-xs font-bold text-[#D8D8D0] bg-[#173B19]">
         {content.footerText}
       </footer>
     </div>
@@ -381,7 +381,7 @@ export default function TermsPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#7EC8E3] p-6">
+        <div className="min-h-screen bg-[#102610] minecraft-grid-bg p-6">
           <SkeletonCard />
         </div>
       }

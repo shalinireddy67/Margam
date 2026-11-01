@@ -12,6 +12,11 @@ export type CardColor =
   | "orange"
   | "grass"
   | "darkgrass"
+  | "pixelgreen"
+  | "forest"
+  | "warmwhite"
+  | "charcoal"
+  | "translucent"
   | "dirt"
   | "stone"
   | "sand"
@@ -21,31 +26,40 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: CardColor;
   dashed?: boolean;
   interactive?: boolean;
+  grassTrim?: boolean;
   children: React.ReactNode;
 }
 
 const colorStyles: Record<CardColor, string> = {
-  white: "bg-[#FFFFFF] text-[#111111]",
-  sand: "bg-[#F2D16B] text-[#111111]",
-  yellow: "bg-[#F2D16B] text-[#111111]",
-  sky: "bg-[#7EC8E3] text-[#111111]",
-  cyan: "bg-[#7EC8E3] text-[#111111]",
-  grass: "bg-[#5DB84A] text-[#111111]",
-  green: "bg-[#5DB84A] text-[#111111]",
-  darkgrass: "bg-[#3C8A2E] text-[#FFFFFF]",
-  dirt: "bg-[#8B5A2B] text-[#FFFFFF]",
-  orange: "bg-[#8B5A2B] text-[#FFFFFF]",
-  stone: "bg-[#9AA0A6] text-[#111111]",
-  red: "bg-[#D9453D] text-[#FFFFFF]",
-  pink: "bg-[#D9453D] text-[#FFFFFF]",
+  forest: "bg-[#173B19] text-[#F2F0DF] border-[#315B2A]",
+  grass: "bg-[#4F8A24] text-[#F2F0DF] border-[#102610]",
+  pixelgreen: "bg-[#79B82A] text-[#102610] border-[#102610]",
+  darkgrass: "bg-[#315B2A] text-[#F2F0DF] border-[#102610]",
+  warmwhite: "bg-[#F2F0DF] text-[#20251F] border-[#20251F]",
+  charcoal: "bg-[#20251F] text-[#F2F0DF] border-[#102610]",
+  translucent: "bg-[#173B19]/90 text-[#F2F0DF] border-[#4F8A24] backdrop-blur-md",
+
+  // Backward compatible aliases
+  white: "bg-[#F2F0DF] text-[#20251F] border-[#20251F]",
+  sand: "bg-[#E5B834] text-[#102610] border-[#102610]",
+  yellow: "bg-[#E5B834] text-[#102610] border-[#102610]",
+  sky: "bg-[#173B19] text-[#F2F0DF] border-[#4F8A24]",
+  cyan: "bg-[#79B82A] text-[#102610] border-[#102610]",
+  green: "bg-[#4F8A24] text-[#F2F0DF] border-[#102610]",
+  dirt: "bg-[#8B5A2B] text-[#FFFFFF] border-[#102610]",
+  orange: "bg-[#E5B834] text-[#102610] border-[#102610]",
+  stone: "bg-[#9AA0A6] text-[#102610] border-[#102610]",
+  red: "bg-[#D9453D] text-[#FFFFFF] border-[#102610]",
+  pink: "bg-[#D9453D] text-[#FFFFFF] border-[#102610]",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
     {
-      color = "white",
+      color = "forest",
       dashed = false,
       interactive = false,
+      grassTrim = false,
       className = "",
       children,
       ...props
@@ -56,11 +70,17 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={`
-          border-4 border-[#111111] rounded-none
+          border-3 rounded-none
           p-4 sm:p-5
-          ${dashed ? "border-dashed shadow-none" : "border-solid shadow-[4px_4px_0px_#111111]"}
-          ${interactive ? "cursor-pointer active:translate-x-[4px] active:translate-y-[4px] active:shadow-none select-none" : ""}
-          ${colorStyles[color] || colorStyles.white}
+          box-border
+          ${grassTrim ? "border-t-[6px] border-t-[#79B82A]" : ""}
+          ${interactive
+            ? "cursor-pointer transition-transform hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5"
+            : ""
+          }
+          ${dashed ? "border-dashed" : "border-solid"}
+          ${colorStyles[color] || colorStyles.forest}
+          shadow-[4px_4px_0px_#102610]
           ${className}
         `.trim()}
         {...props}
@@ -72,3 +92,4 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = "Card";
+export default Card;

@@ -35,7 +35,8 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
       className={`
         fixed left-0 right-0 bottom-0 z-40
         flex justify-center
-        bg-[#FFFFFF] border-t-4 border-[#111111]
+        bg-[#173B19] border-t-3 border-[#315B2A]
+        shadow-[0px_-3px_0px_#102610]
         pb-[env(safe-area-inset-bottom,0px)]
         ${className}
       `.trim()}
@@ -47,23 +48,23 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           prefetch={false}
           aria-current={active === "home" ? "page" : undefined}
           className={`
-            flex-1 min-h-[64px]
+            flex-1 min-h-[58px]
             flex flex-col items-center justify-center gap-1
-            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
-            no-underline select-none
+            font-heading font-extrabold text-[10px]
+            no-underline select-none transition-colors
             ${active === "home"
-              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
-              : "hover:bg-[#F2D16B]/20"
+              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="7" y="1" width="2" height="2" fill="#111111" />
-            <rect x="5" y="3" width="6" height="2" fill="#111111" />
-            <rect x="3" y="5" width="10" height="2" fill="#111111" />
-            <rect x="1" y="7" width="14" height="2" fill="#111111" />
-            <rect x="2" y="9" width="12" height="6" fill={active === "home" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="1" />
-            <rect x="6" y="10" width="4" height="5" fill={active === "home" ? "#F2D16B" : "#111111"} />
+          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="7" y="1" width="2" height="2" fill="currentColor" />
+            <rect x="5" y="3" width="6" height="2" fill="currentColor" />
+            <rect x="3" y="5" width="10" height="2" fill="currentColor" />
+            <rect x="1" y="7" width="14" height="2" fill="currentColor" />
+            <rect x="2" y="9" width="12" height="6" fill={active === "home" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="1" />
+            <rect x="6" y="10" width="4" height="5" fill={active === "home" ? "#79B82A" : "currentColor"} />
           </svg>
           <span>Home</span>
         </Link>
@@ -74,23 +75,23 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           prefetch={false}
           aria-current={active === "learn" ? "page" : undefined}
           className={`
-            flex-1 min-h-[64px]
+            flex-1 min-h-[58px]
             flex flex-col items-center justify-center gap-1
-            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
-            no-underline select-none
+            font-heading font-extrabold text-[10px]
+            no-underline select-none transition-colors
             ${active === "learn"
-              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
-              : "hover:bg-[#F2D16B]/20"
+              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="2" y="2" width="12" height="12" fill={active === "learn" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
-            <rect x="7" y="2" width="2" height="12" fill="#111111" />
-            <rect x="4" y="5" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
-            <rect x="10" y="5" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
-            <rect x="4" y="9" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
-            <rect x="10" y="9" width="2" height="2" fill={active === "learn" ? "#F2D16B" : "#111111"} />
+          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="2" y="2" width="12" height="12" fill={active === "learn" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
+            <rect x="7" y="2" width="2" height="12" fill="currentColor" />
+            <rect x="4" y="5" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
+            <rect x="10" y="5" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
+            <rect x="4" y="9" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
+            <rect x="10" y="9" width="2" height="2" fill={active === "learn" ? "#79B82A" : "currentColor"} />
           </svg>
           <span>Learn</span>
         </Link>
@@ -101,26 +102,26 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           prefetch={false}
           aria-current={active === "stickers" ? "page" : undefined}
           className={`
-            flex-1 min-h-[64px]
+            flex-1 min-h-[58px]
             flex flex-col items-center justify-center gap-1
-            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
-            no-underline select-none
+            font-heading font-extrabold text-[10px]
+            no-underline select-none transition-colors
             ${active === "stickers"
-              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
-              : "hover:bg-[#F2D16B]/20"
+              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="7" y="1" width="2" height="2" fill="#111111" />
-            <rect x="6" y="3" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="1" y="5" width="14" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="3" y="7" width="10" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="4" y="9" width="8" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="3" y="11" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="9" y="11" width="4" height="2" fill={active === "stickers" ? "#111111" : "#F2D16B"} />
-            <rect x="2" y="13" width="3" height="2" fill="#111111" />
-            <rect x="11" y="13" width="3" height="2" fill="#111111" />
+          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="7" y="1" width="2" height="2" fill="currentColor" />
+            <rect x="6" y="3" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="1" y="5" width="14" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="3" y="7" width="10" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="4" y="9" width="8" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="3" y="11" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="9" y="11" width="4" height="2" fill={active === "stickers" ? "#E5B834" : "currentColor"} />
+            <rect x="2" y="13" width="3" height="2" fill="currentColor" />
+            <rect x="11" y="13" width="3" height="2" fill="currentColor" />
           </svg>
           <span>Stickers</span>
         </Link>
@@ -131,19 +132,19 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
           prefetch={false}
           aria-current={active === "me" ? "page" : undefined}
           className={`
-            flex-1 min-h-[64px]
+            flex-1 min-h-[58px]
             flex flex-col items-center justify-center gap-1
-            font-heading font-extrabold text-[10px] sm:text-xs text-[#111111]
-            no-underline select-none
+            font-heading font-extrabold text-[10px]
+            no-underline select-none transition-colors
             ${active === "me"
-              ? "bg-[#F2D16B] border-l-4 border-r-4 border-[#111111] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6)]"
-              : "hover:bg-[#F2D16B]/20"
+              ? "bg-[#4F8A24] text-[#F2F0DF] border-t-3 border-t-[#79B82A] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
+              : "text-[#D8D8D0] hover:text-[#F2F0DF] hover:bg-[#315B2A]/40"
             }
           `.trim()}
         >
-          <svg viewBox="0 0 16 16" className="w-6 h-6" aria-hidden="true" shapeRendering="crispEdges">
-            <rect x="5" y="2" width="6" height="5" fill={active === "me" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
-            <rect x="2" y="9" width="12" height="6" fill={active === "me" ? "#111111" : "#FFFFFF"} stroke="#111111" strokeWidth="2" />
+          <svg viewBox="0 0 16 16" className="w-5 h-5" aria-hidden="true" shapeRendering="crispEdges">
+            <rect x="5" y="2" width="6" height="5" fill={active === "me" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
+            <rect x="2" y="9" width="12" height="6" fill={active === "me" ? "#173B19" : "#102610"} stroke="currentColor" strokeWidth="2" />
           </svg>
           <span>Me</span>
         </Link>
@@ -151,3 +152,5 @@ export function BottomTabBar({ currentTab, className = "" }: BottomTabBarProps) 
     </nav>
   );
 }
+
+export default BottomTabBar;

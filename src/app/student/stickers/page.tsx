@@ -16,6 +16,7 @@ import {
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { BottomTabBar } from "@/components/ui/BottomTabBar";
+import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   EmptyState,
@@ -62,7 +63,7 @@ export default function StickersPage() {
   // 1. Loading Skeleton State
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading stickers">
           <SkeletonCard />
@@ -76,17 +77,17 @@ export default function StickersPage() {
   // 2. Error State with Retry
   if (hasError) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] pb-28 flex flex-col justify-between">
         <OfflineBanner />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="bg-[#FFFFFF] border-4 border-[#111111] rounded-none p-8 shadow-[4px_4px_0px_#111111] space-y-4">
             <div className="w-12 h-12 rounded-none bg-[#FF4F9A] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-extrabold text-lg">
               !
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
               Sticker Showcase Error
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold text-[#F2F0DF]/70 leading-relaxed">
               {errorMessage || "Unable to display learner trophy badges."}
             </p>
             <div className="pt-2">
@@ -110,18 +111,18 @@ export default function StickersPage() {
   // 3. Locked State: If user has not onboarded
   if (!profile || !profile.selectedClass) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] pb-28 flex flex-col justify-between">
         <OfflineBanner />
-        <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
+        <header className="border-b-3 border-[#315B2A] bg-[#173B19] shadow-[0px_4px_0px_#102610]">
           <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
             <Link
               href="/"
-              className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#F2F0DF] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Home</span>
             </Link>
-            <span className="font-heading font-extrabold text-base text-[#111111]">
+            <span className="font-heading font-extrabold text-base text-[#F2F0DF]">
               Sticker Showcase
             </span>
           </div>
@@ -129,13 +130,13 @@ export default function StickersPage() {
 
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="bg-[#FFFFFF] border-4 border-[#111111] rounded-none p-8 shadow-[4px_4px_0px_#111111] space-y-4">
-            <div className="w-12 h-12 rounded-none bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+            <div className="w-12 h-12 rounded-none bg-[#FFE14D] border-[2px] border-[#111111] flex items-center justify-center mx-auto text-[#F2F0DF]">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
               Stickers Locked
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold text-[#F2F0DF]/70 leading-relaxed">
               Start learning on Margam to earn achievement stickers and track your mastery milestones.
             </p>
             <div className="pt-2">
@@ -217,19 +218,19 @@ export default function StickersPage() {
   const unlockedCount = stickers.filter((s) => s.unlocked).length;
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] pb-28 flex flex-col justify-between">
       <OfflineBanner />
 
       <header className="border-b-[3px] border-[#111111] bg-[#FFFFFF]">
         <div className="max-w-xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#111111] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+            className="inline-flex items-center min-h-[48px] gap-2 text-xs font-heading font-extrabold text-[#F2F0DF] no-underline focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Home</span>
           </Link>
-          <span className="font-heading font-extrabold text-base text-[#111111]">
+          <span className="font-heading font-extrabold text-base text-[#F2F0DF]">
             Sticker Showcase
           </span>
         </div>
@@ -237,19 +238,19 @@ export default function StickersPage() {
 
       <main className="max-w-xl mx-auto px-4 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Showcase Banner */}
-        <div className="p-6 bg-[#FFFFFF] border-4 border-[#111111] rounded-none sm:rounded-none shadow-[4px_4px_0px_#111111] text-center space-y-3">
-          <div className="w-16 h-16 rounded-none bg-[#FFE14D] border-4 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center mx-auto text-[#111111]">
+        <div className="p-6 bg-[#173B19] border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] text-center space-y-4">
+          <div className="w-16 h-16 rounded-none bg-[#FFE14D] border-4 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center mx-auto text-[#F2F0DF]">
             <Award className="w-8 h-8" />
           </div>
 
-          <h1 className="font-heading font-extrabold text-2xl text-[#111111]">
+          <h1 className="font-heading font-extrabold text-2xl text-[#F2F0DF]">
             Learner Trophy Badges
           </h1>
-          <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+          <p className="text-xs sm:text-sm font-bold text-[#F2F0DF]/70 leading-relaxed">
             Earn stickers and companion badges as you master sequential concepts and complete diagnostics.
           </p>
           <div className="pt-1">
-            <span className="inline-block px-3 py-1 bg-[#111111] text-[#FFE14D] rounded-none text-xs font-heading font-extrabold">
+            <span className="inline-block px-3.5 py-1 bg-[#102610] text-[#79B82A] border-2 border-[#315B2A] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610]">
               {unlockedCount} of {stickers.length} Badges Unlocked
             </span>
           </div>
@@ -258,7 +259,7 @@ export default function StickersPage() {
         {/* 4. Empty State: If no badges unlocked beyond onboarding */}
         {unlockedCount <= 1 && completedCount === 0 && (
           <div className="p-4 bg-[#FFFFFF] border-[2px] border-[#111111] rounded-none text-center space-y-2">
-            <p className="text-xs font-bold text-[#111111]/80">
+            <p className="text-xs font-bold text-[#F2F0DF]/80">
               Complete your first lesson practice to unlock additional mastery badges!
             </p>
           </div>
@@ -280,41 +281,41 @@ export default function StickersPage() {
                 key={st.id}
                 className={`p-4 rounded-none border-4 border-[#111111] text-center space-y-2 select-none ${
                   st.unlocked
-                    ? "bg-[#FFFFFF] shadow-[3px_3px_0px_#111111]"
-                    : "bg-[#F3EED2]/50 opacity-70 border-dashed"
+                    ? "bg-[#173B19] border-3 border-[#79B82A] shadow-[4px_4px_0px_#102610]"
+                    : "bg-[#20251F]/60 border-2 border-[#315B2A] opacity-70 border-dashed"
                 }`}
               >
                 <div
                   className={`w-14 h-14 rounded-none border-[2px] border-[#111111] flex items-center justify-center mx-auto shadow-[2px_2px_0px_#111111] ${
-                    st.unlocked ? colorClass : "bg-[#E8E0BD] text-[#111111]/50"
+                    st.unlocked ? colorClass : "bg-[#E8E0BD] text-[#F2F0DF]/50"
                   }`}
                 >
                   {st.unlocked ? (
-                    st.icon === "star" ? <Star className="w-7 h-7 text-[#111111]" /> :
-                    st.icon === "award" ? <Award className="w-7 h-7 text-[#111111]" /> :
-                    st.icon === "trending" ? <TrendingUp className="w-7 h-7 text-[#111111]" /> :
-                    st.icon === "zap" ? <Zap className="w-7 h-7 text-[#111111]" /> :
-                    <Sparkles className="w-7 h-7 text-[#111111]" />
+                    st.icon === "star" ? <Star className="w-7 h-7 text-[#F2F0DF]" /> :
+                    st.icon === "award" ? <Award className="w-7 h-7 text-[#F2F0DF]" /> :
+                    st.icon === "trending" ? <TrendingUp className="w-7 h-7 text-[#F2F0DF]" /> :
+                    st.icon === "zap" ? <Zap className="w-7 h-7 text-[#F2F0DF]" /> :
+                    <Sparkles className="w-7 h-7 text-[#F2F0DF]" />
                   ) : (
-                    <Lock className="w-6 h-6 text-[#111111]/60" />
+                    <Lock className="w-6 h-6 text-[#F2F0DF]/60" />
                   )}
                 </div>
 
                 <div className="space-y-0.5">
                   <div className="flex items-center justify-center gap-1.5">
-                    <h2 className="font-heading font-extrabold text-sm text-[#111111]">
+                    <h2 className="font-heading font-extrabold text-sm text-[#F2F0DF]">
                       {st.title}
                     </h2>
-                    {st.unlocked && <CheckCircle2 className="w-3.5 h-3.5 text-[#111111]" />}
+                    {st.unlocked && <CheckCircle2 className="w-3.5 h-3.5 text-[#F2F0DF]" />}
                   </div>
-                  <p className="text-[11px] font-bold text-[#111111]/70 leading-snug">
+                  <p className="text-[11px] font-bold text-[#F2F0DF]/70 leading-snug">
                     {st.description}
                   </p>
                 </div>
 
-                <div className="pt-1 border-t border-[#111111]/10">
+                <div className="pt-1 border-t border-[#315B2A]">
                   <span className={`text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-none ${
-                    st.unlocked ? "bg-[#8DE86A]/40 text-[#111111]" : "text-[#111111]/60"
+                    st.unlocked ? "bg-[#8DE86A]/40 text-[#F2F0DF]" : "text-[#F2F0DF]/60"
                   }`}>
                     {st.unlockedAtLabel}
                   </span>

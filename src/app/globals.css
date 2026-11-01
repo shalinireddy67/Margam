@@ -135,26 +135,34 @@
 @tailwind utilities;
 
 :root {
-  --ink: #111111;
-  --grass: #5DB84A;
-  --darkgrass: #3C8A2E;
+  --forest: #173B19;
+  --grass: #4F8A24;
+  --pixelgreen: #79B82A;
+  --darkgreen: #102610;
+  --mutedgreen: #315B2A;
+  --warmwhite: #F2F0DF;
+  --lightgrey: #D8D8D0;
+  --charcoal: #20251F;
+  --gold: #E5B834;
+
+  --ink: #20251F;
   --dirt: #8B5A2B;
   --stone: #9AA0A6;
-  --sky: #7EC8E3;
-  --sand: #F2D16B;
+  --sky: #4F8A24;
+  --sand: #E5B834;
   --red: #D9453D;
   --white: #FFFFFF;
-  --bg: #7EC8E3;
+  --bg: #102610;
   --r: 0px;
-  --border-pixel: 4px solid #111111;
-  --shadow-pixel: 4px 4px 0px #111111;
+  --border-pixel: 4px solid #20251F;
+  --shadow-pixel: 4px 4px 0px #102610;
 
-  /* Legacy token aliases mapped to pixel palette */
-  --yellow: #F2D16B;
-  --cyan: #7EC8E3;
+  /* Legacy token aliases mapped to Minecraft palette */
+  --yellow: #E5B834;
+  --cyan: #79B82A;
   --pink: #D9453D;
-  --green: #5DB84A;
-  --orange: #8B5A2B;
+  --green: #4F8A24;
+  --orange: #E5B834;
 }
 
 @layer base {
@@ -377,6 +385,95 @@ button[aria-pressed="true"] {
     scroll-behavior: auto !important;
     transform: none !important;
   }
+}
+
+
+/* Minecraft-Inspired Grid & Voxel Styles */
+.minecraft-grid-bg {
+  background-color: #102610;
+  background-image: 
+    linear-gradient(to right, rgba(79, 138, 36, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(79, 138, 36, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.minecraft-grass-pattern {
+  background-color: #173B19;
+  background-image: radial-gradient(#4F8A24 15%, transparent 16%), radial-gradient(#315B2A 15%, transparent 16%);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+
+.voxel-card {
+  background-color: #173B19;
+  border: 3px solid #315B2A;
+  box-shadow: 4px 4px 0px #102610;
+  color: #F2F0DF;
+}
+
+.voxel-card-light {
+  background-color: #F2F0DF;
+  border: 4px solid #20251F;
+  box-shadow: 4px 4px 0px #102610;
+  color: #20251F;
+}
+
+.voxel-card-translucent {
+  background-color: rgba(23, 59, 25, 0.92);
+  border: 2px solid #4F8A24;
+  box-shadow: 4px 4px 0px #102610;
+  backdrop-filter: blur(8px);
+  color: #F2F0DF;
+}
+
+.grass-top-border {
+  border-top: 6px solid #79B82A !important;
+}
+
+/* Companion Keyframe Animations */
+@keyframes companion-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes companion-bounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  30% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  60% {
+    transform: translateY(0px) scale(0.98);
+  }
+}
+
+@keyframes companion-hop {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+.animate-companion-float {
+  animation: companion-float 3.5s ease-in-out infinite;
+}
+
+.animate-companion-bounce {
+  animation: companion-bounce 0.8s ease-in-out;
+}
+
+.animate-companion-hop {
+  animation: companion-hop 2s ease-in-out infinite;
 }
 
 /* Print Stylesheet */

@@ -12,12 +12,36 @@ const config: Config = {
     extend: {
       colors: {
         ink: "#111111",
-        grass: {
-          DEFAULT: "#5DB84A",
-          dark: "#3C8A2E",
-          light: "#79CE67",
+        charcoal: "#20251F",
+        darkgreen: "#102610",
+        forest: {
+          DEFAULT: "#173B19",
+          dark: "#0F2610",
+          light: "#214E23",
         },
-        darkgrass: "#3C8A2E",
+        grass: {
+          DEFAULT: "#4F8A24",
+          dark: "#3C6C1B",
+          light: "#6BB034",
+        },
+        pixelgreen: {
+          DEFAULT: "#79B82A",
+          dark: "#5E931E",
+          light: "#95D83C",
+        },
+        mutedgreen: {
+          DEFAULT: "#315B2A",
+          dark: "#23421E",
+          light: "#43793A",
+        },
+        warmwhite: "#F2F0DF",
+        lightgrey: "#D8D8D0",
+        gold: {
+          DEFAULT: "#E5B834",
+          light: "#F2D16B",
+          dark: "#B88E1F",
+        },
+        darkgrass: "#3C6C1B",
         dirt: {
           DEFAULT: "#8B5A2B",
           light: "#A57342",
@@ -28,14 +52,14 @@ const config: Config = {
           dark: "#7B8187",
         },
         sky: {
-          DEFAULT: "#7EC8E3",
-          light: "#A8DCEF",
-          dark: "#5AA7C4",
+          DEFAULT: "#4F8A24",
+          light: "#79B82A",
+          dark: "#173B19",
         },
         sand: {
-          DEFAULT: "#F2D16B",
-          light: "#F7E298",
-          dark: "#D4B34F",
+          DEFAULT: "#E5B834",
+          light: "#F2D16B",
+          dark: "#B88E1F",
         },
         red: {
           DEFAULT: "#D9453D",
@@ -45,17 +69,17 @@ const config: Config = {
         white: "#FFFFFF",
 
         // Palette mapping aliases to support existing component tokens
-        cream: "#7EC8E3",
-        canvas: "#7EC8E3",
+        cream: "#F2F0DF",
+        canvas: "#102610",
         yellow: {
-          DEFAULT: "#F2D16B",
+          DEFAULT: "#E5B834",
           bright: "#F2D16B",
           light: "#F7E298",
         },
         cyan: {
-          DEFAULT: "#7EC8E3",
-          bright: "#7EC8E3",
-          light: "#A8DCEF",
+          DEFAULT: "#79B82A",
+          bright: "#79B82A",
+          light: "#95D83C",
         },
         pink: {
           DEFAULT: "#D9453D",
@@ -63,20 +87,20 @@ const config: Config = {
           light: "#E4726C",
         },
         green: {
-          DEFAULT: "#5DB84A",
-          bright: "#5DB84A",
-          light: "#79CE67",
+          DEFAULT: "#4F8A24",
+          bright: "#79B82A",
+          light: "#6BB034",
         },
         orange: {
-          DEFAULT: "#8B5A2B",
-          bright: "#8B5A2B",
-          light: "#A57342",
+          DEFAULT: "#E5B834",
+          bright: "#F2D16B",
+          light: "#F7E298",
         },
 
         // Semantic mappings
-        background: "#7EC8E3",
-        foreground: "#111111",
-        muted: "#9AA0A6",
+        background: "#102610",
+        foreground: "#F2F0DF",
+        muted: "#D8D8D0",
       },
       fontFamily: {
         heading: [
@@ -106,13 +130,16 @@ const config: Config = {
         "4": "4px",
       },
       boxShadow: {
-        hard: "4px 4px 0px #111111",
-        "hard-sm": "2px 2px 0px #111111",
-        "hard-lg": "6px 6px 0px #111111",
-        pixel: "4px 4px 0px #111111",
-        "pixel-sm": "2px 2px 0px #111111",
-        "pixel-lg": "6px 6px 0px #111111",
-        "pixel-pressed": "0px 0px 0px #111111",
+        hard: "4px 4px 0px #102610",
+        "hard-sm": "2px 2px 0px #102610",
+        "hard-lg": "6px 6px 0px #102610",
+        pixel: "4px 4px 0px #102610",
+        "pixel-sm": "2px 2px 0px #102610",
+        "pixel-lg": "6px 6px 0px #102610",
+        "pixel-pressed": "0px 0px 0px #102610",
+        block: "4px 4px 0px #20251F",
+        "block-sm": "2px 2px 0px #20251F",
+        "block-lg": "6px 6px 0px #20251F",
       },
       borderRadius: {
         DEFAULT: "0px",

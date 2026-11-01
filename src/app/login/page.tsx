@@ -194,9 +194,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between">
       {/* Header */}
-      <header className="border-b border-slate-200 bg-white">
+      <header className="border-b-3 border-[#315B2A] bg-[#173B19] shadow-[0px_4px_0px_#102610]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center text-white">
@@ -206,7 +206,7 @@ export default function LoginPage() {
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D8D8D0] hover:text-[#F2F0DF]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Home</span>
@@ -216,15 +216,15 @@ export default function LoginPage() {
 
       {/* Main Container */}
       <main className="max-w-md mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
-        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-[#173B19] p-6 sm:p-8 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] space-y-6 text-[#F2F0DF]">
           {/* Logo & Headline */}
           <div className="text-center space-y-1">
-            <h1 className="text-2xl font-heading font-extrabold text-foreground">
+            <h1 className="text-2xl font-heading font-extrabold text-[#79B82A] drop-shadow-[2px_2px_0px_#102610]">
               {mode === "student-signup" && "Student Sign-Up"}
               {mode === "teacher-signup" && "Teacher Sign-Up"}
               {mode === "signin" && "Sign In to Margam"}
             </h1>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-[#D8D8D0]">
               {mode === "student-signup" && "No email or phone required. Pure privacy."}
               {mode === "teacher-signup" && "Organize classes and view student mastery paths."}
               {mode === "signin" && "Resume your cloud-synced learning journey."}
@@ -233,7 +233,7 @@ export default function LoginPage() {
 
           {/* Mode Switcher Tabs */}
           {!recoveryCode && !createdClassCode && (
-            <div className="grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-bold text-center">
+            <div className="grid grid-cols-3 gap-1 bg-[#102610] p-1 border-2 border-[#315B2A] text-xs font-bold text-center">
               <button
                 type="button"
                 onClick={() => {
@@ -241,7 +241,7 @@ export default function LoginPage() {
                   resetMessages();
                 }}
                 className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "student-signup" ? "bg-white text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground"
+                  mode === "student-signup" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
                 }`}
               >
                 Student
@@ -253,7 +253,7 @@ export default function LoginPage() {
                   resetMessages();
                 }}
                 className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "teacher-signup" ? "bg-white text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground"
+                  mode === "teacher-signup" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
                 }`}
               >
                 Teacher
@@ -265,7 +265,7 @@ export default function LoginPage() {
                   resetMessages();
                 }}
                 className={`py-2 px-1.5 rounded-xl transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "signin" ? "bg-white text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground"
+                  mode === "signin" ? "bg-[#79B82A] text-[#102610] shadow-[2px_2px_0px_#102610]" : "text-[#D8D8D0] hover:text-[#F2F0DF]"
                 }`}
               >
                 Sign In
@@ -626,7 +626,7 @@ export default function LoginPage() {
           <div className="pt-4 border-t border-slate-100 text-center">
             <Link
               href="/student"
-              className="text-xs font-semibold text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 min-h-[40px] px-2 py-1 rounded-lg"
+              className="text-xs font-semibold text-[#D8D8D0] hover:text-[#F2F0DF] inline-flex items-center gap-1.5 min-h-[40px] px-2 py-1 rounded-lg"
             >
               <span>Continue in Guest Mode (Local Storage Only)</span>
               <ArrowLeft className="w-3 h-3 rotate-180" />

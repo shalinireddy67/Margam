@@ -12,6 +12,7 @@ import {
   BottomTabBar,
   OfflineBanner,
   Logo,
+  ProgressBar,
   type Language,
 } from "@/components/ui";
 import { LearnerProfile } from "@/lib/types";
@@ -30,6 +31,7 @@ import {
 import { isFeatureEnabled } from "@/lib/flags";
 import { WitchCat } from "@/components/ui/WitchCat";
 import { getCatGreeting } from "@/lib/greetings";
+import { Sparkles, Compass, Award, BookOpen, AlertCircle, ArrowRight, RotateCcw } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -96,57 +98,57 @@ export default function HomePage() {
   const copy = {
     en: {
       appName: "Margam",
-      tagline: "Sequential Maths",
-      heroLine1: "Adaptive maths practice for CBSE & State Boards.",
-      heroLine2: "Catches hidden foundation gaps from earlier classes.",
-      heroLine3: "Free, private, and works offline on any phone.",
-      try3Questions: "Try 3 questions",
-      startCardTitle: "Get Started",
-      startCardSubtitle: "Enter your name and select your class to begin.",
-      nameLabel: "Your Name",
+      tagline: "Minecraft-Inspired Math Realm",
+      heroLine1: "Sequential maths progression across Classes 6–10.",
+      heroLine2: "Detects prerequisite gaps and traces root causes automatically.",
+      heroLine3: "Private, lightweight, and works seamlessly offline.",
+      try3Questions: "Try 3 Questions (Quick Diagnostic)",
+      startCardTitle: "Enter Your Realm",
+      startCardSubtitle: "Enter your name and select your grade to build your personal learning world.",
+      nameLabel: "Player Name",
       namePlaceholder: "Enter your name (e.g. Priya)",
-      classLabel: "Select Your Class",
-      startLearningBtn: "Start Learning",
+      classLabel: "Select Your Grade Realm",
+      startLearningBtn: "Spawn into Realm",
       welcomeBack: "Welcome back",
       classBadge: "Class",
-      activeGapFound: "Active gap identified in foundational prerequisite",
-      fixGapBtn: "Fix Foundation Gap",
-      continueLessonBtn: "Continue Practice",
-      switchProfile: "Switch class or name",
-      chaptersHeading: "Maths Chapters",
-      chaptersSubtitle: "Choose a chapter to practice, review lessons, or diagnose foundation gaps.",
-      teacherLink: "Teacher View",
-      conceptsMastered: "concepts mastered",
+      activeGapFound: "Prerequisite Gap Detected",
+      fixGapBtn: "Strengthen Foundation",
+      continueLessonBtn: "Continue Quest",
+      switchProfile: "Switch Grade / Reset Realm",
+      chaptersHeading: "Math Quests & Chapters",
+      chaptersSubtitle: "Choose a chapter to diagnose prerequisite mastery or start lessons.",
+      teacherLink: "Teacher Hub",
+      conceptsMastered: "Blocks Mastered",
     },
     hi: {
       appName: "मार्गम्",
-      tagline: "अनुक्रमिक गणित",
-      heroLine1: "सीबीएसई और राज्य बोर्डों के लिए अनुकूली गणित अभ्यास।",
-      heroLine2: "पिछली कक्षाओं की छुपी हुई कमियों को खोजकर ठीक करता है।",
-      heroLine3: "पूरी तरह निःशुल्क, निजी और किसी भी फ़ोन पर ऑफ़लाइन चलता है।",
-      try3Questions: "3 प्रश्नों को आज़माएं",
-      startCardTitle: "शुरू करें",
+      tagline: "गणित की दुनिया",
+      heroLine1: "कक्षा 6–10 के लिए क्रमिक और अनुकूली गणित अभ्यास।",
+      heroLine2: "बुनियादी कमियों की स्वतः पहचान और चरणबद्ध समाधान।",
+      heroLine3: "पूर्णतः सुरक्षित, निःशुल्क और ऑफलाइन सक्षम।",
+      try3Questions: "3 प्रश्नों का अभ्यास करें",
+      startCardTitle: "अपनी दुनिया में प्रवेश करें",
       startCardSubtitle: "अपना नाम दर्ज करें और अपनी कक्षा चुनें।",
       nameLabel: "आपका नाम",
-      namePlaceholder: "अपना नाम दर्ज करें (उदा. प्रिया)",
+      namePlaceholder: "अपना नाम लिखें (उदा. प्रिया)",
       classLabel: "अपनी कक्षा चुनें",
       startLearningBtn: "सीखना शुरू करें",
-      welcomeBack: "वापसी पर स्वागत है",
+      welcomeBack: "पुनः स्वागत है",
       classBadge: "कक्षा",
-      activeGapFound: "बुनियादी पूर्व-अपेक्षा में अंतराल पाया गया",
-      fixGapBtn: "बुनियादी कमी ठीक करें",
-      continueLessonBtn: "अभ्यास जारी रखें",
-      switchProfile: "कक्षा या नाम बदलें",
+      activeGapFound: "बुनियादी कमी पाई गई",
+      fixGapBtn: "बुनियादी कमी सुधारें",
+      continueLessonBtn: "पाठ जारी रखें",
+      switchProfile: "कक्षा बदलें",
       chaptersHeading: "गणित के अध्याय",
-      chaptersSubtitle: "अभ्यास करने, पाठ सीखने या कमी का पता लगाने के लिए एक अध्याय चुनें।",
+      chaptersSubtitle: "अभ्यास करने या जांच के लिए अध्याय चुनें।",
       teacherLink: "शिक्षक दृश्य",
-      conceptsMastered: "अवधारणाएं पूरी हुईं",
+      conceptsMastered: "अवधारणाएं पूर्ण",
     },
     te: {
       appName: "మార్గం",
-      tagline: "క్రమానుగత గణితం",
-      heroLine1: "సీబీఎస్‌ఈ మరియు స్టేట్ బోర్డుల కోసం అనుకూల గణిత అభ్యాసం.",
-      heroLine2: "మునుపటి తరగతుల పునాది లోపాలను గుర్తించి సరిచేస్తుంది.",
+      tagline: "గణిత అభ్యాస ప్రపంచం",
+      heroLine1: "6–10 తరగతుల విద్యార్థుల కోసం దశలవారీ గణిత అభ్యాసం.",
+      heroLine2: "ముందస్తు పునాది లోపాలను గుర్తించి స్వయంచాలకంగా సరిదిద్దుతుంది.",
       heroLine3: "ఉచితం, గోప్యత మరియు ఏ ఫోన్‌లోనైనా ఆఫ్‌లైన్‌లో పనిచేస్తుంది.",
       try3Questions: "3 ప్రశ్నలను ప్రయత్నించండి",
       startCardTitle: "ప్రారంభించండి",
@@ -173,66 +175,59 @@ export default function HomePage() {
 
   // Calculate completed concepts count if profile exists
   const completedConceptsCount = profile
-    ? Object.values(profile.topicProgress).filter((p) => p.status === "completed").length
+    ? Object.values(profile.topicProgress || {}).filter((p) => p.status === "completed").length
     : 0;
 
   // Active gap concept if any
   const firstActiveGapId =
     profile?.activeGap && profile.activeGap.status === "confirmed"
       ? profile.activeGap.rootConceptId
-      : undefined;
+    : undefined;
 
-  // Cat time-of-day greeting (EN, HI, TE)
+  // Companion greeting
   const catGreeting = getCatGreeting(profile?.name, currentLang);
-
-  // Tile colors rotation
-  const tileColors: ("yellow" | "cyan" | "green" | "sky" | "orange")[] = [
-    "yellow",
-    "cyan",
-    "green",
-    "sky",
-    "orange",
-  ];
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3]">
-        <div className="p-6 border-4 border-[#111111] rounded-none bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
-          <p className="font-heading font-extrabold text-lg text-[#111111]">Loading Margam...</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#102610] minecraft-grid-bg">
+        <div className="p-6 border-3 border-[#315B2A] bg-[#173B19] shadow-[6px_6px_0px_#102610] text-center text-[#F2F0DF]">
+          <p className="font-heading font-extrabold text-base text-[#79B82A] animate-pulse">
+            Loading Realm...
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] pb-28">
+    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] pb-28">
       {/* Offline Status Listener */}
       <OfflineBanner />
 
       {/* Top Header */}
-      <header className="sticky top-0 z-30 bg-[#7EC8E3] backdrop-blur-none border-b-4 border-[#111111]">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <header className="sticky top-0 z-30 bg-[#173B19]/95 backdrop-blur-md border-b-3 border-[#315B2A] shadow-[0px_4px_0px_#102610]">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           {/* Logo & Grade Info */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               href="/"
-              className="inline-flex items-center min-h-[48px] gap-2 no-underline text-[#111111]"
+              className="inline-flex items-center min-h-[44px] gap-2.5 no-underline text-[#F2F0DF]"
             >
-              <div className="w-10 h-10 rounded-none bg-[#F2D16B] border-4 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-none bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610] flex items-center justify-center shrink-0">
                 <Logo className="w-6 h-6" ariaLabel={copy.appName} />
               </div>
               <div>
-                <span className="font-heading font-extrabold text-2xl text-[#111111] tracking-tight leading-none block">
-                  {copy.appName}
+                <span className="font-heading font-extrabold text-xl sm:text-2xl text-[#79B82A] tracking-wider leading-none block drop-shadow-[2px_2px_0px_#102610]">
+                  {copy.appName.toUpperCase()}
                 </span>
-                <span className="text-xs font-bold text-[#111111]/70 block">
+                <span className="text-[10px] font-heading font-bold text-[#D8D8D0] block mt-0.5">
                   {copy.tagline}
                 </span>
               </div>
             </Link>
 
             {profile && (
-              <span className="hidden sm:inline-block px-2.5 py-1 border-[2px] border-[#111111] rounded-full bg-[#FFE14D] text-xs font-heading font-extrabold text-[#111111]">
+              <span className="hidden sm:inline-block px-2.5 py-1 border-2 border-[#102610] bg-[#4F8A24] text-[10px] font-heading font-extrabold text-[#F2F0DF] shadow-[2px_2px_0px_#102610]">
                 {copy.classBadge} {profile.selectedClass}
               </span>
             )}
@@ -243,11 +238,12 @@ export default function HomePage() {
             {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (
               <Link
                 href="/teacher"
-                className="hidden sm:inline-flex items-center justify-center px-3 py-2 min-h-[48px] min-w-[48px] border-[2px] border-[#111111] rounded-xl bg-[#FFFFFF] shadow-[2px_2px_0px_#111111] text-xs font-heading font-extrabold text-[#111111] no-underline hover:bg-[#FFE14D]/30 active:translate-x-[1px] active:translate-y-[1px]"
+                className="hidden sm:inline-flex items-center justify-center px-3 py-1.5 min-h-[42px] border-2 border-[#315B2A] bg-[#102610] shadow-[2px_2px_0px_#102610] text-xs font-heading font-bold text-[#F2F0DF] hover:bg-[#315B2A] active:translate-x-0.5 active:translate-y-0.5 transition-colors"
               >
                 {copy.teacherLink}
               </Link>
             )}
+
             <LanguageToggle
               currentLang={currentLang}
               onLanguageChange={setCurrentLang}
@@ -257,127 +253,127 @@ export default function HomePage() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-4 pt-6 sm:pt-8 space-y-8">
+      <main className="max-w-5xl mx-auto px-4 pt-6 sm:pt-8 space-y-8">
         {/* ================================================================= */}
-        {/* LANDING & ONBOARDING (For First-Time Visitors)                    */}
+        {/* ONBOARDING (For First-Time Visitors)                              */}
         {/* ================================================================= */}
         {!profile && (
           <section aria-labelledby="welcome-heading" className="space-y-6">
-            {/* 3-Line Landing Hero */}
-            <Card color="yellow" className="p-6 sm:p-8 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
-                    {catGreeting.text}
-                  </span>
+            {/* Minecraft World Welcome Card */}
+            <div className="p-6 sm:p-8 bg-[#173B19]/90 border-3 border-[#4F8A24] shadow-[6px_6px_0px_#102610] border-t-[6px] border-t-[#79B82A] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div className="space-y-2 max-w-xl">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#102610] border border-[#315B2A] text-[10px] font-heading font-bold text-[#79B82A]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#E5B834]" />
+                    <span>MARGAM REALM</span>
+                  </div>
                   <h1
                     id="welcome-heading"
-                    className="font-heading font-extrabold text-3xl sm:text-4xl text-[#111111] leading-tight"
+                    className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F2F0DF] leading-tight drop-shadow-[2px_2px_0px_#102610]"
                   >
-                    {copy.appName}
+                    Build Your Math Mastery
                   </h1>
+                  <p className="text-sm text-[#D8D8D0] leading-relaxed">
+                    A Minecraft-inspired adaptive math realm where learning is sequential, gaps are diagnosed, and every lesson strengthens your foundation.
+                  </p>
                 </div>
-                <div className="shrink-0 self-start sm:self-auto">
+
+                {/* Companion Mascot Welcome */}
+                <div className="shrink-0 flex flex-col items-center justify-center p-3 bg-[#102610]/70 border-2 border-[#315B2A] shadow-[4px_4px_0px_#102610]">
                   <WitchCat
                     pose="greet"
-                    size={80}
-                    sticker={true}
-                    alt="Margam Witch Cat welcoming you to Margam"
+                    size={110}
+                    sticker={false}
+                    alt="Margam Zombie Chicken Jockey companion welcoming you"
                   />
+                  <span className="text-[9px] font-heading text-[#79B82A] mt-1">Study Companion</span>
                 </div>
               </div>
 
-              {/* 3 Short Informative Lines */}
-              <div className="space-y-2 max-w-xl">
-                <div className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
-                    1
-                  </span>
-                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
-                    {copy.heroLine1}
-                  </p>
+              {/* 3 Pillar Features in Block Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610] space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
+                    <BookOpen className="w-4 h-4 text-[#79B82A]" />
+                    <span>Classes 6–10</span>
+                  </div>
+                  <p className="text-xs text-[#D8D8D0] leading-snug">{copy.heroLine1}</p>
                 </div>
-                <div className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
-                    2
-                  </span>
-                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
-                    {copy.heroLine2}
-                  </p>
+                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610] space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#E5B834]">
+                    <Compass className="w-4 h-4 text-[#E5B834]" />
+                    <span>Gap Tracing</span>
+                  </div>
+                  <p className="text-xs text-[#D8D8D0] leading-snug">{copy.heroLine2}</p>
                 </div>
-                <div className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#111111] text-[#FFE14D] flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5">
-                    3
-                  </span>
-                  <p className="font-sans font-bold text-base text-[#111111] leading-snug">
-                    {copy.heroLine3}
-                  </p>
+                <div className="p-3.5 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610] space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
+                    <Award className="w-4 h-4 text-[#79B82A]" />
+                    <span>100% Free</span>
+                  </div>
+                  <p className="text-xs text-[#D8D8D0] leading-snug">{copy.heroLine3}</p>
                 </div>
               </div>
 
-              {/* Main "Try 3 questions" Action Button */}
+              {/* Fast Try 3 Questions Diagnostic Button */}
               <div className="pt-2">
                 <Button
-                  variant="ink"
-                  size="lg"
+                  variant="pixelgreen"
+                  size="default"
                   onClick={handleTryQuestions}
-                  className="w-full sm:w-auto text-[#FFE14D]"
+                  className="w-full sm:w-auto text-[#102610]"
                 >
-                  <span className="mr-2">{copy.try3Questions}</span>
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="w-5 h-5 inline-block"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 8h10M9 4l4 4-4 4" />
-                  </svg>
+                  <Compass className="w-4 h-4 mr-2" />
+                  <span>{copy.try3Questions}</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
-            </Card>
+            </div>
 
-            {/* Name and Class Entry Card */}
-            <Card color="white" className="p-6 sm:p-8 space-y-6">
+            {/* Name and Grade Realm Selection Card */}
+            <div className="p-6 sm:p-8 bg-[#173B19] border-3 border-[#315B2A] shadow-[6px_6px_0px_#102610] space-y-6">
               <div>
-                <h2 className="font-heading font-extrabold text-2xl text-[#111111]">
+                <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#F2F0DF]">
                   {copy.startCardTitle}
                 </h2>
-                <p className="text-sm font-bold text-[#111111]/70 mt-1">
+                <p className="text-xs sm:text-sm text-[#D8D8D0] mt-1 font-medium">
                   {copy.startCardSubtitle}
                 </p>
               </div>
 
-              <form onSubmit={handleStartLearning} className="space-y-5">
-                {/* 1. Name Input */}
+              <form onSubmit={handleStartLearning} className="space-y-6">
+                {/* 1. Student Name */}
                 <div>
                   <label
                     htmlFor="student-name-field"
-                    className="block font-heading font-bold text-sm text-[#111111] mb-1.5 uppercase tracking-wide"
+                    className="block font-heading font-bold text-xs text-[#79B82A] mb-2 uppercase tracking-wider"
                   >
                     {copy.nameLabel}
                   </label>
-                  <Input
+                  <input
                     id="student-name-field"
                     type="text"
                     required
                     placeholder={copy.namePlaceholder}
                     value={nameInput}
                     onChange={(e) => setNameInput(e.target.value)}
+                    className="w-full p-3 bg-[#102610] border-3 border-[#315B2A] text-[#F2F0DF] placeholder:text-[#D8D8D0]/40 font-heading text-sm focus:border-[#79B82A] focus:outline-none shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5)]"
                   />
                 </div>
 
-                {/* 2. Class Selection: 48px buttons with checkmark + 21:1 contrast */}
+                {/* 2. Grade Realm Selection (Classes 6 to 10 as interactive Minecraft block buttons) */}
                 <div>
-                  <label
-                    id="class-selector-label"
-                    className="block font-heading font-bold text-sm text-[#111111] mb-1.5 uppercase tracking-wide"
-                  >
-                    {copy.classLabel}
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label
+                      id="class-selector-label"
+                      className="block font-heading font-bold text-xs text-[#79B82A] uppercase tracking-wider"
+                    >
+                      {copy.classLabel}
+                    </label>
+                    <span className="text-[10px] text-[#D8D8D0]/70 font-heading">
+                      Single grade lock
+                    </span>
+                  </div>
                   <div
                     role="radiogroup"
                     aria-labelledby="class-selector-label"
@@ -394,135 +390,119 @@ export default function HomePage() {
                           aria-label={`Class ${grade}${isSelected ? ", selected" : ""}`}
                           onClick={() => setSelectedClass(grade)}
                           className={`
-                            min-h-[48px] py-2 px-1
-                            flex items-center justify-center gap-1
-                            font-heading font-extrabold text-base
-                            border-[3px] border-[#111111]
-                            rounded-[14px_12px_16px_13px/13px_15px_12px_14px]
+                            min-h-[56px] py-2 px-1
+                            flex flex-col items-center justify-center gap-1
+                            font-heading font-extrabold text-sm sm:text-base
+                            border-3 border-[#102610] rounded-none
                             box-border cursor-pointer select-none
                             transition-transform active:translate-x-[2px] active:translate-y-[2px]
                             ${
                               isSelected
-                                ? "bg-[#111111] text-[#FFFFFF] shadow-[2px_2px_0px_#111111]"
-                                : "bg-[#FFFFFF] text-[#111111] shadow-[3px_3px_0px_#111111] hover:bg-[#FFE14D]/30"
+                                ? "bg-[#79B82A] text-[#102610] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.6),3px_3px_0px_#102610]"
+                                : "bg-[#102610] text-[#D8D8D0] shadow-[3px_3px_0px_#102610] hover:bg-[#315B2A] hover:text-[#F2F0DF]"
                             }
                           `.trim()}
                         >
-                          {isSelected && (
-                            <svg
-                              viewBox="0 0 16 16"
-                              className="w-4 h-4 text-[#8DE86A] shrink-0"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="3"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M3 8.5l3.5 3.5 7-7" />
-                            </svg>
-                          )}
-                          <span className={isSelected ? "text-[#FFFFFF]" : "text-[#111111]"}>
-                            {grade}
-                          </span>
+                          <span className="text-[9px] uppercase tracking-tighter opacity-70">Class</span>
+                          <span className="text-base sm:text-lg leading-none">{grade}</span>
                         </button>
                       );
                     })}
                   </div>
                 </div>
 
-                {/* Submit Action */}
+                {/* Spawn Button */}
                 <Button
                   type="submit"
-                  variant="yellow"
+                  variant="pixelgreen"
                   size="default"
-                  className="w-full text-[#111111]"
+                  className="w-full text-[#102610]"
                 >
                   <span>{copy.startLearningBtn}</span>
-                  <svg
-                    viewBox="0 0 16 16"
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 8h10M9 4l4 4-4 4" />
-                  </svg>
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </form>
-            </Card>
+            </div>
           </section>
         )}
 
         {/* ================================================================= */}
-        {/* RETURNING STUDENT SECTION (If profile exists)                     */}
+        {/* STUDENT DASHBOARD (When Profile is Active)                        */}
         {/* ================================================================= */}
         {profile && (
-          <section aria-labelledby="returning-heading" className="space-y-4">
-            {/* Continue Card */}
-            <Card color="yellow" className="p-6 sm:p-7 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <section aria-labelledby="dashboard-heading" className="space-y-6">
+            {/* Hero Student Realm Banner */}
+            <div className="p-6 sm:p-7 bg-[#173B19]/95 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
-                  <div className="shrink-0">
+                  {/* Mascot Companion with Pose */}
+                  <div className="shrink-0 p-2 bg-[#102610] border-2 border-[#315B2A] shadow-[3px_3px_0px_#102610]">
                     <WitchCat
-                      pose="greet"
-                      size={80}
-                      sticker={true}
-                      alt="Margam Witch Cat greeting the student"
+                      pose="cheer"
+                      size={90}
+                      sticker={false}
+                      alt="Margam Learning Companion"
                     />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
+                    <span className="text-[10px] font-heading font-bold text-[#79B82A] uppercase tracking-wider block">
                       {catGreeting.text}
                     </span>
                     <h1
-                      id="returning-heading"
-                      className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111] leading-tight"
+                      id="dashboard-heading"
+                      className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F2F0DF] leading-tight drop-shadow-[2px_2px_0px_#102610]"
                     >
                       {profile.name}
                     </h1>
-                    <p className="text-xs font-bold text-[#111111]/80 mt-0.5">
-                      {catGreeting.subtitle}
+                    <p className="text-xs text-[#D8D8D0] mt-1 font-bold">
+                      Class {profile.selectedClass} Realm • Adaptive Level {profile.currentDifficulty} / 3
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span className="inline-block px-3 py-1 bg-[#111111] text-[#FFFFFF] rounded-full font-heading font-extrabold text-xs">
-                    {copy.classBadge} {profile.selectedClass}
-                  </span>
-                  <span className="text-xs font-bold text-[#111111]/80">
+                {/* Progress / Mastery Stats */}
+                <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2">
+                  <span className="px-3 py-1 bg-[#4F8A24] text-[#F2F0DF] border-2 border-[#102610] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610]">
                     {completedConceptsCount} {copy.conceptsMastered}
+                  </span>
+                  <span className="text-[11px] font-bold text-[#E5B834]">
+                    XP Level: {Math.max(1, completedConceptsCount * 10)}
                   </span>
                 </div>
               </div>
 
-              {/* Active gap indicator or continue prompt */}
+              {/* Minecraft XP Progress Bar */}
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-center justify-between text-xs font-heading font-bold">
+                  <span className="text-[#D8D8D0]">Realm Mastery Progress</span>
+                  <span className="text-[#79B82A]">
+                    {completedConceptsCount} / {gradeChapters.length * 2} concepts
+                  </span>
+                </div>
+                <ProgressBar
+                  value={completedConceptsCount}
+                  max={Math.max(1, gradeChapters.length * 2)}
+                  segments={12}
+                  color="pixelgreen"
+                />
+              </div>
+
+              {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
-                <div className="p-4 bg-[#FFFFFF] border-[3px] border-[#111111] rounded-2xl shadow-[3px_3px_0px_#111111] space-y-2">
-                  <div className="flex items-center gap-2 text-[#FF4F9A]">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 shrink-0 stroke-[3]"
-                      fill="none"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    <span className="font-heading font-extrabold text-sm text-[#111111]">
+                <div className="p-4 bg-[#102610] border-3 border-[#E5B834] shadow-[4px_4px_0px_#102610] space-y-2">
+                  <div className="flex items-center gap-2 text-[#E5B834]">
+                    <AlertCircle className="w-5 h-5 shrink-0" />
+                    <span className="font-heading font-extrabold text-xs sm:text-sm">
                       {copy.activeGapFound}
                     </span>
                   </div>
+                  <p className="text-xs text-[#D8D8D0]">
+                    Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make current chapters easier!
+                  </p>
                   <div className="pt-1">
                     <Link
                       href={`/student/worksheet/${firstActiveGapId}`}
-                      className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 bg-[#FF4F9A] text-[#111111] border-[2px] border-[#111111] rounded-xl font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#E5B834] hover:bg-[#F2D16B] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                     >
                       {copy.fixGapBtn}
                     </Link>
@@ -531,62 +511,52 @@ export default function HomePage() {
               ) : (
                 <div className="pt-2 flex flex-wrap gap-3 items-center">
                   <Button
-                    variant="ink"
+                    variant="pixelgreen"
                     size="sm"
                     onClick={handleTryQuestions}
-                    className="text-[#FFE14D]"
+                    className="text-[#102610]"
                   >
                     <span>{copy.continueLessonBtn}</span>
-                    <svg
-                      viewBox="0 0 16 16"
-                      className="w-4 h-4 ml-1.5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M3 8h10M9 4l4 4-4 4" />
-                    </svg>
+                    <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
 
                   <button
                     type="button"
                     onClick={handleResetProfile}
-                    className="min-h-[48px] min-w-[48px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A] cursor-pointer"
+                    className="min-h-[44px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#D8D8D0] hover:text-[#79B82A] underline cursor-pointer"
                   >
-                    {copy.switchProfile}
+                    <RotateCcw className="w-3.5 h-3.5 mr-1" />
+                    <span>{copy.switchProfile}</span>
                   </button>
                 </div>
               )}
-            </Card>
+            </div>
           </section>
         )}
 
         {/* ================================================================= */}
-        {/* CHAPTERS LIST (Coloured Illustrated Tiles)                        */}
+        {/* CHAPTERS GRID (Minecraft Voxel Tiles)                             */}
         {/* ================================================================= */}
         <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-[3px] border-[#111111] pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#315B2A] pb-2">
             <div>
               <h2
                 id="chapters-list-heading"
-                className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111]"
+                className="font-heading font-extrabold text-xl sm:text-2xl text-[#F2F0DF]"
               >
                 {copy.classBadge} {currentGrade} {copy.chaptersHeading}
               </h2>
-              <p className="text-xs sm:text-sm font-bold text-[#111111]/70 mt-0.5">
+              <p className="text-xs text-[#D8D8D0]/80 mt-0.5">
                 {copy.chaptersSubtitle}
               </p>
             </div>
-            <span className="text-xs font-extrabold text-[#111111] shrink-0">
+            <span className="text-xs font-heading font-bold text-[#79B82A] shrink-0">
               {gradeChapters.length} Chapters
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {gradeChapters.map((chapter, index) => {
+            {gradeChapters.map((chapter) => {
               const isFull = chapter.status === "full";
               const chapterConcepts = getConceptsByChapter(chapter.id);
               const hasDiagnostic = isFull && canTakeChapterDiagnostic(chapter.id);
@@ -596,14 +566,12 @@ export default function HomePage() {
                   profile?.topicProgress[c.id]?.status === "in_progress"
               );
 
-              // Real state mapping
               const tileState = !isFull
                 ? "coming_soon"
                 : hasStarted
                 ? "in_progress"
                 : "available";
 
-              const color = tileColors[index % tileColors.length];
               const localizedTitle = `Ch ${chapter.chapterNumber}: ${
                 chapter.name[currentLang] || chapter.name.en
               }`;
@@ -628,7 +596,7 @@ export default function HomePage() {
                   title={localizedTitle}
                   subtitle={localizedSubtitle}
                   state={tileState}
-                  color={color}
+                  color="forest"
                   diagnosticHref={diagnosticHref}
                   practiceHref={practiceHref}
                   lessonHref={lessonHref}
@@ -643,7 +611,7 @@ export default function HomePage() {
           <div className="pt-4 text-center sm:hidden">
             <Link
               href="/teacher"
-              className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 text-xs font-bold text-[#111111] underline hover:text-[#FF4F9A]"
+              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#79B82A] underline"
             >
               {copy.teacherLink}
             </Link>
@@ -651,8 +619,8 @@ export default function HomePage() {
         )}
       </main>
 
-      {/* Repeating Pixel Grass Strip at the bottom of the landing page only (inline SVG, tiny) */}
-      <div className="w-full overflow-hidden leading-none select-none mt-10" aria-hidden="true">
+      {/* Repeating Pixel Grass Border at Bottom */}
+      <div className="w-full overflow-hidden leading-none select-none mt-12" aria-hidden="true">
         <svg
           viewBox="0 0 320 16"
           preserveAspectRatio="none"
@@ -661,24 +629,24 @@ export default function HomePage() {
         >
           <defs>
             <pattern id="pixel-grass-strip" width="32" height="16" patternUnits="userSpaceOnUse">
-              <rect x="0" y="4" width="32" height="12" fill="#5DB84A" />
-              <rect x="0" y="12" width="32" height="4" fill="#3C8A2E" />
-              <rect x="2" y="0" width="4" height="4" fill="#5DB84A" />
-              <rect x="10" y="0" width="4" height="4" fill="#5DB84A" />
-              <rect x="18" y="0" width="4" height="4" fill="#5DB84A" />
-              <rect x="26" y="0" width="4" height="4" fill="#5DB84A" />
-              <rect x="6" y="4" width="2" height="2" fill="#3C8A2E" />
-              <rect x="14" y="4" width="2" height="2" fill="#3C8A2E" />
-              <rect x="22" y="4" width="2" height="2" fill="#3C8A2E" />
-              <rect x="30" y="4" width="2" height="2" fill="#3C8A2E" />
+              <rect x="0" y="4" width="32" height="12" fill="#4F8A24" />
+              <rect x="0" y="12" width="32" height="4" fill="#315B2A" />
+              <rect x="2" y="0" width="4" height="4" fill="#79B82A" />
+              <rect x="10" y="0" width="4" height="4" fill="#79B82A" />
+              <rect x="18" y="0" width="4" height="4" fill="#79B82A" />
+              <rect x="26" y="0" width="4" height="4" fill="#79B82A" />
+              <rect x="6" y="4" width="2" height="2" fill="#315B2A" />
+              <rect x="14" y="4" width="2" height="2" fill="#315B2A" />
+              <rect x="22" y="4" width="2" height="2" fill="#315B2A" />
+              <rect x="30" y="4" width="2" height="2" fill="#315B2A" />
             </pattern>
           </defs>
           <rect width="100%" height="16" fill="url(#pixel-grass-strip)" />
         </svg>
-        <div className="w-full h-4 sm:h-5 bg-[#8B5A2B] border-t-2 border-[#111111]" />
+        <div className="w-full h-4 sm:h-5 bg-[#173B19] border-t-2 border-[#102610]" />
       </div>
 
-      {/* Student Bottom Tab Bar (Home active) */}
+      {/* Student Bottom Tab Bar */}
       <BottomTabBar currentTab="home" />
     </div>
   );
