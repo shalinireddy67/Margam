@@ -16,6 +16,8 @@ import {
   ConfidenceLevel,
   RoutingAction,
   CandidateRootCause,
+  AttemptComparison,
+  PersonalizedWorksheetMeta,
 } from "./types";
 import {
   getConceptById,
@@ -25,13 +27,20 @@ import {
   hasEnoughQuestions,
   getQuestionsByConceptId,
   getQuestionsByChapterId,
+  getQuestionById,
 } from "./curriculum";
 import {
   getActiveProfile,
   saveProfile,
   getTopicProgress,
   updateTopicProgress,
+  recordWorksheetAttempt,
+  resolveActiveGap,
 } from "./storage";
+import {
+  computeNextRevisionSchedule,
+  compareAttempts,
+} from "./revision";
 
 export interface AdaptiveDiagnosis {
   mistakeTag: string;
@@ -244,7 +253,21 @@ export interface PracticeResult {
     correctAnswer: string;
     isCorrect: boolean;
     mistakeTag?: string;
+    misconceptionCategory?: string;
+    educationalFeedback?: string;
+    conceptId?: string;
   }[];
+  gapResolved?: boolean;
+  comparison?: AttemptComparison;
+  nextRevisionAt?: string;
+  revisionLevel?: number;
+  conceptsPracticed?: string[];
+  conceptsNeedingAttention?: string[];
+  nextAction?: {
+    title: string;
+    description: string;
+    href: string;
+  };
 }
 
 export interface ChapterTestResult {
@@ -979,62 +1002,245 @@ export function evaluateChapterDiagnostic(
   };
 }
 
+export interface PersonalizedWorksheet {
+  worksheetTitle: string;
+  concept: Concept;
+  targetDifficulty: 1 | 2 | 3;
+  isPersonalized: boolean;
+  personalizedReason: string;
+  questions: Question[];
+  prerequisiteConceptsIncluded: Array<{
+    conceptId: string;
+    name: string;
+    count: number;
+  }>;
+  shortfall: boolean;
+}
+
 /**
- * STAGE 2: Solve (Adaptive Practice)
- * Selects questions matching the student's current per-concept difficulty level.
+ * Phase 3: Personalized Worksheet Generator
+ * Creates tailored practice sessions based on each student's actual learning gaps,
+ * weak concepts, missing prerequisites, previous errors, and difficulty progression.
+ * Strictly uses verified questions from the question bank.
  */
-export function selectPracticeQuestions(
+export function generatePersonalizedWorksheet(
   conceptId: string,
-  count = 3
-): { questions: Question[]; targetDifficulty: 1 | 2 | 3; shortfall: boolean } {
-  const progress = getTopicProgress(conceptId);
-  const targetDifficulty: 1 | 2 | 3 = progress?.difficulty || 1;
+  profile: LearnerProfile | null = null,
+  targetCount = 5
+): PersonalizedWorksheet {
+  const concept = getConceptById(conceptId);
+  if (!concept) {
+    throw new Error(`Concept ${conceptId} not found in curriculum`);
+  }
+
+  const effectiveProfile = profile || getActiveProfile();
+  const progress = effectiveProfile?.topicProgress?.[conceptId] || getTopicProgress(conceptId);
+  const mastery = progress?.mastery ?? 50;
+  const currentDiff = (progress?.difficulty || 1) as 1 | 2 | 3;
 
   const conceptQuestions = getQuestionsByConceptId(conceptId);
-  const matched = conceptQuestions.filter((q) => q.difficulty === targetDifficulty);
+  const selectedQuestions: Question[] = [];
+  const selectedIds = new Set<string>();
+  const prereqsIncluded: Array<{ conceptId: string; name: string; count: number }> = [];
 
-  const selected: Question[] = [...matched.slice(0, count)];
+  let isPersonalized = false;
+  let personalizedReason = "Standard adaptive practice session.";
+  let targetDifficulty: 1 | 2 | 3 = currentDiff;
 
-  // Supplement from other difficulties if not enough at target difficulty
-  if (selected.length < count) {
-    for (const q of conceptQuestions) {
-      if (selected.length >= count) break;
-      if (!selected.some((x) => x.id === q.id)) {
-        selected.push(q);
+  // 1. Condition A: Student has an Active Foundational Gap
+  if (effectiveProfile?.activeGap && effectiveProfile.activeGap.status !== "resolved") {
+    const rootId = effectiveProfile.activeGap.rootConceptId;
+    const rootConcept = getConceptById(rootId);
+    if (rootConcept && rootId !== conceptId) {
+      const rootQuestions = getQuestionsByConceptId(rootId);
+      // Pick 1-2 foundational questions from root gap
+      const foundational = rootQuestions.filter((q) => q.difficulty === 1);
+      const pool = foundational.length > 0 ? foundational : rootQuestions;
+      const countToTake = Math.min(2, pool.length);
+      const chosen = pool.slice(0, countToTake);
+
+      for (const q of chosen) {
+        if (!selectedIds.has(q.id)) {
+          selectedQuestions.push(q);
+          selectedIds.add(q.id);
+        }
+      }
+
+      if (chosen.length > 0) {
+        prereqsIncluded.push({
+          conceptId: rootId,
+          name: rootConcept.name.en,
+          count: chosen.length,
+        });
+        isPersonalized = true;
+        personalizedReason = `Personalized practice: Includes foundational questions from ${rootConcept.name.en} to repair identified learning gaps.`;
+      }
+    }
+  }
+
+  // 2. Condition B: Struggling student (assessed mastery < 60% or repeated errors)
+  if (
+    !isPersonalized &&
+    ((progress?.mastery !== undefined && progress.mastery < 60) ||
+      (progress?.consecutiveIncorrect && progress.consecutiveIncorrect >= 2))
+  ) {
+    targetDifficulty = 1;
+    // Check if concept has immediate prerequisite
+    if (concept.prerequisites && concept.prerequisites.length > 0) {
+      const prereqId = concept.prerequisites[0];
+      const prereqConcept = getConceptById(prereqId);
+      if (prereqConcept) {
+        const prereqQuestions = getQuestionsByConceptId(prereqId).filter((q) => q.difficulty === 1);
+        if (prereqQuestions.length > 0) {
+          const q = prereqQuestions[0];
+          selectedQuestions.push(q);
+          selectedIds.add(q.id);
+          prereqsIncluded.push({
+            conceptId: prereqId,
+            name: prereqConcept.name.en,
+            count: 1,
+          });
+        }
+      }
+    }
+    isPersonalized = true;
+    personalizedReason = `Foundational reinforcement: Tailored to core problem-solving steps and mistake recovery.`;
+  }
+  // 3. Condition C: Advancing / High Mastery (mastery >= 80% or streak >= 3)
+  else if (!isPersonalized && (mastery >= 80 || (progress?.consecutiveCorrect && progress.consecutiveCorrect >= 3))) {
+    targetDifficulty = Math.min(3, currentDiff + 1) as 1 | 2 | 3;
+    isPersonalized = true;
+    personalizedReason = `Mastery challenge: High-order multi-step questions to advance to the next level.`;
+  }
+  // 4. Condition D: Intermediate / Standard Progress (mastery 60-79%)
+  else if (!isPersonalized) {
+    targetDifficulty = currentDiff;
+    isPersonalized = true;
+    personalizedReason = `Adaptive balanced practice tailored to your current performance level.`;
+  }
+
+  // Fill remaining questions from target conceptQuestions matching targetDifficulty
+  const remaining = targetCount - selectedQuestions.length;
+  if (remaining > 0) {
+    const matched = conceptQuestions.filter(
+      (q) => q.difficulty === targetDifficulty && !selectedIds.has(q.id)
+    );
+    for (const q of matched) {
+      if (selectedQuestions.length >= targetCount) break;
+      selectedQuestions.push(q);
+      selectedIds.add(q.id);
+    }
+
+    // Supplement with other difficulties if pool is smaller than targetCount
+    if (selectedQuestions.length < targetCount) {
+      const otherQuestions = conceptQuestions
+        .filter((q) => !selectedIds.has(q.id))
+        .sort((a, b) =>
+          targetDifficulty === 3 ? b.difficulty - a.difficulty : a.difficulty - b.difficulty
+        );
+
+      for (const q of otherQuestions) {
+        if (selectedQuestions.length >= targetCount) break;
+        selectedQuestions.push(q);
+        selectedIds.add(q.id);
       }
     }
   }
 
   return {
-    questions: selected,
+    worksheetTitle: `${concept.name.en} • Practice Worksheet`,
+    concept,
     targetDifficulty,
-    shortfall: selected.length < count,
+    isPersonalized,
+    personalizedReason,
+    questions: selectedQuestions,
+    prerequisiteConceptsIncluded: prereqsIncluded,
+    shortfall: selectedQuestions.length < targetCount,
+  };
+}
+
+/**
+ * STAGE 2: Solve (Adaptive Practice)
+ * Selects questions matching student's current adaptive profile and learning gaps.
+ */
+export function selectPracticeQuestions(
+  conceptId: string,
+  count = 5,
+  profile?: LearnerProfile | null
+): {
+  questions: Question[];
+  targetDifficulty: 1 | 2 | 3;
+  shortfall: boolean;
+  isPersonalized?: boolean;
+  personalizedReason?: string;
+  prerequisiteConceptsIncluded?: Array<{
+    conceptId: string;
+    name: string;
+    count: number;
+  }>;
+} {
+  const personalized = generatePersonalizedWorksheet(conceptId, profile, count);
+  return {
+    questions: personalized.questions,
+    targetDifficulty: personalized.targetDifficulty,
+    shortfall: personalized.shortfall,
+    isPersonalized: personalized.isPersonalized,
+    personalizedReason: personalized.personalizedReason,
+    prerequisiteConceptsIncluded: personalized.prerequisiteConceptsIncluded,
   };
 }
 
 /**
  * STAGE 2: Evaluates Practice Attempt
- * Updates per-concept mastery and per-concept difficulty/streaks via storage.ts.
+ * Updates per-concept mastery, difficulty, spaced revision schedule,
+ * and computes measurable improvement comparison vs previous attempt.
  */
 export function evaluatePracticeSubmission(
   conceptId: string,
-  answers: Record<string, string>
+  answers: Record<string, string>,
+  options?: {
+    studentProfile?: LearnerProfile | null;
+    isPersonalized?: boolean;
+  }
 ): PracticeResult {
   const conceptQuestions = getQuestionsByConceptId(conceptId);
   let correctCount = 0;
   const feedback: PracticeResult["feedback"] = [];
+  const conceptsPracticedSet = new Set<string>([conceptId]);
+  const conceptsNeedingAttentionSet = new Set<string>();
 
-  for (const q of conceptQuestions) {
-    if (!answers[q.id]) continue;
-    const studentAns = answers[q.id].trim();
+  for (const [qid, rawAns] of Object.entries(answers)) {
+    if (!rawAns || typeof rawAns !== "string") continue;
+    const studentAns = rawAns.trim();
+
+    // Look up question in conceptQuestions or fallback to getQuestionById
+    const q =
+      conceptQuestions.find((item) => item.id === qid) || getQuestionById(qid);
+
+    if (!q) continue;
+
+    conceptsPracticedSet.add(q.conceptId);
+
     const isCorrect = studentAns === q.correctAnswer;
-
     let mistakeTag: string | undefined;
+    let misconceptionCategory: string | undefined;
+    let educationalFeedback: string | undefined;
+
     if (isCorrect) {
       correctCount++;
     } else {
+      conceptsNeedingAttentionSet.add(q.conceptId);
       const chosen = q.options?.find((opt) => opt.id === studentAns);
-      if (chosen?.mistakeTag) mistakeTag = chosen.mistakeTag;
+      if (chosen?.mistakeTag) {
+        mistakeTag = chosen.mistakeTag;
+        const insight = classifyMisconception(mistakeTag);
+        misconceptionCategory = insight.category;
+        educationalFeedback = insight.educationalFeedback;
+      } else {
+        const insight = classifyMisconception();
+        misconceptionCategory = insight.category;
+        educationalFeedback = insight.educationalFeedback;
+      }
     }
 
     feedback.push({
@@ -1043,6 +1249,9 @@ export function evaluatePracticeSubmission(
       correctAnswer: q.correctAnswer,
       isCorrect,
       mistakeTag,
+      misconceptionCategory,
+      educationalFeedback,
+      conceptId: q.conceptId,
     });
   }
 
@@ -1053,7 +1262,7 @@ export function evaluatePracticeSubmission(
   // Retrieve current concept progress from storage
   const curProg = getTopicProgress(conceptId);
   const prevMastery = curProg?.mastery;
-  const prevDifficulty = curProg?.difficulty || 1;
+  const prevDifficulty = (curProg?.difficulty || 1) as 1 | 2 | 3;
 
   // Update mastery: first attempt sets directly, later 0.7 * old + 0.3 * new
   const updatedMastery = updateMastery(prevMastery, scorePercentage);
@@ -1082,7 +1291,35 @@ export function evaluatePracticeSubmission(
     }
   }
 
-  // Save updates via storage.ts
+  // Spaced repetition schedule calculation
+  const revSchedule = computeNextRevisionSchedule(
+    scorePercentage,
+    curProg?.revisionLevel || 0
+  );
+
+  // Compare performance against previous attempt (if one exists)
+  const comparison = compareAttempts(correctCount, totalQuestions, curProg || undefined);
+
+  // Check if this attempt resolves an active gap
+  const targetConcept = getConceptById(conceptId);
+  const gapResolved = resolveActiveGap(
+    conceptId,
+    scorePercentage,
+    targetConcept?.name.en
+  );
+
+  // Record completed attempt in storage with attemptHistory
+  recordWorksheetAttempt(
+    conceptId,
+    correctCount,
+    totalQuestions,
+    updatedDifficulty,
+    options?.isPersonalized || false,
+    revSchedule.nextRevisionAt,
+    revSchedule.revisionLevel
+  );
+
+  // Update mastery & streaks on topic progress
   updateTopicProgress(conceptId, {
     mastery: updatedMastery,
     difficulty: updatedDifficulty,
@@ -1092,6 +1329,28 @@ export function evaluatePracticeSubmission(
     worksheetScore: correctCount,
     worksheetTotal: totalQuestions,
   });
+
+  // Next recommended action
+  let nextAction: PracticeResult["nextAction"];
+  if (scorePercentage < 70) {
+    nextAction = {
+      title: `Review ${targetConcept?.name.en || "Lesson"}`,
+      description: "Review the step-by-step worked examples to strengthen this topic.",
+      href: `/lesson/${conceptId}`,
+    };
+  } else if (gapResolved) {
+    nextAction = {
+      title: "Return to Main Learning Path",
+      description: "Foundational prerequisite repaired! Continue your chapter journey.",
+      href: "/",
+    };
+  } else {
+    nextAction = {
+      title: `Practice Level ${updatedDifficulty}`,
+      description: "Keep your streak going with more advanced exercises.",
+      href: `/student/worksheet/${conceptId}`,
+    };
+  }
 
   return {
     conceptId,
@@ -1104,6 +1363,13 @@ export function evaluatePracticeSubmission(
     updatedDifficulty,
     difficultyChanged: diffChange,
     feedback,
+    gapResolved,
+    comparison,
+    nextRevisionAt: revSchedule.nextRevisionAt,
+    revisionLevel: revSchedule.revisionLevel,
+    conceptsPracticed: Array.from(conceptsPracticedSet),
+    conceptsNeedingAttention: Array.from(conceptsNeedingAttentionSet),
+    nextAction,
   };
 }
 

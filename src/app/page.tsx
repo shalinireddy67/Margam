@@ -32,7 +32,8 @@ import {
 import { isFeatureEnabled } from "@/lib/flags";
 import { WitchCat } from "@/components/ui/WitchCat";
 import { getCatGreeting } from "@/lib/greetings";
-import { Sparkles, Compass, Award, BookOpen, AlertCircle, ArrowRight, RotateCcw } from "lucide-react";
+import { Sparkles, Compass, Award, BookOpen, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
+import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 
 export default function HomePage() {
   const router = useRouter();
@@ -191,6 +192,8 @@ export default function HomePage() {
 
   // Companion greeting
   const catGreeting = getCatGreeting(profile?.name, currentLang);
+  const revisionQueue = profile ? getRevisionQueue(profile, 4) : [];
+  const companionRevision = profile ? getCompanionRevisionGreeting(revisionQueue, profile) : null;
 
   if (!isLoaded) {
     return (
@@ -565,6 +568,153 @@ export default function HomePage() {
                 </div>
               )}
             </div>
+          </section>
+        )}
+
+        {/* ================================================================= */}
+        {/* YOUR REVISION ZONE (Smart Spaced Repetition)                      */}
+        {/* ================================================================= */}
+        {profile && (
+          <section aria-labelledby="revision-zone-heading" className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#315B2A] pb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-[#79B82A] text-lg">⚔️</span>
+                <h2
+                  id="revision-zone-heading"
+                  className="font-heading font-extrabold text-xl sm:text-2xl text-[#F2F0DF]"
+                >
+                  Your Revision Zone
+                </h2>
+              </div>
+              <span className="text-xs font-heading font-bold text-[#E5B834]">
+                {revisionQueue.length > 0
+                  ? `${revisionQueue.length} Topic${revisionQueue.length > 1 ? "s" : ""} Prioritized`
+                  : "All Foundations Up to Date"}
+              </span>
+            </div>
+
+            {/* Companion Dialogue & Advice Card */}
+            <div className="p-4 sm:p-5 bg-[#173B19] border-3 border-[#4F8A24] shadow-[4px_4px_0px_#102610] flex flex-col sm:flex-row items-center gap-4">
+              <div className="shrink-0 p-1.5 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610]">
+                <WitchCat
+                  pose={companionRevision?.pose || "greet"}
+                  size={74}
+                  sticker={false}
+                  alt="Margam Zombie Chicken Jockey companion revision advice"
+                />
+              </div>
+
+              <div className="flex-1 text-center sm:text-left space-y-1">
+                <span className="text-[10px] font-heading font-extrabold text-[#79B82A] uppercase tracking-wider block">
+                  Companion Quest Advice • {companionRevision?.title || "Daily Check-in"}
+                </span>
+                <p className="text-xs sm:text-sm text-[#F2F0DF] font-medium leading-relaxed">
+                  &ldquo;{companionRevision?.message}&rdquo;
+                </p>
+              </div>
+
+              {revisionQueue.length > 0 && (
+                <div className="shrink-0">
+                  <Link
+                    href={revisionQueue[0].href}
+                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                  >
+                    <span>Start Revision Worksheet</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Revision Cards Grid */}
+            {revisionQueue.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {revisionQueue.map((item) => {
+                  const isCritical = item.priority === "critical_gap";
+                  const isNeedsPractice = item.priority === "needs_practice";
+                  const isDue = item.priority === "due_revision";
+
+                  const badgeColor = isCritical
+                    ? "bg-[#E5B834] text-[#102610] border-[#102610]"
+                    : isNeedsPractice
+                    ? "bg-[#D9453D] text-[#F2F0DF] border-[#102610]"
+                    : isDue
+                    ? "bg-[#79B82A] text-[#102610] border-[#102610]"
+                    : "bg-[#4F8A24] text-[#F2F0DF] border-[#102610]";
+
+                  const badgeLabel = isCritical
+                    ? "CRITICAL GAP"
+                    : isNeedsPractice
+                    ? "NEEDS PRACTICE"
+                    : isDue
+                    ? (item.daysOverdue && item.daysOverdue > 0 ? `OVERDUE (${item.daysOverdue}D)` : "REVISION DUE")
+                    : "WORKSHEET PENDING";
+
+                  return (
+                    <div
+                      key={item.conceptId}
+                      className={`p-4 bg-[#173B19] border-3 shadow-[4px_4px_0px_#102610] flex flex-col justify-between gap-3 ${
+                        isCritical ? "border-[#E5B834]" : "border-[#315B2A]"
+                      }`}
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <span className={`px-2 py-0.5 text-[10px] font-heading font-extrabold border ${badgeColor}`}>
+                            {badgeLabel}
+                          </span>
+                          <span className="text-[11px] font-heading font-bold text-[#D8D8D0]">
+                            Class {item.class} • Level {item.currentDifficulty}
+                          </span>
+                        </div>
+
+                        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF] leading-snug">
+                          {item.conceptName}
+                        </h3>
+
+                        <p className="text-xs text-[#D8D8D0] leading-relaxed">
+                          {item.reason}
+                        </p>
+
+                        {/* Historical Attempt Improvement if recorded */}
+                        {item.previousImprovement && (
+                          <div className="p-2 bg-[#102610] border border-[#315B2A] flex items-center justify-between text-[11px]">
+                            <span className="text-[#D8D8D0]">
+                              Prev: {item.previousImprovement.previousPercentage}% ➔ Latest: {item.previousImprovement.latestPercentage}%
+                            </span>
+                            <span className={`font-heading font-extrabold ${item.previousImprovement.delta >= 0 ? "text-[#79B82A]" : "text-[#D9453D]"}`}>
+                              {item.previousImprovement.delta >= 0 ? `+${item.previousImprovement.delta}%` : `${item.previousImprovement.delta}%`}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#315B2A]">
+                        <span className="text-[11px] font-heading font-bold text-[#79B82A]">
+                          Mastery: {item.mastery}%
+                        </span>
+                        <Link
+                          href={item.href}
+                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                        >
+                          <span>Practice Worksheet</span>
+                          <ArrowRight className="w-3 h-3 ml-1" />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="p-6 bg-[#173B19] border-2 border-[#315B2A] text-center space-y-2">
+                <CheckCircle2 className="w-8 h-8 text-[#79B82A] mx-auto" />
+                <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF]">
+                  All Math Blocks in Great Shape!
+                </h3>
+                <p className="text-xs text-[#D8D8D0] max-w-md mx-auto">
+                  No concepts are currently overdue for spaced revision. Complete new lessons below to advance your learning realm!
+                </p>
+              </div>
+            )}
           </section>
         )}
 

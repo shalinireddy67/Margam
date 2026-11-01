@@ -23,6 +23,8 @@ export async function POST(req: NextRequest) {
       consecutiveCorrect = 0,
       consecutiveIncorrect = 0,
       previousMastery,
+      profile,
+      isPersonalized = false,
     } = body;
 
     if (!token || typeof token !== "string") {
@@ -88,7 +90,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Incomplete submission check
+    // Incomplete submission check - Reject empty or partial submissions
     const answeredKeys = Object.keys(answers).filter(
       (k) => typeof answers[k] === "string" && answers[k].trim() !== ""
     );
@@ -106,8 +108,11 @@ export async function POST(req: NextRequest) {
 
     markSubmissionCompleted(sessionId);
 
-    // Evaluate pure practice logic on the server
-    const practiceResult = evaluatePracticeSubmission(conceptId, answers);
+    // Evaluate practice logic with historical tracking and comparison
+    const practiceResult = evaluatePracticeSubmission(conceptId, answers, {
+      studentProfile: profile,
+      isPersonalized,
+    });
 
     const passed = practiceResult.scorePercentage >= 70;
 
@@ -151,11 +156,22 @@ export async function POST(req: NextRequest) {
       nextDifficulty: nextDiff,
       consecutiveCorrect: newConsecutiveCorrect,
       consecutiveIncorrect: newConsecutiveIncorrect,
+      gapResolved: practiceResult.gapResolved,
+      comparison: practiceResult.comparison,
+      nextRevisionAt: practiceResult.nextRevisionAt,
+      revisionLevel: practiceResult.revisionLevel,
+      conceptsPracticed: practiceResult.conceptsPracticed,
+      conceptsNeedingAttention: practiceResult.conceptsNeedingAttention,
+      nextAction: practiceResult.nextAction,
       feedback: practiceResult.feedback.map((f) => ({
         questionId: f.questionId,
         isCorrect: f.isCorrect,
         chosenAnswer: f.selectedOption,
+        correctAnswer: f.correctAnswer,
         tag: f.mistakeTag,
+        misconceptionCategory: f.misconceptionCategory,
+        educationalFeedback: f.educationalFeedback,
+        conceptId: f.conceptId,
         mistakeDescription: f.mistakeTag
           ? `Identified error pattern: ${f.mistakeTag.replace(/_/g, " ")}`
           : undefined,

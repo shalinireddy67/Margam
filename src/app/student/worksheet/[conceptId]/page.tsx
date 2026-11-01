@@ -16,10 +16,13 @@ import {
   TrendingUp,
   TrendingDown,
   Lock,
+  Calendar,
+  Compass,
 } from "lucide-react";
 import {
   SupportedLanguage,
   LearnerProfile,
+  AttemptComparison,
 } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { canAccessTopic } from "@/lib/progression";
@@ -32,24 +35,7 @@ import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   OfflineBanner,
-  MistakeCreature,
-  MistakeCreatureType,
 } from "@/components/ui";
-
-function getMistakeCreatureType(tag?: string): MistakeCreatureType {
-  if (!tag) return "calculation_slip";
-  const t = tag.toLowerCase();
-  if (t.includes("sign") || t.includes("negative") || t.includes("minus") || t.includes("inverse") || t.includes("root")) {
-    return "sign_slip";
-  }
-  if (t.includes("fraction") || t.includes("denom") || t.includes("numerator") || t.includes("divide")) {
-    return "fraction_fumble";
-  }
-  if (t.includes("distribut") || t.includes("bracket") || t.includes("expand") || t.includes("parenthes") || t.includes("identity")) {
-    return "distribution_dodge";
-  }
-  return "calculation_slip";
-}
 
 interface SanitizedOption {
   id: string;
@@ -76,6 +62,16 @@ interface PracticeResultResponse {
   consecutiveCorrect: number;
   consecutiveIncorrect: number;
   gapResolved?: boolean;
+  comparison?: AttemptComparison;
+  nextRevisionAt?: string;
+  revisionLevel?: number;
+  conceptsPracticed?: string[];
+  conceptsNeedingAttention?: string[];
+  nextAction?: {
+    title: string;
+    description: string;
+    href: string;
+  };
   feedback: Array<{
     questionId: string;
     isCorrect: boolean;
@@ -87,6 +83,7 @@ interface PracticeResultResponse {
     misconceptionCategory?: string;
     educationalFeedback?: string;
     explanation?: any;
+    conceptId?: string;
   }>;
   mistakeHint?: string;
 }
@@ -101,6 +98,10 @@ export default function AdaptivePracticeRunnerPage() {
   const [questions, setQuestions] = useState<ClientPracticeQuestion[]>([]);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [difficultyLevel, setDifficultyLevel] = useState<1 | 2 | 3>(1);
+  const [worksheetTitle, setWorksheetTitle] = useState<string>("");
+  const [isPersonalized, setIsPersonalized] = useState(false);
+  const [personalizedReason, setPersonalizedReason] = useState<string>("");
+  const [prereqsIncluded, setPrereqsIncluded] = useState<Array<{ conceptId: string; name: string; count: number }>>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<PracticeResultResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -142,7 +143,8 @@ export default function AdaptivePracticeRunnerPage() {
             body: JSON.stringify({
               conceptId,
               studentId: active!.id,
-              count: 3,
+              count: 5,
+              profile: active,
             }),
           });
 
@@ -155,6 +157,13 @@ export default function AdaptivePracticeRunnerPage() {
           if (!isCancelled) {
             setQuestions(data.questions || []);
             setSessionToken(data.token || null);
+            setWorksheetTitle(data.worksheetTitle || "");
+            setIsPersonalized(!!data.isPersonalized);
+            setPersonalizedReason(data.personalizedReason || "");
+            setPrereqsIncluded(data.prerequisiteConceptsIncluded || []);
+            if (data.targetDifficulty) {
+              setDifficultyLevel(data.targetDifficulty);
+            }
             setLoading(false);
           }
         } catch (err: any) {
@@ -185,7 +194,7 @@ export default function AdaptivePracticeRunnerPage() {
   // Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading adaptive practice">
           <SkeletonCard />
@@ -198,7 +207,7 @@ export default function AdaptivePracticeRunnerPage() {
   // Locked State
   if (isLocked) {
     return (
-      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-16">
         <OfflineBanner />
         <StudentHeader
           profile={profile}
@@ -208,20 +217,20 @@ export default function AdaptivePracticeRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-[#FFFFFF] border-4 border-[#111111] p-8 shadow-[4px_4px_0px_#111111] space-y-4">
-            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+          <div className="bg-[#173B19] border-3 border-[#315B2A] p-8 shadow-[6px_6px_0px_#102610] space-y-4">
+            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#102610] flex items-center justify-center mx-auto text-[#102610]">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+            <h1 className="font-heading font-extrabold text-xl text-[#F2F0DF]">
               Practice Locked
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+            <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] leading-relaxed">
               {lockedReason || "You must complete prerequisite topics before accessing this practice."}
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#79B82A] text-[#102610] border-2 border-[#102610] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>
@@ -237,15 +246,15 @@ export default function AdaptivePracticeRunnerPage() {
 
   if (!concept || questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3] p-6">
-        <div className="bg-[#FFFFFF] p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] max-w-md text-center space-y-3">
-          <h2 className="font-heading font-extrabold text-lg text-[#111111]">No Questions Found</h2>
-          <p className="text-xs font-bold text-[#111111]/70">
+      <div className="min-h-screen flex items-center justify-center bg-[#102610] minecraft-grid-bg p-6 text-[#F2F0DF]">
+        <div className="bg-[#173B19] p-6 border-3 border-[#315B2A] shadow-[6px_6px_0px_#102610] max-w-md text-center space-y-3">
+          <h2 className="font-heading font-extrabold text-lg text-[#F2F0DF]">No Questions Found</h2>
+          <p className="text-xs font-bold text-[#D8D8D0]">
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
             href="/"
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 border-2 border-[#111111] bg-[#F2D16B] text-[#111111] text-xs font-heading font-bold shadow-[2px_2px_0px_#111111]"
+            className="mt-4 inline-flex items-center gap-2 px-4 py-2 border-2 border-[#102610] bg-[#79B82A] text-[#102610] text-xs font-heading font-bold shadow-[2px_2px_0px_#102610]"
           >
             Return to Learning Path
           </Link>
@@ -290,6 +299,8 @@ export default function AdaptivePracticeRunnerPage() {
           studentId: profile.id,
           answers,
           currentDifficulty: difficultyLevel,
+          profile,
+          isPersonalized,
         }),
       });
 
@@ -322,9 +333,9 @@ export default function AdaptivePracticeRunnerPage() {
 
   const renderStars = (level: number) => {
     return (
-      <span className="inline-flex items-center text-[#111111] font-bold tracking-wider">
+      <span className="inline-flex items-center text-[#102610] font-bold tracking-wider">
         {"★".repeat(level)}
-        <span className="text-[#111111]/30">{"★".repeat(3 - level)}</span>
+        <span className="text-[#102610]/30">{"★".repeat(3 - level)}</span>
       </span>
     );
   };
@@ -348,10 +359,19 @@ export default function AdaptivePracticeRunnerPage() {
               <span>Adaptive Practice</span>
               <span>•</span>
               <span>Class {concept.class}</span>
+              {isPersonalized && (
+                <>
+                  <span>•</span>
+                  <span className="text-[#E5B834] font-extrabold flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Personalized Worksheet
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Difficulty Badge with 1 to 3 stars */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F2D16B] border-2 border-[#111111] text-xs font-heading font-bold shadow-[2px_2px_0px_#111111]">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F2D16B] border-2 border-[#102610] text-xs font-heading font-bold shadow-[2px_2px_0px_#102610] text-[#102610]">
               <span>Level {difficultyLevel}</span>
               {renderStars(difficultyLevel)}
             </div>
@@ -365,7 +385,35 @@ export default function AdaptivePracticeRunnerPage() {
             {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
-          {/* Results Summary Box with WitchCat & Progression */}
+          {/* Personalized Worksheet Metadata Banner */}
+          {isPersonalized && personalizedReason && (
+            <div className="p-3.5 bg-[#102610] border-2 border-[#E5B834] flex items-start gap-3">
+              <Sparkles className="w-4 h-4 text-[#E5B834] shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="text-[11px] font-heading font-extrabold text-[#E5B834] uppercase tracking-wider block">
+                  Tailored Practice Strategy
+                </span>
+                <p className="text-xs text-[#D8D8D0] leading-snug">
+                  {personalizedReason}
+                </p>
+                {prereqsIncluded.length > 0 && (
+                  <div className="flex items-center gap-2 pt-1 flex-wrap">
+                    <span className="text-[10px] text-[#79B82A] font-bold">Reinforcing:</span>
+                    {prereqsIncluded.map((pr) => (
+                      <span
+                        key={pr.conceptId}
+                        className="px-2 py-0.5 bg-[#173B19] border border-[#315B2A] text-[10px] font-heading font-bold text-[#F2F0DF]"
+                      >
+                        {pr.name} ({pr.count} question{pr.count > 1 ? "s" : ""})
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Results Summary Box with Mascot & Comparison */}
           {result && (
             <div className="space-y-4 mt-6">
               {result.gapResolved && (
@@ -382,71 +430,150 @@ export default function AdaptivePracticeRunnerPage() {
                   </p>
                 </div>
               )}
-            <div
-              className={`p-6 border-3 shadow-[6px_6px_0px_#102610] ${
-                result.passed
-                  ? "bg-[#173B19] border-[#79B82A] text-[#F2F0DF]"
-                  : "bg-[#173B19] border-[#E5B834] text-[#F2F0DF]"
-              }`}
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 p-1 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610]">
-                    <WitchCat
-                      pose={result.percentage >= 70 || result.passed ? "cheer" : "think"}
-                      size={72}
-                      sticker={true}
-                      alt="Margam Witch Cat reviewing practice results"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-extrabold text-base sm:text-lg flex items-center gap-2">
-                      {result.passed ? (
-                        <>
-                          <Award className="w-5 h-5 text-[#3C8A2E]" />
-                          <span>Practice Complete! Mastery Updated</span>
-                        </>
-                      ) : (
-                        <>
-                          <AlertCircle className="w-5 h-5 text-[#D9453D]" />
-                          <span>Practice Attempted • Review Recommended</span>
-                        </>
-                      )}
-                    </h3>
-                    <p className="text-xs font-bold mt-1">
-                      Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%) • Mastery: <strong>{result.mastery}%</strong>
-                      {result.passed
-                        ? " • Next level unlocked!"
-                        : " • Keep practicing to build confidence."}
-                    </p>
-                    {result.mistakeHint && (
-                      <p className="text-xs mt-2 p-2.5 bg-[#FFFFFF] border-2 border-[#111111] font-bold">
-                        💡 <strong>Hint:</strong> {result.mistakeHint}
+
+              {/* Main Score & Mastery Card */}
+              <div
+                className={`p-6 border-3 shadow-[6px_6px_0px_#102610] ${
+                  result.passed
+                    ? "bg-[#173B19] border-[#79B82A] text-[#F2F0DF]"
+                    : "bg-[#173B19] border-[#E5B834] text-[#F2F0DF]"
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="shrink-0 p-1 bg-[#102610] border-2 border-[#315B2A] shadow-[2px_2px_0px_#102610]">
+                      <WitchCat
+                        pose={result.percentage >= 70 || result.passed ? "cheer" : "think"}
+                        size={72}
+                        sticker={true}
+                        alt="Margam Learning Companion reviewing practice results"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-extrabold text-base sm:text-lg flex items-center gap-2">
+                        {result.passed ? (
+                          <>
+                            <Award className="w-5 h-5 text-[#79B82A]" />
+                            <span>Practice Complete! Mastery Updated</span>
+                          </>
+                        ) : (
+                          <>
+                            <AlertCircle className="w-5 h-5 text-[#E5B834]" />
+                            <span>Practice Attempted • Review Recommended</span>
+                          </>
+                        )}
+                      </h3>
+                      <p className="text-xs font-bold mt-1 text-[#D8D8D0]">
+                        Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%) • Mastery: <strong>{result.mastery}%</strong>
+                        {result.passed
+                          ? " • Next level unlocked!"
+                          : " • Keep practicing to build confidence."}
                       </p>
+                      {result.mistakeHint && (
+                        <p className="text-xs mt-2 p-2.5 bg-[#102610] border-2 border-[#315B2A] font-bold text-[#F2F0DF]">
+                          💡 <strong>Hint:</strong> {result.mistakeHint}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={handleRetry}
+                      className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-3.5 py-2 bg-[#102610] text-[#D8D8D0] hover:text-[#F2F0DF] border-2 border-[#315B2A] text-xs font-heading font-bold shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Practice Again</span>
+                    </button>
+
+                    <Link
+                      href={result.nextAction?.href || `/lesson/${conceptId}`}
+                      className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-4 py-2 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline transition-colors"
+                    >
+                      <span>{result.nextAction?.title || "Continue Path"}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Section 6: Previous Attempt Comparison Block */}
+                {result.comparison && (
+                  <div className="mt-4 pt-4 border-t-2 border-[#315B2A]">
+                    {result.comparison.hasPreviousAttempt ? (
+                      <div className="p-4 bg-[#102610] border-2 border-[#4F8A24] space-y-2">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <span className="text-[11px] font-heading font-extrabold text-[#79B82A] uppercase tracking-wider flex items-center gap-1.5">
+                            <TrendingUp className="w-4 h-4 text-[#79B82A]" />
+                            Performance Comparison
+                          </span>
+                          {result.comparison.improvementDelta !== undefined && (
+                            <span
+                              className={`px-2 py-0.5 text-xs font-heading font-extrabold border ${
+                                result.comparison.improvementDelta > 0
+                                  ? "bg-[#4F8A24] text-[#F2F0DF] border-[#79B82A]"
+                                  : result.comparison.improvementDelta === 0
+                                  ? "bg-[#173B19] text-[#D8D8D0] border-[#315B2A]"
+                                  : "bg-[#8B2323] text-[#F2F0DF] border-[#D9453D]"
+                              }`}
+                            >
+                              {result.comparison.improvementDelta > 0
+                                ? `+${result.comparison.improvementDelta}% Improvement! 🚀`
+                                : result.comparison.improvementDelta === 0
+                                ? "Consistent Performance"
+                                : `${result.comparison.improvementDelta}% (Needs Review)`}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-baseline gap-3 text-sm">
+                          <span className="text-[#D8D8D0]">
+                            Previous Attempt:{" "}
+                            <strong className="text-[#F2F0DF]">
+                              {result.comparison.previousScore} / {result.comparison.previousTotal} ({result.comparison.previousPercentage}%)
+                            </strong>
+                          </span>
+                          <span className="text-[#79B82A] font-extrabold">➔</span>
+                          <span className="text-[#D8D8D0]">
+                            Latest Attempt:{" "}
+                            <strong className="text-[#79B82A]">
+                              {result.comparison.latestScore} / {result.comparison.latestTotal} ({result.comparison.latestPercentage}%)
+                            </strong>
+                          </span>
+                        </div>
+
+                        <p className="text-xs text-[#D8D8D0] leading-snug">
+                          {result.comparison.message}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="p-3 bg-[#102610] border-2 border-[#315B2A] text-xs text-[#D8D8D0] flex items-center gap-2">
+                        <Award className="w-4 h-4 text-[#79B82A] shrink-0" />
+                        <span>
+                          <strong>First Attempt Recorded:</strong> Scored {result.score}/{result.total} ({result.percentage}%). Future attempts will track your growth delta!
+                        </span>
+                      </div>
                     )}
                   </div>
-                </div>
+                )}
 
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    onClick={handleRetry}
-                    className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-3.5 py-2 bg-[#102610] text-[#D8D8D0] hover:text-[#F2F0DF] border-2 border-[#315B2A] text-xs font-heading font-bold shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] transition-colors"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Practice Again</span>
-                  </button>
-
-                  <Link
-                    href={`/lesson/${conceptId}`}
-                    className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-4 py-2 bg-[#79B82A] hover:bg-[#8CD033] text-[#102610] border-2 border-[#102610] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#102610] active:translate-x-[1px] active:translate-y-[1px] no-underline transition-colors"
-                  >
-                    <span>Review Lesson</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
+                {/* Spaced Revision Indicator */}
+                {result.nextRevisionAt && (
+                  <div className="mt-3 flex items-center gap-2 text-xs text-[#D8D8D0] font-medium">
+                    <Calendar className="w-4 h-4 text-[#79B82A]" />
+                    <span>
+                      Next scheduled revision:{" "}
+                      <strong className="text-[#79B82A]">
+                        {new Date(result.nextRevisionAt).toLocaleDateString(undefined, {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </strong>{" "}
+                      (Spaced Level {result.revisionLevel || 1})
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
           )}
 
           {errorMessage && (
@@ -474,11 +601,11 @@ export default function AdaptivePracticeRunnerPage() {
                     Question {qIndex + 1} of {questions.length}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-heading font-bold px-2 py-0.5 border border-[#111111] bg-[#F2D16B]">
+                    <span className="text-[11px] font-heading font-bold px-2 py-0.5 border border-[#102610] bg-[#F2D16B] text-[#102610]">
                       Level {q.difficulty}
                     </span>
                     {isAnswered && !result && (
-                      <span className="text-[10px] font-heading font-bold bg-[#5DB84A] text-[#111111] px-2 py-0.5 border border-[#111111]">
+                      <span className="text-[10px] font-heading font-bold bg-[#79B82A] text-[#102610] px-2 py-0.5 border border-[#102610]">
                         Selected
                       </span>
                     )}
@@ -492,7 +619,7 @@ export default function AdaptivePracticeRunnerPage() {
                     <h3 className="font-heading font-bold text-sm sm:text-base text-[#F2F0DF] leading-relaxed flex items-center flex-wrap gap-2">
                       <span>{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#F2D16B] border border-[#111111]">
+                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#F2D16B] text-[#102610] border border-[#102610]">
                           Draft Translation
                         </span>
                       )}
@@ -548,11 +675,11 @@ export default function AdaptivePracticeRunnerPage() {
                           >
                             {opt.id}
                           </span>
-                          <span className="text-xs sm:text-sm font-bold text-[#111111] leading-snug">{optData.text}</span>
+                          <span className="text-xs sm:text-sm font-bold leading-snug">{optData.text}</span>
                         </div>
                         {result && feedbackItem && isSelected && (
                           feedbackItem.isCorrect ? (
-                            <CheckCircle2 className="w-5 h-5 text-[#3C8A2E] shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-[#79B82A] shrink-0" />
                           ) : (
                             <XCircle className="w-5 h-5 text-[#D9453D] shrink-0" />
                           )
@@ -562,7 +689,7 @@ export default function AdaptivePracticeRunnerPage() {
                   })}
                 </div>
 
-                {/* Question Feedback Post-Submission with WitchCat & Educational Guidance */}
+                {/* Question Feedback Post-Submission with Mascot & Educational Guidance */}
                 {feedbackItem && (
                   <div className="mt-4 p-4 bg-[#102610] border-2 border-[#315B2A] space-y-3">
                     <div className="flex items-start gap-3">

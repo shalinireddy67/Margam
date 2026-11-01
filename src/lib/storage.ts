@@ -32,6 +32,22 @@ const TopicProgressSchema = z.object({
   consecutiveCorrect: z.number().optional(),
   consecutiveIncorrect: z.number().optional(),
   tagHistory: z.array(z.string()).optional(),
+  mistakeTagHistory: z.array(z.string()).optional(),
+  revisionLevel: z.number().optional(),
+  nextRevisionAt: z.string().optional(),
+  lastRevisedAt: z.string().optional(),
+  previousScore: z.number().optional(),
+  previousTotal: z.number().optional(),
+  attemptHistory: z.array(
+    z.object({
+      attemptedAt: z.string(),
+      score: z.number(),
+      total: z.number(),
+      percentage: z.number(),
+      difficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+      isPersonalized: z.boolean().optional(),
+    })
+  ).optional(),
 }).passthrough();
 
 const RemediationGapSchema = z.object({
@@ -469,4 +485,138 @@ export async function handleLoginSync(authenticatedUser: {
  */
 export function handleLogout(): void {
   setStorageMode("guest");
+}
+
+/**
+ * Records a completed worksheet attempt in student history, preserving previous scores
+ * for verifiable delta comparison without fabricating synthetic history.
+ */
+export function recordWorksheetAttempt(
+  conceptId: string,
+  score: number,
+  total: number,
+  difficulty: 1 | 2 | 3 = 1,
+  isPersonalized = false,
+  nextRevisionAt?: string,
+  revisionLevel?: number
+): {
+  profile: LearnerProfile;
+  hasPreviousAttempt: boolean;
+  previousScore?: number;
+  previousTotal?: number;
+  previousPercentage?: number;
+  latestScore: number;
+  latestTotal: number;
+  latestPercentage: number;
+  improvementDelta?: number;
+} | null {
+  const profile = getActiveProfile();
+  if (!profile) return null;
+
+  if (!profile.topicProgress) {
+    profile.topicProgress = {};
+  }
+
+  const existing = profile.topicProgress[conceptId];
+  const hasPreviousAttempt = Boolean(
+    existing &&
+    existing.worksheetScore !== undefined &&
+    existing.worksheetTotal !== undefined &&
+    existing.worksheetTotal > 0
+  );
+
+  const previousScore = hasPreviousAttempt ? existing!.worksheetScore : undefined;
+  const previousTotal = hasPreviousAttempt ? existing!.worksheetTotal : undefined;
+  const previousPercentage =
+    previousScore !== undefined && previousTotal !== undefined && previousTotal > 0
+      ? Math.round((previousScore / previousTotal) * 100)
+      : undefined;
+
+  const latestPercentage = total > 0 ? Math.round((score / total) * 100) : 0;
+  const improvementDelta =
+    previousPercentage !== undefined ? latestPercentage - previousPercentage : undefined;
+
+  const attemptRecord = {
+    attemptedAt: new Date().toISOString(),
+    score,
+    total,
+    percentage: latestPercentage,
+    difficulty,
+    isPersonalized,
+  };
+
+  const existingHistory = Array.isArray(existing?.attemptHistory)
+    ? [...existing!.attemptHistory]
+    : [];
+
+  existingHistory.push(attemptRecord);
+
+  // Keep last 10 attempts
+  if (existingHistory.length > 10) {
+    existingHistory.shift();
+  }
+
+  const passed = latestPercentage >= 70;
+
+  profile.topicProgress[conceptId] = {
+    conceptId,
+    status: passed ? "completed" : (existing?.status === "completed" ? "completed" : "in_progress"),
+    lessonCompleted: existing?.lessonCompleted ?? true,
+    worksheetCompleted: true,
+    worksheetScore: score,
+    worksheetTotal: total,
+    previousScore,
+    previousTotal,
+    lastAttemptAt: attemptRecord.attemptedAt,
+    completedAt: passed ? (existing?.completedAt || attemptRecord.attemptedAt) : existing?.completedAt,
+    mastery: existing?.mastery,
+    difficulty,
+    consecutiveCorrect: existing?.consecutiveCorrect ?? 0,
+    consecutiveIncorrect: existing?.consecutiveIncorrect ?? 0,
+    tagHistory: existing?.tagHistory,
+    mistakeTagHistory: existing?.mistakeTagHistory,
+    revisionLevel: revisionLevel ?? existing?.revisionLevel ?? (passed ? 1 : 0),
+    nextRevisionAt: nextRevisionAt ?? existing?.nextRevisionAt,
+    lastRevisedAt: attemptRecord.attemptedAt,
+    attemptHistory: existingHistory,
+  };
+
+  saveProfile(profile);
+
+  return {
+    profile,
+    hasPreviousAttempt,
+    previousScore,
+    previousTotal,
+    previousPercentage,
+    latestScore: score,
+    latestTotal: total,
+    latestPercentage,
+    improvementDelta,
+  };
+}
+
+/**
+ * Updates next revision schedule for a specific concept.
+ */
+export function updateRevisionSchedule(
+  conceptId: string,
+  nextRevisionAt: string,
+  revisionLevel: number
+): LearnerProfile | null {
+  const profile = getActiveProfile();
+  if (!profile || !profile.topicProgress) return null;
+
+  const existing = profile.topicProgress[conceptId];
+  if (!existing) return null;
+
+  profile.topicProgress[conceptId] = {
+    ...existing,
+    nextRevisionAt,
+    revisionLevel,
+    lastRevisedAt: new Date().toISOString(),
+  };
+
+  saveProfile(profile);
+  return profile;
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { selectPracticeQuestions } from "@/lib/adaptive";
+import { generatePersonalizedWorksheet } from "@/lib/adaptive";
 import { sanitizeQuestion } from "@/lib/server/questions";
 import { createSignedSession } from "@/lib/server/session";
 import { isRateLimited } from "@/lib/server/rate-limit";
@@ -7,7 +7,7 @@ import { isRateLimited } from "@/lib/server/rate-limit";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { conceptId, studentId, count = 3 } = body;
+    const { conceptId, studentId, count = 5, profile } = body;
 
     if (!conceptId || typeof conceptId !== "string") {
       return NextResponse.json(
@@ -32,10 +32,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Select practice questions
-    const { questions, shortfall } = selectPracticeQuestions(conceptId, count);
+    // Generate personalized worksheet based on student gaps, mastery, and difficulty
+    const targetCount = typeof count === "number" && count >= 3 && count <= 10 ? count : 5;
+    const worksheet = generatePersonalizedWorksheet(conceptId, profile, targetCount);
 
-    if (questions.length === 0) {
+    if (worksheet.questions.length === 0) {
       return NextResponse.json(
         { error: "No practice questions available for this concept" },
         { status: 404 }
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Strip answers and mistake tags
-    const sanitizedQuestions = questions.map(sanitizeQuestion);
+    const sanitizedQuestions = worksheet.questions.map(sanitizeQuestion);
     const questionIds = sanitizedQuestions.map((q) => q.id);
 
     // Issue signed session token
@@ -60,9 +61,14 @@ export async function POST(req: NextRequest) {
       token: session.token,
       expiresAt: session.expiresAt,
       conceptId,
+      worksheetTitle: worksheet.worksheetTitle,
+      targetDifficulty: worksheet.targetDifficulty,
+      isPersonalized: worksheet.isPersonalized,
+      personalizedReason: worksheet.personalizedReason,
+      prerequisiteConceptsIncluded: worksheet.prerequisiteConceptsIncluded,
       questions: sanitizedQuestions,
       totalQuestions: sanitizedQuestions.length,
-      shortfall,
+      shortfall: worksheet.shortfall,
     });
   } catch (err: any) {
     console.error("Error in /api/practice/start:", err);

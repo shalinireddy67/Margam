@@ -72,6 +72,25 @@ export function getLessonByConceptId(conceptId: string): Lesson | undefined {
  * On the client, this returns empty array (client routes must fetch sanitized questions from /api).
  * On the server and in Node test harnesses, this dynamically loads from data/questions/${chapterId}.json.
  */
+/**
+ * Looks up a question by ID across chapter question banks.
+ */
+export function getQuestionById(questionId: string): Question | undefined {
+  if (typeof window !== "undefined") return undefined;
+  const chapterPrefix = questionId.split("-").slice(0, 2).join("-");
+  const chapterQuestions = getQuestionsByChapterId(chapterPrefix);
+  const found = chapterQuestions.find((q) => q.id === questionId);
+  if (found) return found;
+
+  for (const ch of chapters) {
+    if (ch.id === chapterPrefix) continue;
+    const qs = getQuestionsByChapterId(ch.id);
+    const m = qs.find((q) => q.id === questionId);
+    if (m) return m;
+  }
+  return undefined;
+}
+
 export function getQuestionsByConceptId(conceptId: string): Question[] {
   const concept = getConceptById(conceptId);
   if (!concept || !concept.chapterId) return [];

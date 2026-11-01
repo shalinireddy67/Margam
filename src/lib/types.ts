@@ -146,6 +146,20 @@ export interface TopicProgress {
   consecutiveIncorrect?: number;
   tagHistory?: string[];
   mistakeTagHistory?: string[];
+  // Phase 3: Spaced Revision & Attempt Tracking
+  revisionLevel?: number; // 0 = unrevised, 1 = 1-day, 2 = 3-day, 3 = 7-day, 4+ = 14-day
+  nextRevisionAt?: string; // ISO timestamp when revision is due
+  lastRevisedAt?: string; // ISO timestamp of last revision
+  previousScore?: number; // Previous attempt score before latest attempt
+  previousTotal?: number; // Previous attempt total before latest attempt
+  attemptHistory?: Array<{
+    attemptedAt: string;
+    score: number;
+    total: number;
+    percentage: number;
+    difficulty: 1 | 2 | 3;
+    isPersonalized?: boolean;
+  }>;
 }
 
 export interface RemediationGap {
@@ -183,6 +197,64 @@ export interface LearnerProfile {
   resolvedGaps?: ResolvedGapRecord[];
 }
 
+export interface AttemptComparison {
+  hasPreviousAttempt: boolean;
+  previousScore?: number;
+  previousTotal?: number;
+  previousPercentage?: number;
+  latestScore: number;
+  latestTotal: number;
+  latestPercentage: number;
+  improvementDelta?: number; // e.g. +40 or -10
+  improved?: boolean;
+  message: string;
+}
+
+export interface PersonalizedWorksheetMeta {
+  conceptId: string;
+  conceptName: string;
+  isPersonalized: boolean;
+  personalizedReason?: string;
+  targetDifficulty: 1 | 2 | 3;
+  scaffoldedPrerequisites?: Array<{
+    conceptId: string;
+    name: string;
+    questionCount: number;
+  }>;
+}
+
+export type RevisionPriority =
+  | "critical_gap"
+  | "needs_practice"
+  | "due_revision"
+  | "pending_worksheet"
+  | "mastery_refresh";
+
+export interface RevisionQueueItem {
+  conceptId: string;
+  conceptName: string;
+  class: number;
+  priority: RevisionPriority;
+  priorityScore: number;
+  reason: string;
+  mastery: number;
+  currentDifficulty: 1 | 2 | 3;
+  revisionLevel: number;
+  nextRevisionAt?: string;
+  daysOverdue?: number;
+  lastScore?: {
+    score: number;
+    total: number;
+    percentage: number;
+  };
+  previousImprovement?: {
+    previousPercentage: number;
+    latestPercentage: number;
+    delta: number;
+  };
+  href: string;
+}
+
 export interface WorksheetSubmission {
   conceptId: string;
   answers: Record<string, string>; // questionId -> selectedOptionId
@@ -212,6 +284,16 @@ export interface WorksheetResult {
   qualifiesForCompletion: boolean;
   feedback: QuestionFeedback[];
   gapResolved?: boolean;
+  comparison?: AttemptComparison;
+  nextRevisionAt?: string;
+  revisionLevel?: number;
+  conceptsPracticed?: string[];
+  conceptsNeedingAttention?: string[];
+  nextAction?: {
+    title: string;
+    description: string;
+    href: string;
+  };
 }
 
 export type ConfidenceLevel = "high" | "medium" | "low" | "insufficient";
