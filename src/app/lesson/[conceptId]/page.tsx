@@ -307,11 +307,11 @@ function LessonContent() {
             <span>Class Lessons</span>
           </Link>
 
-          <div className="flex items-center gap-1 bg-[#FFF8DC] p-1 rounded-xl border-[2px] border-[#111111]">
+          <div className="flex items-center gap-1 bg-[#FFF8DC] p-0.5 rounded-xl border-[2px] border-[#111111] shrink-0">
             <button
               type="button"
               onClick={() => setCurrentLang("en")}
-              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+              className={`shrink-0 min-h-[48px] min-w-[48px] px-2.5 flex items-center justify-center rounded-lg text-xs font-heading font-extrabold select-none ${
                 currentLang === "en" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
@@ -320,7 +320,7 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("hi")}
-              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+              className={`shrink-0 min-h-[48px] min-w-[48px] px-2.5 flex items-center justify-center rounded-lg text-xs font-heading font-extrabold select-none ${
                 currentLang === "hi" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
@@ -329,7 +329,7 @@ function LessonContent() {
             <button
               type="button"
               onClick={() => setCurrentLang("te")}
-              className={`min-h-[38px] px-2.5 rounded-lg text-xs font-heading font-extrabold select-none ${
+              className={`shrink-0 min-h-[48px] min-w-[48px] px-2.5 flex items-center justify-center rounded-lg text-xs font-heading font-extrabold select-none ${
                 currentLang === "te" ? "bg-[#111111] text-[#FFFFFF]" : "text-[#111111] hover:bg-[#FFE14D]/30"
               }`}
             >
