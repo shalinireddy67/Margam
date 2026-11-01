@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  HelpCircle,
   CheckCircle2,
   XCircle,
   AlertCircle,
   ArrowRight,
   ArrowLeft,
   RotateCcw,
-  Sparkles,
-  BookOpen,
-  Compass,
   Award,
+  Lock,
+  TrendingUp,
+  TrendingDown,
+  BookOpen,
   Layers,
 } from "lucide-react";
 import {
@@ -29,6 +29,11 @@ import {
   resolveLocalizedString,
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
+import {
+  SkeletonCard,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
 
 interface SanitizedOption {
   id: string;
@@ -84,71 +89,91 @@ export default function ChapterTestRunnerPage() {
   const [result, setResult] = useState<ChapterTestResultResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
-    }
-    setProfile(active);
+  const initTest = useCallback(() => {
+    try {
+      setLoading(true);
+      setHasError(false);
+      setErrorMessage(null);
 
-    let isCancelled = false;
-    async function loadTest() {
-      try {
-        const res = await fetch("/api/test/start", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chapterId,
-            studentId: active!.id,
-          }),
-        });
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
+      }
+      setProfile(active);
 
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.error || "Failed to generate test");
-        }
+      let isCancelled = false;
+      async function loadTest() {
+        try {
+          const res = await fetch("/api/test/start", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chapterId,
+              studentId: active!.id,
+            }),
+          });
 
-        const data = await res.json();
-        if (!isCancelled) {
-          setQuestions(data.questions || []);
-          setSessionToken(data.token || null);
-          setConceptAllocation(data.conceptAllocation || {});
-          setLoading(false);
-        }
-      } catch (err: any) {
-        if (!isCancelled) {
-          setErrorMessage(err.message || "Network error loading test questions");
-          setLoading(false);
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error || "Failed to generate test");
+          }
+
+          const data = await res.json();
+          if (!isCancelled) {
+            setQuestions(data.questions || []);
+            setSessionToken(data.token || null);
+            setConceptAllocation(data.conceptAllocation || {});
+            setLoading(false);
+          }
+        } catch (err: any) {
+          if (!isCancelled) {
+            setHasError(true);
+            setErrorMessage(err.message || "Network error loading test questions");
+            setLoading(false);
+          }
         }
       }
+
+      loadTest();
+
+      return () => {
+        isCancelled = true;
+      };
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to load chapter test.");
+      setLoading(false);
     }
-
-    loadTest();
-
-    return () => {
-      isCancelled = true;
-    };
   }, [chapterId, router]);
+
+  useEffect(() => {
+    initTest();
+  }, [initTest]);
 
   const currentChapter: Chapter | undefined = chapters.find((c) => c.id === chapterId);
 
+  // 1. Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-muted-foreground">Generating chapter test...</p>
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+        <OfflineBanner />
+        <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Generating chapter test">
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
       </div>
     );
   }
 
-  if (!currentChapter || questions.length === 0) {
+  // 2. Error State with Retry
+  if (hasError) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+        <OfflineBanner />
         <StudentHeader
           profile={profile}
           currentLang={currentLang}
@@ -157,20 +182,65 @@ export default function ChapterTestRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-            <h1 className="text-xl font-heading font-bold text-foreground">
-              Chapter Test Unavailable
+          <div className="bg-[#FFFFFF] border-4 border-[#111111] p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 bg-[#D9453D] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-heading font-extrabold text-lg">
+              !
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Chapter Test Error
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Assessment questions for this chapter are currently in development.
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "We encountered an issue preparing the chapter assessment questions."}
             </p>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-white text-xs font-bold shadow-soft"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Return to Learning Path</span>
-            </Link>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initTest}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // 3. Locked / Unavailable State
+  if (!currentChapter || questions.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+        <OfflineBanner />
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Lessons"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Chapter Test Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              Assessment questions for this chapter are currently in development or require lesson completion.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1.5" />
+                <span>Return to Learning Path</span>
+              </Link>
+            </div>
           </div>
         </main>
       </div>
@@ -238,7 +308,9 @@ export default function ChapterTestRunnerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-24">
+      <OfflineBanner />
+
       <StudentHeader
         profile={profile}
         currentLang={currentLang}
@@ -247,10 +319,10 @@ export default function ChapterTestRunnerPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Header Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-6">
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-2">
+        <div className="bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
             <span>Chapter Mastery Test</span>
             <span>•</span>
             <span>Class {currentChapter.class}</span>
@@ -258,18 +330,18 @@ export default function ChapterTestRunnerPage() {
             <span>Chapter {currentChapter.chapterNumber}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
             {currentChapter.name[currentLang] || currentChapter.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+          <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
             Comprehensive 10-question chapter evaluation. Questions are adaptively allocated across concepts based on your mastery profile.
           </p>
 
           {/* Test Allocation Breakdown */}
           {Object.keys(conceptAllocation).length > 0 && (
-            <div className="mt-4 p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center flex-wrap gap-2 text-xs">
-              <span className="font-bold text-slate-600 flex items-center gap-1.5">
+            <div className="mt-4 p-3.5 bg-[#F2D16B]/30 border-2 border-[#111111] flex items-center flex-wrap gap-2 text-xs">
+              <span className="font-heading font-bold text-[#111111] flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
                 <span>Test Blueprint:</span>
               </span>
@@ -279,7 +351,7 @@ export default function ChapterTestRunnerPage() {
                 return (
                   <span
                     key={cId}
-                    className="inline-flex items-center px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-[11px] font-semibold text-slate-700"
+                    className="inline-flex items-center px-2 py-0.5 bg-[#FFFFFF] border border-[#111111] text-[11px] font-heading font-bold text-[#111111]"
                   >
                     {name}: {count} Qs
                   </span>
@@ -291,39 +363,38 @@ export default function ChapterTestRunnerPage() {
           {/* Results Summary Card */}
           {result && (
             <div
-              className={`mt-6 p-6 rounded-2xl border ${
+              className={`mt-6 p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-5 ${
                 result.passed
-                  ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                  : "bg-amber-50 border-amber-200 text-amber-950"
+                  ? "bg-[#5DB84A]/30 text-[#111111]"
+                  : "bg-[#F2D16B]/40 text-[#111111]"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-heading font-extrabold text-xl flex items-center gap-2">
+                  <h2 className="font-heading font-extrabold text-lg flex items-center gap-2">
                     {result.passed ? (
                       <>
-                        <Award className="w-6 h-6 text-emerald-700" />
-                        <span>Chapter Test Passed!</span>
+                        <Award className="w-6 h-6 text-[#3C8A2E]" />
+                        <span>Chapter Mastered! Score: {result.percentage}%</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-6 h-6 text-amber-700" />
-                        <span>Review Recommended</span>
+                        <AlertCircle className="w-6 h-6 text-[#D9453D]" />
+                        <span>Test Attempted • Score: {result.percentage}%</span>
                       </>
                     )}
-                  </h3>
-                  <p className="text-xs sm:text-sm mt-1">
-                    Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
-                    {result.passed
-                      ? " • You have demonstrated mastery of this chapter!"
-                      : " • 70% required to master this chapter."}
+                  </h2>
+                  <p className="text-xs font-bold mt-1 text-[#111111]/80">
+                    Correct: <strong>{result.score} / {result.total}</strong> questions
+                    {!result.passed && " (70% required to master this chapter)"}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
                   <button
+                    type="button"
                     onClick={handleRetry}
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 bg-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold text-[#111111] shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Retake Test</span>
@@ -331,61 +402,88 @@ export default function ChapterTestRunnerPage() {
 
                   <Link
                     href="/"
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     <span>Back to Learning</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 ml-1" />
                   </Link>
                 </div>
               </div>
 
-              {/* Concept-by-Concept Performance Breakdown */}
-              <div className="mt-5 pt-4 border-t border-slate-200/60 space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Concept Mastery Breakdown
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Strong Concepts */}
+              {/* SEPARATE WEAK AND STRONG CONCEPTS */}
+              <div className="space-y-4 pt-3 border-t-2 border-[#111111]/20">
+                {/* 1. Strong Concepts Section */}
                 {result.strongConcepts && result.strongConcepts.length > 0 && (
-                  <div className="bg-white/80 p-3.5 rounded-xl border border-emerald-200 space-y-1.5">
-                    <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">
-                      Strong Concepts (Mastered)
-                    </span>
-                    <ul className="space-y-1">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-xs font-heading font-extrabold text-[#3C8A2E] uppercase tracking-wider">
+                      <TrendingUp className="w-4 h-4" />
+                      <span>Strong Concepts (Mastered • &gt;= 70%)</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {result.strongConcepts.map((sc) => (
-                        <li key={sc.conceptId} className="text-xs text-slate-700 flex justify-between">
-                          <span className="truncate pr-2">{sc.conceptName}</span>
-                          <span className="font-bold text-emerald-700">{sc.percentage}%</span>
-                        </li>
+                        <div
+                          key={sc.conceptId}
+                          className="bg-[#FFFFFF] p-3 border-2 border-[#111111] shadow-[2px_2px_0px_#111111] text-xs flex items-center justify-between"
+                        >
+                          <span className="font-heading font-extrabold text-[#111111] truncate mr-2">
+                            {sc.conceptName}
+                          </span>
+                          <span className="font-bold shrink-0 px-2 py-0.5 bg-[#5DB84A] text-[#111111] border border-[#111111]">
+                            {sc.score}/{sc.total} ({sc.percentage}%)
+                          </span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
 
-                {/* Weak Concepts */}
+                {/* 2. Weak Concepts Section */}
                 {result.weakConcepts && result.weakConcepts.length > 0 && (
-                  <div className="bg-white/80 p-3.5 rounded-xl border border-rose-200 space-y-1.5">
-                    <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
-                      Concepts Needing Attention
-                    </span>
-                    <ul className="space-y-1">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-xs font-heading font-extrabold text-[#D9453D] uppercase tracking-wider">
+                      <TrendingDown className="w-4 h-4" />
+                      <span>Weak Concepts (Needs Review • &lt; 70%)</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {result.weakConcepts.map((wc) => (
-                        <li key={wc.conceptId} className="text-xs text-slate-700 flex justify-between">
-                          <span className="truncate pr-2">{wc.conceptName}</span>
-                          <span className="font-bold text-rose-700">{wc.percentage}%</span>
-                        </li>
+                        <div
+                          key={wc.conceptId}
+                          className="bg-[#FFFFFF] p-3 border-2 border-[#111111] shadow-[2px_2px_0px_#111111] text-xs flex items-center justify-between"
+                        >
+                          <span className="font-heading font-extrabold text-[#111111] truncate mr-2">
+                            {wc.conceptName}
+                          </span>
+                          <span className="font-bold shrink-0 px-2 py-0.5 bg-[#D9453D] text-[#FFFFFF] border border-[#111111]">
+                            {wc.score}/{wc.total} ({wc.percentage}%)
+                          </span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. Next Steps Recommendation Card */}
+                {result.nextSteps && result.nextSteps.length > 0 && (
+                  <div className="p-4 bg-[#FFFFFF] border-2 border-[#111111] shadow-[2px_2px_0px_#111111] space-y-2">
+                    <h3 className="text-xs font-heading font-extrabold text-[#111111] uppercase tracking-wider">
+                      Recommended Next Steps
+                    </h3>
+                    <div className="space-y-1">
+                      {result.nextSteps.map((step, idx) => (
+                        <p key={idx} className="text-xs font-bold text-[#111111]/80 leading-relaxed">
+                          • {step}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
-          </div>
-        )}
+          )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+            <div className="mt-4 p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold text-[#111111] flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#D9453D]" />
               <span>{errorMessage}</span>
             </div>
           )}
@@ -402,72 +500,86 @@ export default function ChapterTestRunnerPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
+                className="bg-[#FFFFFF] p-6 sm:p-7 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#111111] pb-3">
+                  <span className="text-xs font-heading font-extrabold text-[#111111]/70 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100">
-                    Difficulty Level {q.difficulty}
+                  <span className="text-xs font-heading font-bold text-[#111111] px-2.5 py-0.5 bg-[#F2D16B] border border-[#111111]">
+                    Level {q.difficulty}
                   </span>
                 </div>
 
-                <h3 className="font-heading font-bold text-base text-foreground leading-relaxed flex items-center flex-wrap gap-2">
+                <h2 className="font-heading font-extrabold text-sm sm:text-base text-[#111111] leading-relaxed flex items-center flex-wrap gap-2">
                   <span>{promptData.text}</span>
                   {promptData.isDraft && (
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                    <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold bg-[#F2D16B] text-[#111111] border border-[#111111]">
                       Draft Translation
                     </span>
                   )}
-                </h3>
+                </h2>
 
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2.5 pt-1">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-slate-200 hover:border-slate-300";
-                    let optionBgClass = "bg-white";
+                    let optionBorderClass = "border-2 border-[#111111]";
+                    let optionBgClass = "bg-[#FFFFFF]";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
-                        optionBgClass = "bg-emerald-50/60";
+                        optionBorderClass = "border-2 border-[#111111]";
+                        optionBgClass = "bg-[#5DB84A]/30";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
-                        optionBgClass = "bg-rose-50/60";
+                        optionBorderClass = "border-2 border-[#111111]";
+                        optionBgClass = "bg-[#D9453D]/30";
                       }
+                    } else if (isSelected) {
+                      optionBorderClass = "border-2 border-[#111111]";
+                      optionBgClass = "bg-[#F2D16B] shadow-[2px_2px_0px_#111111]";
                     }
 
                     return (
                       <div
                         key={opt.id}
                         data-oid={opt.id}
+                        tabIndex={0}
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Option ${opt.id}: ${optData.text}`}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer flex items-center justify-between transition-all ${
-                          isSelected
-                            ? "border-primary bg-primary/5 font-semibold"
-                            : `${optionBorderClass} ${optionBgClass}`
-                        }`}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            handleSelectOption(q.id, opt.id);
+                          }
+                        }}
+                        className={`min-h-[48px] flex items-center gap-3 p-3.5 border-2 cursor-pointer select-none transition-transform active:translate-x-[1px] active:translate-y-[1px] ${optionBorderClass} ${optionBgClass}`}
                       >
-                        <div className="flex items-center gap-3">
-                          <span
-                            className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-xs shrink-0 ${
-                              isSelected
-                                ? "bg-primary text-white"
-                                : "bg-slate-100 text-slate-700"
-                            }`}
-                          >
-                            {opt.id}
-                          </span>
-                          <span className="text-slate-800 leading-snug">{optData.text}</span>
+                        <span
+                          className={`w-7 h-7 font-heading font-extrabold text-xs flex items-center justify-center shrink-0 border-2 border-[#111111] ${
+                            isSelected
+                              ? "bg-[#111111] text-[#FFFFFF]"
+                              : "bg-[#FFFFFF] text-[#111111]"
+                          }`}
+                        >
+                          {opt.id}
+                        </span>
+                        <div className="flex-1 text-xs sm:text-sm text-[#111111] font-bold flex items-center flex-wrap gap-2">
+                          <span>{optData.text}</span>
+                          {optData.isDraft && (
+                            <span className="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold bg-[#F2D16B] text-[#111111] border border-[#111111]">
+                              Draft
+                            </span>
+                          )}
                         </div>
                         {result && feedbackItem && isSelected && (
                           feedbackItem.isCorrect ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-[#3C8A2E] shrink-0" />
                           ) : (
-                            <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                            <XCircle className="w-5 h-5 text-[#D9453D] shrink-0" />
                           )
                         )}
                       </div>
@@ -479,19 +591,27 @@ export default function ChapterTestRunnerPage() {
           })}
 
           {!result && (
-            <div className="pt-2">
+            <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
+              <span className="text-xs font-heading font-bold text-[#111111]">
+                {Object.keys(answers).length} of {questions.length} Answered
+              </span>
+
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-8 py-4 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-extrabold text-sm shadow-soft transition-all disabled:opacity-50"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 bg-[#111111] text-[#F2D16B] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50"
               >
-                <span>{submitting ? "Evaluating Chapter Test..." : "Submit Chapter Test"}</span>
+                <span>{submitting ? "Evaluating..." : "Submit Chapter Test"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </form>
       </main>
+
+      <footer className="border-t-4 border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+        Margam Adaptive Mathematics • Chapter Assessment
+      </footer>
     </div>
   );
 }

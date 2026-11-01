@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  HelpCircle,
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -26,11 +25,16 @@ import { unlockChapterLessons } from "@/lib/progression";
 import {
   chapters,
   canTakeChapterDiagnostic,
-  getChapterQuestionCount,
   getConceptById,
   resolveLocalizedString,
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
+import {
+  SkeletonCard,
+  EmptyState,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
 
 interface SanitizedOption {
   id: string;
@@ -88,6 +92,7 @@ export default function ChapterDiagnosticPage() {
   const [placementPassed, setPlacementPassed] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   // Confirmation Step State
@@ -97,77 +102,92 @@ export default function ChapterDiagnosticPage() {
   const [confirmationStatus, setConfirmationStatus] = useState<"pending" | "passed" | "failed" | null>(null);
   const [confirmationSubmitted, setConfirmationSubmitted] = useState(false);
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
-    }
-    setProfile(active);
+  const initDiagnostic = useCallback(() => {
+    try {
+      setLoading(true);
+      setHasError(false);
+      setErrorMessage(null);
 
-    // Verify diagnostic eligibility (total questions >= 6)
-    if (!canTakeChapterDiagnostic(chapterId)) {
-      setLoading(false);
-      return;
-    }
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
+      }
+      setProfile(active);
 
-    // Fetch questions from server route (sanitized, no answers/tags)
-    let isCancelled = false;
-    async function loadQuestions() {
-      try {
-        const res = await fetch("/api/diagnostic/start", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chapterId,
-            studentId: active!.id,
-          }),
-        });
+      if (!canTakeChapterDiagnostic(chapterId)) {
+        setLoading(false);
+        return;
+      }
 
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          throw new Error(errData.error || "Failed to load diagnostic");
-        }
+      let isCancelled = false;
+      async function loadQuestions() {
+        try {
+          const res = await fetch("/api/diagnostic/start", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chapterId,
+              studentId: active!.id,
+            }),
+          });
 
-        const data = await res.json();
-        if (!isCancelled) {
-          setQuestions(data.questions || []);
-          setSessionToken(data.token || null);
-          setLoading(false);
-        }
-      } catch (err: any) {
-        if (!isCancelled) {
-          setErrorMessage(err.message || "Network error loading questions");
-          setLoading(false);
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error || "Failed to load diagnostic");
+          }
+
+          const data = await res.json();
+          if (!isCancelled) {
+            setQuestions(data.questions || []);
+            setSessionToken(data.token || null);
+            setLoading(false);
+          }
+        } catch (err: any) {
+          if (!isCancelled) {
+            setHasError(true);
+            setErrorMessage(err.message || "Network error loading questions");
+            setLoading(false);
+          }
         }
       }
+
+      loadQuestions();
+
+      return () => {
+        isCancelled = true;
+      };
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to initialize diagnostic.");
+      setLoading(false);
     }
-
-    loadQuestions();
-
-    return () => {
-      isCancelled = true;
-    };
   }, [chapterId, router]);
+
+  useEffect(() => {
+    initDiagnostic();
+  }, [initDiagnostic]);
 
   const currentChapter: Chapter | undefined = chapters.find((c) => c.id === chapterId);
 
+  // Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-semibold text-muted-foreground">Preparing diagnostic assessment...</p>
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+        <OfflineBanner />
+        <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading diagnostic assessment">
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
       </div>
     );
   }
 
-  // Guard: If chapter has fewer than 6 questions, block diagnostic and inform student
-  const questionCount = getChapterQuestionCount(chapterId);
-  if (!currentChapter || questionCount < 6) {
+  // Error State with Retry
+  if (hasError) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+        <OfflineBanner />
         <StudentHeader
           profile={profile}
           currentLang={currentLang}
@@ -176,24 +196,61 @@ export default function ChapterDiagnosticPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center mx-auto border border-amber-200">
-              <BookOpen className="w-6 h-6" />
+          <div className="bg-[#FFFFFF] border-4 border-[#111111] p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 bg-[#D9453D] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#FFFFFF] font-heading font-extrabold text-lg">
+              !
             </div>
-            <h1 className="text-xl font-heading font-bold text-foreground">
-              Lesson-Only Chapter
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Diagnostic Assessment Error
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              This chapter has {questionCount} questions available (minimum 6 required for diagnostic placement).
-              Please complete this chapter by learning the sequential lessons directly.
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {errorMessage || "We encountered an issue preparing this diagnostic assessment."}
+            </p>
+            <div className="pt-2">
+              <Button
+                variant="yellow"
+                size="default"
+                onClick={initDiagnostic}
+                className="w-full sm:w-auto min-h-[48px]"
+              >
+                <span>Try Again</span>
+                <RotateCcw className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Guard: If chapter has fewer than 6 questions
+  if (!canTakeChapterDiagnostic(chapterId)) {
+    return (
+      <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] pb-16">
+        <StudentHeader
+          profile={profile}
+          currentLang={currentLang}
+          onLanguageChange={setCurrentLang}
+          backHref="/"
+          backLabel="Back to Path"
+        />
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#111111] flex items-center justify-center mx-auto">
+              <BookOpen className="w-6 h-6 text-[#111111]" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Diagnostic Not Available
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              This chapter requires at least 6 verified questions to generate a diagnostic assessment.
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-white text-xs font-bold shadow-soft"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-bold shadow-[2px_2px_0px_#111111] no-underline"
               >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Return to Chapter Lessons</span>
+                <span>Return to Learning Path</span>
               </Link>
             </div>
           </div>
@@ -211,17 +268,12 @@ export default function ChapterDiagnosticPage() {
     setErrorMessage(null);
   };
 
-  const handleSelectConfirmationOption = (questionId: string, optionId: string) => {
-    if (confirmationSubmitted) return;
-    setConfirmationAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
-  };
-
-  const handleSubmitDiagnostic = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (Object.keys(answers).length < questions.length) {
+    setErrorMessage(null);
+
+    const answeredCount = Object.keys(answers).length;
+    if (answeredCount < questions.length) {
       setErrorMessage(`Please answer all ${questions.length} questions before submitting.`);
       return;
     }
@@ -232,7 +284,6 @@ export default function ChapterDiagnosticPage() {
     }
 
     setSubmitting(true);
-    setErrorMessage(null);
 
     try {
       const res = await fetch("/api/diagnostic/submit", {
@@ -248,52 +299,52 @@ export default function ChapterDiagnosticPage() {
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.error || "Submission failed");
+        throw new Error(errData.error || "Diagnostic evaluation failed");
       }
 
       const diagResult: DiagnosticResultResponse = await res.json();
       setResult(diagResult);
 
-      // Placement Rule: score >= 70% unlocks chapter lessons
-      const passed = diagResult.percentage >= 70;
-      setPlacementPassed(passed);
-      if (passed) {
-        const updated = unlockChapterLessons(chapterId);
-        if (updated) setProfile(updated);
+      if (diagResult.passed) {
+        setPlacementPassed(true);
+        const unlockRes = unlockChapterLessons(chapterId);
+        if (unlockRes.success && unlockRes.profile) {
+          setProfile(unlockRes.profile);
+        }
       }
 
-      // Check confirmation questions
       if (diagResult.confirmationQuestions && diagResult.confirmationQuestions.length > 0) {
         setConfirmationQuestions(diagResult.confirmationQuestions);
         setConfirmationToken(diagResult.confirmationToken || null);
         setConfirmationStatus("pending");
-      } else if (
-        diagResult.gapAnalysis?.hasGap &&
-        diagResult.gapAnalysis?.rootConceptId
-      ) {
-        if (diagResult.gapAnalysis.routing === "gap_card") {
-          setConfirmationStatus("failed");
-        } else {
-          setConfirmationStatus("passed");
-        }
       }
+
+      const refreshed = getActiveProfile();
+      if (refreshed) setProfile(refreshed);
     } catch (err: any) {
-      setErrorMessage(err.message || "Failed to submit diagnostic assessment.");
+      setErrorMessage(err.message || "Failed to submit diagnostic.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleSubmitConfirmation = async (e: React.FormEvent) => {
+  const handleConfirmationSelect = (questionId: string, optionId: string) => {
+    if (confirmationSubmitted) return;
+    setConfirmationAnswers((prev) => ({
+      ...prev,
+      [questionId]: optionId,
+    }));
+  };
+
+  const handleConfirmationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(confirmationAnswers).length < confirmationQuestions.length) {
-      alert("Please answer both check questions to verify your understanding.");
+      alert("Please answer all confirmation questions.");
       return;
     }
 
     if (!confirmationToken) {
-      setConfirmationStatus("failed");
-      setConfirmationSubmitted(true);
+      alert("Missing confirmation token. Please reload.");
       return;
     }
 
@@ -302,43 +353,33 @@ export default function ChapterDiagnosticPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          confirmationToken,
-          studentId: profile.id,
+          token: confirmationToken,
           answers: confirmationAnswers,
         }),
       });
 
       if (!res.ok) {
-        throw new Error("Confirmation verification failed");
+        throw new Error("Confirmation submission failed");
       }
 
-      const confirmData = await res.json();
+      const confirmRes = await res.json();
       setConfirmationSubmitted(true);
-      if (confirmData.allCorrect) {
-        setConfirmationStatus("passed");
-      } else {
-        setConfirmationStatus("failed");
-      }
-    } catch {
-      setConfirmationSubmitted(true);
-      setConfirmationStatus("failed");
+      setConfirmationStatus(confirmRes.passed ? "passed" : "failed");
+
+      const refreshed = getActiveProfile();
+      if (refreshed) setProfile(refreshed);
+    } catch (err: any) {
+      alert(err.message || "Failed to evaluate confirmation questions.");
     }
   };
 
-  const handleReset = () => {
-    setAnswers({});
-    setResult(null);
-    setErrorMessage(null);
-    setConfirmationQuestions([]);
-    setConfirmationAnswers({});
-    setConfirmationStatus(null);
-    setConfirmationSubmitted(false);
-    // Reload a fresh session
-    window.location.reload();
-  };
+  const rootConcept = result?.gapAnalysis?.rootConceptId
+    ? getConceptById(result.gapAnalysis.rootConceptId)
+    : undefined;
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] pb-24">
+      <OfflineBanner />
       <StudentHeader
         profile={profile}
         currentLang={currentLang}
@@ -347,273 +388,155 @@ export default function ChapterDiagnosticPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
-        {/* Header Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-6">
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-2">
-            <span>Diagnostic Assessment</span>
-            <span>•</span>
-            <span>Class {currentChapter.class}</span>
-            <span>•</span>
-            <span>Chapter {currentChapter.chapterNumber}</span>
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1">
+        {/* Assessment Header Card */}
+        <div className="bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] mb-6 space-y-3">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#111111]/70">
+              <span>Chapter Diagnostic</span>
+              <span>•</span>
+              <span>Class {profile.selectedClass}</span>
+            </div>
+            <span className="text-xs font-heading font-bold px-2 py-0.5 bg-[#F2D16B] border border-[#111111]">
+              Diagnostic Engine
+            </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground tracking-tight">
-            {currentChapter.name[currentLang] || currentChapter.name.en}
+          <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#111111] tracking-tight">
+            {currentChapter?.title[currentLang] || currentChapter?.title.en || chapterId}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-            Take this 6-question diagnostic to test out of this chapter or identify foundational prerequisite topics.
-            A score of 70% or more immediately unlocks this chapter&apos;s lessons.
+          <p className="text-xs sm:text-sm text-[#111111] bg-[#F2D16B]/30 p-3.5 border-2 border-[#111111] leading-relaxed font-bold">
+            Answer these 6 questions. Our adaptive engine identifies root-cause prerequisites and adjusts your learning journey.
           </p>
 
-          {/* Placement Result Banner */}
+          {/* Results Summary Box */}
           {result && (
             <div
-              className={`mt-6 p-5 rounded-2xl border ${
-                placementPassed
-                  ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                  : "bg-amber-50 border-amber-200 text-amber-950"
+              className={`mt-6 p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4 ${
+                result.passed ? "bg-[#5DB84A]/30" : "bg-[#F2D16B]/50"
               }`}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <h3 className="font-heading font-extrabold text-sm sm:text-base flex items-start sm:items-center gap-2">
-                    {placementPassed ? (
-                      <>
-                        <Award className="w-5 h-5 text-emerald-700 shrink-0" />
-                        <span>Placement Passed! Chapter Lessons Unlocked</span>
-                      </>
-                    ) : (
-                      <>
-                        <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
-                        <span>Diagnostic Attempted • Complete Lessons in Order</span>
-                      </>
-                    )}
-                  </h3>
-                  <p className="text-xs mt-1">
-                    Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
-                    {!placementPassed && " • 70% required for instant placement"}
-                  </p>
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="flex items-center gap-3">
+                  {result.passed ? (
+                    <Award className="w-8 h-8 text-[#3C8A2E]" />
+                  ) : (
+                    <AlertCircle className="w-8 h-8 text-[#D9453D]" />
+                  )}
+                  <div>
+                    <h2 className="font-heading font-extrabold text-lg text-[#111111]">
+                      {result.passed
+                        ? "Diagnostic Passed! Chapter Lessons Unlocked"
+                        : "Diagnostic Complete • Practice Recommended"}
+                    </h2>
+                    <p className="text-xs font-bold text-[#111111]/80">
+                      Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    onClick={handleReset}
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Retake</span>
-                  </button>
-
-                  <Link
-                    href="/"
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
-                  >
-                    <span>Chapter Lessons</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
+                <Link
+                  href="/"
+                  className="inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                >
+                  <span>Return to Learning Path</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
               </div>
+
+              {/* GAP CARD: Root-Cause Remediation Suggestion */}
+              {result.gapAnalysis?.hasGap && rootConcept && (
+                <div className="p-5 bg-[#FFFFFF] border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#D9453D] uppercase tracking-wider">
+                    <GitBranch className="w-4 h-4 text-[#D9453D]" />
+                    <span>Identified Foundational Gap (Class {rootConcept.class})</span>
+                  </div>
+
+                  <h3 className="font-heading font-extrabold text-base text-[#111111]">
+                    {rootConcept.name[currentLang] || rootConcept.name.en}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm font-bold text-[#111111]/80 leading-relaxed">
+                    {result.gapAnalysis.plainLanguageReason ||
+                      `We detected recurring calculation misconceptions rooted in Class ${rootConcept.class} prerequisites.`}
+                  </p>
+
+                  {/* Prerequisite Path Journey Steps */}
+                  {result.gapAnalysis.prerequisitePath && result.gapAnalysis.prerequisitePath.length > 0 && (
+                    <div className="p-3 bg-[#F2D16B]/30 border-2 border-[#111111] space-y-2">
+                      <span className="text-[10px] font-heading font-bold text-[#111111]/70 uppercase tracking-wider block">
+                        Prerequisite Journey:
+                      </span>
+                      <div className="flex items-center gap-1.5 flex-wrap text-xs font-heading font-bold">
+                        {result.gapAnalysis.prerequisitePath.map((stepId, idx) => {
+                          const stepConcept = getConceptById(stepId);
+                          const isLast = idx === (result.gapAnalysis.prerequisitePath?.length || 0) - 1;
+                          return (
+                            <React.Fragment key={stepId}>
+                              <span
+                                className={`px-2 py-0.5 border border-[#111111] ${
+                                  stepId === rootConcept.id
+                                    ? "bg-[#D9453D] text-[#FFFFFF]"
+                                    : "bg-[#FFFFFF] text-[#111111]"
+                                }`}
+                              >
+                                {stepConcept ? stepConcept.name.en : stepId}
+                              </span>
+                              {!isLast && <span className="text-[#111111]">→</span>}
+                            </React.Fragment>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="pt-2">
+                    <Link
+                      href={`/lesson/${rootConcept.id}?fromGap=true&reason=${encodeURIComponent(
+                        result.gapAnalysis.plainLanguageReason || ""
+                      )}`}
+                      className="inline-flex items-center justify-center min-h-[48px] px-5 py-2.5 bg-[#F2D16B] text-[#111111] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                    >
+                      <Sparkles className="w-4 h-4 mr-1.5" />
+                      <span>Review Foundational Lesson (Class {rootConcept.class})</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+            <div className="mt-4 p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#D9453D]" />
               <span>{errorMessage}</span>
             </div>
           )}
         </div>
 
-        {/* STEP 5 CONFIRMATION CHECK: Interactive Check Before Gap Routing */}
-        {result && confirmationQuestions.length > 0 && confirmationStatus === "pending" && (
-          <div className="bg-sky-50 border border-sky-200 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
-            <div className="flex items-center gap-2 text-sky-900 font-heading font-bold text-base">
-              <ShieldCheck className="w-5 h-5 text-sky-700" />
-              <span>Prerequisite Check: Quick Verification</span>
-            </div>
-            <p className="text-xs text-sky-800 leading-relaxed">
-              We noticed a pattern in your diagnostic answers that might connect to a foundational prerequisite.
-              Please answer these 2 quick questions to confirm whether you already know this concept:
-            </p>
-
-            <form onSubmit={handleSubmitConfirmation} className="space-y-4 pt-2">
-              {confirmationQuestions.map((q, qIdx) => {
-                const promptData = resolveLocalizedString(q.prompt, currentLang);
-                return (
-                  <div key={q.id} data-confirm-qid={q.id} className="bg-white p-4 rounded-2xl border border-sky-100 space-y-2">
-                    <p className="text-xs font-bold text-sky-950">
-                      Check Question {qIdx + 1}: {promptData.text}
-                    </p>
-                    <div className="space-y-1.5">
-                      {q.options?.map((opt) => {
-                        const isSelected = confirmationAnswers[q.id] === opt.id;
-                        const optData = resolveLocalizedString(opt.text, currentLang);
-                        return (
-                          <div
-                            key={opt.id}
-                            data-confirm-oid={opt.id}
-                            onClick={() => handleSelectConfirmationOption(q.id, opt.id)}
-                            className={`min-h-[48px] p-3 rounded-xl border text-xs cursor-pointer flex items-center gap-2 transition-all ${
-                              isSelected
-                                ? "border-primary bg-primary/5 font-semibold"
-                                : "border-slate-200 hover:border-slate-300 bg-white"
-                            }`}
-                          >
-                            <span className="w-5 h-5 rounded-md bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-[10px]">
-                              {opt.id}
-                            </span>
-                            <span>{optData.text}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-white text-xs font-bold shadow-soft transition-all"
-              >
-                <span>Verify Prerequisite Understanding</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </form>
-          </div>
-        )}
-
-        {/* CONFIRMATION PASSED: No Routing */}
-        {confirmationStatus === "passed" && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 mb-6 text-emerald-950 flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-            <div className="text-xs leading-relaxed">
-              <strong className="block text-sm font-bold">Prerequisite Check Passed!</strong>
-              You answered the foundational check questions correctly. No prerequisite remediation routing is required.
-            </div>
-          </div>
-        )}
-
-        {/* CONFIRMATION FAILED: SHOW GAP CARD (WHATEVER THE SCORE) */}
-        {confirmationStatus === "failed" && result?.gapAnalysis?.rootConceptId && (() => {
-          const rootConcept = getConceptById(result.gapAnalysis.rootConceptId);
-          const exactConceptName = rootConcept
-            ? (rootConcept.name[currentLang] || rootConcept.name.en)
-            : result.gapAnalysis.rootConceptId;
-
-          const pathNodes = result.gapAnalysis.prerequisitePath || [];
-
-          return (
-            <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
-              <div className="flex items-center justify-between gap-2 flex-wrap">
-                <div className="flex items-center gap-2 text-rose-950 font-heading font-extrabold text-base">
-                  <GitBranch className="w-5 h-5 text-rose-700" />
-                  <span>Identified Prerequisite Gap</span>
-                </div>
-                {rootConcept && (
-                  <span className="px-3 py-1 rounded-full bg-rose-200 text-rose-900 text-xs font-bold">
-                    Class {rootConcept.class} • Concept ID: {rootConcept.id}
-                  </span>
-                )}
-              </div>
-
-              {/* Exact Concept Name from concepts.json */}
-              <div className="bg-white rounded-2xl p-4 border border-rose-200 shadow-xs space-y-1.5">
-                <span className="text-[11px] font-bold text-rose-700 uppercase tracking-wider block">
-                  Foundational Concept to Review
-                </span>
-                <h3 className="text-lg font-heading font-extrabold text-slate-900 tracking-tight">
-                  {exactConceptName}
-                </h3>
-                {rootConcept && currentLang !== "en" && rootConcept.name.en !== exactConceptName && (
-                  <p className="text-xs text-slate-500 font-medium">
-                    {rootConcept.name.en}
-                  </p>
-                )}
-                {rootConcept && (
-                  <p className="text-xs text-slate-600 leading-relaxed pt-1 border-t border-slate-100 mt-2">
-                    <strong className="text-slate-700">Learning Objective: </strong>
-                    {rootConcept.learningObjective[currentLang] || rootConcept.learningObjective.en}
-                  </p>
-                )}
-              </div>
-
-              <p className="text-xs text-rose-900 leading-relaxed font-medium">
-                {result.gapAnalysis.plainLanguageReason}
-              </p>
-
-              {/* Visual DAG Journey Path */}
-              {pathNodes.length > 0 && (
-                <div className="bg-white/80 p-4 rounded-2xl border border-rose-200 space-y-2">
-                  <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
-                    Learning Journey Backtrack
-                  </span>
-                  <div className="flex items-center flex-wrap gap-2 text-xs">
-                    {pathNodes.map((nodeId, idx) => {
-                      const nodeConcept = getConceptById(nodeId);
-                      const isLast = idx === pathNodes.length - 1;
-                      const nodeConceptName = nodeConcept
-                        ? (nodeConcept.name[currentLang] || nodeConcept.name.en)
-                        : nodeId;
-                      return (
-                        <React.Fragment key={nodeId}>
-                          <span
-                            className={`px-2.5 py-1 rounded-xl font-bold border ${
-                              isLast
-                                ? "bg-rose-600 text-white border-rose-700 shadow-xs"
-                                : "bg-slate-100 text-slate-800 border-slate-200"
-                            }`}
-                          >
-                            {nodeConcept ? `Class ${nodeConcept.class}: ${nodeConceptName}` : nodeId}
-                          </span>
-                          {!isLast && <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />}
-                        </React.Fragment>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* CTA Button to Prerequisite Lesson */}
-              <div className="pt-2">
-                <Link
-                  id="fix-this-first-btn"
-                  href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
-                    result.gapAnalysis.plainLanguageReason || ""
-                  )}`}
-                  className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3.5 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
-                >
-                  <span>Fix this first: Review Foundational Lesson (Basics-First)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          );
-        })()}
-
         {/* Diagnostic Questions List */}
-        <form onSubmit={handleSubmitDiagnostic} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {questions.map((q, qIndex) => {
-            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
             const isAnswered = !!answers[q.id];
+            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
 
             return (
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm transition-all"
+                className="bg-[#FFFFFF] p-6 sm:p-7 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4"
               >
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#111111] pb-3">
+                  <span className="text-xs font-heading font-bold text-[#111111]/70 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    <span className="text-[11px] font-heading font-bold px-2 py-0.5 border border-[#111111] bg-[#F2D16B]">
                       Level {q.difficulty}
                     </span>
                     {isAnswered && !result && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary">
+                      <span className="text-[10px] font-heading font-bold bg-[#5DB84A] text-[#111111] px-2 py-0.5 border border-[#111111]">
                         Answered
                       </span>
                     )}
@@ -624,10 +547,10 @@ export default function ChapterDiagnosticPage() {
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="text-base sm:text-lg font-heading font-bold text-foreground leading-snug">
-                      {promptData.text}
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-[#111111] leading-relaxed flex items-center flex-wrap gap-2">
+                      <span>{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200 ml-2">
+                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-bold bg-[#F2D16B] border border-[#111111]">
                           Draft Translation
                         </span>
                       )}
@@ -641,71 +564,173 @@ export default function ChapterDiagnosticPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-slate-200 hover:border-slate-300";
-                    let optionBgClass = "bg-white";
+                    let optionBorderClass = "border-2 border-[#111111]";
+                    let optionBgClass = "bg-[#FFFFFF]";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
-                        optionBgClass = "bg-emerald-50/60";
+                        optionBorderClass = "border-2 border-[#111111]";
+                        optionBgClass = "bg-[#5DB84A]/30";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
-                        optionBgClass = "bg-rose-50/60";
+                        optionBorderClass = "border-2 border-[#111111]";
+                        optionBgClass = "bg-[#D9453D]/30";
                       }
+                    } else if (isSelected) {
+                      optionBorderClass = "border-2 border-[#111111]";
+                      optionBgClass = "bg-[#F2D16B] shadow-[2px_2px_0px_#111111]";
                     }
 
                     return (
                       <div
                         key={opt.id}
                         data-oid={opt.id}
+                        role="radio"
+                        aria-checked={isSelected}
+                        tabIndex={0}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer flex items-center justify-between transition-all ${
-                          isSelected
-                            ? "border-primary bg-primary/5 font-semibold"
-                            : `${optionBorderClass} ${optionBgClass}`
-                        }`}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            handleSelectOption(q.id, opt.id);
+                          }
+                        }}
+                        className={`min-h-[48px] p-3.5 border-2 cursor-pointer flex items-center justify-between transition-transform active:translate-x-[1px] active:translate-y-[1px] ${optionBorderClass} ${optionBgClass}`}
                       >
                         <div className="flex items-center gap-3">
                           <span
-                            className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-xs shrink-0 ${
+                            className={`w-6 h-6 border-2 border-[#111111] font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
                               isSelected
-                                ? "bg-primary text-white"
-                                : "bg-slate-100 text-slate-700"
+                                ? "bg-[#111111] text-[#FFFFFF]"
+                                : "bg-[#FFFFFF] text-[#111111]"
                             }`}
                           >
                             {opt.id}
                           </span>
-                          <span className="text-slate-800 leading-snug">{optData.text}</span>
+                          <span className="text-xs sm:text-sm font-bold text-[#111111] leading-snug">{optData.text}</span>
                         </div>
                         {result && feedbackItem && isSelected && (
                           feedbackItem.isCorrect ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-[#3C8A2E] shrink-0" />
                           ) : (
-                            <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                            <XCircle className="w-5 h-5 text-[#D9453D] shrink-0" />
                           )
                         )}
                       </div>
                     );
                   })}
                 </div>
+
+                {/* Feedback Post-Submission */}
+                {feedbackItem && (
+                  <div
+                    className={`mt-4 p-4 border-2 border-[#111111] text-xs font-bold leading-relaxed space-y-1.5 ${
+                      feedbackItem.isCorrect
+                        ? "bg-[#5DB84A]/30 text-[#111111]"
+                        : "bg-[#D9453D]/20 text-[#111111]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 font-heading font-extrabold text-sm">
+                      {feedbackItem.isCorrect ? (
+                        <>
+                          <CheckCircle2 className="w-4 h-4 text-[#3C8A2E]" />
+                          <span>Correct</span>
+                        </>
+                      ) : (
+                        <>
+                          <XCircle className="w-4 h-4 text-[#D9453D]" />
+                          <span>
+                            Misconception: {feedbackItem.mistakeTag ? feedbackItem.mistakeTag.replace(/_/g, " ") : "Incorrect Answer"}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
 
           {!result && (
-            <div className="pt-2">
+            <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex items-center justify-between gap-4">
+              <span className="text-xs font-heading font-bold text-[#111111]">
+                {Object.keys(answers).length} of {questions.length} Answered
+              </span>
+
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-8 py-4 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-extrabold text-sm shadow-soft transition-all disabled:opacity-50"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 bg-[#111111] text-[#F2D16B] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50"
               >
-                <span>{submitting ? "Evaluating Assessment..." : "Submit Diagnostic Assessment"}</span>
+                <span>{submitting ? "Evaluating..." : "Submit Diagnostic Assessment"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </form>
+
+        {/* Confirmation Step (if triggered by low confidence) */}
+        {confirmationQuestions.length > 0 && (
+          <div className="mt-8 bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111]/70">
+              <ShieldCheck className="w-4 h-4 text-[#111111]" />
+              <span>Diagnostic Confirmation Step</span>
+            </div>
+            <h2 className="font-heading font-extrabold text-base text-[#111111]">
+              Verification Questions
+            </h2>
+            <p className="text-xs font-bold text-[#111111]/70">
+              Please answer these short follow-up questions to confirm whether targeted prerequisite routing is recommended.
+            </p>
+
+            <form onSubmit={handleConfirmationSubmit} className="space-y-4 pt-2">
+              {confirmationQuestions.map((cq, cqIdx) => (
+                <div key={cq.id} className="p-4 bg-[#F2D16B]/20 border-2 border-[#111111] space-y-2">
+                  <p className="text-xs font-heading font-bold text-[#111111]/70">
+                    Confirmation #{cqIdx + 1}
+                  </p>
+                  <p className="text-sm font-bold text-[#111111]">
+                    {resolveLocalizedString(cq.prompt, currentLang).text}
+                  </p>
+                  <div className="space-y-1.5 pt-1">
+                    {cq.options?.map((cOpt) => (
+                      <div
+                        key={cOpt.id}
+                        role="radio"
+                        aria-checked={confirmationAnswers[cq.id] === cOpt.id}
+                        tabIndex={0}
+                        onClick={() => handleConfirmationSelect(cq.id, cOpt.id)}
+                        className={`min-h-[44px] p-2.5 border-2 text-xs font-bold cursor-pointer flex items-center gap-2.5 ${
+                          confirmationAnswers[cq.id] === cOpt.id
+                            ? "border-[#111111] bg-[#F2D16B] shadow-[2px_2px_0px_#111111]"
+                            : "border-[#111111] bg-[#FFFFFF]"
+                        }`}
+                      >
+                        <span className="w-5 h-5 border border-[#111111] flex items-center justify-center font-heading text-[10px]">
+                          {cOpt.id}
+                        </span>
+                        <span>{resolveLocalizedString(cOpt.text, currentLang).text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              {!confirmationSubmitted && (
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-bold text-xs shadow-[2px_2px_0px_#111111]"
+                >
+                  Confirm Diagnostic Result
+                </button>
+              )}
+            </form>
+          </div>
+        )}
       </main>
+
+      <footer className="border-t-4 border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+        Margam Adaptive Mathematics • Diagnostic Engine
+      </footer>
     </div>
   );
 }

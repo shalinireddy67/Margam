@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowRight,
   CheckCircle2,
   Sparkles,
   Check,
@@ -12,6 +13,7 @@ import {
   RotateCcw,
   BookOpen,
   GitBranch,
+  Lock,
 } from "lucide-react";
 import {
   SupportedLanguage,
@@ -31,6 +33,11 @@ import {
 } from "@/lib/curriculum";
 import WitchCatCompanion, { CompanionContext } from "@/components/WitchCatCompanion";
 import { WitchCat } from "@/components/ui/WitchCat";
+import {
+  SkeletonCard,
+  OfflineBanner,
+  Button,
+} from "@/components/ui";
 
 interface PracticeFeedbackItem {
   questionId: string;
@@ -70,61 +77,123 @@ function LessonContent() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [companionContext, setCompanionContext] = useState<CompanionContext>("lesson_start");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockedReason, setLockedReason] = useState<string>("");
 
-  useEffect(() => {
-    const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
-      router.replace("/");
-      return;
-    }
+  const initLesson = useCallback(() => {
+    try {
+      setIsLoaded(false);
+      setHasError(false);
+      setErrorMessage(null);
+      setIsLocked(false);
 
-    const concept = getConceptById(conceptId);
-    // Allow remediation if arriving from gap card or if concept belongs to lower class
-    const allowRemediation = fromGap || (concept ? concept.class < active.selectedClass : false);
-    const access = canAccessTopic(conceptId, active, allowRemediation);
-
-    if (!access.accessible) {
-      alert(access.reason || "You cannot access this lesson yet.");
-      router.replace("/");
-      return;
-    }
-
-    // Opening does NOT complete the lesson, but records in_progress
-    const updated = recordTopicOpened(conceptId);
-    setProfile(updated || active);
-    setIsLoaded(true);
-
-    // Load single practice question for the lesson from server route
-    async function loadPractice() {
-      try {
-        const res = await fetch("/api/practice/start", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            conceptId,
-            studentId: active!.id,
-            count: 1,
-          }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setPracticeQuestions(data.questions || []);
-          setSessionToken(data.token || null);
-        }
-      } catch (err) {
-        console.error("Failed to load lesson practice question:", err);
+      const active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        router.replace("/");
+        return;
       }
-    }
 
-    loadPractice();
+      const concept = getConceptById(conceptId);
+      const allowRemediation = fromGap || (concept ? concept.class < active.selectedClass : false);
+      const access = canAccessTopic(conceptId, active, allowRemediation);
+
+      if (!access.accessible) {
+        setIsLocked(true);
+        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this lesson.");
+        setIsLoaded(true);
+        return;
+      }
+
+      const updated = recordTopicOpened(conceptId);
+      setProfile(updated || active);
+      setIsLoaded(true);
+
+      async function loadPractice() {
+        try {
+          const res = await fetch("/api/practice/start", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              conceptId,
+              studentId: active!.id,
+              count: 1,
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setPracticeQuestions(data.questions || []);
+            setSessionToken(data.token || null);
+          }
+        } catch (err) {
+          console.error("Failed to load lesson practice question:", err);
+        }
+      }
+
+      loadPractice();
+    } catch (err: unknown) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "Failed to load lesson.");
+      setIsLoaded(true);
+    }
   }, [conceptId, fromGap, router]);
 
+  useEffect(() => {
+    initLesson();
+  }, [initLesson]);
+
+  // Loading Skeleton State
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3]">
-        <div className="p-6 border-4 border-[#111111] bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
-          <p className="font-heading font-extrabold text-sm text-[#111111]">Loading lesson...</p>
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+        <OfflineBanner />
+        <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
+          <SkeletonCard />
+          <SkeletonCard />
         </div>
+      </div>
+    );
+  }
+
+  // Locked State
+  if (isLocked) {
+    return (
+      <div className="min-h-screen bg-[#7EC8E3] text-[#111111] flex flex-col justify-between pb-16">
+        <OfflineBanner />
+        <header className="sticky top-0 z-40 bg-[#7EC8E3] border-b-4 border-[#111111]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center min-h-[48px] px-4 py-2 border-2 border-[#111111] bg-[#FFFFFF] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline"
+            >
+              <ArrowLeft className="w-4 h-4 mr-1.5" />
+              <span>Back to Lessons</span>
+            </Link>
+          </div>
+        </header>
+
+        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+          <div className="bg-[#FFFFFF] border-4 border-[#111111] p-8 shadow-[4px_4px_0px_#111111] space-y-4">
+            <div className="w-12 h-12 bg-[#F2D16B] border-2 border-[#111111] flex items-center justify-center mx-auto text-[#111111]">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h1 className="font-heading font-extrabold text-xl text-[#111111]">
+              Lesson Locked
+            </h1>
+            <p className="text-xs sm:text-sm font-bold text-[#111111]/70 leading-relaxed">
+              {lockedReason || "You must complete prerequisite topics before accessing this lesson."}
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] text-xs font-heading font-extrabold shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1.5" />
+                <span>Return to Learning Path</span>
+              </Link>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -153,7 +222,6 @@ function LessonContent() {
   const topicProgress = profile.topicProgress[conceptId];
   const isCompleted = topicProgress?.status === "completed" || completedNow;
 
-  // Choose variant with selectLessonVariant from concept's mastery.
   let variantKey: "basics_first" | "standard" | "fast_track" = "standard";
   let variantReason = "";
 
@@ -175,7 +243,6 @@ function LessonContent() {
 
   const activeVariant = lesson[variantKey] || lesson.standard;
 
-  // Explicit Lesson Completion
   const handleFinishLesson = () => {
     const res = completeLesson(conceptId);
     if (res.success && res.profile) {
@@ -191,7 +258,6 @@ function LessonContent() {
     setErrorMessage(null);
   };
 
-  // Practice Submission through server route
   const handleSubmitPractice = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(answers).length === 0) {
@@ -224,7 +290,6 @@ function LessonContent() {
       setWorksheetResult(resData);
       setCompletedNow(true);
 
-      // Complete the lesson to unlock subsequent concepts
       const completeRes = completeLesson(conceptId);
       if (completeRes.success && completeRes.profile) {
         setProfile(completeRes.profile);
@@ -255,7 +320,8 @@ function LessonContent() {
   const workedSolution = resolveLocalizedString(activeVariant.workedExample.solution, currentLang);
 
   return (
-    <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] font-sans pb-16">
+    <div className="min-h-screen bg-[#7EC8E3] flex flex-col justify-between text-[#111111] font-sans pb-24">
+      <OfflineBanner />
       {/* Top Header */}
       <header className="sticky top-0 z-40 bg-[#7EC8E3] border-b-4 border-[#111111]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
@@ -501,7 +567,16 @@ function LessonContent() {
                         return (
                           <div
                             key={opt.id}
+                            role="radio"
+                            aria-checked={isSelected}
+                            tabIndex={0}
                             onClick={() => handleSelectOption(q.id, opt.id)}
+                            onKeyDown={(e) => {
+                              if (e.key === " " || e.key === "Enter") {
+                                e.preventDefault();
+                                handleSelectOption(q.id, opt.id);
+                              }
+                            }}
                             className={`min-h-[48px] flex items-start gap-3 p-3 border-2 cursor-pointer transition-transform active:translate-x-[1px] active:translate-y-[1px] ${borderClass} ${bgClass}`}
                           >
                             <span
@@ -570,53 +645,43 @@ function LessonContent() {
           </div>
         )}
 
-        {/* Completion Footer */}
-        <div className="bg-[#FFFFFF] p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            {isCompleted && (
-              <div className="shrink-0">
-                <WitchCat
-                  pose="cheer"
-                  size={64}
-                  sticker={true}
-                  alt="Margam Witch Cat celebrating lesson completion"
-                />
-              </div>
-            )}
-            <div>
-              {isCompleted ? (
-                <div className="flex items-center gap-2 text-[#3C8A2E] font-heading font-bold text-sm">
-                  <CheckCircle2 className="w-5 h-5 text-[#5DB84A]" />
-                  <span>Lesson Completed • Next Lesson Unlocked</span>
-                </div>
-              ) : (
-                <p className="text-xs font-bold text-[#111111]/70">
-                  Read through the explanation and example, or submit the practice question above to complete.
-                </p>
-              )}
-            </div>
+        {/* Sticky Next Button Bar */}
+        <div className="sticky bottom-4 z-30 bg-[#FFFFFF] border-4 border-[#111111] p-4 shadow-[4px_4px_0px_#111111] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
+            <span className="text-xs font-heading font-extrabold text-[#111111] block">
+              {isCompleted ? "Topic Mastered!" : "Finished Reviewing?"}
+            </span>
+            <span className="text-[11px] font-bold text-[#111111]/70 block">
+              {isCompleted ? "You can proceed to the next concept or chapter test." : "Advance to update your concept mastery."}
+            </span>
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            {!isCompleted && (
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            {!isCompleted ? (
               <button
+                type="button"
                 onClick={handleFinishLesson}
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 px-5 py-2.5 bg-[#5DB84A] text-[#111111] border-2 border-[#111111] font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DB84A] text-[#111111] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
               >
-                <Check className="w-4 h-4" />
-                <span>Mark Lesson Complete</span>
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Next: Finish Lesson & Complete</span>
               </button>
+            ) : (
+              <Link
+                href="/"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#111111] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+              >
+                <span>Next: Return to Learning Path</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
             )}
-
-            <Link
-              href="/"
-              className="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-2 px-5 py-2.5 bg-[#111111] text-[#FFFFFF] border-2 border-[#111111] font-heading font-bold text-xs shadow-[2px_2px_0px_#111111] active:translate-x-[1px] active:translate-y-[1px] no-underline"
-            >
-              <span>Back to Class Path</span>
-            </Link>
           </div>
         </div>
       </main>
+
+      <footer className="border-t-4 border-[#111111] py-4 text-center text-xs font-bold text-[#111111]/70 bg-[#FFFFFF]">
+        Margam Adaptive Mathematics • Lesson Workspace
+      </footer>
     </div>
   );
 }
@@ -625,9 +690,10 @@ export default function LessonPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#7EC8E3]">
-          <div className="p-6 border-4 border-[#111111] bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] text-center">
-            <p className="font-heading font-extrabold text-sm text-[#111111]">Loading...</p>
+        <div className="min-h-screen bg-[#7EC8E3] text-[#111111] p-4 sm:p-6 pb-28">
+          <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
+            <SkeletonCard />
+            <SkeletonCard />
           </div>
         </div>
       }
