@@ -55,44 +55,54 @@ $$\text{DIAGNOSE} \longrightarrow \text{ADAPT} \longrightarrow \text{CHECK AGAIN
 
 ```
 kernel2k26/
-├── .env.example                       # Documented environment variables
+├── .env.example                       # Documented environment variables (public vs server-only)
 ├── .gitignore                         # Configured for node_modules, .next, .env*.local
-├── package.json                       # Scripts: dev, build, start, validate, test
+├── package.json                       # Scripts: dev, build, start, validate, test, test:auth
 ├── tsconfig.json                      # Strict TypeScript compiler options with @/* aliases
 ├── tailwind.config.ts                 # Margam bespoke color palette & typographic scale
-├── postcss.config.mjs                 # PostCSS setup
 ├── next.config.mjs                    # Next.js production configuration
 ├── README.md                          # Master documentation (this file)
+├── supabase/
+│   └── migrations/
+│       └── 20261101_initial_schema.sql # Profiles, classes, members, attempts, concept_mastery + RLS
 ├── data/
-│   ├── concepts.json                  # 21-node NCERT DAG with EN/HI/TE translations & audit flags
+│   ├── concepts.json                  # 20-node pilot NCERT DAG with EN/HI/TE translations & audit flags
 │   ├── questions.json                 # Question bank with deterministic answers & mistake tags
 │   ├── lessons.json                   # 3 variants per concept (Basics-first, Standard, Fast-track)
-│   └── demo-class.json                # Synthetic 25-student dataset for Class 8A
+│   ├── demo-class.json                # Synthetic 25-student dataset for Class 8A
+│   └── tag-roots.json                 # Error misconception taxonomy
 ├── scripts/
-│   └── validate-content.mjs           # Automated test suite for DAG cycles & schema integrity
+│   ├── validate-content.mjs           # Automated test suite for DAG cycles & schema integrity
+│   ├── test-progression.mjs           # Multi-grade progression, class locking & migration tests
+│   ├── test-gap-tracing.mjs           # Root concept resolution & recency/distance decay tests
+│   ├── test-adaptive.mjs              # Mastery formulas & 3-stage adaptive engine tests
+│   └── test-login-security.mjs        # RLS cross-student isolation, teacher scoping & 15-min lockout
 └── src/
     ├── app/
+    │   ├── api/
+    │   │   ├── auth/                  # Student/teacher signup, login (15-min lockout), logout, me
+    │   │   ├── sync/                  # Local guest profile import & progress cloud mirroring
+    │   │   └── teacher/               # Class creation & scoped student roster routes
+    │   ├── login/                     # Unified login & email-free student signup with recovery codes
     │   ├── layout.tsx                 # Root layout with SEO, semantic HTML, and skip links
     │   ├── page.tsx                   # Master landing page assembling sections A through K
+    │   ├── privacy/                   # DPDP Act notice, dual storage (guest vs cloud), data minimization
+    │   ├── student/                   # Student dashboard, diagnostic, worksheets, and chapter test
+    │   ├── teacher/                   # Teacher class roster & mastery grouping analytics
     │   └── globals.css                # CSS variables, print styles, and focus outlines
-    ├── config/
-    │   └── site.ts                    # Single source of truth for site name, metadata, and chapters
-    ├── lib/
-    │   ├── types.ts                   # TypeScript interfaces for concepts, questions, and mastery
-    │   └── graph.ts                   # Graph utility (DFS cycle detection, topological traversal)
-    └── components/
-        ├── Navbar.tsx                 # Section A: Original wordmark, anchor nav, language selector
-        ├── Hero.tsx                   # Section B: Core headline, CTAs, live concept path preview
-        ├── DiagnosticWidget.tsx       # Interactive 3-question diagnostic simulator
-        ├── ProblemSection.tsx         # Section C: Class 6–10 dilemma (Class 9 Polynomial story)
-        ├── ApproachSection.tsx        # Section D: Diagnose → Adapt → Check Again loop
-        ├── ThreeStagesSection.tsx     # Section E: Learn (3 variants), Solve, and Test
-        ├── ConceptPathway.tsx         # Section F: Interactive DAG visualizer
-        ├── IndianClassrooms.tsx       # Section G: Vernacular languages, Indian math contexts, A4 printout
-        ├── TeacherControl.tsx         # Section H: Class grouping engine preview
-        ├── StarterChapters.tsx        # Section I: Class 7 Integers, Class 8 Linear Eqns, Class 9 Polynomials
-        ├── RoadmapSection.tsx         # Section J: 4-phase roadmap (implemented vs planned)
-        └── Footer.tsx                 # Section K: Closing CTA, DPDP Act 2023, repository links
+    └── lib/
+        ├── flags.ts                   # Feature flags (FEATURE_LOGIN, FEATURE_TUTOR, etc.)
+        ├── storage.ts                 # Dual storage engine (Guest Mode vs Supabase Mode sync)
+        ├── server/
+        │   ├── lockout.ts             # 15-minute server lockout after 5 consecutive failures
+        │   └── auth-helpers.ts        # Synthetic address generator, recovery codes, mock store
+        ├── supabase/
+        │   ├── client.ts              # Browser Supabase client (anon key only)
+        │   ├── server.ts              # Server-side cookie-based Supabase client
+        │   ├── admin.ts               # Privileged server-only Supabase admin client (server-only)
+        │   └── types.ts               # Strict Database schema types
+        ├── types.ts                   # TypeScript interfaces for concepts, questions, and mastery
+        └── adaptive.ts                # Pure adaptive engine (diagnostics, worksheets, tests)
 ```
 
 ---

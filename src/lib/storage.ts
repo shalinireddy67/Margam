@@ -2,6 +2,10 @@
  * Margam Storage Layer
  * Manages local learner profiles with strict single-class locking, schema validation (zod),
  * versioned profile migrations, and crash guards around all localStorage access.
+ *
+ * Supports Dual-Mode Operation:
+ * - Guest Mode (default): Local browser storage only (privacy-first, no account needed).
+ * - Supabase Mode: Authenticated cloud persistence via server-only routes with seamless local migration.
  */
 
 import { z } from "zod";
@@ -9,6 +13,9 @@ import { LearnerProfile, TopicProgress, RemediationGap } from "./types";
 
 export const CURRENT_PROFILE_VERSION = 1;
 export const STORAGE_KEY = "margam_active_learner";
+export const STORAGE_MODE_KEY = "margam_storage_mode";
+
+export type StorageMode = "guest" | "supabase";
 
 // Zod Schemas for Runtime Validation
 const TopicProgressSchema = z.object({
@@ -25,17 +32,19 @@ const TopicProgressSchema = z.object({
   consecutiveCorrect: z.number().optional(),
   consecutiveIncorrect: z.number().optional(),
   mistakeTagHistory: z.array(z.string()).optional(),
-});
+  tagHistory: z.array(z.string()).optional(),
+}).passthrough();
 
 const RemediationGapSchema = z.object({
   currentConceptId: z.string(),
   rootConceptId: z.string(),
-  mistakeTag: z.string(),
+  mistakeTag: z.string().optional(),
+  tag: z.string().optional(),
   plainLanguageReason: z.string(),
   prerequisitePath: z.array(z.string()),
   confirmationQuestionIds: z.array(z.string()),
   status: z.enum(["pending_confirmation", "confirmed", "resolved"]),
-});
+}).passthrough();
 
 export const LearnerProfileSchema = z.object({
   version: z.number().int().default(CURRENT_PROFILE_VERSION),
@@ -113,7 +122,46 @@ export function migrateLearnerProfile(raw: Record<string, unknown>): LearnerProf
 
 const globalStore = globalThis as unknown as {
   __margam_memory_store__?: LearnerProfile | null;
+  __margam_mode_store__?: StorageMode;
 };
+
+/**
+ * Returns current storage mode ("guest" or "supabase").
+ */
+export function getStorageMode(): StorageMode {
+  if (typeof window === "undefined") {
+    return globalStore.__margam_mode_store__ || "guest";
+  }
+  try {
+    const mode = window.localStorage.getItem(STORAGE_MODE_KEY);
+    return mode === "supabase" ? "supabase" : "guest";
+  } catch {
+    return "guest";
+  }
+}
+
+/**
+ * Sets current storage mode.
+ */
+export function setStorageMode(mode: StorageMode): void {
+  if (typeof window === "undefined") {
+    globalStore.__margam_mode_store__ = mode;
+    return;
+  }
+  try {
+    window.localStorage.setItem(STORAGE_MODE_KEY, mode);
+  } catch (err) {
+    console.error("Failed to set storage mode:", err);
+  }
+}
+
+export function isGuestMode(): boolean {
+  return getStorageMode() === "guest";
+}
+
+export function isSupabaseMode(): boolean {
+  return getStorageMode() === "supabase";
+}
 
 /**
  * Retrieves and validates the active profile from localStorage or memory store.
@@ -161,6 +209,7 @@ export function getActiveProfile(): LearnerProfile | null {
 
 /**
  * Saves profile to localStorage with schema validation and try/catch crash guards.
+ * If in Supabase mode, mirrors changes to the server asynchronously.
  */
 export function saveProfile(profile: LearnerProfile): void {
   try {
@@ -179,6 +228,18 @@ export function saveProfile(profile: LearnerProfile): void {
     }
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(validation.data));
+
+    // If authenticated in Supabase mode, sync progress via server route
+    if (isSupabaseMode()) {
+      fetch("/api/sync/import-local", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ localProfile: validation.data }),
+      }).catch((err) => {
+        // Non-blocking background sync warning
+        console.warn("Background progress sync to server deferred:", err);
+      });
+    }
   } catch (err) {
     console.error("Failed to save learner profile to localStorage:", err);
   }
@@ -285,4 +346,67 @@ export function canReadConcept(concept: { id: string; class: number }): boolean 
   const profile = getActiveProfile();
   if (!profile) return false;
   return concept.class <= profile.selectedClass;
+}
+
+/**
+ * On first login: imports existing local progress into the account, updates
+ * identity to Supabase user, and transitions storage mode to "supabase".
+ */
+export async function handleLoginSync(authenticatedUser: {
+  id: string;
+  role: "student" | "teacher";
+  username?: string | null;
+  fullName?: string;
+  selectedClass?: number | null;
+}): Promise<void> {
+  setStorageMode("supabase");
+
+  const existingLocal = getActiveProfile();
+  if (existingLocal) {
+    // 1. Send local progress to server to import into Supabase
+    try {
+      await fetch("/api/sync/import-local", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ localProfile: existingLocal }),
+      });
+    } catch (err) {
+      console.warn("Failed to import local progress to server on login:", err);
+    }
+
+    // 2. Adopt authenticated identity locally
+    existingLocal.id = authenticatedUser.id;
+    if (authenticatedUser.fullName || authenticatedUser.username) {
+      existingLocal.name = authenticatedUser.fullName || authenticatedUser.username || "Student";
+    }
+    if (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass)) {
+      existingLocal.selectedClass = authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10;
+    }
+    saveProfile(existingLocal);
+  } else {
+    // Create new profile linked to user
+    const grade = (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass))
+      ? (authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10)
+      : 10;
+    const newProfile: LearnerProfile = {
+      version: CURRENT_PROFILE_VERSION,
+      id: authenticatedUser.id,
+      name: authenticatedUser.fullName || authenticatedUser.username || "Student",
+      selectedClass: grade,
+      createdAt: new Date().toISOString(),
+      lastActiveAt: new Date().toISOString(),
+      topicProgress: {},
+      consecutiveCorrect: 0,
+      consecutiveIncorrect: 0,
+      currentDifficulty: 1,
+    };
+    saveProfile(newProfile);
+  }
+}
+
+/**
+ * On logout: cleans up session and reverts back to guest mode.
+ */
+export function handleLogout(): void {
+  setStorageMode("guest");
 }
