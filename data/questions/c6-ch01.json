@@ -132,5 +132,467 @@
       "te": "ప్రతి అదనపు చతురస్రం 3 పుల్లలను మాత్రమే కలుపుతుందని గమనించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c6-pat-d1-01",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "What is the next number in the arithmetic sequence: 5, 10, 15, 20, ___?",
+      "hi": "अंकगणितीय अनुक्रम 5, 10, 15, 20, ___ में अगली संख्या क्या है?",
+      "te": "అంకశ్రేణి 5, 10, 15, 20, ___ లో తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "25",
+          "hi": "25",
+          "te": "25",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "30",
+          "hi": "30",
+          "te": "30",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_instead_of_adding_step"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        },
+        "mistakeTag": "added_one_instead_of_sequence_rule"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Each term increases by 5 (rule: add 5). 20 + 5 = 25.",
+      "hi": "प्रत्येक पद में 5 की वृद्धि होती है (नियम: 5 जोड़ें)। 20 + 5 = 25।",
+      "te": "ప్రతి పదం 5 పెరుగుతుంది (నియమం: 5 కలపండి). 20 + 5 = 25.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find the constant difference between consecutive terms.",
+      "hi": "लगातार पदों के बीच का अंतर ज्ञात करें।",
+      "te": "వరుస పదాల మధ్య స్థిరమైన తేడాను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d1-02",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Observe the decreasing pattern: 40, 34, 28, 22, ___. What is the rule and the next number?",
+      "hi": "घटते क्रम का निरीक्षण करें: 40, 34, 28, 22, ___। नियम और अगली संख्या क्या है?",
+      "te": "తగ్గుతున్న నమూనాను పరిశీలించండి: 40, 34, 28, 22, ___। నియమం మరియు తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Subtract 6; next number is 16",
+          "hi": "6 घटाएं; अगली संख्या 16 है",
+          "te": "6 తీసివేయండి; తర్వాతి సంఖ్య 16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Subtract 4; next number is 18",
+          "hi": "4 घटाएं; अगली संख्या 18 है",
+          "te": "4 తీసివేయండి; తర్వాతి సంఖ్య 18",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_step_difference_estimation"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Subtract 6; next number is 14",
+          "hi": "6 घटाएं; अगली संख्या 14 है",
+          "te": "6 తీసివేయండి; తర్వాతి సంఖ్య 14",
+          "reviewed": false
+        },
+        "mistakeTag": "subtraction_borrowing_slip_pattern"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Add 6; next number is 28",
+          "hi": "6 जोड़ें; अगली संख्या 28 है",
+          "te": "6 కలపండి; తర్వాతి సంఖ్య 28",
+          "reviewed": false
+        },
+        "mistakeTag": "reversed_direction_added_instead_of_subtracted"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Each consecutive term decreases by 6 (40 - 6 = 34, 34 - 6 = 28, 28 - 6 = 22). The next term is 22 - 6 = 16.",
+      "hi": "प्रत्येक पद 6 कम होता जाता है। अतः अगला पद 22 - 6 = 16 है।",
+      "te": "ప్రతి పదం 6 తగ్గుతుంది. కాబట్టి తర్వాతి పదం 22 - 6 = 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract 34 from 40 to find the step size.",
+      "hi": "चरण आकार ज्ञात करने के लिए 40 में से 34 घटाएं।",
+      "te": "తేడా తెలుసుకోవడానికి 40 నుండి 34 తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d2-01",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "In a tile pattern, Stage 1 uses 4 tiles, Stage 2 uses 7 tiles, and Stage 3 uses 10 tiles. The algebraic rule for Stage n is 3n + 1. How many tiles are needed for Stage 6?",
+      "hi": "टाइल पैटर्न में, चरण 1 में 4 टाइलें, चरण 2 में 7 टाइलें और चरण 3 में 10 टाइलें लगती हैं। चरण n के लिए बीजगणितीय नियम 3n + 1 है। चरण 6 के लिए कितनी टाइलों की आवश्यकता होगी?",
+      "te": "ఒక టైల్స్ నమూనాలో, దశ 1 లో 4 టైల్స్, దశ 2 లో 7 టైల్స్ మరియు దశ 3 లో 10 టైల్స్ ఉన్నాయి. దశ n కొరకు సూత్రం 3n + 1. దశ 6 కొరకు ఎన్ని టైల్స్ అవసరం?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "19",
+          "hi": "19",
+          "te": "19",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_constant_term_in_pattern_rule"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_after_adding_rule_slip"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "25",
+          "hi": "25",
+          "te": "25",
+          "reviewed": false
+        },
+        "mistakeTag": "added_step_multiple_times_unscaled"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Substitute n = 6 into the rule 3n + 1: 3(6) + 1 = 18 + 1 = 19 tiles.",
+      "hi": "नियम 3n + 1 में n = 6 रखें: 3(6) + 1 = 18 + 1 = 19 टाइलें।",
+      "te": "3n + 1 సూత్రంలో n = 6 ప్రతిక్షేపించండి: 3(6) + 1 = 18 + 1 = 19 టైల్స్.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply 6 by 3 first, then add 1.",
+      "hi": "पहले 6 को 3 से गुणा करें, फिर 1 जोड़ें।",
+      "te": "ముందుగా 6 ను 3 తో గుణించి, తర్వాత 1 కలపండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d2-02",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Look at the square numbers sequence: 1, 4, 9, 16, 25, ___. What is the 6th square number?",
+      "hi": "वर्ग संख्याओं के अनुक्रम को देखें: 1, 4, 9, 16, 25, ___। छठी वर्ग संख्या क्या है?",
+      "te": "వర్గ సంఖ్యల శ్రేణిని పరిశీలించండి: 1, 4, 9, 16, 25, ___। 6వ వర్గ సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "30",
+          "hi": "30",
+          "te": "30",
+          "reviewed": false
+        },
+        "mistakeTag": "added_previous_difference_constant"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "49",
+          "hi": "49",
+          "te": "49",
+          "reviewed": false
+        },
+        "mistakeTag": "skipped_one_term_in_sequence"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The terms are squares of consecutive integers: 1², 2², 3², 4², 5², 6². 6² = 6 × 6 = 36.",
+      "hi": "पद प्राकृतिक संख्याओं के वर्ग हैं: 1², 2², 3², 4², 5², 6² = 36।",
+      "te": "పదాలు పూర్ణాంకాల వర్గాలు: 1², 2², 3², 4², 5², 6² = 36.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply the position number 6 by itself.",
+      "hi": "स्थान संख्या 6 को स्वयं से गुणा करें।",
+      "te": "6 వ స్థాన సంఖ్యను దానితోనే గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d3-01",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "A sequence of hexagonal table arrangements follows the rule T(n) = 4n + 2, where n is the number of tables and T(n) is the total seated people. If 38 people must be seated, how many tables n must be joined together in a line?",
+      "hi": "षट्कोणीय मेजों की व्यवस्था का नियम T(n) = 4n + 2 है, जहाँ n मेजों की संख्या है और T(n) बैठने वाले लोगों की कुल संख्या है। यदि 38 लोगों को बैठाना है, तो एक पंक्ति में कितनी मेजें n जोड़ी जानी चाहिए?",
+      "te": "షడ్భుజి ఆకారపు బల్లల అమరిక సూత్రం T(n) = 4n + 2, ఇక్కడ n బల్లల సంఖ్య మరియు T(n) కూర్చునే వ్యక్తుల సంఖ్య. 38 మంది కూర్చోవడానికి ఎన్ని బల్లలు n అవసరం?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_subtract_constant_term_before_dividing"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "divided_by_two_instead_of_coefficient"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Set up the equation 4n + 2 = 38. Subtract 2 from both sides: 4n = 36. Divide by 4: n = 9 tables.",
+      "hi": "समीकरण 4n + 2 = 38 हल करें। दोनों पक्षों से 2 घटाएं: 4n = 36। 4 से भाग दें: n = 9 मेजें।",
+      "te": "4n + 2 = 38 సమీకరణాన్ని సాధించండి. 4n = 36 => n = 9 బల్లలు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "First subtract the 2 end seats from 38, then divide by 4.",
+      "hi": "पहले 38 में से 2 घटाएं, फिर 4 से भाग दें।",
+      "te": "ముందుగా 38 నుండి 2 తీసివేసి, తర్వాత 4 తో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d3-02",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Consider the triangular numbers pattern: T₁ = 1, T₂ = 3, T₃ = 6, T₄ = 10. The formula for the nth triangular number is n(n + 1)/2. Find the 8th triangular number (T₈).",
+      "hi": "त्रिभुजीय संख्याओं के पैटर्न पर विचार करें: T₁ = 1, T₂ = 3, T₃ = 6, T₄ = 10। n वीं त्रिभुजीय संख्या का सूत्र n(n + 1)/2 है। 8वीं त्रिभुजीय संख्या (T₈) ज्ञात कीजिए।",
+      "te": "త్రిభుజాకార సంఖ్యల నమూనాను పరిశీలించండి: T₁ = 1, T₂ = 3, T₃ = 6, T₄ = 10. n వ త్రిభుజాకార సంఖ్య సూత్రం n(n + 1)/2. 8వ త్రిభుజాకార సంఖ్య (T₈) ను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "72",
+          "hi": "72",
+          "te": "72",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_division_by_two_in_triangular_formula"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "used_n_squared_divided_by_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "45",
+          "hi": "45",
+          "te": "45",
+          "reviewed": false
+        },
+        "mistakeTag": "used_n_plus_one_instead_of_n"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using T(n) = n(n + 1)/2 with n = 8: T₈ = 8(8 + 1)/2 = 8(9)/2 = 72/2 = 36.",
+      "hi": "सूत्र T(n) = n(n + 1)/2 में n = 8 रखें: T₈ = 8(9)/2 = 72/2 = 36।",
+      "te": "T(n) = n(n + 1)/2 సూత్రంలో n = 8 ఉంచగా: T₈ = 8(9)/2 = 72/2 = 36.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Compute 8 times 9, then divide the product by 2.",
+      "hi": "8 को 9 से गुणा करें, फिर परिणाम को 2 से भाग दें।",
+      "te": "8 ను 9 తో గుణించి, లబ్దాన్ని 2 తో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-d3-03",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "The first three terms of a geometric block pattern are 2, 6, 18. Each term is obtained by multiplying the previous term by 3. What is the 5th term of this pattern?",
+      "hi": "गुणोत्तर ब्लॉक पैटर्न के पहले तीन पद 2, 6, 18 हैं। प्रत्येक पद पिछले पद को 3 से गुणा करके प्राप्त होता है। इस पैटर्न का 5वां पद क्या है?",
+      "te": "ఒక గుణశ్రేణి నమూనాలో మొదటి మూడు పదాలు 2, 6, 18. ప్రతి పదం ముందున్న పదాన్ని 3 తో గుణించగా వస్తుంది. ఈ నమూనాలో 5వ పదం ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "162",
+          "hi": "162",
+          "te": "162",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "54",
+          "hi": "54",
+          "te": "54",
+          "reviewed": false
+        },
+        "mistakeTag": "stopped_one_step_early_in_sequence"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "486",
+          "hi": "486",
+          "te": "486",
+          "reviewed": false
+        },
+        "mistakeTag": "computed_one_step_too_far"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "switched_to_addition_instead_of_multiplication"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Term 1 = 2; Term 2 = 6; Term 3 = 18; Term 4 = 18 × 3 = 54; Term 5 = 54 × 3 = 162.",
+      "hi": "पद 1 = 2, पद 2 = 6, पद 3 = 18, पद 4 = 54, पद 5 = 54 × 3 = 162।",
+      "te": "1వ పదం = 2, 2వ పదం = 6, 3వ పదం = 18, 4వ పదం = 54, 5వ పదం = 54 × 3 = 162.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply 18 by 3 to get the 4th term, then multiply again by 3 for the 5th term.",
+      "hi": "चौथा पद पाने के लिए 18 को 3 से गुणा करें, फिर 5वें पद के लिए पुनः 3 से गुणा करें।",
+      "te": "4వ పదం కోసం 18 ను 3 తో గుణించి, 5వ పదం కోసం మళ్లీ 3 తో గుణించండి.",
+      "reviewed": false
+    }
   }
 ]

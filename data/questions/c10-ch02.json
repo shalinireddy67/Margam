@@ -132,5 +132,467 @@
       "te": "x-అక్షాన్ని ఖండించే ప్రతి బిందువు వద్ద p(x) విలువ 0 అవుతుంది.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c10-poly-d1-01",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "How many zeroes does a polynomial have if its graph y = P(x) intersects the x-axis at exactly 3 distinct points?",
+      "hi": "यदि किसी बहुपद का ग्राफ y = P(x) x-अक्ष को ठीक 3 अलग-अलग बिंदुओं पर काटता है, तो उसके कितने शून्यक होंगे?",
+      "te": "ఒక బహుపది గ్రాఫ్ y = P(x) x-అక్షాన్ని ఖచ్చితంగా 3 వేర్వేరు బిందువుల వద్ద ఖండిస్తే, దానికి ఎన్ని శూన్యాలు ఉంటాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_extrema_turning_points_with_zeroes"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "added_y_axis_intersection_to_zero_count"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_degree_with_single_axis_point"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The number of real zeroes of y = P(x) equals the number of points where the graph intersects the x-axis (where y = 0). Here, 3 intersections mean exactly 3 zeroes.",
+      "hi": "y = P(x) के वास्तविक शून्यकों की संख्या ग्राफ द्वारा x-अक्ष को काटे जाने वाले बिंदुओं की संख्या के बराबर होती है। यहाँ 3 प्रतिच्छेद बिंदु हैं, अतः 3 शून्यक होंगे।",
+      "te": "y = P(x) యొక్క వాస్తవ శూన్యాల సంఖ్య ఆ గ్రాఫ్ x-అక్షాన్ని ఖండించే బిందువుల సంఖ్యకు సమానం. ఇక్కడ 3 బిందువులు కాబట్టి 3 శూన్యాలు ఉంటాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Zeroes occur where y = 0, which corresponds to the x-axis.",
+      "hi": "शून्यक वहाँ होते हैं जहाँ y = 0 होता है, जो x-अक्ष पर स्थित है।",
+      "te": "y = 0 అయ్యే బిందువులే శూన్యాలు, ఇవి x-అక్షంపై ఉంటాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d1-02",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "For the quadratic polynomial P(x) = 3x² - 7x + 2, what is the sum of its zeroes (α + β)?",
+      "hi": "द्विघात बहुपद P(x) = 3x² - 7x + 2 के लिए इसके शून्यकों का योग (α + β) क्या है?",
+      "te": "వర్గ బహుపది P(x) = 3x² - 7x + 2 యొక్క శూన్యాల మొత్తం (α + β) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7/3",
+          "hi": "7/3",
+          "te": "7/3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-7/3",
+          "hi": "-7/3",
+          "te": "-7/3",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_negative_sign_in_sum_of_roots_formula"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2/3",
+          "hi": "2/3",
+          "te": "2/3",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_sum_of_roots_with_product_of_roots"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_leading_coefficient_a"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "For ax² + bx + c, sum of zeroes α + β = -b/a. Here a = 3, b = -7, so α + β = -(-7)/3 = 7/3.",
+      "hi": "द्विघात बहुपद ax² + bx + c के लिए, शून्यकों का योग α + β = -b/a होता है। यहाँ a = 3, b = -7, अतः α + β = -(-7)/3 = 7/3।",
+      "te": "ax² + bx + c లో శూన్యాల మొత్తం α + β = -b/a. ఇక్కడ a = 3, b = -7 కాబట్టి α + β = -(-7)/3 = 7/3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Use the formula α + β = -b/a.",
+      "hi": "सूत्र α + β = -b/a का उपयोग करें।",
+      "te": "α + β = -b/a సూత్రాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d2-01",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "For the quadratic polynomial P(x) = 4x² + 8x - 12, find the product of its zeroes (αβ).",
+      "hi": "द्विघात बहुपद P(x) = 4x² + 8x - 12 के लिए इसके शून्यकों का गुणनफल (αβ) ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది P(x) = 4x² + 8x - 12 యొక్క శూన్యాల లబ్దం (αβ) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-3",
+          "hi": "-3",
+          "te": "-3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_sign_of_constant_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_sum_of_roots_instead_of_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-12",
+          "hi": "-12",
+          "te": "-12",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_leading_coefficient_a"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The product of zeroes is given by αβ = c/a. Here c = -12 and a = 4, so αβ = -12/4 = -3.",
+      "hi": "शून्यकों का गुणनफल αβ = c/a होता है। यहाँ c = -12 और a = 4 है, अतः αβ = -12/4 = -3।",
+      "te": "శూన్యాల లబ్దం αβ = c/a. ఇక్కడ c = -12 మరియు a = 4 కాబట్టి αβ = -12/4 = -3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Divide the constant term c by the leading coefficient a.",
+      "hi": "अचर पद c को मुख्य गुणांक a से भाग दें।",
+      "te": "స్థిరపదం c ని మొదటి గుణకం a తో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d2-02",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "A quadratic polynomial whose zeroes are α = 3 and β = -4 is given by x² - (α + β)x + αβ. What is this polynomial?",
+      "hi": "एक द्विघात बहुपद जिसके शून्यक α = 3 और β = -4 हैं, x² - (α + β)x + αβ द्वारा दिया जाता है। यह बहुपद क्या है?",
+      "te": "శూన్యాలు α = 3 మరియు β = -4 కలిగిన వర్గ బహుపది రూపం x² - (α + β)x + αβ. ఆ బహుపది ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + x - 12",
+          "hi": "x² + x - 12",
+          "te": "x² + x - 12",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - x - 12",
+          "hi": "x² - x - 12",
+          "te": "x² - x - 12",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_sign_of_sum_in_quadratic_construction"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + x + 12",
+          "hi": "x² + x + 12",
+          "te": "x² + x + 12",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_negative_times_positive_became_positive"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² - 7x - 12",
+          "hi": "x² - 7x - 12",
+          "te": "x² - 7x - 12",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_roots_instead_of_adding_for_sum"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Sum of zeroes: α + β = 3 + (-4) = -1. Product: αβ = 3 × (-4) = -12. Form: x² - (-1)x + (-12) = x² + x - 12.",
+      "hi": "शून्यकों का योग: α + β = 3 + (-4) = -1। गुणनफल: αβ = -12। बहुपद: x² - (-1)x + (-12) = x² + x - 12।",
+      "te": "శూన్యాల మొత్తం: α + β = -1. లబ్దం: αβ = -12. బహుపది: x² - (-1)x + (-12) = x² + x - 12.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Carefully substitute -(α + β) when the sum is negative.",
+      "hi": "जब योग ऋणात्मक हो तो -(α + β) रखते समय चिह्न का ध्यान रखें।",
+      "te": "మొత్తం రుణాత్మకమైనప్పుడు -(α + β) లో గుర్తులను జాగ్రత్తగా ప్రతిక్షేపించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d3-01",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "If one zero of the quadratic polynomial P(x) = 2x² - 3x + k is reciprocal to the other, what is the value of the constant k?",
+      "hi": "यदि द्विघात बहुपद P(x) = 2x² - 3x + k का एक शून्यक दूसरे का व्युत्क्रम है, तो अचर k का मान क्या है?",
+      "te": "వర్గ బహుపది P(x) = 2x² - 3x + k యొక్క ఒక శూన్యం మరొక శూన్యానికి వ్యుత్క్రమమైతే, స్థిరరాశి k విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_reciprocal_product_condition"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1/2",
+          "hi": "1/2",
+          "te": "1/2",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_relationship_k_equals_one_over_a"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_product_of_roots_with_sum_of_roots"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Let the zeroes be α and 1/α. Their product is α × (1/α) = 1. By the coefficient relation, product = c/a = k/2. Therefore, k/2 = 1 => k = 2.",
+      "hi": "माना शून्यक α और 1/α हैं। उनका गुणनफल = α × (1/α) = 1 = c/a = k/2। अतः k = 2।",
+      "te": "శూన్యాలు α మరియు 1/α అనుకుంటే, వాటి లబ్దం = α × (1/α) = 1 = c/a = k/2 => k = 2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The product of reciprocal numbers is always 1.",
+      "hi": "परस्पर व्युत्क्रम संख्याओं का गुणनफल हमेशा 1 होता है।",
+      "te": "వ్యుత్క్రమ సంఖ్యల లబ్దం ఎల్లప్పుడూ 1 అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d3-02",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "If α and β are the zeroes of the polynomial P(x) = x² - 6x + 8, find the value of (1/α + 1/β).",
+      "hi": "यदि α और β बहुपद P(x) = x² - 6x + 8 के शून्यक हैं, तो (1/α + 1/β) का मान ज्ञात कीजिए।",
+      "te": "α మరియు β లు బహుపది P(x) = x² - 6x + 8 యొక్క శూన్యాలైతే, (1/α + 1/β) విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3/4",
+          "hi": "3/4",
+          "te": "3/4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4/3",
+          "hi": "4/3",
+          "te": "4/3",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_fraction_divided_product_by_sum"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-3/4",
+          "hi": "-3/4",
+          "te": "-3/4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_sum_of_roots_formula"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7/8",
+          "hi": "7/8",
+          "te": "7/8",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "1/α + 1/β = (α + β) / (αβ). For P(x) = x² - 6x + 8: α + β = -(-6)/1 = 6; αβ = 8/1 = 8. Hence (1/α + 1/β) = 6/8 = 3/4.",
+      "hi": "1/α + 1/β = (α + β) / (αβ)। यहाँ α + β = 6 और αβ = 8। अतः 1/α + 1/β = 6/8 = 3/4।",
+      "te": "1/α + 1/β = (α + β) / (αβ). ఇక్కడ α + β = 6 మరియు αβ = 8. కాబట్టి 1/α + 1/β = 6/8 = 3/4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Take the common denominator: (α + β) / (αβ).",
+      "hi": "उभयनिष्ठ हर लें: (α + β) / (αβ)।",
+      "te": "సాధారణ హారాన్ని తీసుకోండి: (α + β) / (αβ).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-d3-03",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "If the zeroes of the quadratic polynomial P(x) = x² - (k + 6)x + 2(2k - 1) satisfy α + β = αβ / 2, find the value of k.",
+      "hi": "यदि द्विघात बहुपद P(x) = x² - (k + 6)x + 2(2k - 1) के शून्यक α + β = αβ / 2 को संतुष्ट करते हैं, तो k का मान ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది P(x) = x² - (k + 6)x + 2(2k - 1) శూన్యాలు α + β = αβ / 2 ను తృప్తిపరిస్తే, k విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_constants_instead_of_adding_in_transposition"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_solving_linear_equation"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "α + β = k + 6. αβ = 2(2k - 1) = 4k - 2, so αβ / 2 = 2k - 1. Setting them equal: k + 6 = 2k - 1 => 2k - k = 6 + 1 => k = 7.",
+      "hi": "α + β = k + 6। αβ / 2 = 2k - 1। समीकरण: k + 6 = 2k - 1 => k = 7।",
+      "te": "α + β = k + 6. αβ / 2 = 2k - 1. సమీకరణం: k + 6 = 2k - 1 => k = 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Express α + β and αβ in terms of k, then solve the linear equation.",
+      "hi": "α + β और αβ को k के रूप में लिखें, फिर रैखिक समीकरण को हल करें।",
+      "te": "α + β మరియు αβ లను k రూపంలో రాసి, సరళ సమీకరణాన్ని సాధించండి.",
+      "reviewed": false
+    }
   }
 ]

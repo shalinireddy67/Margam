@@ -132,5 +132,467 @@
       "te": "12 నుండి తీసివేసే ముందు లోపలి బ్రాకెట్ (5 + 4) ను సాధించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-c7-alg-d1-01",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate the arithmetic expression following order of operations: 18 + 12 ÷ 3.",
+      "hi": "संक्रियाओं के क्रम (BODMAS) का पालन करते हुए मान ज्ञात करें: 18 + 12 ÷ 3।",
+      "te": "BODMAS నియమాన్ని అనుసరించి విలువను లెక్కించండి: 18 + 12 ÷ 3.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "22",
+          "hi": "22",
+          "te": "22",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "added_before_dividing_ignored_bodmas"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Division takes precedence over addition: 12 ÷ 3 = 4. Then 18 + 4 = 22.",
+      "hi": "भाग की संक्रिया जोड़ से पहले की जाती है: 12 ÷ 3 = 4। फिर 18 + 4 = 22।",
+      "te": "కూడిక కంటే ముందే భాగహారం చేయాలి: 12 ÷ 3 = 4. తర్వాత 18 + 4 = 22.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "BODMAS rule: perform division before addition.",
+      "hi": "BODMAS नियम: जोड़ से पहले भाग करें।",
+      "te": "BODMAS నియమం: కూడిక కంటే ముందు భాగహారం చేయాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d1-02",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find the value of: 40 - 5 × 6.",
+      "hi": "मान ज्ञात कीजिए: 40 - 5 × 6।",
+      "te": "విలువను కనుగొనండి: 40 - 5 × 6.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "210",
+          "hi": "210",
+          "te": "210",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_before_multiplying_ignored_bodmas"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-10",
+          "hi": "-10",
+          "te": "-10",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_reversal_in_subtraction"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Multiplication comes before subtraction: 5 × 6 = 30. Then 40 - 30 = 10.",
+      "hi": "घटाव से पहले गुणा किया जाता है: 5 × 6 = 30। फिर 40 - 30 = 10।",
+      "te": "తీసివేత కంటే ముందే గుణకారం చేయాలి: 5 × 6 = 30. తర్వాత 40 - 30 = 10.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate 5 times 6 first.",
+      "hi": "पहले 5 गुणा 6 करें।",
+      "te": "ముందుగా 5 ను 6 తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d2-01",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate the expression with nested brackets: 25 - [10 + (8 - 3 × 2)].",
+      "hi": "कोष्ठकों वाले व्यंजक का मान ज्ञात करें: 25 - [10 + (8 - 3 × 2)]।",
+      "te": "బ్రాకెట్లతో కూడిన సమాసాన్ని సాధించండి: 25 - [10 + (8 - 3 × 2)].",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "13",
+          "hi": "13",
+          "te": "13",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication_inside_brackets"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "17",
+          "hi": "17",
+          "te": "17",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_distribution_error_on_bracket_removal"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        },
+        "mistakeTag": "ignored_nested_bracket_order"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Innermost bracket first: 3 × 2 = 6, then 8 - 6 = 2. Square bracket: 10 + 2 = 12. Finally: 25 - 12 = 13.",
+      "hi": "सबसे भीतरी कोष्ठक पहले: 3 × 2 = 6, फिर 8 - 6 = 2। बड़ा कोष्ठक: 10 + 2 = 12। अंत में: 25 - 12 = 13।",
+      "te": "లోపలి బ్రాకెట్ మొదట: 3 × 2 = 6, తర్వాత 8 - 6 = 2. చతురస్ర బ్రాకెట్: 10 + 2 = 12. చివరగా: 25 - 12 = 13.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Work from the innermost parentheses outward.",
+      "hi": "सबसे भीतरी कोष्ठक से शुरू करके बाहर की ओर हल करें।",
+      "te": "అన్నింటికంటే లోపలి బ్రాకెట్ నుండి బయటకు సాధించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d2-02",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate: 48 ÷ (12 - 4) × 3.",
+      "hi": "मान ज्ञात कीजिए: 48 ÷ (12 - 4) × 3।",
+      "te": "సాధించండి: 48 ÷ (12 - 4) × 3.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_before_dividing_from_left_to_right"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "divided_first_number_by_all_in_brackets"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Brackets first: 12 - 4 = 8. Then evaluate division and multiplication from left to right: 48 ÷ 8 = 6; 6 × 3 = 18.",
+      "hi": "पहले कोष्ठक: 12 - 4 = 8। फिर बाएं से दाएं भाग और गुणा: 48 ÷ 8 = 6; 6 × 3 = 18।",
+      "te": "మొదట బ్రాకెట్: 12 - 4 = 8. తర్వాత ఎడమ నుండి కుడికి: 48 ÷ 8 = 6; 6 × 3 = 18.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "After resolving the brackets, perform division and multiplication from left to right.",
+      "hi": "कोष्ठक हल करने के बाद, बाएं से दाएं क्रम में भाग और गुणा करें।",
+      "te": "బ్రాకెట్ సాధించిన తర్వాత, ఎడమ నుండి కుడికి భాగహారం మరియు గుణకారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d3-01",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Simplify the complex nested expression: 50 - 3 × {14 - 2 × (9 - 6)}.",
+      "hi": "जटिल कोष्ठक व्यंजक को सरल करें: 50 - 3 × {14 - 2 × (9 - 6)}।",
+      "te": "సంక్లిష్ట బ్రాకెట్లతో కూడిన సమాసాన్ని సూక్ష్మీకరించండి: 50 - 3 × {14 - 2 × (9 - 6)}.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "26",
+          "hi": "26",
+          "te": "26",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication_outside_braces"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        },
+        "mistakeTag": "distributed_wrong_sign_in_curly_braces"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "44",
+          "hi": "44",
+          "te": "44",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_outer_multiplication_factor"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "1) Parentheses: 9 - 6 = 3. 2) Braces: 14 - 2(3) = 14 - 6 = 8. 3) Multiply: 3 × 8 = 24. 4) Subtract: 50 - 24 = 26.",
+      "hi": "1) छोटा कोष्ठक: 9 - 6 = 3। 2) मँझला कोष्ठक: 14 - 2(3) = 14 - 6 = 8। 3) गुणा: 3 × 8 = 24। 4) घटाव: 50 - 24 = 26।",
+      "te": "1) లోపలి బ్రాకెట్: 9 - 6 = 3. 2) మధ్య బ్రాకెట్: 14 - 6 = 8. 3) గుణకారం: 3 × 8 = 24. 4) తీసివేత: 50 - 24 = 26.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Evaluate (9 - 6) first, multiply by 2, subtract from 14, multiply by 3, and subtract from 50.",
+      "hi": "पहले (9 - 6) का मान निकालें, 2 से गुणा करें, 14 में से घटाएं, 3 से गुणा करें, और 50 में से घटाएं।",
+      "te": "ముందు (9 - 6) విలువ కనుగొని, 2 తో గుణించి, 14 నుండి తీసివేసి, 3 తో గుణించి, 50 నుండి తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d3-02",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Evaluate: 100 - [40 + {20 - (12 - 4 × 2)}].",
+      "hi": "मान ज्ञात कीजिए: 100 - [40 + {20 - (12 - 4 × 2)}]।",
+      "te": "విలువను కనుగొనండి: 100 - [40 + {20 - (12 - 4 × 2)}].",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "44",
+          "hi": "44",
+          "te": "44",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication_inside_brackets"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "56",
+          "hi": "56",
+          "te": "56",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_subtract_from_first_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "48",
+          "hi": "48",
+          "te": "48",
+          "reviewed": false
+        },
+        "mistakeTag": "arithmetic_calculation_slip_off_by_one"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "1) 4 × 2 = 8. 2) 12 - 8 = 4. 3) 20 - 4 = 16. 4) 40 + 16 = 56. 5) 100 - 56 = 44.",
+      "hi": "1) 4 × 2 = 8। 2) 12 - 8 = 4। 3) 20 - 4 = 16। 4) 40 + 16 = 56। 5) 100 - 56 = 44।",
+      "te": "1) 4 × 2 = 8. 2) 12 - 8 = 4. 3) 20 - 4 = 16. 4) 40 + 16 = 56. 5) 100 - 56 = 44.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Resolve round brackets (12 - 8 = 4), then curly braces, then square brackets.",
+      "hi": "पहले छोटे कोष्ठक (12 - 8 = 4), फिर मँझले, फिर बड़े कोष्ठक को हल करें।",
+      "te": "ముందుగా గుండ్రని బ్రాకెట్లు (12 - 8 = 4), తర్వాత మధ్య బ్రాకెట్లు, తర్వాత పెద్ద బ్రాకెట్లు సాధించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-d3-03",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "prompt": {
+      "en": "Find the value of: [36 ÷ (-4)] + [(-5) × (-3)] - [18 ÷ (-6)].",
+      "hi": "मान ज्ञात कीजिए: [36 ÷ (-4)] + [(-5) × (-3)] - [18 ÷ (-6)]।",
+      "te": "విలువను లెక్కించండి: [36 ÷ (-4)] + [(-5) × (-3)] - [18 ÷ (-6)].",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_negative_times_negative_became_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-3",
+          "hi": "-3",
+          "te": "-3",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_double_negative_becomes_positive_in_subtraction"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_sign_in_division"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "1) 36 ÷ (-4) = -9. 2) (-5) × (-3) = 15. 3) 18 ÷ (-6) = -3. Expression becomes: -9 + 15 - (-3) = -9 + 15 + 3 = 9.",
+      "hi": "1) 36 ÷ (-4) = -9। 2) (-5) × (-3) = 15। 3) 18 ÷ (-6) = -3। व्यंजक: -9 + 15 - (-3) = -9 + 15 + 3 = 9।",
+      "te": "1) 36 ÷ (-4) = -9. 2) (-5) × (-3) = 15. 3) 18 ÷ (-6) = -3. మొత్తం: -9 + 15 - (-3) = -9 + 15 + 3 = 9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that subtracting a negative number is equivalent to adding: -(-3) = +3.",
+      "hi": "याद रखें कि ऋणात्मक संख्या को घटाना जोड़ने के समान है: -(-3) = +3।",
+      "te": "రుణ సంఖ్యను తీసివేయడం అంటే ధన సంఖ్యను కలపడమే: -(-3) = +3.",
+      "reviewed": false
+    }
   }
 ]

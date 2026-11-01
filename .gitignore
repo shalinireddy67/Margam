@@ -41,3 +41,6 @@ next-env.d.ts
 screenshots/
 .screenshots/
 
+# Translation Review CSV
+translations-review.csv
+
