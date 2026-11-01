@@ -78,8 +78,11 @@ export default function HomePage() {
         createLearnerProfile(nameInput.trim() || "Student", selectedClass)
       );
     setProfile(effectiveProfile);
-    const pilotChapters = getSupportedChapters(selectedClass);
-    const chapterId = pilotChapters[0]?.id || "c10-ch04";
+    const eligibleChapters = getSupportedChapters(selectedClass).filter((ch) =>
+      canTakeChapterDiagnostic(ch.id)
+    );
+    const chapterId =
+      eligibleChapters[0]?.id || (selectedClass === 10 ? "c10-ch04" : "c6-ch01");
     router.push(`/student/diagnostic/${chapterId}`);
   };
 
@@ -748,15 +751,17 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {gradeChapters.map((chapter) => {
               const isFull = chapter.status === "full";
+              const isReady = isFull && canTakeChapterDiagnostic(chapter.id);
               const chapterConcepts = getConceptsByChapter(chapter.id);
-              const hasDiagnostic = isFull && canTakeChapterDiagnostic(chapter.id);
-              const hasStarted = chapterConcepts.some(
-                (c) =>
-                  profile?.topicProgress[c.id]?.status === "completed" ||
-                  profile?.topicProgress[c.id]?.status === "in_progress"
-              );
+              const hasStarted =
+                isReady &&
+                chapterConcepts.some(
+                  (c) =>
+                    profile?.topicProgress[c.id]?.status === "completed" ||
+                    profile?.topicProgress[c.id]?.status === "in_progress"
+                );
 
-              const tileState = !isFull
+              const tileState = !isReady
                 ? "coming_soon"
                 : hasStarted
                 ? "in_progress"
@@ -768,15 +773,15 @@ export default function HomePage() {
               const localizedSubtitle = `NCERT • ${chapter.bookName}`;
 
               const firstConceptId = chapterConcepts[0]?.id;
-              const diagnosticHref = hasDiagnostic
+              const diagnosticHref = isReady
                 ? `/student/diagnostic/${chapter.id}`
                 : undefined;
               const practiceHref =
-                isFull && firstConceptId
+                isReady && firstConceptId
                   ? `/student/worksheet/${firstConceptId}`
                   : undefined;
               const lessonHref =
-                isFull && firstConceptId
+                isReady && firstConceptId
                   ? `/lesson/${firstConceptId}`
                   : undefined;
 
@@ -785,6 +790,11 @@ export default function HomePage() {
                   key={chapter.id}
                   title={localizedTitle}
                   subtitle={localizedSubtitle}
+                  tooltip={
+                    !isReady
+                      ? "This chapter is still being built. Try another chapter or come back soon."
+                      : undefined
+                  }
                   state={tileState}
                   color="wood"
                   diagnosticHref={diagnosticHref}

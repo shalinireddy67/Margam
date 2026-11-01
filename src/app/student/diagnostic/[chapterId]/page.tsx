@@ -112,8 +112,7 @@ interface DiagnosticResultResponse {
     conceptId?: string;
     isCorrect: boolean;
     chosenAnswer: string;
-    correctAnswer?: string;
-    mistakeTag?: string;
+    tag?: string;
     misconceptionCategory?: string;
     educationalFeedback?: string;
     explanation?: any;
@@ -290,7 +289,7 @@ export default function ChapterDiagnosticPage() {
               Diagnostic Not Available
             </h1>
             <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] leading-relaxed">
-              This chapter requires at least 6 verified questions to generate a diagnostic assessment.
+              This chapter is still being built. Try another chapter or come back soon.
             </p>
             <div className="pt-2">
               <Link
@@ -795,17 +794,12 @@ export default function ChapterDiagnosticPage() {
                     let optionBgClass = "bg-[#422816] text-[#E5D7BE] hover:border-[#3FA7C9] hover:bg-[#5A3720]";
 
                     if (result && feedbackItem) {
-                      const isCorrectAnswer = feedbackItem.correctAnswer === opt.id;
                       if (isSelected && feedbackItem.isCorrect) {
                         optionBorderClass = "border-2 border-[#2F6B22]";
                         optionBgClass = "bg-[#5DAA3A] text-[#FFF7E6]";
                       } else if (isSelected && !feedbackItem.isCorrect) {
                         optionBorderClass = "border-2 border-[#8B2323]";
                         optionBgClass = "bg-[#E04A3F] text-[#FFF7E6]";
-                      } else if (isCorrectAnswer) {
-                        // Highlight actual correct answer when student made a mistake
-                        optionBorderClass = "border-2 border-[#5DAA3A]";
-                        optionBgClass = "bg-[#422816] text-[#5DAA3A] border-dashed";
                       }
                     } else if (isSelected) {
                       optionBorderClass = "border-2 border-[#1E6F8C]";
@@ -843,18 +837,12 @@ export default function ChapterDiagnosticPage() {
                           </span>
                         </div>
 
-                        {result && feedbackItem && (
-                          isSelected ? (
-                            feedbackItem.isCorrect ? (
-                              <CheckCircle2 className="w-5 h-5 text-[#5DAA3A] shrink-0" />
-                            ) : (
-                              <XCircle className="w-5 h-5 text-[#E04A3F] shrink-0" />
-                            )
-                          ) : feedbackItem.correctAnswer === opt.id ? (
-                            <span className="text-[10px] font-heading font-bold text-[#5DAA3A] px-2 py-0.5 bg-[#422816] border border-[#5DAA3A]">
-                              Correct Solution
-                            </span>
-                          ) : null
+                        {result && feedbackItem && isSelected && (
+                          feedbackItem.isCorrect ? (
+                            <CheckCircle2 className="w-5 h-5 text-[#5DAA3A] shrink-0" />
+                          ) : (
+                            <XCircle className="w-5 h-5 text-[#E04A3F] shrink-0" />
+                          )
                         )}
                       </div>
                     );

@@ -24,6 +24,7 @@ export type TileColor =
 export interface TileProps {
   title: string;
   subtitle?: string;
+  tooltip?: string;
   state?: TileState;
   kind?: TileKind;
   color?: TileColor;
@@ -37,6 +38,7 @@ export interface TileProps {
 export function Tile({
   title,
   subtitle,
+  tooltip,
   state = "available",
   color = "forest",
   diagnosticHref,
@@ -47,17 +49,43 @@ export function Tile({
 }: TileProps) {
   // Coming soon state
   if (state === "coming_soon") {
+    const tooltipText =
+      tooltip ||
+      "This chapter is still being built. Try another chapter or come back soon.";
+
     return (
       <div
+        title={tooltipText}
+        aria-label={`${title} - Coming Soon (Locked)`}
+        aria-disabled="true"
         className={`
-          flex flex-col justify-between
-          border-4 border-dashed border-[#A06A3C] rounded-[2px]
+          flex flex-col justify-between select-none
+          border-4 border-dashed border-[#A06A3C]/70 rounded-[2px]
           bg-[#5A3720]/60 p-4 sm:p-5 text-[#D9D9D9]
           shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3),4px_4px_0px_rgba(0,0,0,0.35)]
+          cursor-not-allowed group relative
           ${className}
         `.trim()}
       >
         <div>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#422816] text-[#FFE9A8] border border-[#5E5E5E] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
+              <svg
+                viewBox="0 0 16 16"
+                className="w-3.5 h-3.5 text-[#FFE9A8]"
+                role="img"
+                aria-hidden="true"
+                shapeRendering="crispEdges"
+              >
+                <rect x="5" y="2" width="6" height="2" fill="#D9D9D9" />
+                <rect x="4" y="3" width="2" height="4" fill="#D9D9D9" />
+                <rect x="10" y="3" width="2" height="4" fill="#D9D9D9" />
+                <rect x="3" y="7" width="10" height="7" fill="#7A4B2A" stroke="#422816" strokeWidth="2" />
+                <rect x="7" y="9" width="2" height="2" fill="#FFE9A8" />
+              </svg>
+              <span>COMING SOON</span>
+            </span>
+          </div>
           <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D9D9D9] leading-tight">
             {title}
           </h3>
@@ -67,9 +95,10 @@ export function Tile({
             </p>
           )}
         </div>
-        <div className="mt-4">
-          <span className="inline-block border-2 border-[#3F3F3F] rounded-[2px] px-3 py-1 bg-[#5E5E5E] text-[10px] font-heading font-bold text-[#D9D9D9]">
-            COMING SOON
+        <div className="mt-4 pt-2 border-t border-[#A06A3C]/40 flex items-center justify-between text-[11px] font-heading text-[#D9D9D9]/70">
+          <span>Under Construction</span>
+          <span className="text-[10px] text-[#FFE9A8]/80 group-hover:text-[#FFE9A8] transition-colors">
+            Questions in Forge
           </span>
         </div>
       </div>

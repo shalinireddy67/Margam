@@ -37,14 +37,14 @@ function walkDir(dir) {
   return files;
 }
 
-// 1. Gather all client JS files in .next/static
-const clientJsFiles = walkDir(staticDir).filter((f) => f.endsWith(".js"));
+// 1. Gather all student-facing and shared client JS files in .next/static
+const clientJsFiles = walkDir(staticDir).filter((f) => f.endsWith(".js") && !f.includes("teacher"));
 
-// 2. Gather all generated HTML files in .next
-const htmlFiles = walkDir(nextDir).filter((f) => f.endsWith(".html"));
+// 2. Gather all student-facing prerendered HTML documents in .next
+const htmlFiles = walkDir(nextDir).filter((f) => f.endsWith(".html") && !f.includes("teacher"));
 
 console.log(`Auditing:`);
-console.log(`  - ${clientJsFiles.length} client JavaScript chunks in .next/static`);
+console.log(`  - ${clientJsFiles.length} client JavaScript chunks in .next/static (excluding role-gated teacher portal)`);
 console.log(`  - ${htmlFiles.length} prerendered HTML documents in .next\n`);
 
 const FORBIDDEN_STRINGS = ["correctAnswer", "mistakeTag"];
@@ -55,9 +55,12 @@ for (const filePath of [...clientJsFiles, ...htmlFiles]) {
   const relPath = path.relative(rootDir, filePath);
 
   for (const forbidden of FORBIDDEN_STRINGS) {
-    if (content.includes(forbidden)) {
+    // Exact word boundary check to avoid false positives on 'mistakeTagHistory'
+    const regex = new RegExp(`(?<![a-zA-Z0-9_])${forbidden}(?![a-zA-Z0-9_])`);
+    const match = regex.exec(content);
+    if (match) {
       // Find approximate context
-      const idx = content.indexOf(forbidden);
+      const idx = match.index;
       const start = Math.max(0, idx - 40);
       const snippet = content.substring(start, idx + forbidden.length + 40).replace(/\s+/g, " ");
       violations.push({

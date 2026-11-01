@@ -54,7 +54,6 @@ const RemediationGapSchema = z.object({
   currentConceptId: z.string(),
   rootConceptId: z.string(),
   tag: z.string().optional(),
-  mistakeTag: z.string().optional(),
   plainLanguageReason: z.string(),
   prerequisitePath: z.array(z.string()),
   confirmationQuestionIds: z.array(z.string()),

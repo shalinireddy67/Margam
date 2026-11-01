@@ -135,6 +135,8 @@ export function canTakeChapterDiagnostic(chapterId: string): boolean {
   return getChapterQuestionCount(chapterId) >= 6;
 }
 
+export const isChapterDiagnosticReady = canTakeChapterDiagnostic;
+
 /**
  * Returns true if the concept has at least minRequired questions in the active question bank.
  */
