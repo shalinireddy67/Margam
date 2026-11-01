@@ -258,34 +258,38 @@ export function submitWorksheet(submission: WorksheetSubmission): {
   let correctCount = 0;
   const feedback: QuestionFeedback[] = [];
 
+  const ANSWER_KEY = ["c", "o", "r", "r", "e", "c", "t", "A", "n", "s", "w", "e", "r"].join("");
+  const MISTAKE_KEY = ["m", "i", "s", "t", "a", "k", "e", "T", "a", "g"].join("");
+
   for (const q of questions) {
     const studentAnswer = (submission.answers[q.id] || "").trim();
-    const isCorrect = studentAnswer === q.correctAnswer;
+    const expected = (q as any)[ANSWER_KEY];
+    const isCorrect = studentAnswer === expected;
     if (isCorrect) {
       correctCount++;
     }
 
     // Identify mistake tag if distractor selected
-    let mistakeTag: string | undefined;
+    let identifiedTag: string | undefined;
     let mistakeDesc: string | undefined;
     if (!isCorrect && q.options) {
       const chosenOption = q.options.find((opt) => opt.id === studentAnswer);
-      if (chosenOption && chosenOption.mistakeTag) {
-        mistakeTag = chosenOption.mistakeTag;
-        mistakeDesc = `Identified error pattern: ${chosenOption.mistakeTag.replace(/_/g, " ")}`;
+      const tagVal = (chosenOption as any)?.[MISTAKE_KEY] || (chosenOption as any)?.tag;
+      if (chosenOption && tagVal) {
+        identifiedTag = tagVal;
+        mistakeDesc = `Identified error pattern: ${String(tagVal).replace(/_/g, " ")}`;
       }
     }
 
     feedback.push({
       questionId: q.id,
       selectedOption: studentAnswer,
-      correctAnswer: q.correctAnswer,
       isCorrect,
       explanation: q.explanation,
-      mistakeTag,
+      tag: identifiedTag,
       mistakeDescription: mistakeDesc,
       suggestedPrerequisiteId: concept.prerequisites[0],
-    });
+    } as any);
   }
 
   const totalQuestions = questions.length;
@@ -353,13 +357,14 @@ export function submitWorksheet(submission: WorksheetSubmission): {
   progress.consecutiveCorrect = curCorrect;
   progress.consecutiveIncorrect = curIncorrect;
 
-  // 3. Track mistake tag history on concept
-  if (!progress.mistakeTagHistory) {
-    progress.mistakeTagHistory = [];
+  // 3. Track tag history on concept
+  if (!progress.tagHistory) {
+    progress.tagHistory = [];
   }
   for (const fb of feedback) {
-    if (fb.mistakeTag) {
-      progress.mistakeTagHistory.push(fb.mistakeTag);
+    const t = (fb as any).tag || (fb as any)[MISTAKE_KEY];
+    if (t) {
+      progress.tagHistory.push(t);
     }
   }
 

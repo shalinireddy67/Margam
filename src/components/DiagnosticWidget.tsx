@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Sparkles, BookOpen, Compass, Award } from "lucide-react";
-import questionsData from "../../data/questions.json";
 import conceptsData from "../../data/concepts.json";
 import lessonsData from "../../data/lessons.json";
 import { SupportedLanguage } from "@/lib/types";
@@ -10,6 +9,51 @@ import { SupportedLanguage } from "@/lib/types";
 interface DiagnosticWidgetProps {
   currentLang?: SupportedLanguage;
 }
+
+const sampleQuestions = [
+  {
+    id: "q-poly-02",
+    conceptId: "c9-poly-01",
+    prompt: {
+      en: "Expand (x + 3)(x - 2)",
+      hi: "(x + 3)(x - 2) का प्रसार कीजिए",
+      te: "(x + 3)(x - 2) ను విస్తరించండి",
+      reviewed: false,
+    },
+    options: [
+      { id: "A", text: { en: "x² + x - 6", hi: "x² + x - 6", te: "x² + x - 6", reviewed: false } },
+      { id: "B", text: { en: "x² - x - 6", hi: "x² - x - 6", te: "x² - x - 6", reviewed: false } },
+    ],
+  },
+  {
+    id: "q-lin-02",
+    conceptId: "c8-lin-01",
+    prompt: {
+      en: "Solve for x: 2(x - 3) = 8",
+      hi: "x के लिए हल करें: 2(x - 3) = 8",
+      te: "x కొరకు సాధించండి: 2(x - 3) = 8",
+      reviewed: false,
+    },
+    options: [
+      { id: "A", text: { en: "x = 7", hi: "x = 7", te: "x = 7", reviewed: false } },
+      { id: "B", text: { en: "x = 4", hi: "x = 4", te: "x = 4", reviewed: false } },
+    ],
+  },
+  {
+    id: "q-int-02",
+    conceptId: "c7-int-02",
+    prompt: {
+      en: "Calculate: (-4) × (-5)",
+      hi: "गणना करें: (-4) × (-5)",
+      te: "లెక్కించండి: (-4) × (-5)",
+      reviewed: false,
+    },
+    options: [
+      { id: "A", text: { en: "+20", hi: "+20", te: "+20", reviewed: false } },
+      { id: "B", text: { en: "-20", hi: "-20", te: "-20", reviewed: false } },
+    ],
+  },
+];
 
 export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidgetProps) {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -20,11 +64,7 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
     "basics_first"
   );
 
-  // 3 sequential diagnostic questions representing Class 9 -> Class 8 -> Class 7 DAG
-  const diagnosticQuestionIds = ["q-poly-02", "q-lin-02", "q-int-02"];
-  const currentQuestions = diagnosticQuestionIds
-    .map((id) => questionsData.find((q) => q.id === id))
-    .filter(Boolean);
+  const currentQuestions = sampleQuestions;
 
   const activeQ = currentQuestions[currentStep];
 

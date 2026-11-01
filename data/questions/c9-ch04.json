@@ -1,0 +1,873 @@
+[
+  {
+    "id": "q-c9-id-01",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Using standard algebraic identities, expand: (3x - 4)²",
+      "hi": "मानक बीजीय सर्वसमिकाओं का उपयोग करके विस्तार कीजिए: (3x - 4)²",
+      "te": "ప్రామాణిక బీజగణిత సర్వసమీకరణాలను ఉపయోగించి విస్తరించండి: (3x - 4)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9x² - 16",
+          "hi": "9x² - 16",
+          "te": "9x² - 16",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9x² - 12x + 16",
+          "hi": "9x² - 12x + 16",
+          "te": "9x² - 12x + 16",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9x² - 24x + 16",
+          "hi": "9x² - 24x + 16",
+          "te": "9x² - 24x + 16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "9x² + 24x + 16",
+          "hi": "9x² + 24x + 16",
+          "te": "9x² + 24x + 16",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_middle_term_positive_instead_of_negative"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Using (a - b)² = a² - 2ab + b² with a = 3x and b = 4: (3x)² - 2(3x)(4) + (4)² = 9x² - 24x + 16.",
+      "hi": "(a - b)² = a² - 2ab + b² का उपयोग करते हुए, a = 3x और b = 4 रखने पर: (3x)² - 2(3x)(4) + (4)² = 9x² - 24x + 16।",
+      "te": "(a - b)² = a² - 2ab + b² సూత్రంలో a = 3x, b = 4 ప్రతిక్షేపిస్తే: (3x)² - 2(3x)(4) + (4)² = 9x² - 24x + 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Do not forget the middle term: -2 × a × b.",
+      "hi": "मध्य पद को न भूलें: -2 × a × b।",
+      "te": "మధ్య పదం -2 × a × b ను మర్చిపోకండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-02",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Compute the product directly using algebraic identities: (5x + 3y)(5x - 3y)",
+      "hi": "सर्वसमिकाओं का उपयोग करके सीधे गुणनफल ज्ञात कीजिए: (5x + 3y)(5x - 3y)",
+      "te": "సర్వసమీకరణాలను ఉపయోగించి లబ్దాన్ని నేరుగా లెక్కించండి: (5x + 3y)(5x - 3y)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "25x² + 9y²",
+          "hi": "25x² + 9y²",
+          "te": "25x² + 9y²",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_difference_of_squares"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "25x² - 30xy - 9y²",
+          "hi": "25x² - 30xy - 9y²",
+          "te": "25x² - 30xy - 9y²",
+          "reviewed": false
+        },
+        "mistakeTag": "included_non_existent_middle_term_in_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "25x² - 9y²",
+          "hi": "25x² - 9y²",
+          "te": "25x² - 9y²",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "10x² - 6y²",
+          "hi": "10x² - 6y²",
+          "te": "10x² - 6y²",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_by_two_instead_of_squaring"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "This matches the difference of squares identity: (a + b)(a - b) = a² - b². Here, a = 5x and b = 3y, so (5x)² - (3y)² = 25x² - 9y².",
+      "hi": "यह वर्गों के अंतर की सर्वसमिका से मेल खाता है: (a + b)(a - b) = a² - b²। यहाँ a = 5x और b = 3y, अतः (5x)² - (3y)² = 25x² - 9y²।",
+      "te": "ఇది వర్గాల తేడా సర్వసమీకరణం: (a + b)(a - b) = a² - b². ఇక్కడ a = 5x, b = 3y, కాబట్టి (5x)² - (3y)² = 25x² - 9y².",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Notice that the linear middle terms cancel each other out.",
+      "hi": "ध्यान दें कि मध्य पद एक दूसरे को निरस्त कर देते हैं।",
+      "te": "మధ్య పదాలు పరస్పరం రద్దవుతాయని గమనించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-01",
+    "conceptId": "c9-id-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Factorize the quadratic polynomial by splitting the middle term: x² + 8x + 15",
+      "hi": "मध्य पद को विभाजित करके द्विघात बहुपद का गुणनखंड कीजिए: x² + 8x + 15",
+      "te": "మధ్య పదాన్ని విభజించి వర్గ బహుపదిని కారణాంకాలుగా మార్చండి: x² + 8x + 15",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x + 1)(x + 15)",
+          "hi": "(x + 1)(x + 15)",
+          "te": "(x + 1)(x + 15)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x + 3)(x + 5)",
+          "hi": "(x + 3)(x + 5)",
+          "te": "(x + 3)(x + 5)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(x - 3)(x - 5)",
+          "hi": "(x - 3)(x - 5)",
+          "te": "(x - 3)(x - 5)",
+          "reviewed": false
+        },
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x + 2)(x + 6)",
+          "hi": "(x + 2)(x + 6)",
+          "te": "(x + 2)(x + 6)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "We need two numbers that multiply to 15 and add to 8. The numbers are 3 and 5 (3 × 5 = 15, 3 + 5 = 8). Thus, x² + 8x + 15 = (x + 3)(x + 5).",
+      "hi": "हमें ऐसी दो संख्याएँ चाहिए जिनका गुणनफल 15 और योग 8 हो। वे संख्याएँ 3 और 5 हैं (3 × 5 = 15, 3 + 5 = 8)। अतः x² + 8x + 15 = (x + 3)(x + 5)।",
+      "te": "లబ్దం 15 మరియు మొత్తం 8 అయ్యే రెండు సంఖ్యలు కావాలి. ఆ సంఖ్యలు 3 మరియు 5 (3 × 5 = 15, 3 + 5 = 8). కాబట్టి x² + 8x + 15 = (x + 3)(x + 5).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "List the factor pairs of 15: (1, 15) and (3, 5). Which pair adds up to 8?",
+      "hi": "15 के गुणनखंड जोड़ियों की सूची बनाएं: (1, 15) और (3, 5)। किस जोड़ी का योग 8 है?",
+      "te": "15 యొక్క కారణాంక జతలను చూడండి: (1, 15) మరియు (3, 5). ఏ జత మొత్తం 8 అవుతుంది?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-02",
+    "conceptId": "c9-id-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Factorize the quadratic expression with a negative constant term: x² - 4x - 21",
+      "hi": "ऋणात्मक अचर पद वाले द्विघात व्यंजक का गुणनखंड कीजिए: x² - 4x - 21",
+      "te": "ఋణ స్థిరపదం కలిగిన వర్గ సమాసాన్ని కారణాంకాలుగా మార్చండి: x² - 4x - 21",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x + 7)(x - 3)",
+          "hi": "(x + 7)(x - 3)",
+          "te": "(x + 7)(x - 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x - 7)(x - 3)",
+          "hi": "(x - 7)(x - 3)",
+          "te": "(x - 7)(x - 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_both_negative_yields_positive_product"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(x - 7)(x + 3)",
+          "hi": "(x - 7)(x + 3)",
+          "te": "(x - 7)(x + 3)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x - 21)(x + 1)",
+          "hi": "(x - 21)(x + 1)",
+          "te": "(x - 21)(x + 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "We need two numbers whose product is -21 and sum is -4. Since the product is negative, the numbers must have opposite signs. Testing pairs: (-7) × 3 = -21 and (-7) + 3 = -4. Therefore, the factorization is (x - 7)(x + 3).",
+      "hi": "हमें ऐसी दो संख्याएँ चाहिए जिनका गुणनफल -21 और योग -4 हो। चूंकि गुणनफल ऋणात्मक है, अतः संख्याओं के चिह्न विपरीत होने चाहिए: (-7) × 3 = -21 और (-7) + 3 = -4। अतः गुणनखंड (x - 7)(x + 3) है।",
+      "te": "లబ్దం -21 మరియు మొత్తం -4 అయ్యే రెండు సంఖ్యలు కావాలి. లబ్దం ఋణాత్మకం కాబట్టి సంఖ్యలకు వేర్వేరు సంకేతాలు ఉండాలి: (-7) × 3 = -21 మరియు (-7) + 3 = -4. కాబట్టి కారణాంకాలు (x - 7)(x + 3).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When the product is negative, the larger magnitude number must take the sign of the middle term (-).",
+      "hi": "जब गुणनफल ऋणात्मक हो, तो बड़े अंक का चिह्न मध्य पद (-) के समान होना चाहिए।",
+      "te": "లబ్దం ఋణాత్మకం అయినప్పుడు, పెద్ద సంఖ్యకు మధ్య పదం (-) సంకేతం ఉండాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d1-01",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand (x + 5)² using standard algebraic identities.",
+      "hi": "मानक बीजगणितीय सर्वसमिकाओं का उपयोग करके (x + 5)² का विस्तार कीजिए।",
+      "te": "బీజగణిత సర్వసమీకరణాలను ఉపయోగించి (x + 5)² ను విస్తరించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 10x + 25",
+          "hi": "x² + 10x + 25",
+          "te": "x² + 10x + 25",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² + 25",
+          "hi": "x² + 25",
+          "te": "x² + 25",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 5x + 25",
+          "hi": "x² + 5x + 25",
+          "te": "x² + 5x + 25",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 10x + 10",
+          "hi": "x² + 10x + 10",
+          "te": "x² + 10x + 10",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_by_two_instead_of_squaring"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using (a + b)² = a² + 2ab + b²: x² + 2(x)(5) + 5² = x² + 10x + 25.",
+      "hi": "(a + b)² = a² + 2ab + b² का उपयोग करते हुए: x² + 2(x)(5) + 5² = x² + 10x + 25।",
+      "te": "(a + b)² = a² + 2ab + b² సూత్రం ప్రకారం: x² + 2(x)(5) + 5² = x² + 10x + 25.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Don't forget the middle term 2ab.",
+      "hi": "मध्य पद 2ab को न भूलें।",
+      "te": "మధ్య పదం 2ab ని మర్చిపోకండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d1-02",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand (x - 6)² using algebraic identities.",
+      "hi": "बीजगणितीय सर्वसमिकाओं का उपयोग करके (x - 6)² का विस्तार कीजिए।",
+      "te": "(x - 6)² ను విస్తరించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 12x + 36",
+          "hi": "x² + 12x + 36",
+          "te": "x² + 12x + 36",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_middle_term_positive_instead_of_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² + 36",
+          "hi": "x² + 36",
+          "te": "x² + 36",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² - 12x - 36",
+          "hi": "x² - 12x - 36",
+          "te": "x² - 12x - 36",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_constant_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² - 12x + 36",
+          "hi": "x² - 12x + 36",
+          "te": "x² - 12x + 36",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Using (a - b)² = a² - 2ab + b²: x² - 2(x)(6) + 6² = x² - 12x + 36.",
+      "hi": "(a - b)² = a² - 2ab + b² का उपयोग करते हुए: x² - 2(x)(6) + 6² = x² - 12x + 36।",
+      "te": "(a - b)² = a² - 2ab + b² సూత్రం ప్రకారం: x² - 2(x)(6) + 6² = x² - 12x + 36.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The square of a negative number is positive: (-6)² = +36, but the middle term is negative.",
+      "hi": "ऋणात्मक संख्या का वर्ग धनात्मक होता है: (-6)² = +36, लेकिन मध्य पद ऋणात्मक होता है।",
+      "te": "రుణ సంఖ్య వర్గం ధనాత్మకం: (-6)² = +36, కానీ మధ్య పదం రుణాత్మకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d1-03",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand: (2x + 3)².",
+      "hi": "विस्तार कीजिए: (2x + 3)².",
+      "te": "విస్తరించండి: (2x + 3)².",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2x² + 12x + 9",
+          "hi": "2x² + 12x + 9",
+          "te": "2x² + 12x + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_coefficient_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4x² + 12x + 9",
+          "hi": "4x² + 12x + 9",
+          "te": "4x² + 12x + 9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4x² + 6x + 9",
+          "hi": "4x² + 6x + 9",
+          "te": "4x² + 6x + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4x² + 9",
+          "hi": "4x² + 9",
+          "te": "4x² + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "(2x)² + 2(2x)(3) + 3² = 4x² + 12x + 9. Square both the coefficient 2 and the variable x.",
+      "hi": "(2x)² + 2(2x)(3) + 3² = 4x² + 12x + 9। गुणांक 2 और चर x दोनों का वर्ग करें।",
+      "te": "(2x)² + 2(2x)(3) + 3² = 4x² + 12x + 9. గుణకం 2 మరియు చరరాశి x రెండింటినీ వర్గం చేయండి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Square the entire first term: (2x)² = 4x².",
+      "hi": "पूरे पहले पद का वर्ग करें: (2x)² = 4x²।",
+      "te": "మొత్తం మొదటి పదాన్ని వర్గం చేయండి: (2x)² = 4x².",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d2-01",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using the difference of squares identity: (3x + 4)(3x - 4).",
+      "hi": "वर्गों के अंतर की सर्वसमिका का उपयोग करके विस्तार कीजिए: (3x + 4)(3x - 4).",
+      "te": "వర్గాల తేడా సూత్రాన్ని ఉపయోగించి విస్తరించండి: (3x + 4)(3x - 4).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9x² - 24x - 16",
+          "hi": "9x² - 24x - 16",
+          "te": "9x² - 24x - 16",
+          "reviewed": false
+        },
+        "mistakeTag": "included_non_existent_middle_term_in_difference_of_squares"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9x² + 16",
+          "hi": "9x² + 16",
+          "te": "9x² + 16",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9x² - 16",
+          "hi": "9x² - 16",
+          "te": "9x² - 16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3x² - 16",
+          "hi": "3x² - 16",
+          "te": "3x² - 16",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_coefficient_square"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Using (a + b)(a - b) = a² - b²: (3x)² - 4² = 9x² - 16.",
+      "hi": "(a + b)(a - b) = a² - b² का उपयोग करते हुए: (3x)² - 4² = 9x² - 16।",
+      "te": "(a + b)(a - b) = a² - b² సూత్రం ప్రకారం: (3x)² - 4² = 9x² - 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The product of sum and difference has no middle term: a² - b².",
+      "hi": "योग और अंतर के गुणनफल में कोई मध्य पद नहीं होता: a² - b²।",
+      "te": "కూడిక మరియు తీసివేతల లబ్దంలో మధ్య పదం ఉండదు: a² - b².",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d2-02",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand (x + 7)(x - 3) using the identity (x + a)(x + b) = x² + (a + b)x + ab.",
+      "hi": "सर्वसमिका (x + a)(x + b) = x² + (a + b)x + ab का उपयोग करके (x + 7)(x - 3) का विस्तार कीजिए।",
+      "te": "(x + a)(x + b) = x² + (a + b)x + ab సూత్రాన్ని ఉపయోగించి (x + 7)(x - 3) ను విస్తరించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 4x - 21",
+          "hi": "x² + 4x - 21",
+          "te": "x² + 4x - 21",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 4x - 21",
+          "hi": "x² - 4x - 21",
+          "te": "x² - 4x - 21",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_combining_linear_terms"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 4x + 21",
+          "hi": "x² + 4x + 21",
+          "te": "x² + 4x + 21",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_constant_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² - 21x + 4",
+          "hi": "x² - 21x + 4",
+          "te": "x² - 21x + 4",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_and_product_coefficients"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Here a = 7, b = -3. Middle coefficient = 7 + (-3) = 4. Constant term = 7 × (-3) = -21. So x² + 4x - 21.",
+      "hi": "यहाँ a = 7, b = -3। मध्य गुणांक = 7 + (-3) = 4। अचर पद = 7 × (-3) = -21। अतः x² + 4x - 21।",
+      "te": "ఇక్కడ a = 7, b = -3. మధ్య గుణకం = 7 + (-3) = 4. స్థిర పదం = 7 × (-3) = -21. కాబట్టి x² + 4x - 21.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The middle term is the sum of 7 and -3; the constant is their product.",
+      "hi": "मध्य पद 7 और -3 का योग है; अचर पद उनका गुणनफल है।",
+      "te": "మధ్య పదం 7 మరియు -3 ల మొత్తం; స్థిర పదం వాటి లబ్ధం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d2-03",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate 103 × 97 without direct multiplication using an algebraic identity.",
+      "hi": "बीजगणितीय सर्वसमिका का उपयोग करके प्रत्यक्ष गुणा किए बिना 103 × 97 का मान ज्ञात कीजिए।",
+      "te": "బీజగణిత సూత్రాన్ని ఉపయోగించి నేరుగా గుణించకుండా 103 × 97 విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9997",
+          "hi": "9997",
+          "te": "9997",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9991",
+          "hi": "9991",
+          "te": "9991",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "10009",
+          "hi": "10009",
+          "te": "10009",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_difference_of_squares"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "9981",
+          "hi": "9981",
+          "te": "9981",
+          "reviewed": false
+        },
+        "mistakeTag": "calculation_error"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "103 × 97 = (100 + 3)(100 - 3) = 100² - 3² = 10000 - 9 = 9991.",
+      "hi": "103 × 97 = (100 + 3)(100 - 3) = 100² - 3² = 10000 - 9 = 9991।",
+      "te": "103 × 97 = (100 + 3)(100 - 3) = 100² - 3² = 10000 - 9 = 9991.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Rewrite 103 as (100 + 3) and 97 as (100 - 3).",
+      "hi": "103 को (100 + 3) और 97 को (100 - 3) के रूप में लिखें।",
+      "te": "103 ని (100 + 3) గా మరియు 97 ని (100 - 3) గా రాయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d3-01",
+    "conceptId": "c9-id-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand (x - 2y + 3z)² using the identity (a + b + c)².",
+      "hi": "सर्वसमिका (a + b + c)² का उपयोग करके (x - 2y + 3z)² का विस्तार कीजिए।",
+      "te": "(a + b + c)² సూత్రాన్ని ఉపయోగించి (x - 2y + 3z)² ను విస్తరించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 4y² + 9z² + 4xy + 12yz + 6xz",
+          "hi": "x² + 4y² + 9z² + 4xy + 12yz + 6xz",
+          "te": "x² + 4y² + 9z² + 4xy + 12yz + 6xz",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_cross_terms_all_positive"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 4y² + 9z² - 4xy - 12yz + 6xz",
+          "hi": "x² - 4y² + 9z² - 4xy - 12yz + 6xz",
+          "te": "x² - 4y² + 9z² - 4xy - 12yz + 6xz",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_squared_terms_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 4y² + 9z² - 2xy - 6yz + 3xz",
+          "hi": "x² + 4y² + 9z² - 2xy - 6yz + 3xz",
+          "te": "x² + 4y² + 9z² - 2xy - 6yz + 3xz",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_cross_terms"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 4y² + 9z² - 4xy - 12yz + 6xz",
+          "hi": "x² + 4y² + 9z² - 4xy - 12yz + 6xz",
+          "te": "x² + 4y² + 9z² - 4xy - 12yz + 6xz",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "a² + b² + c² + 2ab + 2bc + 2ca = x² + (-2y)² + (3z)² + 2(x)(-2y) + 2(-2y)(3z) + 2(x)(3z) = x² + 4y² + 9z² - 4xy - 12yz + 6xz.",
+      "hi": "a² + b² + c² + 2ab + 2bc + 2ca = x² + (-2y)² + (3z)² + 2(x)(-2y) + 2(-2y)(3z) + 2(x)(3z) = x² + 4y² + 9z² - 4xy - 12yz + 6xz।",
+      "te": "a² + b² + c² + 2ab + 2bc + 2ca = x² + 4y² + 9z² - 4xy - 12yz + 6xz.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Cross terms containing an odd number of negative factors become negative: 2(x)(-2y) = -4xy.",
+      "hi": "ऋणात्मक गुणनखंड वाले पदों का गुणनफल ऋणात्मक होता है: 2(x)(-2y) = -4xy।",
+      "te": "ఒక రుణ గుణకం ఉన్న పదాలు రుణాత్మకం అవుతాయి: 2(x)(-2y) = -4xy.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d3-02",
+    "conceptId": "c9-id-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If x + 1/x = 5, find the value of x² + 1/x².",
+      "hi": "यदि x + 1/x = 5 है, तो x² + 1/x² का मान ज्ञात कीजिए।",
+      "te": "x + 1/x = 5 అయితే, x² + 1/x² విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "23",
+          "hi": "23",
+          "te": "23",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "25",
+          "hi": "25",
+          "te": "25",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_cross_term_subtraction"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "27",
+          "hi": "27",
+          "te": "27",
+          "reviewed": false
+        },
+        "mistakeTag": "added_cross_term_instead_of_subtracted"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "squared_without_cross_terms"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Square both sides: (x + 1/x)² = 5² => x² + 2(x)(1/x) + 1/x² = 25 => x² + 2 + 1/x² = 25 => x² + 1/x² = 23.",
+      "hi": "दोनों पक्षों का वर्ग करें: (x + 1/x)² = 5² => x² + 2 + 1/x² = 25 => x² + 1/x² = 23।",
+      "te": "ఇరువైపులా వర్గం చేయండి: (x + 1/x)² = 5² => x² + 2 + 1/x² = 25 => x² + 1/x² = 23.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The cross term 2·x·(1/x) simplifies to 2, which must be subtracted from 25.",
+      "hi": "मध्य पद 2·x·(1/x) सरल होकर 2 बन जाता है, जिसे 25 में से घटाना होगा।",
+      "te": "మధ్య పదం 2·x·(1/x) 2 అవుతుంది, దానిని 25 నుండి తీసివేయాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-id-d3-03",
+    "conceptId": "c9-id-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Factorise the quadratic expression: 49a² - 28ab + 4b².",
+      "hi": "द्विघात व्यंजक का गुणनखंडन कीजिए: 49a² - 28ab + 4b².",
+      "te": "కారణాంకాలుగా విభజించండి: 49a² - 28ab + 4b².",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(7a + 2b)²",
+          "hi": "(7a + 2b)²",
+          "te": "(7a + 2b)²",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_middle_term_positive_instead_of_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(7a - 2b)(7a + 2b)",
+          "hi": "(7a - 2b)(7a + 2b)",
+          "te": "(7a - 2b)(7a + 2b)",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_with_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(7a - 2b)²",
+          "hi": "(7a - 2b)²",
+          "te": "(7a - 2b)²",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(49a - 4b)²",
+          "hi": "(49a - 4b)²",
+          "te": "(49a - 4b)²",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_coefficient_square"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Recognize the pattern a² - 2ab + b² = (a - b)²: (7a)² - 2(7a)(2b) + (2b)² = (7a - 2b)².",
+      "hi": "सर्वसमिका पहचानें a² - 2ab + b² = (a - b)²: (7a)² - 2(7a)(2b) + (2b)² = (7a - 2b)²।",
+      "te": "a² - 2ab + b² = (a - b)² రూపంలో ఉంది: (7a)² - 2(7a)(2b) + (2b)² = (7a - 2b)².",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "49a² = (7a)² and 4b² = (2b)², and 2(7a)(2b) = 28ab.",
+      "hi": "49a² = (7a)² और 4b² = (2b)², तथा 2(7a)(2b) = 28ab।",
+      "te": "49a² = (7a)² మరియు 4b² = (2b)², మరియు 2(7a)(2b) = 28ab.",
+      "reviewed": false
+    }
+  }
+]

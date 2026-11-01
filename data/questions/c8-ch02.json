@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c8-exp-01",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify using the product law of exponents: 3⁴ × 3³",
+      "hi": "घातांकों के गुणन नियम का उपयोग करके सरल कीजिए: 3⁴ × 3³",
+      "te": "ఘాతాంక గుణకార నియమాన్ని ఉపయోగించి సూక్ష్మీకరించండి: 3⁴ × 3³",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3¹²",
+          "hi": "3¹²",
+          "te": "3¹²",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3⁷",
+          "hi": "3⁷",
+          "te": "3⁷",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9⁷",
+          "hi": "9⁷",
+          "te": "9⁷",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3¹",
+          "hi": "3¹",
+          "te": "3¹",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "According to the law a^m × a^n = a^(m+n), when multiplying powers with the same base, add their exponents: 3^(4+3) = 3⁷.",
+      "hi": "नियम a^m × a^n = a^(m+n) के अनुसार समान आधार होने पर घातों को जोड़ते हैं: 3^(4+3) = 3⁷।",
+      "te": "a^m × a^n = a^(m+n) నియమం ప్రకారం సమాన భూములు ఉన్నప్పుడు ఘాతాలను కూడాలి: 3^(4+3) = 3⁷.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When bases are identical, do you add or multiply the exponents?",
+      "hi": "जब आधार समान हों, तो क्या आप घातांकों को जोड़ते हैं या गुणा करते हैं?",
+      "te": "భూములు సమానంగా ఉన్నప్పుడు ఘాతాంకాలను కూడాలా లేక గుణించాలా?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-exp-02",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the numeric value of: (2³)² ÷ 2⁴",
+      "hi": "मान ज्ञात कीजिए: (2³)² ÷ 2⁴",
+      "te": "సంఖ్యా విలువను లెక్కించండి: (2³)² ÷ 2⁴",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_power_of_power_as_addition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_wrong_exponent"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_division_operation"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "First apply power of a power: (2³)² = 2^(3×2) = 2⁶. Next apply quotient rule: 2⁶ ÷ 2⁴ = 2^(6-4) = 2² = 4.",
+      "hi": "पहले घात की घात नियम लगाएं: (2³)² = 2⁶। फिर भाग नियम: 2⁶ ÷ 2⁴ = 2^(6-4) = 2² = 4।",
+      "te": "ముందుగా ఘాతం యొక్క ఘాతం: (2³)² = 2⁶. తర్వాత భాగహార నియమం: 2⁶ ÷ 2⁴ = 2^(6-4) = 2² = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "(a^m)^n = a^(mn), so (2³)² = 2⁶.",
+      "hi": "(a^m)^n = a^(mn), इसलिए (2³)² = 2⁶।",
+      "te": "(a^m)^n = a^(mn) కావున (2³)² = 2⁶.",
+      "reviewed": false
+    }
+  }
+]

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c6-pat-01",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the next number in the sequence: 4, 7, 10, 13, __?",
+      "hi": "अनुक्रम 4, 7, 10, 13, __ में अगली संख्या क्या होगी?",
+      "te": "4, 7, 10, 13, __ శ్రేణిలో తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "17",
+          "hi": "17",
+          "te": "17",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Each term in the sequence increases by 3: 4 + 3 = 7, 7 + 3 = 10, 10 + 3 = 13. Therefore, the next term is 13 + 3 = 16.",
+      "hi": "अनुक्रम का प्रत्येक पद 3 बढ़ता है: 4 + 3 = 7, 7 + 3 = 10, 10 + 3 = 13। अतः अगला पद 13 + 3 = 16 है।",
+      "te": "శ్రేణిలోని ప్రతి పదం 3 పెరుగుతుంది: 4 + 3 = 7, 7 + 3 = 10, 10 + 3 = 13. కాబట్టి తర్వాతి పదం 13 + 3 = 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find the difference between consecutive numbers.",
+      "hi": "लगातार दो संख्याओं के बीच का अंतर ज्ञात करें।",
+      "te": "వరుస సంఖ్యల మధ్య తేడాను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-pat-02",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A pattern of connected squares made from matchsticks needs 4 sticks for 1 square, 7 sticks for 2 squares, and 10 sticks for 3 squares. How many sticks are needed for 4 squares?",
+      "hi": "तीली से बने वर्गों के एक पैटर्न में 1 वर्ग के लिए 4 तीलियाँ, 2 वर्गों के लिए 7 तीलियाँ और 3 वर्गों के लिए 10 तीलियाँ लगती हैं। 4 वर्गों के लिए कितनी तीलियाँ चाहिए?",
+      "te": "అగ్గిపుల్లలతో చేసిన చతురస్రాల నమూనాలో 1 చతురస్రానికి 4 పుల్లలు, 2 చతురస్రాలకు 7 పుల్లలు, 3 చతురస్రాలకు 10 పుల్లలు అవసరం. 4 చతురస్రాలకు ఎన్ని పుల్లలు కావాలి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_four_by_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "13",
+          "hi": "13",
+          "te": "13",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_to_ten"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_four_times_four_without_sharing"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The number of matchsticks follows the rule 3n + 1, where n is the number of squares. For n = 4, sticks = 3(4) + 1 = 12 + 1 = 13.",
+      "hi": "तीलियों की संख्या नियम 3n + 1 का पालन करती है जहाँ n वर्गों की संख्या है। n = 4 के लिए, तीलियाँ = 3(4) + 1 = 13।",
+      "te": "అగ్గిపుల్లల సంఖ్య 3n + 1 నియమాన్ని అనుసరిస్తుంది. n = 4 కోసం, పుల్లలు = 3(4) + 1 = 13.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Notice that each additional square adds 3 more matchsticks.",
+      "hi": "ध्यान दें कि प्रत्येक अतिरिक्त वर्ग 3 और तीलियाँ जोड़ता है।",
+      "te": "ప్రతి అదనపు చతురస్రం 3 పుల్లలను మాత్రమే కలుపుతుందని గమనించండి.",
+      "reviewed": false
+    }
+  }
+]

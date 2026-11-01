@@ -21,10 +21,10 @@ import {
   getConceptById,
   getConceptsByChapter,
   concepts,
-  questions,
   tagRoots,
   hasEnoughQuestions,
   getQuestionsByConceptId,
+  getQuestionsByChapterId,
 } from "./curriculum";
 import {
   getActiveProfile,
@@ -704,7 +704,7 @@ export function generateChapterDiagnostic(
   const conceptIds = chapterConcepts.map((c) => c.id);
 
   // Pool all questions for this chapter's concepts
-  const pool = questions.filter((q) => conceptIds.includes(q.conceptId));
+  const pool = getQuestionsByChapterId(chapterId);
 
   if (pool.length < requestedCount) {
     return { questions: pool, shortfall: true };
@@ -743,7 +743,7 @@ export function evaluateChapterDiagnostic(
 ): DiagnosticResult {
   const chapterConcepts = getConceptsByChapter(chapterId);
   const conceptIds = chapterConcepts.map((c) => c.id);
-  const diagnosticPool = questions.filter((q) => conceptIds.includes(q.conceptId));
+  const diagnosticPool = getQuestionsByChapterId(chapterId);
 
   let correctCount = 0;
   const mistakeTags: string[] = [];
@@ -1040,7 +1040,7 @@ export function evaluateChapterTest(
 ): ChapterTestResult {
   const chapterConcepts = getConceptsByChapter(chapterId);
   const conceptIds = chapterConcepts.map((c) => c.id);
-  const chapterQuestions = questions.filter((q) => conceptIds.includes(q.conceptId));
+  const chapterQuestions = getQuestionsByChapterId(chapterId);
 
   const conceptBreakdown: ChapterTestResult["conceptBreakdown"] = {};
   let totalCorrect = 0;

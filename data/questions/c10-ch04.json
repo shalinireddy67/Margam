@@ -1,0 +1,940 @@
+[
+  {
+    "id": "q-c10-sol-01",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the roots of the quadratic equation by factoring: x² - 7x + 12 = 0",
+      "hi": "गुणनखंडन द्वारा द्विघात समीकरण के मूल ज्ञात कीजिए: x² - 7x + 12 = 0",
+      "te": "కారణాంక పద్ధతిలో వర్గ సమీకరణ మూలాలను కనుగొనండి: x² - 7x + 12 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -3, x = -4",
+          "hi": "x = -3, x = -4",
+          "te": "x = -3, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 3, x = 4",
+          "hi": "x = 3, x = 4",
+          "te": "x = 3, x = 4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 2, x = 6",
+          "hi": "x = 2, x = 6",
+          "te": "x = 2, x = 6",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 3, x = -4",
+          "hi": "x = 3, x = -4",
+          "te": "x = 3, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Step 1: Factor the quadratic into (x - 3)(x - 4) = 0. Step 2: By the zero-product rule, x - 3 = 0 or x - 4 = 0. Therefore, the roots are x = 3 and x = 4.",
+      "hi": "चरण 1: समीकरण को (x - 3)(x - 4) = 0 के रूप में गुणनखंडित करें। चरण 2: शून्य-गुणनफल नियम से, x - 3 = 0 या x - 4 = 0। अतः मूल x = 3 और x = 4 हैं।",
+      "te": "దశ 1: సమీకరణాన్ని (x - 3)(x - 4) = 0 గా మార్చండి. దశ 2: శూన్య-లబ్ద నియమం ప్రకారం, x - 3 = 0 లేదా x - 4 = 0. కాబట్టి మూలాలు x = 3 మరియు x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "If (x - a)(x - b) = 0, then the solutions are x = +a and x = +b.",
+      "hi": "यदि (x - a)(x - b) = 0 है, तो हल x = +a और x = +b हैं।",
+      "te": "(x - a)(x - b) = 0 అయితే, సాధనలు x = +a మరియు x = +b అవుతాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-sol-02",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation: x² + 2x - 15 = 0",
+      "hi": "द्विघात समीकरण को हल कीजिए: x² + 2x - 15 = 0",
+      "te": "వర్గ సమీకరణాన్ని సాధించండి: x² + 2x - 15 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 5, x = -3",
+          "hi": "x = 5, x = -3",
+          "te": "x = 5, x = -3",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -5, x = 3",
+          "hi": "x = -5, x = 3",
+          "te": "x = -5, x = 3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -5, x = -3",
+          "hi": "x = -5, x = -3",
+          "te": "x = -5, x = -3",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_roots_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 15, x = -1",
+          "hi": "x = 15, x = -1",
+          "te": "x = 15, x = -1",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Factor: (x + 5)(x - 3) = 0. By zero-product property: x + 5 = 0 implies x = -5, and x - 3 = 0 implies x = 3. Roots: x = -5, 3.",
+      "hi": "गुणनखंड: (x + 5)(x - 3) = 0। शून्य-गुणनफल नियम से: x + 5 = 0 से x = -5, और x - 3 = 0 से x = 3। मूल: x = -5, 3।",
+      "te": "కారణాంకాలు: (x + 5)(x - 3) = 0. శూన్య-లబ్ద నియమం ప్రకారం: x + 5 = 0 అయితే x = -5, x - 3 = 0 అయితే x = 3. మూలాలు: x = -5, 3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Notice that x + 5 = 0 leads to a negative root x = -5.",
+      "hi": "ध्यान दें कि x + 5 = 0 से ऋणात्मक मूल x = -5 प्राप्त होता है।",
+      "te": "x + 5 = 0 నుండి ఋణ మూలం x = -5 వస్తుందని గమనించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-01",
+    "conceptId": "c10-quad-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Calculate the discriminant D = b² - 4ac for the quadratic equation: x² - 6x + 5 = 0",
+      "hi": "द्विघात समीकरण x² - 6x + 5 = 0 के लिए विविक्तकर D = b² - 4ac का मान ज्ञात कीजिए",
+      "te": "x² - 6x + 5 = 0 వర్గ సమీకరణానికి విచక్షణి D = b² - 4ac విలువను లెక్కించండి",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-56",
+          "hi": "-56",
+          "te": "-56",
+          "reviewed": false
+        },
+        "mistakeTag": "squared_negative_b_as_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "56",
+          "hi": "56",
+          "te": "56",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_ac_instead_of_subtracting"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-16",
+          "hi": "-16",
+          "te": "-16",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Identify coefficients: a = 1, b = -6, c = 5. D = b² - 4ac = (-6)² - 4(1)(5) = 36 - 20 = 16.",
+      "hi": "गुणांक पहचानें: a = 1, b = -6, c = 5। D = b² - 4ac = (-6)² - 4(1)(5) = 36 - 20 = 16।",
+      "te": "గుణకాలను గుర్తించండి: a = 1, b = -6, c = 5. D = b² - 4ac = (-6)² - 4(1)(5) = 36 - 20 = 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that (-6)² is positive 36, not -36.",
+      "hi": "याद रखें कि (-6)² धनात्मक 36 होता है, न कि -36।",
+      "te": "(-6)² అనేది ధన 36 అవుతుంది, -36 కాదు అని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-02",
+    "conceptId": "c10-quad-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation using the quadratic formula: x² - 2x - 8 = 0",
+      "hi": "द्विघात सूत्र का उपयोग करके समीकरण को हल कीजिए: x² - 2x - 8 = 0",
+      "te": "వర్గ సూత్రాన్ని ఉపయోగించి సమీకరణాన్ని సాధించండి: x² - 2x - 8 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -4, x = 2",
+          "hi": "x = -4, x = 2",
+          "te": "x = -4, x = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_negative_b_sign_flip"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 4, x = -2",
+          "hi": "x = 4, x = -2",
+          "te": "x = 4, x = -2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 4, x = 2",
+          "hi": "x = 4, x = 2",
+          "te": "x = 4, x = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_root_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "No real roots (calculated D = 4 - 32 = -28)",
+          "hi": "कोई वास्तविक मूल नहीं (D = 4 - 32 = -28)",
+          "te": "వాస్తవ మూలాలు లేవు (D = 4 - 32 = -28)",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_negative_times_negative_became_negative"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "a = 1, b = -2, c = -8. D = (-2)² - 4(1)(-8) = 4 + 32 = 36. √D = 6. x = (-b ± √D) / (2a) = (-(-2) ± 6) / 2 = (2 ± 6) / 2. This gives x = 8/2 = 4 and x = -4/2 = -2.",
+      "hi": "a = 1, b = -2, c = -8। D = (-2)² - 4(1)(-8) = 4 + 32 = 36। √D = 6। x = (-(-2) ± 6) / 2 = (2 ± 6) / 2। इससे x = 4 और x = -2 प्राप्त होता है।",
+      "te": "a = 1, b = -2, c = -8. D = (-2)² - 4(1)(-8) = 4 + 32 = 36. √D = 6. x = (-(-2) ± 6) / 2 = (2 ± 6) / 2. దీని ద్వారా x = 4 మరియు x = -2 వస్తాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Be careful: -b is -(-2) which becomes +2.",
+      "hi": "सावधान रहें: -b का मान -(-2) है जो +2 बन जाता है।",
+      "te": "జాగ్రత్త: -b విలువ -(-2) అంటే +2 అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-03",
+    "conceptId": "c10-quad-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Determine the nature of the roots of 3x² - 4x + 2 = 0 without solving the equation.",
+      "hi": "बिना हल किए 3x² - 4x + 2 = 0 के मूलों की प्रकृति निर्धारित कीजिए।",
+      "te": "సమీకరణాన్ని సాధించకుండానే 3x² - 4x + 2 = 0 మూలాల స్వభావాన్ని నిర్ణయించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Two distinct real roots",
+          "hi": "दो भिन्न वास्तविक मूल",
+          "te": "రెండు వేర్వేరు వాస్తవ మూలాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_discriminant_positive_without_evaluating"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Two equal real roots",
+          "hi": "दो बराबर वास्तविक मूल",
+          "te": "రెండు సమాన వాస్తవ మూలాలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_discriminant"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "No real roots (discriminant D < 0)",
+          "hi": "कोई वास्तविक मूल नहीं (विविक्तकर D < 0)",
+          "te": "వాస్తవ మూలాలు లేవు (విచక్షణి D < 0)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "One rational and one irrational root",
+          "hi": "एक परिमेय और एक अपरिमेय मूल",
+          "te": "ఒక అకరణీయ మరియు ఒక కరణీయ మూలం",
+          "reviewed": false
+        },
+        "mistakeTag": "misunderstood_nature_of_roots_rules"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Calculate the discriminant: a = 3, b = -4, c = 2. D = b² - 4ac = (-4)² - 4(3)(2) = 16 - 24 = -8. Since D < 0, the equation has no real roots.",
+      "hi": "विविक्तकर की गणना करें: a = 3, b = -4, c = 2। D = b² - 4ac = (-4)² - 4(3)(2) = 16 - 24 = -8। चूंकि D < 0 है, इसलिए कोई वास्तविक मूल नहीं है।",
+      "te": "విచక్షణిని లెక్కించండి: a = 3, b = -4, c = 2. D = b² - 4ac = (-4)² - 4(3)(2) = 16 - 24 = -8. D < 0 కాబట్టి, ఈ సమీకరణానికి ఎటువంటి వాస్తవ మూలాలు ఉండవు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Compute D = b² - 4ac. If D is negative, the square root √D is not a real number.",
+      "hi": "D = b² - 4ac निकालें। यदि D ऋणात्मक है, तो √D वास्तविक संख्या नहीं है।",
+      "te": "D = b² - 4ac లెక్కించండి. D ఋణాత్మకం అయితే, √D వాస్తవ సంఖ్య కాదు.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d1-01",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the roots of the factored quadratic equation: (x - 5)(x + 2) = 0.",
+      "hi": "गुणनखंडित द्विघात समीकरण के मूल ज्ञात कीजिए: (x - 5)(x + 2) = 0.",
+      "te": "వర్గ సమీకరణం యొక్క మూలాలను కనుగొనండి: (x - 5)(x + 2) = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 5, x = -2",
+          "hi": "x = 5, x = -2",
+          "te": "x = 5, x = -2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -5, x = 2",
+          "hi": "x = -5, x = 2",
+          "te": "x = -5, x = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 5, x = 2",
+          "hi": "x = 5, x = 2",
+          "te": "x = 5, x = 2",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -5, x = -2",
+          "hi": "x = -5, x = -2",
+          "te": "x = -5, x = -2",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_roots_negative"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Set each factor to zero: x - 5 = 0 => x = 5; x + 2 = 0 => x = -2.",
+      "hi": "प्रत्येक गुणनखंड को शून्य के बराबर रखें: x - 5 = 0 => x = 5; x + 2 = 0 => x = -2।",
+      "te": "ప్రతి కారణాంకాన్ని సున్నాకి సమానం చేయండి: x - 5 = 0 => x = 5; x + 2 = 0 => x = -2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "If AB = 0, then either A = 0 or B = 0.",
+      "hi": "यदि AB = 0, तो या तो A = 0 या B = 0।",
+      "te": "AB = 0 అయితే, A = 0 లేదా B = 0 అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d1-02",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Rewrite the equation 2x² = 7x - 3 in standard form ax² + bx + c = 0.",
+      "hi": "समीकरण 2x² = 7x - 3 को मानक रूप ax² + bx + c = 0 में लिखिए।",
+      "te": "2x² = 7x - 3 సమీకరణాన్ని ప్రామాణిక రూపం ax² + bx + c = 0 లో రాయండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2x² + 7x - 3 = 0",
+          "hi": "2x² + 7x - 3 = 0",
+          "te": "2x² + 7x - 3 = 0",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2x² - 7x - 3 = 0",
+          "hi": "2x² - 7x - 3 = 0",
+          "te": "2x² - 7x - 3 = 0",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_constant_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-2x² - 7x + 3 = 0",
+          "hi": "-2x² - 7x + 3 = 0",
+          "te": "-2x² - 7x + 3 = 0",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_equation_signs"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "2x² - 7x + 3 = 0",
+          "hi": "2x² - 7x + 3 = 0",
+          "te": "2x² - 7x + 3 = 0",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Subtract 7x and add 3 to both sides: 2x² - 7x + 3 = 0.",
+      "hi": "दोनों पक्षों से 7x घटाएं और 3 जोड़ें: 2x² - 7x + 3 = 0।",
+      "te": "ఇరువైపులా 7x తీసివేసి 3 కలపండి: 2x² - 7x + 3 = 0.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Moving terms across the equals sign changes their signs.",
+      "hi": "बराबर के चिह्न के पार पदों को ले जाने से उनके चिह्न बदल जाते हैं।",
+      "te": "సమాన గుర్తు దాటి పదాలను తరలించినప్పుడు వాటి గుర్తులు మారుతాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d1-03",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find all real roots of the equation x² - 9 = 0.",
+      "hi": "समीकरण x² - 9 = 0 के सभी वास्तविक मूल ज्ञात कीजिए।",
+      "te": "x² - 9 = 0 సమీకరణం యొక్క అన్ని వాస్తవ మూలాలను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 3 only",
+          "hi": "केवल x = 3",
+          "te": "కేవలం x = 3",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_root"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 3, x = -3",
+          "hi": "x = 3, x = -3",
+          "te": "x = 3, x = -3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 9, x = -9",
+          "hi": "x = 9, x = -9",
+          "te": "x = 9, x = -9",
+          "reviewed": false
+        },
+        "mistakeTag": "squared_instead_of_square_root"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 0, x = 3",
+          "hi": "x = 0, x = 3",
+          "te": "x = 0, x = 3",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_zero_root"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "x² = 9 => x = ±√9 = ±3. A quadratic equation has up to two roots.",
+      "hi": "x² = 9 => x = ±√9 = ±3। द्विघात समीकरण के अधिकतम दो मूल होते हैं।",
+      "te": "x² = 9 => x = ±√9 = ±3. వర్గ సమీకరణానికి రెండు మూలాలు ఉంటాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that both (+3)² and (-3)² equal 9.",
+      "hi": "याद रखें कि (+3)² और (-3)² दोनों का मान 9 होता है।",
+      "te": "(+3)² మరియు (-3)² రెండూ 9 అవుతాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d2-01",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve by factorisation: x² - 8x + 15 = 0.",
+      "hi": "गुणनखंडन द्वारा हल कीजिए: x² - 8x + 15 = 0.",
+      "te": "కారణాంకాల పద్ధతి ద్వారా సాధించండి: x² - 8x + 15 = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 3, x = 5",
+          "hi": "x = 3, x = 5",
+          "te": "x = 3, x = 5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -3, x = -5",
+          "hi": "x = -3, x = -5",
+          "te": "x = -3, x = -5",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 1, x = 15",
+          "hi": "x = 1, x = 15",
+          "te": "x = 1, x = 15",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -3, x = 5",
+          "hi": "x = -3, x = 5",
+          "te": "x = -3, x = 5",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Find two numbers whose product is 15 and sum is -8: -3 and -5. (x - 3)(x - 5) = 0 => x = 3, x = 5.",
+      "hi": "दो संख्याएँ खोजें जिनका गुणनफल 15 और योग -8 हो: -3 और -5। (x - 3)(x - 5) = 0 => x = 3, x = 5।",
+      "te": "లబ్ధం 15 మరియు మొత్తం -8 అయ్యే సంఖ్యలు: -3 మరియు -5. (x - 3)(x - 5) = 0 => x = 3, x = 5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Both factors of +15 must be negative to add up to -8.",
+      "hi": "+15 के दोनों गुणनखंड ऋणात्मक होने चाहिए ताकि उनका योग -8 हो।",
+      "te": "మొత్తం -8 రావడానికి +15 కారణాంకాలు రెండూ రుణాత్మకంగా ఉండాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d2-02",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve by factorisation: x² + 5x - 24 = 0.",
+      "hi": "गुणनखंडन द्वारा हल कीजिए: x² + 5x - 24 = 0.",
+      "te": "కారణాంకాల పద్ధతి ద్వారా సాధించండి: x² + 5x - 24 = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -3, x = 8",
+          "hi": "x = -3, x = 8",
+          "te": "x = -3, x = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -3, x = -8",
+          "hi": "x = -3, x = -8",
+          "te": "x = -3, x = -8",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 3, x = -8",
+          "hi": "x = 3, x = -8",
+          "te": "x = 3, x = -8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 4, x = -6",
+          "hi": "x = 4, x = -6",
+          "te": "x = 4, x = -6",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Factors of -24 adding to +5 are +8 and -3: (x + 8)(x - 3) = 0 => x = -8, x = 3.",
+      "hi": "-24 के ऐसे गुणनखंड जिनका योग +5 हो: +8 और -3। (x + 8)(x - 3) = 0 => x = -8, x = 3।",
+      "te": "-24 యొక్క కారణాంకాలు మొత్తం +5 ఇచ్చేవి: +8 మరియు -3. (x + 8)(x - 3) = 0 => x = -8, x = 3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "8 × (-3) = -24 and 8 + (-3) = +5.",
+      "hi": "8 × (-3) = -24 और 8 + (-3) = +5।",
+      "te": "8 × (-3) = -24 మరియు 8 + (-3) = +5.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d2-03",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve by factorisation: x² - 2x - 35 = 0.",
+      "hi": "गुणनखंडन द्वारा हल कीजिए: x² - 2x - 35 = 0.",
+      "te": "కారణాంకాల పద్ధతి ద్వారా సాధించండి: x² - 2x - 35 = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -7, x = 5",
+          "hi": "x = -7, x = 5",
+          "te": "x = -7, x = 5",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 7, x = -5",
+          "hi": "x = 7, x = -5",
+          "te": "x = 7, x = -5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -7, x = -5",
+          "hi": "x = -7, x = -5",
+          "te": "x = -7, x = -5",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 7, x = 5",
+          "hi": "x = 7, x = 5",
+          "te": "x = 7, x = 5",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Two numbers whose product is -35 and sum is -2 are -7 and +5: (x - 7)(x + 5) = 0 => x = 7, x = -5.",
+      "hi": "-35 का गुणनफल और -2 का योग देने वाली संख्याएँ: -7 और +5। (x - 7)(x + 5) = 0 => x = 7, x = -5।",
+      "te": "లబ్ధం -35 మరియు మొత్తం -2 అయ్యే సంఖ్యలు: -7 మరియు +5. (x - 7)(x + 5) = 0 => x = 7, x = -5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The larger factor must be negative so that their sum is -2.",
+      "hi": "बड़ा गुणनखंड ऋणात्मक होना चाहिए ताकि उनका योग -2 हो।",
+      "te": "మొత్తం -2 రావడానికి పెద్ద కారణాంకం రుణాత్మకంగా ఉండాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d3-01",
+    "conceptId": "c10-quad-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the non-monic quadratic equation by factorisation: 2x² - 7x + 3 = 0.",
+      "hi": "गुणनखंडन द्वारा द्विघात समीकरण को हल कीजिए: 2x² - 7x + 3 = 0.",
+      "te": "కారణాంకాల పద్ధతి ద్వారా సాధించండి: 2x² - 7x + 3 = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -3, x = -1/2",
+          "hi": "x = -3, x = -1/2",
+          "te": "x = -3, x = -1/2",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 3, x = 1",
+          "hi": "x = 3, x = 1",
+          "te": "x = 3, x = 1",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_division_by_leading_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -3, x = 1/2",
+          "hi": "x = -3, x = 1/2",
+          "te": "x = -3, x = 1/2",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_both_negative_yields_positive_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 3, x = 1/2",
+          "hi": "x = 3, x = 1/2",
+          "te": "x = 3, x = 1/2",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Product ac = 2 × 3 = 6. Factors adding to -7 are -6 and -1. 2x² - 6x - x + 3 = 0 => 2x(x - 3) - 1(x - 3) = 0 => (2x - 1)(x - 3) = 0 => x = 1/2, x = 3.",
+      "hi": "ac = 2 × 3 = 6। -7 का योग देने वाले गुणनखंड: -6 और -1। 2x(x - 3) - 1(x - 3) = 0 => (2x - 1)(x - 3) = 0 => x = 1/2, x = 3।",
+      "te": "ac = 2 × 3 = 6. మొత్తం -7 ఇచ్చేవి: -6 మరియు -1. 2x(x - 3) - 1(x - 3) = 0 => (2x - 1)(x - 3) = 0 => x = 1/2, x = 3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply a and c (2 × 3 = 6) and find factors of 6 that add to -7.",
+      "hi": "a और c का गुणा करें (2 × 3 = 6) और 6 के ऐसे गुणनखंड खोजें जिनका योग -7 हो।",
+      "te": "a మరియు c లను గుణించండి (2 × 3 = 6), మొత్తం -7 వచ్చేలా 6 కారణాంకాలను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d3-02",
+    "conceptId": "c10-quad-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve by factorisation: 3x² + 10x - 8 = 0.",
+      "hi": "गुणनखंडन द्वारा हल कीजिए: 3x² + 10x - 8 = 0.",
+      "te": "కారణాంకాల పద్ధతి ద్వారా సాధించండి: 3x² + 10x - 8 = 0.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 2/3, x = -4",
+          "hi": "x = 2/3, x = -4",
+          "te": "x = 2/3, x = -4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -2/3, x = 4",
+          "hi": "x = -2/3, x = 4",
+          "te": "x = -2/3, x = 4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 2, x = -4",
+          "hi": "x = 2, x = -4",
+          "te": "x = 2, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_division_by_leading_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -2/3, x = -4",
+          "hi": "x = -2/3, x = -4",
+          "te": "x = -2/3, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "ac = 3 × (-8) = -24. Factors of -24 adding to +10 are +12 and -2: 3x² + 12x - 2x - 8 = 0 => 3x(x + 4) - 2(x + 4) = 0 => (3x - 2)(x + 4) = 0 => x = 2/3, x = -4.",
+      "hi": "ac = 3 × (-8) = -24। -24 के ऐसे गुणनखंड जिनका योग +10 हो: +12 और -2। 3x(x + 4) - 2(x + 4) = 0 => (3x - 2)(x + 4) = 0 => x = 2/3, x = -4।",
+      "te": "ac = 3 × (-8) = -24. మొత్తం +10 ఇచ్చేవి: +12 మరియు -2. 3x(x + 4) - 2(x + 4) = 0 => (3x - 2)(x + 4) = 0 => x = 2/3, x = -4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Split the middle term 10x into +12x - 2x.",
+      "hi": "मध्य पद 10x को +12x - 2x में विभाजित करें।",
+      "te": "మధ్య పదం 10x ను +12x - 2x గా విభజించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-quad-d3-03",
+    "conceptId": "c10-quad-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "A rectangular community garden in Bengaluru has an area of 60 m². The length of the garden is 7 metres more than its breadth. Find the length and breadth by solving a quadratic equation.",
+      "hi": "बेंगलुरु में एक आयताकार सामुदायिक उद्यान का क्षेत्रफल 60 वर्ग मीटर है। उद्यान की लंबाई उसकी चौड़ाई से 7 मीटर अधिक है। द्विघात समीकरण हल करके लंबाई और चौड़ाई ज्ञात कीजिए।",
+      "te": "బెంగళూరులోని ఒక దీర్ఘచతురస్రాకార తోట వైశాల్యం 60 చ.మీ. దాని పొడవు వెడల్పు కంటే 7 మీటర్లు ఎక్కువ. వర్గ సమీకరణాన్ని సాధించి పొడవు మరియు వెడల్పులను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Breadth = -12 m, Length = -5 m",
+          "hi": "चौड़ाई = -12 मी, लंबाई = -5 मी",
+          "te": "వెడల్పు = -12 మీ, పొడవు = -5 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "accepted_negative_root_for_physical_dimension"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Length = 12 m, Breadth = 5 m",
+          "hi": "लंबाई = 12 मी, चौड़ाई = 5 मी",
+          "te": "పొడవు = 12 మీ, వెడల్పు = 5 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Length = 10 m, Breadth = 6 m",
+          "hi": "लंबाई = 10 मी, चौड़ाई = 6 मी",
+          "te": "పొడవు = 10 మీ, వెడల్పు = 6 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Length = 15 m, Breadth = 4 m",
+          "hi": "लंबाई = 15 मी, चौड़ाई = 4 मी",
+          "te": "పొడవు = 15 మీ, వెడల్పు = 4 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_difference"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Let breadth be b. Length = b + 7. Area = b(b + 7) = 60 => b² + 7b - 60 = 0 => (b + 12)(b - 5) = 0 => b = 5 (rejecting b = -12 since dimensions must be positive). Length = 5 + 7 = 12 m.",
+      "hi": "माना चौड़ाई b है। लंबाई = b + 7। क्षेत्रफल = b(b + 7) = 60 => b² + 7b - 60 = 0 => (b + 12)(b - 5) = 0 => b = 5 (ऋणात्मक मान -12 को अस्वीकार करते हुए)। लंबाई = 5 + 7 = 12 मी।",
+      "te": "వెడల్పు b అనుకుందాం. పొడవు = b + 7. వైశాల్యం = b(b + 7) = 60 => b² + 7b - 60 = 0 => (b + 12)(b - 5) = 0 => b = 5 (కొలతలు ధనాత్మకంగా ఉండాలి కాబట్టి -12 ని తిరస్కరించాలి). పొడవు = 5 + 7 = 12 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set up b(b + 7) = 60, factorise, and choose the positive root for physical measurements.",
+      "hi": "समीकरण बनाएं b(b + 7) = 60, गुणनखंड करें और भौतिक माप के लिए धनात्मक मूल चुनें।",
+      "te": "b(b + 7) = 60 సమీకరణాన్ని రాసి, కారణాంకాలుగా మార్చి, ధన మూలాన్ని ఎంచుకోండి.",
+      "reviewed": false
+    }
+  }
+]

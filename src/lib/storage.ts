@@ -24,18 +24,18 @@ const TopicProgressSchema = z.object({
   difficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]).optional(),
   consecutiveCorrect: z.number().optional(),
   consecutiveIncorrect: z.number().optional(),
-  mistakeTagHistory: z.array(z.string()).optional(),
-});
+  tagHistory: z.array(z.string()).optional(),
+}).passthrough();
 
 const RemediationGapSchema = z.object({
   currentConceptId: z.string(),
   rootConceptId: z.string(),
-  mistakeTag: z.string(),
+  tag: z.string().optional(),
   plainLanguageReason: z.string(),
   prerequisitePath: z.array(z.string()),
   confirmationQuestionIds: z.array(z.string()),
   status: z.enum(["pending_confirmation", "confirmed", "resolved"]),
-});
+}).passthrough();
 
 export const LearnerProfileSchema = z.object({
   version: z.number().int().default(CURRENT_PROFILE_VERSION),

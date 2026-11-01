@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c7-alg-01",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the arithmetic expression using BODMAS: 20 - 3 × 4 + 6",
+      "hi": "BODMAS नियम का उपयोग करके मान ज्ञात कीजिए: 20 - 3 × 4 + 6",
+      "te": "BODMAS నియమాన్ని ఉపయోగించి లెక్కించండి: 20 - 3 × 4 + 6",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "74",
+          "hi": "74",
+          "te": "74",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "26",
+          "hi": "26",
+          "te": "26",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "By BODMAS, perform multiplication first: 3 × 4 = 12. Expression becomes 20 - 12 + 6. Next, evaluate from left to right: (20 - 12) = 8, then 8 + 6 = 14.",
+      "hi": "BODMAS के अनुसार पहले गुणा करें: 3 × 4 = 12। व्यंजक बनता है 20 - 12 + 6। बाएं से दाएं हल करने पर: 20 - 12 = 8, फिर 8 + 6 = 14।",
+      "te": "BODMAS ప్రకారం ముందుగా గుణకారం చేయాలి: 3 × 4 = 12. సమాసం 20 - 12 + 6 అవుతుంది. ఎడమ నుండి కుడికి: 20 - 12 = 8, తర్వాత 8 + 6 = 14.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiplication takes precedence over addition and subtraction.",
+      "hi": "गुणा को जोड़ और घटाव से पहले हल किया जाता है।",
+      "te": "సంకలనం మరియు వ్యవకలనం కంటే గుణకారాన్ని ముందుగా చేయాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-alg-02",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the expression: 45 ÷ [12 - (5 + 4)]",
+      "hi": "मान ज्ञात कीजिए: 45 ÷ [12 - (5 + 4)]",
+      "te": "విలువను లెక్కించండి: 45 ÷ [12 - (5 + 4)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "45",
+          "hi": "45",
+          "te": "45",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_one"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_division_operands"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Evaluate innermost parentheses first: (5 + 4) = 9. Inside square brackets: [12 - 9] = 3. Finally, divide: 45 ÷ 3 = 15.",
+      "hi": "सबसे पहले छोटे कोष्ठक को हल करें: (5 + 4) = 9। फिर बड़े कोष्ठक में: [12 - 9] = 3। अंत में भाग दें: 45 ÷ 3 = 15।",
+      "te": "ముందుగా లోపలి బ్రాకెట్ చేయండి: (5 + 4) = 9. తర్వాత చతురస్ర బ్రాకెట్: [12 - 9] = 3. చివరగా భాగహారం: 45 ÷ 3 = 15.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Solve the innermost parentheses (5 + 4) before subtracting from 12.",
+      "hi": "12 में से घटाने से पहले सबसे भीतरी कोष्ठक (5 + 4) को हल करें।",
+      "te": "12 నుండి తీసివేసే ముందు లోపలి బ్రాకెట్ (5 + 4) ను సాధించండి.",
+      "reviewed": false
+    }
+  }
+]

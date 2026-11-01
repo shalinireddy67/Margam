@@ -1,0 +1,873 @@
+[
+  {
+    "id": "q-c6-neg-01",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "During peak winter in Dras (Ladakh), the night temperature drops to 18 degrees Celsius below the freezing point (0°C). Which integer correctly represents this temperature?",
+      "hi": "द्रास (लद्दाख) में सर्दियों के दौरान रात का तापमान हिमांक बिंदु (0°C) से 18 डिग्री सेल्सियस नीचे गिर जाता है। कौन सा पूर्णांक इस तापमान को सही ढंग से दर्शाता है?",
+      "te": "ద్రాస్ (లడఖ్) శీతాకాలంలో రాత్రి ఉష్ణోగ్రత గడ్డకట్టే స్థానం (0°C) కంటే 18 డిగ్రీల సెల్సియస్ దిగువకు పడిపోతుంది. ఈ ఉష్ణోగ్రతను ఏ పూర్ణ సంఖ్య ఖచ్చితంగా సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "+18°C",
+          "hi": "+18°C",
+          "te": "+18°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-18°C",
+          "hi": "-18°C",
+          "te": "-18°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0°C",
+          "hi": "0°C",
+          "te": "0°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-1°C",
+          "hi": "-1°C",
+          "te": "-1°C",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_minimum_negative_integer"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Temperatures below 0°C are measured in the negative direction from zero. Hence, 18 degrees below zero is written as -18°C.",
+      "hi": "0°C से नीचे के तापमान को शून्य से ऋणात्मक दिशा में मापा जाता है। इसलिए, शून्य से 18 डिग्री नीचे को -18°C लिखा जाता है।",
+      "te": "0°C కంటే తక్కువ ఉష్ణోగ్రతలను సున్నా నుండి ఋణ దిశలో కొలుస్తారు. కాబట్టి సున్నా కంటే 18 డిగ్రీల దిగువను -18°C గా రాస్తారు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quantities below the reference zero point carry a negative (-) sign.",
+      "hi": "संदर्भ शून्य बिंदु से नीचे की राशियों में ऋण (-) चिह्न लगाया जाता है।",
+      "te": "ఆధార సున్నా బిందువు కంటే తక్కువ ఉన్న రాశులకు ఋణ (-) సంకేతం ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-02",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "A research drone flies at 120 metres above sea level (+120 m). Directly beneath it, an underwater exploration sensor is situated at 150 metres below sea level (-150 m). What is the vertical distance between the drone and the sensor?",
+      "hi": "एक अनुसंधान ड्रोन समुद्र तल से 120 मीटर ऊपर (+120 m) उड़ रहा है। ठीक उसके नीचे, समुद्र तल से 150 मीटर नीचे (-150 m) एक पानी के नीचे का सेंसर स्थित है। ड्रोन और सेंसर के बीच की ऊर्ध्वाधर दूरी क्या है?",
+      "te": "ఒక పరిశోధనా డ్రోన్ సముద్ర మట్టానికి 120 మీటర్ల ఎత్తులో (+120 m) ఎగురుతోంది. దాని కింద సముద్ర మట్టానికి 150 మీటర్ల దిగువన (-150 m) ఒక సెన్సార్ ఉంది. డ్రోన్ మరియు సెన్సార్ మధ్య నిలువు దూరం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "30 metres",
+          "hi": "30 मीटर",
+          "te": "30 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "270 metres",
+          "hi": "270 मीटर",
+          "te": "270 మీటర్లు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-30 metres",
+          "hi": "-30 मीटर",
+          "te": "-30 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_difference_fallacy"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-270 metres",
+          "hi": "-270 मीटर",
+          "te": "-270 మీటర్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The vertical distance from sea level to the drone is 120 m, and from sea level to the sensor is 150 m. The total separation is 120 - (-150) = 120 + 150 = 270 metres.",
+      "hi": "समुद्र तल से ड्रोन की ऊर्ध्वाधर दूरी 120 मीटर है, और समुद्र तल से सेंसर की दूरी 150 मीटर है। कुल दूरी 120 - (-150) = 120 + 150 = 270 मीटर है।",
+      "te": "సముద్ర మట్టం నుండి డ్రోన్ వరకు దూరం 120 మీటర్లు, సముద్ర మట్టం నుండి సెన్సార్ వరకు 150 మీటర్లు. మొత్తం దూరం 120 - (-150) = 120 + 150 = 270 మీటర్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add the altitude above sea level and the depth below sea level to find total vertical distance.",
+      "hi": "कुल दूरी ज्ञात करने के लिए समुद्र तल के ऊपर की ऊँचाई और नीचे की गहराई को जोड़ें।",
+      "te": "మొత్తం నిలువు దూరాన్ని కనుగొనడానికి సముద్ర మట్టం పై ఎత్తును మరియు దిగువ లోతును కలపండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-01",
+    "conceptId": "c6-neg-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Which of the following inequality statements correctly compares -9 and -4?",
+      "hi": "निम्नलिखित में से कौन सा असमानता कथन -9 और -4 की सही तुलना करता है?",
+      "te": "కింది వాటిలో -9 మరియు -4 లను సరిగ్గా పోల్చే అసమానత ప్రకటన ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-9 > -4 because 9 is greater than 4",
+          "hi": "-9 > -4 क्योंकि 9, 4 से बड़ा है",
+          "te": "-9 > -4 ఎందుకంటే 9 అనేది 4 కంటే పెద్దది",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-9 < -4 because -9 lies further left on the number line",
+          "hi": "-9 < -4 क्योंकि -9 संख्या रेखा पर अधिक बाईं ओर स्थित है",
+          "te": "-9 < -4 ఎందుకంటే సంఖ్యా రేఖపై -9 మరింత ఎడమవైపు ఉంటుంది",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-9 = -4 because both are negative",
+          "hi": "-9 = -4 क्योंकि दोनों ऋणात्मक हैं",
+          "te": "-9 = -4 ఎందుకంటే రెండూ ఋణ సంఖ్యలు",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_all_negatives_equal"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-9 > 0",
+          "hi": "-9 > 0",
+          "te": "-9 > 0",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_greater_than_zero_misconception"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "On a horizontal number line, values decrease as you move to the left. Since -9 is 9 units to the left of zero and -4 is only 4 units to the left, -9 is further left and therefore smaller: -9 < -4.",
+      "hi": "संख्या रेखा पर बाईं ओर जाने पर मान घटता है। चूंकि -9 शून्य से 9 इकाई बाईं ओर है और -4 केवल 4 इकाई बाईं ओर है, इसलिए -9 अधिक बाईं ओर होने के कारण छोटा है: -9 < -4।",
+      "te": "సంఖ్యా రేఖపై ఎడమవైపుకు వెళ్ళేకొద్దీ విలువ తగ్గుతుంది. సున్నా నుండి -9 తొమ్మిది స్థానాలు ఎడమవైపున, -4 నాలుగు స్థానాలు ఎడమవైపున ఉండటం వల్ల, -9 మరింత ఎడమవైపు ఉండి చిన్నదవుతుంది: -9 < -4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember that for negative numbers, a larger absolute digit means a value further to the left.",
+      "hi": "याद रखें कि ऋणात्मक संख्याओं में अंक जितना बड़ा होगा, वह संख्या रेखा पर उतनी ही अधिक बाईं ओर होगी।",
+      "te": "ఋణ సంఖ్యలలో అంకె విలువ ఎక్కువ ఉంటే, సంఖ్యా రేఖపై అది మరింత ఎడమవైపు ఉంటుందని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-02",
+    "conceptId": "c6-neg-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Which sequence shows the integers -12, 5, -3, 0, -8 arranged in ascending order (from smallest to largest)?",
+      "hi": "पूर्णांकों -12, 5, -3, 0, -8 को आरोही क्रम (छोटे से बड़े) में कौन सा क्रम सही दिखाता है?",
+      "te": "-12, 5, -3, 0, -8 పూర్ణ సంఖ్యలను ఆరోహణ క్రమంలో (చిన్న నుండి పెద్దది) సరైన క్రమం ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-3, -8, -12, 0, 5",
+          "hi": "-3, -8, -12, 0, 5",
+          "te": "-3, -8, -12, 0, 5",
+          "reviewed": false
+        },
+        "mistakeTag": "ordered_negatives_by_absolute_value_ascending"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5, 0, -3, -8, -12",
+          "hi": "5, 0, -3, -8, -12",
+          "te": "5, 0, -3, -8, -12",
+          "reviewed": false
+        },
+        "mistakeTag": "descending_order_instead_of_ascending"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-12, -8, -3, 0, 5",
+          "hi": "-12, -8, -3, 0, 5",
+          "te": "-12, -8, -3, 0, 5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "0, -3, -8, -12, 5",
+          "hi": "0, -3, -8, -12, 5",
+          "te": "0, -3, -8, -12, 5",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_zero_as_smallest"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Moving from left to right on the number line gives: -12 < -8 < -3 < 0 < 5. Therefore, the ascending order is -12, -8, -3, 0, 5.",
+      "hi": "संख्या रेखा पर बाएँ से दाएँ चलने पर: -12 < -8 < -3 < 0 < 5 प्राप्त होता है। अतः आरोही क्रम -12, -8, -3, 0, 5 है।",
+      "te": "సంఖ్యా రేఖపై ఎడమ నుండి కుడికి చూస్తే: -12 < -8 < -3 < 0 < 5. కాబట్టి ఆరోహణ క్రమం -12, -8, -3, 0, 5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The most negative number is the smallest and comes first in ascending order.",
+      "hi": "सबसे बड़ी ऋणात्मक संख्या सबसे छोटी होती है और आरोही क्रम में सबसे पहले आती है।",
+      "te": "అత్యధిక ఋణ విలువ గల సంఖ్య అత్యంత చిన్నది, ఆరోహణ క్రమంలో మొదట వస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d1-01",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "In winter, the temperature in Leh drops to 14°C below the freezing point (0°C). How is this recorded as an integer?",
+      "hi": "सर्दियों में लेह का तापमान हिमांक (0°C) से 14°C नीचे चला जाता है। इसे पूर्णांक के रूप में कैसे लिखा जाएगा?",
+      "te": "శీతాకాలంలో లేహ్ ఉష్ణోగ్రత గడ్డకట్టే స్థానం (0°C) కంటే 14°C తక్కువకు పడిపోతుంది. దీనిని పూర్ణాంకంగా ఎలా నమోదు చేస్తారు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-14°C",
+          "hi": "-14°C",
+          "te": "-14°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+14°C",
+          "hi": "+14°C",
+          "te": "+14°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0°C",
+          "hi": "0°C",
+          "te": "0°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-4°C",
+          "hi": "-4°C",
+          "te": "-4°C",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_ten_error"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Quantities below zero or below a reference benchmark are represented using negative integers. 14°C below 0°C is -14°C.",
+      "hi": "शून्य या मानक संदर्भ से नीचे की मात्राओं को ऋणात्मक पूर्णांकों द्वारा दर्शाया जाता है। 0°C से 14°C नीचे -14°C होता है।",
+      "te": "సున్నా కంటే తక్కువ ఉన్న పరిమాణాలను రుణ పూర్ణాంకాలతో సూచిస్తారు. 0°C కంటే 14°C తక్కువ అనగా -14°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Values below zero take a minus (-) sign.",
+      "hi": "शून्य से नीचे के मानों में ऋण (-) चिह्न लगता है।",
+      "te": "సున్నా కంటే తక్కువ ఉన్న విలువలకు మైనస్ (-) గుర్తు ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d1-02",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "An Indian Navy submarine operates 85 metres below sea level (sea level is 0 m). How is its position recorded as an integer?",
+      "hi": "भारतीय नौसेना की एक पनडुब्बी समुद्र तल (0 मी) से 85 मीटर नीचे संचालित होती है। इसकी स्थिति को पूर्णांक के रूप में कैसे दर्ज किया जाएगा?",
+      "te": "భారత నావికాదళ జలాంతర్గామి సముద్ర మట్టం (0 మీ) కంటే 85 మీటర్ల దిగువన పనిచేస్తుంది. దాని స్థానాన్ని పూర్ణాంకంగా ఎలా నమోదు చేస్తారు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "+85 m",
+          "hi": "+85 मी",
+          "te": "+85 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-170 m",
+          "hi": "-170 मी",
+          "te": "-170 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "magnitude_doubled"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-85 m",
+          "hi": "-85 मी",
+          "te": "-85 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "0 m",
+          "hi": "0 मी",
+          "te": "0 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Sea level is the zero benchmark. Depths below sea level are represented by negative integers: -85 m.",
+      "hi": "समुद्र तल शून्य संदर्भ है। समुद्र तल से नीचे की गहराई को ऋणात्मक पूर्णांक द्वारा दर्शाया जाता है: -85 मी।",
+      "te": "సముద్ర మట్టం సున్నా ప్రమాణం. సముద్ర మట్టానికి దిగువన ఉన్న లోతును రుణ పూర్ణాంకంతో సూచిస్తారు: -85 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Below sea level is opposite to altitude above sea level.",
+      "hi": "समुद्र तल से नीचे का स्थान ऊंचाई के विपरीत होता है।",
+      "te": "సముద్ర మట్టం కంటే దిగువన ఉండటం ఎత్తుకు వ్యతిరేకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d1-03",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "In a shopping mall, an elevator travels from the ground floor (0) down to the 2nd basement parking level. What integer represents this basement floor?",
+      "hi": "एक शॉपिंग मॉल में लिफ्ट भूतल (0) से नीचे दूसरे बेसमेंट पार्किंग तल पर जाती है। इस बेसमेंट तल को कौन सा पूर्णांक दर्शाता है?",
+      "te": "షాపింగ్ మాల్‌లోని లిఫ్ట్ గ్రౌండ్ ఫ్లోర్ (0) నుండి 2వ బేస్‌మెంట్ పార్కింగ్ అంతస్తుకు దిగుతుంది. ఈ బేస్‌మెంట్ అంతస్తును ఏ పూర్ణాంకం సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "+2",
+          "hi": "+2",
+          "te": "+2",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-2",
+          "hi": "-2",
+          "te": "-2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-20",
+          "hi": "-20",
+          "te": "-20",
+          "reviewed": false
+        },
+        "mistakeTag": "added_ten_scale"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "0",
+          "hi": "0",
+          "te": "0",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_displacement"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Levels below the ground floor (0) are negative. 2 levels down is -2.",
+      "hi": "भूतल (0) से नीचे के तलों को ऋणात्मक माना जाता है। 2 तल नीचे -2 होता है।",
+      "te": "గ్రౌండ్ ఫ్లోర్ (0) కంటే దిగువ అంతస్తులు రుణాత్మకం. 2 అంతస్తులు కిందకు అనగా -2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Floors below ground level take negative values.",
+      "hi": "जमीन के स्तर से नीचे के तलों का मान ऋणात्मक होता है।",
+      "te": "భూగర్భ అంతస్తులకు రుణ విలువలు ఉంటాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d2-01",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "Kavita has ₹500 in her bank account. She makes an online payment of ₹800 using an approved overdraft facility. What integer represents her new balance?",
+      "hi": "कविता के बैंक खाते में ₹500 हैं। वह ओवरड्राफ्ट सुविधा का उपयोग करके ₹800 का ऑनलाइन भुगतान करती है। उसका नया बैलेंस कौन सा पूर्णांक दर्शाएगा?",
+      "te": "కవిత బ్యాంక్ ఖాతాలో ₹500 ఉన్నాయి. ఆమె అనుమతించబడిన ఓవర్‌డ్రాఫ్ట్ ద్వారా ₹800 ఆన్‌లైన్ చెల్లింపు చేసింది. ఆమె కొత్త బ్యాలెన్స్‌ను ఏ పూర్ణాంకం సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-₹300",
+          "hi": "-₹300",
+          "te": "-₹300",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+₹300",
+          "hi": "+₹300",
+          "te": "+₹300",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "+₹1300",
+          "hi": "+₹1300",
+          "te": "+₹1300",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_subtracted"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-₹800",
+          "hi": "-₹800",
+          "te": "-₹800",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_from_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Balance = 500 - 800 = -300. An overdraft is money owed, represented by -₹300.",
+      "hi": "शेष = 500 - 800 = -300। ओवरड्राफ्ट बकाया राशि है, जिसे -₹300 से दर्शाया जाता है।",
+      "te": "నిల్వ = 500 - 800 = -300. ఓవర్‌డ్రాఫ్ట్ బాకీ ఉన్న డబ్బు, కాబట్టి -₹300.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtracting a larger amount from a smaller amount gives a negative balance.",
+      "hi": "छोटी राशि में से बड़ी राशि घटाने पर ऋणात्मक शेष प्राप्त होता है।",
+      "te": "చిన్న మొత్తం నుండి పెద్ద మొత్తాన్ని తీసివేస్తే రుణ విలువ వస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d2-02",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If travelling 12 km East is represented by +12 km, what integer represents travelling 15 km West?",
+      "hi": "यदि पूर्व दिशा में 12 किमी की यात्रा को +12 किमी से दर्शाया जाता है, तो पश्चिम दिशा में 15 किमी की यात्रा को किस पूर्णांक से दर्शाया जाएगा?",
+      "te": "తూర్పు దిశలో 12 కి.మీ ప్రయాణాన్ని +12 కి.మీగా సూచిస్తే, పశ్చిమ దిశలో 15 కి.మీ ప్రయాణాన్ని ఏ పూర్ణాంకం సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "+15 km",
+          "hi": "+15 किमी",
+          "te": "+15 కి.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-3 km",
+          "hi": "-3 किमी",
+          "te": "-3 కి.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "+3 km",
+          "hi": "+3 किमी",
+          "te": "+3 కి.మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_reference_point"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-15 km",
+          "hi": "-15 किमी",
+          "te": "-15 కి.మీ",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "West is the exact opposite direction to East. Since East is positive, West is negative: -15 km.",
+      "hi": "पश्चिम दिशा पूर्व के ठीक विपरीत है। चूंकि पूर्व धनात्मक है, पश्चिम ऋणात्मक होगा: -15 किमी।",
+      "te": "పశ్చిమ దిశ తూర్పుకు పూర్తి వ్యతిరేకం. తూర్పు ధనాత్మకం కాబట్టి, పశ్చిమం రుణాత్మకం: -15 కి.మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Opposite directions are assigned opposite signs.",
+      "hi": "विपरीत दिशाओं को विपरीत चिह्न दिए जाते हैं।",
+      "te": "వ్యతిరేక దిశలకు వ్యతిరేక గుర్తులు ఇవ్వబడతాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d2-03",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A coastal mountain peak has an elevation of +2400 m, while a deep sea trench directly offshore has an elevation of -600 m. What is the total vertical distance between the peak and the trench?",
+      "hi": "तटीय पर्वत शिखर की ऊंचाई +2400 मीटर है, जबकि समुद्र में एक खाई -600 मीटर की गहराई पर है। शिखर और खाई के बीच कुल ऊर्ध्वाधर दूरी क्या है?",
+      "te": "ఒక తీర పర్వత శిఖరం ఎత్తు +2400 మీటర్లు, సముద్ర కందకం లోతు -600 మీటర్లు. శిఖరం మరియు కందకం మధ్య మొత్తం నిలువు దూరం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1800 m",
+          "hi": "1800 मी",
+          "te": "1800 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3000 m",
+          "hi": "3000 मी",
+          "te": "3000 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-3000 m",
+          "hi": "-3000 मी",
+          "te": "-3000 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "2400 m",
+          "hi": "2400 मी",
+          "te": "2400 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_reference"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Vertical distance = Higher elevation - Lower elevation = 2400 - (-600) = 2400 + 600 = 3000 m.",
+      "hi": "ऊर्ध्वाधर दूरी = उच्च ऊंचाई - निम्न ऊंचाई = 2400 - (-600) = 2400 + 600 = 3000 मी।",
+      "te": "నిలువు దూరం = ఎగువ ఎత్తు - దిగువ ఎత్తు = 2400 - (-600) = 2400 + 600 = 3000 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtracting a negative number is equivalent to adding its positive value.",
+      "hi": "किसी ऋणात्मक संख्या को घटाना उसके धनात्मक मान को जोड़ने के बराबर है।",
+      "te": "రుణ సంఖ్యను తీసివేయడం దాని ధన విలువను కలపడంతో సమానం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d3-01",
+    "conceptId": "c6-neg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "At 6 AM in Srinagar, the temperature was -4°C. By noon, it rose by 7°C, but by midnight it fell by 9°C. What was the temperature at midnight?",
+      "hi": "श्रीनगर में सुबह 6 बजे तापमान -4°C था। दोपहर तक यह 7°C बढ़ गया, लेकिन आधी रात तक 9°C गिर गया। आधी रात को तापमान क्या था?",
+      "te": "శ్రీనగర్‌లో ఉదయం 6 గంటలకు ఉష్ణోగ్రత -4°C. మధ్యాహ్నానికి 7°C పెరిగింది, కానీ అర్ధరాత్రికి 9°C తగ్గింది. అర్ధరాత్రి ఉష్ణోగ్రత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "+6°C",
+          "hi": "+6°C",
+          "te": "+6°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-20°C",
+          "hi": "-20°C",
+          "te": "-20°C",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-6°C",
+          "hi": "-6°C",
+          "te": "-6°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+2°C",
+          "hi": "+2°C",
+          "te": "+2°C",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Initial = -4°C. Noon = -4 + 7 = +3°C. Midnight = +3 - 9 = -6°C.",
+      "hi": "प्रारंभिक = -4°C। दोपहर = -4 + 7 = +3°C। आधी रात = +3 - 9 = -6°C।",
+      "te": "ప్రారంభం = -4°C. మధ్యాహ్నం = -4 + 7 = +3°C. అర్ధరాత్రి = +3 - 9 = -6°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Follow each change in sequence: start at -4, add 7, then subtract 9.",
+      "hi": "क्रम से गणना करें: -4 से शुरू करें, 7 जोड़ें, फिर 9 घटाएं।",
+      "te": "-4 తో ప్రారంభించి, 7 కలిపి, తర్వాత 9 తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d3-02",
+    "conceptId": "c6-neg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A deep-sea diver is positioned at -18 m. She ascends 12 m towards the surface, then descends 5 m deeper. What is her final elevation relative to sea level?",
+      "hi": "एक गोताखोर समुद्र में -18 मीटर पर है। वह सतह की ओर 12 मीटर ऊपर चढ़ती है, फिर 5 मीटर नीचे उतरती है। समुद्र तल के सापेक्ष उसकी अंतिम स्थिति क्या है?",
+      "te": "ఒక స్కూబా డైవర్ -18 మీటర్ల వద్ద ఉంది. ఆమె పైకి 12 మీటర్లు వెళ్లి, తర్వాత 5 మీటర్లు దిగువకు వెళ్ళింది. సముద్ర మట్టానికి సంబంధించి ఆమె చివరి స్థానం ఏమిటి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-11 m",
+          "hi": "-11 मी",
+          "te": "-11 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+11 m",
+          "hi": "+11 मी",
+          "te": "+11 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-35 m",
+          "hi": "-35 मी",
+          "te": "-35 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "added_all_movements"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-1 m",
+          "hi": "-1 मी",
+          "te": "-1 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_direction_signs"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Position = -18 + 12 - 5 = -6 - 5 = -11 m.",
+      "hi": "स्थिति = -18 + 12 - 5 = -6 - 5 = -11 मी।",
+      "te": "స్థానం = -18 + 12 - 5 = -6 - 5 = -11 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Ascending is positive (+); descending is negative (-).",
+      "hi": "ऊपर चढ़ना धनात्मक (+) है; नीचे उतरना ऋणात्मक (-) है।",
+      "te": "పైకి వెళ్లడం ధనాత్మకం (+); కిందకు వెళ్లడం రుణాత్మకం (-).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-neg-d3-03",
+    "conceptId": "c6-neg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A survey drone hovers at an altitude of +45 m above sea level. Directly beneath it, a coral reef lies at -15 m below sea level. A pelican flies at an altitude exactly halfway between the drone and the reef. What is the pelican's altitude?",
+      "hi": "एक सर्वेक्षण ड्रोन समुद्र तल से +45 मीटर की ऊंचाई पर उड़ रहा है। ठीक इसके नीचे, एक प्रवाल भित्ति समुद्र तल से -15 मीटर पर है। एक पेलिकन ड्रोन और भित्ति के ठीक बीच में उड़ रहा है। पेलिकन की ऊंचाई क्या है?",
+      "te": "ఒక సర్వే డ్రోన్ సముద్ర మట్టానికి +45 మీటర్ల ఎత్తులో ఉంది. దాని కింద ఒక పగడపు దిబ్బ -15 మీటర్ల లోతులో ఉంది. ఒక పక్షి డ్రోన్ మరియు దిబ్బకు సరిగ్గా మధ్యలో ఎగురుతోంది. ఆ పక్షి ఎత్తు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "0 m",
+          "hi": "0 मी",
+          "te": "0 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_reference"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+15 m",
+          "hi": "+15 मी",
+          "te": "+15 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "+30 m",
+          "hi": "+30 मी",
+          "te": "+30 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_half_distance"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-15 m",
+          "hi": "-15 मी",
+          "te": "-15 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_average_error"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The midpoint is the average of the two elevations: [45 + (-15)] / 2 = 30 / 2 = +15 m.",
+      "hi": "मध्य बिंदु दोनों ऊंचाइयों का औसत है: [45 + (-15)] / 2 = 30 / 2 = +15 मी।",
+      "te": "మధ్య బిందువు రెండు ఎత్తుల సగటు: [45 + (-15)] / 2 = 30 / 2 = +15 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add the two numbers and divide by 2.",
+      "hi": "दोनों संख्याओं को जोड़ें और 2 से भाग दें।",
+      "te": "రెండు సంఖ్యలను కలిపి 2 తో భాగించండి.",
+      "reviewed": false
+    }
+  }
+]

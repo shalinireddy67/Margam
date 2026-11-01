@@ -1,0 +1,873 @@
+[
+  {
+    "id": "q-c7-add-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the integer sum: (-15) + 9",
+      "hi": "पूर्णांक योग का मान ज्ञात कीजिए: (-15) + 9",
+      "te": "పూర్ణ సంఖ్యల మొత్తం విలువను లెక్కించండి: (-15) + 9",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-24",
+          "hi": "-24",
+          "te": "-24",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "When adding integers with opposite signs, take the difference between their absolute values (15 - 9 = 6) and apply the sign of the integer with the larger absolute value (-15). Hence, (-15) + 9 = -6.",
+      "hi": "विपरीत चिह्नों वाले पूर्णांकों को जोड़ते समय, उनके निरपेक्ष मानों का अंतर लें (15 - 9 = 6) और बड़े निरपेक्ष मान वाले पूर्णांक का चिह्न लगाएं। अतः (-15) + 9 = -6।",
+      "te": "వేర్వేరు సంకేతాలు ఉన్నప్పుడు, వాటి సంపూర్ణ విలువల తేడాను తీసివేసి (15 - 9 = 6), పెద్ద విలువ యొక్క సంకేతాన్ని ఉంచాలి. కాబట్టి (-15) + 9 = -6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "You owe ₹15 and pay back ₹9. How much do you still owe?",
+      "hi": "आप पर ₹15 का कर्ज है और आप ₹9 चुकाते हैं। अब आप पर कितना कर्ज बचा?",
+      "te": "మీకు ₹15 అప్పు ఉంది, మీరు ₹9 చెల్లించారు. ఇంకా ఎంత అప్పు మిగిలి ఉంది?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-sub-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Calculate the exact value of: 8 - (-13)",
+      "hi": "सटीक मान ज्ञात कीजिए: 8 - (-13)",
+      "te": "ఖచ్చితమైన విలువను లెక్కించండి: 8 - (-13)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_positive"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-21",
+          "hi": "-21",
+          "te": "-21",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Subtracting a negative number is equivalent to adding its additive inverse: 8 - (-13) = 8 + 13 = 21.",
+      "hi": "ऋणात्मक संख्या को घटाना उसके योज्य प्रतिलोम को जोड़ने के समान है: 8 - (-13) = 8 + 13 = 21।",
+      "te": "ఋణ సంఖ్యను తీసివేయడం అంటే దాని సంకలన విలోమాన్ని కలపడం: 8 - (-13) = 8 + 13 = 21.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember the rule: minus a negative becomes plus.",
+      "hi": "नियम याद रखें: ऋण का ऋण धन बन जाता है।",
+      "te": "ఋణాన్ని తీసివేయడం ధనంగా మారుతుందని గుర్తుంచుకోండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-mul-01",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: (-8) × (-7)",
+      "hi": "गुणनफल ज्ञात कीजिए: (-8) × (-7)",
+      "te": "లబ్దాన్ని కనుగొనండి: (-8) × (-7)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-56",
+          "hi": "-56",
+          "te": "-56",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "56",
+          "hi": "56",
+          "te": "56",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-15",
+          "hi": "-15",
+          "te": "-15",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "15",
+          "hi": "15",
+          "te": "15",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The product of two negative integers is always positive: (-) × (-) = (+). Hence, (-8) × (-7) = +56.",
+      "hi": "दो ऋणात्मक पूर्णांकों का गुणनफल सदैव धनात्मक होता है: (-) × (-) = (+)। अतः (-8) × (-7) = +56।",
+      "te": "రెండు ఋణ పూర్ణ సంఖ్యల లబ్దం ఎల్లప్పుడూ ధనాత్మకం: (-) × (-) = (+). కాబట్టి (-8) × (-7) = +56.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Like signs in multiplication produce a positive result.",
+      "hi": "गुणा में समान चिह्न होने पर परिणाम धनात्मक होता है।",
+      "te": "గుణకారంలో ఒకే రకమైన సంకేతాలు ఉంటే ఫలితం ధనాత్మకం అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-mul-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the product of three signed integers: (-3) × 4 × (-5)",
+      "hi": "तीन पूर्णांकों के गुणनफल का मान ज्ञात कीजिए: (-3) × 4 × (-5)",
+      "te": "మూడు పూర్ణ సంఖ్యల లబ్దాన్ని లెక్కించండి: (-3) × 4 × (-5)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-60",
+          "hi": "-60",
+          "te": "-60",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-12",
+          "hi": "-12",
+          "te": "-12",
+          "reviewed": false
+        },
+        "mistakeTag": "incomplete_multiplication_of_factors"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "20",
+          "hi": "20",
+          "te": "20",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_first_factor"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Step 1: (-3) × 4 = -12. Step 2: (-12) × (-5) = +60. Since there are an even number (2) of negative factors, the overall product is positive.",
+      "hi": "चरण 1: (-3) × 4 = -12। चरण 2: (-12) × (-5) = +60। चूंकि ऋणात्मक कारकों की संख्या सम (2) है, इसलिए अंतिम गुणनफल धनात्मक होगा।",
+      "te": "దశ 1: (-3) × 4 = -12. దశ 2: (-12) × (-5) = +60. ఋణ సంఖ్యల సంఖ్య సరి సంఖ్య (2) కాబట్టి మొత్తం ఫలితం ధనాత్మకం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply from left to right, tracking how signs change at each step.",
+      "hi": "बाएँ से दाएँ गुणा करें और देखें कि प्रत्येक चरण में चिह्न कैसे बदलता है।",
+      "te": "ఎడమ నుండి కుడికి గుణిస్తూ, ప్రతి దశలో సంకేతాల మార్పును గమనించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d1-01",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: (-6) × 7.",
+      "hi": "गुणनफल ज्ञात कीजिए: (-6) × 7.",
+      "te": "లబ్ధాన్ని కనుగొనండి: (-6) × 7.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "42",
+          "hi": "42",
+          "te": "42",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-42",
+          "hi": "-42",
+          "te": "-42",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-13",
+          "hi": "-13",
+          "te": "-13",
+          "reviewed": false
+        },
+        "mistakeTag": "added_with_negative_sign"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The product of a negative integer and a positive integer is always negative: (-6) × 7 = -42.",
+      "hi": "एक ऋणात्मक पूर्णांक और एक धनात्मक पूर्णांक का गुणनफल हमेशा ऋणात्मक होता है: (-6) × 7 = -42।",
+      "te": "ఒక రుణ పూర్ణాంకం మరియు ఒక ధన పూర్ణాంకం లబ్ధం ఎల్లప్పుడూ రుణాత్మకం: (-6) × 7 = -42.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Negative × Positive = Negative.",
+      "hi": "ऋणात्मक × धनात्मक = ऋणात्मक।",
+      "te": "రుణ సంఖ్య × ధన సంఖ్య = రుణ సంఖ్య.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d1-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: (-9) × (-8).",
+      "hi": "गुणनफल ज्ञात कीजिए: (-9) × (-8).",
+      "te": "లబ్ధాన్ని కనుగొనండి: (-9) × (-8).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "72",
+          "hi": "72",
+          "te": "72",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-72",
+          "hi": "-72",
+          "te": "-72",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-17",
+          "hi": "-17",
+          "te": "-17",
+          "reviewed": false
+        },
+        "mistakeTag": "added_with_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "17",
+          "hi": "17",
+          "te": "17",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The product of two negative integers is always positive: (-9) × (-8) = +72.",
+      "hi": "दो ऋणात्मक पूर्णांकों का गुणनफल हमेशा धनात्मक होता है: (-9) × (-8) = +72।",
+      "te": "రెండు రుణ పూర్ణాంకాల లబ్ధం ఎల్లప్పుడూ ధనాత్మకం: (-9) × (-8) = +72.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Negative × Negative = Positive.",
+      "hi": "ऋणात्मक × ऋणात्मक = धनात्मक।",
+      "te": "రుణ సంఖ్య × రుణ సంఖ్య = ధన సంఖ్య.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d1-03",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: 12 × (-5).",
+      "hi": "गुणनफल ज्ञात कीजिए: 12 × (-5).",
+      "te": "లబ్ధాన్ని కనుగొనండి: 12 × (-5).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-60",
+          "hi": "-60",
+          "te": "-60",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Positive × Negative = Negative: 12 × (-5) = -60.",
+      "hi": "धनात्मक × ऋणात्मक = ऋणात्मक: 12 × (-5) = -60।",
+      "te": "ధన సంఖ్య × రుణ సంఖ్య = రుణ సంఖ్య: 12 × (-5) = -60.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiplying with one negative factor yields a negative result.",
+      "hi": "एक ऋणात्मक गुणनखंड से गुणा करने पर ऋणात्मक परिणाम मिलता है।",
+      "te": "ఒక రుణ గుణకం ఉంటే ఫలితం రుణాత్మకం అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d2-01",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the product of three integers: (-3) × (-4) × (-5).",
+      "hi": "तीन पूर्णांकों के गुणनफल का मान ज्ञात कीजिए: (-3) × (-4) × (-5).",
+      "te": "మూడు పూర్ణాంకాల లబ్ధాన్ని కనుగొనండి: (-3) × (-4) × (-5).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-12",
+          "hi": "-12",
+          "te": "-12",
+          "reviewed": false
+        },
+        "mistakeTag": "added_with_negative_sign"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-60",
+          "hi": "-60",
+          "te": "-60",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "20",
+          "hi": "20",
+          "te": "20",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_first_factor"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "First multiply (-3) × (-4) = +12. Then (+12) × (-5) = -60. An odd count of negative factors (3) yields a negative product.",
+      "hi": "पहले गुणा करें (-3) × (-4) = +12। फिर (+12) × (-5) = -60। ऋणात्मक गुणनखंडों की विषम संख्या (3) होने पर परिणाम ऋणात्मक होता है।",
+      "te": "మొదట (-3) × (-4) = +12. తర్వాత (+12) × (-5) = -60. బేసి సంఖ్యలో రుణ గుణకాలు ఉంటే ఫలితం రుణాత్మకం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "An odd number of negative signs results in a negative product.",
+      "hi": "ऋणात्मक चिह्नों की विषम संख्या होने पर गुणनफल ऋणात्मक होता है।",
+      "te": "బేసి సంఖ్యలో మైనస్ గుర్తులు ఉంటే ఫలితం మైనస్ అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d2-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "A cold-storage facility reduces its internal temperature at a steady rate of 3°C per hour (change of -3°C/hr). What is the total temperature change after 8 hours?",
+      "hi": "एक कोल्ड स्टोरेज सुविधा अपने आंतरिक तापमान को 3°C प्रति घंटे की स्थिर दर से कम करती है (-3°C/घंटे का बदलाव)। 8 घंटे बाद कुल तापमान परिवर्तन क्या होगा?",
+      "te": "ఒక కోల్డ్ స్టోరేజ్ గంటకు 3°C చొప్పున ఉష్ణోగ్రతను తగ్గిస్తుంది (-3°C/గం). 8 గంటల తర్వాత మొత్తం ఉష్ణోగ్రత మార్పు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-24°C",
+          "hi": "-24°C",
+          "te": "-24°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+24°C",
+          "hi": "+24°C",
+          "te": "+24°C",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "+5°C",
+          "hi": "+5°C",
+          "te": "+5°C",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-11°C",
+          "hi": "-11°C",
+          "te": "-11°C",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_instead_of_multiplied"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Total change = Rate × Time = (-3°C) × 8 = -24°C.",
+      "hi": "कुल परिवर्तन = दर × समय = (-3°C) × 8 = -24°C।",
+      "te": "మొత్తం మార్పు = రేటు × సమయం = (-3°C) × 8 = -24°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply the hourly change (-3) by 8 hours.",
+      "hi": "प्रति घंटे के बदलाव (-3) को 8 घंटों से गुणा करें।",
+      "te": "గంట మార్పు (-3) ని 8 గంటలతో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d2-03",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the product of multiplying (-1) by itself 5 times: (-1) × (-1) × (-1) × (-1) × (-1)?",
+      "hi": "(-1) को 5 बार स्वयं से गुणा करने पर क्या मान प्राप्त होगा: (-1) × (-1) × (-1) × (-1) × (-1)?",
+      "te": "(-1) ని 5 సార్లు గుణిస్తే వచ్చే లబ్ధం ఎంత: (-1) × (-1) × (-1) × (-1) × (-1)?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-1",
+          "hi": "-1",
+          "te": "-1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_by_count"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "0",
+          "hi": "0",
+          "te": "0",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_factors_cancel_to_zero"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "(-1) raised to an odd power is always -1. There are 5 negative signs, so the product is -1.",
+      "hi": "(-1) की विषम घात हमेशा -1 होती है। यहाँ 5 ऋणात्मक चिह्न हैं, इसलिए गुणनफल -1 है।",
+      "te": "(-1) యొక్క బేసి ఘాతం ఎల్లప్పుడూ -1. 5 మైనస్ గుర్తులు ఉన్నాయి కాబట్టి లబ్ధం -1.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Pairs of negative signs turn positive; one unpaired negative sign remains.",
+      "hi": "ऋणात्मक चिह्नों के जोड़े धनात्मक बन जाते हैं; एक बिना जोड़े का ऋणात्मक चिह्न शेष रहता है।",
+      "te": "మైనస్ గుర్తుల జతలు ప్లస్ అవుతాయి; ఒక మిగిలిన మైనస్ గుర్తు ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d3-01",
+    "conceptId": "c7-int-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate using order of operations: (-7) × [(-4) + (-6)].",
+      "hi": "संक्रियाओं के क्रम का उपयोग करके मान ज्ञात कीजिए: (-7) × [(-4) + (-6)].",
+      "te": "గణిత నియమాలను ఉపయోగించి సాధించండి: (-7) × [(-4) + (-6)].",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-70",
+          "hi": "-70",
+          "te": "-70",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-14",
+          "hi": "-14",
+          "te": "-14",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_brackets"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "168",
+          "hi": "168",
+          "te": "168",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_instead_of_added_in_bracket"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "70",
+          "hi": "70",
+          "te": "70",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "First evaluate inside brackets: (-4) + (-6) = -10. Then multiply: (-7) × (-10) = +70.",
+      "hi": "पहले कोष्ठक के अंदर का हल करें: (-4) + (-6) = -10। फिर गुणा करें: (-7) × (-10) = +70।",
+      "te": "మొదట బ్రాకెట్ లోపల ఉన్నది సాధించండి: (-4) + (-6) = -10. తర్వాత గుణించండి: (-7) × (-10) = +70.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Add the terms inside the square brackets first, then multiply by -7.",
+      "hi": "पहले कोष्ठक के अंदर के पदों को जोड़ें, फिर -7 से गुणा करें।",
+      "te": "మొదట బ్రాకెట్ లోపల కూడి, తర్వాత -7 తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d3-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "In a competitive exam, +4 marks are awarded for each correct answer and -2 marks are deducted for each incorrect answer. Maya attempted all questions, answering 12 correctly and 6 incorrectly. What was her final score?",
+      "hi": "एक प्रतियोगी परीक्षा में प्रत्येक सही उत्तर के लिए +4 अंक दिए जाते हैं और प्रत्येक गलत उत्तर के लिए -2 अंक काटे जाते हैं। माया ने 12 सही और 6 गलत उत्तर दिए। उसका अंतिम स्कोर क्या था?",
+      "te": "ఒక పోటీ పరీక్షలో ప్రతి సరైన సమాధానానికి +4 మార్కులు, తప్పు సమాధానానికి -2 మార్కులు ఇస్తారు. మాయ 12 సరైనవి మరియు 6 తప్పు సమాధానాలు ఇచ్చింది. ఆమె మొత్తం మార్కులు ఎన్ని?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36 marks",
+          "hi": "36 अंक",
+          "te": "36 మార్కులు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "48 marks",
+          "hi": "48 अंक",
+          "te": "48 మార్కులు",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "60 marks",
+          "hi": "60 अंक",
+          "te": "60 మార్కులు",
+          "reviewed": false
+        },
+        "mistakeTag": "added_penalties_as_positive"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "24 marks",
+          "hi": "24 अंक",
+          "te": "24 మార్కులు",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_both"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Score = (12 × 4) + [6 × (-2)] = 48 + (-12) = 36 marks.",
+      "hi": "स्कोर = (12 × 4) + [6 × (-2)] = 48 + (-12) = 36 अंक।",
+      "te": "స్కోరు = (12 × 4) + [6 × (-2)] = 48 + (-12) = 36 మార్కులు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply 12 by 4, multiply 6 by -2, and add the two amounts.",
+      "hi": "12 को 4 से गुणा करें, 6 को -2 से गुणा करें, और दोनों को जोड़ें।",
+      "te": "12 ని 4 తో, 6 ని -2 తో గుణించి, రెండింటినీ కలపండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int-d3-03",
+    "conceptId": "c7-int-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate the product: (-2) × 5 × (-3) × (-4).",
+      "hi": "गुणनफल का मान ज्ञात कीजिए: (-2) × 5 × (-3) × (-4).",
+      "te": "లబ్ధాన్ని సాధించండి: (-2) × 5 × (-3) × (-4).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "120",
+          "hi": "120",
+          "te": "120",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "added_with_negative_sign"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-120",
+          "hi": "-120",
+          "te": "-120",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Product of magnitudes = 2 × 5 × 3 × 4 = 120. Count of negative factors = 3 (odd). Hence result is -120.",
+      "hi": "संख्याओं का गुणनफल = 2 × 5 × 3 × 4 = 120। ऋणात्मक गुणनखंडों की संख्या = 3 (विषम)। अतः परिणाम -120 है।",
+      "te": "సంఖ్యల లబ్ధం = 2 × 5 × 3 × 4 = 120. రుణ గుణకాల సంఖ్య = 3 (బేసి). కాబట్టి జవాబు -120.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Count the number of negative signs: 3 negative signs produce a negative result.",
+      "hi": "ऋणात्मक चिह्नों की गिनती करें: 3 ऋणात्मक चिह्नों का परिणाम ऋणात्मक होता है।",
+      "te": "మైనస్ గుర్తులను లెక్కించండి: 3 మైనస్ గుర్తులు ఉన్నందున ఫలితం రుణాత్మకం.",
+      "reviewed": false
+    }
+  }
+]

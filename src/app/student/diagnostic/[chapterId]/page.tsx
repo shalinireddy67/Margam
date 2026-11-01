@@ -11,9 +11,7 @@ import {
   ArrowRight,
   ArrowLeft,
   RotateCcw,
-  Sparkles,
   BookOpen,
-  Compass,
   GitBranch,
   ShieldCheck,
   Award,
@@ -21,11 +19,10 @@ import {
 import {
   SupportedLanguage,
   LearnerProfile,
-  Question,
   Chapter,
 } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
-import { unlockChapterLessons, syncClassProgression } from "@/lib/progression";
+import { unlockChapterLessons } from "@/lib/progression";
 import {
   chapters,
   canTakeChapterDiagnostic,
@@ -33,13 +30,49 @@ import {
   getConceptById,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import {
-  generateChapterDiagnostic,
-  evaluateChapterDiagnostic,
-  getConfirmationQuestions,
-  DiagnosticResult,
-} from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+
+interface SanitizedOption {
+  id: string;
+  text: any;
+}
+
+interface ClientQuestion {
+  id: string;
+  conceptId: string;
+  difficulty: number;
+  type: string;
+  contextTag?: string;
+  prompt: any;
+  options?: SanitizedOption[];
+}
+
+interface DiagnosticResultResponse {
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+  mistakeTags: string[];
+  gapAnalysis: {
+    hasGap?: boolean;
+    confirmed?: boolean;
+    canRoute?: boolean;
+    rootConceptId?: string;
+    confidence?: string;
+    routing?: "confirmation_only" | "gap_card" | "none";
+    plainLanguageReason?: string;
+    prerequisitePath?: string[];
+  };
+  feedback: Array<{
+    questionId: string;
+    isCorrect: boolean;
+    chosenAnswer: string;
+    mistakeTag?: string;
+    identifiedGap?: string;
+  }>;
+  confirmationQuestions?: ClientQuestion[];
+  confirmationToken?: string | null;
+}
 
 export default function ChapterDiagnosticPage() {
   const params = useParams();
@@ -48,15 +81,18 @@ export default function ChapterDiagnosticPage() {
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<ClientQuestion[]>([]);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [result, setResult] = useState<DiagnosticResult | null>(null);
+  const [result, setResult] = useState<DiagnosticResultResponse | null>(null);
   const [placementPassed, setPlacementPassed] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   // Confirmation Step State
-  const [confirmationQuestions, setConfirmationQuestions] = useState<Question[]>([]);
+  const [confirmationQuestions, setConfirmationQuestions] = useState<ClientQuestion[]>([]);
+  const [confirmationToken, setConfirmationToken] = useState<string | null>(null);
   const [confirmationAnswers, setConfirmationAnswers] = useState<Record<string, string>>({});
   const [confirmationStatus, setConfirmationStatus] = useState<"pending" | "passed" | "failed" | null>(null);
   const [confirmationSubmitted, setConfirmationSubmitted] = useState(false);
@@ -75,9 +111,43 @@ export default function ChapterDiagnosticPage() {
       return;
     }
 
-    const { questions: diagQuestions } = generateChapterDiagnostic(chapterId, 6);
-    setQuestions(diagQuestions);
-    setLoading(false);
+    // Fetch questions from server route (sanitized, no answers/tags)
+    let isCancelled = false;
+    async function loadQuestions() {
+      try {
+        const res = await fetch("/api/diagnostic/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chapterId,
+            studentId: active!.id,
+          }),
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || "Failed to load diagnostic");
+        }
+
+        const data = await res.json();
+        if (!isCancelled) {
+          setQuestions(data.questions || []);
+          setSessionToken(data.token || null);
+          setLoading(false);
+        }
+      } catch (err: any) {
+        if (!isCancelled) {
+          setErrorMessage(err.message || "Network error loading questions");
+          setLoading(false);
+        }
+      }
+    }
+
+    loadQuestions();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [chapterId, router]);
 
   const currentChapter: Chapter | undefined = chapters.find((c) => c.id === chapterId);
@@ -149,69 +219,108 @@ export default function ChapterDiagnosticPage() {
     }));
   };
 
-  const handleSubmitDiagnostic = (e: React.FormEvent) => {
+  const handleSubmitDiagnostic = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(answers).length < questions.length) {
       setErrorMessage(`Please answer all ${questions.length} questions before submitting.`);
       return;
     }
 
-    const diagResult = evaluateChapterDiagnostic(chapterId, answers, 3);
-    setResult(diagResult);
-
-    // Placement Rule: score >= 70% unlocks chapter lessons
-    const passed = diagResult.scorePercentage >= 70;
-    setPlacementPassed(passed);
-    if (passed) {
-      const updated = unlockChapterLessons(chapterId);
-      if (updated) setProfile(updated);
+    if (!sessionToken) {
+      setErrorMessage("Missing session token. Please reload the assessment.");
+      return;
     }
 
-    // Calibrated Gap Tracing Routing:
-    // - low = confirmation check only (confirmation failure -> gap card)
-    // - medium or high = gap card directly
-    // - insufficient = no routing
-    if (
-      diagResult.gapAnalysis.confirmed &&
-      diagResult.gapAnalysis.canRoute &&
-      diagResult.gapAnalysis.rootConceptId
-    ) {
-      const routing =
-        diagResult.gapAnalysis.routing ||
-        (diagResult.gapAnalysis.confidence === "low" ? "confirmation_only" : "gap_card");
+    setSubmitting(true);
+    setErrorMessage(null);
 
-      if (routing === "confirmation_only") {
-        const confirmQs = getConfirmationQuestions(diagResult.gapAnalysis.rootConceptId, 2);
-        if (confirmQs.length > 0) {
-          setConfirmationQuestions(confirmQs);
-          setConfirmationStatus("pending");
+    try {
+      const res = await fetch("/api/diagnostic/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionToken,
+          chapterId,
+          studentId: profile.id,
+          answers,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Submission failed");
+      }
+
+      const diagResult: DiagnosticResultResponse = await res.json();
+      setResult(diagResult);
+
+      // Placement Rule: score >= 70% unlocks chapter lessons
+      const passed = diagResult.percentage >= 70;
+      setPlacementPassed(passed);
+      if (passed) {
+        const updated = unlockChapterLessons(chapterId);
+        if (updated) setProfile(updated);
+      }
+
+      // Check confirmation questions
+      if (diagResult.confirmationQuestions && diagResult.confirmationQuestions.length > 0) {
+        setConfirmationQuestions(diagResult.confirmationQuestions);
+        setConfirmationToken(diagResult.confirmationToken || null);
+        setConfirmationStatus("pending");
+      } else if (
+        diagResult.gapAnalysis?.hasGap &&
+        diagResult.gapAnalysis?.rootConceptId
+      ) {
+        if (diagResult.gapAnalysis.routing === "gap_card") {
+          setConfirmationStatus("failed");
         } else {
-          // If no confirmation questions available, protect student
           setConfirmationStatus("passed");
         }
-      } else if (routing === "gap_card") {
-        // Direct routing to gap card for medium or high confidence
-        setConfirmationStatus("failed");
       }
+    } catch (err: any) {
+      setErrorMessage(err.message || "Failed to submit diagnostic assessment.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  const handleSubmitConfirmation = (e: React.FormEvent) => {
+  const handleSubmitConfirmation = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(confirmationAnswers).length < confirmationQuestions.length) {
       alert("Please answer both check questions to verify your understanding.");
       return;
     }
 
-    // Check if student answered all confirmation questions correctly
-    const allCorrect = confirmationQuestions.every(
-      (q) => confirmationAnswers[q.id] === q.correctAnswer
-    );
+    if (!confirmationToken) {
+      setConfirmationStatus("failed");
+      setConfirmationSubmitted(true);
+      return;
+    }
 
-    setConfirmationSubmitted(true);
-    if (allCorrect) {
-      setConfirmationStatus("passed");
-    } else {
+    try {
+      const res = await fetch("/api/diagnostic/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          confirmationToken,
+          studentId: profile.id,
+          answers: confirmationAnswers,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Confirmation verification failed");
+      }
+
+      const confirmData = await res.json();
+      setConfirmationSubmitted(true);
+      if (confirmData.allCorrect) {
+        setConfirmationStatus("passed");
+      } else {
+        setConfirmationStatus("failed");
+      }
+    } catch {
+      setConfirmationSubmitted(true);
       setConfirmationStatus("failed");
     }
   };
@@ -224,6 +333,8 @@ export default function ChapterDiagnosticPage() {
     setConfirmationAnswers({});
     setConfirmationStatus(null);
     setConfirmationSubmitted(false);
+    // Reload a fresh session
+    window.location.reload();
   };
 
   return (
@@ -281,7 +392,7 @@ export default function ChapterDiagnosticPage() {
                     )}
                   </h3>
                   <p className="text-xs mt-1">
-                    Score: <strong>{result.correctCount} / {result.totalQuestions}</strong> ({result.scorePercentage}%)
+                    Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
                     {!placementPassed && " • 70% required for instant placement"}
                   </p>
                 </div>
@@ -385,11 +496,13 @@ export default function ChapterDiagnosticPage() {
         )}
 
         {/* CONFIRMATION FAILED: SHOW GAP CARD (WHATEVER THE SCORE) */}
-        {confirmationStatus === "failed" && result?.gapAnalysis.rootConceptId && (() => {
+        {confirmationStatus === "failed" && result?.gapAnalysis?.rootConceptId && (() => {
           const rootConcept = getConceptById(result.gapAnalysis.rootConceptId);
           const exactConceptName = rootConcept
             ? (rootConcept.name[currentLang] || rootConcept.name.en)
             : result.gapAnalysis.rootConceptId;
+
+          const pathNodes = result.gapAnalysis.prerequisitePath || [];
 
           return (
             <div className="bg-rose-50 border-2 border-rose-300 rounded-3xl p-6 sm:p-7 shadow-sm mb-6 space-y-4">
@@ -431,15 +544,15 @@ export default function ChapterDiagnosticPage() {
               </p>
 
               {/* Visual DAG Journey Path */}
-              {result.gapAnalysis.prerequisitePath.length > 0 && (
+              {pathNodes.length > 0 && (
                 <div className="bg-white/80 p-4 rounded-2xl border border-rose-200 space-y-2">
                   <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
                     Learning Journey Backtrack
                   </span>
                   <div className="flex items-center flex-wrap gap-2 text-xs">
-                    {result.gapAnalysis.prerequisitePath.map((nodeId, idx) => {
+                    {pathNodes.map((nodeId, idx) => {
                       const nodeConcept = getConceptById(nodeId);
-                      const isLast = idx === result.gapAnalysis.prerequisitePath.length - 1;
+                      const isLast = idx === pathNodes.length - 1;
                       const nodeConceptName = nodeConcept
                         ? (nodeConcept.name[currentLang] || nodeConcept.name.en)
                         : nodeId;
@@ -467,7 +580,7 @@ export default function ChapterDiagnosticPage() {
                 <Link
                   id="fix-this-first-btn"
                   href={`/lesson/${result.gapAnalysis.rootConceptId}?fromGap=true&reason=${encodeURIComponent(
-                    result.gapAnalysis.plainLanguageReason
+                    result.gapAnalysis.plainLanguageReason || ""
                   )}`}
                   className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3.5 rounded-2xl bg-rose-700 hover:bg-rose-800 text-white font-heading font-bold text-xs shadow-soft transition-all"
                 >
@@ -489,25 +602,32 @@ export default function ChapterDiagnosticPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
+                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm transition-all"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100">
-                    Difficulty Level {q.difficulty}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                      Level {q.difficulty}
+                    </span>
+                    {isAnswered && !result && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary">
+                        Answered
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Prompt */}
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <h3 className="font-heading font-bold text-base text-foreground leading-relaxed flex items-center flex-wrap gap-2">
-                      <span>{promptData.text}</span>
+                    <h3 className="text-base sm:text-lg font-heading font-bold text-foreground leading-snug">
+                      {promptData.text}
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200 ml-2">
                           Draft Translation
                         </span>
                       )}
@@ -519,23 +639,19 @@ export default function ChapterDiagnosticPage() {
                 <div className="space-y-2 pt-2">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const isCorrectAnswer = q.correctAnswer === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
                     let optionBorderClass = "border-slate-200 hover:border-slate-300";
                     let optionBgClass = "bg-white";
 
-                    if (result) {
-                      if (isCorrectAnswer) {
+                    if (result && feedbackItem) {
+                      if (isSelected && feedbackItem.isCorrect) {
                         optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
                         optionBgClass = "bg-emerald-50/60";
-                      } else if (isSelected && !isCorrectAnswer) {
+                      } else if (isSelected && !feedbackItem.isCorrect) {
                         optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
                         optionBgClass = "bg-rose-50/60";
                       }
-                    } else if (isSelected) {
-                      optionBorderClass = "border-primary ring-2 ring-primary/20";
-                      optionBgClass = "bg-slate-50";
                     }
 
                     return (
@@ -543,81 +659,53 @@ export default function ChapterDiagnosticPage() {
                         key={opt.id}
                         data-oid={opt.id}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer flex items-center justify-between transition-all ${
+                          isSelected
+                            ? "border-primary bg-primary/5 font-semibold"
+                            : `${optionBorderClass} ${optionBgClass}`
+                        }`}
                       >
-                        <span
-                          className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
-                            isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-700"
-                          }`}
-                        >
-                          {opt.id}
-                        </span>
-                        <div className="flex-1 text-xs sm:text-sm text-foreground font-medium pt-0.5 flex items-center flex-wrap gap-2">
-                          <span>{optData.text}</span>
-                          {optData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
-                          )}
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-xs shrink-0 ${
+                              isSelected
+                                ? "bg-primary text-white"
+                                : "bg-slate-100 text-slate-700"
+                            }`}
+                          >
+                            {opt.id}
+                          </span>
+                          <span className="text-slate-800 leading-snug">{optData.text}</span>
                         </div>
+                        {result && feedbackItem && isSelected && (
+                          feedbackItem.isCorrect ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          ) : (
+                            <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                          )
+                        )}
                       </div>
                     );
                   })}
                 </div>
-
-                {/* Feedback Post-Submission */}
-                {feedbackItem && (
-                  <div
-                    className={`mt-4 p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
-                      feedbackItem.isCorrect
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                        : "bg-rose-50/80 border-rose-200 text-rose-950"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 font-bold">
-                      {feedbackItem.isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                          <span>Correct</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
-                          <span>
-                            Misconception: {feedbackItem.mistakeTag ? feedbackItem.mistakeTag.replace(/_/g, " ") : "Incorrect Answer"}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                )}
               </div>
             );
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-between gap-4">
-              <span className="text-xs text-muted-foreground font-semibold">
-                {Object.keys(answers).length} of {questions.length} Answered
-              </span>
-
+            <div className="pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                disabled={submitting}
+                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-8 py-4 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-extrabold text-sm shadow-soft transition-all disabled:opacity-50"
               >
-                <span>Submit Diagnostic</span>
+                <span>{submitting ? "Evaluating Assessment..." : "Submit Diagnostic Assessment"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </form>
       </main>
-
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
-        Margam Adaptive Mathematics • Diagnostic Engine
-      </footer>
     </div>
   );
 }

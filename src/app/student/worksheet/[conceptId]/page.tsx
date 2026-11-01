@@ -4,24 +4,21 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  FileText,
+  HelpCircle,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   AlertCircle,
   ArrowRight,
   ArrowLeft,
   RotateCcw,
   Sparkles,
   BookOpen,
-  TrendingUp,
-  TrendingDown,
-  Star,
+  Compass,
+  Award,
 } from "lucide-react";
 import {
   SupportedLanguage,
   LearnerProfile,
-  Question,
 } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { canAccessTopic } from "@/lib/progression";
@@ -29,12 +26,41 @@ import {
   getConceptById,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import {
-  selectPracticeQuestions,
-  evaluatePracticeSubmission,
-  PracticeResult,
-} from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+
+interface SanitizedOption {
+  id: string;
+  text: any;
+}
+
+interface ClientPracticeQuestion {
+  id: string;
+  conceptId: string;
+  difficulty: number;
+  type: string;
+  contextTag?: string;
+  prompt: any;
+  options?: SanitizedOption[];
+}
+
+interface PracticeResultResponse {
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+  mastery: number;
+  nextDifficulty: 1 | 2 | 3;
+  consecutiveCorrect: number;
+  consecutiveIncorrect: number;
+  feedback: Array<{
+    questionId: string;
+    isCorrect: boolean;
+    chosenAnswer: string;
+    tag?: string;
+    hint?: string;
+  }>;
+  mistakeHint?: string;
+}
 
 export default function AdaptivePracticeRunnerPage() {
   const params = useParams();
@@ -43,12 +69,14 @@ export default function AdaptivePracticeRunnerPage() {
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<ClientPracticeQuestion[]>([]);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [difficultyLevel, setDifficultyLevel] = useState<1 | 2 | 3>(1);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [result, setResult] = useState<PracticeResult | null>(null);
+  const [result, setResult] = useState<PracticeResultResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const active = getActiveProfile();
@@ -57,7 +85,6 @@ export default function AdaptivePracticeRunnerPage() {
       return;
     }
 
-    // Allow remediation access if user is practicing a lower-class concept
     const access = canAccessTopic(conceptId, active, true);
     if (!access.accessible) {
       alert(access.reason || "You cannot access this practice worksheet yet.");
@@ -67,11 +94,43 @@ export default function AdaptivePracticeRunnerPage() {
 
     setProfile(active);
 
-    // Select adaptive practice questions matching student's per-concept difficulty level
-    const practiceData = selectPracticeQuestions(conceptId, 3);
-    setQuestions(practiceData.questions);
-    setDifficultyLevel(practiceData.targetDifficulty);
-    setLoading(false);
+    let isCancelled = false;
+    async function loadPractice() {
+      try {
+        const res = await fetch("/api/practice/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            conceptId,
+            studentId: active!.id,
+            count: 3,
+          }),
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || "Failed to load practice questions");
+        }
+
+        const data = await res.json();
+        if (!isCancelled) {
+          setQuestions(data.questions || []);
+          setSessionToken(data.token || null);
+          setLoading(false);
+        }
+      } catch (err: any) {
+        if (!isCancelled) {
+          setErrorMessage(err.message || "Network error loading practice questions");
+          setLoading(false);
+        }
+      }
+    }
+
+    loadPractice();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [conceptId, router]);
 
   if (loading || !profile) {
@@ -115,7 +174,7 @@ export default function AdaptivePracticeRunnerPage() {
     setErrorMessage(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -125,24 +184,51 @@ export default function AdaptivePracticeRunnerPage() {
       return;
     }
 
-    // Evaluate submission through the adaptive engine
-    const practiceRes = evaluatePracticeSubmission(conceptId, answers);
-    setResult(practiceRes);
-    setDifficultyLevel(practiceRes.updatedDifficulty);
+    if (!sessionToken) {
+      setErrorMessage("Missing session token. Please reload practice.");
+      return;
+    }
 
-    const refreshed = getActiveProfile();
-    if (refreshed) setProfile(refreshed);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/practice/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionToken,
+          conceptId,
+          studentId: profile.id,
+          answers,
+          currentDifficulty: difficultyLevel,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Practice evaluation failed");
+      }
+
+      const practiceRes: PracticeResultResponse = await res.json();
+      setResult(practiceRes);
+      if (practiceRes.nextDifficulty) {
+        setDifficultyLevel(practiceRes.nextDifficulty);
+      }
+
+      const refreshed = getActiveProfile();
+      if (refreshed) setProfile(refreshed);
+    } catch (err: any) {
+      setErrorMessage(err.message || "Failed to submit practice.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleRetry = () => {
     setAnswers({});
     setResult(null);
     setErrorMessage(null);
-
-    // Refresh questions based on updated difficulty
-    const practiceData = selectPracticeQuestions(conceptId, 3);
-    setQuestions(practiceData.questions);
-    setDifficultyLevel(practiceData.targetDifficulty);
+    window.location.reload();
   };
 
   const renderStars = (level: number) => {
@@ -185,15 +271,15 @@ export default function AdaptivePracticeRunnerPage() {
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 mt-2">
-            Solve these 3 targeted questions to advance your mastery. Your difficulty level automatically adjusts based on your performance.
+          <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+            {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
-          {/* Result Banner on Submission */}
+          {/* Results Summary Box */}
           {result && (
             <div
-              className={`mt-6 p-5 rounded-2xl border ${
-                result.scorePercentage >= 70
+              className={`mt-6 p-6 rounded-2xl border ${
+                result.passed
                   ? "bg-emerald-50 border-emerald-200 text-emerald-950"
                   : "bg-amber-50 border-amber-200 text-amber-950"
               }`}
@@ -201,45 +287,29 @@ export default function AdaptivePracticeRunnerPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
-                    {result.scorePercentage >= 70 ? (
+                    {result.passed ? (
                       <>
-                        <CheckCircle2 className="w-5 h-5 text-emerald-700" />
-                        <span>Practice Complete! Mastery Updated to {result.updatedMastery}%</span>
+                        <Award className="w-5 h-5 text-emerald-700" />
+                        <span>Practice Complete! Mastery Updated</span>
                       </>
                     ) : (
                       <>
                         <AlertCircle className="w-5 h-5 text-amber-700" />
-                        <span>Practice Attempted • Mastery at {result.updatedMastery}%</span>
+                        <span>Practice Attempted • Review Recommended</span>
                       </>
                     )}
                   </h3>
-
                   <p className="text-xs mt-1">
-                    Score: <strong>{result.correctCount} / {result.totalQuestions}</strong> ({result.scorePercentage}%)
+                    Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%) • Mastery: <strong>{result.mastery}%</strong>
+                    {result.passed
+                      ? " • Next level unlocked!"
+                      : " • Keep practicing to build confidence."}
                   </p>
-
-                  {/* One-Line Note when the Level Changes */}
-                  <div className="mt-3 text-xs font-bold flex items-center gap-2">
-                    {result.difficultyChanged === "promoted" && (
-                      <span className="inline-flex items-center gap-1.5 text-emerald-800 bg-emerald-100 px-3 py-1 rounded-xl">
-                        <TrendingUp className="w-4 h-4 text-emerald-700" />
-                        Promoted to Difficulty Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)}! Keep going!
-                      </span>
-                    )}
-
-                    {result.difficultyChanged === "demoted" && (
-                      <span className="inline-flex items-center gap-1.5 text-amber-900 bg-amber-100 px-3 py-1 rounded-xl">
-                        <TrendingDown className="w-4 h-4 text-amber-700" />
-                        Adjusted to Difficulty Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)} to reinforce core foundations.
-                      </span>
-                    )}
-
-                    {result.difficultyChanged === "maintained" && (
-                      <span className="inline-flex items-center gap-1.5 text-slate-700 bg-slate-100 px-3 py-1 rounded-xl">
-                        Difficulty maintained at Level {result.updatedDifficulty} {renderStars(result.updatedDifficulty)}.
-                      </span>
-                    )}
-                  </div>
+                  {result.mistakeHint && (
+                    <p className="text-xs mt-2 p-2.5 rounded-xl bg-white/80 border border-amber-300 text-amber-900 font-medium">
+                      💡 <strong>Hint:</strong> {result.mistakeHint}
+                    </p>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
@@ -248,14 +318,14 @@ export default function AdaptivePracticeRunnerPage() {
                     className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Practice Next Set</span>
+                    <span>Practice Again</span>
                   </button>
 
                   <Link
-                    href="/"
+                    href={`/lesson/${conceptId}`}
                     className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
                   >
-                    <span>Back to Lessons</span>
+                    <span>Review Lesson</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -274,24 +344,32 @@ export default function AdaptivePracticeRunnerPage() {
         {/* Practice Questions List */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {questions.map((q, qIndex) => {
-            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
             const isAnswered = !!answers[q.id];
+            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
 
             return (
               <div
                 key={q.id}
+                data-qid={q.id}
                 className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4"
               >
                 <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100 flex items-center gap-1">
-                    Level {q.difficulty} {renderStars(q.difficulty)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-semibold text-slate-500 px-2 py-0.5 rounded-full bg-slate-100">
+                      Difficulty Level {q.difficulty}
+                    </span>
+                    {isAnswered && !result && (
+                      <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                        Selected
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                {/* Question Prompt */}
+                {/* Prompt */}
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
@@ -310,17 +388,16 @@ export default function AdaptivePracticeRunnerPage() {
                 <div className="space-y-2 pt-2">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const isCorrectAnswer = q.correctAnswer === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
                     let optionBorderClass = "border-slate-200 hover:border-slate-300";
                     let optionBgClass = "bg-white";
 
-                    if (result) {
-                      if (isCorrectAnswer) {
+                    if (result && feedbackItem) {
+                      if (isSelected && feedbackItem.isCorrect) {
                         optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
                         optionBgClass = "bg-emerald-50/60";
-                      } else if (isSelected && !isCorrectAnswer) {
+                      } else if (isSelected && !feedbackItem.isCorrect) {
                         optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
                         optionBgClass = "bg-rose-50/60";
                       }
@@ -332,101 +409,51 @@ export default function AdaptivePracticeRunnerPage() {
                     return (
                       <div
                         key={opt.id}
+                        data-oid={opt.id}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer flex items-center justify-between transition-all ${optionBorderClass} ${optionBgClass}`}
                       >
-                        <span
-                          className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
-                            isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-700"
-                          }`}
-                        >
-                          {opt.id}
-                        </span>
-                        <div className="flex-1 text-xs sm:text-sm text-foreground font-medium pt-0.5 flex items-center flex-wrap gap-2">
-                          <span>{optData.text}</span>
-                          {optData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
-                          )}
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-xs shrink-0 ${
+                              isSelected
+                                ? "bg-primary text-white"
+                                : "bg-slate-100 text-slate-700"
+                            }`}
+                          >
+                            {opt.id}
+                          </span>
+                          <span className="text-slate-800 leading-snug">{optData.text}</span>
                         </div>
+                        {result && feedbackItem && isSelected && (
+                          feedbackItem.isCorrect ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          ) : (
+                            <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                          )
+                        )}
                       </div>
                     );
                   })}
                 </div>
-
-                {/* Question Feedback Post-Submission with Mistake Hint */}
-                {feedbackItem && (
-                  <div
-                    className={`mt-4 p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
-                      feedbackItem.isCorrect
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                        : "bg-rose-50/80 border-rose-200 text-rose-950"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 font-bold">
-                      {feedbackItem.isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                          <span>Correct! Well reasoned.</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
-                          <span>
-                            Mistake Hint:{" "}
-                            {feedbackItem.mistakeTag
-                              ? feedbackItem.mistakeTag.replace(/_/g, " ")
-                              : "Review calculation rule"}
-                          </span>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Explanation */}
-                    {(() => {
-                      const expData = resolveLocalizedString(q.explanation, currentLang);
-                      return (
-                        <p className="text-slate-700 pt-1 flex items-center flex-wrap gap-1.5">
-                          <strong>Explanation:</strong> <span>{expData.text}</span>
-                          {expData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
-                          )}
-                        </p>
-                      );
-                    })()}
-                  </div>
-                )}
               </div>
             );
           })}
 
-          {/* Submission Bar */}
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-between gap-4">
-              <span className="text-xs text-muted-foreground font-semibold">
-                {Object.keys(answers).length} of {questions.length} Answered
-              </span>
-
+            <div className="pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                disabled={submitting}
+                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-8 py-4 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-extrabold text-sm shadow-soft transition-all disabled:opacity-50"
               >
-                <span>Submit Practice</span>
+                <span>{submitting ? "Checking Answers..." : "Submit Practice Worksheet"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </form>
       </main>
-
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
-        Margam Adaptive Mathematics • Practice Workspace
-      </footer>
     </div>
   );
 }
