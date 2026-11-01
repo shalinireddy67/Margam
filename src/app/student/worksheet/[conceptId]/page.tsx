@@ -75,13 +75,18 @@ interface PracticeResultResponse {
   nextDifficulty: 1 | 2 | 3;
   consecutiveCorrect: number;
   consecutiveIncorrect: number;
+  gapResolved?: boolean;
   feedback: Array<{
     questionId: string;
     isCorrect: boolean;
     chosenAnswer: string;
+    correctAnswer?: string;
     tag?: string;
-    hint?: string;
+    hint?: any;
     mistakeTag?: string;
+    misconceptionCategory?: string;
+    educationalFeedback?: string;
+    explanation?: any;
   }>;
   mistakeHint?: string;
 }
@@ -337,7 +342,7 @@ export default function AdaptivePracticeRunnerPage() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full flex-1 space-y-6">
         {/* Title Header Card */}
-        <div className="bg-[#FFFFFF] p-6 sm:p-8 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] space-y-3">
+        <div className="bg-[#173B19] p-6 sm:p-8 border-3 border-[#4F8A24] border-t-[6px] border-t-[#79B82A] shadow-[6px_6px_0px_#102610] space-y-4 text-[#F2F0DF]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#79B82A]">
               <span>Adaptive Practice</span>
@@ -362,11 +367,26 @@ export default function AdaptivePracticeRunnerPage() {
 
           {/* Results Summary Box with WitchCat & Progression */}
           {result && (
+            <div className="space-y-4 mt-6">
+              {result.gapResolved && (
+                <div className="p-5 bg-[#173B19] border-3 border-[#E5B834] border-l-[8px] border-l-[#E5B834] shadow-[6px_6px_0px_#102610] space-y-2">
+                  <div className="flex items-center gap-2 text-[#E5B834] font-heading font-extrabold text-xs uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 text-[#E5B834]" />
+                    <span>Foundational Prerequisite Gap Resolved!</span>
+                  </div>
+                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#F2F0DF]">
+                    Foundation Successfully Repaired!
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#D8D8D0] leading-relaxed">
+                    You scored <strong>{result.percentage}%</strong> and demonstrated mastery on this foundational topic. This concept is now marked as resolved in your learner profile!
+                  </p>
+                </div>
+              )}
             <div
-              className={`mt-6 p-6 border-4 border-[#111111] shadow-[4px_4px_0px_#111111] ${
+              className={`p-6 border-3 shadow-[6px_6px_0px_#102610] ${
                 result.passed
-                  ? "bg-[#173B19] border-3 border-[#79B82A] text-[#F2F0DF]"
-                  : "bg-[#173B19] border-3 border-[#E5B834] text-[#F2F0DF]"
+                  ? "bg-[#173B19] border-[#79B82A] text-[#F2F0DF]"
+                  : "bg-[#173B19] border-[#E5B834] text-[#F2F0DF]"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -426,10 +446,11 @@ export default function AdaptivePracticeRunnerPage() {
                 </div>
               </div>
             </div>
+          </div>
           )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold flex items-center gap-2">
+            <div className="mt-4 p-3.5 bg-[#D9453D]/20 border-2 border-[#D9453D] text-xs font-bold flex items-center gap-2 text-[#F2F0DF]">
               <AlertCircle className="w-4 h-4 shrink-0 text-[#D9453D]" />
               <span>{errorMessage}</span>
             </div>
@@ -541,61 +562,59 @@ export default function AdaptivePracticeRunnerPage() {
                   })}
                 </div>
 
-                {/* Question Feedback Post-Submission with WitchCat & Mistake Creature */}
+                {/* Question Feedback Post-Submission with WitchCat & Educational Guidance */}
                 {feedbackItem && (
-                  <div
-                    className={`mt-4 p-4 border-2 border-[#111111] text-xs font-bold leading-relaxed space-y-2 ${
-                      feedbackItem.isCorrect
-                        ? "bg-[#173B19] border-2 border-[#79B82A] text-[#F2F0DF]"
-                        : "bg-[#173B19] border-2 border-[#D9453D] text-[#F2F0DF]"
-                    }`}
-                  >
+                  <div className="mt-4 p-4 bg-[#102610] border-2 border-[#315B2A] space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="shrink-0 pt-0.5">
                         <WitchCat
-                          pose={feedbackItem.isCorrect ? "cheer" : "oops"}
+                          pose={feedbackItem.isCorrect ? "cheer" : "think"}
                           size={56}
-                          sticker={true}
-                          alt={
-                            feedbackItem.isCorrect
-                              ? "Margam Witch Cat cheering correct answer"
-                              : "Margam Witch Cat offering mistake hint"
-                          }
+                          sticker={false}
+                          alt="Margam Learning Companion"
                         />
                       </div>
 
-                      {!feedbackItem.isCorrect && (
-                        <div className="shrink-0 p-1.5 bg-[#FFFFFF] border-2 border-[#111111] shadow-[2px_2px_0px_#111111]">
-                          <MistakeCreature
-                            type={getMistakeCreatureType(feedbackItem.tag || feedbackItem.mistakeTag)}
-                            size="sm"
-                          />
-                        </div>
-                      )}
-
-                      <div className="flex-1 space-y-1">
+                      <div className="flex-1 space-y-2">
                         <div className="flex items-center gap-2 font-heading font-extrabold text-xs sm:text-sm">
                           {feedbackItem.isCorrect ? (
                             <>
-                              <CheckCircle2 className="w-4 h-4 text-[#3C8A2E]" />
-                              <span>Correct! Well reasoned.</span>
+                              <CheckCircle2 className="w-4 h-4 text-[#79B82A]" />
+                              <span className="text-[#79B82A]">Correct! Solid understanding demonstrated.</span>
                             </>
                           ) : (
                             <>
-                              <XCircle className="w-4 h-4 text-[#D9453D]" />
-                              <span>
-                                Misconception:{" "}
-                                {feedbackItem.tag || feedbackItem.mistakeTag
-                                  ? (feedbackItem.tag || feedbackItem.mistakeTag || "").replace(/_/g, " ")
-                                  : "Review calculation rule"}
+                              <AlertCircle className="w-4 h-4 text-[#E5B834]" />
+                              <span className="text-[#E5B834]">
+                                {feedbackItem.misconceptionCategory
+                                  ? `Concept Note: ${feedbackItem.misconceptionCategory.replace(/_/g, " ").toUpperCase()}`
+                                  : "Review Method"}
                               </span>
                             </>
                           )}
                         </div>
 
+                        {!feedbackItem.isCorrect && feedbackItem.educationalFeedback && (
+                          <div className="p-3 bg-[#173B19] border border-[#E5B834] text-xs text-[#F2F0DF] leading-relaxed">
+                            <span className="font-heading font-bold text-[10px] text-[#E5B834] uppercase block mb-1">
+                              💡 Educational Note:
+                            </span>
+                            <p>{feedbackItem.educationalFeedback}</p>
+                          </div>
+                        )}
+
+                        {feedbackItem.explanation && (
+                          <div className="p-3 bg-[#102610] border border-[#315B2A] text-xs text-[#D8D8D0] leading-relaxed space-y-1">
+                            <span className="font-heading font-bold text-[10px] text-[#79B82A] uppercase block">
+                              Step-by-step Solution:
+                            </span>
+                            <p>{resolveLocalizedString(feedbackItem.explanation, currentLang).text}</p>
+                          </div>
+                        )}
+
                         {feedbackItem.hint && (
-                          <p className="pt-1 text-[#111111]">
-                            <strong>Hint:</strong> <span>{feedbackItem.hint}</span>
+                          <p className="text-xs text-[#79B82A] pt-1">
+                            <strong>Tip:</strong> {typeof feedbackItem.hint === 'string' ? feedbackItem.hint : resolveLocalizedString(feedbackItem.hint, currentLang).text}
                           </p>
                         )}
                       </div>

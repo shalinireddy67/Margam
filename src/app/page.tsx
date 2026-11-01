@@ -27,6 +27,7 @@ import {
   getSupportedChapters,
   getConceptsByChapter,
   canTakeChapterDiagnostic,
+  getConceptById,
 } from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
 import { WitchCat } from "@/components/ui/WitchCat";
@@ -178,11 +179,15 @@ export default function HomePage() {
     ? Object.values(profile.topicProgress || {}).filter((p) => p.status === "completed").length
     : 0;
 
+  const resolvedGapsCount = profile?.resolvedGaps?.length || 0;
+
   // Active gap concept if any
   const firstActiveGapId =
     profile?.activeGap && profile.activeGap.status === "confirmed"
       ? profile.activeGap.rootConceptId
     : undefined;
+
+  const gapConcept = firstActiveGapId ? getConceptById(firstActiveGapId) : undefined;
 
   // Companion greeting
   const catGreeting = getCatGreeting(profile?.name, currentLang);
@@ -465,8 +470,14 @@ export default function HomePage() {
                   <span className="px-3 py-1 bg-[#4F8A24] text-[#F2F0DF] border-2 border-[#102610] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610]">
                     {completedConceptsCount} {copy.conceptsMastered}
                   </span>
+                  {resolvedGapsCount > 0 && (
+                    <span className="px-3 py-1 bg-[#E5B834] text-[#102610] border-2 border-[#102610] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610] flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>{resolvedGapsCount} Foundations Repaired</span>
+                    </span>
+                  )}
                   <span className="text-[11px] font-bold text-[#E5B834]">
-                    XP Level: {Math.max(1, completedConceptsCount * 10)}
+                    XP Level: {Math.max(1, completedConceptsCount * 10 + resolvedGapsCount * 25)}
                   </span>
                 </div>
               </div>
@@ -489,22 +500,45 @@ export default function HomePage() {
 
               {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
-                <div className="p-4 bg-[#102610] border-3 border-[#E5B834] shadow-[4px_4px_0px_#102610] space-y-2">
-                  <div className="flex items-center gap-2 text-[#E5B834]">
-                    <AlertCircle className="w-5 h-5 shrink-0" />
-                    <span className="font-heading font-extrabold text-xs sm:text-sm">
-                      {copy.activeGapFound}
-                    </span>
+                <div className="p-5 bg-[#102610] border-3 border-[#E5B834] border-l-[8px] border-l-[#E5B834] shadow-[4px_4px_0px_#102610] space-y-3">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 text-[#E5B834]">
+                      <AlertCircle className="w-5 h-5 shrink-0" />
+                      <span className="font-heading font-extrabold text-xs sm:text-sm">
+                        {copy.activeGapFound} {gapConcept ? `(Class ${gapConcept.class})` : ""}
+                      </span>
+                    </div>
+                    {gapConcept && (
+                      <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#E5B834] text-[#102610] border border-[#102610]">
+                        Class {gapConcept.class} Prerequisite
+                      </span>
+                    )}
                   </div>
-                  <p className="text-xs text-[#D8D8D0]">
-                    Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make current chapters easier!
+
+                  {gapConcept && (
+                    <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#F2F0DF]">
+                      {gapConcept.name[currentLang] || gapConcept.name.en}
+                    </h3>
+                  )}
+
+                  <p className="text-xs text-[#D8D8D0] leading-relaxed">
+                    {profile?.activeGap?.plainLanguageReason ||
+                      "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade quests much easier!"}
                   </p>
-                  <div className="pt-1">
+
+                  <div className="pt-1 flex items-center gap-2 flex-wrap">
                     <Link
-                      href={`/student/worksheet/${firstActiveGapId}`}
+                      href={`/lesson/${firstActiveGapId}?fromGap=true`}
                       className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#E5B834] hover:bg-[#F2D16B] text-[#102610] border-2 border-[#102610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#102610] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                     >
-                      {copy.fixGapBtn}
+                      <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                      <span>{copy.fixGapBtn}</span>
+                    </Link>
+                    <Link
+                      href={`/student/worksheet/${firstActiveGapId}`}
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#315B2A] hover:bg-[#4F8A24] text-[#F2F0DF] border-2 border-[#102610] font-heading font-bold text-xs shadow-[2px_2px_0px_#102610] no-underline transition-colors"
+                    >
+                      <span>Jump to Practice Worksheet</span>
                     </Link>
                   </div>
                 </div>

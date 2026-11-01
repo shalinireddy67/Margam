@@ -40,6 +40,176 @@ export interface AdaptiveDiagnosis {
   recommendationText: string;
 }
 
+
+export type MisconceptionCategory =
+  | "sign_error"
+  | "operation_confusion"
+  | "algebraic_rule"
+  | "spatial_ordering"
+  | "fraction_or_ratio"
+  | "calculation_slip"
+  | "unclassified_slip";
+
+export interface MisconceptionInsight {
+  category: MisconceptionCategory;
+  title: string;
+  educationalFeedback: string;
+  foundationalConceptId?: string;
+}
+
+/**
+ * Classifies distractor mistake tags into pedagogically actionable misconception categories.
+ * Provides clear, age-appropriate educational guidance for students aged 11–16.
+ */
+export function classifyMisconception(tag?: string): MisconceptionInsight {
+  if (!tag || tag.trim() === "") {
+    return {
+      category: "unclassified_slip",
+      title: "Review Question",
+      educationalFeedback: "Check the step-by-step solution to understand the correct mathematical method.",
+    };
+  }
+
+  const t = tag.toLowerCase();
+
+  // 1. Sign & Negative Integer Errors
+  if (
+    t.includes("sign") ||
+    t.includes("negative") ||
+    t.includes("below_zero") ||
+    t.includes("minus") ||
+    t.includes("invert_sign") ||
+    t.includes("sign_flip") ||
+    t.includes("root_sign")
+  ) {
+    if (t.includes("times") || t.includes("product") || t.includes("multipl") || t.includes("squared_negative")) {
+      return {
+        category: "sign_error",
+        title: "Sign Rule in Multiplication",
+        educationalFeedback: "Remember: multiplying two negative numbers yields a POSITIVE result: (−) × (−) = (+). Multiplying opposite signs yields a negative: (−) × (+) = (−).",
+        foundationalConceptId: "c7-int-02",
+      };
+    }
+    if (t.includes("root") || t.includes("factor")) {
+      return {
+        category: "sign_error",
+        title: "Sign Inversion in Equation Roots",
+        educationalFeedback: "When solving (x − a)(x − b) = 0, setting each factor to zero flips the sign: x − a = 0 gives x = +a, and x − b = 0 gives x = +b.",
+        foundationalConceptId: "c10-quad-01",
+      };
+    }
+    return {
+      category: "sign_error",
+      title: "Integer Sign Operations",
+      educationalFeedback: "When adding or subtracting integers with opposite signs, subtract the smaller magnitude from the larger and keep the sign of the larger absolute value.",
+      foundationalConceptId: "c7-int-01",
+    };
+  }
+
+  // 2. Operation Confusion
+  if (
+    t.includes("added_instead_of_multiplied") ||
+    t.includes("multiplied_instead_of_added") ||
+    t.includes("multiplied_by_two_instead_of_squaring") ||
+    t.includes("added_constants_instead_of_multiplied") ||
+    t.includes("swapped_sum_and_product")
+  ) {
+    return {
+      category: "operation_confusion",
+      title: "Operation Mix-up",
+      educationalFeedback: "Be careful with operations! Squaring a number (x²) means multiplying by itself (x × x), not multiplying by 2.",
+      foundationalConceptId: "c8-exp-01",
+    };
+  }
+
+  // 3. Algebraic Rules: Distribution, Expansion, Identities, Factorization
+  if (
+    t.includes("distribut") ||
+    t.includes("bracket") ||
+    t.includes("second_term") ||
+    t.includes("middle_term") ||
+    t.includes("difference_of_squares") ||
+    t.includes("linear_term") ||
+    t.includes("discriminant") ||
+    t.includes("factor_pair") ||
+    t.includes("nature_of_roots")
+  ) {
+    if (t.includes("distribut") || t.includes("second_term")) {
+      return {
+        category: "algebraic_rule",
+        title: "Distributive Property",
+        educationalFeedback: "Apply the distributive property: a(b + c) = ab + ac. Make sure to multiply the outside factor by EVERY term inside the bracket.",
+        foundationalConceptId: "c8-dist-01",
+      };
+    }
+    if (t.includes("difference_of_squares")) {
+      return {
+        category: "algebraic_rule",
+        title: "Difference of Squares Identity",
+        educationalFeedback: "Remember the identity: (a + b)(a − b) = a² − b². Notice there is NO middle linear term in a difference of squares!",
+        foundationalConceptId: "c9-id-01",
+      };
+    }
+    if (t.includes("middle_term") || t.includes("factor_of_two")) {
+      return {
+        category: "algebraic_rule",
+        title: "Binomial Expansion Identity",
+        educationalFeedback: "When squaring a binomial (a + b)², remember the middle term: a² + 2ab + b². Don't drop the 2ab term!",
+        foundationalConceptId: "c9-id-01",
+      };
+    }
+    if (t.includes("factor_pair")) {
+      return {
+        category: "algebraic_rule",
+        title: "Quadratic Factor Splitting",
+        educationalFeedback: "When factorising x² + bx + c, find two numbers that MULTIPLY to c and ADD up to b.",
+        foundationalConceptId: "c9-id-02",
+      };
+    }
+    return {
+      category: "algebraic_rule",
+      title: "Algebraic Rule Application",
+      educationalFeedback: "Carefully follow algebraic rules for expanding, simplifying, and grouping like terms.",
+      foundationalConceptId: "c9-id-01",
+    };
+  }
+
+  // 4. Number Line & Spatial Ordering
+  if (
+    t.includes("number_line") ||
+    t.includes("ordering") ||
+    t.includes("descending") ||
+    t.includes("ascending") ||
+    t.includes("absolute_value") ||
+    t.includes("zero_as_smallest") ||
+    t.includes("greater_than_zero")
+  ) {
+    return {
+      category: "spatial_ordering",
+      title: "Number Line Positioning",
+      educationalFeedback: "On the number line, numbers become smaller as you move further left. For example, −7 is smaller than −2 because it lies further to the left.",
+      foundationalConceptId: "c6-neg-01",
+    };
+  }
+
+  // 5. Fraction & Rational Operations
+  if (t.includes("fraction") || t.includes("denominator") || t.includes("numerator") || t.includes("ratio")) {
+    return {
+      category: "fraction_or_ratio",
+      title: "Fraction Operations",
+      educationalFeedback: "When adding or subtracting fractions, find a common denominator first. You cannot simply add across numerators and denominators.",
+      foundationalConceptId: "c7-num-01",
+    };
+  }
+
+  // 6. Calculation Slips
+  return {
+    category: "calculation_slip",
+    title: "Arithmetic Check",
+    educationalFeedback: "Your reasoning was close, but a small arithmetic slip occurred. Review your step-by-step calculations carefully.",
+  };
+}
+
 export interface DiagnosticResult {
   chapterId: string;
   totalQuestions: number;

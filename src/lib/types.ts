@@ -157,6 +157,15 @@ export interface RemediationGap {
   prerequisitePath: string[];
   confirmationQuestionIds: string[];
   status: "pending_confirmation" | "confirmed" | "resolved";
+  misconceptionCategory?: string;
+}
+
+export interface ResolvedGapRecord {
+  rootConceptId: string;
+  currentConceptId: string;
+  resolvedAt: string;
+  scorePercentage: number;
+  conceptName?: string;
 }
 
 export interface LearnerProfile {
@@ -171,6 +180,7 @@ export interface LearnerProfile {
   consecutiveIncorrect: number; // profile-level fallback
   currentDifficulty: 1 | 2 | 3; // profile-level fallback
   activeGap?: RemediationGap | null;
+  resolvedGaps?: ResolvedGapRecord[];
 }
 
 export interface WorksheetSubmission {
@@ -185,9 +195,12 @@ export interface QuestionFeedback {
   correctAnswer: string;
   isCorrect: boolean;
   explanation: LocalizedString;
+  hint?: LocalizedString;
   mistakeTag?: string;
   mistakeDescription?: string;
   suggestedPrerequisiteId?: string;
+  misconceptionCategory?: string;
+  educationalFeedback?: string;
 }
 
 export interface WorksheetResult {
@@ -198,6 +211,7 @@ export interface WorksheetResult {
   scorePercentage: number;
   qualifiesForCompletion: boolean;
   feedback: QuestionFeedback[];
+  gapResolved?: boolean;
 }
 
 export type ConfidenceLevel = "high" | "medium" | "low" | "insufficient";
@@ -215,10 +229,12 @@ export interface CandidateRootCause {
   reason: string;
   isDirectRoot: boolean;
   prerequisitePath: string[];
+  misconceptionCategory?: string;
 }
 
 export interface GapTraceResult {
   confirmed: boolean;
+  hasGap?: boolean;
   rootConceptId: string | null;
   rootConcept?: Concept;
   triggerReason: "repeated_tag" | "convergent_tags" | "ranked_root" | "propagated_prereq" | null;
@@ -231,4 +247,40 @@ export interface GapTraceResult {
   routing?: RoutingAction;
   score?: number;
   candidates?: CandidateRootCause[];
+}
+
+export interface ConceptDiagnosticBreakdown {
+  conceptId: string;
+  conceptName: string;
+  class: number;
+  status: "mastered" | "needs_practice" | "foundational_gap" | "unassessed";
+  totalQuestions: number;
+  correctCount: number;
+  scorePercentage: number;
+  isFoundational?: boolean;
+  reason?: string;
+}
+
+export interface LearningPathStep {
+  stepNumber: number;
+  conceptId: string;
+  conceptName: string;
+  class: number;
+  action: "remediate" | "practice" | "learn" | "reassess";
+  title: string;
+  description: string;
+  isCurrentClass: boolean;
+  isFoundational: boolean;
+  href: string;
+  status: "available" | "locked" | "completed";
+}
+
+export interface DiagnosticNextAction {
+  conceptId: string;
+  conceptName: string;
+  class: number;
+  title: string;
+  description: string;
+  href: string;
+  type: "remediate" | "practice" | "lesson";
 }

@@ -9,7 +9,7 @@
  */
 
 import { z } from "zod";
-import { LearnerProfile, TopicProgress, RemediationGap } from "./types";
+import { LearnerProfile, TopicProgress, RemediationGap, ResolvedGapRecord } from "./types";
 
 export const CURRENT_PROFILE_VERSION = 1;
 export const STORAGE_KEY = "margam_active_learner";
@@ -38,10 +38,20 @@ const RemediationGapSchema = z.object({
   currentConceptId: z.string(),
   rootConceptId: z.string(),
   tag: z.string().optional(),
+  mistakeTag: z.string().optional(),
   plainLanguageReason: z.string(),
   prerequisitePath: z.array(z.string()),
   confirmationQuestionIds: z.array(z.string()),
   status: z.enum(["pending_confirmation", "confirmed", "resolved"]),
+  misconceptionCategory: z.string().optional(),
+}).passthrough();
+
+export const ResolvedGapRecordSchema = z.object({
+  rootConceptId: z.string(),
+  currentConceptId: z.string(),
+  resolvedAt: z.string(),
+  scorePercentage: z.number().optional(),
+  conceptName: z.string().optional(),
 }).passthrough();
 
 export const LearnerProfileSchema = z.object({
@@ -62,6 +72,7 @@ export const LearnerProfileSchema = z.object({
   consecutiveIncorrect: z.number().int().default(0),
   currentDifficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]).default(1),
   activeGap: RemediationGapSchema.nullable().optional(),
+  resolvedGaps: z.array(ResolvedGapRecordSchema).optional().default([]),
 });
 
 /**
@@ -101,6 +112,7 @@ export function migrateLearnerProfile(raw: Record<string, unknown>): LearnerProf
           : 1,
         createdAt: typeof candidate.createdAt === "string" ? candidate.createdAt : new Date().toISOString(),
         lastActiveAt: new Date().toISOString(),
+        resolvedGaps: Array.isArray(candidate.resolvedGaps) ? candidate.resolvedGaps : [],
       };
     }
 
@@ -271,6 +283,7 @@ export function createLearnerProfile(
     consecutiveCorrect: 0,
     consecutiveIncorrect: 0,
     currentDifficulty: 1,
+    resolvedGaps: [],
   };
   saveProfile(profile);
   return profile;
@@ -294,6 +307,7 @@ export function resetProfileToClass(
     consecutiveCorrect: 0,
     consecutiveIncorrect: 0,
     currentDifficulty: 1,
+    resolvedGaps: [],
   };
   saveProfile(profile);
   return profile;
@@ -348,6 +362,43 @@ export function updateTopicProgress(
 
   saveProfile(profile);
   return profile;
+}
+
+/**
+ * Resolves an active gap when a student demonstrates mastery (>= 70%) on the root prerequisite.
+ */
+export function resolveActiveGap(
+  conceptId: string,
+  scorePercentage: number,
+  conceptName?: string
+): boolean {
+  const profile = getActiveProfile();
+  if (!profile || !profile.activeGap) return false;
+
+  if (profile.activeGap.rootConceptId === conceptId && scorePercentage >= 70) {
+    if (!profile.resolvedGaps) {
+      profile.resolvedGaps = [];
+    }
+    profile.resolvedGaps.push({
+      rootConceptId: conceptId,
+      currentConceptId: profile.activeGap.currentConceptId,
+      resolvedAt: new Date().toISOString(),
+      scorePercentage,
+      conceptName,
+    });
+    profile.activeGap = null;
+    saveProfile(profile);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Returns all resolved gaps for the active learner.
+ */
+export function getResolvedGaps(): ResolvedGapRecord[] {
+  const profile = getActiveProfile();
+  return profile?.resolvedGaps || [];
 }
 
 export function canReadConcept(concept: { id: string; class: number }): boolean {
@@ -407,6 +458,7 @@ export async function handleLoginSync(authenticatedUser: {
       consecutiveCorrect: 0,
       consecutiveIncorrect: 0,
       currentDifficulty: 1,
+      resolvedGaps: [],
     };
     saveProfile(newProfile);
   }

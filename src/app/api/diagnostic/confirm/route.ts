@@ -10,18 +10,13 @@ import {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { confirmationToken, studentId, answers } = body;
+    const token = body.confirmationToken || body.token;
+    const studentId = body.studentId;
+    const answers = body.answers;
 
-    if (!confirmationToken || typeof confirmationToken !== "string") {
+    if (!token || typeof token !== "string") {
       return NextResponse.json(
         { error: "Missing or invalid confirmation token" },
-        { status: 400 }
-      );
-    }
-
-    if (!studentId || typeof studentId !== "string") {
-      return NextResponse.json(
-        { error: "Missing studentId" },
         { status: 400 }
       );
     }
@@ -34,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify confirmation session token
-    const verification = verifySessionToken(confirmationToken, studentId, "confirm");
+    const verification = verifySessionToken(token, studentId, "confirm");
     if (!verification.valid || !verification.payload) {
       return NextResponse.json(
         { error: verification.error || "Unauthorized confirmation session" },
@@ -45,7 +40,7 @@ export async function POST(req: NextRequest) {
     const { sessionId, targetId: rootConceptId, questionIds } = verification.payload;
 
     // Rate limit check
-    const clientIp = req.headers.get("x-forwarded-for") || studentId;
+    const clientIp = req.headers.get("x-forwarded-for") || studentId || "client";
     if (isRateLimited(`diag_confirm_${clientIp}`, 20, 60000)) {
       return NextResponse.json(
         { error: "Too many confirmation attempts. Please wait." },
