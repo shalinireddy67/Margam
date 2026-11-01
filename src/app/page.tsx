@@ -28,6 +28,8 @@ import {
   canTakeChapterDiagnostic,
 } from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
+import { WitchCat } from "@/components/ui/WitchCat";
+import { getCatGreeting } from "@/lib/greetings";
 
 export default function HomePage() {
   const router = useRouter();
@@ -180,6 +182,9 @@ export default function HomePage() {
       ? profile.activeGap.rootConceptId
       : undefined;
 
+  // Cat time-of-day greeting (EN, HI, TE)
+  const catGreeting = getCatGreeting(profile?.name, currentLang);
+
   // Tile colors rotation
   const tileColors: ("yellow" | "cyan" | "green" | "sky" | "orange")[] = [
     "yellow",
@@ -260,12 +265,27 @@ export default function HomePage() {
           <section aria-labelledby="welcome-heading" className="space-y-6">
             {/* 3-Line Landing Hero */}
             <Card color="yellow" className="p-6 sm:p-8 space-y-4">
-              <h1
-                id="welcome-heading"
-                className="font-heading font-extrabold text-3xl sm:text-4xl text-[#111111] leading-tight"
-              >
-                {copy.appName}
-              </h1>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
+                    {catGreeting.text}
+                  </span>
+                  <h1
+                    id="welcome-heading"
+                    className="font-heading font-extrabold text-3xl sm:text-4xl text-[#111111] leading-tight"
+                  >
+                    {copy.appName}
+                  </h1>
+                </div>
+                <div className="shrink-0 self-start sm:self-auto">
+                  <WitchCat
+                    pose="greet"
+                    size={80}
+                    sticker={true}
+                    alt="Margam Witch Cat welcoming you to Margam"
+                  />
+                </div>
+              </div>
 
               {/* 3 Short Informative Lines */}
               <div className="space-y-2 max-w-xl">
@@ -444,17 +464,30 @@ export default function HomePage() {
           <section aria-labelledby="returning-heading" className="space-y-4">
             {/* Continue Card */}
             <Card color="yellow" className="p-6 sm:p-7 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
-                    {copy.welcomeBack}
-                  </span>
-                  <h1
-                    id="returning-heading"
-                    className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111] leading-tight"
-                  >
-                    {profile.name}
-                  </h1>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0">
+                    <WitchCat
+                      pose="greet"
+                      size={80}
+                      sticker={true}
+                      alt="Margam Witch Cat greeting the student"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-[#111111]/70 uppercase tracking-wide">
+                      {catGreeting.text}
+                    </span>
+                    <h1
+                      id="returning-heading"
+                      className="font-heading font-extrabold text-2xl sm:text-3xl text-[#111111] leading-tight"
+                    >
+                      {profile.name}
+                    </h1>
+                    <p className="text-xs font-bold text-[#111111]/80 mt-0.5">
+                      {catGreeting.subtitle}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2">

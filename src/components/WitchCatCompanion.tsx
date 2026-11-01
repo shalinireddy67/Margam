@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { X, Sparkles } from "lucide-react";
+import { WitchCat, type WitchCatPose } from "@/components/ui/WitchCat";
 
 export type CompanionContext =
   | "greeting"
@@ -19,6 +19,8 @@ interface WitchCatCompanionProps {
   customMessage?: string;
   className?: string;
   mode?: "floating" | "inline";
+  pose?: WitchCatPose;
+  sticker?: boolean;
 }
 
 export default function WitchCatCompanion({
@@ -27,9 +29,22 @@ export default function WitchCatCompanion({
   customMessage,
   className = "",
   mode = "floating",
+  pose: propPose,
+  sticker = true,
 }: WitchCatCompanionProps) {
   const [bubbleDismissed, setBubbleDismissed] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
+
+  const poseMap: Record<CompanionContext, WitchCatPose> = {
+    greeting: "greet",
+    lesson_start: "read",
+    correct: "cheer",
+    incorrect: "oops",
+    completed: "cheer",
+    locked: "think",
+    welcome_back: "greet",
+  };
+  const activePose: WitchCatPose = propPose || poseMap[context] || "greet";
 
   useEffect(() => {
     if (customMessage) {
@@ -40,19 +55,19 @@ export default function WitchCatCompanion({
 
     switch (context) {
       case "greeting":
-        setCurrentMessage(`Hey, ${studentName}! ✨ Ready for today's little learning adventure?`);
+        setCurrentMessage(`Hey, ${studentName}! Ready for today's learning journey?`);
         break;
       case "lesson_start":
         setCurrentMessage("Let's explore this idea together. Take your time reading!");
         break;
       case "correct":
-        setCurrentMessage("You got it! Nicely done! 🌟");
+        setCurrentMessage("You got it! Nicely done!");
         break;
       case "incorrect":
         setCurrentMessage("Not quite yet. Let's understand why from the steps.");
         break;
       case "completed":
-        setCurrentMessage("One more step on your path! Well done, " + studentName + "! 🎉");
+        setCurrentMessage("One more step on your path! Well done, " + studentName + "!");
         break;
       case "locked":
         setCurrentMessage("Let's finish the previous lesson first, then this one opens!");
@@ -76,14 +91,12 @@ export default function WitchCatCompanion({
         aria-label="Study companion greeting"
         className={`flex items-start gap-4 p-4 rounded-3xl bg-peach-light/80 border border-peach-border ${className}`}
       >
-        <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float">
-          <Image
-            src="/images/witch-cat-transparent.png"
+        <div className="relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 animate-gentle-float motion-reduce:animate-none">
+          <WitchCat
+            pose={activePose}
+            size={80}
+            sticker={sticker}
             alt="Margam Witch Cat Study Companion"
-            width={80}
-            height={80}
-            className="object-contain drop-shadow-sm select-none"
-            priority
           />
         </div>
 
@@ -108,7 +121,7 @@ export default function WitchCatCompanion({
     >
       {/* Speech Bubble (Dismissible) */}
       {!bubbleDismissed && currentMessage && (
-        <div className="pointer-events-auto max-w-[260px] sm:max-w-[290px] mb-2 p-3.5 rounded-2xl bg-white border border-peach-border shadow-soft text-plum text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="pointer-events-auto max-w-[260px] sm:max-w-[290px] mb-2 p-3.5 rounded-2xl bg-white border border-peach-border shadow-soft text-plum text-xs sm:text-sm font-medium leading-snug relative animate-in fade-in slide-in-from-bottom-2 duration-200 motion-reduce:animate-none">
           <button
             type="button"
             onClick={() => setBubbleDismissed(true)}
@@ -131,18 +144,19 @@ export default function WitchCatCompanion({
         onClick={toggleBubble}
         aria-label="Witch Cat Companion - Click for message"
         title="Click to hear from your study companion"
-        className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1"
+        className="pointer-events-auto group relative w-16 h-16 sm:w-20 sm:h-20 transition-transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-berry rounded-full p-1 motion-reduce:transition-none"
       >
-        <div className="relative w-full h-full animate-gentle-float">
-          <Image
-            src="/images/witch-cat-transparent.png"
+        <div className="relative w-full h-full animate-gentle-float motion-reduce:animate-none">
+          <WitchCat
+            pose={activePose}
+            size={80}
+            sticker={sticker}
             alt="Margam Witch Cat"
-            width={80}
-            height={80}
-            className="object-contain drop-shadow-md select-none transition-transform group-hover:scale-105"
+            className="transition-transform group-hover:scale-105 motion-reduce:transform-none"
           />
         </div>
       </button>
     </aside>
   );
 }
+
