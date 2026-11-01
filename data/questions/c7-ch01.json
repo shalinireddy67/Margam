@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c7-num-01",
+    "conceptId": "c7-num-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "indian_real_world",
+    "prompt": {
+      "en": "In the Indian number system, 1 crore is equal to how many lakhs?",
+      "hi": "भारतीय संख्या प्रणाली में 1 करोड़ कितने लाख के बराबर होता है?",
+      "te": "భారతీయ సంఖ్యామానంలో 1 కోటి ఎన్ని లక్షలకు సమానం?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "10 lakhs",
+          "hi": "10 लाख",
+          "te": "10 లక్షలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_crore_with_million"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "100 lakhs",
+          "hi": "100 लाख",
+          "te": "100 లక్షలు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1,000 lakhs",
+          "hi": "1,000 लाख",
+          "te": "1,000 లక్షలు",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_place_value"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "50 lakhs",
+          "hi": "50 लाख",
+          "te": "50 లక్షలు",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "1 lakh = 1,00,000 (5 zeros) and 1 crore = 1,00,00,000 (7 zeros). Since 1,00,00,000 ÷ 1,00,000 = 100, 1 crore equals 100 lakhs.",
+      "hi": "1 लाख = 1,00,000 और 1 करोड़ = 1,00,00,000। चूंकि 1,00,00,000 ÷ 1,00,000 = 100, इसलिए 1 करोड़ = 100 लाख।",
+      "te": "1 లక్ష = 1,00,000 మరియు 1 కోటి = 1,00,00,000. 1,00,00,000 ÷ 1,00,000 = 100 కాబట్టి, 1 కోటి = 100 లక్షలు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Count the number of zeros in 1 lakh and in 1 crore.",
+      "hi": "1 लाख और 1 करोड़ में शून्यों की संख्या गिनें।",
+      "te": "1 లక్ష మరియు 1 కోటిలో ఉన్న సున్నాల సంఖ్యను లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-02",
+    "conceptId": "c7-num-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Round the number 4,87,620 to the nearest ten thousand.",
+      "hi": "संख्या 4,87,620 को निकटतम दस हजार तक सन्निकटित कीजिए।",
+      "te": "4,87,620 సంఖ్యను సమీప పది వేలకు సవరించండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4,80,000",
+          "hi": "4,80,000",
+          "te": "4,80,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_down_ignoring_digit_seven"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4,87,000",
+          "hi": "4,87,000",
+          "te": "4,87,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_thousand_instead"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4,90,000",
+          "hi": "4,90,000",
+          "te": "4,90,000",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "5,00,000",
+          "hi": "5,00,000",
+          "te": "5,00,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_lakh_instead"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "In 4,87,620, the ten-thousands digit is 8 and the thousands digit is 7. Since 7 >= 5, we round up the ten-thousands place from 8 to 9: 4,90,000.",
+      "hi": "4,87,620 में दस हजार का अंक 8 है और हजार का अंक 7 है। चूंकि 7 >= 5, हम दस हजार के अंक को बढ़ाकर 9 कर देते हैं: 4,90,000।",
+      "te": "4,87,620 లో పది వేల స్థానంలో 8, వేల స్థానంలో 7 ఉన్నాయి. 7 >= 5 కాబట్టి, పది వేల స్థానాన్ని 9 గా పెంచుతాము: 4,90,000.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Look at the digit in the thousands place (7) to decide whether to round up or down.",
+      "hi": "सन्निकटन का निर्णय लेने के लिए हजार के स्थान का अंक (7) देखें।",
+      "te": "సవరించడానికి వేల స్థానంలో ఉన్న అంకెను (7) చూడండి.",
+      "reviewed": false
+    }
+  }
+]

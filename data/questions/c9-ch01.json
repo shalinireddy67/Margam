@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c9-coord-01",
+    "conceptId": "c9-coord-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In which quadrant of the Cartesian plane does the point (-4, 5) lie?",
+      "hi": "कार्तीय तल के किस चतुर्थांश में बिंदु (-4, 5) स्थित है?",
+      "te": "కార్టీసియన్ తలంలో (-4, 5) బిందువు ఏ పాదంలో ఉంటుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Quadrant I",
+          "hi": "चतुर्थांश I",
+          "te": "మొదటి పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "ignored_negative_sign_of_x"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Quadrant II",
+          "hi": "चतुर्थांश II",
+          "te": "రెండవ పాదం",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Quadrant III",
+          "hi": "चतुर्थांश III",
+          "te": "మూడవ పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_coordinates_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Quadrant IV",
+          "hi": "चतुर्थांश IV",
+          "te": "నాల్గవ పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "For point (-4, 5), the x-coordinate is negative (x < 0) and the y-coordinate is positive (y > 0). Points with (- , +) signs lie in Quadrant II.",
+      "hi": "बिंदु (-4, 5) के लिए x-निर्देशांक ऋणात्मक है और y-निर्देशांक धनात्मक है। (- , +) चिह्न वाले बिंदु द्वितीय चतुर्थांश (Quadrant II) में होते हैं।",
+      "te": "(-4, 5) బిందువుకు x నిరూపకం ఋణాత్మకం, y నిరూపకం ధనాత్మకం. (- , +) సంకేతాలు గల బిందువులు రెండవ పాదంలో ఉంటాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Recall sign rules for quadrants: QI (+,+), QII (-,+), QIII (-,-), QIV (+,-).",
+      "hi": "चतुर्थांशों के चिह्न याद रखें: QI (+,+), QII (-,+), QIII (-,-), QIV (+,-)।",
+      "te": "పాదాల సంకేతాలను గుర్తుచేసుకోండి: QI (+,+), QII (-,+), QIII (-,-), QIV (+,-).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-02",
+    "conceptId": "c9-coord-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What are the coordinates of a point that lies on the y-axis at a distance of 6 units below the origin?",
+      "hi": "मूल बिंदु से 6 इकाई नीचे y-अक्ष पर स्थित बिंदु के निर्देशांक क्या हैं?",
+      "te": "మూల బిందువుకు దిగువన 6 ప్రమాణాల దూరంలో y-అక్షంపై ఉన్న బిందువు నిరూపకాలు ఏమిటి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(-6, 0)",
+          "hi": "(-6, 0)",
+          "te": "(-6, 0)",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_point_on_x_axis_instead_of_y_axis"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(0, -6)",
+          "hi": "(0, -6)",
+          "te": "(0, -6)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(0, 6)",
+          "hi": "(0, 6)",
+          "te": "(0, 6)",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_y_instead_of_below_origin"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(-6, -6)",
+          "hi": "(-6, -6)",
+          "te": "(-6, -6)",
+          "reviewed": false
+        },
+        "mistakeTag": "assigned_value_to_both_coordinates"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Any point on the y-axis has x-coordinate = 0. Being 6 units below the origin means y = -6. Thus, the coordinates are (0, -6).",
+      "hi": "y-अक्ष पर स्थित किसी भी बिंदु का x-निर्देशांक 0 होता है। मूल बिंदु से 6 इकाई नीचे होने का अर्थ y = -6 है। अतः निर्देशांक (0, -6) हैं।",
+      "te": "y-అక్షంపై ఉన్న ఏ బిందువుకైనా x-నిరూపకం = 0. మూల బిందువుకు 6 ప్రమాణాలు దిగువన ఉండటం వల్ల y = -6. కాబట్టి నిరూపకాలు (0, -6).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Points on the y-axis always have an x-coordinate of 0.",
+      "hi": "y-अक्ष पर स्थित बिंदुओं का x-निर्देशांक सदैव 0 होता है।",
+      "te": "y-అక్షంపై ఉన్న బిందువుల x నిరూపకం ఎల్లప్పుడూ 0 గా ఉంటుంది.",
+      "reviewed": false
+    }
+  }
+]

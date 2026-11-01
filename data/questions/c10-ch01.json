@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c10-real-01",
+    "conceptId": "c10-real-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Express 140 as a product of its prime factors.",
+      "hi": "140 को अभाज्य गुणनखंडों के गुणनफल के रूप में व्यक्त कीजिए।",
+      "te": "140 సంఖ్యను ప్రధాన కారణాంకాల లబ్దంగా రాయండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2 × 5 × 14",
+          "hi": "2 × 5 × 14",
+          "te": "2 × 5 × 14",
+          "reviewed": false
+        },
+        "mistakeTag": "composite_number_fourteen_included"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2² × 5 × 7",
+          "hi": "2² × 5 × 7",
+          "te": "2² × 5 × 7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2³ × 5 × 7",
+          "hi": "2³ × 5 × 7",
+          "te": "2³ × 5 × 7",
+          "reviewed": false
+        },
+        "mistakeTag": "extra_factor_of_two"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4 × 35",
+          "hi": "4 × 35",
+          "te": "4 × 35",
+          "reviewed": false
+        },
+        "mistakeTag": "factored_into_composites_not_primes"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Divide 140 by primes: 140 ÷ 2 = 70; 70 ÷ 2 = 35; 35 ÷ 5 = 7; 7 ÷ 7 = 1. Thus, 140 = 2 × 2 × 5 × 7 = 2² × 5 × 7.",
+      "hi": "140 के अभाज्य गुणनखंड: 140 ÷ 2 = 70; 70 ÷ 2 = 35; 35 ÷ 5 = 7; 7 ÷ 7 = 1। अतः 140 = 2² × 5 × 7।",
+      "te": "140 ప్రధాన కారణాంకాలు: 140 ÷ 2 = 70; 70 ÷ 2 = 35; 35 ÷ 5 = 7; 7 ÷ 7 = 1. కాబట్టి 140 = 2² × 5 × 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Divide by the smallest prime 2 repeatedly, then by 5 and 7.",
+      "hi": "सबसे छोटे अभाज्य 2 से बार-बार भाग दें, फिर 5 और 7 से।",
+      "te": "అతి చిన్న ప్రధాన సంఖ్య 2 తో మొదలుపెట్టి భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-real-02",
+    "conceptId": "c10-real-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Given that HCF(306, 657) = 9, find LCM(306, 657) using the relationship HCF × LCM = a × b.",
+      "hi": "दिया गया है कि HCF(306, 657) = 9 है, तो HCF × LCM = a × b का उपयोग करके LCM(306, 657) ज्ञात कीजिए।",
+      "te": "HCF(306, 657) = 9 అని ఇవ్వబడింది, HCF × LCM = a × b సంబంధాన్ని ఉపయోగించి LCM(306, 657) ను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "22338",
+          "hi": "22338",
+          "te": "22338",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "201042",
+          "hi": "201042",
+          "te": "201042",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_numbers_without_dividing_by_hcf"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2238",
+          "hi": "2238",
+          "te": "2238",
+          "reviewed": false
+        },
+        "mistakeTag": "division_decimal_omission_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "73",
+          "hi": "73",
+          "te": "73",
+          "reviewed": false
+        },
+        "mistakeTag": "divided_single_number_by_hcf"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using HCF(a, b) × LCM(a, b) = a × b: 9 × LCM = 306 × 657 => LCM = (306 × 657) ÷ 9 = 34 × 657 = 22,338.",
+      "hi": "संबंध HCF × LCM = a × b द्वारा: 9 × LCM = 306 × 657 => LCM = (306 ÷ 9) × 657 = 34 × 657 = 22,338।",
+      "te": "HCF × LCM = a × b సూత్రం ప్రకారం: 9 × LCM = 306 × 657 => LCM = 34 × 657 = 22,338.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "LCM = (a × b) / HCF. You can simplify 306 / 9 = 34 first.",
+      "hi": "LCM = (a × b) / HCF। आप पहले 306 ÷ 9 = 34 कर सकते हैं।",
+      "te": "LCM = (a × b) / HCF. ముందుగా 306 / 9 = 34 చేయండి.",
+      "reviewed": false
+    }
+  }
+]

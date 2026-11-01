@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c9-poly-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the coefficient of x in the linear polynomial p(x) = 7 - 5x?",
+      "hi": "रैखिक बहुपद p(x) = 7 - 5x में x का गुणांक क्या है?",
+      "te": "రేఖీయ బహుపది p(x) = 7 - 5x లో x యొక్క గుణకం ఏమిటి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "negated_constant_term"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "In the expression 7 - 5x, the term containing x is -5x. The coefficient includes the sign preceding the number, which is -5.",
+      "hi": "व्यंजक 7 - 5x में x वाला पद -5x है। गुणांक में संख्या से पहले का चिह्न भी शामिल होता है, जो कि -5 है।",
+      "te": "7 - 5x సమాసంలో x ఉన్న పదం -5x. గుణకంలో సంఖ్య ముందున్న సంకేతం కూడా ఉంటుంది, అది -5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember to include the negative sign directly in front of the 5x term.",
+      "hi": "5x पद के ठीक आगे लगे ऋण चिह्न को शामिल करना याद रखें।",
+      "te": "5x పదం ముందున్న ఋణ సంకేతాన్ని చేర్చడం మర్చిపోకండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-poly-02",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial p(x) = 3x - 12.",
+      "hi": "रैखिक बहुपद p(x) = 3x - 12 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది p(x) = 3x - 12 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_divide_by_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_instead_of_divided"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "To find the zero of p(x), set p(x) = 0: 3x - 12 = 0 => 3x = 12 => x = 12 ÷ 3 = 4.",
+      "hi": "शून्यक ज्ञात करने के लिए p(x) = 0 रखें: 3x - 12 = 0 => 3x = 12 => x = 4।",
+      "te": "శూన్యాన్ని కనుగొనడానికి p(x) = 0 చేయండి: 3x - 12 = 0 => 3x = 12 => x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set 3x - 12 = 0 and solve for x.",
+      "hi": "3x - 12 = 0 समीकरण को x के लिए हल करें।",
+      "te": "3x - 12 = 0 సమీకరణాన్ని x కోసం సాధించండి.",
+      "reviewed": false
+    }
+  }
+]

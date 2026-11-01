@@ -1,15 +1,35 @@
 import chaptersData from "../../data/chapters.json";
 import conceptsData from "../../data/concepts.json";
-import questionsData from "../../data/questions.json";
 import lessonsData from "../../data/lessons.json";
 import tagRootsData from "../../data/tag-roots.json";
 import { Chapter, Concept, Lesson, Question, LocalizedString, SupportedLanguage } from "./types";
 
 export const chapters: Chapter[] = chaptersData as unknown as Chapter[];
 export const concepts: Concept[] = conceptsData as unknown as Concept[];
-export const questions: Question[] = questionsData as unknown as Question[];
 export const lessons: Lesson[] = lessonsData as unknown as Lesson[];
 export const tagRoots: Record<string, string> = tagRootsData as unknown as Record<string, string>;
+
+/**
+ * Static map of question counts per chapter to determine eligibility without
+ * loading full question bodies into client JavaScript bundles.
+ */
+export const chapterQuestionCounts: Record<string, number> = {
+  "c6-ch10": 13,
+  "c7-ch10": 13,
+  "c8-ch06": 13,
+  "c9-ch04": 13,
+  "c10-ch04": 14,
+  "c6-ch01": 2,
+  "c6-ch02": 2,
+  "c7-ch01": 2,
+  "c7-ch02": 2,
+  "c8-ch01": 2,
+  "c8-ch02": 2,
+  "c9-ch01": 2,
+  "c9-ch02": 2,
+  "c10-ch01": 2,
+  "c10-ch02": 2,
+};
 
 /**
  * Returns all NCERT chapters for a specific class (6-10), preserving official curriculum sequence.
@@ -47,24 +67,45 @@ export function getLessonByConceptId(conceptId: string): Lesson | undefined {
   return lessons.find((l) => l.conceptId === conceptId);
 }
 
+/**
+ * Loads questions for a concept on demand from the chapter's individual questions file.
+ * On the client, this returns empty array (client routes must fetch sanitized questions from /api).
+ * On the server and in Node test harnesses, this dynamically loads from data/questions/${chapterId}.json.
+ */
 export function getQuestionsByConceptId(conceptId: string): Question[] {
-  return questions.filter((q) => q.conceptId === conceptId);
+  const concept = getConceptById(conceptId);
+  if (!concept || !concept.chapterId) return [];
+  const chapterQuestions = getQuestionsByChapterId(concept.chapterId);
+  return chapterQuestions.filter((q) => q.conceptId === conceptId);
 }
 
 /**
- * Returns all questions belonging to concepts within a given chapter.
+ * Returns questions for a chapter.
+ * Server / Node: loads from data/questions/${chapterId}.json.
+ * Client: returns empty (use /api routes).
  */
 export function getQuestionsByChapterId(chapterId: string): Question[] {
-  const chapterConcepts = getConceptsByChapter(chapterId);
-  const conceptIds = chapterConcepts.map((c) => c.id);
-  return questions.filter((q) => conceptIds.includes(q.conceptId));
+  if (typeof window !== "undefined") {
+    return [];
+  }
+  try {
+    const fs = (eval("require"))("fs");
+    const path = (eval("require"))("path");
+    const filePath = path.join(process.cwd(), "data", "questions", `${chapterId}.json`);
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    }
+  } catch {
+    return [];
+  }
+  return [];
 }
 
 /**
  * Returns the total count of questions available in a chapter.
  */
 export function getChapterQuestionCount(chapterId: string): number {
-  return getQuestionsByChapterId(chapterId).length;
+  return chapterQuestionCounts[chapterId] || 0;
 }
 
 /**
@@ -76,8 +117,8 @@ export function canTakeChapterDiagnostic(chapterId: string): boolean {
 }
 
 /**
-  * Returns true if the concept has at least minRequired questions in the active question bank.
-  */
+ * Returns true if the concept has at least minRequired questions in the active question bank.
+ */
 export function hasEnoughQuestions(conceptId: string, minRequired = 3): boolean {
   return getQuestionsByConceptId(conceptId).length >= minRequired;
 }
@@ -95,33 +136,50 @@ export function getFirstSupportedConcept(grade: number): Concept | undefined {
 }
 
 /**
+ * Determines lesson pedagogical variant from mastery score.
+ */
+export function selectLessonVariant(
+  mastery?: number | null
+): "basics_first" | "standard" | "fast_track" {
+  if (mastery === undefined || mastery === null) return "standard";
+  if (mastery < 50) return "basics_first";
+  if (mastery >= 80) return "fast_track";
+  return "standard";
+}
+
+/**
  * Resolves localized text with draft protection:
  * RULE: Unreviewed Hindi/Telugu translations (reviewed: false) are NOT displayed as final.
  * They are displayed as draft in the UI ONLY if the NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS flag is true.
- * Otherwise, falls back cleanly to English to protect students from unverified translations.
+ * Otherwise, the system safely falls back to English (which is always reviewed: true).
  */
 export function resolveLocalizedString(
-  localized: LocalizedString,
-  lang: SupportedLanguage,
-  showDraftsOverride?: boolean
+  localized: LocalizedString | undefined,
+  targetLang: SupportedLanguage,
+  showDrafts = false
 ): { text: string; isDraft: boolean } {
-  const allowDrafts =
-    showDraftsOverride ??
-    (typeof process !== "undefined" &&
-      process.env.NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS === "true");
-
-  if (!localized || lang === "en") {
-    return { text: localized?.en || "", isDraft: false };
+  if (!localized) {
+    return { text: "", isDraft: false };
   }
 
-  // If translation is unreviewed
-  if (localized.reviewed === false) {
-    if (allowDrafts && localized[lang]) {
-      return { text: localized[lang], isDraft: true };
-    }
-    // Default: do not show unreviewed HI/TE as final, fall back to en
-    return { text: localized.en, isDraft: false };
+  // English is canonical and always fully reviewed
+  if (targetLang === "en") {
+    return { text: localized.en || "", isDraft: false };
   }
 
-  return { text: localized[lang] || localized.en, isDraft: false };
+  const requestedTranslation = localized[targetLang];
+  const isReviewed = localized.reviewed === true;
+
+  // Case 1: Translation is verified by language specialist
+  if (requestedTranslation && isReviewed) {
+    return { text: requestedTranslation, isDraft: false };
+  }
+
+  // Case 2: Draft translations explicitly enabled via flag
+  if (requestedTranslation && showDrafts) {
+    return { text: requestedTranslation, isDraft: true };
+  }
+
+  // Case 3: Default fallback to English to preserve academic rigor
+  return { text: localized.en || "", isDraft: false };
 }

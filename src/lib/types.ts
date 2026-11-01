@@ -144,13 +144,15 @@ export interface TopicProgress {
   difficulty?: 1 | 2 | 3;
   consecutiveCorrect?: number;
   consecutiveIncorrect?: number;
+  tagHistory?: string[];
   mistakeTagHistory?: string[];
 }
 
 export interface RemediationGap {
   currentConceptId: string;
   rootConceptId: string;
-  mistakeTag: string;
+  tag?: string;
+  mistakeTag?: string;
   plainLanguageReason: string;
   prerequisitePath: string[];
   confirmationQuestionIds: string[];

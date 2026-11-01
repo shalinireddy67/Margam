@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  FileText,
+  HelpCircle,
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -13,14 +13,13 @@ import {
   RotateCcw,
   Sparkles,
   BookOpen,
+  Compass,
   Award,
-  TrendingUp,
-  BarChart2,
+  Layers,
 } from "lucide-react";
 import {
   SupportedLanguage,
   LearnerProfile,
-  Question,
   Chapter,
 } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
@@ -29,12 +28,47 @@ import {
   getConceptById,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import {
-  generateChapterTest,
-  evaluateChapterTest,
-  ChapterTestResult,
-} from "@/lib/adaptive";
 import StudentHeader from "@/components/StudentHeader";
+
+interface SanitizedOption {
+  id: string;
+  text: any;
+}
+
+interface ClientTestQuestion {
+  id: string;
+  conceptId: string;
+  difficulty: number;
+  type: string;
+  contextTag?: string;
+  prompt: any;
+  options?: SanitizedOption[];
+}
+
+interface ConceptPerformance {
+  conceptId: string;
+  conceptName: string;
+  score: number;
+  total: number;
+  percentage: number;
+  category: "mastered" | "in_progress" | "needs_attention";
+}
+
+interface ChapterTestResultResponse {
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+  strongConcepts: ConceptPerformance[];
+  weakConcepts: ConceptPerformance[];
+  nextSteps: string[];
+  feedback: Array<{
+    questionId: string;
+    isCorrect: boolean;
+    conceptId: string;
+    chosenOption: string;
+  }>;
+}
 
 export default function ChapterTestRunnerPage() {
   const params = useParams();
@@ -43,12 +77,14 @@ export default function ChapterTestRunnerPage() {
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<ClientTestQuestion[]>([]);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [conceptAllocation, setConceptAllocation] = useState<Record<string, number>>({});
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [result, setResult] = useState<ChapterTestResult | null>(null);
+  const [result, setResult] = useState<ChapterTestResultResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const active = getActiveProfile();
@@ -58,10 +94,43 @@ export default function ChapterTestRunnerPage() {
     }
     setProfile(active);
 
-    const testAssembly = generateChapterTest(chapterId, 10);
-    setQuestions(testAssembly.questions);
-    setConceptAllocation(testAssembly.conceptAllocation);
-    setLoading(false);
+    let isCancelled = false;
+    async function loadTest() {
+      try {
+        const res = await fetch("/api/test/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chapterId,
+            studentId: active!.id,
+          }),
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || "Failed to generate test");
+        }
+
+        const data = await res.json();
+        if (!isCancelled) {
+          setQuestions(data.questions || []);
+          setSessionToken(data.token || null);
+          setConceptAllocation(data.conceptAllocation || {});
+          setLoading(false);
+        }
+      } catch (err: any) {
+        if (!isCancelled) {
+          setErrorMessage(err.message || "Network error loading test questions");
+          setLoading(false);
+        }
+      }
+    }
+
+    loadTest();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [chapterId, router]);
 
   const currentChapter: Chapter | undefined = chapters.find((c) => c.id === chapterId);
@@ -117,28 +186,55 @@ export default function ChapterTestRunnerPage() {
     setErrorMessage(null);
   };
 
-  const handleSubmitTest = (e: React.FormEvent) => {
+  const handleSubmitTest = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(answers).length < questions.length) {
       setErrorMessage(`Please answer all ${questions.length} questions before submitting.`);
       return;
     }
 
-    const testRes = evaluateChapterTest(chapterId, answers);
-    setResult(testRes);
+    if (!sessionToken) {
+      setErrorMessage("Missing session token. Please reload the test.");
+      return;
+    }
 
-    const refreshed = getActiveProfile();
-    if (refreshed) setProfile(refreshed);
+    setSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/test/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionToken,
+          chapterId,
+          studentId: profile.id,
+          answers,
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Submission failed");
+      }
+
+      const testRes: ChapterTestResultResponse = await res.json();
+      setResult(testRes);
+
+      const refreshed = getActiveProfile();
+      if (refreshed) setProfile(refreshed);
+    } catch (err: any) {
+      setErrorMessage(err.message || "Failed to submit test.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleRetry = () => {
     setAnswers({});
     setResult(null);
     setErrorMessage(null);
-
-    const testAssembly = generateChapterTest(chapterId, 10);
-    setQuestions(testAssembly.questions);
-    setConceptAllocation(testAssembly.conceptAllocation);
+    window.location.reload();
   };
 
   return (
@@ -170,10 +266,32 @@ export default function ChapterTestRunnerPage() {
             Comprehensive 10-question chapter evaluation. Questions are adaptively allocated across concepts based on your mastery profile.
           </p>
 
-          {/* Result Scorecard Banner */}
+          {/* Test Allocation Breakdown */}
+          {Object.keys(conceptAllocation).length > 0 && (
+            <div className="mt-4 p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center flex-wrap gap-2 text-xs">
+              <span className="font-bold text-slate-600 flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5" />
+                <span>Test Blueprint:</span>
+              </span>
+              {Object.entries(conceptAllocation).map(([cId, count]) => {
+                const c = getConceptById(cId);
+                const name = c ? (c.name[currentLang] || c.name.en) : cId;
+                return (
+                  <span
+                    key={cId}
+                    className="inline-flex items-center px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-[11px] font-semibold text-slate-700"
+                  >
+                    {name}: {count} Qs
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Results Summary Card */}
           {result && (
             <div
-              className={`mt-6 p-6 rounded-2xl border space-y-4 ${
+              className={`mt-6 p-6 rounded-2xl border ${
                 result.passed
                   ? "bg-emerald-50 border-emerald-200 text-emerald-950"
                   : "bg-amber-50 border-amber-200 text-amber-950"
@@ -181,22 +299,24 @@ export default function ChapterTestRunnerPage() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="font-heading font-extrabold text-lg flex items-center gap-2">
+                  <h3 className="font-heading font-extrabold text-xl flex items-center gap-2">
                     {result.passed ? (
                       <>
-                        <Award className="w-5 h-5 text-emerald-700" />
-                        <span>Chapter Mastered! Score: {result.scorePercentage}%</span>
+                        <Award className="w-6 h-6 text-emerald-700" />
+                        <span>Chapter Test Passed!</span>
                       </>
                     ) : (
                       <>
-                        <AlertCircle className="w-5 h-5 text-amber-700" />
-                        <span>Test Attempted • Score: {result.scorePercentage}%</span>
+                        <AlertCircle className="w-6 h-6 text-amber-700" />
+                        <span>Review Recommended</span>
                       </>
                     )}
                   </h3>
-                  <p className="text-xs mt-1">
-                    Correct: <strong>{result.correctCount} / {result.totalQuestions}</strong> questions
-                    {!result.passed && " (70% required to master this chapter)"}
+                  <p className="text-xs sm:text-sm mt-1">
+                    Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%)
+                    {result.passed
+                      ? " • You have demonstrated mastery of this chapter!"
+                      : " • 70% required to master this chapter."}
                   </p>
                 </div>
 
@@ -213,38 +333,55 @@ export default function ChapterTestRunnerPage() {
                     href="/"
                     className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-soft transition-all"
                   >
-                    <span>Learning Path</span>
+                    <span>Back to Learning</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
 
-              {/* Concept Mastery Breakdown */}
-              <div className="pt-2 border-t border-slate-200/60">
-                <p className="text-xs font-bold uppercase tracking-wider mb-2 text-slate-700">
+              {/* Concept-by-Concept Performance Breakdown */}
+              <div className="mt-5 pt-4 border-t border-slate-200/60 space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                   Concept Mastery Breakdown
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {Object.entries(result.conceptBreakdown).map(([cId, item]) => {
-                    const conceptItem = getConceptById(cId);
-                    return (
-                      <div
-                        key={cId}
-                        className="bg-white/90 p-3 rounded-xl border border-slate-200 text-xs flex items-center justify-between"
-                      >
-                        <span className="font-semibold text-slate-800 truncate mr-2">
-                          {conceptItem ? conceptItem.name.en : cId}
-                        </span>
-                        <span className="font-bold shrink-0 text-slate-900">
-                          {item.correct}/{item.total} ({item.scorePercentage}%) • Mastery: {item.updatedMastery}%
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Strong Concepts */}
+                {result.strongConcepts && result.strongConcepts.length > 0 && (
+                  <div className="bg-white/80 p-3.5 rounded-xl border border-emerald-200 space-y-1.5">
+                    <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">
+                      Strong Concepts (Mastered)
+                    </span>
+                    <ul className="space-y-1">
+                      {result.strongConcepts.map((sc) => (
+                        <li key={sc.conceptId} className="text-xs text-slate-700 flex justify-between">
+                          <span className="truncate pr-2">{sc.conceptName}</span>
+                          <span className="font-bold text-emerald-700">{sc.percentage}%</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Weak Concepts */}
+                {result.weakConcepts && result.weakConcepts.length > 0 && (
+                  <div className="bg-white/80 p-3.5 rounded-xl border border-rose-200 space-y-1.5">
+                    <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block">
+                      Concepts Needing Attention
+                    </span>
+                    <ul className="space-y-1">
+                      {result.weakConcepts.map((wc) => (
+                        <li key={wc.conceptId} className="text-xs text-slate-700 flex justify-between">
+                          <span className="truncate pr-2">{wc.conceptName}</span>
+                          <span className="font-bold text-rose-700">{wc.percentage}%</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
-          )}
+          </div>
+        )}
 
           {errorMessage && (
             <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 flex items-center gap-2">
@@ -258,7 +395,7 @@ export default function ChapterTestRunnerPage() {
         <form onSubmit={handleSubmitTest} className="space-y-6">
           {questions.map((q, qIndex) => {
             const isAnswered = !!answers[q.id];
-            const isCorrect = answers[q.id] === q.correctAnswer;
+            const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
             const promptData = resolveLocalizedString(q.prompt, currentLang);
 
             return (
@@ -288,23 +425,19 @@ export default function ChapterTestRunnerPage() {
                 <div className="space-y-2 pt-2">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const isCorrectAnswer = q.correctAnswer === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
                     let optionBorderClass = "border-slate-200 hover:border-slate-300";
                     let optionBgClass = "bg-white";
 
-                    if (result) {
-                      if (isCorrectAnswer) {
+                    if (result && feedbackItem) {
+                      if (isSelected && feedbackItem.isCorrect) {
                         optionBorderClass = "border-emerald-500 ring-1 ring-emerald-500";
                         optionBgClass = "bg-emerald-50/60";
-                      } else if (isSelected && !isCorrectAnswer) {
+                      } else if (isSelected && !feedbackItem.isCorrect) {
                         optionBorderClass = "border-rose-400 ring-1 ring-rose-400";
                         optionBgClass = "bg-rose-50/60";
                       }
-                    } else if (isSelected) {
-                      optionBorderClass = "border-primary ring-2 ring-primary/20";
-                      optionBgClass = "bg-slate-50";
                     }
 
                     return (
@@ -312,92 +445,53 @@ export default function ChapterTestRunnerPage() {
                         key={opt.id}
                         data-oid={opt.id}
                         onClick={() => handleSelectOption(q.id, opt.id)}
-                        className={`min-h-[48px] flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-all ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] p-3.5 rounded-2xl border text-xs sm:text-sm cursor-pointer flex items-center justify-between transition-all ${
+                          isSelected
+                            ? "border-primary bg-primary/5 font-semibold"
+                            : `${optionBorderClass} ${optionBgClass}`
+                        }`}
                       >
-                        <span
-                          className={`w-6 h-6 rounded-xl font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 ${
-                            isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-700"
-                          }`}
-                        >
-                          {opt.id}
-                        </span>
-                        <div className="flex-1 text-xs sm:text-sm text-foreground font-medium pt-0.5 flex items-center flex-wrap gap-2">
-                          <span>{optData.text}</span>
-                          {optData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
-                          )}
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`w-6 h-6 rounded-lg font-bold flex items-center justify-center text-xs shrink-0 ${
+                              isSelected
+                                ? "bg-primary text-white"
+                                : "bg-slate-100 text-slate-700"
+                            }`}
+                          >
+                            {opt.id}
+                          </span>
+                          <span className="text-slate-800 leading-snug">{optData.text}</span>
                         </div>
+                        {result && feedbackItem && isSelected && (
+                          feedbackItem.isCorrect ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          ) : (
+                            <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                          )
+                        )}
                       </div>
                     );
                   })}
                 </div>
-
-                {/* Feedback Post-Submission */}
-                {result && (
-                  <div
-                    className={`mt-4 p-4 rounded-2xl border text-xs leading-relaxed space-y-2 ${
-                      isCorrect
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-950"
-                        : "bg-rose-50/80 border-rose-200 text-rose-950"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 font-bold">
-                      {isCorrect ? (
-                        <>
-                          <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                          <span>Correct</span>
-                        </>
-                      ) : (
-                        <>
-                          <XCircle className="w-4 h-4 text-rose-600" />
-                          <span>Incorrect</span>
-                        </>
-                      )}
-                    </div>
-                    {(() => {
-                      const expData = resolveLocalizedString(q.explanation, currentLang);
-                      return (
-                        <p className="text-slate-700 pt-1 flex items-center flex-wrap gap-1.5">
-                          <strong>Explanation:</strong> <span>{expData.text}</span>
-                          {expData.isDraft && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                              Draft
-                            </span>
-                          )}
-                        </p>
-                      );
-                    })()}
-                  </div>
-                )}
               </div>
             );
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-slate-200 shadow-xl flex items-center justify-between gap-4">
-              <span className="text-xs text-muted-foreground font-semibold">
-                {Object.keys(answers).length} of {questions.length} Answered
-              </span>
-
+            <div className="pt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-bold text-xs shadow-soft transition-all"
+                disabled={submitting}
+                className="w-full inline-flex items-center justify-center min-h-[48px] gap-2 px-8 py-4 rounded-2xl bg-primary hover:bg-primary-hover text-white font-heading font-extrabold text-sm shadow-soft transition-all disabled:opacity-50"
               >
-                <span>Submit Chapter Test</span>
+                <span>{submitting ? "Evaluating Chapter Test..." : "Submit Chapter Test"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </form>
       </main>
-
-      <footer className="border-t border-slate-200 py-4 text-center text-xs text-muted-foreground bg-white">
-        Margam Adaptive Mathematics • Chapter Assessment
-      </footer>
     </div>
   );
 }

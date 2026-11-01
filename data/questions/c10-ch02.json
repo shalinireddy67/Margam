@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c10-poly-01",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If a quadratic polynomial p(x) = x² - 5x + 6 has zeroes α and β, find the sum of zeroes (α + β).",
+      "hi": "यदि द्विघात बहुपद p(x) = x² - 5x + 6 के शून्यक α और β हैं, तो शून्यकों का योग (α + β) ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది p(x) = x² - 5x + 6 శూన్యాలు α మరియు β అయితే, శూన్యాల మొత్తం (α + β) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        },
+        "mistakeTag": "negated_product_coefficient"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "For standard quadratic polynomial ax² + bx + c, the sum of zeroes α + β = -b/a. Here a = 1, b = -5, so α + β = -(-5)/1 = 5.",
+      "hi": "द्विघात बहुपद ax² + bx + c के लिए शून्यकों का योग α + β = -b/a होता है। यहाँ a = 1, b = -5, अतः α + β = -(-5)/1 = 5।",
+      "te": "ax² + bx + c బహుపదికి శూన్యాల మొత్తం α + β = -b/a. ఇక్కడ a = 1, b = -5, కాబట్టి α + β = -(-5)/1 = 5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The formula for the sum of zeroes is -b/a.",
+      "hi": "शून्यकों के योग का सूत्र -b/a है।",
+      "te": "శూన్యాల మొత్తం సూత్రం -b/a.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-poly-02",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "How many real zeroes does a polynomial p(x) have if its graph intersects the x-axis at exactly 3 distinct points?",
+      "hi": "यदि किसी बहुपद p(x) का ग्राफ x-अक्ष को ठीक 3 अलग-अलग बिंदुओं पर काटता है, तो उसके कितने वास्तविक शून्यक होंगे?",
+      "te": "ఒక బహుపది p(x) గ్రాఫ్ x-అక్షాన్ని ఖచ్చితంగా 3 వేర్వేరు బిందువుల వద్ద ఖండిస్తే, దానికి ఎన్ని వాస్తవ శూన్యాలు ఉంటాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_standard_quadratic_two_zeroes"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_zero"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The number of real zeroes of y = p(x) is equal to the number of points where the graph intersects the x-axis (where y = 0). Since it intersects at 3 points, it has 3 real zeroes.",
+      "hi": "y = p(x) के वास्तविक शून्यकों की संख्या x-अक्ष के प्रतिच्छेद बिंदुओं की संख्या के बराबर होती है। चूंकि यह 3 बिंदुओं पर काटता है, इसलिए इसके 3 वास्तविक शून्यक हैं।",
+      "te": "y = p(x) గ్రాఫ్ x-అక్షాన్ని ఖండించే బిందువుల సంఖ్యే దాని వాస్తవ శూన్యాల సంఖ్య. 3 బిందువుల వద్ద ఖండిస్తుంది కాబట్టి 3 శూన్యాలు ఉంటాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Each intersection with the x-axis corresponds to an x value where p(x) = 0.",
+      "hi": "x-अक्ष के प्रत्येक प्रतिच्छेद बिंदु पर p(x) का मान 0 होता है।",
+      "te": "x-అక్షాన్ని ఖండించే ప్రతి బిందువు వద్ద p(x) విలువ 0 అవుతుంది.",
+      "reviewed": false
+    }
+  }
+]

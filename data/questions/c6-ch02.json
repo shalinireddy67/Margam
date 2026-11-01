@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c6-geo-01",
+    "conceptId": "c6-geo-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "An angle measuring 65° is classified as which type of angle?",
+      "hi": "65° का कोण किस प्रकार का कोण कहलाता है?",
+      "te": "65° కొలత గల కోణాన్ని ఏ రకమైన కోణంగా వర్గీకరిస్తారు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Right angle",
+          "hi": "समकोण",
+          "te": "లంబ కోణం",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_right_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Obtuse angle",
+          "hi": "अधिक कोण",
+          "te": "గురు కోణం",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_obtuse_angle"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Acute angle",
+          "hi": "न्यून कोण",
+          "te": "లఘు కోణం",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Straight angle",
+          "hi": "ऋजु कोण",
+          "te": "సరళ కోణం",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_straight_angle"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "An angle whose measure is strictly greater than 0° and less than 90° is an acute angle. Since 65° is less than 90°, it is an acute angle.",
+      "hi": "वह कोण जिसका मान 0° से अधिक और 90° से कम हो, न्यून कोण कहलाता है। चूंकि 65° < 90°, यह एक न्यून कोण है।",
+      "te": "0° కంటే ఎక్కువ మరియు 90° కంటే తక్కువ ఉన్న కోణాన్ని లఘు కోణం అంటారు. 65° అనేది 90° కంటే తక్కువ కాబట్టి ఇది లఘు కోణం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Is 65° less than or greater than 90°?",
+      "hi": "क्या 65° 90° से छोटा है या बड़ा?",
+      "te": "65° అనేది 90° కంటే చిన్నదా లేక పెద్దదా?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-02",
+    "conceptId": "c6-geo-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If two opposite rays share a common initial point and form a single straight line, what is the measure of the angle formed between them?",
+      "hi": "यदि दो विपरीत किरणें एक ही उभयनिष्ठ प्रारंभिक बिंदु साझा करती हैं और एक सीधी रेखा बनाती हैं, तो उनके बीच बने कोण का माप क्या है?",
+      "te": "రెండు వ్యతిరేక కిరణాలు ఒకే ఉమ్మడి ప్రారంభ బిందువును కలిగి ఉండి సరళ రేఖను ఏర్పరిస్తే, వాటి మధ్య కోణం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "90°",
+          "hi": "90°",
+          "te": "90°",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_perpendicular_rays"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "180°",
+          "hi": "180°",
+          "te": "180°",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "360°",
+          "hi": "360°",
+          "te": "360°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_straight_angle_with_complete_angle"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "45°",
+          "hi": "45°",
+          "te": "45°",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_fraction_of_right_angle"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Two opposite rays forming a straight line create a straight angle, which measures exactly 180°.",
+      "hi": "एक सीधी रेखा बनाने वाली दो विपरीत किरणें एक ऋजु कोण बनाती हैं, जिसका माप ठीक 180° होता है।",
+      "te": "సరళ రేఖను ఏర్పరిచే రెండు వ్యతిరేక కిరణాలు సరళ కోణాన్ని ఏర్పరుస్తాయి, దీని కొలత ఖచ్చితంగా 180°.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "A straight line represents half of a full 360° revolution.",
+      "hi": "एक सीधी रेखा 360° के पूरे घूर्णन का आधा हिस्सा होती है।",
+      "te": "సరళ రేఖ అనేది 360° పూర్తి భ్రమణంలో సగం.",
+      "reviewed": false
+    }
+  }
+]

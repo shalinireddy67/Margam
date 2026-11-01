@@ -1,0 +1,136 @@
+[
+  {
+    "id": "q-c8-sqr-01",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Which of the following numbers is a perfect square?",
+      "hi": "निम्नलिखित में से कौन सी संख्या एक पूर्ण वर्ग है?",
+      "te": "కింది వాటిలో ఏది ఖచ్చిత వర్గ సంఖ్య?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "72",
+          "hi": "72",
+          "te": "72",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "144",
+          "hi": "144",
+          "te": "144",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "200",
+          "hi": "200",
+          "te": "200",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_double_hundred_with_perfect_square"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "250",
+          "hi": "250",
+          "te": "250",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_ending_in_fifty_with_square"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "144 is a perfect square because 12 × 12 = 144. None of 72, 200, or 250 have an integer square root.",
+      "hi": "144 एक पूर्ण वर्ग है क्योंकि 12 × 12 = 144। 72, 200 या 250 का कोई पूर्णांक वर्गमूल नहीं है।",
+      "te": "12 × 12 = 144 కాబట్టి 144 ఖచ్చిత వర్గ సంఖ్య. 72, 200, 250 లకు పూర్ణ సంఖ్య వర్గమూలం లేదు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Check if there is an integer whose square equals 144 (e.g. 10² = 100, 11² = 121, 12² = ?).",
+      "hi": "जांचें कि क्या 12 का वर्ग 144 के बराबर है।",
+      "te": "12 యొక్క వర్గం ఎంత అని పరిశీలించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-02",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the square root of 576 using prime factorisation.",
+      "hi": "अभाज्य गुणनखंडन द्वारा 576 का वर्गमूल ज्ञात कीजिए।",
+      "te": "ప్రధాన కారణాంక పద్ధతిలో 576 యొక్క వర్గమూలాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "26",
+          "hi": "26",
+          "te": "26",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "28",
+          "hi": "28",
+          "te": "28",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "guessed_ending_in_four_from_six"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Prime factorisation of 576 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 = 2^6 × 3^2. Grouping into pairs: √(576) = 2^3 × 3 = 8 × 3 = 24.",
+      "hi": "576 का अभाज्य गुणनखंड = 2^6 × 3^2। युग्म बनाने पर: √(576) = 2^3 × 3 = 8 × 3 = 24।",
+      "te": "576 ప్రధాన కారణాంకాలు = 2^6 × 3^2. జతలుగా చేస్తే: √(576) = 2^3 × 3 = 8 × 3 = 24.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Notice that 20² = 400 and 30² = 900. Since 576 ends in 6, the unit digit of the root must be 4 or 6.",
+      "hi": "चूंकि 576 का अंतिम अंक 6 है, इसके वर्गमूल का इकाई अंक 4 या 6 होना चाहिए।",
+      "te": "576 చివరి అంకె 6 కాబట్టి, వర్గమూలం ఒకట్ల స్థానంలో 4 లేదా 6 ఉండాలి.",
+      "reviewed": false
+    }
+  }
+]
