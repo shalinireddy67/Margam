@@ -112,7 +112,7 @@ export default function StudentHeader({
                 <div className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-slate-700">
                   <User className="w-3.5 h-3.5" />
                 </div>
-                <span className="max-w-[100px] truncate">{profile.name}</span>
+                <span className="hidden sm:inline max-w-[100px] truncate">{profile.name}</span>
               </button>
 
               {showProfileMenu && (

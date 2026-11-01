@@ -1,5 +1,15 @@
 /* Self-hosted fonts via @fontsource (Zero Google Fonts runtime calls) */
 
+/* Press Start 2P Latin 400 */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/press-start-2p-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Baloo 2 Latin 600 */
 @font-face {
   font-family: 'Baloo 2';
@@ -160,7 +170,7 @@
     padding: 0;
   }
 
-  /* Default / English */
+  /* Default / English Body */
   body {
     background-color: var(--bg);
     color: var(--ink);
@@ -173,58 +183,117 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Default / English Headings */
-  h1, h2, h3, h4, h5, h6, .font-heading, button {
-    font-family: 'Baloo 2', sans-serif;
-    line-height: 1.35;
-  }
-
-  /* Hindi typography */
-  html[lang="hi"] body {
-    font-family: 'Noto Sans Devanagari', 'Nunito', sans-serif;
-  }
-  html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3, html[lang="hi"] h4, html[lang="hi"] h5, html[lang="hi"] h6, html[lang="hi"] .font-heading {
-    font-family: 'Baloo 2', sans-serif;
-  }
-
-  /* Telugu typography */
-  html[lang="te"] body {
-    font-family: 'Noto Sans Telugu', 'Nunito', sans-serif;
-  }
-  html[lang="te"] h1, html[lang="te"] h2, html[lang="te"] h3, html[lang="te"] h4, html[lang="te"] h5, html[lang="te"] h6, html[lang="te"] .font-heading {
-    font-family: 'Baloo Tammudu 2', 'Baloo 2', sans-serif;
-  }
-
-  /* Telugu heading priority */
-  html[lang="te"] h1,
-  html[lang="te"] h2,
-  html[lang="te"] h3,
-  html[lang="te"] h4,
-  html[lang="te"] button {
-    font-family: 'Baloo Tammudu 2', 'Baloo 2', sans-serif;
+  /* Default / English Headings & Badges */
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-pixel {
+    font-family: 'Press Start 2P', monospace, sans-serif;
+    letter-spacing: -0.02em;
     line-height: 1.4;
+    word-break: break-word;
   }
 
+  /* English Buttons & Badges */
+  button:not([data-l]), .pixel-btn, .chip, [role="tab"] {
+    font-family: 'Press Start 2P', monospace, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Font sizes calibrated for Press Start 2P so wide pixel letters never clip at 360px */
   h1 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    margin: 0 0 8px;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin: 0 0 10px;
   }
 
   h2 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin: 0 0 6px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0 0 8px;
   }
 
   h3 {
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-size: 0.75rem;
+    line-height: 1.35;
     margin: 0;
+  }
+
+  /* Specific heading overrides on mobile so wide pixel typography does not push viewport */
+  .font-heading.text-2xl,
+  .font-heading.text-3xl {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+  }
+  .font-heading.text-xl {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Language toggle buttons must preserve system / local glyphs */
+  [data-l], [data-l="en"], [data-l="hi"], [data-l="te"] {
+    font-family: system-ui, -apple-system, sans-serif !important;
   }
 
   p {
     margin: 0 0 8px;
+  }
+
+  /* Hindi typography: headings & buttons use Baloo 2 and Noto stack so no glyph is missing */
+  html[lang="hi"] body {
+    font-family: 'Noto Sans Devanagari', 'Nunito', sans-serif;
+  }
+  html[lang="hi"] h1,
+  html[lang="hi"] h2,
+  html[lang="hi"] h3,
+  html[lang="hi"] h4,
+  html[lang="hi"] h5,
+  html[lang="hi"] h6,
+  html[lang="hi"] .font-heading,
+  html[lang="hi"] .font-pixel,
+  html[lang="hi"] button,
+  html[lang="hi"] .pixel-btn,
+  html[lang="hi"] .chip,
+  html[lang="hi"] [role="tab"] {
+    font-family: 'Baloo 2', 'Noto Sans Devanagari', sans-serif !important;
+    letter-spacing: normal;
+    line-height: 1.35;
+  }
+  html[lang="hi"] h1 {
+    font-size: 1.85rem;
+  }
+  html[lang="hi"] h2 {
+    font-size: 1.35rem;
+  }
+  html[lang="hi"] h3 {
+    font-size: 1.1rem;
+  }
+
+  /* Telugu typography: headings & buttons use Baloo Tammudu 2 and Noto stack so no glyph is missing */
+  html[lang="te"] body {
+    font-family: 'Noto Sans Telugu', 'Nunito', sans-serif;
+  }
+  html[lang="te"] h1,
+  html[lang="te"] h2,
+  html[lang="te"] h3,
+  html[lang="te"] h4,
+  html[lang="te"] h5,
+  html[lang="te"] h6,
+  html[lang="te"] .font-heading,
+  html[lang="te"] .font-pixel,
+  html[lang="te"] button,
+  html[lang="te"] .pixel-btn,
+  html[lang="te"] .chip,
+  html[lang="te"] [role="tab"] {
+    font-family: 'Baloo Tammudu 2', 'Noto Sans Telugu', 'Baloo 2', sans-serif !important;
+    letter-spacing: normal;
+    line-height: 1.4;
+  }
+  html[lang="te"] h1 {
+    font-size: 1.85rem;
+  }
+  html[lang="te"] h2 {
+    font-size: 1.35rem;
+  }
+  html[lang="te"] h3 {
+    font-size: 1.1rem;
   }
 
   /* Accessible min 48px touch targets */

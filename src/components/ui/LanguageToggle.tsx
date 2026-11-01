@@ -26,7 +26,7 @@ export function LanguageToggle({
     <div
       role="group"
       aria-label="Language selection"
-      className={`inline-flex border-[3px] border-[#111111] rounded-[18px_14px_20px_15px/15px_20px_14px_18px] bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] overflow-hidden ${className}`.trim()}
+      className={`inline-flex border-4 border-[#111111] bg-[#FFFFFF] shadow-[4px_4px_0px_#111111] overflow-hidden ${className}`.trim()}
     >
       {languages.map(({ code, label, ariaLabel }) => {
         const isActive = currentLang === code;
@@ -40,15 +40,15 @@ export function LanguageToggle({
             onClick={() => onLanguageChange(code)}
             style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
             className={`
-              min-w-[48px] min-h-[48px] px-3 py-1
-              font-bold text-sm select-none
+              min-w-[48px] min-h-[48px] px-1.5 py-1
+              font-bold text-xs select-none
               border-0 cursor-pointer
               flex items-center justify-center
-              transition-colors
-              ${code !== "en" ? "border-l-[2px] border-[#111111]" : ""}
+              transition-none
+              ${code !== "en" ? "border-l-2 border-[#111111]" : ""}
               ${isActive
                 ? "bg-[#111111] text-[#FFFFFF]"
-                : "bg-transparent text-[#111111] hover:bg-[#FFE14D]/40"
+                : "bg-transparent text-[#111111] hover:bg-[#F2D16B]"
               }
             `.trim()}
           >
