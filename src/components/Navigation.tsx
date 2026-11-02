@@ -12,6 +12,7 @@ import {
   VolumeX,
   Flame,
   Compass,
+  Target,
 } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
 import { Logo } from "@/components/ui";
@@ -19,7 +20,7 @@ import { isSoundEnabled, setSoundEnabled, playPopSound } from "@/lib/sound";
 import { getLevelProgress } from "@/lib/xp-config";
 
 export interface NavItemConfig {
-  id: "home" | "learn" | "stickers" | "profile";
+  id: "home" | "learn" | "practice" | "diagnostic" | "profile" | "stickers";
   label: {
     en: string;
     hi: string;
@@ -33,31 +34,37 @@ export const NAV_ITEMS: readonly NavItemConfig[] = [
   {
     id: "home",
     label: { en: "Home", hi: "होम", te: "హోమ్" },
-    href: "/",
+    href: "/student",
     icon: Home,
   },
   {
     id: "learn",
     label: { en: "Learn", hi: "सीखें", te: "నేర్చుకోండి" },
-    href: "/student",
+    href: "/student/learn",
     icon: Sparkles,
   },
   {
-    id: "stickers",
-    label: { en: "Badges", hi: "बैज", te: "బ్యాడ్జ్‌లు" },
-    href: "/student/stickers",
-    icon: Award,
+    id: "practice",
+    label: { en: "Practice", hi: "अभ्यास", te: "అభ్యాసం" },
+    href: "/student/practice",
+    icon: Compass,
+  },
+  {
+    id: "diagnostic",
+    label: { en: "Diagnose", hi: "निदान", te: "రోగనిర్ధారణ" },
+    href: "/student/diagnostic",
+    icon: Target,
   },
   {
     id: "profile",
     label: { en: "Profile", hi: "प्रोफ़ाइल", te: "ప్రొఫైల్" },
-    href: "/student/select-class",
+    href: "/student/profile",
     icon: User,
   },
 ] as const;
 
 export interface NavigationProps {
-  currentTab?: "home" | "learn" | "stickers" | "profile";
+  currentTab?: "home" | "learn" | "practice" | "diagnostic" | "profile" | "stickers";
   currentLang?: SupportedLanguage;
   onLanguageChange?: (lang: SupportedLanguage) => void;
   profile?: LearnerProfile | null;
@@ -90,9 +97,12 @@ export function Navigation({
   // Derive active tab automatically from route if not explicitly passed
   let active = currentTab;
   if (!active) {
-    if (pathname.includes("/stickers")) active = "stickers";
-    else if (pathname.includes("/lesson") || pathname === "/student") active = "learn";
-    else if (pathname.includes("/select-class") || pathname.includes("/reset-class")) active = "profile";
+    if (pathname === "/student" || pathname === "/student/") active = "home";
+    else if (pathname.startsWith("/student/learn") || pathname.startsWith("/lesson") || pathname.startsWith("/learn")) active = "learn";
+    else if (pathname.startsWith("/student/practice") || pathname.startsWith("/student/worksheet")) active = "practice";
+    else if (pathname.startsWith("/student/diagnostic") || pathname.startsWith("/student/test")) active = "diagnostic";
+    else if (pathname.startsWith("/student/profile") || pathname.startsWith("/student/select-class") || pathname.startsWith("/student/reset-class")) active = "profile";
+    else if (pathname.startsWith("/student/stickers")) active = "stickers";
     else active = "home";
   }
 

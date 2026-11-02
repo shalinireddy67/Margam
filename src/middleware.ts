@@ -151,6 +151,13 @@ export async function middleware(req: NextRequest) {
     }
   }
 
+  // 3. Guard Student Portal: Keep Teachers in Teacher Portal
+  if (pathname === "/student" || pathname.startsWith("/student/")) {
+    if (isAuthenticated && userRole === "teacher") {
+      return NextResponse.redirect(new URL("/teacher", req.url));
+    }
+  }
+
   return res;
 }
 

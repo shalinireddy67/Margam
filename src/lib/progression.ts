@@ -24,8 +24,10 @@ import { getActiveProfile, saveProfile } from "./storage";
  * CRITICAL RULE: Only unlocks the first supported, fully implemented topic.
  */
 export function syncClassProgression(profile: LearnerProfile): LearnerProfile {
-  const classConcepts = getConceptsByClass(profile.selectedClass);
-  const firstSupported = getFirstSupportedConcept(profile.selectedClass);
+  const targetClass = (profile.studyClass || profile.selectedClass || 10) as 6 | 7 | 8 | 9 | 10;
+  profile.selectedClass = targetClass;
+  const classConcepts = getConceptsByClass(targetClass);
+  const firstSupported = getFirstSupportedConcept(targetClass);
   const demoUnlock =
     typeof process !== "undefined" &&
     process.env.NEXT_PUBLIC_DEMO_UNLOCK === "true";

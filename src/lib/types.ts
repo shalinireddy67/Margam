@@ -188,6 +188,8 @@ export interface LearnerProfile {
   id: string;
   name: string;
   selectedClass: 6 | 7 | 8 | 9 | 10;
+  enrolledClass?: 6 | 7 | 8 | 9 | 10;
+  studyClass?: 6 | 7 | 8 | 9 | 10;
   createdAt: string;
   lastActiveAt: string;
   topicProgress: Record<string, TopicProgress>;

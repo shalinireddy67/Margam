@@ -7,7 +7,7 @@ export default function SelectClassRedirectPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/");
+    router.replace("/student/profile");
   }, [router]);
 
   return null;

@@ -80,6 +80,20 @@ export const LearnerProfileSchema = z.object({
     z.literal(9),
     z.literal(10),
   ]),
+  enrolledClass: z.union([
+    z.literal(6),
+    z.literal(7),
+    z.literal(8),
+    z.literal(9),
+    z.literal(10),
+  ]).optional(),
+  studyClass: z.union([
+    z.literal(6),
+    z.literal(7),
+    z.literal(8),
+    z.literal(9),
+    z.literal(10),
+  ]).optional(),
   createdAt: z.string(),
   lastActiveAt: z.string(),
   topicProgress: z.record(z.string(), TopicProgressSchema).default({}),
@@ -303,13 +317,16 @@ export function saveProfile(profile: LearnerProfile): void {
  */
 export function createLearnerProfile(
   name: string,
-  selectedClass: 6 | 7 | 8 | 9 | 10
+  selectedClass: 6 | 7 | 8 | 9 | 10,
+  enrolledClass?: 6 | 7 | 8 | 9 | 10
 ): LearnerProfile {
   const profile: LearnerProfile = {
     version: CURRENT_PROFILE_VERSION,
     id: `learner_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
     name: name.trim() || "Student",
     selectedClass,
+    studyClass: selectedClass,
+    enrolledClass: enrolledClass || selectedClass,
     createdAt: new Date().toISOString(),
     lastActiveAt: new Date().toISOString(),
     topicProgress: {},
@@ -320,6 +337,40 @@ export function createLearnerProfile(
   };
   saveProfile(profile);
   return profile;
+}
+
+/**
+ * Updates the learner's display nickname across the application.
+ */
+export function updateLearnerNickname(
+  profile: LearnerProfile,
+  newName: string
+): LearnerProfile {
+  const cleanName = newName.trim() || profile.name || "Student";
+  const updated: LearnerProfile = {
+    ...profile,
+    name: cleanName,
+  };
+  saveProfile(updated);
+  return updated;
+}
+
+/**
+ * Safely switches the daily study class (6-10) without resetting or wiping any historical
+ * learning data, completed lessons, gap records, streak, or XP.
+ */
+export function updateLearnerStudyClass(
+  profile: LearnerProfile,
+  newStudyClass: 6 | 7 | 8 | 9 | 10
+): LearnerProfile {
+  const updated: LearnerProfile = {
+    ...profile,
+    studyClass: newStudyClass,
+    selectedClass: newStudyClass, // Drives curriculum queries
+    enrolledClass: profile.enrolledClass || profile.selectedClass, // Preserves official academic grade
+  };
+  saveProfile(updated);
+  return updated;
 }
 
 /**
@@ -450,6 +501,7 @@ export async function handleLoginSync(authenticatedUser: {
   username?: string | null;
   fullName?: string;
   selectedClass?: number | null;
+  enrolledClass?: { id: string; name: string; grade: number } | null;
 }): Promise<void> {
   setStorageMode("supabase");
 
@@ -469,8 +521,11 @@ export async function handleLoginSync(authenticatedUser: {
         if (authenticatedUser.fullName || authenticatedUser.username) {
           merged.name = authenticatedUser.fullName || authenticatedUser.username || "Student";
         }
+        const enrolledGrade = (authenticatedUser.enrolledClass?.grade || authenticatedUser.selectedClass || 10) as 6 | 7 | 8 | 9 | 10;
+        merged.enrolledClass = merged.enrolledClass || enrolledGrade;
+        merged.studyClass = merged.studyClass || merged.selectedClass || enrolledGrade;
         if (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass)) {
-          merged.selectedClass = authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10;
+          merged.selectedClass = (merged.studyClass || authenticatedUser.selectedClass) as 6 | 7 | 8 | 9 | 10;
         }
         saveProfile(merged);
         return;
@@ -481,24 +536,26 @@ export async function handleLoginSync(authenticatedUser: {
   }
 
   // Fallback to local profile adoption if network offline
+  const fallbackGrade = (authenticatedUser.enrolledClass?.grade || authenticatedUser.selectedClass || 10) as 6 | 7 | 8 | 9 | 10;
   if (existingLocal) {
     existingLocal.id = authenticatedUser.id;
     if (authenticatedUser.fullName || authenticatedUser.username) {
       existingLocal.name = authenticatedUser.fullName || authenticatedUser.username || "Student";
     }
+    existingLocal.enrolledClass = existingLocal.enrolledClass || fallbackGrade;
+    existingLocal.studyClass = existingLocal.studyClass || existingLocal.selectedClass || fallbackGrade;
     if (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass)) {
-      existingLocal.selectedClass = authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10;
+      existingLocal.selectedClass = (existingLocal.studyClass || authenticatedUser.selectedClass) as 6 | 7 | 8 | 9 | 10;
     }
     saveProfile(existingLocal);
   } else {
-    const grade = (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass))
-      ? (authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10)
-      : 10;
     const newProfile: LearnerProfile = {
       version: CURRENT_PROFILE_VERSION,
       id: authenticatedUser.id,
       name: authenticatedUser.fullName || authenticatedUser.username || "Student",
-      selectedClass: grade,
+      selectedClass: fallbackGrade,
+      studyClass: fallbackGrade,
+      enrolledClass: fallbackGrade,
       createdAt: new Date().toISOString(),
       lastActiveAt: new Date().toISOString(),
       topicProgress: {},
@@ -537,6 +594,7 @@ export async function syncCloudProgress(): Promise<LearnerProfile | null> {
  */
 export function handleLogout(): void {
   setStorageMode("guest");
+  clearActiveProfile();
 }
 
 /**
