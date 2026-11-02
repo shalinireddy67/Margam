@@ -16,6 +16,7 @@ import {
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { Navigation } from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
@@ -63,7 +64,7 @@ export default function StickersPage() {
   // 1. Loading Skeleton State
   if (loading) {
     return (
-      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] p-4 sm:p-6 pb-28 flex flex-col justify-between">
+      <div className="min-h-[100dvh]  text-[#2B1B0F] p-4 sm:p-6 pb-10 flex flex-col justify-between">
         <OfflineBanner />
         <Navigation currentTab="stickers" profile={profile} />
         <div className="max-w-2xl mx-auto w-full space-y-4 pt-4 flex-1" role="status" aria-label="Loading stickers">
@@ -77,7 +78,7 @@ export default function StickersPage() {
   // 2. Error State with Retry
   if (hasError) {
     return (
-      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
+      <div className="min-h-[100dvh]  text-[#2B1B0F] pb-10 flex flex-col justify-between">
         <OfflineBanner />
         <Navigation currentTab="stickers" profile={profile} />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center items-center text-center my-auto">
@@ -111,7 +112,7 @@ export default function StickersPage() {
   // 3. Locked State: If user has not onboarded
   if (!profile || !profile.selectedClass) {
     return (
-      <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] pb-28 flex flex-col justify-between">
+      <div className="min-h-[100dvh]  text-[#2B1B0F] pb-10 flex flex-col justify-between">
         <OfflineBanner />
         <Navigation currentTab="stickers" />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center items-center text-center my-auto">
@@ -203,7 +204,7 @@ export default function StickersPage() {
   const unlockedCount = stickers.filter((s) => s.unlocked).length;
 
   return (
-    <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
+    <div className="min-h-[100dvh]  text-[#2B1B0F] flex flex-col justify-between">
       <OfflineBanner />
 
       <Navigation
@@ -211,10 +212,10 @@ export default function StickersPage() {
         profile={profile}
       />
 
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8 pb-28 lg:pb-12">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8 pb-10 lg:pb-12">
         {/* Showcase Banner */}
-        <div className="p-6 sm:p-8 bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[5px_5px_0px_#1B120C] text-center space-y-4 max-w-2xl mx-auto">
-          <div className="w-16 h-16 bg-[#FFE9A8] border-[3px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center mx-auto text-[#2B1B0F]">
+        <div className="glass-panel p-6 sm:p-8 border border-white/70 shadow-sm text-center space-y-4 max-w-2xl mx-auto rounded-2xl">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 shadow-sm border border-white/80 flex items-center justify-center mx-auto text-white">
             <Award className="w-8 h-8" />
           </div>
 
@@ -225,7 +226,7 @@ export default function StickersPage() {
             Earn stickers and companion badges as you master sequential concepts and complete diagnostics.
           </p>
           <div className="pt-1">
-            <span className="inline-block px-3.5 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-[2px] border-[#422816] font-pixel text-xs shadow-[2px_2px_0px_#1B120C]">
+            <span className="inline-block px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 font-heading font-bold text-xs shadow-xs">
               {unlockedCount} of {stickers.length} Badges Unlocked
             </span>
           </div>
@@ -233,7 +234,7 @@ export default function StickersPage() {
 
         {/* 4. Empty State: If no badges unlocked beyond onboarding */}
         {unlockedCount <= 1 && completedCount === 0 && (
-          <div className="p-4 bg-[#FFF7E6] border-[2px] border-[#422816] text-center space-y-2 max-w-md mx-auto">
+          <div className="glass-panel p-4 border border-white/70 text-center space-y-2 max-w-md mx-auto rounded-xl">
             <p className="text-xs font-semibold text-[#5A3720]">
               Complete your first lesson practice to unlock additional mastery badges!
             </p>
@@ -261,7 +262,7 @@ export default function StickersPage() {
                 }`}
               >
                 <div
-                  className={`w-14 h-14 border-[2px] border-[#422816] flex items-center justify-center mx-auto shadow-[2px_2px_0px_#1B120C] ${
+                  className={`w-14 h-14 rounded-2xl border border-white/80 flex items-center justify-center mx-auto shadow-xs ${
                     st.unlocked ? colorClass : "bg-[#8B8B8B] text-[#FFF7E6]"
                   }`}
                 >

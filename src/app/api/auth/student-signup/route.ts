@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import crypto from "crypto";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
+import { createSupabaseRouteClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
 import {
   generateStudentEmail,
   generateRecoveryCode,
   hashRecoveryCode,
   mockDb,
 } from "@/lib/server/auth-helpers";
+import { signSessionPayload } from "@/lib/server/auth";
 
 const StudentSignUpSchema = z.object({
   username: z
@@ -44,21 +47,83 @@ export async function POST(req: NextRequest) {
     const recoveryCodeHash = hashRecoveryCode(recoveryCode);
     const studentName = (fullName && fullName.trim()) || username;
 
-    const admin = getSupabaseAdminClient();
+    const supabaseActive = isSupabaseConfigured();
 
-    let userId: string;
+    // Production safety guard: Never fall back to mockDb in production
+    if (process.env.NODE_ENV === "production" && !supabaseActive) {
+      return NextResponse.json(
+        { error: "Database configuration error: Supabase credentials are missing or unconfigured in production." },
+        { status: 503 }
+      );
+    }
 
-    if (admin) {
+    if (supabaseActive) {
+      const admin = getSupabaseAdminClient();
+      if (!admin) {
+        return NextResponse.json(
+          { error: "Database service unavailable" },
+          { status: 503 }
+        );
+      }
+
+      // Check if username already exists in profiles
+      const { data: existingUser } = await admin
+        .from("profiles")
+        .select("id")
+        .eq("username", username.toLowerCase())
+        .maybeSingle();
+
+      if (existingUser) {
+        return NextResponse.json(
+          { error: "Username is already taken. Please choose another." },
+          { status: 409 }
+        );
+      }
+
+      // Validate class code if supplied
+      let enrolledClassId: string | null = null;
+      let enrolledClassName: string | null = null;
+
+      if (classCode && classCode.trim()) {
+        const cleanCode = classCode.trim().toUpperCase();
+        const { data: classRow, error: classSearchErr } = await admin
+          .from("classes")
+          .select("id, grade, name")
+          .eq("class_code", cleanCode)
+          .maybeSingle();
+
+        if (classSearchErr || !classRow) {
+          return NextResponse.json(
+            { error: `Invalid class code "${cleanCode}". Please verify with your teacher.` },
+            { status: 400 }
+          );
+        }
+
+        if (classRow.grade !== selectedClass) {
+          return NextResponse.json(
+            {
+              error: `Class code "${cleanCode}" belongs to a Class ${classRow.grade} group, but you selected Class ${selectedClass}.`,
+            },
+            { status: 400 }
+          );
+        }
+
+        enrolledClassId = classRow.id;
+        enrolledClassName = classRow.name;
+      }
+
       // 1. Create auth user in Supabase
       const { data: authData, error: authError } = await admin.auth.admin.createUser({
         email: studentEmail,
         password,
         email_confirm: true,
-        user_metadata: {
+        app_metadata: {
           role: "student",
-          username,
+        },
+        user_metadata: {
+          role: "student", // Strictly hardcoded to student
+          username: username.toLowerCase(),
           full_name: studentName,
-          selected_class: selectedClass,
         },
       });
 
@@ -69,13 +134,13 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      userId = authData.user.id;
+      const userId = authData.user.id;
 
-      // 2. Insert into profiles table
+      // 2. Insert into public.profiles (role strictly 'student')
       const { error: profileError } = await admin.from("profiles").insert({
         id: userId,
         role: "student",
-        username,
+        username: username.toLowerCase(),
         full_name: studentName,
         selected_class: selectedClass,
         recovery_code_hash: recoveryCodeHash,
@@ -83,7 +148,7 @@ export async function POST(req: NextRequest) {
       });
 
       if (profileError) {
-        // Rollback created auth user
+        // Rollback created auth user immediately
         await admin.auth.admin.deleteUser(userId);
         return NextResponse.json(
           { error: profileError.message || "Failed to create profile" },
@@ -92,22 +157,50 @@ export async function POST(req: NextRequest) {
       }
 
       // 3. If classCode provided, enroll student
-      if (classCode && classCode.trim()) {
-        const { data: classRow } = await admin
-          .from("classes")
-          .select("id")
-          .eq("class_code", classCode.trim().toUpperCase())
-          .single();
+      if (enrolledClassId) {
+        const { error: enrollError } = await admin.from("class_members").insert({
+          class_id: enrolledClassId,
+          student_id: userId,
+        });
 
-        if (classRow) {
-          await admin.from("class_members").insert({
-            class_id: classRow.id,
-            student_id: userId,
-          });
+        if (enrollError) {
+          console.warn("[SignUp] Student profile created, but class enrollment failed:", enrollError.message);
         }
       }
+
+      // 4. Authenticate session via route client to set SSR auth cookies
+      const response = NextResponse.json({
+        success: true,
+        user: {
+          id: userId,
+          role: "student",
+          username: username.toLowerCase(),
+          fullName: studentName,
+          selectedClass,
+          enrolledClass: enrolledClassName,
+        },
+        recoveryCode, // Displayed once for student to save
+        notice: "Please write down your recovery code. Passwords cannot be reset by email as no email is collected.",
+      });
+
+      const routeClient = createSupabaseRouteClient(req, response);
+      if (routeClient) {
+        await routeClient.auth.signInWithPassword({
+          email: studentEmail,
+          password,
+        });
+      }
+
+      return response;
     } else {
-      // Offline / Test mock fallback
+      if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json(
+        { error: 'Database configuration error: Supabase credentials are missing or unconfigured in production.' },
+        { status: 503 }
+      );
+    }
+
+    // Mock / Dev fallback (Non-production only)
       const existing = Array.from(mockDb.profiles.values()).find(
         (p) => p.username?.toLowerCase() === username.toLowerCase()
       );
@@ -118,11 +211,40 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      userId = `std_${crypto.randomBytes(8).toString("hex")}`;
+      let enrolledClassId: string | null = null;
+      let enrolledClassName: string | null = null;
+
+      if (classCode && classCode.trim()) {
+        const cleanCode = classCode.trim().toUpperCase();
+        const matchingClass = Array.from(mockDb.classes.values()).find(
+          (c) => c.classCode.toUpperCase() === cleanCode
+        );
+
+        if (!matchingClass) {
+          return NextResponse.json(
+            { error: `Invalid class code "${cleanCode}". Please verify with your teacher.` },
+            { status: 400 }
+          );
+        }
+
+        if (matchingClass.grade !== selectedClass) {
+          return NextResponse.json(
+            {
+              error: `Class code belongs to Class ${matchingClass.grade}, but you selected Class ${selectedClass}.`,
+            },
+            { status: 400 }
+          );
+        }
+
+        enrolledClassId = matchingClass.id;
+        enrolledClassName = matchingClass.name;
+      }
+
+      const userId = `std_${crypto.randomBytes(8).toString("hex")}`;
       mockDb.profiles.set(userId, {
         id: userId,
         role: "student",
-        username,
+        username: username.toLowerCase(),
         email: studentEmail,
         passwordHash: crypto.createHash("sha256").update(password).digest("hex"),
         fullName: studentName,
@@ -134,50 +256,45 @@ export async function POST(req: NextRequest) {
         updated_at: new Date().toISOString(),
       });
 
-      if (classCode && classCode.trim()) {
-        const matchingClass = Array.from(mockDb.classes.values()).find(
-          (c) => c.classCode.toUpperCase() === classCode.trim().toUpperCase()
-        );
-        if (matchingClass) {
-          mockDb.classMembers.set(`${matchingClass.id}:${userId}`, {
-            id: `cm_${Date.now()}`,
-            classId: matchingClass.id,
-            studentId: userId,
-            joinedAt: new Date().toISOString(),
-          });
-        }
+      if (enrolledClassId) {
+        mockDb.classMembers.set(`${enrolledClassId}:${userId}`, {
+          id: `cm_${Date.now()}`,
+          classId: enrolledClassId,
+          studentId: userId,
+          joinedAt: new Date().toISOString(),
+        });
       }
-    }
 
-    // Set simple authenticated session cookie
-    const response = NextResponse.json({
-      success: true,
-      user: {
-        id: userId,
+      const signedToken = signSessionPayload({
+        userId,
         role: "student",
-        username,
-        fullName: studentName,
-        selectedClass,
-      },
-      recoveryCode, // SHOWN ONCE to student
-      notice:
-        "Please write down your recovery code. Passwords CANNOT be reset by email as no email address is collected.",
-    });
+        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      });
 
-    response.cookies.set("margam_session", JSON.stringify({
-      userId,
-      role: "student",
-      username,
-      selectedClass,
-    }), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-      sameSite: "lax",
-    });
+      const response = NextResponse.json({
+        success: true,
+        user: {
+          id: userId,
+          role: "student",
+          username: username.toLowerCase(),
+          fullName: studentName,
+          selectedClass,
+          enrolledClass: enrolledClassName,
+        },
+        recoveryCode,
+        notice: "Please write down your recovery code. Passwords cannot be reset by email as no email is collected.",
+      });
 
-    return response;
+      response.cookies.set("margam_auth_token", signedToken, {
+        httpOnly: true,
+        secure: false,
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
+
+      return response;
+    }
   } catch (err) {
     console.error("Student sign-up route error:", err);
     return NextResponse.json(

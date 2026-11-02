@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import crypto from "crypto";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
+import { createSupabaseRouteClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { checkLockout, recordFailedAttempt, resetLockout } from "@/lib/server/lockout";
 import { generateStudentEmail, mockDb } from "@/lib/server/auth-helpers";
+import { signSessionPayload } from "@/lib/server/auth";
 
 const LoginSchema = z.object({
   identifier: z.string().min(1, "Username or email is required"),
   password: z.string().min(1, "Password is required"),
+  expectedRole: z.enum(["student", "teacher"]).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -21,7 +25,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { identifier, password } = parsed.data;
+    const { identifier, password, expectedRole } = parsed.data;
     const clientIp =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       req.headers.get("x-real-ip") ||
@@ -40,26 +44,39 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Determine target email
+    // Determine target email:
+    // Teachers use standard email; Students use username converted to synthetic non-routable address
     const isEmail = identifier.includes("@");
     const targetEmail = isEmail ? identifier.trim().toLowerCase() : generateStudentEmail(identifier);
 
-    const admin = getSupabaseAdminClient();
-    let authenticatedUser: {
-      id: string;
-      role: "student" | "teacher";
-      username: string | null;
-      email: string;
-      fullName: string;
-      selectedClass: number | null;
-    } | null = null;
+    const supabaseActive = isSupabaseConfigured();
 
-    if (admin) {
-      // Authenticate with Supabase Auth
-      const { data: signInData, error: signInError } = await admin.auth.signInWithPassword({
-        email: targetEmail,
-        password,
-      });
+    // 2. Production Safety Guard: Never silently authenticate in mockDb in production
+    if (process.env.NODE_ENV === "production" && !supabaseActive) {
+      return NextResponse.json(
+        { error: "Database configuration error: Supabase credentials are missing or unconfigured in production." },
+        { status: 503 }
+      );
+    }
+
+    if (supabaseActive) {
+      const response = NextResponse.json({ success: true });
+      const routeClient = createSupabaseRouteClient(req, response);
+      const admin = getSupabaseAdminClient();
+
+      if (!routeClient || !admin) {
+        return NextResponse.json(
+          { error: "Authentication service unavailable" },
+          { status: 503 }
+        );
+      }
+
+      // Authenticate with Supabase Auth (sets HttpOnly SSR cookies on response)
+      const { data: signInData, error: signInError } =
+        await routeClient.auth.signInWithPassword({
+          email: targetEmail,
+          password,
+        });
 
       if (signInError || !signInData.user) {
         const failure = recordFailedAttempt(identifier, clientIp);
@@ -76,29 +93,68 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
           {
             error: "Invalid username/email or password.",
-            attemptsRemaining: 5 - failure.attempts,
+            attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
         );
       }
 
-      // Fetch user profile
-      const { data: profile } = await admin
+      // Fetch verified profile from database
+      const { data: profile, error: profileError } = await admin
         .from("profiles")
-        .select("*")
+        .select("role, username, full_name, selected_class, avatar_pixel")
         .eq("id", signInData.user.id)
         .single();
 
-      authenticatedUser = {
+      if (profileError || !profile) {
+        return NextResponse.json(
+          { error: "Account exists but profile could not be loaded." },
+          { status: 500 }
+        );
+      }
+
+      // Role check: If expectedRole is specified, enforce it
+      if (expectedRole && profile.role !== expectedRole) {
+        await routeClient.auth.signOut();
+        return NextResponse.json(
+          {
+            error: `Access denied: this account is registered as a ${profile.role}, but you are logging in through the ${expectedRole} portal.`,
+          },
+          { status: 403 }
+        );
+      }
+
+      // Clear failure lockout on success
+      resetLockout(identifier, clientIp);
+
+      const authenticatedUser = {
         id: signInData.user.id,
-        role: (profile?.role as "student" | "teacher") || "student",
-        username: profile?.username || null,
+        role: profile.role,
+        username: profile.username,
         email: targetEmail,
-        fullName: profile?.full_name || signInData.user.user_metadata?.full_name || "Student",
-        selectedClass: profile?.selected_class || null,
+        fullName: profile.full_name || "User",
+        selectedClass: profile.selected_class,
+        avatarPixel: profile.avatar_pixel,
       };
+
+      // Return user data in response body (cookies are already set on response by routeClient)
+      return NextResponse.json({
+        success: true,
+        user: authenticatedUser,
+        role: profile.role,
+        redirectUrl: profile.role === "teacher" ? "/teacher" : "/student",
+      }, {
+        headers: response.headers,
+      });
     } else {
-      // Mock / Offline verification
+      if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json(
+        { error: 'Database configuration error: Supabase credentials are missing or unconfigured in production.' },
+        { status: 503 }
+      );
+    }
+
+    // Offline / Test mock fallback (Non-production only)
       const profile = Array.from(mockDb.profiles.values()).find(
         (p) =>
           p.email.toLowerCase() === targetEmail.toLowerCase() ||
@@ -122,13 +178,24 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
           {
             error: "Invalid username/email or password.",
-            attemptsRemaining: 5 - failure.attempts,
+            attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
         );
       }
 
-      authenticatedUser = {
+      if (expectedRole && profile.role !== expectedRole) {
+        return NextResponse.json(
+          {
+            error: `Access denied: this account is a ${profile.role}, not a ${expectedRole}.`,
+          },
+          { status: 403 }
+        );
+      }
+
+      resetLockout(identifier, clientIp);
+
+      const authenticatedUser = {
         id: profile.id,
         role: profile.role,
         username: profile.username,
@@ -136,25 +203,31 @@ export async function POST(req: NextRequest) {
         fullName: profile.fullName,
         selectedClass: profile.selectedClass,
       };
+
+      // Sign the fallback session token with HMAC
+      const signedToken = signSessionPayload({
+        userId: profile.id,
+        role: profile.role,
+        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      });
+
+      const response = NextResponse.json({
+        success: true,
+        user: authenticatedUser,
+        role: profile.role,
+        redirectUrl: profile.role === "teacher" ? "/teacher" : "/student",
+      });
+
+      response.cookies.set("margam_auth_token", signedToken, {
+        httpOnly: true,
+        secure: false,
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
+
+      return response;
     }
-
-    // 2. Authentication successful: reset failure lockout
-    resetLockout(identifier, clientIp);
-
-    const response = NextResponse.json({
-      success: true,
-      user: authenticatedUser,
-    });
-
-    response.cookies.set("margam_session", JSON.stringify(authenticatedUser), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-      sameSite: "lax",
-    });
-
-    return response;
   } catch (err) {
     console.error("Login route error:", err);
     return NextResponse.json(

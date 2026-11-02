@@ -28,6 +28,7 @@ import {
   resolveLocalizedString,
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
+import Footer from "@/components/Footer";
 import {
   SkeletonCard,
   OfflineBanner,
@@ -159,7 +160,7 @@ export default function ChapterTestRunnerPage() {
   // 1. Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen  text-[#2B1B0F] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Generating chapter test">
           <SkeletonCard />
@@ -172,7 +173,7 @@ export default function ChapterTestRunnerPage() {
   // 2. Error State with Retry
   if (hasError) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between pb-16">
+      <div className="min-h-screen  text-[#2B1B0F] flex flex-col justify-between pb-16">
         <OfflineBanner />
         <StudentHeader
           profile={profile}
@@ -212,7 +213,7 @@ export default function ChapterTestRunnerPage() {
   // 3. Locked / Unavailable State
   if (!currentChapter || questions.length === 0) {
     return (
-      <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between pb-16">
+      <div className="min-h-screen  text-[#2B1B0F] flex flex-col justify-between pb-16">
         <OfflineBanner />
         <StudentHeader
           profile={profile}
@@ -308,7 +309,7 @@ export default function ChapterTestRunnerPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between pb-24">
+    <div className="min-h-[100dvh] text-slate-800 flex flex-col justify-between">
       <OfflineBanner />
 
       <StudentHeader
@@ -321,7 +322,7 @@ export default function ChapterTestRunnerPage() {
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6">
         {/* Header Card */}
-        <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-3">
+        <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/75 shadow-sm space-y-3 text-emerald-950">
           <div className="flex items-center gap-2 text-xs font-pixel text-[#5DAA3A]">
             <span>Chapter Mastery Test</span>
             <span>•</span>

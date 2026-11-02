@@ -1,32 +1,37 @@
 import { createBrowserClient } from "@supabase/ssr";
 import { SupabaseClient } from "@supabase/supabase-js";
+import {
+  isSupabaseConfigured,
+  getSupabaseAnonKey,
+  getSupabaseUrl,
+} from "@/lib/env";
+
+export { isSupabaseConfigured, getSupabaseAnonKey };
+
+if (typeof globalThis.WebSocket === "undefined") {
+  globalThis.WebSocket = class {} as any;
+}
 
 let browserClient: SupabaseClient | null = null;
 
 /**
- * Checks whether Supabase is configured with active, non-placeholder credentials.
- */
-export function isSupabaseConfigured(): boolean {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) return false;
-  if (url.includes("your-project") || key.includes("your-publishable-key")) return false;
-  return true;
-}
-
-/**
- * Returns a type-safe browser client instance for anonymous authentication and read operations.
- * Gracefully returns null if credentials are unconfigured or placeholder, ensuring zero build breaks.
+ * Returns a type-safe browser client instance for authentication and read operations.
+ * Gracefully returns null if credentials are unconfigured or placeholder.
  */
 export function getSupabaseBrowserClient(): SupabaseClient | null {
   if (!isSupabaseConfigured()) {
+    if (process.env.NODE_ENV === "production" && typeof window !== "undefined") {
+      console.error(
+        "[Margam Client] Supabase is not configured. Public credentials (NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY) are missing or placeholder."
+      );
+    }
     return null;
   }
 
   if (browserClient) return browserClient;
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
+  const url = getSupabaseUrl()!;
+  const key = getSupabaseAnonKey()!;
 
   browserClient = createBrowserClient(url, key);
   return browserClient;

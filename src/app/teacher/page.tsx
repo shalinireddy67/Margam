@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Compass,
   AlertTriangle,
@@ -25,6 +26,11 @@ import {
   TrendingUp,
   Eye,
   EyeOff,
+  Users,
+  Plus,
+  LogOut,
+  Copy,
+  Check,
 } from "lucide-react";
 import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
@@ -32,6 +38,7 @@ import { LearnerProfile } from "@/lib/types";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 
 export default function TeacherPage() {
+  const router = useRouter();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("stu-synth-01");
   const [filterAttention, setFilterAttention] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -40,10 +47,84 @@ export default function TeacherPage() {
   const [hiddenStudentIds, setHiddenStudentIds] = useState<Set<string>>(new Set(["stu-synth-07"]));
   const [localProfile, setLocalProfile] = useState<LearnerProfile | null>(null);
 
+  // Live enrolled classes state
+  const [viewMode, setViewMode] = useState<"synthetic" | "live">("synthetic");
+  const [teacherUser, setTeacherUser] = useState<any>(null);
+  const [liveClasses, setLiveClasses] = useState<any[]>([]);
+  const [liveMembers, setLiveMembers] = useState<any[]>([]);
+  const [loadingLive, setLoadingLive] = useState(false);
+  const [showAddClassModal, setShowAddClassModal] = useState(false);
+  const [newClassName, setNewClassName] = useState("");
+  const [newClassGrade, setNewClassGrade] = useState<number>(10);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [inspectingStudent, setInspectingStudent] = useState<any | null>(null);
+
+  const fetchTeacherData = async () => {
+    try {
+      setLoadingLive(true);
+      const meRes = await fetch("/api/auth/me");
+      const meData = await meRes.json();
+      if (meData.authenticated && meData.user?.role === "teacher") {
+        setTeacherUser(meData.user);
+      }
+
+      const classRes = await fetch("/api/teacher/classes");
+      if (classRes.ok) {
+        const classData = await classRes.json();
+        setLiveClasses(classData.classes || []);
+        setLiveMembers(classData.members || []);
+      }
+    } catch (err) {
+      console.warn("Error fetching teacher class data:", err);
+    } finally {
+      setLoadingLive(false);
+    }
+  };
+
   useEffect(() => {
     const profile = getActiveProfile();
     setLocalProfile(profile);
+    fetchTeacherData();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } finally {
+      router.push("/login?role=teacher");
+    }
+  };
+
+  const handleCreateClass = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newClassName.trim()) return;
+
+    try {
+      const res = await fetch("/api/teacher/classes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newClassName.trim(),
+          grade: Number(newClassGrade),
+        }),
+      });
+
+      if (res.ok) {
+        setShowAddClassModal(false);
+        setNewClassName("");
+        await fetchTeacherData();
+        setViewMode("live");
+      }
+    } catch (err) {
+      console.error("Failed to create class:", err);
+    }
+  };
+
+  const copyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000);
+  };
 
   const students = syntheticClassData.students;
   const heatmapConcepts = syntheticClassData.heatmapConcepts;
@@ -66,66 +147,484 @@ export default function TeacherPage() {
     students.find((s) => s.id === selectedStudentId) || students[0];
 
   return (
-    <div className="min-h-screen bg-[#2A1E17] text-[#FFF7E6] flex flex-col font-sans">
-      {/* Top Bar with Voxel Wood Style */}
-      <header className="sticky top-0 z-40 bg-[#5A3720] border-b-4 border-[#422816] shadow-[0px_4px_0px_rgba(0,0,0,0.4)] text-[#FFF7E6]">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-[#FFE9A8] border-2 border-[#422816] flex items-center justify-center font-heading font-black text-xl text-[#2B1B0F] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+    <div className="min-h-screen text-slate-800 flex flex-col font-sans">
+      {/* Floating Top Glass Header */}
+      <header className="sticky top-3 z-50 max-w-[1240px] mx-auto px-3 sm:px-6 w-full">
+        <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center font-heading font-black text-lg text-white shadow-xs border border-white/60">
               M
             </div>
             <div>
-              <span className="font-heading font-black text-lg tracking-tight block leading-tight text-[#FFE9A8]">
+              <span className="font-heading font-extrabold text-base sm:text-lg tracking-tight block leading-tight text-emerald-950">
                 Margam Teacher
               </span>
-              <span className="text-[10px] font-bold text-[#E5D7BE] block uppercase tracking-wider">
-                Classroom Diagnostics
+              <span className="text-[10px] font-bold text-emerald-800 block uppercase tracking-wider">
+                {teacherUser?.fullName ? `Welcome, ${teacherUser.fullName}` : "Classroom Diagnostics"}
               </span>
             </div>
           </Link>
 
           <div className="flex items-center gap-2">
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-[#422816] text-[#FFE9A8] border-2 border-[#7A4B2A] text-xs font-black shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Synthetic Class</span>
-            </span>
             <Link
               href="/student"
-              className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] text-xs font-black border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] transition-transform active:translate-y-0.5"
+              className="glass-btn-primary inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline"
             >
               <span>Student View</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Link>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center justify-center min-h-[38px] px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-heading font-bold border border-rose-200 rounded-xl shadow-xs transition-transform active:translate-y-0.5 cursor-pointer"
+              title="Sign Out"
+            >
+              <LogOut className="w-3.5 h-3.5 sm:mr-1" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </button>
           </div>
         </div>
       </header>
 
       {/* Main Container */}
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 space-y-6">
-        {/* Synthetic Notice Banner */}
-        <div className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
-          <div className="flex items-start gap-3">
-            <div className="w-9 h-9 bg-[#3FA7C9] border-2 border-[#1E6F8C] flex items-center justify-center shrink-0 mt-0.5 shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-              <Compass className="w-5 h-5 text-[#FFF7E6]" />
-            </div>
-            <div>
-              <div className="inline-block px-2.5 py-0.5 bg-[#422816] border border-[#FFE9A8] text-[11px] font-black uppercase tracking-wider text-[#FFE9A8] mb-1">
-                Synthetic class, generated by the Margam engine
-              </div>
-              <h1 className="text-xl sm:text-2xl font-heading font-black tracking-tight leading-tight text-[#FFF7E6]">
-                {syntheticClassData.className} — {syntheticClassData.chapterName}
-              </h1>
-              <p className="text-xs font-semibold text-[#E5D7BE] mt-0.5">
-                Teacher: {syntheticClassData.teacherName} • Chapter ID: {syntheticClassData.chapterId} • 25 Scripted Student Profiles
-              </p>
-            </div>
+
+        {/* View Mode Switcher: Synthetic Demo Class vs Enrolled Students */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 glass-panel p-3 border border-white/70 shadow-xs rounded-2xl">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setViewMode("synthetic")}
+              className={`px-3.5 py-2 font-heading font-bold text-xs border-2 border-[#422816] flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === "synthetic"
+                  ? "bg-emerald-600 text-white shadow-xs rounded-xl"
+                  : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
+              }`}
+            >
+              <Sparkles className="w-4 h-4 text-[#A06A3C]" />
+              <span>Synthetic Demo Class</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode("live")}
+              className={`px-3.5 py-2 font-heading font-bold text-xs border-2 border-[#422816] flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === "live"
+                  ? "bg-emerald-600 text-white shadow-xs rounded-xl"
+                  : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
+              }`}
+            >
+              <Users className="w-4 h-4 text-white" />
+              <span>My Enrolled Students ({liveMembers.length})</span>
+            </button>
           </div>
-          <div className="flex items-center gap-2 self-stretch sm:self-auto">
-            <span className="text-xs font-black px-3 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] text-center flex-1 sm:flex-none">
-              Engine Status: Active
-            </span>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowAddClassModal(true)}
+              className="glass-btn-primary px-3.5 py-1.5 text-xs font-heading font-bold flex items-center gap-1 transition-all cursor-pointer rounded-xl"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Create New Class</span>
+            </button>
           </div>
         </div>
+
+        {/* LIVE ENROLLED STUDENTS VIEW */}
+        {viewMode === "live" && (
+          <div className="space-y-6">
+            {/* Active Classes Cards */}
+            <div className="glass-panel p-6 rounded-2xl border border-white/70 shadow-sm space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="font-heading font-black text-lg text-[#FFF7E6]">
+                    Your Registered Classes
+                  </h2>
+                  <p className="text-xs text-[#E5D7BE]">
+                    Students use your unique Class Code to link their learning progress.
+                  </p>
+                </div>
+              </div>
+
+              {liveClasses.length === 0 ? (
+                <div className="p-6 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-3">
+                  <p className="text-xs font-bold text-[#FFE9A8]">
+                    No classes created yet.
+                  </p>
+                  <button
+                    onClick={() => setShowAddClassModal(true)}
+                    className="px-4 py-2 bg-[#5DAA3A] hover:bg-[#4E9330] text-white font-heading text-xs border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Create Your First Class</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {liveClasses.map((cls) => {
+                    const enrolledCount = liveMembers.filter(
+                      (m) => m.class_id === cls.id
+                    ).length;
+                    const code = cls.class_code || cls.classCode;
+                    return (
+                      <div
+                        key={cls.id}
+                        className="p-4 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] space-y-3"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <span className="font-heading font-black text-sm text-[#FFF7E6] block">
+                              {cls.name}
+                            </span>
+                            <span className="text-[10px] text-[#FFE9A8] font-bold block mt-0.5">
+                              Class {cls.grade} • {enrolledCount} Student(s)
+                            </span>
+                          </div>
+                          <span className="px-2 py-0.5 bg-[#5DAA3A] text-white text-[10px] font-bold border border-[#422816]">
+                            Active
+                          </span>
+                        </div>
+
+                        <div className="bg-[#2A1E17] p-2.5 border border-[#7A4B2A] flex items-center justify-between">
+                          <div>
+                            <span className="text-[9px] text-[#E5D7BE] uppercase tracking-wider block font-bold">
+                              Class Code
+                            </span>
+                            <code className="text-xs font-mono font-black text-[#FFE9A8] tracking-wider">
+                              {code}
+                            </code>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => copyCode(code)}
+                            className="px-2 py-1 bg-[#5A3720] hover:bg-[#7A4B2A] text-white text-[10px] font-heading font-bold border border-[#422816] flex items-center gap-1 cursor-pointer transition-colors"
+                          >
+                            {copiedCode === code ? (
+                              <>
+                                <Check className="w-3 h-3 text-[#5DAA3A]" />
+                                <span>Copied</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3 h-3 text-[#FFE9A8]" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Enrolled Students Table */}
+            <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4">
+              <h2 className="font-heading font-black text-lg text-[#FFF7E6]">
+                Enrolled Students
+              </h2>
+
+              {liveMembers.length === 0 ? (
+                <div className="p-6 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-2">
+                  <Users className="w-8 h-8 text-[#FFE9A8] mx-auto opacity-70" />
+                  <p className="text-xs font-bold text-[#FFE9A8]">
+                    No students have joined your classes yet.
+                  </p>
+                  <p className="text-[11px] text-[#E5D7BE] max-w-md mx-auto">
+                    Share your Class Code with your students. When they enter it during registration or in their profile settings, they will automatically appear here.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-[#7A4B2A] text-[#FFE9A8] font-heading">
+                        <th className="py-2.5 px-3">Student Name</th>
+                        <th className="py-2.5 px-3">Username</th>
+                        <th className="py-2.5 px-3">Grade</th>
+                        <th className="py-2.5 px-3">Diagnostic Result</th>
+                        <th className="py-2.5 px-3">Concept Mastery</th>
+                        <th className="py-2.5 px-3">Enrolled At</th>
+                        <th className="py-2.5 px-3 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {liveMembers.map((m, idx) => {
+                        const prof = m.profiles || {};
+                        const diagScore = m.latestDiagnosticScore;
+                        const diagPct = m.latestDiagnosticPercentage;
+                        const masteredCount = m.masteredCount || 0;
+                        const totalConcepts = m.totalConceptsAttempted || 0;
+
+                        return (
+                          <tr
+                            key={m.student_id || idx}
+                            className="border-b border-[#7A4B2A]/50 hover:bg-[#422816]/70 transition-colors"
+                          >
+                            <td className="py-2.5 px-3 font-bold text-[#FFF7E6]">
+                              {prof.full_name || "Student"}
+                            </td>
+                            <td className="py-2.5 px-3 text-[#E5D7BE] font-mono">
+                              @{prof.username || "anonymous"}
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <span className="px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-bold text-[#FFE9A8]">
+                                Class {prof.selected_class || "—"}
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3">
+                              {diagScore ? (
+                                <span className={`px-2 py-0.5 text-[10px] font-bold border border-[#422816] ${
+                                  (diagPct ?? 0) >= 70 ? "bg-[#5DAA3A] text-white" : "bg-[#F4C542] text-[#2B1B0F]"
+                                }`}>
+                                  {diagScore} ({diagPct}%)
+                                </span>
+                              ) : (
+                                <span className="text-[11px] text-[#E5D7BE]/60 italic">
+                                  Pending
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-2.5 px-3">
+                              <span className="px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-bold text-[#6EB5FF]">
+                                {masteredCount} Mastered ({totalConcepts} Attempted)
+                              </span>
+                            </td>
+                            <td className="py-2.5 px-3 text-[#E5D7BE]">
+                              {m.joined_at
+                                ? new Date(m.joined_at).toLocaleDateString()
+                                : "Recent"}
+                            </td>
+                            <td className="py-2.5 px-3 text-right">
+                              <button
+                                type="button"
+                                onClick={() => setInspectingStudent(m)}
+                                className="px-2.5 py-1 bg-[#3FA7C9] hover:bg-[#348EA8] text-[#FFF7E6] text-[10px] font-heading font-bold border border-[#422816] shadow-[1px_1px_0px_rgba(0,0,0,0.3)] cursor-pointer transition-colors"
+                              >
+                                View Mastery
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+        {/* Modal: Inspect Student Mastery & Diagnostic History */}
+        {inspectingStudent && (
+          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+            <div className="bg-[#5A3720] border-4 border-[#422816] shadow-[8px_8px_0px_rgba(0,0,0,0.6)] p-6 max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto text-[#FFF7E6]">
+              <div className="flex items-start justify-between border-b-2 border-[#7A4B2A] pb-3">
+                <div>
+                  <h3 className="font-heading font-black text-base text-[#FFF7E6]">
+                    {inspectingStudent.profiles?.full_name || "Student"} • Mastery & Diagnostics
+                  </h3>
+                  <span className="text-xs text-[#FFE9A8] font-mono">
+                    @{inspectingStudent.profiles?.username} • Class {inspectingStudent.profiles?.selected_class}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setInspectingStudent(null)}
+                  className="px-2.5 py-1 bg-[#D9453D] hover:bg-[#B83830] text-[#FFF7E6] text-xs font-bold border border-[#422816] cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+
+              {/* Diagnostic & Assessment Results */}
+              <div className="space-y-2">
+                <h4 className="font-heading font-bold text-xs text-[#FFE9A8] uppercase tracking-wider">
+                  Diagnostic & Assessment History
+                </h4>
+                {(!inspectingStudent.attempts || inspectingStudent.attempts.length === 0) ? (
+                  <p className="text-xs text-[#E5D7BE]/70 italic bg-[#422816] p-3 border border-[#7A4B2A]">
+                    No assessment attempts recorded yet for this student.
+                  </p>
+                ) : (
+                  <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                    {inspectingStudent.attempts.map((att: any, idx: number) => {
+                      const pct = Math.round((Number(att.score) / Number(att.total)) * 100);
+                      const passed = pct >= 70;
+                      return (
+                        <div
+                          key={att.id || idx}
+                          className="flex items-center justify-between p-2 bg-[#422816] border border-[#7A4B2A] text-xs"
+                        >
+                          <div>
+                            <span className="font-bold text-[#FFF7E6] capitalize">
+                              {att.type} • {att.identifier}
+                            </span>
+                            <span className="block text-[10px] text-[#E5D7BE]/70">
+                              {att.created_at ? new Date(att.created_at).toLocaleString() : "Recent"}
+                            </span>
+                          </div>
+                          <span
+                            className={`px-2 py-0.5 text-[10px] font-bold border border-[#422816] ${
+                              passed ? "bg-[#5DAA3A] text-white" : "bg-[#F4C542] text-[#2B1B0F]"
+                            }`}
+                          >
+                            {att.score}/{att.total} ({pct}%)
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Concept Mastery Breakdown */}
+              <div className="space-y-2">
+                <h4 className="font-heading font-bold text-xs text-[#FFE9A8] uppercase tracking-wider">
+                  Concept Mastery Breakdown
+                </h4>
+                {(!inspectingStudent.conceptMastery || inspectingStudent.conceptMastery.length === 0) ? (
+                  <p className="text-xs text-[#E5D7BE]/70 italic bg-[#422816] p-3 border border-[#7A4B2A]">
+                    No concept progression recorded yet for this student.
+                  </p>
+                ) : (
+                  <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                    {inspectingStudent.conceptMastery.map((cm: any, idx: number) => {
+                      const masteryVal = Number(cm.mastery) || 0;
+                      const isMastered = masteryVal >= 75 || cm.status === "mastered";
+                      return (
+                        <div
+                          key={cm.concept_id || cm.conceptId || idx}
+                          className="p-2 bg-[#422816] border border-[#7A4B2A] text-xs space-y-1"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-mono text-[#FFF7E6] font-bold">
+                              {cm.concept_id || cm.conceptId}
+                            </span>
+                            <span
+                              className={`px-2 py-0.5 text-[9px] font-bold border border-[#422816] ${
+                                isMastered ? "bg-[#5DAA3A] text-white" : "bg-[#3FA7C9] text-white"
+                              }`}
+                            >
+                              {masteryVal}% {isMastered ? "Mastered" : "In Progress"}
+                            </span>
+                          </div>
+                          <div className="w-full bg-[#2A1E17] h-1.5 border border-[#7A4B2A] overflow-hidden">
+                            <div
+                              className={`h-full ${isMastered ? "bg-[#5DAA3A]" : "bg-[#3FA7C9]"}`}
+                              style={{ width: `${Math.min(100, masteryVal)}%` }}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-[10px] text-[#E5D7BE]/80 pt-0.5">
+                            <span>Difficulty: L{cm.difficulty || 1}</span>
+                            {cm.lesson_completed && (
+                              <span className="text-[#5DAA3A] font-bold">• Lesson Done</span>
+                            )}
+                            {cm.worksheet_completed && (
+                              <span className="text-[#FFE9A8] font-bold">• Worksheet Done</span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Modal: Create New Class */}
+        {showAddClassModal && (
+          <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+            <div className="bg-[#5A3720] border-4 border-[#422816] shadow-[8px_8px_0px_rgba(0,0,0,0.6)] p-6 max-w-sm w-full space-y-4">
+              <h3 className="font-heading font-black text-base text-[#FFF7E6]">
+                Create a New Class
+              </h3>
+              <form onSubmit={handleCreateClass} className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#FFE9A8] block">
+                    Class Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={newClassName}
+                    onChange={(e) => setNewClassName(e.target.value)}
+                    placeholder="e.g. Class 9-B Mathematics"
+                    className="w-full px-3 py-2 bg-[#FFF7E6] border-2 border-[#422816] text-xs text-[#2B1B0F] font-bold focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#FFE9A8] block">
+                    Grade Realm
+                  </label>
+                  <div className="grid grid-cols-5 gap-1">
+                    {[6, 7, 8, 9, 10].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setNewClassGrade(g)}
+                        className={`py-1.5 text-xs font-heading font-bold border-2 border-[#422816] cursor-pointer ${
+                          newClassGrade === g
+                            ? "bg-[#FFE9A8] text-[#2B1B0F]"
+                            : "bg-[#422816] text-[#FFF7E6]"
+                        }`}
+                      >
+                        C{g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddClassModal(false)}
+                    className="px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-bold text-[#FFF7E6] border-2 border-[#422816] cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-1.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-xs font-bold text-white border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] cursor-pointer"
+                  >
+                    Create Class
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* SYNTHETIC DEMO CLASS BANNER & SECTIONS */}
+        {viewMode === "synthetic" && (
+          <>
+            {/* Synthetic Notice Banner */}
+            <div className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 bg-[#3FA7C9] border-2 border-[#1E6F8C] flex items-center justify-center shrink-0 mt-0.5 shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                  <Compass className="w-5 h-5 text-[#FFF7E6]" />
+                </div>
+                <div>
+                  <div className="inline-block px-2.5 py-0.5 bg-[#422816] border border-[#FFE9A8] text-[11px] font-black uppercase tracking-wider text-[#FFE9A8] mb-1">
+                    Synthetic class, generated by the Margam engine
+                  </div>
+                  <h1 className="text-xl sm:text-2xl font-heading font-black tracking-tight leading-tight text-[#FFF7E6]">
+                    {syntheticClassData.className} — {syntheticClassData.chapterName}
+                  </h1>
+                  <p className="text-xs font-semibold text-[#E5D7BE] mt-0.5">
+                    Teacher: {syntheticClassData.teacherName} • Chapter ID: {syntheticClassData.chapterId} • 25 Scripted Student Profiles
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 self-stretch sm:self-auto">
+                <span className="text-xs font-black px-3 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] text-center flex-1 sm:flex-none">
+                  Engine Status: Active
+                </span>
+              </div>
+            </div>
 
         {/* This Device: Current Student Session Card */}
         <section className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)]">
@@ -1071,6 +1570,8 @@ export default function TeacherPage() {
               </div>
             </div>
           </div>
+        )}
+        </>
         )}
       </main>
 

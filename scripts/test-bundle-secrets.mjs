@@ -1,9 +1,10 @@
 /**
  * Production Bundle Security Test
  * 
- * Verifies that answer keys and mistake tags NEVER reach the browser.
- * Greps all production HTML files and client JS bundles (.next/static)
- * to ensure that neither 'correctAnswer' nor 'mistakeTag' strings exist.
+ * Verifies that:
+ * 1. Answer keys and mistake tags NEVER reach student-facing browser bundles.
+ * 2. Privileged server secrets (SUPABASE_SERVICE_ROLE_KEY, SUPABASE_SECRET_KEY,
+ *    SUPABASE_SERVICE_KEY, SESSION_SECRET) NEVER appear in ANY client JavaScript bundle.
  */
 
 import fs from "fs";
@@ -37,33 +38,37 @@ function walkDir(dir) {
   return files;
 }
 
-// 1. Gather all student-facing and shared client JS files in .next/static
-const clientJsFiles = walkDir(staticDir).filter((f) => f.endsWith(".js") && !f.includes("teacher"));
+// 1. Gather all client JavaScript files in .next/static (all chunks, runtime, pages, app)
+const allClientJsFiles = walkDir(staticDir).filter((f) => f.endsWith(".js"));
 
-// 2. Gather all student-facing prerendered HTML documents in .next
+// Student-facing subset
+const studentClientJsFiles = allClientJsFiles.filter((f) => !f.includes("teacher"));
+
+// 2. Gather student-facing prerendered HTML documents in .next
 const htmlFiles = walkDir(nextDir).filter((f) => f.endsWith(".html") && !f.includes("teacher"));
 
 console.log(`Auditing:`);
-console.log(`  - ${clientJsFiles.length} client JavaScript chunks in .next/static (excluding role-gated teacher portal)`);
+console.log(`  - ${allClientJsFiles.length} total client JavaScript chunks across .next/static`);
+console.log(`  - ${studentClientJsFiles.length} student-facing client JavaScript chunks`);
 console.log(`  - ${htmlFiles.length} prerendered HTML documents in .next\n`);
 
-const FORBIDDEN_STRINGS = ["correctAnswer", "mistakeTag"];
 let violations = [];
 
-for (const filePath of [...clientJsFiles, ...htmlFiles]) {
+// AUDIT 1: Pedagogy Secrets in Student Bundles
+const FORBIDDEN_PEDAGOGY = ["correctAnswer", "mistakeTag"];
+for (const filePath of [...studentClientJsFiles, ...htmlFiles]) {
   const content = fs.readFileSync(filePath, "utf-8");
   const relPath = path.relative(rootDir, filePath);
 
-  for (const forbidden of FORBIDDEN_STRINGS) {
-    // Exact word boundary check to avoid false positives on 'mistakeTagHistory'
+  for (const forbidden of FORBIDDEN_PEDAGOGY) {
     const regex = new RegExp(`(?<![a-zA-Z0-9_])${forbidden}(?![a-zA-Z0-9_])`);
     const match = regex.exec(content);
     if (match) {
-      // Find approximate context
       const idx = match.index;
       const start = Math.max(0, idx - 40);
       const snippet = content.substring(start, idx + forbidden.length + 40).replace(/\s+/g, " ");
       violations.push({
+        type: "PEDAGOGY LEAK",
         file: relPath,
         forbidden,
         snippet,
@@ -72,17 +77,47 @@ for (const filePath of [...clientJsFiles, ...htmlFiles]) {
   }
 }
 
+// AUDIT 2: Server Secrets in ALL Client JavaScript Bundles
+const FORBIDDEN_SERVER_SECRETS = [
+  "SUPABASE_SERVICE_ROLE_KEY",
+  "SUPABASE_SECRET_KEY",
+  "SUPABASE_SERVICE_KEY",
+  "SESSION_SECRET",
+];
+
+for (const filePath of allClientJsFiles) {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const relPath = path.relative(rootDir, filePath);
+
+  for (const secretKey of FORBIDDEN_SERVER_SECRETS) {
+    const regex = new RegExp(`(?<![a-zA-Z0-9_])${secretKey}(?![a-zA-Z0-9_])`);
+    const match = regex.exec(content);
+    if (match) {
+      const idx = match.index;
+      const start = Math.max(0, idx - 40);
+      const snippet = content.substring(start, idx + secretKey.length + 40).replace(/\s+/g, " ");
+      violations.push({
+        type: "SERVER SECRET LEAK",
+        file: relPath,
+        forbidden: secretKey,
+        snippet,
+      });
+    }
+  }
+}
+
 if (violations.length > 0) {
-  console.error("❌ FAILED: Production bundles leak answer keys or diagnostic mistake tags!\n");
+  console.error("❌ FAILED: Production bundle security violations detected!\n");
   for (const v of violations) {
-    console.error(`  [LEAK] Found '${v.forbidden}' in ${v.file}`);
+    console.error(`  [${v.type}] Found '${v.forbidden}' in ${v.file}`);
     console.error(`         Context: "...${v.snippet}..."\n`);
   }
   console.error(`Total violations: ${violations.length}`);
   process.exit(1);
 }
 
-console.log("✅ [PASS] Zero occurrences of 'correctAnswer' and 'mistakeTag' in production bundles!");
-console.log("   - Answer keys stripped: verified");
-console.log("   - Distractor mistake tags stripped: verified");
-console.log("   - Client bundle security audit: CLEAN\n");
+console.log("✅ [PASS] Production bundle security verification complete!");
+console.log("   - Pedagogy answer keys stripped from student bundles: verified");
+console.log("   - Cognitive distractor mistake tags stripped: verified");
+console.log("   - Zero server-only secret keys in ALL client JavaScript chunks: verified");
+console.log("   - Client bundle security audit: 100% CLEAN\n");

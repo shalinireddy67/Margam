@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { Sparkles, BookOpen, Compass, Lock } from "lucide-react";
 
 export type ChapterTileState = "available" | "in_progress" | "coming_soon";
 export type LessonTileState = "available" | "in_progress" | "locked";
@@ -59,45 +60,31 @@ export function Tile({
         aria-label={`${title} - Coming Soon (Locked)`}
         aria-disabled="true"
         className={`
-          flex flex-col justify-between select-none
-          border-4 border-dashed border-[#A06A3C]/70 rounded-[2px]
-          bg-[#5A3720]/60 p-4 sm:p-5 text-[#D9D9D9]
-          shadow-[inset_2px_2px_0px_rgba(0,0,0,0.3),4px_4px_0px_rgba(0,0,0,0.35)]
-          cursor-not-allowed group relative
+          glass-card p-5 rounded-2xl flex flex-col justify-between select-none
+          border border-dashed border-slate-300/80 bg-white/50 text-slate-500
+          shadow-xs cursor-not-allowed group relative
           ${className}
         `.trim()}
       >
         <div>
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#422816] text-[#FFE9A8] border border-[#5E5E5E] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
-              <svg
-                viewBox="0 0 16 16"
-                className="w-3.5 h-3.5 text-[#FFE9A8]"
-                role="img"
-                aria-hidden="true"
-                shapeRendering="crispEdges"
-              >
-                <rect x="5" y="2" width="6" height="2" fill="#D9D9D9" />
-                <rect x="4" y="3" width="2" height="4" fill="#D9D9D9" />
-                <rect x="10" y="3" width="2" height="4" fill="#D9D9D9" />
-                <rect x="3" y="7" width="10" height="7" fill="#7A4B2A" stroke="#422816" strokeWidth="2" />
-                <rect x="7" y="9" width="2" height="2" fill="#FFE9A8" />
-              </svg>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-heading font-bold">
+              <Lock className="w-3 h-3 text-slate-500" />
               <span>COMING SOON</span>
             </span>
           </div>
-          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D9D9D9] leading-tight">
+          <h3 className="font-heading font-extrabold text-sm sm:text-base text-slate-700 leading-tight">
             {title}
           </h3>
           {subtitle && (
-            <p className="text-xs font-bold text-[#D9D9D9]/70 mt-1">
+            <p className="text-xs font-semibold text-slate-500 mt-1">
               {subtitle}
             </p>
           )}
         </div>
-        <div className="mt-4 pt-2 border-t border-[#A06A3C]/40 flex items-center justify-between text-[11px] font-heading text-[#D9D9D9]/70">
+        <div className="mt-4 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-heading text-slate-400">
           <span>Under Construction</span>
-          <span className="text-[10px] text-[#FFE9A8]/80 group-hover:text-[#FFE9A8] transition-colors">
+          <span className="text-[10px] text-slate-400">
             Questions in Forge
           </span>
         </div>
@@ -110,106 +97,97 @@ export function Tile({
     return (
       <div
         className={`
-          flex flex-col justify-between
-          border-4 border-[#3F3F3F] rounded-[2px]
-          bg-[#5E5E5E] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.2),4px_4px_0px_rgba(0,0,0,0.35)]
-          p-4 sm:p-5 text-[#D9D9D9]
+          glass-card p-5 rounded-2xl flex flex-col justify-between select-none
+          border border-slate-200 bg-white/50 text-slate-500 shadow-xs
           ${className}
         `.trim()}
       >
         <div>
           <div className="flex items-center justify-between mb-2">
-            <svg
-              viewBox="0 0 16 16"
-              className="w-5 h-5 text-[#FFE9A8]"
-              role="img"
-              aria-label="Locked"
-              shapeRendering="crispEdges"
-            >
-              <rect x="5" y="2" width="6" height="2" fill="#D9D9D9" />
-              <rect x="4" y="3" width="2" height="4" fill="#D9D9D9" />
-              <rect x="10" y="3" width="2" height="4" fill="#D9D9D9" />
-              <rect x="3" y="7" width="10" height="7" fill="#7A4B2A" stroke="#422816" strokeWidth="2" />
-              <rect x="7" y="9" width="2" height="2" fill="#FFE9A8" />
-            </svg>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-heading font-bold">
+              <Lock className="w-3 h-3 text-slate-500" />
+              <span>LOCKED</span>
+            </span>
           </div>
-          <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#D9D9D9] leading-tight">
+          <h3 className="font-heading font-extrabold text-sm sm:text-base text-slate-700 leading-tight">
             {title}
           </h3>
           {subtitle && (
-            <p className="text-xs font-bold text-[#D9D9D9]/70 mt-1">
+            <p className="text-xs font-semibold text-slate-500 mt-1">
               {subtitle}
             </p>
           )}
         </div>
-        <p className="text-xs font-bold text-[#D9D9D9]/70 mt-4 font-heading">
-          LOCKED
+        <p className="text-xs font-bold text-slate-400 mt-4 font-heading">
+          PREREQUISITES REQUIRED
         </p>
       </div>
     );
   }
 
   // In-progress or available state
-  const isDashed = state === "in_progress";
+  const isInProgress = state === "in_progress";
 
   return (
     <div
       className={`
-        flex flex-col justify-between
-        border-4 ${isDashed ? "border-[#F4C542] border-t-[8px] border-t-[#5DAA3A]" : "border-[#422816] border-t-[6px] border-t-[#5DAA3A]"} rounded-[2px]
-        bg-[#7A4B2A] text-[#FFF7E6]
-        shadow-[inset_2px_2px_0px_rgba(255,255,255,0.25),inset_-2px_-2px_0px_rgba(0,0,0,0.4),4px_4px_0px_rgba(0,0,0,0.35)]
-        hover:border-[#FFE9A8] transition-all
-        p-4 sm:p-5
+        glass-card glass-card-hover p-5 sm:p-6 rounded-2xl flex flex-col justify-between
+        border border-white/70 shadow-[0_8px_24px_rgba(16,42,18,0.06)] relative overflow-hidden
+        ${isInProgress ? "border-t-4 border-t-amber-500" : "border-t-4 border-t-emerald-500"}
         ${className}
       `.trim()}
     >
       <div>
-        <div className="flex items-center justify-between gap-2 mb-2">
-          {state === "in_progress" ? (
-            <span className="inline-flex items-center px-2 py-0.5 bg-[#5DAA3A] text-[#FFF7E6] border border-[#2F6B22] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
-              IN PROGRESS
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          {isInProgress ? (
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-heading font-bold shadow-xs">
+              <Sparkles className="w-3 h-3 text-amber-600" />
+              <span>IN PROGRESS</span>
             </span>
           ) : (
-            <span className="inline-flex items-center px-2 py-0.5 bg-[#5A3720] text-[#FFE9A8] border border-[#422816] text-[9px] font-heading font-bold shadow-[1px_1px_0px_#2B1B0F]">
-              READY
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-heading font-bold shadow-xs">
+              <BookOpen className="w-3 h-3 text-emerald-600" />
+              <span>READY</span>
             </span>
           )}
         </div>
+
         {icon && <div className="mb-3 h-12 w-full flex items-center justify-center">{icon}</div>}
-        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] leading-tight">
+
+        <h3 className="font-heading font-extrabold text-sm sm:text-base text-emerald-950 leading-snug">
           {title}
         </h3>
         {subtitle && (
-          <p className="text-xs font-bold text-[#FFF7E6]/80 mt-1">
+          <p className="text-xs font-medium text-emerald-900/75 mt-1.5 leading-relaxed">
             {subtitle}
           </p>
         )}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-5 pt-3 border-t border-emerald-950/10 flex flex-wrap gap-2">
         {diagnosticHref && (
           <Link
             href={diagnosticHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-2 border-[#204514] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="glass-btn-primary inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline transition-all"
           >
-            Diagnose
+            <Compass className="w-3.5 h-3.5 mr-1.5" />
+            <span>Diagnose</span>
           </Link>
         )}
         {practiceHref && (
           <Link
             href={practiceHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#FFE9A8] to-[#F4C542] text-[#2B1B0F] border-2 border-[#7A4B2A] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.6),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="glass-btn-accent inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline transition-all"
           >
-            Practice
+            <span>Practice</span>
           </Link>
         )}
         {lessonHref && (
           <Link
             href={lessonHref}
-            className="inline-flex items-center justify-center min-h-[44px] px-3.5 py-1.5 bg-gradient-to-b from-[#6EB5FF] to-[#3FA7C9] text-[#FFF7E6] border-2 border-[#1E6F8C] rounded-[2px] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.35)] active:translate-x-[1px] active:translate-y-[1px] no-underline select-none transition-colors"
+            className="glass-btn-secondary inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline transition-all"
           >
-            Learn
+            <span>Learn</span>
           </Link>
         )}
       </div>

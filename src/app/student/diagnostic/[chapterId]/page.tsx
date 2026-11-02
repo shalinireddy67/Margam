@@ -35,6 +35,7 @@ import {
   resolveLocalizedString,
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
+import Footer from "@/components/Footer";
 import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
@@ -496,7 +497,7 @@ export default function ChapterDiagnosticPage() {
   const foundGapsCount = result?.conceptBreakdown?.filter((c) => c.status === "foundational_gap").length || 0;
 
   return (
-    <div className="min-h-screen bg-[#2A1E17] flex flex-col justify-between text-[#FFF7E6] pb-24">
+    <div className="min-h-screen text-slate-800 flex flex-col justify-between">
       <OfflineBanner />
       <StudentHeader
         profile={profile}
@@ -528,7 +529,7 @@ export default function ChapterDiagnosticPage() {
           {/* Main Question Column: Focused max 720px width, centered on desktop */}
           <div className="lg:col-span-8 max-w-[720px] mx-auto w-full space-y-6">
             {/* Assessment Header Card */}
-            <div className="bg-[#5A3720] p-6 sm:p-8 border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
+            <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/75 shadow-sm space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#FFE9A8]">
                   <span>Chapter Diagnostic</span>
@@ -540,11 +541,11 @@ export default function ChapterDiagnosticPage() {
                 </span>
               </div>
 
-              <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#FFF7E6] tracking-wide drop-shadow-[2px_2px_0px_#422816]">
+              <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950 tracking-wide">
                 {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
               </h1>
 
-              <p className="text-xs sm:text-sm text-[#E5D7BE] bg-[#422816] p-3.5 border-2 border-[#7A4B2A] leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-emerald-900/80 bg-white/70 p-3.5 rounded-xl border border-white/80 leading-relaxed font-medium">
                 Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
               </p>
 

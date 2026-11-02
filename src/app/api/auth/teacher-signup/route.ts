@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import crypto from "crypto";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
+import { createSupabaseRouteClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { generateClassCode, mockDb } from "@/lib/server/auth-helpers";
+import { signSessionPayload } from "@/lib/server/auth";
 
 const TeacherSignUpSchema = z.object({
   email: z.string().email("Valid email address is required"),
@@ -16,8 +19,9 @@ const TeacherSignUpSchema = z.object({
     z.literal(9),
     z.literal(10),
   ]),
+  schoolName: z.string().optional(),
   consentConfirmed: z.boolean().refine((val) => val === true, {
-    message: "You must confirm school or guardian consent to proceed",
+    message: "You must confirm school or institutional consent to proceed",
   }),
 });
 
@@ -32,22 +36,40 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { email, password, fullName, className, grade, consentConfirmed } = parsed.data;
+    const { email, password, fullName, className, grade, schoolName, consentConfirmed } =
+      parsed.data;
     const classCode = generateClassCode(grade);
 
-    const admin = getSupabaseAdminClient();
-    let teacherId: string;
-    let createdClassId: string;
+    const supabaseActive = isSupabaseConfigured();
 
-    if (admin) {
+    if (process.env.NODE_ENV === "production" && !supabaseActive) {
+      return NextResponse.json(
+        { error: "Database configuration error: Supabase credentials are missing or unconfigured in production." },
+        { status: 503 }
+      );
+    }
+
+    if (supabaseActive) {
+      const admin = getSupabaseAdminClient();
+      if (!admin) {
+        return NextResponse.json(
+          { error: "Database service unavailable" },
+          { status: 503 }
+        );
+      }
+
       // 1. Create teacher auth user in Supabase
       const { data: authData, error: authError } = await admin.auth.admin.createUser({
-        email,
+        email: email.trim().toLowerCase(),
         password,
         email_confirm: true,
-        user_metadata: {
+        app_metadata: {
           role: "teacher",
-          full_name: fullName,
+        },
+        user_metadata: {
+          role: "teacher", // Strictly assigned on server
+          full_name: fullName.trim(),
+          school_name: schoolName?.trim() || null,
         },
       });
 
@@ -58,19 +80,20 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      teacherId = authData.user.id;
+      const teacherId = authData.user.id;
 
       // 2. Insert into profiles table
       const { error: profileError } = await admin.from("profiles").insert({
         id: teacherId,
         role: "teacher",
         username: null,
-        full_name: fullName,
+        full_name: fullName.trim(),
         selected_class: grade,
         consent_confirmed: consentConfirmed,
       });
 
       if (profileError) {
+        // Rollback auth user
         await admin.auth.admin.deleteUser(teacherId);
         return NextResponse.json(
           { error: profileError.message || "Failed to create teacher profile" },
@@ -78,12 +101,12 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // 3. Create teacher's class
+      // 3. Create teacher's first class
       const { data: classRow, error: classError } = await admin
         .from("classes")
         .insert({
           teacher_id: teacherId,
-          name: className,
+          name: className.trim(),
           grade,
           class_code: classCode,
         })
@@ -91,14 +114,49 @@ export async function POST(req: NextRequest) {
         .single();
 
       if (classError || !classRow) {
+        // Rollback profile and auth user
+        await admin.from("profiles").delete().eq("id", teacherId);
+        await admin.auth.admin.deleteUser(teacherId);
         return NextResponse.json(
           { error: "Account created but failed to initialize class." },
           { status: 500 }
         );
       }
-      createdClassId = classRow.id;
+
+      // 4. Authenticate session via route client
+      const response = NextResponse.json({
+        success: true,
+        user: {
+          id: teacherId,
+          role: "teacher",
+          email: email.trim().toLowerCase(),
+          fullName: fullName.trim(),
+          classCode,
+          className: className.trim(),
+          grade,
+        },
+        classCode, // RETURN UNIQUE CLASS CODE TO TEACHER
+        redirectUrl: "/teacher",
+      });
+
+      const routeClient = createSupabaseRouteClient(req, response);
+      if (routeClient) {
+        await routeClient.auth.signInWithPassword({
+          email: email.trim().toLowerCase(),
+          password,
+        });
+      }
+
+      return response;
     } else {
-      // Offline / Test mock fallback
+      if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json(
+        { error: 'Database configuration error: Supabase credentials are missing or unconfigured in production.' },
+        { status: 503 }
+      );
+    }
+
+    // Offline / Test mock fallback (Non-production only)
       const existing = Array.from(mockDb.profiles.values()).find(
         (p) => p.email.toLowerCase() === email.toLowerCase()
       );
@@ -109,19 +167,20 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      teacherId = `tch_${crypto.randomBytes(8).toString("hex")}`;
-      createdClassId = `cls_${crypto.randomBytes(8).toString("hex")}`;
+      const teacherId = `tch_${crypto.randomBytes(8).toString("hex")}`;
+      const createdClassId = `cls_${crypto.randomBytes(8).toString("hex")}`;
 
       mockDb.profiles.set(teacherId, {
         id: teacherId,
         role: "teacher",
         username: null,
-        email,
+        email: email.trim().toLowerCase(),
         passwordHash: crypto.createHash("sha256").update(password).digest("hex"),
-        fullName,
+        fullName: fullName.trim(),
         selectedClass: grade,
         recoveryCodeHash: null,
         consentConfirmed,
+        classCode,
         createdAt: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       });
@@ -129,44 +188,43 @@ export async function POST(req: NextRequest) {
       mockDb.classes.set(createdClassId, {
         id: createdClassId,
         teacherId,
-        name: className,
+        name: className.trim(),
         grade,
         classCode,
         createdAt: new Date().toISOString(),
       });
-    }
 
-    const response = NextResponse.json({
-      success: true,
-      user: {
-        id: teacherId,
+      const signedToken = signSessionPayload({
+        userId: teacherId,
         role: "teacher",
-        email,
-        fullName,
-      },
-      classInfo: {
-        id: createdClassId,
-        name: className,
-        grade,
+        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      });
+
+      const response = NextResponse.json({
+        success: true,
+        user: {
+          id: teacherId,
+          role: "teacher",
+          email: email.trim().toLowerCase(),
+          fullName: fullName.trim(),
+          classCode,
+          className: className.trim(),
+          grade,
+        },
         classCode,
-      },
-      message: `Class "${className}" created! Share class code ${classCode} with your students.`,
-    });
+        redirectUrl: "/teacher",
+      });
 
-    response.cookies.set("margam_session", JSON.stringify({
-      userId: teacherId,
-      role: "teacher",
-      email,
-      fullName,
-    }), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-      sameSite: "lax",
-    });
+      response.cookies.set("margam_auth_token", signedToken, {
+        httpOnly: true,
+        secure: false,
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
 
-    return response;
+      return response;
+    }
   } catch (err) {
     console.error("Teacher sign-up route error:", err);
     return NextResponse.json(

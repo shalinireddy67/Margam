@@ -454,19 +454,34 @@ export async function handleLoginSync(authenticatedUser: {
   setStorageMode("supabase");
 
   const existingLocal = getActiveProfile();
-  if (existingLocal) {
-    // 1. Send local progress to server to import into Supabase
-    try {
-      await fetch("/api/sync/import-local", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ localProfile: existingLocal }),
-      });
-    } catch (err) {
-      console.warn("Failed to import local progress to server on login:", err);
-    }
+  try {
+    const res = await fetch("/api/sync/import-local", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ localProfile: existingLocal || undefined }),
+    });
 
-    // 2. Adopt authenticated identity locally
+    if (res.ok) {
+      const data = await res.json();
+      if (data?.profile) {
+        const merged = data.profile as LearnerProfile;
+        merged.id = authenticatedUser.id;
+        if (authenticatedUser.fullName || authenticatedUser.username) {
+          merged.name = authenticatedUser.fullName || authenticatedUser.username || "Student";
+        }
+        if (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass)) {
+          merged.selectedClass = authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10;
+        }
+        saveProfile(merged);
+        return;
+      }
+    }
+  } catch (err) {
+    console.warn("Failed to synchronize with cloud on login; preserving local profile:", err);
+  }
+
+  // Fallback to local profile adoption if network offline
+  if (existingLocal) {
     existingLocal.id = authenticatedUser.id;
     if (authenticatedUser.fullName || authenticatedUser.username) {
       existingLocal.name = authenticatedUser.fullName || authenticatedUser.username || "Student";
@@ -476,7 +491,6 @@ export async function handleLoginSync(authenticatedUser: {
     }
     saveProfile(existingLocal);
   } else {
-    // Create new profile linked to user
     const grade = (authenticatedUser.selectedClass && [6, 7, 8, 9, 10].includes(authenticatedUser.selectedClass))
       ? (authenticatedUser.selectedClass as 6 | 7 | 8 | 9 | 10)
       : 10;
@@ -495,6 +509,27 @@ export async function handleLoginSync(authenticatedUser: {
     };
     saveProfile(newProfile);
   }
+}
+
+/**
+ * Synchronizes cloud progress into local storage on demand.
+ * Resilient against network interruptions.
+ */
+export async function syncCloudProgress(): Promise<LearnerProfile | null> {
+  if (isGuestMode()) return getActiveProfile();
+  try {
+    const res = await fetch("/api/sync/import-local", { method: "GET" });
+    if (res.ok) {
+      const data = await res.json();
+      if (data?.profile) {
+        saveProfile(data.profile);
+        return data.profile;
+      }
+    }
+  } catch (err) {
+    console.warn("[Sync] Network error fetching cloud progress; continuing with local:", err);
+  }
+  return getActiveProfile();
 }
 
 /**

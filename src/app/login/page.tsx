@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Compass,
   ArrowLeft,
@@ -10,40 +10,50 @@ import {
   User,
   GraduationCap,
   KeyRound,
-  ShieldCheck,
   AlertTriangle,
   CheckCircle,
   Copy,
-  Info,
   Sparkles,
+  ArrowRight,
+  School,
+  Mail,
+  Shield,
 } from "lucide-react";
-import { handleLoginSync, setStorageMode } from "@/lib/storage";
+import { handleLoginSync, setStorageMode, createLearnerProfile } from "@/lib/storage";
+import { WitchCat } from "@/components/ui/WitchCat";
+import { isIstNightTime } from "@/lib/xp-config";
 
-type AuthMode = "student-signup" | "teacher-signup" | "signin";
-
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
-  const [mode, setMode] = useState<AuthMode>("student-signup");
+  const searchParams = useSearchParams();
+  const roleParam = searchParams.get("role");
+  const isTeacherFlow = roleParam === "teacher";
+
+  // Mode within the role portal: "signin" or "signup"
+  const [subMode, setSubMode] = useState<"signin" | "signup">("signin");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  // Form states
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [selectedClass, setSelectedClass] = useState<number>(8);
-  const [classCode, setClassCode] = useState("");
-  const [className, setClassName] = useState("");
-  const [consentConfirmed, setConsentConfirmed] = useState(false);
+  // Student form fields
+  const [studentUsername, setStudentUsername] = useState("");
+  const [studentPassword, setStudentPassword] = useState("");
+  const [studentFullName, setStudentFullName] = useState("");
+  const [studentClass, setStudentClass] = useState<number>(10);
+  const [studentClassCode, setStudentClassCode] = useState("");
 
-  // Recovery code display for students
+  // Teacher form fields
+  const [teacherEmail, setTeacherEmail] = useState("");
+  const [teacherPassword, setTeacherPassword] = useState("");
+  const [teacherFullName, setTeacherFullName] = useState("");
+  const [teacherClassName, setTeacherClassName] = useState("");
+  const [teacherGrade, setTeacherGrade] = useState<number>(10);
+  const [teacherConsent, setTeacherConsent] = useState(false);
+
+  // Success states
   const [recoveryCode, setRecoveryCode] = useState<string | null>(null);
   const [copiedRecovery, setCopiedRecovery] = useState(false);
   const [savedRecoveryCodeCheckbox, setSavedRecoveryCodeCheckbox] = useState(false);
-
-  // Created class display for teachers
   const [createdClassCode, setCreatedClassCode] = useState<string | null>(null);
 
   // Lockout state
@@ -55,97 +65,30 @@ export default function LoginPage() {
     setSuccessMessage(null);
   };
 
-  const handleStudentSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    resetMessages();
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/auth/student-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          password,
-          fullName: fullName || username,
-          selectedClass: Number(selectedClass),
-          classCode: classCode.trim() || undefined,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setErrorMessage(data.error || "Failed to create student account.");
-        setLoading(false);
-        return;
-      }
-
-      setRecoveryCode(data.recoveryCode);
-      await handleLoginSync(data.user);
-      setSuccessMessage("Student account created successfully!");
-    } catch {
-      setErrorMessage("Network error during student registration.");
-    } finally {
-      setLoading(false);
+  const copyRecoveryCode = () => {
+    if (recoveryCode) {
+      navigator.clipboard.writeText(recoveryCode);
+      setCopiedRecovery(true);
+      setTimeout(() => setCopiedRecovery(false), 2500);
     }
   };
 
-  const handleTeacherSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    resetMessages();
-
-    if (!consentConfirmed) {
-      setErrorMessage("Please confirm school or guardian consent to register as a teacher.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/auth/teacher-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-          fullName,
-          className,
-          grade: Number(selectedClass),
-          consentConfirmed: true,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setErrorMessage(data.error || "Failed to create teacher account.");
-        setLoading(false);
-        return;
-      }
-
-      setCreatedClassCode(data.classInfo?.classCode || null);
-      setStorageMode("supabase");
-      setSuccessMessage(data.message || "Teacher account created!");
-    } catch {
-      setErrorMessage("Network error during teacher registration.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSignIn = async (e: React.FormEvent) => {
+  // -------------------------------------------------------------
+  // STUDENT AUTHENTICATION HANDLERS
+  // -------------------------------------------------------------
+  const handleStudentSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     resetMessages();
     setLoading(true);
-
-    const identifier = username.trim() || email.trim();
 
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          identifier,
-          password,
+          identifier: studentUsername.trim(),
+          password: studentPassword,
+          expectedRole: "student",
         }),
       });
 
@@ -171,42 +114,162 @@ export default function LoginPage() {
         return;
       }
 
-      // Successful login: sync local guest progress into Supabase account
-      if (data.user?.role === "student") {
-        await handleLoginSync(data.user);
-        router.push("/student");
-      } else {
-        setStorageMode("supabase");
-        router.push("/teacher");
-      }
+      await handleLoginSync(data.user);
+      router.push("/student");
     } catch {
-      setErrorMessage("Network error during sign in.");
+      setErrorMessage("Network error during student sign-in.");
+    } finally {
       setLoading(false);
     }
   };
 
-  const copyRecoveryCode = () => {
-    if (recoveryCode) {
-      navigator.clipboard.writeText(recoveryCode);
-      setCopiedRecovery(true);
-      setTimeout(() => setCopiedRecovery(false), 2500);
+  const handleStudentSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    resetMessages();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/student-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: studentUsername.trim(),
+          password: studentPassword,
+          fullName: studentFullName.trim() || studentUsername.trim(),
+          selectedClass: Number(studentClass),
+          classCode: studentClassCode.trim() || undefined,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMessage(data.error || "Failed to create student account.");
+        setLoading(false);
+        return;
+      }
+
+      setRecoveryCode(data.recoveryCode);
+      await handleLoginSync(data.user);
+      setSuccessMessage("Student account created successfully!");
+    } catch {
+      setErrorMessage("Network error during student registration.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGuestContinue = () => {
+    // If no existing profile, create a default guest profile
+    createLearnerProfile("Student", Number(studentClass) as 6 | 7 | 8 | 9 | 10);
+    router.push("/student");
+  };
+
+  // -------------------------------------------------------------
+  // TEACHER AUTHENTICATION HANDLERS
+  // -------------------------------------------------------------
+  const handleTeacherSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    resetMessages();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          identifier: teacherEmail.trim(),
+          password: teacherPassword,
+          expectedRole: "teacher",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 429 || data.locked) {
+        setIsLocked(true);
+        setLockoutMinutes(data.remainingMinutes || 15);
+        setErrorMessage(
+          data.error ||
+            "Account temporarily locked for 15 minutes due to 5 consecutive failed login attempts."
+        );
+        setLoading(false);
+        return;
+      }
+
+      if (!res.ok) {
+        const warning = data.attemptsRemaining
+          ? ` (${data.attemptsRemaining} attempt(s) remaining before 15-min lockout)`
+          : "";
+        setErrorMessage((data.error || "Invalid email or password.") + warning);
+        setLoading(false);
+        return;
+      }
+
+      setStorageMode("supabase");
+      router.push("/teacher");
+    } catch {
+      setErrorMessage("Network error during teacher sign-in.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTeacherSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    resetMessages();
+
+    if (!teacherConsent) {
+      setErrorMessage("Please confirm school or guardian consent to register as an educator.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/teacher-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: teacherEmail.trim(),
+          password: teacherPassword,
+          fullName: teacherFullName.trim(),
+          className: teacherClassName.trim(),
+          grade: Number(teacherGrade),
+          consentConfirmed: true,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMessage(data.error || "Failed to create teacher account.");
+        setLoading(false);
+        return;
+      }
+
+      setCreatedClassCode(data.classInfo?.classCode || null);
+      setStorageMode("supabase");
+      setSuccessMessage(data.message || "Teacher account created!");
+    } catch {
+      setErrorMessage("Network error during teacher registration.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
-      {/* Header */}
-      <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6] shadow-[0px_4px_0px_#1B120C]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div className="min-h-screen text-slate-800 flex flex-col justify-between">
+      {/* Floating Top Glass Header */}
+      <header className="max-w-[1240px] mx-auto mt-3 px-3 sm:px-6 w-full">
+        <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-sm border border-white/60 flex items-center justify-center text-white">
               <Compass className="w-4 h-4" />
             </div>
-            <span className="font-pixel text-base text-[#FFE9A8]">MARGAM</span>
+            <span className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">MARGAM</span>
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-pixel text-[#FFE9A8] hover:text-white"
+            className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-emerald-900 hover:text-emerald-950 py-1.5 px-3 rounded-xl bg-white/70 hover:bg-white border border-white/80 transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Realm</span>
@@ -216,59 +279,80 @@ export default function LoginPage() {
 
       {/* Main Container */}
       <main className="max-w-md mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center">
-        <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-6 text-[#2B1B0F]">
+        <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/75 shadow-[0_12px_40px_rgba(16,42,18,0.1)] space-y-6 text-slate-800">
+          
+          {/* Companion Mascot on Student Portal */}
+          {!isTeacherFlow && !recoveryCode && (
+            <div className="flex justify-center -mb-2">
+              <div className="p-2 rounded-2xl bg-white/70 border border-white/80 shadow-xs flex items-center gap-2">
+                <WitchCat
+                  pose={isIstNightTime() ? "sleepy" : "greet"}
+                  size={50}
+                  sticker={false}
+                  alt="Maru companion"
+                />
+                <span className="text-[10px] font-heading font-bold text-emerald-900">
+                  Maru is ready to guide you!
+                </span>
+              </div>
+            </div>
+          )}
+
           {/* Logo & Headline */}
           <div className="text-center space-y-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-heading font-bold text-[#FFE9A8] uppercase tracking-wider mb-1">
+              {isTeacherFlow ? (
+                <>
+                  <School className="w-3.5 h-3.5 text-[#3FA7C9]" />
+                  <span>Educator Access</span>
+                </>
+              ) : (
+                <>
+                  <GraduationCap className="w-3.5 h-3.5 text-[#5DAA3A]" />
+                  <span>Student Access</span>
+                </>
+              )}
+            </div>
             <h1 className="text-xl sm:text-2xl font-pixel text-[#2B1B0F]">
-              {mode === "student-signup" && "Student Sign-Up"}
-              {mode === "teacher-signup" && "Teacher Sign-Up"}
-              {mode === "signin" && "Sign In to Margam"}
+              {isTeacherFlow ? "Teacher Portal" : "Student Portal"}
             </h1>
             <p className="text-xs text-[#5A3720] font-sans font-semibold">
-              {mode === "student-signup" && "No email or phone required. Pure privacy."}
-              {mode === "teacher-signup" && "Organize classes and view student mastery paths."}
-              {mode === "signin" && "Resume your cloud-synced learning journey."}
+              {isTeacherFlow
+                ? "Manage classrooms, track learning gaps & monitor diagnostics"
+                : "Privacy-first math realm. No email or phone required."}
             </p>
           </div>
 
-          {/* Mode Switcher Tabs */}
+          {/* Mode Switcher Tabs (Sign In vs Sign Up within this role) */}
           {!recoveryCode && !createdClassCode && (
-            <div className="grid grid-cols-3 gap-1 bg-[#5A3720] p-1 border-[2px] border-[#422816] text-xs font-pixel text-center">
+            <div className="grid grid-cols-2 gap-1.5 bg-white/60 p-1.5 rounded-xl border border-white/80 text-xs font-heading text-center">
               <button
                 type="button"
                 onClick={() => {
-                  setMode("student-signup");
+                  setSubMode("signin");
                   resetMessages();
                 }}
                 className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "student-signup" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
+                  subMode === "signin"
+                    ? "bg-emerald-600 text-white shadow-xs rounded-lg font-bold"
+                    : "text-emerald-950/70 hover:text-emerald-950 rounded-lg"
                 }`}
               >
-                Student
+                Log In
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setMode("teacher-signup");
+                  setSubMode("signup");
                   resetMessages();
                 }}
                 className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "teacher-signup" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
+                  subMode === "signup"
+                    ? "bg-emerald-600 text-white shadow-xs rounded-lg font-bold"
+                    : "text-emerald-950/70 hover:text-emerald-950 rounded-lg"
                 }`}
               >
-                Teacher
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMode("signin");
-                  resetMessages();
-                }}
-                className={`py-2 px-1.5 transition-all cursor-pointer min-h-[44px] flex items-center justify-center ${
-                  mode === "signin" ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]" : "text-[#FFE9A8] hover:text-white"
-                }`}
-              >
-                Sign In
+                Create Account
               </button>
             </div>
           )}
@@ -292,7 +376,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* RECOVERY CODE DISPLAY (STUDENT SIGN-UP ONLY) */}
+          {/* RECOVERY CODE MODAL (STUDENT SIGN-UP ONLY) */}
           {recoveryCode && (
             <div className="space-y-4 animate-in fade-in">
               <div className="p-4 bg-[#FFE9A8] border-[2px] border-[#422816] space-y-2.5 text-[#2B1B0F]">
@@ -337,11 +421,12 @@ export default function LoginPage() {
                 className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>Continue to Learning Path</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
 
-          {/* TEACHER CLASS CREATED DISPLAY */}
+          {/* TEACHER CLASS CODE MODAL */}
           {createdClassCode && (
             <div className="space-y-4 animate-in fade-in">
               <div className="p-4 bg-[#FFE9A8] border-[2px] border-[#422816] space-y-2.5 text-[#2B1B0F]">
@@ -350,7 +435,7 @@ export default function LoginPage() {
                   <span>Class Code Generated!</span>
                 </div>
                 <p className="text-xs text-[#2B1B0F] leading-relaxed font-sans font-semibold">
-                  Share this class code with your students so they can link their diagnostics and worksheets to your dashboard:
+                  Share this class code with your students so they can link their diagnostic quizzes to your teacher dashboard:
                 </p>
                 <div className="bg-white p-3 border-[2px] border-[#422816] flex items-center justify-between">
                   <code className="font-mono text-base font-extrabold tracking-widest text-[#2B1B0F]">
@@ -374,221 +459,34 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => router.push("/teacher")}
-                className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer"
+                className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
               >
-                Open Teacher Dashboard
+                <span>Open Teacher Dashboard</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           )}
 
-          {/* FORMS (when no success modal is active) */}
-          {!recoveryCode && !createdClassCode && (
+          {/* ============================================================= */}
+          {/* 1. STUDENT FLOW FORMS                                         */}
+          {/* ============================================================= */}
+          {!isTeacherFlow && !recoveryCode && (
             <>
-              {/* 1. STUDENT SIGN-UP FORM */}
-              {mode === "student-signup" && (
-                <form onSubmit={handleStudentSignUp} className="space-y-4">
+              {subMode === "signin" ? (
+                <form onSubmit={handleStudentSignIn} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Choose Username <span className="text-[#D9453D]">*</span>
+                      Student Username <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="text"
                         required
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="e.g. aryabhata_10"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Password (6+ characters) <span className="text-[#D9453D]">*</span>
-                    </label>
-                    <div className="relative">
-                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
-                      <input
-                        type="password"
-                        required
-                        minLength={6}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-[#2B1B0F] block">
-                        Class / Grade <span className="text-[#D9453D]">*</span>
-                      </label>
-                      <select
-                        value={selectedClass}
-                        onChange={(e) => setSelectedClass(Number(e.target.value))}
-                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] text-xs sm:text-sm bg-white font-semibold focus:outline-none"
-                      >
-                        <option value={6}>Class 6</option>
-                        <option value={7}>Class 7</option>
-                        <option value={8}>Class 8</option>
-                        <option value={9}>Class 9</option>
-                        <option value={10}>Class 10</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-[#2B1B0F] block">
-                        Class Code <span className="text-[#7A4B2A] text-[10px]">(Optional)</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={classCode}
-                        onChange={(e) => setClassCode(e.target.value.toUpperCase())}
-                        placeholder="MGM-8A"
-                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold uppercase focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="p-3 bg-[#FFE9A8] border-[2px] border-[#422816] text-[11px] text-[#2B1B0F] flex items-start gap-2">
-                    <Info className="w-3.5 h-3.5 text-[#5A3720] shrink-0 mt-0.5" />
-                    <span className="font-semibold">
-                      Passwords cannot be reset by email because no email or phone number is collected. A one-time recovery code will be provided.
-                    </span>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    <span>{loading ? "Creating Student Account..." : "Create Student Account"}</span>
-                  </button>
-                </form>
-              )}
-
-              {/* 2. TEACHER SIGN-UP FORM */}
-              {mode === "teacher-signup" && (
-                <form onSubmit={handleTeacherSignUp} className="space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Teacher Full Name <span className="text-[#D9453D]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      placeholder="e.g. S. Ramanujan"
-                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#2B1B0F] block">
-                      School / Professional Email <span className="text-[#D9453D]">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="teacher@school.edu.in"
-                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Password (6+ characters) <span className="text-[#D9453D]">*</span>
-                    </label>
-                    <input
-                      type="password"
-                      required
-                      minLength={6}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
-                      className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-[#2B1B0F] block">
-                        First Class Name <span className="text-[#D9453D]">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={className}
-                        onChange={(e) => setClassName(e.target.value)}
-                        placeholder="Class 8 Section A"
-                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-[#2B1B0F] block">
-                        Class Grade <span className="text-[#D9453D]">*</span>
-                      </label>
-                      <select
-                        value={selectedClass}
-                        onChange={(e) => setSelectedClass(Number(e.target.value))}
-                        className="w-full min-h-[48px] px-3 py-2.5 border-[2px] border-[#422816] text-xs sm:text-sm bg-white font-semibold focus:outline-none"
-                      >
-                        <option value={6}>Class 6</option>
-                        <option value={7}>Class 7</option>
-                        <option value={8}>Class 8</option>
-                        <option value={9}>Class 9</option>
-                        <option value={10}>Class 10</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <label className="flex items-start gap-2.5 text-xs text-[#5A3720] cursor-pointer pt-1 font-semibold">
-                    <input
-                      type="checkbox"
-                      required
-                      checked={consentConfirmed}
-                      onChange={(e) => setConsentConfirmed(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 rounded-none accent-[#5DAA3A]"
-                    />
-                    <span>
-                      I confirm school or guardian consent to manage student class data under applicable privacy guidelines.
-                    </span>
-                  </label>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    <span>{loading ? "Creating Teacher Account..." : "Create Teacher Account & Class"}</span>
-                  </button>
-                </form>
-              )}
-
-              {/* 3. SIGN IN FORM */}
-              {mode === "signin" && (
-                <form onSubmit={handleSignIn} className="space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Username or Email <span className="text-[#D9453D]">*</span>
-                    </label>
-                    <div className="relative">
-                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
-                      <input
-                        type="text"
-                        required
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Student username or teacher email"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
+                        value={studentUsername}
+                        onChange={(e) => setStudentUsername(e.target.value)}
+                        placeholder="e.g. priya_maths"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
                       />
                     </div>
                   </div>
@@ -602,10 +500,10 @@ export default function LoginPage() {
                       <input
                         type="password"
                         required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={studentPassword}
+                        onChange={(e) => setStudentPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full min-h-[48px] pl-9 pr-3 py-2.5 border-[2px] border-[#422816] bg-white text-xs sm:text-sm font-semibold focus:outline-none"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
                       />
                     </div>
                   </div>
@@ -615,30 +513,327 @@ export default function LoginPage() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
-                    <span>{loading ? "Authenticating..." : "Sign In"}</span>
+                    <span>{loading ? "Signing In..." : "Log In to Student Realm"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <div className="pt-2 text-center">
+                    <button
+                      type="button"
+                      onClick={handleGuestContinue}
+                      className="text-xs font-heading font-bold text-[#7A4B2A] hover:text-[#2B1B0F] underline"
+                    >
+                      Or continue without an account as Guest
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleStudentSignUp} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Choose Username <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="text"
+                        required
+                        value={studentUsername}
+                        onChange={(e) => setStudentUsername(e.target.value)}
+                        placeholder="3–20 characters (e.g. rahul_quest)"
+                        pattern="^[a-zA-Z0-9_]{3,20}$"
+                        title="Username must be 3-20 characters long and contain only letters, numbers, and underscores"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Player Name (Display Name)
+                    </label>
+                    <input
+                      type="text"
+                      value={studentFullName}
+                      onChange={(e) => setStudentFullName(e.target.value)}
+                      placeholder="e.g. Rahul Sharma"
+                      className="w-full px-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="password"
+                        required
+                        minLength={6}
+                        value={studentPassword}
+                        onChange={(e) => setStudentPassword(e.target.value)}
+                        placeholder="Minimum 6 characters"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Select Your Grade <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {[6, 7, 8, 9, 10].map((grade) => (
+                        <button
+                          key={grade}
+                          type="button"
+                          onClick={() => setStudentClass(grade)}
+                          className={`py-2 text-xs font-pixel border-[2px] border-[#422816] transition-all cursor-pointer ${
+                            studentClass === grade
+                              ? "bg-[#5DAA3A] text-white shadow-[2px_2px_0px_#1B120C]"
+                              : "bg-white text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                          }`}
+                        >
+                          C{grade}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Teacher Class Code <span className="text-[10px] text-[#7A4B2A] font-normal">(Optional)</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={studentClassCode}
+                      onChange={(e) => setStudentClassCode(e.target.value)}
+                      placeholder="e.g. MGM-C10-A1B2"
+                      className="w-full px-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-mono uppercase focus:outline-none focus:ring-2 focus:ring-[#5DAA3A]"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading || isLocked}
+                    className="w-full min-h-[48px] py-3 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>{loading ? "Creating Account..." : "Create Student Account"}</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
               )}
+
+              {/* Portal Switcher */}
+              <div className="pt-4 border-t-2 border-[#E5D7BE] text-center">
+                <Link
+                  href="/login?role=teacher"
+                  className="text-xs font-heading font-bold text-[#3FA7C9] hover:underline inline-flex items-center gap-1"
+                >
+                  <School className="w-3.5 h-3.5" />
+                  <span>Educator or Teacher? Switch to Teacher Portal</span>
+                </Link>
+              </div>
             </>
           )}
 
-          {/* Guest Mode Navigation Link */}
-          <div className="pt-4 border-t-2 border-[#E5D7BE] text-center">
-            <Link
-              href="/student"
-              className="text-xs font-pixel text-[#5A3720] hover:text-[#2B1B0F] inline-flex items-center gap-1.5 min-h-[40px] px-2 py-1"
-            >
-              <span>Continue in Guest Mode (Local Storage Only)</span>
-              <ArrowLeft className="w-3 h-3 rotate-180" />
-            </Link>
-          </div>
+          {/* ============================================================= */}
+          {/* 2. TEACHER FLOW FORMS                                         */}
+          {/* ============================================================= */}
+          {isTeacherFlow && !createdClassCode && (
+            <>
+              {subMode === "signin" ? (
+                <form onSubmit={handleTeacherSignIn} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Educator Email <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="email"
+                        required
+                        value={teacherEmail}
+                        onChange={(e) => setTeacherEmail(e.target.value)}
+                        placeholder="teacher@school.edu.in"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="password"
+                        required
+                        value={teacherPassword}
+                        onChange={(e) => setTeacherPassword(e.target.value)}
+                        placeholder="••••••••"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading || isLocked}
+                    className="w-full min-h-[48px] py-3 bg-[#3FA7C9] hover:bg-[#348EA8] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>{loading ? "Signing In..." : "Log In to Teacher Hub"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={handleTeacherSignUp} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Full Name <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={teacherFullName}
+                      onChange={(e) => setTeacherFullName(e.target.value)}
+                      placeholder="e.g. Shalini Reddy"
+                      className="w-full px-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      School / Educator Email <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="email"
+                        required
+                        value={teacherEmail}
+                        onChange={(e) => setTeacherEmail(e.target.value)}
+                        placeholder="teacher@school.edu.in"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Password <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="password"
+                        required
+                        minLength={6}
+                        value={teacherPassword}
+                        onChange={(e) => setTeacherPassword(e.target.value)}
+                        placeholder="Minimum 6 characters"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Initial Class Name <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={teacherClassName}
+                      onChange={(e) => setTeacherClassName(e.target.value)}
+                      placeholder="e.g. Class 10-A Math"
+                      className="w-full px-3 py-2.5 bg-white border-[2px] border-[#422816] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#3FA7C9]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      Class Grade <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {[6, 7, 8, 9, 10].map((grade) => (
+                        <button
+                          key={grade}
+                          type="button"
+                          onClick={() => setTeacherGrade(grade)}
+                          className={`py-2 text-xs font-pixel border-[2px] border-[#422816] transition-all cursor-pointer ${
+                            teacherGrade === grade
+                              ? "bg-[#3FA7C9] text-white shadow-[2px_2px_0px_#1B120C]"
+                              : "bg-white text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                          }`}
+                        >
+                          C{grade}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <label className="flex items-start gap-2.5 text-xs text-[#5A3720] cursor-pointer pt-1 font-semibold">
+                    <input
+                      type="checkbox"
+                      checked={teacherConsent}
+                      onChange={(e) => setTeacherConsent(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 rounded-none accent-[#3FA7C9]"
+                    />
+                    <span>
+                      I confirm I am an educator and authorized to view classroom diagnostic analytics.
+                    </span>
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={loading || isLocked}
+                    className="w-full min-h-[48px] py-3 bg-[#3FA7C9] hover:bg-[#348EA8] disabled:opacity-50 text-white text-xs font-pixel border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <span>{loading ? "Registering..." : "Create Teacher Account"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
+
+              {/* Portal Switcher */}
+              <div className="pt-4 border-t-2 border-[#E5D7BE] text-center">
+                <Link
+                  href="/login?role=student"
+                  className="text-xs font-heading font-bold text-[#5DAA3A] hover:underline inline-flex items-center gap-1"
+                >
+                  <GraduationCap className="w-3.5 h-3.5" />
+                  <span>Are you a student? Switch to Student Login</span>
+                </Link>
+              </div>
+            </>
+          )}
+
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t-2 border-[#422816]/20 py-4 text-center text-xs text-[#5A3720] bg-[#FFF7E6]">
-        Margam • DPDP-Compliant Student & Teacher Authentication
+      {/* Lightweight Glass Footer */}
+      <footer className="max-w-[1240px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+        Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="glass-panel p-6 rounded-2xl text-center">
+            <p className="font-heading text-xs text-emerald-950 animate-pulse">Loading Portal...</p>
+          </div>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

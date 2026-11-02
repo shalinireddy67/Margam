@@ -12,6 +12,9 @@ import {
   isDuplicateSubmission,
   markSubmissionCompleted,
 } from "@/lib/server/rate-limit";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { mockDb } from "@/lib/server/auth-helpers";
 
 export async function POST(req: NextRequest) {
   try {
@@ -136,11 +139,12 @@ export async function POST(req: NextRequest) {
       newConsecutiveIncorrect += 1;
     }
 
-    const nextDiff = calculateNextDifficulty(
+    const nextDiffResult = calculateNextDifficulty(
       (practiceResult.updatedDifficulty || currentDifficulty) as 1 | 2 | 3,
       newConsecutiveCorrect,
       newConsecutiveIncorrect
     );
+    const nextDiff = nextDiffResult.newDifficulty;
 
     // Generate readable mistake hint if incorrect
     let mistakeHint: string | undefined;
@@ -165,6 +169,60 @@ export async function POST(req: NextRequest) {
       todayXpEarned: body.studentHistory?.todayXpEarned || profile?.dailyXp?.xp || 0,
       lastActiveIstDate: body.studentHistory?.lastActiveIstDate || profile?.dailyXp?.date,
     });
+
+    // Trusted server-side attempt & mastery persistence
+    try {
+      if (isSupabaseConfigured()) {
+        const admin = getSupabaseAdminClient();
+        if (admin && studentId && studentId.length === 36) {
+          await admin.from("attempts").insert({
+            student_id: studentId,
+            type: "worksheet",
+            identifier: conceptId,
+            score: practiceResult.correctCount,
+            total: practiceResult.totalQuestions,
+            created_at: new Date().toISOString(),
+          });
+          await admin.from("concept_mastery").upsert({
+            student_id: studentId,
+            concept_id: conceptId,
+            mastery: computedMastery,
+            difficulty: nextDiff,
+            consecutive_correct: newConsecutiveCorrect,
+            consecutive_incorrect: newConsecutiveIncorrect,
+            status: passed ? "completed" : "in_progress",
+            worksheet_completed: true,
+            last_attempt_at: new Date().toISOString(),
+          });
+        }
+      } else if (process.env.NODE_ENV !== "production") {
+        mockDb.attempts.push({
+          id: `att_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+          studentId,
+          type: "worksheet",
+          identifier: conceptId,
+          score: practiceResult.correctCount,
+          total: practiceResult.totalQuestions,
+          createdAt: new Date().toISOString(),
+        });
+        const existingCm = mockDb.conceptMastery.get(`${studentId}:${conceptId}`);
+        mockDb.conceptMastery.set(`${studentId}:${conceptId}`, {
+          id: existingCm?.id || `cm_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+          studentId,
+          conceptId,
+          mastery: computedMastery,
+          difficulty: nextDiff,
+          consecutiveCorrect: newConsecutiveCorrect,
+          consecutiveIncorrect: newConsecutiveIncorrect,
+          status: passed ? "completed" : (existingCm?.status === "completed" ? "completed" : "in_progress"),
+          lessonCompleted: existingCm?.lessonCompleted ?? true,
+          worksheetCompleted: true,
+          lastAttemptAt: new Date().toISOString(),
+        });
+      }
+    } catch (saveErr) {
+      console.warn("[Practice Submit] Could not persist attempt to database:", saveErr);
+    }
 
     return NextResponse.json({
       score: practiceResult.correctCount,

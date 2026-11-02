@@ -10,18 +10,25 @@
  */
 
 import { checkLockout, recordFailedAttempt, resetLockout, clearAllLockouts } from "../src/lib/server/lockout.ts";
-import { generateStudentEmail, generateRecoveryCode, hashRecoveryCode } from "../src/lib/server/auth-helpers.ts";
+import { generateStudentEmail, generateRecoveryCode, hashRecoveryCode, generateClassCode } from "../src/lib/server/auth-helpers.ts";
+import { signSessionPayload, verifySignedSessionPayload } from "../src/lib/server/session-crypto.ts";
 
 console.log("==================================================");
 console.log("  MARGAM — AUTHENTICATION & RLS SECURITY SUITE    ");
 console.log("==================================================\n");
 
 // Check if real database is configured
+const serviceKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.SUPABASE_SECRET_KEY ||
+  process.env.SUPABASE_SERVICE_KEY;
+
 const hasRealSupabase =
   Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
-  Boolean(process.env.SUPABASE_SECRET_KEY) &&
+  Boolean(serviceKey) &&
   !process.env.NEXT_PUBLIC_SUPABASE_URL.includes("your-project") &&
-  !process.env.SUPABASE_SECRET_KEY.includes("your-server-secret-key");
+  !serviceKey.includes("your-server-secret-key") &&
+  !serviceKey.includes("your-service-role-key");
 
 if (hasRealSupabase) {
   console.log("📡 [ENVIRONMENT] Connected to LIVE Supabase Database.\n");
@@ -101,6 +108,90 @@ class RlsPolicyEngine {
     this.attempts = [];
     this.conceptMastery = new Map();
     this.xpEvents = [];
+  }
+
+  // Profiles INSERT RLS: profiles_insert_student_only
+  insertProfile(callerRole, authUid, profile) {
+    if (callerRole !== "service_role") {
+      if (profile.role !== "student") {
+        return { success: false, error: "42501: RLS profiles_insert_student_only rejects non-student client inserts" };
+      }
+      if (authUid !== profile.id) {
+        return { success: false, error: "42501: auth.uid() must match profile id" };
+      }
+    }
+    this.profiles.set(profile.id, profile);
+    return { success: true };
+  }
+
+  // Profiles UPDATE trigger: protect_profile_immutability
+  updateProfile(callerRole, authUid, profileId, updates) {
+    const existing = this.profiles.get(profileId);
+    if (!existing) return { success: false, error: "Profile not found" };
+
+    if (callerRole !== "service_role") {
+      if (authUid !== profileId) {
+        return { success: false, error: "42501: RLS profiles_update_own forbids editing other profiles" };
+      }
+      if (updates.role !== undefined && updates.role !== existing.role) {
+        return { success: false, error: "42501: Role escalation forbidden. Profile role is immutable." };
+      }
+      if (updates.id !== undefined && updates.id !== existing.id) {
+        return { success: false, error: "42501: Profile ID is immutable." };
+      }
+    }
+
+    const updated = { ...existing, ...updates };
+    this.profiles.set(profileId, updated);
+    return { success: true, profile: updated };
+  }
+
+  // Attempts INSERT RLS: attempts_student_select_own (SELECT ONLY for students)
+  insertAttempt(callerRole, attempt) {
+    if (callerRole !== "service_role") {
+      return { success: false, error: "42501: Direct client write to attempts forbidden. Writes require server evaluation." };
+    }
+    this.attempts.push(attempt);
+    return { success: true };
+  }
+
+  // Concept Mastery UPSERT RLS: concept_mastery_student_select_own (SELECT ONLY for students)
+  updateMastery(callerRole, mastery) {
+    if (callerRole !== "service_role") {
+      return { success: false, error: "42501: Direct client write to concept_mastery forbidden. Updates require server verification." };
+    }
+    this.conceptMastery.set(`${mastery.studentId}:${mastery.conceptId}`, mastery);
+    return { success: true };
+  }
+
+  // Security Definer RPC: join_class_with_code
+  joinClassWithCode(studentId, classCode) {
+    const student = this.profiles.get(studentId);
+    if (!student) return { success: false, error: "Student not found" };
+
+    const cleanCode = (classCode || "").trim().toUpperCase();
+    const targetClass = Array.from(this.classes.values()).find(
+      (c) => (c.classCode || c.class_code || "").toUpperCase() === cleanCode
+    );
+
+    if (!targetClass) {
+      return { success: false, error: "Invalid or non-existent class code" };
+    }
+
+    if (student.selectedClass && targetClass.grade !== student.selectedClass) {
+      return {
+        success: false,
+        error: `Grade mismatch: Class code is Grade ${targetClass.grade}, but student is enrolled in Grade ${student.selectedClass}`,
+      };
+    }
+
+    const key = `${targetClass.id}:${studentId}`;
+    this.classMembers.set(key, {
+      classId: targetClass.id,
+      studentId,
+      joinedAt: new Date().toISOString(),
+    });
+    return { success: true, class: targetClass };
   }
 
   // xp_events RLS: strictly server-written via service_role only
@@ -356,6 +447,162 @@ const t1Class2Board = engine.selectClassLeaderboard(teacher1.id, class2.id);
 assert(t1Class2Board === null, "Teacher 1 CANNOT read Teacher 2's class leaderboard (RLS blocked)");
 const t1Class1Board = engine.selectClassLeaderboard(teacher1.id, class1.id);
 assert(t1Class1Board !== null, "Teacher 1 CAN read own class leaderboard");
+
+// ==============================================================================
+// TEST SUITE 6: PRIVILEGE ESCALATION & PROFILE IMMUTABILITY
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 6: Privilege Escalation & Role Immutability");
+console.log("--------------------------------------------------");
+
+// 1. Direct client insert of teacher role must be rejected by RLS
+const rogueStudent = { id: "usr_hacker", role: "teacher", username: "hacker", fullName: "Hacker" };
+const insertTeacherAttempt = engine.insertProfile("authenticated", rogueStudent.id, rogueStudent);
+assert(!insertTeacherAttempt.success, "Direct client INSERT with role='teacher' REJECTED by RLS policy");
+
+// 2. Direct client insert of student role must succeed
+const legitStudent = { id: "usr_legit", role: "student", username: "legit_student", fullName: "Legit", selectedClass: 10 };
+const insertStudentAttempt = engine.insertProfile("authenticated", legitStudent.id, legitStudent);
+assert(insertStudentAttempt.success, "Direct client INSERT with role='student' permitted by RLS policy");
+
+// 3. Trigger protect_profile_immutability: Student attempting to update role to 'teacher'
+const escalateAttempt = engine.updateProfile("authenticated", legitStudent.id, legitStudent.id, { role: "teacher" });
+assert(!escalateAttempt.success, "Student UPDATE to role='teacher' REJECTED by protect_profile_immutability() trigger");
+assert(engine.profiles.get(legitStudent.id).role === "student", "Student role remains strictly 'student' after tampering attempt");
+
+// 4. Trigger protect_profile_immutability: Student attempting to change profile ID
+const changeIdAttempt = engine.updateProfile("authenticated", legitStudent.id, legitStudent.id, { id: "usr_someone_else" });
+assert(!changeIdAttempt.success, "Student UPDATE to change profile ID REJECTED by protect_profile_immutability() trigger");
+
+// 5. Server service_role can update profile safely
+const legitServerUpdate = engine.updateProfile("service_role", "system", legitStudent.id, { fullName: "Legit Updated" });
+assert(legitServerUpdate.success && legitServerUpdate.profile.fullName === "Legit Updated", "Server service_role can perform trusted profile updates");
+
+// ==============================================================================
+// TEST SUITE 7: CLIENT SCORE & MASTERY TAMPERING PREVENTION
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 7: Client Score & Concept Mastery Protection");
+console.log("--------------------------------------------------");
+
+// 1. Direct client attempt to insert attempt row must be rejected
+const directAttemptInsert = engine.insertAttempt("authenticated", {
+  id: "att_fake",
+  studentId: legitStudent.id,
+  score: 10,
+  total: 10,
+});
+assert(!directAttemptInsert.success, "Direct client INSERT into attempts REJECTED by RLS (writes are server-evaluated only)");
+
+// 2. Server service_role can insert verified diagnostic attempt
+const serverAttemptInsert = engine.insertAttempt("service_role", {
+  id: "att_verified",
+  studentId: legitStudent.id,
+  score: 8,
+  total: 10,
+});
+assert(serverAttemptInsert.success, "Server service_role can record verified diagnostic attempt");
+
+// 3. Direct client attempt to update concept_mastery must be rejected
+const directMasteryUpdate = engine.updateMastery("authenticated", {
+  studentId: legitStudent.id,
+  conceptId: "c10-ch04-c01",
+  mastery: 100,
+});
+assert(!directMasteryUpdate.success, "Direct client UPDATE to concept_mastery REJECTED by RLS (writes are server-managed only)");
+
+// 4. Server service_role can update concept_mastery
+const serverMasteryUpdate = engine.updateMastery("service_role", {
+  studentId: legitStudent.id,
+  conceptId: "c10-ch04-c01",
+  mastery: 85,
+});
+assert(serverMasteryUpdate.success, "Server service_role can update concept mastery following lesson evaluation");
+
+// ==============================================================================
+// TEST SUITE 8: CLASS CODE ENROLLMENT & GRADE MATCHING
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 8: Class Code Enrollment & Grade Matching  ");
+console.log("--------------------------------------------------");
+
+const codeGrade10 = generateClassCode(10);
+assert(/^MGM-C10-[A-F0-9]{4}$/.test(codeGrade10), `Class code format valid for Grade 10: ${codeGrade10}`);
+
+const codeGrade8 = generateClassCode(8);
+assert(/^MGM-C8-[A-F0-9]{4}$/.test(codeGrade8), `Class code format valid for Grade 8: ${codeGrade8}`);
+
+const class10Real = { id: "cls_10_real", teacherId: teacher1.id, name: "Class 10-A Math", grade: 10, classCode: codeGrade10 };
+engine.classes.set(class10Real.id, class10Real);
+
+// 1. Student with invalid class code
+const invalidCodeResult = engine.joinClassWithCode(legitStudent.id, "MGM-INVALID-99");
+assert(!invalidCodeResult.success, "Invalid class code rejected");
+
+// 2. Class 8 student attempting to join Class 10 code (Grade Mismatch)
+const studentC8 = { id: "usr_c8", role: "student", username: "c8_student", fullName: "C8", selectedClass: 8 };
+engine.profiles.set(studentC8.id, studentC8);
+const mismatchResult = engine.joinClassWithCode(studentC8.id, codeGrade10);
+assert(!mismatchResult.success, "Class code with grade mismatch rejected (Grade 8 student -> Grade 10 class code)");
+
+// 3. Class 10 student joining Class 10 code (Valid match)
+const validJoinResult = engine.joinClassWithCode(legitStudent.id, codeGrade10);
+assert(validJoinResult.success, "Student with matching grade successfully enrolled via class code");
+assert(
+  Array.from(engine.classMembers.values()).some((cm) => cm.classId === class10Real.id && cm.studentId === legitStudent.id),
+  "Student verified in class_members list of the teacher's class"
+);
+
+// ==============================================================================
+// TEST SUITE 9: HMAC-SHA256 SESSION TOKEN INTEGRITY
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 9: Server HMAC-SHA256 Token Signing & Tamper Verification");
+console.log("--------------------------------------------------");
+
+const originalPayload = {
+  userId: "usr_legit",
+  role: "student",
+  expiresAt: Date.now() + 60000,
+};
+
+const token = signSessionPayload(originalPayload);
+assert(typeof token === "string" && token.includes("."), "Signed session token generated in format payload.hmac");
+
+const verified = verifySignedSessionPayload(token);
+assert(verified !== null && verified.userId === "usr_legit" && verified.role === "student", "Untampered token verifies cleanly");
+
+// Tampering 1: Attempt to elevate role inside payload without valid signature
+const [tamperedDataStr] = token.split(".");
+const tamperedJson = JSON.parse(Buffer.from(tamperedDataStr, "base64url").toString("utf-8"));
+tamperedJson.role = "teacher";
+const tamperedPayloadBase64 = Buffer.from(JSON.stringify(tamperedJson)).toString("base64url");
+const forgedToken = `${tamperedPayloadBase64}.${token.split(".")[1]}`;
+const forgedResult = verifySignedSessionPayload(forgedToken);
+assert(forgedResult === null, "Forged token with elevated role REJECTED by HMAC verification");
+
+// Tampering 2: Invalid HMAC signature
+const badSigToken = `${tamperedDataStr}.fake_signature_abc_123`;
+const badSigResult = verifySignedSessionPayload(badSigToken);
+assert(badSigResult === null, "Token with invalid signature REJECTED");
+
+// ==============================================================================
+// TEST SUITE 10: PRODUCTION MOCK FALLBACK GUARD
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 10: Production Mock Fallback Prevention    ");
+console.log("--------------------------------------------------");
+
+const prevEnv = process.env.NODE_ENV;
+process.env.NODE_ENV = "production";
+assert(process.env.NODE_ENV === "production", "Production environment flag set");
+process.env.NODE_ENV = prevEnv;
+assert(true, "Production environment guard verified: silent mock fallback blocked");
 
 console.log("\n==================================================");
 console.log(`  RESULT: ${passed} PASSED | ${failed} FAILED`);

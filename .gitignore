@@ -24,9 +24,16 @@ yarn-error.log*
 # Environment files (contains secrets/local overrides)
 .env
 .env.local
+.env.development
 .env.development.local
+.env.test
 .env.test.local
+.env.preview
+.env.preview.local
+.env.production
 .env.production.local
+.env.staging
+.env.staging.local
 .env*.local
 !.env.example
 

@@ -196,7 +196,6 @@
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
-    border-radius: 0 !important;
   }
 
   html, body {
@@ -209,8 +208,8 @@
 
   /* Default / English Body */
   body {
-    background-color: var(--bg);
-    color: var(--ink);
+    background-color: transparent;
+    color: #0F2815;
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -823,4 +822,122 @@ button[aria-pressed="true"] {
   .print-only {
     display: block !important;
   }
+}
+
+
+/* ==========================================================================
+   MINECRAFT NATURE + FROSTED GLASS INTERFACE UTILITIES
+   ========================================================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 10px 30px -5px rgba(20, 50, 20, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  color: #0F2815;
+}
+
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.90);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -4px rgba(20, 50, 20, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(16, 42, 18, 0.07);
+  border-radius: 1.25rem;
+  color: #0F2815;
+}
+
+.glass-panel-tinted {
+  background: rgba(240, 253, 244, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(167, 243, 208, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(16, 42, 18, 0.08);
+  border-radius: 1.25rem;
+  color: #064E3B;
+}
+
+.glass-panel-cream {
+  background: rgba(255, 252, 245, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 245, 225, 0.8);
+  box-shadow: 0 8px 30px rgba(74, 50, 20, 0.08);
+  border-radius: 1.25rem;
+  color: #2B1B0F;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid rgba(16, 185, 129, 0.35);
+  color: #0F2815;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  background: #FFFFFF;
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  outline: none;
+}
+
+.glass-btn-primary {
+  background: linear-gradient(180deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.glass-btn-primary:hover {
+  background: linear-gradient(180deg, #34D399 0%, #059669 100%);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+  transform: translateY(-1px);
+}
+
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.85);
+  color: #064E3B !important;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.glass-btn-secondary:hover {
+  background: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.glass-btn-accent {
+  background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.glass-btn-accent:hover {
+  background: linear-gradient(180deg, #FBBF24 0%, #D97706 100%);
+  transform: translateY(-1px);
 }

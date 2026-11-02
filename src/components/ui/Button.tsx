@@ -37,48 +37,46 @@ export interface ButtonProps
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  // Aliases
-  primary: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
-  outline: "bg-[#FFF7E6] text-[#2B1B0F] border-[#422816] hover:bg-[#FFE9A8]",
+  // Primary Grass/Emerald CTA
+  primary: "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-emerald-400/50 shadow-sm hover:from-emerald-500 hover:to-emerald-400 hover:shadow-md",
+  grass: "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-emerald-400/50 shadow-sm hover:from-emerald-500 hover:to-emerald-400 hover:shadow-md",
+  pixelgreen: "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-emerald-400/50 shadow-sm hover:from-emerald-500 hover:to-emerald-400 hover:shadow-md",
+  green: "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white border-emerald-400/50 shadow-sm hover:from-emerald-500 hover:to-emerald-400 hover:shadow-md",
+  darkgrass: "bg-gradient-to-r from-emerald-800 to-emerald-700 text-white border-emerald-600/50 shadow-sm hover:from-emerald-700 hover:to-emerald-600",
+  forest: "bg-gradient-to-r from-emerald-700 to-emerald-600 text-white border-emerald-500/50 shadow-sm hover:from-emerald-600 hover:to-emerald-500",
 
-  // Primary Grass-top look
-  grass: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
-  pixelgreen: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
-  green: "bg-gradient-to-b from-[#5DAA3A] via-[#4F8A24] to-[#2F6B22] text-[#FFF7E6] border-[#204514] hover:brightness-110",
-  darkgrass: "bg-[#2F6B22] text-[#FFF7E6] border-[#1C4514] hover:bg-[#3D822D]",
-  forest: "bg-[#2F6B22] text-[#FFF7E6] border-[#1C4514] hover:bg-[#3D822D]",
+  // Outline / Secondary Light
+  outline: "bg-white/80 text-emerald-950 border-white/80 hover:bg-white shadow-xs hover:shadow-sm",
+  white: "bg-white/90 text-emerald-950 border-white/90 hover:bg-white shadow-xs",
+  warmwhite: "bg-amber-50/90 text-amber-950 border-amber-200/80 hover:bg-amber-100 shadow-xs",
 
-  // Secondary Stone look
-  stone: "bg-gradient-to-b from-[#9E9E9E] via-[#8B8B8B] to-[#5E5E5E] text-[#FFF7E6] border-[#3F3F3F] hover:brightness-110",
-  charcoal: "bg-[#5E5E5E] text-[#FFF7E6] border-[#3F3F3F] hover:bg-[#707070]",
+  // Secondary Stone
+  stone: "bg-slate-200/90 text-slate-800 border-slate-300 hover:bg-slate-300/90 shadow-xs",
+  charcoal: "bg-slate-700 text-white border-slate-600 hover:bg-slate-600 shadow-xs",
 
   // Highlight Gold CTA
-  gold: "bg-gradient-to-b from-[#FFE9A8] via-[#F4C542] to-[#C6961E] text-[#2B1B0F] border-[#7A4B2A] hover:brightness-105",
-  yellow: "bg-gradient-to-b from-[#FFE9A8] via-[#F4C542] to-[#C6961E] text-[#2B1B0F] border-[#7A4B2A] hover:brightness-105",
-  sand: "bg-gradient-to-b from-[#FFE9A8] via-[#F4C542] to-[#C6961E] text-[#2B1B0F] border-[#7A4B2A] hover:brightness-105",
-  orange: "bg-gradient-to-b from-[#FFE9A8] via-[#FFB36B] to-[#D47E30] text-[#2B1B0F] border-[#7A4B2A] hover:brightness-105",
+  gold: "bg-gradient-to-r from-amber-500 to-amber-400 text-white border-amber-300/50 shadow-sm hover:from-amber-400 hover:to-amber-300",
+  yellow: "bg-gradient-to-r from-amber-500 to-amber-400 text-white border-amber-300/50 shadow-sm hover:from-amber-400 hover:to-amber-300",
+  sand: "bg-gradient-to-r from-amber-500 to-amber-400 text-white border-amber-300/50 shadow-sm hover:from-amber-400 hover:to-amber-300",
+  orange: "bg-gradient-to-r from-orange-500 to-orange-400 text-white border-orange-300/50 shadow-sm hover:from-orange-400 hover:to-orange-300",
 
-  // Wood & Dirt
-  dirt: "bg-gradient-to-b from-[#A06A3C] via-[#7A4B2A] to-[#5A3720] text-[#FFF7E6] border-[#422816] hover:brightness-110",
-  ink: "bg-[#5A3720] text-[#FFF7E6] border-[#422816] hover:bg-[#7A4B2A]",
+  // Earth / Dirt
+  dirt: "bg-amber-900/80 text-white border-amber-800 hover:bg-amber-800/90 shadow-xs",
+  ink: "bg-slate-900 text-white border-slate-800 hover:bg-slate-800 shadow-xs",
 
   // Water / Info Links
-  sky: "bg-gradient-to-b from-[#6EB5FF] via-[#3FA7C9] to-[#1E6F8C] text-[#FFF7E6] border-[#134D63] hover:brightness-110",
-  cyan: "bg-gradient-to-b from-[#6EB5FF] via-[#3FA7C9] to-[#1E6F8C] text-[#FFF7E6] border-[#134D63] hover:brightness-110",
+  sky: "bg-gradient-to-r from-sky-500 to-cyan-500 text-white border-sky-300/50 shadow-sm hover:from-sky-400 hover:to-cyan-400",
+  cyan: "bg-gradient-to-r from-sky-500 to-cyan-500 text-white border-sky-300/50 shadow-sm hover:from-sky-400 hover:to-cyan-400",
 
   // Flower Red / Accent
-  red: "bg-gradient-to-b from-[#FF756B] via-[#E04A3F] to-[#A32B22] text-[#FFFFFF] border-[#701A13] hover:brightness-110",
-  pink: "bg-gradient-to-b from-[#FFB36B] via-[#FF8FA3] to-[#D65F76] text-[#2B1B0F] border-[#7A4B2A] hover:brightness-105",
-
-  // Parchment Light
-  white: "bg-[#FFF7E6] text-[#2B1B0F] border-[#5A3720] hover:bg-[#FFFFFF]",
-  warmwhite: "bg-[#FFF7E6] text-[#2B1B0F] border-[#5A3720] hover:bg-[#FFFFFF]",
+  red: "bg-gradient-to-r from-rose-600 to-rose-500 text-white border-rose-400/50 shadow-sm hover:from-rose-500 hover:to-rose-400",
+  pink: "bg-gradient-to-r from-pink-500 to-rose-400 text-white border-pink-300/50 shadow-sm hover:from-pink-400 hover:to-rose-300",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "min-h-[44px] px-3.5 py-1.5 text-xs",
-  default: "min-h-[48px] px-4 py-2.5 text-xs sm:text-sm",
-  lg: "min-h-[54px] px-5 py-3 text-sm sm:text-base",
+  sm: "min-h-[40px] px-3.5 py-1.5 text-xs font-heading",
+  default: "min-h-[44px] px-4 py-2 text-xs sm:text-sm font-heading",
+  lg: "min-h-[50px] px-5 py-2.5 text-sm sm:text-base font-heading",
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -100,16 +98,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled}
         className={`
-          inline-flex items-center justify-center text-center font-heading
-          border-3 rounded-[2px]
-          box-border select-none cursor-pointer
-          ${disabled
-            ? "bg-[#8B8B8B] text-[#5E5E5E] border-[#5E5E5E] shadow-none cursor-not-allowed opacity-75"
-            : `shadow-[inset_2px_2px_0px_rgba(255,255,255,0.4),inset_-2px_-2px_0px_rgba(0,0,0,0.4),4px_4px_0px_rgba(0,0,0,0.35)]
-               hover:translate-x-0 hover:translate-y-0
-               active:translate-x-[2px] active:translate-y-[2px] active:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5),2px_2px_0px_rgba(0,0,0,0.35)]
-               focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[#FFE9A8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B1B0F]`
-          }
+          inline-flex items-center justify-center
+          font-bold tracking-wide rounded-xl border
+          cursor-pointer select-none transition-all duration-200
+          hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]
+          disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500
           ${sizeStyles[size]}
           ${variantStyles[variant] || variantStyles.grass}
           ${className}
@@ -123,4 +117,5 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+
 export default Button;

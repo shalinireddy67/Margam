@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { getSessionSecret } from "@/lib/env";
 
 export interface SessionPayload {
   sessionId: string;
@@ -10,9 +11,6 @@ export interface SessionPayload {
   expiresAt: number;
   metadata?: Record<string, any>;
 }
-
-const SESSION_SECRET =
-  process.env.SESSION_SECRET || "margam_internal_secure_hmac_secret_2026";
 
 /**
  * Creates a signed, short-lived session token (valid for 30 minutes by default).
@@ -41,8 +39,9 @@ export function createSignedSession(
   };
 
   const payloadB64 = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const secret = getSessionSecret();
   const signature = crypto
-    .createHmac("sha256", SESSION_SECRET)
+    .createHmac("sha256", secret)
     .update(payloadB64)
     .digest("base64url");
 
@@ -74,8 +73,9 @@ export function verifySessionToken(
   const [payloadB64, signature] = parts;
 
   // Verify HMAC signature in constant time
+  const secret = getSessionSecret();
   const expectedSig = crypto
-    .createHmac("sha256", SESSION_SECRET)
+    .createHmac("sha256", secret)
     .update(payloadB64)
     .digest("base64url");
 
@@ -99,7 +99,7 @@ export function verifySessionToken(
     if (expectedStudentId && payload.studentId !== expectedStudentId) {
       return {
         valid: false,
-        error: "Session does not belong to the requesting student",
+        error: "Session does not match the active student",
       };
     }
 
@@ -107,12 +107,12 @@ export function verifySessionToken(
     if (expectedType && payload.type !== expectedType) {
       return {
         valid: false,
-        error: `Invalid session type: expected ${expectedType}, got ${payload.type}`,
+        error: `Invalid session type: expected ${expectedType}, found ${payload.type}`,
       };
     }
 
     return { valid: true, payload };
   } catch {
-    return { valid: false, error: "Failed to decode session payload" };
+    return { valid: false, error: "Malformed session payload" };
   }
 }

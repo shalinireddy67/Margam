@@ -9,6 +9,9 @@ import {
   isDuplicateSubmission,
   markSubmissionCompleted,
 } from "@/lib/server/rate-limit";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { mockDb } from "@/lib/server/auth-helpers";
 
 export async function POST(req: NextRequest) {
   try {
@@ -152,6 +155,35 @@ export async function POST(req: NextRequest) {
       todayXpEarned: body.studentHistory?.todayXpEarned || 0,
       lastActiveIstDate: body.studentHistory?.lastActiveIstDate,
     });
+
+    // Trusted server-side attempt persistence
+    try {
+      if (isSupabaseConfigured()) {
+        const admin = getSupabaseAdminClient();
+        if (admin && studentId && studentId.length === 36) {
+          await admin.from("attempts").insert({
+            student_id: studentId,
+            type: "diagnostic",
+            identifier: chapterId,
+            score: diagResult.correctCount,
+            total: diagResult.totalQuestions,
+            created_at: new Date().toISOString(),
+          });
+        }
+      } else if (process.env.NODE_ENV !== "production") {
+        mockDb.attempts.push({
+          id: `att_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+          studentId,
+          type: "diagnostic",
+          identifier: chapterId,
+          score: diagResult.correctCount,
+          total: diagResult.totalQuestions,
+          createdAt: new Date().toISOString(),
+        });
+      }
+    } catch (saveErr) {
+      console.warn("[Diagnostic Submit] Could not persist attempt to database:", saveErr);
+    }
 
     // Return graded output to client (no answer keys or distractor tags returned in questions)
     return NextResponse.json({
