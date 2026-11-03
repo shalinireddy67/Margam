@@ -3,7 +3,7 @@ import React from "react";
 export default function LoginShellFallback() {
   return (
     <div className="space-y-6 w-full animate-pulse motion-reduce:animate-none">
-      {/* Real Sign In Form Skeleton (Comes FIRST) */}
+      {/* Real sign in form skeleton (comes first) */}
       <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px] p-6 sm:p-8 space-y-6">
         <div className="text-center space-y-2">
           <div className="h-4 w-16 bg-[#2B1B0F]/15 mx-auto rounded-[2px]" />

@@ -1161,7 +1161,7 @@ export function generatePersonalizedWorksheet(
       }
     }
     isPersonalized = true;
-    personalizedReason = `Foundational reinforcement: Tailored to core problem-solving steps and mistake recovery.`;
+    personalizedReason = `Foundational reinforcement: Targeted to core problem-solving steps and mistake recovery.`;
   }
   // 3. Condition C: Advancing / High Mastery (mastery >= 80% or streak >= 3)
   else if (!isPersonalized && (mastery >= 80 || (progress?.consecutiveCorrect && progress.consecutiveCorrect >= 3))) {
@@ -1173,7 +1173,7 @@ export function generatePersonalizedWorksheet(
   else if (!isPersonalized) {
     targetDifficulty = currentDiff;
     isPersonalized = true;
-    personalizedReason = `Adaptive balanced practice tailored to your current performance level.`;
+    personalizedReason = `Adaptive balanced practice based on your current performance level.`;
   }
 
   // Fill remaining questions using hierarchical anti-repetition:
@@ -1225,7 +1225,7 @@ export function generatePersonalizedWorksheet(
   }
 
   return {
-    worksheetTitle: `${concept.name.en} • Practice Worksheet`,
+    worksheetTitle: `${concept.name.en}, Practice worksheet`,
     concept,
     targetDifficulty,
     isPersonalized,
@@ -1418,7 +1418,7 @@ export function evaluatePracticeSubmission(
   } else if (gapResolved) {
     nextAction = {
       title: "Return to Main Learning Path",
-      description: "Foundational prerequisite repaired! Continue your chapter journey.",
+      description: "Foundational prerequisite completed. Continue with your chapter lessons.",
       href: "/",
     };
   } else {

@@ -91,7 +91,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         b1Num: "01",
         b1Title: "Diagnostic",
         b1Text:
-          "A 5-question check-in tests prerequisite mastery behind your current class topic, tracing errors back to earlier grades.",
+          "A 5-question check-in tests prerequisite understanding behind your current class topic, tracing errors back to earlier classes.",
         b2Num: "02",
         b2Title: "Fix the Gap",
         b2Text:
@@ -99,7 +99,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         b3Num: "03",
         b3Title: "Prove It",
         b3Text:
-          "Return to your grade-level problem with confidence, lock in concept mastery, and earn XP.",
+          "Return to your class-level problem with confidence, secure your understanding, and earn XP.",
       },
       s3: {
         tag: "03 // MISTAKE CREATURES",
@@ -1069,7 +1069,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
           {/* Question Box */}
           <div className="p-4 bg-[#FFF7E6] border-2 border-[#2B1B0F] rounded-[2px]">
             <span className="font-pixel text-[10px] text-[#7A4B2A] uppercase block mb-1">
-              Sample Class 10 Diagnostic Question
+              Sample Class 10 diagnostic question
             </span>
             <p className="font-heading font-bold text-base sm:text-lg text-[#2B1B0F] leading-snug">
               {sampleQuestion.q}

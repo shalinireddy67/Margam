@@ -358,7 +358,7 @@ export default function HomePage() {
                       href={`/student/worksheet/${firstActiveGapId}`}
                       className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
                     >
-                      <span>Jump to Practice Worksheet</span>
+                      <span>Start practice</span>
                     </Link>
                   </div>
                 </div>
@@ -399,7 +399,7 @@ export default function HomePage() {
                   id="revision-zone-heading"
                   className="font-heading font-extrabold text-xl sm:text-2xl text-[#FFF7E6]"
                 >
-                  Your Revision Zone
+                  Your revision topics
                 </h2>
               </div>
               <span className="text-xs font-heading font-bold text-[#FFE9A8]">
@@ -435,7 +435,7 @@ export default function HomePage() {
                     href={revisionQueue[0].href}
                     className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                   >
-                    <span>Start Revision Worksheet</span>
+                    <span>Start revision</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                   </Link>
                 </div>
@@ -506,13 +506,13 @@ export default function HomePage() {
 
                       <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#7A4B2A]">
                         <span className="text-[11px] font-heading font-bold text-[#FFE9A8]">
-                          Mastery: {item.mastery}%
+                          Progress: {item.mastery}%
                         </span>
                         <Link
                           href={item.href}
                           className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                         >
-                          <span>Practice Worksheet</span>
+                          <span>Start practice</span>
                           <ArrowRight className="w-3 h-3 ml-1" />
                         </Link>
                       </div>

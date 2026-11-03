@@ -67,7 +67,7 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
       dates: "28–29 Oct",
       done: false,
       points: [
-        "Classroom mastery heatmap matrix",
+        "Classroom topic progress heatmap",
         "Automated remedial peer grouping engine",
         "Single-click 1-page A4 worksheet generator",
         "Teacher topic override authority",

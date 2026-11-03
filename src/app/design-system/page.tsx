@@ -116,7 +116,7 @@ export default function DesignSystemPage() {
               {copy.sampleBody}
             </p>
             <p className="text-xs font-bold text-[#666666]">
-              Headings: Baloo 2 / Baloo Tammudu 2 (600, 800) • Body: Nunito / Noto Sans (400, 700)
+              Headings: Baloo 2 / Baloo Tammudu 2 (600, 800), Body: Nunito / Noto Sans (400, 700)
             </p>
           </Card>
         </section>
@@ -130,15 +130,15 @@ export default function DesignSystemPage() {
             {copy.buttons}
           </h2>
           <div className="flex flex-wrap gap-3">
-            <Button variant="yellow">Yellow Primary</Button>
+            <Button variant="yellow">Yellow primary</Button>
             <Button variant="cyan">Cyan</Button>
-            <Button variant="pink">Pink Accent</Button>
-            <Button variant="green">Green Success</Button>
-            <Button variant="sky">Sky Blue</Button>
+            <Button variant="pink">Pink accent</Button>
+            <Button variant="green">Green success</Button>
+            <Button variant="sky">Sky blue</Button>
             <Button variant="orange">Orange</Button>
             <Button variant="white">White</Button>
-            <Button variant="ink">Dark Ink</Button>
-            <Button variant="yellow" disabled>Disabled State</Button>
+            <Button variant="ink">Dark ink</Button>
+            <Button variant="yellow" disabled>Disabled state</Button>
           </div>
         </section>
 
@@ -235,7 +235,7 @@ export default function DesignSystemPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Tile
               title="Quadratic Equations"
-              subtitle="Class 10 • Chapter 4"
+              subtitle="Class 10, Chapter 4"
               state="available"
               color="yellow"
               diagnosticHref="#diagnose"
@@ -243,7 +243,7 @@ export default function DesignSystemPage() {
             />
             <Tile
               title="Coordinate Geometry"
-              subtitle="Class 10 • Chapter 7"
+              subtitle="Class 10, Chapter 7"
               state="in_progress"
               color="cyan"
               practiceHref="#practice"
@@ -251,7 +251,7 @@ export default function DesignSystemPage() {
             />
             <Tile
               title="Triangles & Similarity"
-              subtitle="Class 10 • Chapter 6"
+              subtitle="Class 10, Chapter 6"
               state="coming_soon"
             />
           </div>
@@ -263,7 +263,7 @@ export default function DesignSystemPage() {
             </p>
             <Tile
               title="Concept Remediation: Negative Integers"
-              subtitle="Prerequisite concept • Complete previous lesson to unlock"
+              subtitle="Prerequisite concept, complete previous lesson first"
               state="locked"
               kind="lesson"
             />

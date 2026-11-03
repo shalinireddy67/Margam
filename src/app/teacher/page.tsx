@@ -265,16 +265,16 @@ export default function TeacherPage() {
               href="/student"
               className="glass-btn-primary inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline"
             >
-              <span>Student View</span>
+              <span>Student view</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Link>
             <button
               onClick={handleLogout}
               className="inline-flex items-center justify-center min-h-[38px] px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-heading font-bold border border-rose-200 rounded-xl shadow-xs transition-transform active:translate-y-0.5 cursor-pointer"
-              title="Sign Out"
+              title="Sign out"
             >
               <LogOut className="w-3.5 h-3.5 sm:mr-1" />
-              <span className="hidden sm:inline">Sign Out</span>
+              <span className="hidden sm:inline">Sign out</span>
             </button>
           </div>
         </div>
@@ -332,13 +332,13 @@ export default function TeacherPage() {
                 </div>
                 <div className="space-y-2">
                   <span className="px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide">
-                    TEACHER PORTAL
+                    TEACHER DASHBOARD
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#2B1B0F]">
                     No Classes Created Yet
                   </h2>
                   <p className="text-sm text-[#2B1B0F]/80 font-sans max-w-md mx-auto leading-relaxed">
-                    Create your first classroom to generate a unique join code for your students, track diagnostic mastery, and automatically surface foundational gaps.
+                    Create your first classroom to generate a unique join code for your students, track diagnostic progress, and see which earlier topics students are missing.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -373,7 +373,7 @@ export default function TeacherPage() {
                     </span>
                   )}
                   <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
-                    {activeLiveClass?.schoolName || "Example Public School"} • {activeLiveClass?.name || "Class 10-A (demo)"}
+                    {activeLiveClass?.schoolName || "Example Public School"}, {activeLiveClass?.name || "Class 10-A (demo)"}
                   </h2>
                 </div>
 
@@ -434,11 +434,11 @@ export default function TeacherPage() {
                   <span>
                     <strong>Class Teacher:</strong> {teacherUser?.fullName || "Demo Teacher"}
                   </span>
-                  <span>•</span>
+                  <span>,</span>
                   <span>
                     <strong>Curriculum:</strong> NCERT Mathematics (Class 10)
                   </span>
-                  <span>•</span>
+                  <span>,</span>
                   <span>
                     <strong>Enrolled Roster:</strong> {totalClassStudents} Students
                   </span>
@@ -482,7 +482,7 @@ export default function TeacherPage() {
               {/* Card 3: Concept Mastery */}
               <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
-                  <span>Concept Mastery</span>
+                  <span>Concept progress</span>
                   <Sparkles className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-heading font-black text-emerald-950">
@@ -534,7 +534,7 @@ export default function TeacherPage() {
                 <div className="p-3.5 rounded-xl bg-white/70 border border-rose-200 shadow-2xs space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
-                      c7-int-02 • Class 7
+                      c7-int-02, Class 7
                     </span>
                     <span className="text-[10px] font-heading font-extrabold text-rose-900">
                       4 Students
@@ -556,7 +556,7 @@ export default function TeacherPage() {
                 <div className="p-3.5 rounded-xl bg-white/70 border border-amber-200 shadow-2xs space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
-                      c7-num-01 • Class 7
+                      c7-num-01, Class 7
                     </span>
                     <span className="text-[10px] font-heading font-extrabold text-amber-900">
                       3 Students
@@ -578,7 +578,7 @@ export default function TeacherPage() {
                 <div className="p-3.5 rounded-xl bg-white/70 border border-sky-200 shadow-2xs space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded">
-                      c8-alg-03 • Class 8
+                      c8-alg-03, Class 8
                     </span>
                     <span className="text-[10px] font-heading font-extrabold text-sky-900">
                       2 Students
@@ -695,7 +695,7 @@ export default function TeacherPage() {
                         <th className="py-2.5 px-3">Username</th>
                         <th className="py-2.5 px-3">Pedagogical Persona</th>
                         <th className="py-2.5 px-3">Diagnostic Score</th>
-                        <th className="py-2.5 px-3">Mastery</th>
+                        <th className="py-2.5 px-3">Progress</th>
                         <th className="py-2.5 px-3">Key Gap / Status</th>
                         <th className="py-2.5 px-3 text-right">Action</th>
                       </tr>
@@ -790,7 +790,7 @@ export default function TeacherPage() {
               )}
             </div>
 
-            {/* Modal: Inspect Student Profile & Diagnostic Journey */}
+            {/* Modal: Inspect student profile and diagnostic history */}
             {inspectingStudent && (
               <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
                 <div className="glass-panel p-6 rounded-3xl border border-white/90 shadow-[0_16px_50px_rgba(0,0,0,0.25)] max-w-xl w-full max-h-[90vh] overflow-y-auto space-y-5 text-slate-800 bg-white/95">
@@ -799,7 +799,7 @@ export default function TeacherPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-heading font-bold">
-                          {activeLiveClass?.schoolName || "Example Public School"} • Class 10-A (demo)
+                          {activeLiveClass?.schoolName || "Example Public School"}, Class 10-A (demo)
                         </span>
                         {inspectingStudent.rollNumber && (
                           <span className="font-mono text-xs font-bold text-slate-500">
@@ -930,7 +930,7 @@ export default function TeacherPage() {
                             <div key={aIdx} className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
                               <div>
                                 <span className="font-heading font-bold text-slate-800 capitalize">
-                                  {att.type} • {att.identifier}
+                                  {att.type}, {att.identifier}
                                 </span>
                                 <span className="block text-[10px] text-slate-500">
                                   {att.created_at || att.createdAt ? new Date(att.created_at || att.createdAt).toLocaleString() : "Recent"}
@@ -948,7 +948,7 @@ export default function TeacherPage() {
                     )}
                   </div>
 
-                  {/* Concept Mastery Progress */}
+                  {/* Topic progress */}
                   <div className="space-y-2">
                     <h4 className="font-heading font-bold text-xs text-slate-700 uppercase tracking-wider">
                       Concept Mastery Progress
@@ -1018,7 +1018,7 @@ export default function TeacherPage() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-700 block">
-                    Grade Realm
+                    Class
                   </label>
                   <div className="grid grid-cols-5 gap-1">
                     {[6, 7, 8, 9, 10].map((g) => (
@@ -1048,7 +1048,7 @@ export default function TeacherPage() {
                     type="submit"
                     className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-xs font-heading font-bold text-white rounded-xl shadow-xs cursor-pointer"
                   >
-                    Create Class
+                    Create class
                   </button>
                 </div>
               </form>
@@ -1073,7 +1073,7 @@ export default function TeacherPage() {
                     {syntheticClassData.className} — {syntheticClassData.chapterName}
                   </h1>
                   <p className="text-xs text-slate-600 font-sans mt-0.5">
-                    Teacher: {syntheticClassData.teacherName} • Chapter ID: {syntheticClassData.chapterId} • 25 Scripted Student Profiles
+                    Teacher: {syntheticClassData.teacherName}, Chapter ID: {syntheticClassData.chapterId}, 25 demo students
                   </p>
                 </div>
               </div>
@@ -1088,7 +1088,7 @@ export default function TeacherPage() {
         <section className="glass-panel p-4 sm:p-5 rounded-2xl border border-white/80 shadow-xs space-y-2">
           <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-950 mb-2">
             <Smartphone className="w-4 h-4 text-emerald-700" />
-            <span className="uppercase tracking-wider">This Device • Active Learner Session</span>
+            <span className="uppercase tracking-wider">This device: active student session</span>
             <span className="ml-auto text-[11px] font-medium text-slate-500">Local Browser State</span>
           </div>
 
@@ -1105,7 +1105,7 @@ export default function TeacherPage() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-600 font-sans mt-1">
-                  Active topics: {Object.keys(localProfile.topicProgress || {}).length} tracked •
+                  Active topics: {Object.keys(localProfile.topicProgress || {}).length} tracked,
                   Streak: {localProfile.consecutiveCorrect || 0} correct
                 </p>
               </div>
@@ -1114,7 +1114,7 @@ export default function TeacherPage() {
                   href="/student"
                   className="glass-btn-primary min-h-[40px] px-4 py-2 text-xs font-heading font-bold flex items-center justify-center gap-1.5 flex-1 sm:flex-none rounded-xl cursor-pointer"
                 >
-                  <span>Resume Learning</span>
+                  <span>Resume lesson</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -1136,7 +1136,7 @@ export default function TeacherPage() {
                 href="/student"
                 className="glass-btn-primary min-h-[40px] px-4 py-2 text-xs font-heading font-bold flex items-center justify-center gap-1.5 rounded-xl cursor-pointer w-full sm:w-auto"
               >
-                <span>Launch Student Session</span>
+                <span>Open student view</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -1182,7 +1182,7 @@ export default function TeacherPage() {
                 {metrics.topMissingPrerequisite?.conceptId}
               </div>
               <span className="text-[10px] font-bold text-[#E5D7BE] block mt-1 truncate">
-                Class {metrics.topMissingPrerequisite?.class} • {metrics.topMissingPrerequisite?.count} Students ({metrics.topMissingPrerequisite?.percentage}%)
+                Class {metrics.topMissingPrerequisite?.class}, {metrics.topMissingPrerequisite?.count} students ({metrics.topMissingPrerequisite?.percentage}%)
               </span>
             </div>
             <button
@@ -1245,7 +1245,7 @@ export default function TeacherPage() {
                 : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
-            Quest Board & XP
+            Activity board & XP
           </button>
         </div>
 
@@ -1431,7 +1431,7 @@ export default function TeacherPage() {
                     </span>
                     <div className="text-xs text-[#E5D7BE] space-y-0.5">
                       <div className="truncate font-bold text-emerald-950">Kavya R. (8d idle)</div>
-                      <div className="truncate text-[11px] text-[#D9D9D9]/70">No quests logged this week</div>
+                      <div className="truncate text-[11px] text-[#D9D9D9]/70">No activity logged this week</div>
                     </div>
                   </div>
                 </div>
@@ -1659,7 +1659,7 @@ export default function TeacherPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="font-heading font-black text-lg text-ink">
-                  Classroom Concept Mastery Heatmap (25 × 10 Matrix)
+                  Classroom topic progress heatmap (25 × 10 Matrix)
                 </h2>
                 <p className="text-xs text-slate-600 mt-0.5">
                   Every cell displays a status letter (M, P, G, L) and color token computed directly by the Margam engine.
@@ -1744,7 +1744,7 @@ export default function TeacherPage() {
                             <td
                               key={cell.conceptId}
                               className="p-1.5 border-r border-ink/20 text-center"
-                              title={`${st.name} • ${cell.name}: ${cell.masteryPercentage}% (${cell.status})`}
+                              title={`${st.name}, ${cell.name}: ${cell.masteryPercentage}% (${cell.status})`}
                             >
                               <div
                                 className={`w-8 h-8 mx-auto rounded-lg border-2 border-ink font-heading font-black text-xs flex items-center justify-center shadow-hard-sm ${cellStyle}`}
@@ -1905,7 +1905,7 @@ export default function TeacherPage() {
               `}</style>
               <div className="flex justify-between items-center border-b-2 border-ink pb-3">
                 <div>
-                  <h3 className="font-heading font-black text-sm">Margam Adaptive Learning • Targeted Remediation</h3>
+                  <h3 className="font-heading font-black text-sm">Margam · Targeted remediation</h3>
                   <p className="text-[11px] text-slate-600">Topic: Integer Multiplication & Rule of Signs (Class 7 Prerequisite)</p>
                 </div>
                 <div className="text-right text-[11px] font-mono">
@@ -1948,7 +1948,7 @@ export default function TeacherPage() {
 
               <div className="pt-4 border-t-2 border-ink text-[10px] text-slate-500 flex justify-between">
                 <span>Teacher Signature: _____________________</span>
-                <span>Margam Remedial Print Edition • Zero Internet Required</span>
+                <span>Margam worksheet printout (offline)</span>
               </div>
             </div>
           </div>
@@ -1981,7 +1981,7 @@ export default function TeacherPage() {
                 </div>
 
                 <p className="text-xs text-[#E5D7BE] leading-relaxed">
-                  As the classroom educator, you can enable or disable the public quest board for this cohort, or hide individual students to ensure healthy, friendly learning motivation.
+                  As the teacher, you can enable or disable the public activity board for this class, or hide individual students.
                 </p>
 
                 {/* Individual Student Visibility Table */}
@@ -2036,9 +2036,9 @@ export default function TeacherPage() {
       {/* Footer */}
       <footer className="border-t-3 border-[#2B1B0F] py-6 text-center text-xs font-bold bg-white mt-12">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span className="text-[#2B1B0F]">Margam • Teacher Partnership & Classroom Practice</span>
+          <span className="text-[#2B1B0F]">Margam · Teacher dashboard & classroom practice</span>
           <span className="text-[11px] font-black px-2.5 py-0.5 border border-[#2B1B0F] bg-[#FFE9A8] text-[#2B1B0F] shadow-xs">
-            {viewMode === "live" ? "Live Classroom • Margam Adaptive Engine" : "Synthetic demo class, generated by the Margam engine"}
+            {viewMode === "live" ? "Live classroom, Margam" : "Synthetic demo class, generated by the Margam engine"}
           </span>
         </div>
       </footer>

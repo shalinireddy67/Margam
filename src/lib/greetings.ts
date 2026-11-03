@@ -28,7 +28,7 @@ export const CAT_TIME_GREETINGS: Record<TimeOfDay, LocalizedString> = {
 };
 
 export const CAT_GREETING_SUBTITLES: Record<SupportedLanguage, string> = {
-  en: "Ready for today's maths journey?",
+  en: "Ready for maths practice today?",
   hi: "क्या आप आज के गणित अभ्यास के लिए तैयार हैं?",
   te: "ఈరోజు గణిత అభ్యాసానికి సిద్ధంగా ఉన్నారా?",
 };

@@ -9,7 +9,7 @@ export default function TeacherLoading() {
         </div>
         <div className="space-y-1.5">
           <h2 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
-            Loading Teacher Portal
+            Loading teacher dashboard
           </h2>
           <p className="text-xs text-[#2B1B0F]/75 font-sans leading-relaxed">
             Gathering classroom diagnostics and concept analytics...

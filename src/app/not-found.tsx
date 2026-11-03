@@ -20,9 +20,9 @@ export default function NotFound() {
       <main className="max-w-md mx-auto px-4 py-16 text-center w-full my-auto">
         <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-8 space-y-4">
           <span className="font-pixel text-4xl text-[#E04A3F] block">404</span>
-          <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page Not Found</h1>
+          <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page not found</h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-            The requested mathematics lesson or page does not exist. Check the URL or return to the home screen.
+            The requested page does not exist. Check the address or return to the home screen.
           </p>
           <div className="pt-2">
             <Link
@@ -30,7 +30,7 @@ export default function NotFound() {
               className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[4px_4px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] no-underline"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Return Home</span>
+              <span>Back to home</span>
             </Link>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function NotFound() {
 
       {/* Footer Ground Strip */}
       <footer className="border-t-[3px] border-[#422816] py-4 text-center text-xs text-[#FFF7E6] bg-[#5A3720]">
-        Margam Educational Platform • Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

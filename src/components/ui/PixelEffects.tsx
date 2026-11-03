@@ -181,7 +181,7 @@ export function SegmentedXpBar({
         <div className="flex items-center gap-1.5">
           <span className="text-base select-none">{rank.badge}</span>
           <span className="text-[#FFE9A8] uppercase tracking-wider">{rank.name}</span>
-          <span className="text-[#D9D9D9]/80">• Lv {level}</span>
+          <span className="text-[#D9D9D9]/80">, level {level}</span>
         </div>
         <div className="text-[11px] text-[#FFE9A8]" aria-live="polite">
           {progressPercent}% ({xpUntilNextLevel} XP to Lv {level + 1})
@@ -253,7 +253,7 @@ export function LevelUpModal({
         </h2>
 
         <p className="text-xs text-[#E5D7BE] font-medium leading-relaxed mb-4">
-          You have achieved the <strong className="text-[#FFE9A8]">{rank.name} Rank</strong> in the Margam realm! Keep exploring to unlock diamond tier achievements.
+          You have reached the <strong className="text-[#FFE9A8]">{rank.name} rank</strong>! Keep practicing to earn higher tier badges.
         </p>
 
         <button

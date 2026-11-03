@@ -51,7 +51,7 @@ export default function DiagnosticHubPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
           <div className="w-8 h-8 border-3 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-cyan-950">Opening Diagnostic Portal...</p>
+          <p className="font-heading text-xs text-cyan-950">Loading diagnostic checks...</p>
         </div>
       </div>
     );
@@ -86,11 +86,10 @@ export default function DiagnosticHubPage() {
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
-              Diagnostic Mastery Tests
+              Chapter diagnostics
             </h1>
             <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Diagnostics evaluate your mastery across chapter prerequisites. Scoring 70% or higher automatically
-              unlocks all chapter lessons, while detecting any specific misconceptions that need review.
+              Diagnostics evaluate prerequisite topics for each chapter. Scoring 70% or higher marks chapter lessons available, and identifies earlier topics that need review.
             </p>
           </div>
 
@@ -99,7 +98,7 @@ export default function DiagnosticHubPage() {
             className="py-2.5 px-4 rounded-xl bg-white/80 hover:bg-white text-emerald-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white shadow-xs transition-colors shrink-0"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Open Learn Cascade</span>
+            <span>Open lessons</span>
           </Link>
         </div>
 
@@ -125,11 +124,11 @@ export default function DiagnosticHubPage() {
                     </span>
                     {hasDiagnostic ? (
                       <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                        Diagnostic Active
+                        Diagnostic ready
                       </span>
                     ) : (
                       <span className="text-[10px] font-heading font-bold text-slate-500">
-                        Learn Direct
+                        Study directly
                       </span>
                     )}
                   </div>
@@ -138,7 +137,7 @@ export default function DiagnosticHubPage() {
                     {chapter.name[currentLang] || chapter.name.en}
                   </h3>
                   <p className="text-xs text-slate-600 font-sans">
-                    {chapterConcepts.length} Concepts in this chapter syllabus.
+                    {chapterConcepts.length} topics in this chapter.
                   </p>
                 </div>
 
@@ -149,7 +148,7 @@ export default function DiagnosticHubPage() {
                       className="w-full py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors"
                     >
                       <Target className="w-3.5 h-3.5" />
-                      <span>Take Diagnostic</span>
+                      <span>Start diagnostic</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   ) : (
@@ -157,7 +156,7 @@ export default function DiagnosticHubPage() {
                       href="/student/learn"
                       className="w-full py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-heading font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
                     >
-                      <span>Study Topics</span>
+                      <span>Study topics</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   )}
@@ -170,8 +169,8 @@ export default function DiagnosticHubPage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

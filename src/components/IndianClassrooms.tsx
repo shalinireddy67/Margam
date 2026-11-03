@@ -113,7 +113,7 @@ export default function IndianClassrooms({ currentLang }: IndianClassroomsProps)
             </p>
           </div>
           <span className="text-xs font-pixel text-[#7A4B2A] pt-3 border-t-2 border-[#E5D7BE] block">
-            ₹ Rupees • Auto Fares • Cricket Run Rates
+            ₹ Rupees, auto fares, cricket run rates
           </span>
         </div>
 

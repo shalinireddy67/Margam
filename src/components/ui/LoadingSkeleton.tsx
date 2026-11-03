@@ -87,16 +87,16 @@ export function EmptyState({
   );
 }
 
-const REALM_TIPS = [
+const STUDY_TIPS = [
   "Every gap is a block waiting to be placed.",
   "Foundational blocks build the tallest mathematical towers.",
-  "Master integer rules to unlock algebraic equations.",
+  "Understand integer rules before starting algebraic equations.",
   "Even great mathematicians placed one block at a time.",
   "Reviewing prerequisites lights up your learning map.",
 ];
 
 export function VoxelRealmLoader({
-  message = "Loading Realm...",
+  message = "Loading dashboard...",
   subtext,
   progress = 65,
 }: {
@@ -108,7 +108,7 @@ export function VoxelRealmLoader({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTipIndex((prev) => (prev + 1) % REALM_TIPS.length);
+      setTipIndex((prev) => (prev + 1) % STUDY_TIPS.length);
     }, 3800);
     return () => clearInterval(interval);
   }, []);
@@ -136,7 +136,7 @@ export function VoxelRealmLoader({
       </div>
 
       <p className="text-xs sm:text-sm font-bold text-[#FFF7E6] max-w-md bg-[#422816]/70 border-2 border-[#7A4B2A] px-4 py-2 shadow-[2px_2px_0px_rgba(0,0,0,0.35)] min-h-[44px] flex items-center justify-center">
-        💡 {subtext || REALM_TIPS[tipIndex]}
+        💡 {subtext || STUDY_TIPS[tipIndex]}
       </p>
     </div>
   );

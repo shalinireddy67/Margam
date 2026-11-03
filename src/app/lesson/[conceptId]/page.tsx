@@ -234,7 +234,7 @@ function LessonContent() {
     if (variantKey === "basics_first") {
       variantReason = "Basics-First: Focused on intuitive real-world analogies and concrete examples.";
     } else if (variantKey === "fast_track") {
-      variantReason = "Fast-Track: High mastery detected. Concise overview with advanced challenges.";
+      variantReason = "Fast-track: high previous score. Concise overview with advanced practice.";
     } else {
       variantReason = "Standard: Balanced conceptual explanation with step-by-step worked examples.";
     }
@@ -387,7 +387,7 @@ function LessonContent() {
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
               <span>Class {concept.class}</span>
-              <span>•</span>
+              <span>,</span>
               <span>Topic {concept.id}</span>
             </div>
 
@@ -518,7 +518,7 @@ function LessonContent() {
                   className="inline-flex items-center justify-center min-h-[44px] gap-1 px-3 py-1.5 rounded-xl border border-white/90 bg-white/80 hover:bg-white shadow-xs text-xs font-heading font-bold text-slate-700 hover:text-slate-900 active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Try Again</span>
+                  <span>Try again</span>
                 </button>
               )}
             </div>
@@ -655,7 +655,7 @@ function LessonContent() {
             <span className="text-[11px] text-slate-600 font-sans block">
               {isCompleted
                 ? "You can now attempt the full practice worksheet or return to your path."
-                : "Mark this lesson completed to unlock practice and next topics."}
+                : "Mark this lesson completed to make practice and next topics available."}
             </span>
           </div>
 
@@ -675,7 +675,7 @@ function LessonContent() {
                   href={`/student/worksheet/${conceptId}`}
                   className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                 >
-                  <span>Attempt Practice Worksheet</span>
+                  <span>Start practice</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
@@ -691,7 +691,7 @@ function LessonContent() {
       </main>
 
       <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
-        Margam Adaptive Mathematics • Lesson Workspace
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

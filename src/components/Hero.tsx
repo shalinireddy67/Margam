@@ -11,18 +11,18 @@ interface HeroProps {
 export default function Hero({ currentLang }: HeroProps) {
   const content = {
     en: {
-      badge: "Adaptive Math • Classes 6 to 10",
+      badge: "Maths for Classes 6-10",
       headline: "Find what you need to learn next.",
       subhead:
         "Stuck on Class 9 math? The missing piece is often an easy rule from Class 7. We find the exact gap and help you fix it with short, simple steps.",
       chip1: "NCERT Aligned",
-      chip2: "English • हिन्दी • తెలుగు",
+      chip2: "English, हिन्दी, తెలుగు",
       chip3: "100% Free & Private",
       ctaMain: "Try 3 questions",
       ctaSecondary: "See how it works",
       sampleCardLabel: "Sample student",
       sampleName: "Aditi Sharma",
-      sampleGrade: "Class 9B • Roll #14",
+      sampleGrade: "Class 9B, roll 14",
       progressLabel: "Weekly Goal",
       progressValue: "2 of 3 Gaps Fixed",
       streakLabel: "4-Day Streak",
@@ -36,18 +36,18 @@ export default function Hero({ currentLang }: HeroProps) {
       recentAchievement: "Sign rules (-3 × +2 = -6) mastered today!",
     },
     hi: {
-      badge: "अनुकूली गणित • कक्षा 6 से 10",
+      badge: "गणित, कक्षा 6 से 10",
       headline: "जानें आगे क्या सीखना है।",
       subhead:
         "कक्षा 9 के गणित में अटक रहे हैं? असली कमी अक्सर कक्षा 7 के किसी बुनियादी नियम में होती है। हम सटीक कमी खोजकर उसे सरल तरीके से सुधारते हैं।",
       chip1: "एनसीईआरटी संरेखित",
-      chip2: "अंग्रेजी • हिन्दी • तेलुगु",
+      chip2: "अंग्रेजी, हिन्दी, तेलुगु",
       chip3: "पूर्णतः निःशुल्क व सुरक्षित",
       ctaMain: "3 प्रश्न हल करें",
       ctaSecondary: "देखें यह कैसे काम करता है",
       sampleCardLabel: "नमूना छात्र प्रोफ़ाइल",
       sampleName: "अदिति शर्मा",
-      sampleGrade: "कक्षा 9B • रोल #14",
+      sampleGrade: "कक्षा 9B, रोल 14",
       progressLabel: "साप्ताहिक लक्ष्य",
       progressValue: "3 में से 2 कमियाँ दूर",
       streakLabel: "4-दिन की निरंतरता",
@@ -61,18 +61,18 @@ export default function Hero({ currentLang }: HeroProps) {
       recentAchievement: "चिह्न नियम (-3 × +2 = -6) में महारत हासिल की!",
     },
     te: {
-      badge: "అనుకూల గణితం • 6 నుండి 10 తరగతులు",
+      badge: "గణితం, 6 నుండి 10 తరగతులు",
       headline: "తదుపరి ఏమి నేర్చుకోవాలో కనుగొనండి.",
       subhead:
         "9వ తరగతి లెక్కల్లో ఇబ్బంది పడుతున్నారా? అసలు లోపం 7వ తరగతి సూత్రాలలో ఉండవచ్చు. మేము ఆ లోపాన్ని సులభమైన దశల్లో సరిచేస్తాము.",
       chip1: "NCERT ప్రమాణాలు",
-      chip2: "ఇంగ్లీష్ • हिन्दी • తెలుగు",
+      chip2: "ఇంగ్లీష్, हिन्दी, తెలుగు",
       chip3: "పూర్తిగా ఉచితం & సురక్షితం",
       ctaMain: "3 ప్రశ్నలు సాధించండి",
       ctaSecondary: "ఇది ఎలా పనిచేస్తుందో చూడండి",
       sampleCardLabel: "నమూనా విద్యార్థి ప్రొఫైల్",
       sampleName: "అదితి శర్మ",
-      sampleGrade: "9వ తరగతి B • రోల్ #14",
+      sampleGrade: "9వ తరగతి B, రోల్ 14",
       progressLabel: "వారపు లక్ష్యం",
       progressValue: "3 లో 2 లోపాలు పూర్తయ్యాయి",
       streakLabel: "4 రోజుల సాధన",
@@ -129,7 +129,7 @@ export default function Hero({ currentLang }: HeroProps) {
               href="/student"
               className="inline-flex items-center justify-center min-h-[52px] px-8 bg-[#5DAA3A] hover:bg-[#4E9330] text-white font-pixel text-xs border-[2px] border-[#422816] shadow-[3px_3px_0px_#1B120C] transition-all cursor-pointer no-underline"
             >
-              <span>Start Learning</span>
+              <span>Start learning</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </a>
 

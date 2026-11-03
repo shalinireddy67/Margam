@@ -24,10 +24,10 @@ export default function LessonErrorBoundary({
 
         <div className="space-y-2">
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#2B1B0F]">
-            Lesson Could Not Load
+            Lesson could not load
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-            There was a temporary issue reading this lesson. Your study progress is safely preserved.
+            This lesson could not load. Reload the page or return to your lessons.
           </p>
         </div>
 
@@ -38,14 +38,14 @@ export default function LessonErrorBoundary({
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            <span>Reload Lesson</span>
+            <span>Reload lesson</span>
           </button>
           <Link
             href="/student"
             className="flex-1 min-h-[48px] px-5 py-3 bg-white hover:bg-[#FFF7E6] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 no-underline"
           >
             <Home className="w-4 h-4" />
-            <span>Return to Lessons</span>
+            <span>Return to lessons</span>
           </Link>
         </div>
       </div>

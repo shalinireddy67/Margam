@@ -120,7 +120,7 @@ export default function PracticeHubPage() {
             className="py-2.5 px-4 rounded-xl bg-white/80 hover:bg-white text-emerald-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white shadow-xs transition-colors shrink-0"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>View Lesson Cascade</span>
+            <span>View lessons</span>
           </Link>
         </div>
 
@@ -222,7 +222,7 @@ export default function PracticeHubPage() {
                       className="w-full py-2 px-3.5 rounded-xl bg-slate-200 text-slate-600 font-heading font-bold text-xs flex items-center justify-center gap-1.5"
                     >
                       <Lock className="w-3.5 h-3.5" />
-                      <span>Unlock in Learn</span>
+                      <span>Study in lessons</span>
                     </Link>
                   )}
                 </div>
@@ -235,7 +235,7 @@ export default function PracticeHubPage() {
 
       {/* Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

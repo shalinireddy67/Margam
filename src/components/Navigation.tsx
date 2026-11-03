@@ -219,7 +219,7 @@ export function Navigation({
                   {levelInfo && (
                     <div
                       className="hidden md:flex items-center gap-1.5 px-2.5 py-1 bg-[#FFF7E6] border-2 border-[#2B1B0F] text-xs font-sans font-extrabold text-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] select-none"
-                      title={`Level ${levelInfo.level} • ${levelInfo.rank.name} Rank`}
+                      title={`Level ${levelInfo.level}, ${levelInfo.rank.name} rank`}
                     >
                       <span>{levelInfo.rank.badge}</span>
                       <span className="hidden xl:inline">{levelInfo.rank.name}</span>

@@ -38,11 +38,11 @@ export default function StudentHeader({
 
   const levelInfo = profile ? getLevelProgress(profile.xp || 0) : null;
   const gradeNames: Record<number, string> = {
-    6: "Class 6 • Ganita Prakash",
-    7: "Class 7 • Ganita Prakash",
-    8: "Class 8 • Ganita Prakash",
-    9: "Class 9 • Ganita Manjari",
-    10: "Class 10 • Mathematics",
+    6: "Class 6: Ganita Prakash",
+    7: "Class 7: Ganita Prakash",
+    8: "Class 8: Ganita Prakash",
+    9: "Class 9: Ganita Manjari",
+    10: "Class 10: Mathematics",
   };
 
   return (
@@ -89,7 +89,7 @@ export default function StudentHeader({
               {/* Level & Rank Pill */}
               <div
                 className="flex items-center gap-1 px-2.5 py-1 bg-emerald-50/90 border border-emerald-200/80 rounded-xl text-xs font-heading font-bold text-emerald-800 shadow-xs select-none"
-                title={`${levelInfo?.rank.name} Rank • Level ${levelInfo?.level} (${profile.xp || 0} XP)`}
+                title={`${levelInfo?.rank.name} rank, level ${levelInfo?.level} (${profile.xp || 0} XP)`}
               >
                 <span>{levelInfo?.rank.badge}</span>
                 <span>Lv {levelInfo?.level}</span>

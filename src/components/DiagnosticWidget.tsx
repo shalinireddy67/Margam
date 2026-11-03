@@ -92,11 +92,11 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
   const t = {
     en: {
       badge: "Interactive Diagnostic",
-      headline: "Try 3 Questions to Trace Your Path",
+      headline: "Try 3 questions to trace your path",
       subhead:
-        "Answer 3 quick math questions from Class 9 down to Class 7. Margam checks your answers and pinpoints where you need a quick boost.",
+        "Answer 3 quick maths questions from Class 9 down to Class 7. Margam checks your answers and finds any topic you missed.",
       stepLabel: `Question ${currentStep + 1} of ${currentQuestions.length}`,
-      nextBtn: "Next Question",
+      nextBtn: "Next question",
       finishBtn: "View Diagnostic Map",
       restartBtn: "Restart Diagnostic",
       resultTitle: "Diagnostic Assessment Complete",
@@ -174,7 +174,7 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
                   <div className="flex items-center justify-between text-xs font-heading font-bold">
                     <span className="text-[#FFE9A8] uppercase tracking-wider">{t.stepLabel}</span>
                     <span className="text-[#FFF7E6]/80 text-[11px]">
-                      Class {activeConcept?.class || 9} • {activeConcept?.chapter || "Mathematics"}
+                      Class {activeConcept?.class || 9}, {activeConcept?.chapter || "Mathematics"}
                     </span>
                   </div>
                   <ProgressBar

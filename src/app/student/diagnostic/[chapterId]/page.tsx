@@ -294,7 +294,7 @@ export default function ChapterDiagnosticPage() {
                 onClick={initDiagnostic}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                <span>Try Again</span>
+                <span>Try again</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -548,8 +548,8 @@ export default function ChapterDiagnosticPage() {
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-                  <span>Chapter Diagnostic</span>
-                  <span>•</span>
+                  <span>Chapter diagnostic</span>
+                  <span>,</span>
                   <span>Class {profile.selectedClass}</span>
                 </div>
                 <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-slate-700 shadow-2xs">
@@ -562,7 +562,7 @@ export default function ChapterDiagnosticPage() {
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium text-xs sm:text-sm">
-                Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
+                Answer these 6 questions. Margam checks your answers against the NCERT prerequisite graph to see what you understand and find any earlier topics you missed.
               </p>
 
               {errorMessage && (
@@ -602,14 +602,14 @@ export default function ChapterDiagnosticPage() {
                     </span>
                     <h2 className="font-heading font-extrabold text-lg sm:text-2xl text-emerald-950 mt-0.5">
                       {result.passed
-                        ? "Chapter Mastery Unlocked! 🎉"
+                        ? "Chapter lessons ready"
                         : foundGapsCount > 0
                         ? "Foundational Gap Identified"
                         : "Practice Recommended"}
                     </h2>
                     <p className="text-xs text-slate-600 font-sans font-medium mt-1">
                       {result.passed
-                        ? "You demonstrated strong mastery of the chapter prerequisites. All chapter quests are unlocked!"
+                        ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
                         : "We analyzed your error patterns. Strengthening prerequisite concepts will make this chapter effortless."}
                     </p>
                   </div>
@@ -683,7 +683,7 @@ export default function ChapterDiagnosticPage() {
                     href={result.nextAction.href}
                     className="inline-flex items-center justify-center shrink-0 min-h-[46px] px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                   >
-                    <span>Start This Quest</span>
+                    <span>Start lesson</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </div>
@@ -696,7 +696,7 @@ export default function ChapterDiagnosticPage() {
                 <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
                   <h3 className="font-heading font-extrabold text-sm sm:text-base text-emerald-950 flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-[#5DAA3A]" />
-                    <span>Concept-Level Mastery Analysis</span>
+                    <span>Topic analysis</span>
                   </h3>
                   <span className="text-[10px] font-heading text-slate-500 uppercase">
                     Diagnosed against Prerequisite Graph
@@ -802,7 +802,7 @@ export default function ChapterDiagnosticPage() {
                           href={step.href}
                           className="self-end sm:self-center inline-flex items-center justify-center px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-bold text-xs shadow-xs no-underline transition-all shrink-0"
                         >
-                          <span>Open Quest</span>
+                          <span>Open lesson</span>
                           <ArrowRight className="w-3.5 h-3.5 ml-1" />
                         </Link>
                       </div>
@@ -1055,7 +1055,7 @@ export default function ChapterDiagnosticPage() {
                   type="submit"
                   className="w-full inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm transition-all"
                 >
-                  Confirm Diagnostic Result
+                  Confirm result
                 </button>
               )}
             </form>
@@ -1122,7 +1122,7 @@ export default function ChapterDiagnosticPage() {
                 <span>Diagnostic Bounty</span>
               </div>
               <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
-                Complete this diagnostic to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and unlock personalized practice worksheets!
+                Complete this diagnostic to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and make practice worksheets available.
               </p>
             </div>
           </aside>
@@ -1130,7 +1130,7 @@ export default function ChapterDiagnosticPage() {
       </main>
 
       <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
-        Margam Adaptive Mathematics • Intelligent Learning Gap Engine
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

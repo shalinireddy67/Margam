@@ -216,7 +216,7 @@ export default function ChapterTestRunnerPage() {
                 onClick={initTest}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                <span>Try Again</span>
+                <span>Try again</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -340,10 +340,10 @@ export default function ChapterTestRunnerPage() {
         {/* Header Card */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
           <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-            <span>Chapter Mastery Test</span>
-            <span>•</span>
+            <span>Chapter test</span>
+            <span>,</span>
             <span>Class {currentChapter.class}</span>
-            <span>•</span>
+            <span>,</span>
             <span>Chapter {currentChapter.chapterNumber}</span>
           </div>
 
@@ -352,7 +352,7 @@ export default function ChapterTestRunnerPage() {
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-            Comprehensive 10-question chapter evaluation. Questions are adaptively allocated across concepts based on your mastery profile.
+            10-question chapter test. Questions cover key chapter topics.
           </p>
 
           {/* Test Allocation Breakdown */}
@@ -395,7 +395,7 @@ export default function ChapterTestRunnerPage() {
                     ) : (
                       <>
                         <AlertCircle className="w-6 h-6 text-amber-600" />
-                        <span>Test Attempted • Score: {result.percentage}%</span>
+                        <span>Test completed, score: {result.percentage}%</span>
                       </>
                     )}
                   </h2>
@@ -432,7 +432,7 @@ export default function ChapterTestRunnerPage() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-1.5 text-xs font-heading font-extrabold uppercase tracking-wider text-emerald-900">
                       <TrendingUp className="w-4 h-4 text-emerald-600" />
-                      <span>Strong Concepts (Mastered • &gt;= 70%)</span>
+                      <span>Understood topics (&gt;= 70%)</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {result.strongConcepts.map((sc) => (
@@ -457,7 +457,7 @@ export default function ChapterTestRunnerPage() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-1.5 text-xs font-pixel text-[#D9453D] uppercase tracking-wider">
                       <TrendingDown className="w-4 h-4 text-[#D9453D]" />
-                      <span>Weak Concepts (Needs Review • &lt; 70%)</span>
+                      <span>Topics needing review (&lt; 70%)</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {result.weakConcepts.map((wc) => (
@@ -486,7 +486,7 @@ export default function ChapterTestRunnerPage() {
                     <div className="space-y-1">
                       {result.nextSteps.map((step, idx) => (
                         <p key={idx} className="text-xs text-slate-700 font-sans leading-relaxed">
-                          • {step}
+                          - {step}
                         </p>
                       ))}
                     </div>
@@ -608,7 +608,7 @@ export default function ChapterTestRunnerPage() {
           {!result && (
             <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 text-slate-800">
               <span className="text-xs font-heading font-extrabold text-emerald-950">
-                {Object.keys(answers).length} of {questions.length} Answered
+                {Object.keys(answers).length} of {questions.length} answered
               </span>
 
               <button
@@ -625,7 +625,7 @@ export default function ChapterTestRunnerPage() {
       </main>
 
       <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
-        Margam Adaptive Mathematics • Chapter Assessment
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

@@ -54,7 +54,7 @@ export default function StickersPage() {
     } catch (err) {
       console.error("Error loading learner stickers:", err);
       setHasError(true);
-      setErrorMessage("Could not load stickers. Your learning data is safe.");
+      setErrorMessage("Could not load badges. Reload the page.");
       setLoading(false);
     }
   }, []);
@@ -90,7 +90,7 @@ export default function StickersPage() {
         <main className="max-w-md mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 space-y-4">
             <h1 className="font-heading font-extrabold text-xl text-[#2B1B0F]">
-              Sticker Collection Paused
+              Badges could not load
             </h1>
             <p className="text-xs sm:text-sm text-[#2B1B0F]/80">
               {errorMessage || "Unable to display stickers right now."}
@@ -100,7 +100,7 @@ export default function StickersPage() {
               onClick={initStickers}
               className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F]"
             >
-              Try Again
+              Try again
             </button>
           </div>
         </main>
@@ -120,17 +120,17 @@ export default function StickersPage() {
               <Lock className="w-6 h-6" />
             </div>
             <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">
-              Badges Locked
+              Badges
             </h1>
             <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-              Start learning on Margam to earn achievement stickers and track your mastery milestones.
+              Start a lesson or practice worksheet to earn your first badge.
             </p>
             <div className="pt-2">
               <Link
                 href="/student"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F] no-underline hover:brightness-105"
               >
-                <span>Get Started</span>
+                <span>Start learning</span>
               </Link>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function StickersPage() {
       title: "First Step",
       description: `Began learning in Class ${profile.selectedClass}`,
       unlocked: true,
-      unlockedAtLabel: "Unlocked on onboarding",
+      unlockedAtLabel: "Earned on sign in",
       color: "green",
       icon: "star",
     },
@@ -158,7 +158,7 @@ export default function StickersPage() {
       title: "Concept Pioneer",
       description: "Mastered first mathematical concept",
       unlocked: completedCount >= 1,
-      unlockedAtLabel: completedCount >= 1 ? "1 concept mastered" : "Master 1 concept to unlock",
+      unlockedAtLabel: completedCount >= 1 ? "1 topic completed" : "Complete 1 topic to earn",
       color: "yellow",
       icon: "award",
     },
@@ -167,7 +167,7 @@ export default function StickersPage() {
       title: "Adaptive Climber",
       description: "Reached Difficulty Level 2 or higher",
       unlocked: profile.currentDifficulty >= 2,
-      unlockedAtLabel: profile.currentDifficulty >= 2 ? `Level ${profile.currentDifficulty} reached` : "Advance difficulty to unlock",
+      unlockedAtLabel: profile.currentDifficulty >= 2 ? `Level ${profile.currentDifficulty} reached` : "Advance difficulty to earn",
       color: "cyan",
       icon: "trending",
     },
@@ -176,7 +176,7 @@ export default function StickersPage() {
       title: "Focus Streak",
       description: "Answered 3 questions correctly in a row",
       unlocked: profile.consecutiveCorrect >= 3,
-      unlockedAtLabel: profile.consecutiveCorrect >= 3 ? "3 correct streak achieved" : "Achieve 3 correct in a row to unlock",
+      unlockedAtLabel: profile.consecutiveCorrect >= 3 ? "3 correct streak achieved" : "Answer 3 correct in a row to earn",
       color: "pink",
       icon: "zap",
     },
@@ -185,7 +185,7 @@ export default function StickersPage() {
       title: "Mastery Builder",
       description: "Completed 3 sequential concepts",
       unlocked: completedCount >= 3,
-      unlockedAtLabel: completedCount >= 3 ? `${completedCount} concepts mastered` : `Master 3 concepts to unlock (${completedCount}/3)`,
+      unlockedAtLabel: completedCount >= 3 ? `${completedCount} topics completed` : `Complete 3 topics to earn (${completedCount}/3)`,
       color: "orange",
       icon: "sparkles",
     },
@@ -194,7 +194,7 @@ export default function StickersPage() {
       title: "Top Performer",
       description: "Reached Difficulty Level 3 in adaptive practice",
       unlocked: profile.currentDifficulty === 3,
-      unlockedAtLabel: profile.currentDifficulty === 3 ? "Level 3 achieved" : "Reach Difficulty Level 3 to unlock",
+      unlockedAtLabel: profile.currentDifficulty === 3 ? "Level 3 achieved" : "Reach difficulty level 3 to earn",
       color: "yellow",
       icon: "star",
     },
@@ -219,14 +219,14 @@ export default function StickersPage() {
           </div>
 
           <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#2B1B0F]">
-            Learner Trophy Badges
+            Badges
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed max-w-lg mx-auto">
-            Earn stickers and companion badges as you master sequential concepts and complete diagnostics.
+            Earn badges as you complete topics and diagnostic checks.
           </p>
           <div className="pt-1">
             <span className="inline-block px-3.5 py-1.5 bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F]">
-              {unlockedCount} of {stickers.length} Badges Unlocked
+              {unlockedCount} of {stickers.length} badges earned
             </span>
           </div>
         </div>
@@ -235,7 +235,7 @@ export default function StickersPage() {
         {unlockedCount <= 1 && completedCount === 0 && (
           <div className="bg-white p-4 border-[2px] border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] text-center space-y-2 max-w-md mx-auto">
             <p className="text-xs font-sans font-bold text-[#2B1B0F]/80">
-              Complete your first lesson practice to unlock additional mastery badges!
+              Complete a lesson or practice worksheet to earn more badges.
             </p>
           </div>
         )}

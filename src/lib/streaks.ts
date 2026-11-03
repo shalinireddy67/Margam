@@ -52,7 +52,7 @@ export function evaluateDailyStreak(
   let lastFreezeEarnedDate = existing.lastFreezeEarnedDate;
   let streakIncreased = false;
   let freezeUsed = false;
-  let message = "Welcome back to your math quest!";
+  let message = "Welcome back to your maths practice.";
 
   if (!existing.lastActiveDate) {
     // Brand new learner first activity
@@ -127,7 +127,7 @@ export function getStreakReminder(streakState?: LearnerProfile["streak"]): {
     }
     return {
       needsPracticeToday: true,
-      reminderText: "Maru is ready to learn! Solve today's quest to ignite your streak ✨",
+      reminderText: "Maru is ready. Complete today's practice to keep your streak active.",
     };
   }
 

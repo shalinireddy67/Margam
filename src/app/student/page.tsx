@@ -86,7 +86,7 @@ export default function StudentDashboardPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="bg-[#FFFDF7] p-6 border-3 border-[#2B1B0F] shadow-block text-center">
           <div className="w-8 h-8 border-3 border-[#5DAA3A] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading font-bold text-xs text-[#2B1B0F]">Opening Margam Learning Realm...</p>
+          <p className="font-heading font-bold text-xs text-[#2B1B0F]">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -132,10 +132,10 @@ export default function StudentDashboardPage() {
         concept: rootConcept,
         title: `Repair Foundational Skill: ${rootName}`,
         description: currConcept
-          ? `While working on Class ${currConcept.class} (${currName}), a prerequisite gap in Class ${rootConcept.class} was detected. Fixing this unlocks smooth progress!`
-          : `A prerequisite gap was identified in Class ${rootConcept.class}. Repair this foundational step to unlock smooth progress!`,
+          ? `While working on Class ${currConcept.class} (${currName}), a prerequisite topic in Class ${rootConcept.class} was missed. Fixing this clears the path.`
+          : `A prerequisite topic in Class ${rootConcept.class} was missed. Repair this foundation first to keep moving forward.`,
         actionHref: `/student/worksheet/${rootConcept.id}`,
-        actionText: "Repair Gap Now",
+        actionText: "Fix gap now",
         isRootGap: true,
       };
     }
@@ -216,7 +216,7 @@ export default function StudentDashboardPage() {
         showTopBar={true}
       />
 
-      {/* Main Student Realm Content */}
+      {/* Main student content */}
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Welcome Companion & Hero Bar */}
@@ -241,7 +241,7 @@ export default function StudentDashboardPage() {
                   </span>
                 )}
                 <span className="px-2.5 py-0.5 bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel">
-                  {levelInfo.rank.badge} {levelInfo.rank.name} • Lv {levelInfo.level}
+                  {levelInfo.rank.badge} {levelInfo.rank.name}, level {levelInfo.level}
                 </span>
               </div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#2B1B0F] leading-tight">
@@ -281,13 +281,13 @@ export default function StudentDashboardPage() {
               </div>
               <div className="space-y-1.5">
                 <span className="px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide">
-                  START YOUR JOURNEY
+                  START LEARNING
                 </span>
                 <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-[#2B1B0F]">
-                  Discover Your Math Baseline
+                  Baseline diagnostic
                 </h2>
                 <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans max-w-xl leading-relaxed">
-                  Welcome to Margam! Take a quick 6-question diagnostic placement for Class {studyClass}. We’ll automatically identify your strengths and pinpoint any hidden prerequisite gaps from earlier classes.
+                  Take a 6-question check-in for Class {studyClass}. Margam finds any earlier topics you missed and walks you back to fix them.
                 </p>
               </div>
             </div>
@@ -296,14 +296,14 @@ export default function StudentDashboardPage() {
                 href={firstDiagnosticHref}
                 className="px-5 py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 no-underline cursor-pointer"
               >
-                <span>Take Diagnostic</span>
+                <span>Start diagnostic</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/student/learn"
                 className="px-4 py-3 bg-white hover:bg-slate-50 text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-1.5 no-underline cursor-pointer"
               >
-                <span>Explore Lessons</span>
+                <span>Explore lessons</span>
               </Link>
             </div>
           </div>
@@ -360,7 +360,7 @@ export default function StudentDashboardPage() {
                   {continueItem.conceptName}
                 </h3>
                 <p className="text-xs text-[#2B1B0F]/70 font-sans">
-                  Class {continueItem.class} • Current Mastery {continueItem.mastery}%
+                  Class {continueItem.class}, progress {continueItem.mastery}%
                 </p>
               </div>
             </div>
@@ -368,7 +368,7 @@ export default function StudentDashboardPage() {
               href={continueItem.href}
               className="w-full md:w-auto px-5 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 no-underline cursor-pointer"
             >
-              <span>Resume Learning</span>
+              <span>Resume lesson</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -387,7 +387,7 @@ export default function StudentDashboardPage() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 bg-[#5DAA3A] border-2 border-[#2B1B0F] text-[#2B1B0F] flex items-center justify-center shadow-xs">
-                  <Sparkles className="w-5 h-5" />
+                  <BookOpen className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] font-pixel px-2 py-0.5 bg-[#FFF7E6] text-[#2B1B0F] border border-[#2B1B0F]">
                   CURRICULUM
@@ -403,7 +403,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#2B1B0F]/10 flex items-center justify-between text-xs font-heading font-bold text-[#2B1B0F]">
-              <span>Open Lessons</span>
+              <span>Open lessons</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -432,7 +432,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#2B1B0F]/10 flex items-center justify-between text-xs font-heading font-bold text-[#2B1B0F]">
-              <span>Start Practice</span>
+              <span>Start practice</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -453,15 +453,15 @@ export default function StudentDashboardPage() {
               </div>
               <div>
                 <h2 className="font-heading font-extrabold text-base text-[#2B1B0F] group-hover:text-[#3880FF] transition-colors">
-                  Diagnose Mastery
+                  Check chapter progress
                 </h2>
                 <p className="text-xs text-[#2B1B0F]/70 font-sans mt-1">
-                  Take chapter diagnostics to pinpoint hidden learning gaps and auto-unlock chapter concepts.
+                  Take chapter diagnostics to find earlier topics you missed and make lessons available.
                 </p>
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#2B1B0F]/10 flex items-center justify-between text-xs font-heading font-bold text-[#2B1B0F]">
-              <span>Take Diagnostic</span>
+              <span>Start diagnostic</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -490,7 +490,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#2B1B0F]/10 flex items-center justify-between text-xs font-heading font-bold text-[#2B1B0F]">
-              <span>Edit Profile</span>
+              <span>Edit profile</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -518,7 +518,7 @@ export default function StudentDashboardPage() {
                 >
                   <div>
                     <span className="text-[10px] font-pixel px-2 py-0.5 bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F]">
-                      Class {item.class} • Mastery {item.mastery}%
+                      Class {item.class}, progress {item.mastery}%
                     </span>
                     <h3 className="font-heading font-bold text-xs text-[#2B1B0F] mt-1.5">
                       {item.conceptName}
@@ -531,7 +531,7 @@ export default function StudentDashboardPage() {
                     href={item.href}
                     className="w-full py-1.5 px-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs border-2 border-[#2B1B0F] flex items-center justify-center gap-1.5 shadow-xs transition-colors no-underline"
                   >
-                    <span>Revise Now</span>
+                    <span>Revise now</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -558,7 +558,7 @@ export default function StudentDashboardPage() {
               href="/student/learn"
               className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#2B1B0F] py-2 px-3.5 bg-white hover:bg-slate-50 border-2 border-[#2B1B0F] shadow-xs transition-all self-start sm:self-auto no-underline"
             >
-              <span>View All Chapters</span>
+              <span>View all chapters</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -584,7 +584,7 @@ export default function StudentDashboardPage() {
                       </span>
                       {chapter.status === "full" ? (
                         <span className="text-[10px] font-heading font-extrabold text-[#5DAA3A]">
-                          {completedInChapter}/{chapterConcepts.length} Completed
+                          {completedInChapter}/{chapterConcepts.length} completed
                         </span>
                       ) : (
                         <span className="text-[10px] font-heading font-bold text-slate-500">
@@ -654,7 +654,7 @@ export default function StudentDashboardPage() {
               </p>
             </div>
 
-            {/* Unlocked Badges Showcase */}
+            {/* Earned badges showcase */}
             {earnedBadges.length > 0 ? (
               <div className="grid grid-cols-2 gap-2.5">
                 {earnedBadges.slice(0, 4).map((b) => (
@@ -669,7 +669,7 @@ export default function StudentDashboardPage() {
                       {b.title[currentLang] || b.title.en}
                     </div>
                     <span className="text-[9px] font-pixel text-[#5DAA3A] block">
-                      UNLOCKED
+                      EARNED
                     </span>
                   </div>
                 ))}
@@ -678,10 +678,10 @@ export default function StudentDashboardPage() {
               <div className="p-4 bg-[#FFF7E6] border-2 border-[#2B1B0F] text-center space-y-1.5">
                 <div className="text-3xl">🎯</div>
                 <div className="font-heading font-bold text-xs text-[#2B1B0F]">
-                  No Stickers Unlocked Yet
+                  No badges earned yet
                 </div>
                 <p className="text-[11px] text-[#2B1B0F]/70 font-sans">
-                  Complete your first lesson or practice session to earn the &quot;First Step&quot; sticker!
+                  Complete your first lesson or practice worksheet to earn your first badge.
                 </p>
               </div>
             )}
@@ -690,7 +690,7 @@ export default function StudentDashboardPage() {
               href="/student/stickers"
               className="w-full py-2.5 px-3 bg-white hover:bg-slate-50 text-[#2B1B0F] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-2 border-[#2B1B0F] shadow-xs transition-colors no-underline"
             >
-              <span>Explore All Badges & Stickers</span>
+              <span>View all badges</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -699,7 +699,7 @@ export default function StudentDashboardPage() {
 
       {/* Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

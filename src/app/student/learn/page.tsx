@@ -59,7 +59,7 @@ export default function StudentLearnPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
           <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-emerald-950">Loading Curriculum...</p>
+          <p className="font-heading text-xs text-emerald-950">Loading curriculum</p>
         </div>
       </div>
     );
@@ -133,22 +133,22 @@ export default function StudentLearnPage() {
                 NCERT Curriculum
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-white text-[10px] font-heading font-bold text-slate-700">
-                {completedCount} of {allConcepts.length} Topics Mastered
+                {completedCount} of {allConcepts.length} topics completed
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
-              Class {studyClass} Mathematics Topics
+              Class {studyClass} maths topics
             </h1>
             <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Topics are arranged sequentially below according to the NCERT syllabus. Complete lessons
-              and practice worksheets to unlock downstream concepts.
+              Topics follow the NCERT syllabus. Complete lessons
+              and practice worksheets to make next topics available.
             </p>
           </div>
 
           {/* Quick Study Class Switcher Pills */}
           <div className="flex flex-col gap-1.5 shrink-0 w-full sm:w-auto">
             <span className="text-[10px] font-heading font-bold text-emerald-950/70 uppercase">
-              Switch Study Class:
+              Switch class:
             </span>
             <div className="flex items-center gap-1.5 bg-white/70 p-1.5 rounded-2xl border border-white/80 shadow-xs flex-wrap sm:flex-nowrap">
               {([6, 7, 8, 9, 10] as const).map((grade) => (
@@ -237,7 +237,8 @@ export default function StudentLearnPage() {
           {filteredConcepts.length === 0 ? (
             <div className="glass-panel p-8 rounded-3xl text-center space-y-2 border border-white/80">
               <BookOpen className="w-8 h-8 text-slate-400 mx-auto" />
-              <p className="font-heading font-bold text-sm text-slate-700">No topics match your filter</p>
+              <h2 className="font-heading font-bold text-sm text-slate-700">No topics found</h2>
+              <p className="text-xs text-slate-600">No topics match your search or filter settings.</p>
               <button
                 type="button"
                 onClick={() => {
@@ -330,12 +331,12 @@ export default function StudentLearnPage() {
                           )}
                           {isInProgress && (
                             <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">
-                              In Progress
+                              In progress
                             </span>
                           )}
                           {isAvailable && (
                             <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                              Unlocked
+                              Available
                             </span>
                           )}
                           {isLocked && (
@@ -360,7 +361,7 @@ export default function StudentLearnPage() {
                           <div className="pt-1 flex items-center gap-1.5 text-xs font-sans text-rose-700">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>
-                              <strong>Prerequisite required:</strong> Complete {missingPrereqNames.join(", ")} to unlock.
+                              <strong>Prerequisite needed:</strong> Complete {missingPrereqNames.join(", ")} first.
                             </span>
                           </div>
                         )}
@@ -411,7 +412,7 @@ export default function StudentLearnPage() {
 
       {/* Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

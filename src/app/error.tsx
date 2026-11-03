@@ -26,16 +26,11 @@ export default function RootErrorBoundary({
         {/* Message */}
         <div className="space-y-2">
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#2B1B0F]">
-            Something Took a Wrong Turn
+            Something went wrong
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-            Don&apos;t worry — your profile and math progress are safely preserved on this device.
+            An unexpected error occurred. Try reloading the page or return home.
           </p>
-          {error.message && (
-            <div className="mt-3 p-3 bg-[#FFF7E6] border-[2px] border-[#2B1B0F] text-left text-xs font-mono text-[#2B1B0F] overflow-x-auto">
-              {error.message}
-            </div>
-          )}
         </div>
 
         {/* Action Buttons with >= 48px touch targets */}
@@ -46,14 +41,14 @@ export default function RootErrorBoundary({
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            <span>Try Again</span>
+            <span>Try again</span>
           </button>
           <Link
             href="/"
             className="flex-1 min-h-[48px] px-5 py-3 bg-white hover:bg-[#FFF7E6] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 no-underline"
           >
             <Home className="w-4 h-4" />
-            <span>Return Home</span>
+            <span>Return home</span>
           </Link>
         </div>
       </div>

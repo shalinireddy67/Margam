@@ -220,7 +220,7 @@ export default function StudentProfilePage() {
             className="py-2 px-4 rounded-xl bg-white/70 hover:bg-white text-rose-700 hover:text-rose-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white/80 transition-all shadow-xs shrink-0 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Log Out</span>
+            <span>Sign out</span>
           </button>
         </div>
 
@@ -234,7 +234,7 @@ export default function StudentProfilePage() {
         {nameSuccess && (
           <div className="glass-panel p-3.5 rounded-2xl border border-emerald-300 bg-emerald-50/90 text-emerald-800 text-xs font-sans flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
-            <span>Nickname successfully updated across the realm!</span>
+            <span>Nickname updated.</span>
           </div>
         )}
         {classSuccess && (
@@ -328,7 +328,7 @@ export default function StudentProfilePage() {
             </div>
 
             <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-sans">
-              Tip: Your nickname updates everywhere across the realm immediately.
+              Tip: Your nickname updates across your dashboard immediately.
             </div>
           </div>
 
@@ -416,7 +416,7 @@ export default function StudentProfilePage() {
               href="/student/learn"
               className="text-xs font-heading font-bold text-emerald-700 hover:underline flex items-center gap-1"
             >
-              <span>Explore Curriculum</span>
+              <span>View lessons</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -494,7 +494,7 @@ export default function StudentProfilePage() {
 
       {/* Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

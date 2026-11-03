@@ -78,7 +78,7 @@ export default function ResetClassPage() {
               className="w-full min-h-[48px] px-4 py-2.5 bg-[#E04A3F] hover:brightness-105 text-white border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
-              <span>Reset Class {profile.selectedClass} Progress & Switch Grade</span>
+              <span>Reset class {profile.selectedClass} progress</span>
             </button>
 
             <Link
@@ -86,14 +86,14 @@ export default function ResetClassPage() {
               className="w-full min-h-[48px] px-4 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] flex items-center justify-center gap-2 transition-all cursor-pointer no-underline"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Cancel and Return to Class {profile.selectedClass}</span>
+              <span>Return to dashboard</span>
             </Link>
           </div>
         </div>
       </main>
 
       <footer className="border-t-[3px] border-[#422816] py-4 text-center text-xs text-[#FFF7E6] bg-[#5A3720]">
-        Margam Educational Platform • Safe & Deterministic Storage
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

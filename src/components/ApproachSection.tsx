@@ -12,7 +12,7 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
   const t = {
     en: {
       badge: "How Margam Works",
-      headline: "Learn • Solve • Test",
+      headline: "Learn, solve, test",
       subhead:
         "Most math apps only change the difficulty of practice drills. Margam adapts all three steps of learning so you never get stuck.",
       step1Tag: "1. LEARN",
@@ -23,7 +23,7 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
       step2Desc: "Start with 1-step confidence builders, then level up to multi-step problem solving with step-by-step hints.",
       step3Tag: "3. TEST",
       step3Title: "5-Min Checkpoints",
-      step3Desc: "Quick checkpoints that pinpoint which prerequisite gaps you have closed, without high-stakes test stress.",
+      step3Desc: "Quick checkpoints that show which earlier topics you have reviewed, without test stress.",
       reportTitle: "Student Gap Report",
       reportStudent: "Rajesh Kumar (Class 9A)",
       reportGap: "Class 7 Integer Signs",
@@ -33,7 +33,7 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
     },
     hi: {
       badge: "मार्गम् कैसे काम करता है",
-      headline: "सीखें • हल करें • परीक्षण दें",
+      headline: "सीखें, हल करें, परीक्षण दें",
       subhead:
         "अधिकांश ऐप्स केवल प्रश्नों की कठिनाई बदलते हैं। मार्गम् समझ के तीनों चरणों को अनुकूलित करता है ताकि आप कभी न अटकें।",
       step1Tag: "1. सीखें (Learn)",
@@ -54,7 +54,7 @@ export default function ApproachSection({ currentLang }: ApproachSectionProps) {
     },
     te: {
       badge: "మార్గం ఎలా పనిచేస్తుంది",
-      headline: "నేర్చుకోండి • సాధించండి • పరీక్షించండి",
+      headline: "నేర్చుకోండి, సాధించండి, పరీక్షించండి",
       subhead:
         "చాలా వెబ్‌సైట్లు కేవలం లెక్కల కష్టాన్ని మాత్రమే మారుస్తాయి. మార్గం అవగాహన యొక్క 3 దశలను అనుకూలీకరిస్తుంది.",
       step1Tag: "1. నేర్చుకోండి",

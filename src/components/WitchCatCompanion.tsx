@@ -55,7 +55,7 @@ export default function WitchCatCompanion({
 
     switch (context) {
       case "greeting":
-        setCurrentMessage(`Hey ${studentName}! Ready to build your math realm today?`);
+        setCurrentMessage(`Hey ${studentName}! Ready to practice maths today?`);
         break;
       case "lesson_start":
         setCurrentMessage("Let's break down this concept block by block. Read carefully!");
@@ -67,13 +67,13 @@ export default function WitchCatCompanion({
         setCurrentMessage("Don't worry, every mistake shows where our foundation needs support.");
         break;
       case "completed":
-        setCurrentMessage(`Quest cleared! Great job strengthening your path, ${studentName}!`);
+        setCurrentMessage(`Topic completed! Good work on your path, ${studentName}.`);
         break;
       case "locked":
-        setCurrentMessage("Complete the previous block to unlock this new lesson!");
+        setCurrentMessage("Complete the previous lesson to make this one available.");
         break;
       case "welcome_back":
-        setCurrentMessage(`Welcome back to your realm, ${studentName}! Let's pick up where we left off.`);
+        setCurrentMessage(`Welcome back, ${studentName}. Let's pick up where you left off.`);
         break;
       default:
         setCurrentMessage("Ready to conquer new math concepts? Let's go!");

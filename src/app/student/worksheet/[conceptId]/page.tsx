@@ -282,15 +282,15 @@ export default function AdaptivePracticeRunnerPage() {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 text-slate-800">
         <div className="glass-panel p-6 rounded-3xl border border-white/80 shadow-lg max-w-md text-center space-y-3">
-          <h2 className="font-heading font-extrabold text-lg text-emerald-950">No Questions Found</h2>
+          <h2 className="font-heading font-extrabold text-lg text-emerald-950">No questions found</h2>
           <p className="text-xs text-slate-600 font-sans">
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
-            href="/student"
+            href="/student/learn"
             className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-heading font-bold px-4 py-2 shadow-sm"
           >
-            Return to Learning Path
+            View lessons
           </Link>
         </div>
       </div>
@@ -442,15 +442,14 @@ export default function AdaptivePracticeRunnerPage() {
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-              <span>Adaptive Practice</span>
-              <span>•</span>
+              <span>Adaptive practice</span>
+              <span>,</span>
               <span>Class {concept.class}</span>
               {isPersonalized && (
                 <>
-                  <span>•</span>
+                  <span>,</span>
                   <span className="text-amber-800 font-extrabold flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Personalized Worksheet
+                    Personalized worksheet
                   </span>
                 </>
               )}
@@ -477,7 +476,7 @@ export default function AdaptivePracticeRunnerPage() {
               <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <span className="text-[11px] font-heading font-extrabold text-amber-900 uppercase tracking-wider block">
-                  Tailored Practice Strategy
+                  Targeted practice strategy
                 </span>
                 <p className="text-xs text-slate-700 font-sans leading-snug">
                   {personalizedReason}
@@ -512,7 +511,7 @@ export default function AdaptivePracticeRunnerPage() {
                     Foundation Successfully Repaired!
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-700 font-sans leading-relaxed">
-                    You scored <strong>{result.percentage}%</strong> and demonstrated mastery on this foundational topic. This block is now illuminated on your Concept Pathway!
+                    You scored <strong>{result.percentage}%</strong> on this topic. This block is now marked complete on your path map.
                   </p>
                 </div>
               )}
@@ -540,20 +539,20 @@ export default function AdaptivePracticeRunnerPage() {
                         {result.passed ? (
                           <>
                             <Award className="w-5 h-5 text-[#79B82A]" />
-                            <span>Practice Complete! Mastery Updated</span>
+                            <span>Practice complete</span>
                           </>
                         ) : (
                           <>
                             <AlertCircle className="w-5 h-5 text-[#E5B834]" />
-                            <span>Practice Attempted • Review Recommended</span>
+                            <span>Practice finished, review suggested</span>
                           </>
                         )}
                       </h3>
                       <p className="text-xs font-bold mt-1 text-[#D8D8D0]">
-                        Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%) • Mastery: <strong>{result.mastery}%</strong>
+                        Score: <strong>{result.score} / {result.total}</strong> ({result.percentage}%), progress: <strong>{result.mastery}%</strong>
                         {result.passed
-                          ? " • Next level unlocked!"
-                          : " • Keep practicing to build confidence."}
+                          ? ", ready for next level."
+                          : ", keep practicing to build confidence."}
                       </p>
                       {result.mistakeHint && (
                         <p className="text-xs mt-2 p-3 rounded-xl bg-white/80 border border-white/90 font-sans font-medium text-slate-700">
@@ -839,7 +838,7 @@ export default function AdaptivePracticeRunnerPage() {
           {!result && (
             <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 text-slate-800">
               <span className="text-xs font-heading font-extrabold text-emerald-950">
-                {Object.keys(answers).length} of {questions.length} Answered
+                {Object.keys(answers).length} of {questions.length} answered
               </span>
 
               <button
@@ -885,7 +884,7 @@ export default function AdaptivePracticeRunnerPage() {
             <div className="glass-panel p-4 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-3 text-slate-800">
               <div className="flex items-center justify-between text-xs font-heading font-bold text-emerald-950">
                 <span>Worksheet Progress</span>
-                <span>{Object.keys(answers).length} / {questions.length} Answered</span>
+                <span>{Object.keys(answers).length} / {questions.length} answered</span>
               </div>
               {/* Progress Blocks */}
               <div className="grid grid-cols-5 gap-1.5">
@@ -922,7 +921,7 @@ export default function AdaptivePracticeRunnerPage() {
       </main>
 
       <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
-        Margam Adaptive Mathematics • Practice Workspace
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

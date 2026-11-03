@@ -109,7 +109,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
             The Margam Progression Path
           </h2>
           <p className="text-xs text-[#2B1B0F]/80 font-sans mt-0.5">
-            Your block-by-block journey from foundational roots up to Class {studyClass}.
+            Your step-by-step path from foundational topics up to Class {studyClass}.
           </p>
         </div>
 
@@ -193,7 +193,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
 
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#FDE8E8] text-[#D9453D] text-[10px] font-heading font-bold border border-[#D9453D]/40">
                       <AlertTriangle className="w-3 h-3 text-[#D9453D] shrink-0" />
-                      <span>{node.isGapRoot ? "Root Misconception" : `Mastery ${node.mastery}%`}</span>
+                      <span>{node.isGapRoot ? "Root misconception" : `Progress ${node.mastery}%`}</span>
                     </div>
                   </div>
 
@@ -238,7 +238,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
 
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#2B1B0F]/10 text-[#2B1B0F] text-[10px] font-heading font-black">
                       <CheckCircle2 className="w-3 h-3 text-[#2B1B0F] shrink-0" />
-                      <span>Mastered ({node.mastery > 0 ? `${node.mastery}%` : "100%"})</span>
+                      <span>Completed ({node.mastery > 0 ? `${node.mastery}%` : "100%"})</span>
                     </div>
                   </div>
 
@@ -289,7 +289,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
 
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-white/60 text-[#2B1B0F] text-[10px] font-heading font-extrabold border border-[#2B1B0F]/20">
                       <Flame className="w-3 h-3 text-[#B8322B] fill-[#B8322B] shrink-0" />
-                      <span>In Progress ({node.mastery}%)</span>
+                      <span>In progress ({node.mastery}%)</span>
                     </div>
                   </div>
 
@@ -342,7 +342,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
                       href={`/student/lesson/${node.concept.id}`}
                       className="text-[#2B1B0F] hover:text-[#5DAA3A] flex items-center gap-1"
                     >
-                      <span>Start Lesson</span>
+                      <span>Start lesson</span>
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>

@@ -330,7 +330,7 @@ export function getCompanionRevisionGreeting(
   if (!queue || queue.length === 0) {
     return {
       title: "All Blocks Solid!",
-      message: "Awesome work! All your math blocks are strong and up to date. Explore new lessons to expand your world!",
+      message: "All your math topics are up to date. Explore new lessons to continue learning.",
       pose: "cheer",
     };
   }
@@ -355,7 +355,7 @@ export function getCompanionRevisionGreeting(
 
   if (top.priority === "due_revision") {
     return {
-      title: "Time for a Spaced Quest!",
+      title: "Time for spaced revision",
       message: `Keep your memory sharp! A quick 5-question revision on ${top.conceptName} is waiting.`,
       pose: "read",
     };

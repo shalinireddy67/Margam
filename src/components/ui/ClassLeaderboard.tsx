@@ -103,10 +103,10 @@ export function ClassLeaderboard({
           </div>
           <div>
             <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#FFE9A8] leading-tight">
-              Class Quest Board
+              Class activity board
             </h2>
             <p className="text-[11px] text-[#E5D7BE] font-medium">
-              Class Section • Privacy-First • {data?.resetWindowLabel || "Resets Mondays 00:00 IST"}
+              Class section, privacy-first, {data?.resetWindowLabel || "resets Mondays 00:00 IST"}
             </p>
           </div>
         </div>
@@ -179,7 +179,7 @@ export function ClassLeaderboard({
       {loading ? (
         <div className="py-8 text-center text-xs text-[#E5D7BE] font-medium space-y-2">
           <div className="w-6 h-6 border-3 border-[#FFE9A8] border-t-transparent animate-spin mx-auto" />
-          <span>Assembling class quest scores...</span>
+          <span>Loading class scores...</span>
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -216,7 +216,7 @@ export function ClassLeaderboard({
                     <div className="flex items-center gap-1.5 text-[10px] text-[#E5D7BE]">
                       <span>{item.rankBadge}</span>
                       <span>Lv {item.level}</span>
-                      <span>•</span>
+                      <span>,</span>
                       <span>{item.rankName}</span>
                     </div>
                   </div>
