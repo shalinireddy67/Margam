@@ -1,5 +1,5 @@
 -- ==============================================================================
--- MARGAM SECURITY REPAIR MIGRATION: 20261102_security_repair.sql
+-- MARGAM SECURITY REPAIR MIGRATION: 20261104_security_repair.sql
 -- Fixes privilege escalation, unauthorized role changes, arbitrary class joins,
 -- mutable search paths, and locks down direct client writes to scores and mastery tables.
 -- ==============================================================================

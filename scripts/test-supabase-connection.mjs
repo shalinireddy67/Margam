@@ -32,7 +32,7 @@ if (!isConfigured) {
   console.log("   SUPABASE_SERVICE_ROLE_KEY=\"your-service-role-key\"");
   console.log("   SESSION_SECRET=\"your-high-entropy-random-secret-key\"");
   console.log("3. In Supabase Dashboard -> SQL Editor, run:");
-  console.log("   supabase/migrations/20261102_consolidated_production_setup.sql");
+  console.log("   supabase/consolidated_production_setup.sql");
   process.exit(0);
 }
 
