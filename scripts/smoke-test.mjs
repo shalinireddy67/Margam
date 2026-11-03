@@ -11,7 +11,7 @@
  *   (c) Strong student, no gap card
  *   (d) Chapter test
  * - Fail criteria: uncaught page errors, console.error, HTTP >= 400, horizontal overflow, clipped text, tap targets < 48px
- * - Screenshots saved to C:\Users\reddy\kernel\screenshots\smoke\ and ./screenshots/smoke/
+ * - Screenshots saved to ./screenshots/smoke/
  */
 
 import { spawn, execSync } from "child_process";
@@ -23,7 +23,7 @@ import puppeteer from "puppeteer-core";
 const PORT = 3102;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const SCREENSHOT_DIRS = [
-  "C:\\Users\\reddy\\kernel\\screenshots\\smoke",
+  "./screenshots/smoke",
   path.resolve(process.cwd(), "screenshots", "smoke"),
 ];
 

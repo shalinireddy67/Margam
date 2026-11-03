@@ -212,7 +212,7 @@ assert(day4WithFreeze.updatedStreak.freezeTokens === 0, "Freeze token count redu
 // Miss 2 days without Freeze Token (e.g. Nov 4 to Nov 7)
 const day7Lapse = evaluateDailyStreak(day4WithFreeze.updatedStreak, new Date("2026-11-07T10:00:00Z"));
 assert(day7Lapse.updatedStreak.current === 1, "Lapsed streak restarts gently at Day 1 without punishment");
-assert(day7Lapse.message.includes("Maru missed you"), "Lapse shows comforting non-punishing message");
+assert(day7Lapse.message.includes("Welcome back"), "Lapse shows comforting non-punishing message");
 
 console.log("");
 
@@ -287,11 +287,11 @@ console.log("--------------------------------------------------");
 
 // 9:00 PM IST = 15:30 UTC
 const nightTimeUtc = new Date("2026-11-02T15:30:00Z");
-assert(isIstNightTime(nightTimeUtc) === true, "21:00 IST detected as night time (Maru sleepy pose)");
+assert(isIstNightTime(nightTimeUtc) === true, "21:00 IST detected as night time (sleepy pose)");
 
 // 11:00 AM IST = 05:30 UTC
 const dayTimeUtc = new Date("2026-11-02T05:30:00Z");
-assert(isIstNightTime(dayTimeUtc) === false, "11:00 IST detected as active daytime (Maru awake)");
+assert(isIstNightTime(dayTimeUtc) === false, "11:00 IST detected as active daytime (awake)");
 
 console.log("\n==================================================");
 console.log(`  RESULT: ${passed} PASSED | ${failed} FAILED`);

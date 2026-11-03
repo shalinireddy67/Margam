@@ -44,7 +44,7 @@ if (isConfigured) {
 } else {
   console.log("  • Local Shell Supabase Credentials: Not set in environment (safe local test mode)");
 }
-console.log("  • Live Production URL: https://kernel2k26.vercel.app\n");
+console.log("  • Live Production URL: https://margam-learningspace.vercel.app\n");
 
 let passed = 0;
 let failed = 0;

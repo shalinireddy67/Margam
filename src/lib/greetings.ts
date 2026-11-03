@@ -3,10 +3,10 @@ import { LocalizedString, SupportedLanguage } from "./types";
 export type TimeOfDay = "morning" | "afternoon" | "evening";
 
 /**
- * Cat time-of-day greetings across English, Hindi, and Telugu.
+ * Time-of-day greetings across English, Hindi, and Telugu.
  * Hindi and Telugu greetings are marked reviewed: false per specification.
  */
-export const CAT_TIME_GREETINGS: Record<TimeOfDay, LocalizedString> = {
+export const TIME_GREETINGS: Record<TimeOfDay, LocalizedString> = {
   morning: {
     en: "Good morning, {name}!",
     hi: "शुभ प्रभात, {name}!",
@@ -27,11 +27,15 @@ export const CAT_TIME_GREETINGS: Record<TimeOfDay, LocalizedString> = {
   },
 };
 
-export const CAT_GREETING_SUBTITLES: Record<SupportedLanguage, string> = {
+export const GREETING_SUBTITLES: Record<SupportedLanguage, string> = {
   en: "Ready for today's maths journey?",
   hi: "क्या आप आज के गणित अभ्यास के लिए तैयार हैं?",
   te: "ఈరోజు గణిత అభ్యాసానికి సిద్ధంగా ఉన్నారా?",
 };
+
+// Aliases for compatibility
+export const CAT_TIME_GREETINGS = TIME_GREETINGS;
+export const CAT_GREETING_SUBTITLES = GREETING_SUBTITLES;
 
 export function getTimeOfDay(date: Date = new Date()): TimeOfDay {
   const hour = date.getHours();
@@ -40,20 +44,23 @@ export function getTimeOfDay(date: Date = new Date()): TimeOfDay {
   return "evening";
 }
 
-export function getCatGreeting(
+export function getLearnerGreeting(
   studentName?: string,
   lang: SupportedLanguage = "en",
   date: Date = new Date()
 ): { text: string; subtitle: string; timeOfDay: TimeOfDay; reviewed: boolean } {
   const timeOfDay = getTimeOfDay(date);
-  const template = CAT_TIME_GREETINGS[timeOfDay];
+  const template = TIME_GREETINGS[timeOfDay];
   const fallbackName = lang === "hi" ? "विद्यार्थी" : lang === "te" ? "విద్యార్థి" : "Learner";
   const name = studentName && studentName.trim() ? studentName.trim() : fallbackName;
   const rawText = template[lang] || template.en;
   return {
     text: rawText.replace("{name}", name),
-    subtitle: CAT_GREETING_SUBTITLES[lang] || CAT_GREETING_SUBTITLES.en,
+    subtitle: GREETING_SUBTITLES[lang] || GREETING_SUBTITLES.en,
     timeOfDay,
     reviewed: template.reviewed,
   };
 }
+
+// Backwards-compatible alias
+export const getCatGreeting = getLearnerGreeting;

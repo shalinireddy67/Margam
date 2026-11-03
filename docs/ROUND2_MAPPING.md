@@ -8,14 +8,14 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 | # | Evaluator Evaluation Focus | Core Code Implementation | Automated Test Command | Interactive Demo Route & Step |
 |---|---|---|---|---|
-| **1** | **Explainable Prerequisite Backtracking**<br/>(Class 10 $\to$ Class 7 root-cause gap tracing, convergent tags, mistake tagging) | [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts)<br/>[tag-roots.json](file:///C:/Users/reddy/kernel/kernel2k26/data/tag-roots.json)<br/>[concepts.json](file:///C:/Users/reddy/kernel/kernel2k26/data/concepts.json) | `npm test`<br/>`npm run eval` | `/student/diagnostic/c10-ch04`<br/>Answer Q3 & Q4 with sign errors; view Class 7 gap card & graph path |
-| **2** | **Root-Cause Ranking Engine**<br/>(Recency $\lambda=0.9$, Distance $\delta=0.7$, thresholds, 14 evaluation scenarios with 4 held-out) | [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L403-L550)<br/>[eval-scenarios.json](file:///C:/Users/reddy/kernel/kernel2k26/data/eval-scenarios.json) | `npm run eval` | Run `npm run eval`<br/>View 100% precision, recall, top-1 accuracy on tuning & blind held-out sets |
-| **3** | **Three-Stage Adaptation**<br/>(Stage 1 Diagnostic $\to$ Stage 2 Adaptive Practice $\to$ Stage 3 Chapter Test) | [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L690-L1050)<br/>[curriculum.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/curriculum.ts) | `npx tsx scripts/test-adaptive.mjs` | `/student/diagnostic/c10-ch04`<br/>$\to$ `/student/worksheet/c10-quad-01`<br/>$\to$ `/student/test/c10-ch04` |
-| **4** | **3-Variant Remedial Lessons**<br/>(Basics-first, Standard, Fast-track; multilingual EN/HI/TE; unreviewed draft protection) | [lessons.json](file:///C:/Users/reddy/kernel/kernel2k26/data/lessons.json)<br/>[adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L230-L260)<br/>[lesson/[conceptId]](file:///C:/Users/reddy/kernel/kernel2k26/src/app/lesson/[conceptId]/page.tsx) | `npx tsx scripts/test-draft-translations.mjs` | `/student/lesson/c7-int-02`<br/>Toggle pedagogical variants & language switcher (EN, HI, TE) |
-| **5** | **Teacher Empowerment & Live Dashboard**<br/>(25 synthetic student cohort from real engine, concept heatmap M/P/G/L, evidence drill-down, "this device") | [page.tsx](file:///C:/Users/reddy/kernel/kernel2k26/src/app/teacher/page.tsx)<br/>[generate-synthetic-class.mjs](file:///C:/Users/reddy/kernel/kernel2k26/scripts/generate-synthetic-class.mjs)<br/>[synthetic-class.json](file:///C:/Users/reddy/kernel/kernel2k26/data/synthetic-class.json) | `npm run generate:class`<br/>`npm test` | `/teacher`<br/>Inspect attention roster, 25x10 heatmap matrix, click student for evidence drill-down |
-| **6** | **Chapter Test Blueprint & Feasibility Report**<br/>(Honest 10-item blueprint, non-diagnostic pool audit, silent shortfall handling, equivalent forms constraint) | [CHAPTER_TEST_BLUEPRINT.md](file:///C:/Users/reddy/kernel/kernel2k26/docs/CHAPTER_TEST_BLUEPRINT.md)<br/>[adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L950-L1050) | `npx tsx scripts/test-adaptive.mjs` | `/student/test/c10-ch04`<br/>Submit test, review score, concept breakdown, and diagnostic gap report |
-| **7** | **Multi-Grade Profile Isolation & Migration**<br/>(Independent Class 6 to 10 progression, isolated reset, v0 $\to$ v1 Zod migration, corrupt profile safe recovery) | [storage.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/storage.ts)<br/>[progression.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/progression.ts) | `npx tsx scripts/test-progression.mjs` | `/student/select-class`<br/>$\to$ Switch between Class 10 and Class 7; observe total isolation and reset |
-| **8** | **Mobile-First UX, Performance & Smoke Test**<br/>(360x800 viewport, min 48px tap targets, neo-brutalist tokens, zero runtime errors, self-hosted fonts) | [smoke-test.mjs](file:///C:/Users/reddy/kernel/kernel2k26/scripts/smoke-test.mjs)<br/>[tailwind.config.ts](file:///C:/Users/reddy/kernel/kernel2k26/tailwind.config.ts) | `npm run smoke` | Run `npm run smoke`<br/>Review 60 automated screenshots across 4 journeys in EN/HI/TE |
+| **1** | **Explainable Prerequisite Backtracking**<br/>(Class 10 $\to$ Class 7 root-cause gap tracing, convergent tags, mistake tagging) | [adaptive.ts](../src/lib/adaptive.ts)<br/>[tag-roots.json](../data/tag-roots.json)<br/>[concepts.json](../data/concepts.json) | `npm test`<br/>`npm run eval` | `/student/diagnostic/c10-ch04`<br/>Answer Q3 & Q4 with sign errors; view Class 7 gap card & graph path |
+| **2** | **Root-Cause Ranking Engine**<br/>(Recency $\lambda=0.9$, Distance $\delta=0.7$, thresholds, 14 evaluation scenarios with 4 held-out) | [adaptive.ts](../src/lib/adaptive.ts#L403-L550)<br/>[eval-scenarios.json](../data/eval-scenarios.json) | `npm run eval` | Run `npm run eval`<br/>View 100% precision, recall, top-1 accuracy on tuning & blind held-out sets |
+| **3** | **Three-Stage Adaptation**<br/>(Stage 1 Diagnostic $\to$ Stage 2 Adaptive Practice $\to$ Stage 3 Chapter Test) | [adaptive.ts](../src/lib/adaptive.ts#L690-L1050)<br/>[curriculum.ts](../src/lib/curriculum.ts) | `npx tsx scripts/test-adaptive.mjs` | `/student/diagnostic/c10-ch04`<br/>$\to$ `/student/worksheet/c10-quad-01`<br/>$\to$ `/student/test/c10-ch04` |
+| **4** | **3-Variant Remedial Lessons**<br/>(Basics-first, Standard, Fast-track; multilingual EN/HI/TE; unreviewed draft protection) | [lessons.json](../data/lessons.json)<br/>[adaptive.ts](../src/lib/adaptive.ts#L230-L260)<br/>[lesson/[conceptId]](../src/app/lesson/[conceptId]/page.tsx) | `npx tsx scripts/test-draft-translations.mjs` | `/student/lesson/c7-int-02`<br/>Toggle pedagogical variants & language switcher (EN, HI, TE) |
+| **5** | **Teacher Empowerment & Live Dashboard**<br/>(25 synthetic student cohort from real engine, concept heatmap M/P/G/L, evidence drill-down, "this device") | [page.tsx](../src/app/teacher/page.tsx)<br/>[generate-synthetic-class.mjs](../scripts/generate-synthetic-class.mjs)<br/>[synthetic-class.json](../data/synthetic-class.json) | `npm run generate:class`<br/>`npm test` | `/teacher`<br/>Inspect attention roster, 25x10 heatmap matrix, click student for evidence drill-down |
+| **6** | **Chapter Test Blueprint & Feasibility Report**<br/>(Honest 10-item blueprint, non-diagnostic pool audit, silent shortfall handling, equivalent forms constraint) | [CHAPTER_TEST_BLUEPRINT.md](../docs/CHAPTER_TEST_BLUEPRINT.md)<br/>[adaptive.ts](../src/lib/adaptive.ts#L950-L1050) | `npx tsx scripts/test-adaptive.mjs` | `/student/test/c10-ch04`<br/>Submit test, review score, concept breakdown, and diagnostic gap report |
+| **7** | **Multi-Grade Profile Isolation & Migration**<br/>(Independent Class 6 to 10 progression, isolated reset, v0 $\to$ v1 Zod migration, corrupt profile safe recovery) | [storage.ts](../src/lib/storage.ts)<br/>[progression.ts](../src/lib/progression.ts) | `npx tsx scripts/test-progression.mjs` | `/student/select-class`<br/>$\to$ Switch between Class 10 and Class 7; observe total isolation and reset |
+| **8** | **Mobile-First UX, Performance & Smoke Test**<br/>(360x800 viewport, min 48px tap targets, neo-brutalist tokens, zero runtime errors, self-hosted fonts) | [smoke-test.mjs](../scripts/smoke-test.mjs)<br/>[tailwind.config.ts](../tailwind.config.ts) | `npm run smoke` | Run `npm run smoke`<br/>Review 60 automated screenshots across 4 journeys in EN/HI/TE |
 
 ---
 
@@ -25,9 +25,9 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Verify that when a Class 10 student makes sign errors in quadratic equations, the platform does not merely mark the answer wrong; it mathematically traces the error across grades to Class 7 integer multiplication.
 - **Code Locations**:
-  - `evaluateGapTracing()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L551-L658)
-  - Distractor mistake mappings in [tag-roots.json](file:///C:/Users/reddy/kernel/kernel2k26/data/tag-roots.json) (167 mapped mistake tags)
-  - DAG prerequisite links with pedagogical justifications in [concepts.json](file:///C:/Users/reddy/kernel/kernel2k26/data/concepts.json) (`edgeMeta`)
+  - `evaluateGapTracing()` in [adaptive.ts](../src/lib/adaptive.ts#L551-L658)
+  - Distractor mistake mappings in [tag-roots.json](../data/tag-roots.json) (167 mapped mistake tags)
+  - DAG prerequisite links with pedagogical justifications in [concepts.json](../data/concepts.json) (`edgeMeta`)
 - **Automated Verification**:
   ```bash
   npx tsx scripts/test-gap-tracing.mjs
@@ -50,17 +50,17 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Prove recommendation accuracy on a pre-labeled evaluation harness with held-out blind test cases.
 - **Code Locations**:
-  - `rankCandidateRootCauses()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L403-L550)
+  - `rankCandidateRootCauses()` in [adaptive.ts](../src/lib/adaptive.ts#L403-L550)
   - Mathematical decay rules: $w_{\text{recency}} = 0.90^{N - 1 - i}$, $w_{\text{distance}} = 0.70^d$
   - Confidence calibration: $< 1.10$ (slip / none), $1.10 - 1.99$ (low / confirmation), $2.00 - 2.74$ (medium / gap_card), $\ge 2.75$ (high / gap_card).
-  - 14 test scenarios in [eval-scenarios.json](file:///C:/Users/reddy/kernel/kernel2k26/data/eval-scenarios.json) (10 tuning + 4 blind held-out).
+  - 14 test scenarios in [eval-scenarios.json](../data/eval-scenarios.json) (10 tuning + 4 blind held-out).
 - **Automated Verification**:
   ```bash
   npm run eval
   ```
   *Output: Full confusion matrix (TP=10, FP=0, FN=0, TN=4), 100% Precision, 100% Recall, 100% Top-1 Accuracy across both tuning and held-out subsets.*
 - **Documentation**:
-  - Full algorithmic proof and 3 worked examples with real concept IDs and exact scores in [docs/ALGORITHM.md](file:///C:/Users/reddy/kernel/kernel2k26/docs/ALGORITHM.md).
+  - Full algorithmic proof and 3 worked examples with real concept IDs and exact scores in [docs/ALGORITHM.md](../docs/ALGORITHM.md).
 
 ---
 
@@ -68,9 +68,9 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Confirm implementation of all three distinct learning stages.
 - **Code Locations**:
-  - **Stage 1 (Diagnostic)**: `generateChapterDiagnostic()` and `evaluateChapterDiagnostic()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L694-L810)
-  - **Stage 2 (Solve / Adaptive Practice)**: `selectPracticeQuestions()` and `evaluatePracticeSubmission()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L816-L945)
-  - **Stage 3 (Chapter Test)**: `generateChapterTest()` and `evaluateChapterTest()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L950-L1050)
+  - **Stage 1 (Diagnostic)**: `generateChapterDiagnostic()` and `evaluateChapterDiagnostic()` in [adaptive.ts](../src/lib/adaptive.ts#L694-L810)
+  - **Stage 2 (Solve / Adaptive Practice)**: `selectPracticeQuestions()` and `evaluatePracticeSubmission()` in [adaptive.ts](../src/lib/adaptive.ts#L816-L945)
+  - **Stage 3 (Chapter Test)**: `generateChapterTest()` and `evaluateChapterTest()` in [adaptive.ts](../src/lib/adaptive.ts#L950-L1050)
   - Pure Mastery update formula: $0.7 \cdot \text{old} + 0.3 \cdot \text{new}$ in `updateMastery()`
   - Deterministic difficulty stepping: promote after 3 consecutive correct, demote after 2 incorrect in `updateConceptDifficulty()`
 - **Automated Verification**:
@@ -89,11 +89,11 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Verify that remediation is pedagogical (not just more drills), offering 3 tailored variants with verified Indian curriculum models.
 - **Code Locations**:
-  - 3 variants per concept in [lessons.json](file:///C:/Users/reddy/kernel/kernel2k26/data/lessons.json):
+  - 3 variants per concept in [lessons.json](../data/lessons.json):
     1. **Basics-First**: Visual, concrete models (e.g., Kirana store ledger book for positive cash vs negative credit).
     2. **Standard**: NCERT procedural instruction with step-by-step worked examples.
     3. **Fast-Track**: High-density pattern recognition and algebraic shortcut derivations.
-  - Variant selector: `selectLessonVariant()` and `getLessonVariantFromMastery()` in [adaptive.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/adaptive.ts#L233-L265)
+  - Variant selector: `selectLessonVariant()` and `getLessonVariantFromMastery()` in [adaptive.ts](../src/lib/adaptive.ts#L233-L265)
   - Unreviewed translation protection: unreviewed Hindi/Telugu text is guarded unless `NEXT_PUBLIC_SHOW_DRAFT_TRANSLATIONS=true`.
 - **Automated Verification**:
   ```bash
@@ -112,10 +112,10 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Verify the teacher dashboard displays a complete 25-student cohort evaluated by the real Margam engine (no hand-typed scores).
 - **Code Locations**:
-  - Generator script: [generate-synthetic-class.mjs](file:///C:/Users/reddy/kernel/kernel2k26/scripts/generate-synthetic-class.mjs)
-  - Real engine dataset: [synthetic-class.json](file:///C:/Users/reddy/kernel/kernel2k26/data/synthetic-class.json)
-  - Dashboard component: [src/app/teacher/page.tsx](file:///C:/Users/reddy/kernel/kernel2k26/src/app/teacher/page.tsx)
-  - Feature flag: `FEATURE_TEACHER_TOOLS: true` in [flags.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/flags.ts)
+  - Generator script: [generate-synthetic-class.mjs](../scripts/generate-synthetic-class.mjs)
+  - Real engine dataset: [synthetic-class.json](../data/synthetic-class.json)
+  - Dashboard component: [src/app/teacher/page.tsx](../src/app/teacher/page.tsx)
+  - Feature flag: `FEATURE_TEACHER_TOOLS: true` in [flags.ts](../src/lib/flags.ts)
 - **Dashboard Features**:
   1. **Cohort Summary Metrics**: 72% class average, 17 flagged students (68%), top missing prerequisite `c7-int-02` (24%).
   2. **Students Needing Attention Roster**: Quick search, attention reason filtering.
@@ -155,7 +155,7 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Assess test validity against real question bank sizes, verify silent shortfall handling, and understand psychometric constraints.
 - **Documentation**:
-  - Full audit of 86 questions across 20 concepts in [docs/CHAPTER_TEST_BLUEPRINT.md](file:///C:/Users/reddy/kernel/kernel2k26/docs/CHAPTER_TEST_BLUEPRINT.md).
+  - Full audit of 86 questions across 20 concepts in [docs/CHAPTER_TEST_BLUEPRINT.md](../docs/CHAPTER_TEST_BLUEPRINT.md).
 - **Core Findings Documented**:
   1. **Disjoint Pool Shortfall**: Chapter `c10-ch04` contains 14 total questions. Excluding 6 diagnostic questions leaves 8 non-diagnostic items (all in `c10-quad-01`).
   2. **Shortfall Handler**: When strictly disjoint items are requested, the engine triggers `shortfall: true`, returning available items without fabricating synthetic questions.
@@ -172,11 +172,11 @@ This document provides a comprehensive mapping of every evaluation requirement t
 
 - **Evaluator Goal**: Confirm independent progression across Classes 6 to 10, robust storage schema migration with Zod, and self-healing error recovery.
 - **Code Locations**:
-  - Schema definition and migrations in [storage.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/storage.ts):
+  - Schema definition and migrations in [storage.ts](../src/lib/storage.ts):
     - `LearnerProfileSchema` (Zod v1)
     - `migrateLearnerProfile()`: Migrates unversioned v0 legacy profiles to v1 schema.
     - Corrupted profile recovery: Deliberately malformed profiles return `null` and safely reset to default state without throwing uncaught exceptions.
-  - Progression isolation in [progression.ts](file:///C:/Users/reddy/kernel/kernel2k26/src/lib/progression.ts):
+  - Progression isolation in [progression.ts](../src/lib/progression.ts):
     - Switching grades isolates chapter unlocking; resetting one grade leaves other grades intact.
 - **Automated Verification**:
   ```bash

@@ -22,7 +22,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { handleLoginSync, setStorageMode, createLearnerProfile } from "@/lib/storage";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime } from "@/lib/xp-config";
 import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
 
@@ -481,7 +481,7 @@ function LoginForm() {
           {!isTeacherFlow && !recoveryCode && (
             <div className="flex justify-center -mb-2">
               <div className="p-2 rounded-2xl bg-white/70 border border-white/80 shadow-xs flex items-center gap-2">
-                <WitchCat
+                <Companion
                   pose={isIstNightTime() ? "sleepy" : "greet"}
                   size={50}
                   sticker={false}

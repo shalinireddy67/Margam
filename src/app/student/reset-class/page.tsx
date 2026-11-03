@@ -6,7 +6,7 @@ import Link from "next/link";
 import { AlertTriangle, ArrowLeft, RotateCcw, ShieldAlert } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile, clearActiveProfile } from "@/lib/storage";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import { Logo } from "@/components/ui";
 
 export default function ResetClassPage() {
@@ -48,7 +48,7 @@ export default function ResetClassPage() {
       <main className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center items-center my-auto">
         <div className="bg-[#FFF7E6] p-6 sm:p-8 border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] space-y-6 text-center">
           <div className="flex justify-center mb-2">
-            <WitchCat pose="oops" size={80} sticker={false} alt="Margam companion warning" />
+            <Companion pose="oops" size={80} sticker={false} alt="Margam companion warning" />
           </div>
 
           <div>

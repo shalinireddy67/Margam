@@ -48,12 +48,12 @@ import {
   canTakeChapterDiagnostic,
   getConceptById,
 } from "@/lib/curriculum";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime, getLevelProgress } from "@/lib/xp-config";
 import { SegmentedXpBar } from "@/components/ui/PixelEffects";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 import { evaluateStudentBadges } from "@/lib/badges";
-import { getCatGreeting } from "@/lib/greetings";
+import { getLearnerGreeting } from "@/lib/greetings";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 
 export default function StudentDashboardPage() {
@@ -103,7 +103,7 @@ export default function StudentDashboardPage() {
     (tp) => tp.worksheetCompleted || (tp.worksheetScore !== undefined)
   ).length;
 
-  const greetingObj = getCatGreeting(profile.name, currentLang);
+  const greetingObj = getLearnerGreeting(profile.name, currentLang);
   const companionRevisionObj = getCompanionRevisionGreeting(revisionQueue, profile);
   const displayGreeting = companionRevisionObj?.message || greetingObj.text;
 
@@ -125,7 +125,7 @@ export default function StudentDashboardPage() {
         <div className="glass-panel p-5 sm:p-7 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
             <div className="shrink-0 p-2.5 rounded-2xl bg-white/70 border border-white/80 shadow-xs">
-              <WitchCat
+              <Companion
                 pose={isIstNightTime() ? "sleepy" : "greet"}
                 size={64}
                 sticker={false}

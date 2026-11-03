@@ -20,6 +20,8 @@ export interface StreakEvaluationResult {
   message: string;
 }
 
+export type StreakUpdateResult = StreakEvaluationResult;
+
 /**
  * Calculates day difference between two YYYY-MM-DD date strings.
  */
@@ -59,7 +61,7 @@ export function evaluateDailyStreak(
     current = 1;
     longest = 1;
     streakIncreased = true;
-    message = "First day of your streak! 🔥 Maru is cheering for you!";
+    message = "First day of your streak! 🔥 Your companion is cheering for you!";
   } else if (existing.lastActiveDate === todayIst) {
     // Already practiced today; maintain streak
     message = "You have already secured today's streak flame! 🔥";
@@ -71,7 +73,7 @@ export function evaluateDailyStreak(
       current += 1;
       streakIncreased = true;
       if (current > longest) longest = current;
-      message = `${current}-Day Streak! 🔥 Maru does a victory hop!`;
+      message = `${current}-Day Streak! 🔥 Your companion celebrates your victory!`;
 
       // Check if weekly freeze token milestone is reached (every 7 streak days)
       if (current % XP_CONFIG.STREAK_FREEZE_REWARD_DAYS === 0 && freezeTokens < XP_CONFIG.MAX_STREAK_FREEZES) {
@@ -89,7 +91,7 @@ export function evaluateDailyStreak(
     } else {
       // Reset streak gently without punishment
       current = 1;
-      message = "Maru missed you! Welcome back — starting fresh with Day 1! ✨";
+      message = "Welcome back — starting fresh with Day 1! ✨";
     }
   }
 
@@ -107,6 +109,8 @@ export function evaluateDailyStreak(
   };
 }
 
+export const recordDailyActivity = evaluateDailyStreak;
+
 /**
  * Returns a gentle, positive reminder message if the student has not yet practiced today.
  */
@@ -122,12 +126,12 @@ export function getStreakReminder(streakState?: LearnerProfile["streak"]): {
     if (currentStreak > 0) {
       return {
         needsPracticeToday: true,
-        reminderText: `Maru misses you! Play 1 lesson today to keep your ${currentStreak}-day flame alive 🔥`,
+        reminderText: `Play 1 lesson today to keep your ${currentStreak}-day flame alive 🔥`,
       };
     }
     return {
       needsPracticeToday: true,
-      reminderText: "Maru is ready to learn! Solve today's quest to ignite your streak ✨",
+      reminderText: "Ready to learn! Solve today's quest to ignite your streak ✨",
     };
   }
 
@@ -136,4 +140,3 @@ export function getStreakReminder(streakState?: LearnerProfile["streak"]): {
     reminderText: "Today's flame is burning bright! Great job practicing today 🔥",
   };
 }
-

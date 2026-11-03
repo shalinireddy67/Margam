@@ -181,7 +181,7 @@ export function getIstDateString(date = new Date()): string {
 
 /**
  * Returns whether it is currently night time in IST (after 8:00 PM or before 6:00 AM).
- * Used for Maru the cat's sleepy pose.
+ * Used for the learning companion's sleepy pose.
  */
 export function isIstNightTime(date = new Date()): boolean {
   const utc = date.getTime() + date.getTimezoneOffset() * 60000;

@@ -30,13 +30,29 @@ import {
   selectLessonVariant,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import WitchCatCompanion, { CompanionContext } from "@/components/WitchCatCompanion";
+
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import {
   SkeletonCard,
   OfflineBanner,
 } from "@/components/ui";
+
+type LessonCompanionContext = "lesson_start" | "correct" | "incorrect" | "completed";
+
+const companionPoseMap: Record<LessonCompanionContext, "greet" | "read" | "think" | "cheer" | "oops" | "sleepy"> = {
+  lesson_start: "read",
+  correct: "cheer",
+  incorrect: "oops",
+  completed: "cheer",
+};
+
+const companionDialogMap: Record<LessonCompanionContext, string> = {
+  lesson_start: "Study the key concept and worked examples below.",
+  correct: "Excellent answer! You got it right!",
+  incorrect: "Good try! Check the hint and try again.",
+  completed: "Fantastic! You completed this lesson milestone!",
+};
 
 interface PracticeFeedbackItem {
   questionId: string;
@@ -74,7 +90,7 @@ function LessonContent() {
   const [worksheetResult, setWorksheetResult] = useState<PracticeResultState | null>(null);
   const [completedNow, setCompletedNow] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [companionContext, setCompanionContext] = useState<CompanionContext>("lesson_start");
+  const [companionContext, setCompanionContext] = useState<LessonCompanionContext>("lesson_start");
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
@@ -431,7 +447,7 @@ function LessonContent() {
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex flex-col sm:flex-row items-start gap-5">
                 <div className="shrink-0 p-2.5 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
-                  <WitchCat
+                  <Companion
                     pose="read"
                     size={88}
                     sticker={false}
@@ -490,11 +506,14 @@ function LessonContent() {
           {/* Side Column: Mascot Companion Dialogue */}
           <div className="md:col-span-4 sticky top-24 space-y-4">
             <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] flex flex-col items-center text-center text-slate-800">
-              <WitchCatCompanion
-                context={companionContext}
-                studentName={profile.name}
-                mode="inline"
+              <Companion
+                pose={companionPoseMap[companionContext] || "read"}
+                size={84}
+                alt="Margam learning companion"
               />
+              <p className="text-xs sm:text-sm font-heading font-bold text-slate-700 leading-relaxed mt-2">
+                {companionDialogMap[companionContext]}
+              </p>
             </div>
           </div>
         </div>
@@ -602,7 +621,7 @@ function LessonContent() {
                       <div className="p-4 rounded-2xl bg-rose-50/80 border border-rose-200 text-xs text-rose-950 space-y-2">
                         <div className="flex items-start gap-3">
                           <div className="shrink-0 pt-0.5">
-                            <WitchCat
+                            <Companion
                               pose="oops"
                               size={56}
                               sticker={true}

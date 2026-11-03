@@ -17,7 +17,7 @@ import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import {
   SkeletonCard,
   EmptyState,

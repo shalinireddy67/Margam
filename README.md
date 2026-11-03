@@ -2,45 +2,40 @@
 
 **Every learner has a path. Find yours.**
 
-Margam is an adaptive mathematics learning website for students in Classes 6–10. It helps students identify topics they need to improve, learn concepts at their own pace, and practise based on their progress.
+Margam is an adaptive mathematics learning platform for students in Classes 6–10 (NCERT curriculum). It identifies foundational learning gaps, traces prerequisite dependencies across grade levels, and provides personalized remedial lessons, adaptive practice, and chapter assessments.
 
-**Live website:** https://kernel2k26.vercel.app/  
+**Live website:** https://margam-learningspace.vercel.app/  
 **GitHub repository:** https://github.com/shalinireddy67/Margam
 
-## What Margam offers
+## What Margam Offers
 
-- **Learning gap identification:** Diagnostic activities help identify concepts a student may need to revise.
-- **Prerequisite learning:** Topics are connected so students can work on the basic concepts needed to understand harder topics.
-- **Adaptive practice:** Practice difficulty can adjust based on student responses.
-- **Different lesson styles:** Lessons include Basics First, Standard, and Fast Track approaches.
-- **Progress tracking:** Students can follow their lesson and topic progress.
-- **Worksheets and revision:** Students can practise concepts and revisit topics that need more attention.
-- **Multilingual learning:** Learning content is available in English, Hindi, and Telugu.
-- **Learning companion:** A mascot appears throughout the learning experience to make the journey more engaging.
+- **Learning Gap Identification:** Diagnostic assessments detect specific misconceptions and error patterns.
+- **Prerequisite Backtracking:** Prerequisite DAG maps foundational concepts across Classes 6 to 10 (e.g. Class 10 Quadratic Equations backtracking to Class 7 Integer Signs).
+- **Adaptive Practice Engine:** Stepped difficulty (Levels 1–3) with real-time feedback and misconception hints.
+- **3-Variant Pedagogical Lessons:** Basics First, Standard, and Fast Track approaches tailored to individual mastery.
+- **Multilingual Support:** Full trilingual support in English, Hindi (हिन्दी), and Telugu (తెలుగు).
+- **Gamification & Progress:** Streak flames with freeze token protection, IST daily reset, and XP rank milestones.
+- **Teacher Dashboard:** Real-time classroom oversight, concept mastery matrix, and student roster management.
 
-## Student learning journey
+## Student Learning Journey
 
-1. The student opens Margam and selects their class.
-2. They begin with the available learning or assessment activities.
-3. Their responses help identify concepts that need attention.
-4. They study lessons and complete practice activities.
-5. Their progress helps guide what they should learn or revise next.
+1. The student selects their grade level (Class 6 to 10).
+2. Diagnostic assessments identify prerequisite concepts needing attention.
+3. The platform generates personalized lessons and adaptive practice worksheets.
+4. Student progress, mastery, and daily streaks are synchronized securely.
+5. Chapter tests assess overall topic proficiency.
 
-## Classes and subjects
+## Technology Stack
 
-Margam currently focuses on **Mathematics for Classes 6 to 10**, with curriculum content based on NCERT topics.
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS (Fluid Responsive Layout & Voxel Design System)
+- **Database & Auth:** Supabase (PostgreSQL with Row Level Security)
+- **Fonts:** Self-hosted WOFF2 fonts for offline resilience
 
-## Technology used
+## Run Locally
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Supabase
-
-## Run locally
-
-You will need Node.js and npm installed.
+You will need Node.js (v20+) and npm installed.
 
 ```bash
 git clone https://github.com/shalinireddy67/Margam.git
@@ -49,11 +44,27 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Some project features use Supabase. If you are setting up those features locally, configure the required environment variables in a `.env.local` file.
+Configure required environment variables in `.env.local` using `.env.example` as a template.
+
+## Verification & Testing
+
+```bash
+# Run unit, progression, and curriculum validation suites
+npm test
+
+# Run authentication and security authorization suites
+npm run test:auth
+
+# Run production bundle secret leak audit
+npm run test:bundle
+
+# Production build
+npm run build
+```
 
 ## Links
 
-- **Website:** https://kernel2k26.vercel.app/
-- **Source code:** https://github.com/shalinireddy67/Margam
+- **Production Website:** https://margam-learningspace.vercel.app/
+- **Source Code:** https://github.com/shalinireddy67/Margam

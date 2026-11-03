@@ -31,13 +31,13 @@ import {
   getConceptById,
 } from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime } from "@/lib/xp-config";
 import { SegmentedXpBar } from "@/components/ui/PixelEffects";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 import ConceptPathway from "@/components/ConceptPathway";
 import { evaluateStudentBadges } from "@/lib/badges";
-import { getCatGreeting } from "@/lib/greetings";
+import { getLearnerGreeting } from "@/lib/greetings";
 import { Sparkles, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 
@@ -210,7 +210,7 @@ export default function HomePage() {
   const gapConcept = firstActiveGapId ? getConceptById(firstActiveGapId) : undefined;
 
   // Companion greeting
-  const catGreeting = getCatGreeting(profile?.name, currentLang);
+  const learnerGreeting = getLearnerGreeting(profile?.name, currentLang);
   const revisionQueue = profile ? getRevisionQueue(profile, 4) : [];
   const companionRevision = profile ? getCompanionRevisionGreeting(revisionQueue, profile) : null;
 
@@ -246,14 +246,14 @@ export default function HomePage() {
         {/* ================================================================= */}
         {!profile && (
           <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
-            {/* Hero Section: WitchCat Mascot + H1 + Subline */}
+            {/* Hero Section: Learning Companion Mascot + H1 + Subline */}
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
               <div className="shrink-0 mb-2 p-2 bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F]">
-                <WitchCat
+                <Companion
                   pose={isIstNightTime() ? "sleepy" : "greet"}
                   size={110}
                   sticker={false}
-                  alt="Maru the cat mascot"
+                  alt="Margam learning companion"
                 />
               </div>
 
@@ -360,7 +360,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-4">
                   {/* Mascot Companion with Pose */}
                   <div className="shrink-0 p-2 bg-[#422816] border-2 border-[#7A4B2A] shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
-                    <WitchCat
+                    <Companion
                       pose="cheer"
                       size={90}
                       sticker={false}
@@ -369,7 +369,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <span className="text-[10px] font-heading font-bold text-[#FFE9A8] uppercase tracking-wider block">
-                      {catGreeting.text}
+                      {learnerGreeting.text}
                     </span>
                     <h1
                       id="dashboard-heading"
@@ -513,7 +513,7 @@ export default function HomePage() {
             {/* Companion Dialogue & Advice Card */}
             <div className="p-4 sm:p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col sm:flex-row items-center gap-4">
               <div className="shrink-0 p-1.5 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-                <WitchCat
+                <Companion
                   pose={companionRevision?.pose || "greet"}
                   size={74}
                   sticker={false}

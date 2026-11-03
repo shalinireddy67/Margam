@@ -36,7 +36,7 @@ import {
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
+import { Companion } from "@/components/ui/Companion";
 import {
   SkeletonCard,
   EmptyState,
@@ -573,7 +573,7 @@ export default function ChapterDiagnosticPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-white/80 pb-5">
                 <div className="flex items-center gap-4">
                   <div className="shrink-0 p-2 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
-                    <WitchCat
+                    <Companion
                       pose={result.passed ? "cheer" : "think"}
                       size={74}
                       sticker={false}
@@ -1052,7 +1052,7 @@ export default function ChapterDiagnosticPage() {
             {/* Companion Reaction Card */}
             <div className="glass-panel p-5 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-center space-y-3">
               <div className="flex justify-center">
-                <WitchCat
+                <Companion
                   pose={result ? (result.passed ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
                   size={96}
                   sticker={false}

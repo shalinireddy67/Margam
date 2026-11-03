@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
-export type WitchCatPose = "greet" | "read" | "think" | "cheer" | "oops" | "sleepy";
-export type CompanionPose = WitchCatPose;
+export type CompanionPose = "greet" | "read" | "think" | "cheer" | "oops" | "sleepy";
 
-export interface WitchCatProps {
-  pose?: WitchCatPose;
+export interface CompanionProps {
+  pose?: CompanionPose;
   size?: number | "sm" | "default" | "lg";
   className?: string;
   alt?: string;
@@ -16,16 +14,16 @@ export interface WitchCatProps {
 }
 
 /**
- * Margam Learning Companion: Minecraft Zombie riding a Chicken (Chicken Jockey).
- * Faithful to the authentic Minecraft character identity, proportions, and transparent rendering.
+ * Margam Learning Companion (Minecraft Chicken Jockey mascot).
+ * Faithful to authentic voxel identity, balanced proportions, and transparent rendering.
  */
-export function WitchCat({
+export function Companion({
   pose = "greet",
   size = "default",
   className = "",
   alt,
   sticker = false,
-}: WitchCatProps) {
+}: CompanionProps) {
   let dimension = 120;
   if (typeof size === "number") {
     dimension = size;
@@ -37,17 +35,17 @@ export function WitchCat({
     dimension = 220;
   }
 
-  // Chicken Jockey aspect ratio: width is ~0.51 of height (328 x 640)
+  // Mascot aspect ratio: width is ~0.52 of height
   const mascotHeight = dimension;
   const mascotWidth = Math.round(dimension * 0.52);
 
   const defaultAlt = {
-    greet: "Margam Zombie Chicken Jockey companion greeting you",
-    read: "Margam Zombie Chicken Jockey companion reading math lessons",
-    think: "Margam Zombie Chicken Jockey companion thinking carefully",
-    cheer: "Margam Zombie Chicken Jockey companion celebrating your victory!",
-    oops: "Margam Zombie Chicken Jockey companion offering encouragement",
-    sleepy: "Margam Zombie Chicken Jockey companion resting peacefully at night",
+    greet: "Margam learning companion greeting you",
+    read: "Margam learning companion reading math lessons",
+    think: "Margam learning companion thinking carefully",
+    cheer: "Margam learning companion celebrating your victory!",
+    oops: "Margam learning companion offering encouragement",
+    sleepy: "Margam learning companion resting peacefully at night",
   }[pose];
 
   const animationClass =
@@ -59,7 +57,7 @@ export function WitchCat({
 
   return (
     <div
-      data-testid="witch-cat"
+      data-testid="learning-companion"
       data-testid-companion="chicken-jockey"
       data-pose={pose}
       role="img"
@@ -72,7 +70,7 @@ export function WitchCat({
         <div className="absolute inset-0 bg-[#5A3720] border-2 border-[#422816] shadow-[3px_3px_0px_rgba(0,0,0,0.4)] -z-10" />
       )}
 
-      {/* Mascot Container with Subtle Minecraft Animation */}
+      {/* Mascot Container with Subtle Animation */}
       <div className={`relative w-full h-full flex items-center justify-center ${animationClass} motion-reduce:animate-none`}>
         <img
           src="/images/companion/mascot-trimmed.png"
@@ -87,7 +85,7 @@ export function WitchCat({
           }}
         />
 
-        {/* Pose Badges & Expressions without altering mascot */}
+        {/* Pose Badges & Expressions */}
         {pose === "think" && (
           <div className="absolute -top-1 -right-2 bg-[#FFE9A8] text-[#2B1B0F] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] px-1.5 py-0.5 text-[9px] font-heading font-extrabold animate-bounce">
             ?
@@ -131,9 +129,8 @@ export function WitchCat({
   );
 }
 
-// Aliases for clear semantic naming across the codebase
-export const Companion = WitchCat;
-export const ChickenJockey = WitchCat;
-export const LearningCompanion = WitchCat;
+// Aliases for clean semantic naming
+export const LearningCompanion = Companion;
+export const ChickenJockey = Companion;
 
-export default WitchCat;
+export default Companion;
