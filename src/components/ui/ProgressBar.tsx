@@ -6,7 +6,7 @@ export interface ProgressBarProps {
   value: number; // Current progress value
   max?: number;  // Max progress value (default 100)
   segments?: number; // Total number of discrete square blocks (default 10)
-  color?: "grass" | "sand" | "sky" | "red" | "darkgrass" | "gold" | "pixelgreen";
+  color?: "grass" | "sand" | "sky" | "red" | "gold";
   className?: string;
   ariaLabel?: string;
 }
@@ -25,8 +25,6 @@ export function ProgressBar({
 
   const fillColors = {
     grass: "bg-[#5DAA3A]",
-    pixelgreen: "bg-[#5DAA3A]",
-    darkgrass: "bg-[#2F6B22]",
     gold: "bg-[#F4C542]",
     sand: "bg-[#FFE9A8]",
     sky: "bg-[#3FA7C9]",

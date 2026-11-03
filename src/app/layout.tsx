@@ -1,21 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { SITE_NAME, SITE_TAGLINE, SITE_DESCRIPTION } from "@/config/site";
+
+const SITE_NAME = "Margam";
+const SITE_DESCRIPTION =
+  "Margam — Adaptive Mathematics learning platform for Classes 6 to 10 (NCERT curriculum).";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | Adaptive Mathematics Platform for Classes 6–10`,
-  description: `${SITE_TAGLINE} — ${SITE_DESCRIPTION}`,
-  keywords: [
-    "Adaptive Learning",
-    "NCERT Mathematics",
-    "Classes 6 to 10",
-    "Prerequisite Gaps",
-    "Concept Graph DAG",
-    "Indian Classrooms",
-    "Code Kernel 26",
-    "Margam",
-  ],
-  authors: [{ name: "Margam Learning Initiative" }],
+  title: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
+  description: SITE_DESCRIPTION,
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: `${SITE_NAME} | Every learner has a path. Find yours.`,
     description: SITE_DESCRIPTION,
@@ -32,7 +27,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#10B981",
+  themeColor: "#FFF7E6",
 };
 
 export default function RootLayout({
@@ -42,18 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-full flex flex-col text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-emerald-200 selection:text-emerald-950">
-        {/* Universal Fixed Minecraft Nature Background Scenery */}
-        <div
-          className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat transition-all duration-700"
-          style={{ backgroundImage: "url('/images/minecraft/meadow-day.jpg')" }}
-          aria-hidden="true"
-        />
-        {/* Subtle Ambient Light Wash */}
-        <div
-          className="fixed inset-0 pointer-events-none -z-10 bg-white/10 backdrop-blur-[0.5px]"
-          aria-hidden="true"
-        />
+      <body className="min-h-full flex flex-col bg-[#FFF7E6] text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

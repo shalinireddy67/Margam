@@ -4,6 +4,7 @@ import React from "react";
 
 export type CardColor =
   | "white"
+  | "cream"
   | "yellow"
   | "cyan"
   | "pink"
@@ -11,10 +12,6 @@ export type CardColor =
   | "sky"
   | "orange"
   | "grass"
-  | "darkgrass"
-  | "pixelgreen"
-  | "forest"
-  | "warmwhite"
   | "charcoal"
   | "translucent"
   | "dirt"
@@ -32,44 +29,41 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const colorStyles: Record<CardColor, string> = {
-  // Frosted Glass Defaults
-  forest: "bg-white/80 text-emerald-950 border-white/70 backdrop-blur-md shadow-[0_8px_32px_rgba(16,42,18,0.08)]",
-  dirt: "bg-white/80 text-emerald-950 border-white/70 backdrop-blur-md shadow-[0_8px_32px_rgba(16,42,18,0.08)]",
-  charcoal: "bg-white/85 text-slate-900 border-white/80 backdrop-blur-md shadow-[0_8px_32px_rgba(16,42,18,0.08)]",
-  translucent: "bg-white/75 text-emerald-950 border-white/60 backdrop-blur-lg shadow-[0_8px_32px_rgba(16,42,18,0.08)]",
-
-  // Light Parchment panels
-  warmwhite: "bg-amber-50/85 text-emerald-950 border-amber-200/80 backdrop-blur-md",
-  white: "bg-white/90 text-emerald-950 border-white/90 backdrop-blur-md",
+  // White card with Ink border (Canonical)
+  white: "bg-[#FFFFFF] text-[#2B1B0F] border-[#2B1B0F]",
+  cream: "bg-[#FFF7E6] text-[#2B1B0F] border-[#2B1B0F]",
 
   // Neutral Stone
-  stone: "bg-slate-100/85 text-slate-800 border-slate-200/80 backdrop-blur-md",
+  stone: "bg-[#8B8B8B] text-[#FFF7E6] border-[#3F3F3F]",
 
   // Grass Accent
-  grass: "bg-emerald-50/90 text-emerald-950 border-emerald-200/80 backdrop-blur-md",
-  pixelgreen: "bg-emerald-50/90 text-emerald-950 border-emerald-200/80 backdrop-blur-md",
-  darkgrass: "bg-emerald-800/90 text-white border-emerald-700 backdrop-blur-md",
-  green: "bg-emerald-50/90 text-emerald-950 border-emerald-200/80 backdrop-blur-md",
+  grass: "bg-[#5DAA3A] text-[#2B1B0F] border-[#2B1B0F]",
+  green: "bg-[#5DAA3A] text-[#2B1B0F] border-[#2B1B0F]",
 
   // Highlights
-  gold: "bg-amber-50/90 text-amber-950 border-amber-200/80 backdrop-blur-md",
-  sand: "bg-amber-50/90 text-amber-950 border-amber-200/80 backdrop-blur-md",
-  yellow: "bg-amber-50/90 text-amber-950 border-amber-200/80 backdrop-blur-md",
-  orange: "bg-orange-50/90 text-orange-950 border-orange-200/80 backdrop-blur-md",
+  gold: "bg-[#F4C542] text-[#2B1B0F] border-[#2B1B0F]",
+  sand: "bg-[#FFE9A8] text-[#2B1B0F] border-[#2B1B0F]",
+  yellow: "bg-[#F4C542] text-[#2B1B0F] border-[#2B1B0F]",
+  orange: "bg-[#FFB36B] text-[#2B1B0F] border-[#2B1B0F]",
 
   // Water / Sky
-  sky: "bg-sky-50/90 text-sky-950 border-sky-200/80 backdrop-blur-md",
-  cyan: "bg-cyan-50/90 text-cyan-950 border-cyan-200/80 backdrop-blur-md",
+  sky: "bg-[#6EB5FF] text-[#2B1B0F] border-[#2B1B0F]",
+  cyan: "bg-[#3FA7C9] text-[#2B1B0F] border-[#2B1B0F]",
+
+  // Ground Wood & Dirt panels
+  dirt: "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]",
+  charcoal: "bg-[#5A3720] text-[#FFF7E6] border-[#422816]",
+  translucent: "bg-[#5A3720]/90 text-[#FFF7E6] border-[#7A4B2A] backdrop-blur-md",
 
   // Flower Red / Pink
-  red: "bg-rose-50/90 text-rose-950 border-rose-200/80 backdrop-blur-md",
-  pink: "bg-pink-50/90 text-pink-950 border-pink-200/80 backdrop-blur-md",
+  red: "bg-[#E04A3F] text-[#FFFFFF] border-[#701A13]",
+  pink: "bg-[#FF8FA3] text-[#2B1B0F] border-[#2B1B0F]",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
     {
-      color = "forest",
+      color = "white",
       dashed = false,
       interactive = false,
       grassTrim = false,
@@ -83,16 +77,17 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={`
-          border rounded-2xl
+          border-[3px] rounded-[2px]
           p-4 sm:p-5
           box-border
-          ${grassTrim ? "border-t-4 border-t-emerald-500" : ""}
+          ${grassTrim ? "border-t-[8px] border-t-[#5DAA3A]" : ""}
           ${interactive
-            ? "cursor-pointer transition-all hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(16,42,18,0.12)] active:translate-y-0"
+            ? "cursor-pointer transition-transform hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5"
             : ""
           }
           ${dashed ? "border-dashed" : "border-solid"}
-          ${colorStyles[color] || colorStyles.forest}
+          ${colorStyles[color] || colorStyles.white}
+          shadow-[4px_4px_0px_#2B1B0F]
           ${className}
         `.trim()}
         {...props}
@@ -104,5 +99,4 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = "Card";
-
 export default Card;

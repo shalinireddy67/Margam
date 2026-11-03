@@ -273,7 +273,7 @@ export default function ChapterDiagnosticPage() {
             </p>
             <div className="pt-2">
               <Button
-                variant="pixelgreen"
+                variant="grass"
                 size="default"
                 onClick={initDiagnostic}
                 className="w-full sm:w-auto min-h-[48px]"

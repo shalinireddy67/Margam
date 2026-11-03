@@ -18,9 +18,7 @@ export type TileColor =
   | "sand"
   | "dirt"
   | "wood"
-  | "stone"
-  | "forest"
-  | "pixelgreen";
+  | "stone";
 
 export interface TileProps {
   title: string;
@@ -41,7 +39,7 @@ export function Tile({
   subtitle,
   tooltip,
   state = "available",
-  color = "forest",
+  color = "dirt",
   diagnosticHref,
   practiceHref,
   lessonHref,

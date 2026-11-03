@@ -169,33 +169,17 @@
   --voxel-panel-dark: #5A3720;
 
   --ink: #2B1B0F;
-  --bg: #5A3720;
-  --r: 2px;
-  --border-pixel: 4px solid #422816;
-  --shadow-pixel: 4px 4px 0px rgba(0, 0, 0, 0.35);
-
-  /* Legacy aliases mapped to Voxel palette */
-  --forest: #2F6B22;
-  --pixelgreen: #5DAA3A;
-  --darkgreen: #2F6B22;
-  --mutedgreen: #2F6B22;
-  --warmwhite: #FFF7E6;
-  --lightgrey: #D9D9D9;
-  --charcoal: #20251F;
+  --bg: #FFF7E6;
   --gold: #F4C542;
-  --sand: #FFE9A8;
-  --red: #E04A3F;
-  --white: #FFFFFF;
-  --yellow: #F4C542;
-  --cyan: #3FA7C9;
-  --pink: #FF8FA3;
-  --green: #5DAA3A;
-  --orange: #FFB36B;
+  --r: 2px;
+  --border-pixel: 3px solid #2B1B0F;
+  --shadow-pixel: 4px 4px 0px #2B1B0F;
 }
 
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
+    border-radius: 0 !important;
   }
 
   html, body {
@@ -206,71 +190,65 @@
     min-height: 100dvh;
   }
 
-  /* Default / English Body */
+  /* Default / English Body: Nunito 16px, line-height 1.6, Ink on Cream */
   body {
-    background-color: transparent;
-    color: #0F2815;
+    background-color: var(--bg);
+    color: var(--ink);
     font-family: 'Nunito', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.6;
     padding-top: env(safe-area-inset-top, 0px);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Default Headings: Clean, readable Nunito with fluid clamp scaling */
+  /* Headings: Baloo 2 bold (Baloo Tammudu 2 for Telugu) */
   h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: 'Nunito', 'Baloo 2', 'Baloo Tammudu 2', sans-serif;
-    letter-spacing: -0.015em;
-    font-weight: 800;
-    line-height: 1.3;
+    font-family: 'Baloo 2', 'Baloo Tammudu 2', 'Nunito', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
     word-break: break-word;
   }
 
-  /* Pixel Font: strictly reserved for badges, small tags & decorative accents */
-  .font-pixel {
+  /* Press Start 2P: ONLY for MARGAM wordmark and tiny uppercase labels */
+  .font-pixel, .pixel-label, .wordmark {
     font-family: 'Press Start 2P', monospace, sans-serif;
-    letter-spacing: 0.02em;
-    line-height: 1.4;
+    letter-spacing: -0.02em;
   }
 
-  /* Default Button Typography: Readable Nunito font with proper touch targets */
-  button:not([data-l]), .glass-btn, .chip, [role="tab"] {
-    font-family: 'Nunito', 'Baloo 2', 'Baloo Tammudu 2', sans-serif;
+  /* English Buttons & Chips: Readable bold typography */
+  button:not([data-l]), .pixel-btn, .chip, [role="tab"] {
+    font-family: 'Baloo 2', 'Nunito', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
   }
 
-  /* Explicit pixel button utility for retro badges */
-  .pixel-btn {
-    font-family: 'Press Start 2P', monospace, sans-serif;
-    letter-spacing: 0.02em;
+  /* Fluid H1: clamp(2rem, 5vw, 3.5rem), tight line-height, bold Baloo 2 */
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin: 0 0 16px;
   }
 
-  /* Fluid typography scale with CSS clamp() (28-36px desktop / 24-28px mobile for H1) */
-  h1, .text-page-title {
-    font-size: clamp(1.5rem, 3.2vw, 2.25rem); /* 24px - 36px */
+  h2 {
+    font-size: clamp(1.4rem, 3.5vw, 2.25rem);
     line-height: 1.25;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
   }
 
-  h2, .text-section-title {
-    font-size: clamp(1.2rem, 2.2vw, 1.625rem); /* 19px - 26px */
-    line-height: 1.3;
+  h3 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.35;
     margin: 0 0 8px;
   }
 
-  h3, .text-card-title {
-    font-size: clamp(1.05rem, 1.8vw, 1.25rem); /* 17px - 20px */
-    line-height: 1.35;
-    margin: 0 0 6px;
-  }
-
-  h4 {
-    font-size: clamp(0.95rem, 1.4vw, 1.125rem); /* 15px - 18px */
-    line-height: 1.4;
-    margin: 0;
+  p {
+    max-width: 65ch;
+    line-height: 1.6;
+    margin: 0 0 12px;
+    color: var(--ink);
   }
 
   /* Math & Formula Container Overflow Rules: formulas scroll internally without page blowout */
@@ -290,10 +268,6 @@
     font-family: system-ui, -apple-system, sans-serif !important;
   }
 
-  p {
-    margin: 0 0 8px;
-  }
-
   /* Hindi typography: headings & buttons use Baloo 2 and Noto stack so no glyph is missing */
   html[lang="hi"] body {
     font-family: 'Noto Sans Devanagari', 'Nunito', sans-serif;
@@ -305,7 +279,6 @@
   html[lang="hi"] h5,
   html[lang="hi"] h6,
   html[lang="hi"] .font-heading,
-  html[lang="hi"] .font-pixel,
   html[lang="hi"] button,
   html[lang="hi"] .pixel-btn,
   html[lang="hi"] .chip,
@@ -315,13 +288,13 @@
     line-height: 1.35;
   }
   html[lang="hi"] h1 {
-    font-size: 1.85rem;
+    font-size: clamp(1.9rem, 4.5vw, 3.25rem);
   }
   html[lang="hi"] h2 {
-    font-size: 1.35rem;
+    font-size: clamp(1.35rem, 3.2vw, 2.1rem);
   }
   html[lang="hi"] h3 {
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   }
 
   /* Telugu typography: headings & buttons use Baloo Tammudu 2 and Noto stack so no glyph is missing */
@@ -335,7 +308,6 @@
   html[lang="te"] h5,
   html[lang="te"] h6,
   html[lang="te"] .font-heading,
-  html[lang="te"] .font-pixel,
   html[lang="te"] button,
   html[lang="te"] .pixel-btn,
   html[lang="te"] .chip,
@@ -345,13 +317,13 @@
     line-height: 1.4;
   }
   html[lang="te"] h1 {
-    font-size: 1.85rem;
+    font-size: clamp(1.9rem, 4.5vw, 3.25rem);
   }
   html[lang="te"] h2 {
-    font-size: 1.35rem;
+    font-size: clamp(1.35rem, 3.2vw, 2.1rem);
   }
   html[lang="te"] h3 {
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   }
 
   /* Accessible min 48px touch targets */
@@ -359,21 +331,21 @@
     touch-action: manipulation;
   }
 
-  /* 4px Ink Border & Hard Pixel Shadow */
+  /* 4px Press-down translate on :active with 3px ink border */
   button:active:not(:disabled),
   [role="button"]:active:not(:disabled) {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0px 0px 0px #2B1B0F !important;
   }
 
-  /* 4px Focus Ring with Sand Yellow Glow */
+  /* Visible focus rings: 3px sky outline (#6EB5FF) */
   button:focus-visible,
   a:focus-visible,
   input:focus-visible,
   select:focus-visible {
-    outline: 4px solid var(--ink) !important;
+    outline: 3px solid #6EB5FF !important;
     outline-offset: 2px !important;
-    box-shadow: 0 0 0 6px var(--sand) !important;
+    box-shadow: 0 0 0 3px rgba(110, 181, 255, 0.4) !important;
   }
 
   /* Skip to content link */
@@ -382,10 +354,10 @@
     top: -100px;
     left: 1rem;
     z-index: 9999;
-    background-color: var(--sand);
-    color: var(--ink);
-    border: 4px solid var(--ink);
-    box-shadow: 4px 4px 0px var(--ink);
+    background-color: #FFE9A8;
+    color: #2B1B0F;
+    border: 3px solid #2B1B0F;
+    box-shadow: 4px 4px 0px #2B1B0F;
     padding: 0.75rem 1.25rem;
     font-weight: 800;
     text-decoration: none;
@@ -394,6 +366,7 @@
 
   .skip-to-content:focus {
     top: 1rem;
+    outline: 3px solid #6EB5FF !important;
   }
 }
 
@@ -461,6 +434,19 @@ button[aria-pressed="true"] {
 
 .voxel-sky-calm, .bg-voxel-sky {
   background: linear-gradient(180deg, #EBF5FF 0%, #FFE9D6 60%, #FFDEE5 100%);
+}
+
+/* Soft sky (#A4D2FF) to cream (#FFF7E6) vertical gradient */
+.bg-sky-cream-gradient {
+  background: linear-gradient(180deg, #A4D2FF 0%, #D8EBFF 180px, #FFF7E6 420px, #FFF7E6 100%);
+}
+
+.card-block, .voxel-card-white {
+  background-color: #FFFFFF;
+  border: 3px solid #2B1B0F;
+  box-shadow: 4px 4px 0px #2B1B0F;
+  color: #2B1B0F;
+  border-radius: 2px;
 }
 
 /* Responsive background attachment: scroll on mobile to avoid repaint jitter, fixed on desktop */
@@ -830,190 +816,4 @@ button[aria-pressed="true"] {
   .print-only {
     display: block !important;
   }
-}
-
-
-/* ==========================================================================
-   MINECRAFT NATURE + FROSTED GLASS INTERFACE UTILITIES
-   ========================================================================== */
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 10px 30px -5px rgba(20, 50, 20, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.4);
-  border-radius: 1rem;
-  color: #0F2815;
-}
-
-.glass-card-hover {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.90);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px -4px rgba(20, 50, 20, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.6);
-}
-
-.glass-panel {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(16, 42, 18, 0.07);
-  border-radius: 1.25rem;
-  color: #0F2815;
-}
-
-.glass-panel-tinted {
-  background: rgba(240, 253, 244, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(167, 243, 208, 0.7);
-  box-shadow: 0 8px 32px 0 rgba(16, 42, 18, 0.08);
-  border-radius: 1.25rem;
-  color: #064E3B;
-}
-
-.glass-panel-cream {
-  background: rgba(255, 252, 245, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 245, 225, 0.8);
-  box-shadow: 0 8px 30px rgba(74, 50, 20, 0.08);
-  border-radius: 1.25rem;
-  color: #2B1B0F;
-}
-
-.glass-input {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1.5px solid rgba(16, 185, 129, 0.35);
-  color: #0F2815;
-  border-radius: 0.75rem;
-  backdrop-filter: blur(8px);
-  transition: all 0.2s ease;
-}
-
-.glass-input:focus {
-  background: #FFFFFF;
-  border-color: #059669;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-  outline: none;
-}
-
-.glass-btn-primary {
-  background: linear-gradient(180deg, #10B981 0%, #059669 100%);
-  color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border-radius: 0.75rem;
-  font-weight: 700;
-  transition: all 0.2s ease;
-}
-
-.glass-btn-primary:hover {
-  background: linear-gradient(180deg, #34D399 0%, #059669 100%);
-  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
-  transform: translateY(-1px);
-}
-
-.glass-btn-secondary {
-  background: rgba(255, 255, 255, 0.85);
-  color: #064E3B !important;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-radius: 0.75rem;
-  font-weight: 700;
-  transition: all 0.2s ease;
-}
-
-.glass-btn-secondary:hover {
-  background: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
-}
-
-.glass-btn-accent {
-  background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
-  color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
-  border-radius: 0.75rem;
-  font-weight: 700;
-  transition: all 0.2s ease;
-}
-
-.glass-btn-accent:hover {
-  background: linear-gradient(180deg, #FBBF24 0%, #D97706 100%);
-  transform: translateY(-1px);
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN SYSTEM TOKENS & UTILITIES
-   ========================================================================== */
-
-/* Main content container with max-width calibrated for laptops (1280, 1366, 1440, 1536) */
-.page-container {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 100%;
-}
-@media (min-width: 640px) {
-  .page-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  .page-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* Floating Mobile Bottom Navigation Bar */
-.mobile-bottom-nav {
-  position: fixed;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  right: 0.75rem;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 10px 30px rgba(16, 42, 18, 0.15), 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-radius: 1.25rem;
-}
-@media (min-width: 768px) {
-  .mobile-bottom-nav {
-    display: none;
-  }
-}
-
-/* Add bottom padding on mobile when mobile bottom bar is active */
-.has-mobile-nav {
-  padding-bottom: 5.5rem;
-}
-@media (min-width: 768px) {
-  .has-mobile-nav {
-    padding-bottom: 2rem;
-  }
-}
-
-/* Responsive Table Scroll Container */
-.table-responsive-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 1rem;
 }

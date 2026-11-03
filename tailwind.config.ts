@@ -48,109 +48,48 @@ const config: Config = {
         // Dirt & Wood (Cards, panels, borders)
         dirt: {
           DEFAULT: "#7A4B2A",
-          dark: "#5A3720",
+          dark: "#422816",
           light: "#A06A3C",
-          border: "#422816",
+          bedrock: "#1B120C",
         },
         wood: {
-          DEFAULT: "#7A4B2A",
+          DEFAULT: "#A06A3C",
           dark: "#5A3720",
-          light: "#A06A3C",
+          light: "#C68B59",
         },
 
-        // Stone (Neutral surfaces, disabled)
+        // Stone & Redstone Accents
         stone: {
-          DEFAULT: "#8B8B8B",
-          dark: "#5E5E5E",
-          light: "#D9D9D9",
-          border: "#3F3F3F",
+          DEFAULT: "#6B7280",
+          dark: "#374151",
+          light: "#9CA3AF",
         },
-
-        // Water (Info, links, graph edges)
-        water: {
+        redstone: {
+          DEFAULT: "#E04A3F",
+          dark: "#991B1B",
+          light: "#F87171",
+        },
+        diamond: {
           DEFAULT: "#3FA7C9",
           dark: "#1E6F8C",
-          light: "#62C4E3",
+          light: "#6ED3F5",
         },
-
-        // Flower Accents
-        flower: {
-          red: "#E04A3F",
-          yellow: "#F4C542",
-          purple: "#B070C9",
-          white: "#FFFFFF",
-        },
-
-        // Typography Colors
-        voxel: {
-          textLight: "#2B1B0F",
-          textDark: "#FFF7E6",
-          panelLight: "#FFF7E6",
-          panelDark: "#5A3720",
-          panelWood: "#7A4B2A",
-          panelStone: "#8B8B8B",
-          bevelLight: "rgba(255, 255, 255, 0.4)",
-          bevelDark: "rgba(0, 0, 0, 0.45)",
-        },
-
-        // Backwards compatibility aliases mapped to new voxel tokens
-        forest: {
-          DEFAULT: "#2F6B22",
-          dark: "#1C4514",
-          light: "#5DAA3A",
-        },
-        darkgreen: "#2F6B22",
-        pixelgreen: {
-          DEFAULT: "#5DAA3A",
-          dark: "#2F6B22",
-          light: "#7BC458",
-        },
-        mutedgreen: {
-          DEFAULT: "#2F6B22",
-          dark: "#1C4514",
-          light: "#5DAA3A",
-        },
-        darkgrass: "#2F6B22",
-        warmwhite: "#FFF7E6",
-        lightgrey: "#D9D9D9",
-        cream: "#FFF7E6",
-        canvas: "#5A3720",
-        white: "#FFFFFF",
-
         gold: {
           DEFAULT: "#F4C542",
-          light: "#FFE9A8",
-          dark: "#C6961E",
-        },
-        yellow: {
-          DEFAULT: "#F4C542",
-          bright: "#F4C542",
+          dark: "#B88E14",
           light: "#FFE9A8",
         },
-        cyan: {
-          DEFAULT: "#3FA7C9",
-          bright: "#3FA7C9",
-          light: "#62C4E3",
+        iron: {
+          DEFAULT: "#D8D8D8",
+          dark: "#8B8B8B",
+          light: "#F0F0F0",
         },
-        pink: {
-          DEFAULT: "#FF8FA3",
-          bright: "#FF8FA3",
-          light: "#FFB36B",
-        },
-        red: {
-          DEFAULT: "#E04A3F",
-          light: "#FF756B",
-          dark: "#A32B22",
-        },
-        green: {
-          DEFAULT: "#5DAA3A",
-          bright: "#7BC458",
-          light: "#7BC458",
-        },
-        orange: {
-          DEFAULT: "#FFB36B",
-          bright: "#FFB36B",
-          light: "#FFE9A8",
+
+        // UI Neutral Backgrounds
+        cream: {
+          DEFAULT: "#FFF7E6",
+          dark: "#E5D7BE",
+          light: "#FFFDF7",
         },
         sand: {
           DEFAULT: "#FFE9A8",
@@ -158,14 +97,13 @@ const config: Config = {
           dark: "#F4C542",
         },
 
-        // Semantic mappings
-        background: "#5A3720",
-        foreground: "#FFF7E6",
+        // Semantic mappings: Cream background, Ink foreground
+        background: "#FFF7E6",
+        foreground: "#2B1B0F",
         muted: "#D9D9D9",
       },
       fontFamily: {
         heading: [
-          "'Nunito'",
           "'Baloo 2'",
           "'Baloo Tammudu 2'",
           "sans-serif",
