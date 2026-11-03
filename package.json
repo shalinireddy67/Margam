@@ -11,7 +11,7 @@
     "coverage": "node scripts/coverage-report.mjs",
     "check:layout": "node scripts/check-layout.mjs",
     "test": "node scripts/validate-content.mjs && npx tsx scripts/test-progression.mjs && npx tsx scripts/test-gap-tracing.mjs && npx tsx scripts/test-adaptive.mjs && npx tsx scripts/test-draft-translations.mjs && npx tsx scripts/test-login-security.mjs && npx tsx scripts/test-smart-revision.mjs && npx tsx scripts/test-student-journey.mjs && npx tsx scripts/test-gamification.mjs",
-    "test:auth": "npx tsx scripts/test-login-security.mjs && npx tsx scripts/test-student-auth.mjs && npx tsx scripts/test-teacher-auth.mjs && npx tsx scripts/test-role-security-and-sync.mjs && npx tsx scripts/test-assessment-idor-security.mjs",
+    "test:auth": "npx tsx scripts/test-login-security.mjs && npx tsx scripts/test-student-auth.mjs && npx tsx scripts/test-teacher-auth.mjs && npx tsx scripts/test-role-security-and-sync.mjs && npx tsx scripts/test-assessment-idor-security.mjs && node scripts/test-student-navigation-regression.mjs",
     "test:student-auth": "npx tsx scripts/test-student-auth.mjs",
     "test:teacher-auth": "npx tsx scripts/test-teacher-auth.mjs",
     "test:security": "npx tsx scripts/test-role-security-and-sync.mjs && npx tsx scripts/test-assessment-idor-security.mjs",

@@ -31,11 +31,12 @@ export function verifySignedSessionPayload<T = Record<string, any>>(
       .update(dataStr)
       .digest("base64url");
 
+    const sigBuf = Buffer.from(signature, "utf-8");
+    const expBuf = Buffer.from(expectedHmac, "utf-8");
+
     if (
-      !crypto.timingSafeEqual(
-        Buffer.from(signature, "utf-8"),
-        Buffer.from(expectedHmac, "utf-8")
-      )
+      sigBuf.length !== expBuf.length ||
+      !crypto.timingSafeEqual(sigBuf, expBuf)
     ) {
       return null;
     }

@@ -128,7 +128,7 @@ export default function StickersPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#FFF7E6] border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] no-underline hover:bg-[#4E9330]"
               >
                 <span>Get Started</span>

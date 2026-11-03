@@ -41,7 +41,7 @@ export default function StudentErrorBoundary({
             <span>Retry Screen</span>
           </button>
           <Link
-            href="/"
+            href="/student"
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#FFF7E6] hover:bg-[#FFE9A8] text-[#2B1B0F] font-pixel text-xs border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center justify-center gap-2 no-underline"
           >
             <Home className="w-4 h-4" />

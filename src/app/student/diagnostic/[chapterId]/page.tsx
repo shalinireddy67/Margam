@@ -257,7 +257,7 @@ export default function ChapterDiagnosticPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
@@ -296,7 +296,7 @@ export default function ChapterDiagnosticPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Path"
         />
         <main className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
@@ -312,7 +312,7 @@ export default function ChapterDiagnosticPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student"
                 className="inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
               >
                 <span>Return to Learning Path</span>
@@ -503,7 +503,7 @@ export default function ChapterDiagnosticPage() {
         profile={profile}
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
-        backHref="/"
+        backHref="/student"
         backLabel="Class Lessons"
       />
 
@@ -600,7 +600,7 @@ export default function ChapterDiagnosticPage() {
                 </div>
 
                 <Link
-                  href="/"
+                  href="/student"
                   className="self-start sm:self-center inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                 >
                   <span>Return to Learning Path</span>

@@ -231,7 +231,7 @@ export default function AdaptivePracticeRunnerPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
@@ -247,7 +247,7 @@ export default function AdaptivePracticeRunnerPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
@@ -271,7 +271,7 @@ export default function AdaptivePracticeRunnerPage() {
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
-            href="/"
+            href="/student"
             className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-heading font-bold px-4 py-2 shadow-sm"
           >
             Return to Learning Path
@@ -397,7 +397,7 @@ export default function AdaptivePracticeRunnerPage() {
         profile={profile}
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
-        backHref="/"
+        backHref="/student"
         backLabel="Class Lessons"
       />
 

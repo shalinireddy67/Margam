@@ -20,7 +20,7 @@ export default function StudentHeader({
   profile,
   currentLang,
   onLanguageChange,
-  backHref,
+  backHref = "/student",
   backLabel = "Back to Learning Path",
 }: StudentHeaderProps) {
   const [soundOn, setSoundOn] = useState(false);
