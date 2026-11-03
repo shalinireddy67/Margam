@@ -57,7 +57,7 @@ export const NAV_ITEMS: readonly NavItemConfig[] = [
 ] as const;
 
 export interface NavigationProps {
-  currentTab?: "home" | "learn" | "stickers" | "profile";
+  currentTab?: "home" | "learn" | "stickers" | "profile" | "diagnostic" | "practice" | string;
   currentLang?: SupportedLanguage;
   onLanguageChange?: (lang: SupportedLanguage) => void;
   profile?: LearnerProfile | null;
