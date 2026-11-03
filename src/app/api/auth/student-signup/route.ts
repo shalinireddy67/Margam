@@ -287,7 +287,7 @@ export async function POST(req: NextRequest) {
 
       response.cookies.set("margam_auth_token", signedToken, {
         httpOnly: true,
-        secure: false,
+        secure: (process.env.NODE_ENV as string) === "production",
         path: "/",
         maxAge: 60 * 60 * 24 * 30,
         sameSite: "lax",

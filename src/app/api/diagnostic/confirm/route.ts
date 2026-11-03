@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getConceptQuestions } from "@/lib/server/questions";
 import { verifySessionToken } from "@/lib/server/session";
+import { getAuthenticatedUser } from "@/lib/server/auth";
 import {
   isRateLimited,
   isDuplicateSubmission,
@@ -28,8 +29,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const authUser = await getAuthenticatedUser(req);
+    if (authUser && studentId && studentId !== authUser.id) {
+      return NextResponse.json(
+        { error: "Access denied: student identity mismatch" },
+        { status: 403 }
+      );
+    }
+    const effectiveStudentId = authUser ? authUser.id : studentId;
+
     // Verify confirmation session token
-    const verification = verifySessionToken(token, studentId, "confirm");
+    const verification = verifySessionToken(token, effectiveStudentId, "confirm");
     if (!verification.valid || !verification.payload) {
       return NextResponse.json(
         { error: verification.error || "Unauthorized confirmation session" },
@@ -40,7 +50,7 @@ export async function POST(req: NextRequest) {
     const { sessionId, targetId: rootConceptId, questionIds } = verification.payload;
 
     // Rate limit check
-    const clientIp = req.headers.get("x-forwarded-for") || studentId || "client";
+    const clientIp = req.headers.get("x-forwarded-for") || effectiveStudentId || "client";
     if (isRateLimited(`diag_confirm_${clientIp}`, 20, 60000)) {
       return NextResponse.json(
         { error: "Too many confirmation attempts. Please wait." },

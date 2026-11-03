@@ -12,6 +12,7 @@ import {
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { mockDb } from "@/lib/server/auth-helpers";
+import { getAuthenticatedUser } from "@/lib/server/auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -46,8 +47,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const authUser = await getAuthenticatedUser(req);
+    if (authUser && studentId && studentId !== authUser.id) {
+      return NextResponse.json(
+        { error: "Access denied: student identity mismatch" },
+        { status: 403 }
+      );
+    }
+    const effectiveStudentId = authUser ? authUser.id : studentId;
+
     // Verify cryptographic session token
-    const verification = verifySessionToken(token, studentId, "diagnostic");
+    const verification = verifySessionToken(token, effectiveStudentId, "diagnostic");
     if (!verification.valid || !verification.payload) {
       return NextResponse.json(
         { error: verification.error || "Unauthorized session" },
@@ -128,7 +138,7 @@ export async function POST(req: NextRequest) {
           const confirmSession = createSignedSession(
             "confirm",
             diagResult.gapAnalysis.rootConceptId,
-            studentId,
+            effectiveStudentId,
             confirmationQuestions.map((q) => q.id),
             15 * 60 * 1000
           );
@@ -160,9 +170,9 @@ export async function POST(req: NextRequest) {
     try {
       if (isSupabaseConfigured()) {
         const admin = getSupabaseAdminClient();
-        if (admin && studentId && studentId.length === 36) {
+        if (admin && authUser && authUser.id === effectiveStudentId && effectiveStudentId.length === 36) {
           await admin.from("attempts").insert({
-            student_id: studentId,
+            student_id: effectiveStudentId,
             type: "diagnostic",
             identifier: chapterId,
             score: diagResult.correctCount,
@@ -173,7 +183,7 @@ export async function POST(req: NextRequest) {
       } else if (process.env.NODE_ENV !== "production") {
         mockDb.attempts.push({
           id: `att_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-          studentId,
+          studentId: effectiveStudentId,
           type: "diagnostic",
           identifier: chapterId,
           score: diagResult.correctCount,

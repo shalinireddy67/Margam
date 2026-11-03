@@ -3,6 +3,7 @@ import { generateChapterTest } from "@/lib/adaptive";
 import { sanitizeQuestion } from "@/lib/server/questions";
 import { createSignedSession } from "@/lib/server/session";
 import { isRateLimited } from "@/lib/server/rate-limit";
+import { getAuthenticatedUser } from "@/lib/server/auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,7 +17,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!studentId || typeof studentId !== "string") {
+    const authUser = await getAuthenticatedUser(req);
+    if (authUser && studentId && studentId !== authUser.id) {
+      return NextResponse.json(
+        { error: "Access denied: student identity mismatch" },
+        { status: 403 }
+      );
+    }
+    const effectiveStudentId = authUser ? authUser.id : studentId;
+
+    if (!effectiveStudentId || typeof effectiveStudentId !== "string") {
       return NextResponse.json(
         { error: "Invalid or missing studentId" },
         { status: 400 }
@@ -24,7 +34,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Rate-limiting check
-    const clientIp = req.headers.get("x-forwarded-for") || studentId;
+    const clientIp = req.headers.get("x-forwarded-for") || effectiveStudentId;
     if (isRateLimited(`test_start_${clientIp}`, 30, 60000)) {
       return NextResponse.json(
         { error: "Too many test requests. Please slow down." },
@@ -50,7 +60,7 @@ export async function POST(req: NextRequest) {
     const session = createSignedSession(
       "test",
       chapterId,
-      studentId,
+      effectiveStudentId,
       questionIds,
       45 * 60 * 1000 // 45 minutes for full chapter test
     );

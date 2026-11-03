@@ -114,3 +114,4 @@ for (const token of requiredTokens) {
 console.log('\n==================================================');
 console.log('  RESULT: ALL VIEWPORT & RESPONSIVE CHECKS PASSED  ');
 console.log('==================================================');
+
