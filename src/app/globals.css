@@ -920,3 +920,51 @@ button[aria-pressed="true"] {
 .glass-btn-accent:hover:not(:disabled) {
   background: #B45309;
 }
+
+
+/* ==========================================================================
+   RESPONSIVE UTILITIES FOR MOBILE PADDING & SCROLL
+   ========================================================================== */
+
+.has-mobile-nav {
+  padding-bottom: 5.5rem;
+}
+@media (min-width: 768px) {
+  .has-mobile-nav {
+    padding-bottom: 2rem;
+  }
+}
+
+.page-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.mobile-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+.table-responsive-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
