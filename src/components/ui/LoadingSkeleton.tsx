@@ -88,11 +88,11 @@ export function EmptyState({
 }
 
 const STUDY_TIPS = [
-  "Every gap is a block waiting to be placed.",
-  "Foundational blocks build the tallest mathematical towers.",
+  "Reviewing earlier topics makes advanced maths easier.",
+  "Building strong foundations prevents mistakes in later classes.",
   "Understand integer rules before starting algebraic equations.",
-  "Even great mathematicians placed one block at a time.",
-  "Reviewing prerequisites lights up your learning map.",
+  "Take one small step at a time.",
+  "Checking earlier topics clarifies where to start.",
 ];
 
 export function VoxelRealmLoader({

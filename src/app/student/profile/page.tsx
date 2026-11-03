@@ -201,7 +201,7 @@ export default function StudentProfilePage() {
                 Student Profile
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-amber-100/90 border border-amber-300 text-[10px] font-heading font-extrabold text-amber-900">
-                {levelInfo.rank.badge} {levelInfo.rank.name} Scholar
+                {levelInfo.rank.badge} {levelInfo.rank.name}, level {levelInfo.level}
               </span>
             </div>
 
@@ -291,7 +291,7 @@ export default function StudentProfilePage() {
                       type="text"
                       value={nameInput}
                       onChange={(e) => setNameInput(e.target.value)}
-                      placeholder="e.g. Arya, ScholarSteve, MathWizard"
+                      placeholder="e.g. Arya, Steve, Student1"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-emerald-400 text-xs font-sans text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-xs"
                       maxLength={60}
                       autoFocus

@@ -548,7 +548,7 @@ export default function TeacherPage() {
                   </p>
                   <div className="text-[10px] font-heading font-bold text-emerald-800 bg-emerald-50 px-2 py-1 rounded border border-emerald-200 flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                    <span>Isha Reddy resolved via remedial drill!</span>
+                    <span>Isha Reddy resolved via targeted practice.</span>
                   </div>
                 </div>
 
@@ -654,7 +654,7 @@ export default function TeacherPage() {
                         : "bg-white/80 text-amber-800 border-amber-200 hover:bg-amber-50"
                     }`}
                   >
-                    Breakthroughs ({liveImproving.length})
+                    Gaps resolved ({liveImproving.length})
                   </button>
                 </div>
               </div>
@@ -850,10 +850,10 @@ export default function TeacherPage() {
                     <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-300 space-y-1">
                       <div className="flex items-center gap-1.5 font-heading font-bold text-xs text-emerald-900">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                        <span>Prerequisite Gap Resolved: {inspectingStudent.resolvedGap.conceptName} ({inspectingStudent.resolvedGap.conceptId})</span>
+                        <span>Prerequisite gap resolved: {inspectingStudent.resolvedGap.conceptName} ({inspectingStudent.resolvedGap.conceptId})</span>
                       </div>
                       <p className="text-xs text-emerald-800/90 font-sans leading-relaxed">
-                        Student showed a 40% diagnostic deficiency on negative integer signs, completed prerequisite interactive drills, and scored 90% on subsequent assessments.
+                        Student missed integer sign questions on the diagnostic, completed targeted practice, and improved to 90%.
                       </p>
                     </div>
                   )}
@@ -1235,7 +1235,7 @@ export default function TeacherPage() {
                 : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
-            Printable A4 Remedial Worksheet
+            Printable remedial worksheet
           </button>
           <button
             onClick={() => setActiveTab("leaderboard")}
@@ -1370,7 +1370,7 @@ export default function TeacherPage() {
                   <div className="flex items-center gap-2">
                     <Trophy className="w-4 h-4 text-amber-600" />
                     <span className="font-heading font-extrabold text-xs text-emerald-950 uppercase tracking-wider">
-                      Weekly Class XP Pulse
+                      Weekly class XP
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1539,7 +1539,7 @@ export default function TeacherPage() {
                   <div className="bg-green-light/40 border-2 border-ink rounded-xl p-3 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-800 shrink-0" />
                     <span className="text-xs font-bold text-green-900">
-                      No foundational prerequisite gaps detected. Student is on track with Class 10 concepts!
+                      No foundational prerequisite gaps detected. Student is on track with Class 10 topics.
                     </span>
                   </div>
                 )}
@@ -1610,7 +1610,7 @@ export default function TeacherPage() {
                 {selectedStudent.gapAnalysis.candidates && selectedStudent.gapAnalysis.candidates.length > 0 && (
                   <div className="space-y-2 pt-2 border-t-2 border-ink">
                     <h4 className="font-heading font-black text-xs text-ink uppercase tracking-wide">
-                      Engine Candidate Ranking Breakdown
+                      Prerequisite candidate rankings
                     </h4>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-[11px] border-collapse">
@@ -1662,7 +1662,7 @@ export default function TeacherPage() {
                   Classroom topic progress heatmap (25 × 10 Matrix)
                 </h2>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  Every cell displays a status letter (M, P, G, L) and color token computed directly by the Margam engine.
+                  Every cell displays a status letter (M, P, G, L) indicating progress on that topic.
                 </p>
               </div>
 

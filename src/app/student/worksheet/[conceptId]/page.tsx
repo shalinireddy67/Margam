@@ -504,11 +504,10 @@ export default function AdaptivePracticeRunnerPage() {
               {result.gapResolved && (
                 <div className="glass-panel p-5 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-emerald-950 space-y-2">
                   <div className="flex items-center gap-2 text-emerald-900 font-heading font-extrabold text-xs uppercase tracking-wider">
-                    <Sparkles className="w-4 h-4 text-emerald-600" />
-                    <span>✨ Foundational Prerequisite Gap Resolved! (+50 XP Bonus)</span>
+                    <span>Earlier topic gap resolved (+50 XP)</span>
                   </div>
                   <h3 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
-                    Foundation Successfully Repaired!
+                    Prerequisite topic completed
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-700 font-sans leading-relaxed">
                     You scored <strong>{result.percentage}%</strong> on this topic. This block is now marked complete on your path map.
@@ -602,10 +601,10 @@ export default function AdaptivePracticeRunnerPage() {
                               }`}
                             >
                               {result.comparison.improvementDelta > 0
-                                ? `+${result.comparison.improvementDelta}% Improvement! 🚀`
+                                ? `+${result.comparison.improvementDelta}% improvement`
                                 : result.comparison.improvementDelta === 0
-                                ? "Consistent Performance"
-                                : `${result.comparison.improvementDelta}% (Needs Review)`}
+                                ? "Consistent performance"
+                                : `${result.comparison.improvementDelta}% (needs review)`}
                             </span>
                           )}
                         </div>
@@ -634,7 +633,7 @@ export default function AdaptivePracticeRunnerPage() {
                       <div className="p-3 rounded-xl bg-white/80 border border-white/90 text-xs text-slate-700 font-sans flex items-center gap-2">
                         <Award className="w-4 h-4 text-emerald-700 shrink-0" />
                         <span>
-                          <strong>First Attempt Recorded:</strong> Scored {result.score}/{result.total} ({result.percentage}%). Future attempts will track your growth delta!
+                          <strong>First attempt:</strong> Scored {result.score}/{result.total} ({result.percentage}%). Future attempts will track your progress.
                         </span>
                       </div>
                     )}
@@ -792,14 +791,14 @@ export default function AdaptivePracticeRunnerPage() {
                           {feedbackItem.isCorrect ? (
                             <>
                               <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />
-                              <span className="text-[#5DAA3A]">Correct! Solid understanding demonstrated.</span>
+                              <span className="text-[#5DAA3A]">Correct.</span>
                             </>
                           ) : (
                             <>
                               <AlertCircle className="w-4 h-4 text-amber-700" />
                               <span className="text-amber-900">
                                 {feedbackItem.misconceptionCategory
-                                  ? `Concept Note: ${feedbackItem.misconceptionCategory.replace(/_/g, " ").toUpperCase()}`
+                                  ? `Concept note: ${feedbackItem.misconceptionCategory.replace(/_/g, " ")}`
                                   : "Review Method"}
                               </span>
                             </>
@@ -873,8 +872,8 @@ export default function AdaptivePracticeRunnerPage() {
                 <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
                   {result
                     ? result.percentage >= 70
-                      ? "Great job on this worksheet! Your concept foundation is growing stronger."
-                      : "Keep practicing! Reviewing the explanation steps will help you master this."
+                      ? "Worksheet complete. Your progress has been updated."
+                      : "Review the step-by-step explanation above to see how this problem is solved."
                     : "Focused adaptive practice. Each question adapts to your current level."}
                 </p>
               </div>
@@ -909,11 +908,10 @@ export default function AdaptivePracticeRunnerPage() {
             {/* Practice XP Bounty */}
             <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
               <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
-                <Sparkles className="w-4 h-4 text-amber-600" />
-                <span>Practice XP Rewards</span>
+                <span>Practice XP</span>
               </div>
               <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
-                Earn <strong className="text-amber-900 font-bold">10 XP × Difficulty</strong> for each correct answer plus first-try bonuses!
+                Earn <strong className="text-amber-900 font-bold">10 XP × difficulty</strong> for each correct answer.
               </p>
             </div>
           </aside>

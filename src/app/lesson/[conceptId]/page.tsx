@@ -232,7 +232,7 @@ function LessonContent() {
   } else {
     variantKey = selectLessonVariant(topicProgress?.mastery);
     if (variantKey === "basics_first") {
-      variantReason = "Basics-First: Focused on intuitive real-world analogies and concrete examples.";
+      variantReason = "Basics-first: focused on intuitive analogies and concrete examples.";
     } else if (variantKey === "fast_track") {
       variantReason = "Fast-track: high previous score. Concise overview with advanced practice.";
     } else {
@@ -650,7 +650,7 @@ function LessonContent() {
         <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-800">
           <div className="text-center sm:text-left">
             <span className="text-xs font-heading font-extrabold text-emerald-950 block">
-              {isCompleted ? "Topic Completed!" : "Finished Reviewing?"}
+              {isCompleted ? "Topic completed" : "Finished reading?"}
             </span>
             <span className="text-[11px] text-slate-600 font-sans block">
               {isCompleted

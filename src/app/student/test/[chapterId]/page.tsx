@@ -390,7 +390,7 @@ export default function ChapterTestRunnerPage() {
                     {result.passed ? (
                       <>
                         <Award className="w-6 h-6 text-emerald-600" />
-                        <span>Chapter Mastered! Score: {result.percentage}%</span>
+                        <span>Chapter passed, score: {result.percentage}%</span>
                       </>
                     ) : (
                       <>
@@ -401,7 +401,7 @@ export default function ChapterTestRunnerPage() {
                   </h2>
                   <p className="text-xs font-semibold mt-1 font-sans opacity-90">
                     Correct: <strong>{result.score} / {result.total}</strong> questions
-                    {!result.passed && " (70% required to master this chapter)"}
+                    {!result.passed && " (70% required to complete this chapter)"}
                   </p>
                 </div>
 
@@ -412,7 +412,7 @@ export default function ChapterTestRunnerPage() {
                     className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-4 py-2 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs transition-all"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Retake Test</span>
+                    <span>Retake test</span>
                   </button>
 
                   <Link

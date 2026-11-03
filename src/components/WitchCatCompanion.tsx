@@ -55,19 +55,19 @@ export default function WitchCatCompanion({
 
     switch (context) {
       case "greeting":
-        setCurrentMessage(`Hey ${studentName}! Ready to practice maths today?`);
+        setCurrentMessage(`Hello ${studentName}. Ready to practice maths today?`);
         break;
       case "lesson_start":
-        setCurrentMessage("Let's break down this concept block by block. Read carefully!");
+        setCurrentMessage("Read through the worked example step by step.");
         break;
       case "correct":
-        setCurrentMessage("Spot on! That's how we master it!");
+        setCurrentMessage("Correct. That step is clear.");
         break;
       case "incorrect":
-        setCurrentMessage("Don't worry, every mistake shows where our foundation needs support.");
+        setCurrentMessage("Check the explanation above to see how this step works.");
         break;
       case "completed":
-        setCurrentMessage(`Topic completed! Good work on your path, ${studentName}.`);
+        setCurrentMessage(`Topic completed, ${studentName}.`);
         break;
       case "locked":
         setCurrentMessage("Complete the previous lesson to make this one available.");
@@ -76,7 +76,7 @@ export default function WitchCatCompanion({
         setCurrentMessage(`Welcome back, ${studentName}. Let's pick up where you left off.`);
         break;
       default:
-        setCurrentMessage("Ready to conquer new math concepts? Let's go!");
+        setCurrentMessage("Ready to begin. Pick a topic to start.");
     }
     setBubbleDismissed(false);
   }, [context, customMessage, studentName]);

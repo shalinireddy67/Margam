@@ -90,7 +90,7 @@ export function MistakeCreatureCard({
       return {
         name: "Sign Slip",
         creature: "❄️",
-        line: "Sign Slip spotted! Remember: when multiplying two negatives, the result turns positive.",
+        line: "Sign error: when multiplying two negative numbers, the result is positive.",
         color: "#6EB5FF",
       };
     }
@@ -98,7 +98,7 @@ export function MistakeCreatureCard({
       return {
         name: "Operation Ooze",
         creature: "🧪",
-        line: "Operation Ooze spotted! Check whether the problem asks to add, multiply, or square.",
+        line: "Operation error: check whether the problem asks to add, multiply, or square.",
         color: "#FFB36B",
       };
     }
@@ -106,14 +106,14 @@ export function MistakeCreatureCard({
       return {
         name: "Bracket Bug",
         creature: "🐛",
-        line: "Bracket Bug spotted! Remember to multiply the outside factor with every term inside.",
+        line: "Bracket error: multiply the outside factor with every term inside the parentheses.",
         color: "#FFE9A8",
       };
     }
     return {
       name: "Curious Critter",
       creature: "🦉",
-      line: hint || "A small misstep spotted! Take a deep breath and review the steps calmly.",
+      line: hint || "Review the steps above calmly.",
       color: "#FFE9A8",
     };
   })();
@@ -133,7 +133,7 @@ export function MistakeCreatureCard({
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 mb-0.5">
           <span className="text-[11px] font-heading font-extrabold text-[#FFE9A8]">
-            {categoryInfo.name} spotted!
+            {categoryInfo.name}
           </span>
         </div>
         <p className="text-xs text-[#E5D7BE] font-medium leading-relaxed">

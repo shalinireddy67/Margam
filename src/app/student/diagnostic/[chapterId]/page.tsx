@@ -553,7 +553,7 @@ export default function ChapterDiagnosticPage() {
                   <span>Class {profile.selectedClass}</span>
                 </div>
                 <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-slate-700 shadow-2xs">
-                  Intelligent Learning Gap Engine
+                  Diagnostic check
                 </span>
               </div>
 
@@ -940,14 +940,14 @@ export default function ChapterDiagnosticPage() {
                       {feedbackItem.isCorrect ? (
                         <>
                           <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />
-                          <span className="text-[#5DAA3A]">Correct Answer! Excellent conceptual grasp.</span>
+                          <span className="text-[#5DAA3A]">Correct answer.</span>
                         </>
                       ) : (
                         <>
                           <AlertCircle className="w-4 h-4 text-amber-700" />
                           <span className="text-amber-900">
                             {feedbackItem.misconceptionCategory
-                              ? `Concept Insight: ${feedbackItem.misconceptionCategory.replace(/_/g, " ").toUpperCase()}`
+                              ? `Concept check: ${feedbackItem.misconceptionCategory.replace(/_/g, " ")}`
                               : "Conceptual Check"}
                           </span>
                         </>
@@ -1072,7 +1072,7 @@ export default function ChapterDiagnosticPage() {
                   pose={result ? (result.passed ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
                   size={96}
                   sticker={false}
-                  alt="Margam companion cheering you on"
+                  alt="Margam guide"
                 />
               </div>
               <div className="space-y-1">
@@ -1082,9 +1082,9 @@ export default function ChapterDiagnosticPage() {
                 <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
                   {result
                     ? result.passed
-                      ? "Incredible work! You conquered the prerequisites for this chapter."
-                      : "We found the exact concept to practice. You've got this!"
-                    : "Take your time! No rush, every question diagnoses your foundational skills."}
+                      ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
+                      : "We found an earlier topic to review before continuing."
+                    : "Work at your own pace. Each question checks an earlier topic."}
                 </p>
               </div>
             </div>
@@ -1118,8 +1118,7 @@ export default function ChapterDiagnosticPage() {
             {/* Diagnostic Quest Bounty */}
             <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
               <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
-                <Sparkles className="w-4 h-4 text-amber-600" />
-                <span>Diagnostic Bounty</span>
+                <span>Diagnostic check</span>
               </div>
               <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
                 Complete this diagnostic to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and make practice worksheets available.
