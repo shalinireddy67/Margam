@@ -1468,3 +1468,4 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
     </div>
   );
 }
+
