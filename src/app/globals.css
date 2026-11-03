@@ -444,11 +444,9 @@ button[aria-pressed="true"] {
 .card-block, .voxel-card-white, .glass-panel {
   border: 3px solid #2B1B0F !important;
   box-shadow: 4px 4px 0px #2B1B0F !important;
-  background-color: #FFFFFF;
-  border: 3px solid #2B1B0F;
-  box-shadow: 4px 4px 0px #2B1B0F;
-  color: #2B1B0F;
-  border-radius: 2px;
+  background-color: rgba(255, 253, 247, 0.94) !important;
+  color: #2B1B0F !important;
+  border-radius: 2px !important;
 }
 
 /* Responsive background attachment: scroll on mobile to avoid repaint jitter, fixed on desktop */
@@ -844,4 +842,69 @@ button[aria-pressed="true"] {
 .glass-btn-secondary:active, .pixel-btn-secondary:active {
   transform: translate(2px, 2px) !important;
   box-shadow: 1px 1px 0px #2B1B0F !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM TOKENS & UTILITIES
+   ========================================================================== */
+
+/* Main content container with max-width calibrated for laptops & desktops */
+.page-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Floating Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 253, 247, 0.95);
+  border-top: 3px solid #2B1B0F;
+  box-shadow: 0 -4px 0px rgba(43, 27, 15, 0.15);
+}
+@media (min-width: 768px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+}
+
+/* Add bottom padding on mobile when mobile bottom bar is active */
+.has-mobile-nav {
+  padding-bottom: 5.5rem;
+}
+@media (min-width: 768px) {
+  .has-mobile-nav {
+    padding-bottom: 2rem;
+  }
+}
+
+/* Responsive Table Scroll Container */
+.table-responsive-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 2px;
 }

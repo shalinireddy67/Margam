@@ -36,7 +36,6 @@ import {
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   EmptyState,
@@ -588,14 +587,6 @@ export default function ChapterDiagnosticPage() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-white/80 pb-5">
                 <div className="flex items-center gap-4">
-                  <div className="shrink-0 p-2 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
-                    <WitchCat
-                      pose={result.passed ? "cheer" : "think"}
-                      size={74}
-                      sticker={false}
-                      alt="Companion Reaction"
-                    />
-                  </div>
                   <div>
                     <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-emerald-900 block">
                       Diagnostic Evaluation Complete
@@ -1065,28 +1056,18 @@ export default function ChapterDiagnosticPage() {
 
           {/* Desktop Side Companion & Progress Panel (Hidden on mobile & tablet) */}
           <aside className="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 select-none">
-            {/* Companion Reaction Card */}
-            <div className="glass-panel p-5 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-center space-y-3">
-              <div className="flex justify-center">
-                <WitchCat
-                  pose={result ? (result.passed ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
-                  size={96}
-                  sticker={false}
-                  alt="Margam guide"
-                />
-              </div>
-              <div className="space-y-1">
-                <span className="text-[10px] font-heading font-extrabold text-emerald-900 uppercase tracking-wider block">
-                  Companion Study Guide
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
-                  {result
-                    ? result.passed
-                      ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
-                      : "We found an earlier topic to review before continuing."
-                    : "Work at your own pace. Each question checks an earlier topic."}
-                </p>
-              </div>
+            {/* Diagnostic Study Guide Card */}
+            <div className="bg-[#FFFDF7] p-5 border-3 border-[#2B1B0F] shadow-block rounded-[2px] space-y-2">
+              <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
+                Diagnostic Progress
+              </span>
+              <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans font-medium">
+                {result
+                  ? result.passed
+                    ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
+                    : "We found an earlier topic to review before continuing."
+                  : "Work at your own pace. Each question checks an earlier topic."}
+              </p>
             </div>
 
             {/* Live Progress Card */}

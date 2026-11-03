@@ -19,7 +19,6 @@ import {
   Flame,
   CheckCircle2,
 } from "lucide-react";
-import { WitchCat } from "@/components/ui/WitchCat";
 import { MistakeCreature } from "@/components/ui/MistakeCreature";
 
 export interface LandingSectionsProps {
@@ -104,7 +103,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       s3: {
         tag: "03 // MISTAKE CREATURES",
         heading: "Mistakes aren't failures — they're friendly clues",
-        sub: "When you make an error, Maru and our pixel mistake creatures spot the exact pattern and help you patch it kindly.",
+        sub: "When you make an error, our pixel mistake creatures spot the exact pattern and help you patch it kindly.",
         c1Name: "Sign Slip",
         c1Line: "Juggles plus and minus signs when you look away. We'll help you lock them down.",
         c2Name: "Fraction Fumble",
@@ -277,7 +276,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       s3: {
         tag: "03 // भूल-सुधार जीव",
         heading: "गलतियाँ असफलता नहीं हैं — वे सीखने के संकेत हैं",
-        sub: "जब आपसे कोई त्रुटि होती है, तो मारु बिल्ली और हमारे पिक्सेल जीव उस सटीक स्वरूप को पहचानकर उसे सुधारते हैं।",
+        sub: "जब आपसे कोई त्रुटि होती है, तो हमारे पिक्सेल जीव उस सटीक स्वरूप को पहचानकर उसे सुधारते हैं।",
         c1Name: "साइन स्लिप",
         c1Line: "जब आप ध्यान नहीं देते, तो यह धन और ऋण चिह्नों की अदला-बदली कर देता है।",
         c2Name: "फ़्रैक्शन फंबल",
@@ -587,18 +586,11 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       {/* ================================================================= */}
       <section aria-labelledby="hero-heading" className="space-y-8 sm:space-y-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
-          <div className="shrink-0 mb-1 p-2 bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px]">
-            <WitchCat
-              pose="greet"
-              size={110}
-              sticker={false}
-              alt="Maru the cat companion"
-            />
-          </div>
+
 
           <h1
             id="hero-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#2B1B0F] leading-tight max-w-[22ch]"
+            className="font-pixel text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#2B1B0F] leading-snug max-w-[28ch] tracking-wide"
           >
             {copy.hero.h1}
           </h1>

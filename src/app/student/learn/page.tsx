@@ -13,19 +13,15 @@ import {
   Compass,
   AlertCircle,
   Search,
-  Filter,
-  GraduationCap,
-  Layers,
-  ChevronRight,
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
-import { LearnerProfile, Concept, Chapter, SupportedLanguage } from "@/lib/types";
+import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
   createLearnerProfile,
   updateLearnerStudyClass,
 } from "@/lib/storage";
-import { syncClassProgression, canAccessTopic } from "@/lib/progression";
+import { syncClassProgression } from "@/lib/progression";
 import {
   getChaptersByClass,
   getConceptsByClass,
@@ -56,17 +52,16 @@ export default function StudentLearnPage() {
 
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-800">
-        <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
-          <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-emerald-950">Loading curriculum</p>
+      <div className="min-h-screen flex items-center justify-center text-[#2B1B0F]">
+        <div className="bg-[#FFFDF7] p-6 rounded-[2px] text-center border-3 border-[#2B1B0F] shadow-block">
+          <div className="w-8 h-8 border-3 border-[#5DAA3A] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+          <p className="font-pixel text-xs text-[#2B1B0F]">Loading curriculum...</p>
         </div>
       </div>
     );
   }
 
   const studyClass = (profile.studyClass || profile.selectedClass || 10) as 6 | 7 | 8 | 9 | 10;
-  const enrolledClass = (profile.enrolledClass || profile.selectedClass || 10) as 6 | 7 | 8 | 9 | 10;
 
   // Handle study class change directly from the learn page
   const handleSelectClass = (newGrade: 6 | 7 | 8 | 9 | 10) => {
@@ -112,8 +107,8 @@ export default function StudentLearnPage() {
   ).length;
 
   return (
-    <div className="min-h-screen text-slate-800 flex flex-col justify-between">
-      {/* Top Floating Glass Navigation */}
+    <div className="min-h-screen text-[#2B1B0F] flex flex-col justify-between">
+      {/* Top Navigation */}
       <Navigation
         currentTab="learn"
         currentLang={currentLang}
@@ -124,42 +119,40 @@ export default function StudentLearnPage() {
 
       {/* Main Content */}
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
-        
         {/* Header Banner */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="bg-[#FFFDF7] p-5 sm:p-6 rounded-[2px] border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100/90 border border-emerald-300 text-[10px] font-heading font-extrabold text-emerald-900 uppercase tracking-wide">
+              <span className="px-2.5 py-1 bg-[#F4C542] border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] rounded-[2px] text-[10px] font-heading font-extrabold text-[#2B1B0F] uppercase tracking-wide">
                 NCERT Curriculum
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-white text-[10px] font-heading font-bold text-slate-700">
+              <span className="px-2.5 py-1 bg-[#FFF7E6] border-2 border-[#2B1B0F] rounded-[2px] text-[10px] font-heading font-bold text-[#2B1B0F]">
                 {completedCount} of {allConcepts.length} topics completed
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
+            <h1 className="text-base sm:text-lg md:text-xl font-pixel text-[#2B1B0F] tracking-tight leading-snug">
               Class {studyClass} maths topics
             </h1>
-            <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Topics follow the NCERT syllabus. Complete lessons
-              and practice worksheets to make next topics available.
+            <p className="text-xs sm:text-sm text-[#2B1B0F]/90 font-sans max-w-xl">
+              Topics follow the NCERT syllabus. Complete lessons and practice worksheets to make next topics available.
             </p>
           </div>
 
           {/* Quick Study Class Switcher Pills */}
           <div className="flex flex-col gap-1.5 shrink-0 w-full sm:w-auto">
-            <span className="text-[10px] font-heading font-bold text-emerald-950/70 uppercase">
+            <span className="text-[10px] font-heading font-bold text-[#2B1B0F]/80 uppercase">
               Switch class:
             </span>
-            <div className="flex items-center gap-1.5 bg-white/70 p-1.5 rounded-2xl border border-white/80 shadow-xs flex-wrap sm:flex-nowrap">
+            <div className="flex items-center gap-1.5 bg-[#FFF7E6] p-1.5 rounded-[2px] border-2 border-[#2B1B0F] flex-wrap sm:flex-nowrap">
               {([6, 7, 8, 9, 10] as const).map((grade) => (
                 <button
                   key={grade}
                   type="button"
                   onClick={() => handleSelectClass(grade)}
-                  className={`min-h-[36px] min-w-[36px] sm:min-w-[42px] px-2 text-xs font-heading font-extrabold rounded-xl transition-all cursor-pointer ${
+                  className={`min-h-[36px] min-w-[36px] sm:min-w-[42px] px-2 text-xs font-heading font-extrabold rounded-[2px] transition-all cursor-pointer ${
                     studyClass === grade
-                      ? "bg-emerald-600 text-white shadow-xs scale-105"
-                      : "text-emerald-950/70 hover:text-emerald-950 hover:bg-white/60"
+                      ? "bg-[#5DAA3A] text-white border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F]"
+                      : "text-[#2B1B0F] border border-[#2B1B0F]/20 hover:bg-[#F4C542]/30"
                   }`}
                 >
                   Class {grade}
@@ -170,28 +163,28 @@ export default function StudentLearnPage() {
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="bg-[#FFFDF7] p-3 sm:p-4 rounded-[2px] border-3 border-[#2B1B0F] shadow-block flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Search Input */}
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#2B1B0F]/50" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search topics or concepts..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white/80 border border-white text-xs font-sans text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full pl-9 pr-3 py-2 rounded-[2px] bg-[#FFF7E6] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/50 focus:outline-none focus:border-[#5DAA3A]"
             />
           </div>
 
           {/* Status Filter Tabs */}
-          <div className="flex items-center gap-1 bg-white/70 p-1 rounded-xl border border-white/80 text-xs font-heading font-bold w-full sm:w-auto overflow-x-auto">
+          <div className="flex items-center gap-1 bg-[#FFF7E6] p-1 rounded-[2px] border-2 border-[#2B1B0F] text-xs font-heading font-bold w-full sm:w-auto overflow-x-auto">
             <button
               type="button"
               onClick={() => setStatusFilter("all")}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[2px] transition-colors cursor-pointer ${
                 statusFilter === "all"
-                  ? "bg-emerald-600 text-white shadow-xs"
-                  : "text-slate-700 hover:text-slate-900"
+                  ? "bg-[#5DAA3A] text-white border border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F]"
+                  : "text-[#2B1B0F] hover:bg-[#F4C542]/30"
               }`}
             >
               All ({allConcepts.length})
@@ -199,10 +192,10 @@ export default function StudentLearnPage() {
             <button
               type="button"
               onClick={() => setStatusFilter("unlocked")}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[2px] transition-colors cursor-pointer ${
                 statusFilter === "unlocked"
-                  ? "bg-emerald-600 text-white shadow-xs"
-                  : "text-slate-700 hover:text-slate-900"
+                  ? "bg-[#5DAA3A] text-white border border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F]"
+                  : "text-[#2B1B0F] hover:bg-[#F4C542]/30"
               }`}
             >
               Available
@@ -210,10 +203,10 @@ export default function StudentLearnPage() {
             <button
               type="button"
               onClick={() => setStatusFilter("completed")}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[2px] transition-colors cursor-pointer ${
                 statusFilter === "completed"
-                  ? "bg-emerald-600 text-white shadow-xs"
-                  : "text-slate-700 hover:text-slate-900"
+                  ? "bg-[#5DAA3A] text-white border border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F]"
+                  : "text-[#2B1B0F] hover:bg-[#F4C542]/30"
               }`}
             >
               Completed ({completedCount})
@@ -221,10 +214,10 @@ export default function StudentLearnPage() {
             <button
               type="button"
               onClick={() => setStatusFilter("locked")}
-              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[2px] transition-colors cursor-pointer ${
                 statusFilter === "locked"
-                  ? "bg-emerald-600 text-white shadow-xs"
-                  : "text-slate-700 hover:text-slate-900"
+                  ? "bg-[#5DAA3A] text-white border border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F]"
+                  : "text-[#2B1B0F] hover:bg-[#F4C542]/30"
               }`}
             >
               Locked
@@ -235,23 +228,23 @@ export default function StudentLearnPage() {
         {/* Vertical Cascade of Topics */}
         <div className="space-y-3">
           {filteredConcepts.length === 0 ? (
-            <div className="glass-panel p-8 rounded-3xl text-center space-y-2 border border-white/80">
-              <BookOpen className="w-8 h-8 text-slate-400 mx-auto" />
-              <h2 className="font-heading font-bold text-sm text-slate-700">No topics found</h2>
-              <p className="text-xs text-slate-600">No topics match your search or filter settings.</p>
+            <div className="bg-[#FFFDF7] p-8 rounded-[2px] text-center space-y-2 border-3 border-[#2B1B0F] shadow-block">
+              <BookOpen className="w-8 h-8 text-[#2B1B0F]/40 mx-auto" />
+              <h2 className="font-pixel text-xs sm:text-sm text-[#2B1B0F]">No topics found</h2>
+              <p className="text-xs text-[#2B1B0F]/70 font-sans">No topics match your search or filter settings.</p>
               <button
                 type="button"
                 onClick={() => {
                   setSearchQuery("");
                   setStatusFilter("all");
                 }}
-                className="text-xs font-heading font-bold text-emerald-700 underline cursor-pointer"
+                className="text-xs font-heading font-bold text-[#5DAA3A] underline cursor-pointer"
               >
                 Reset filters
               </button>
             </div>
           ) : (
-            filteredConcepts.map((concept, index) => {
+            filteredConcepts.map((concept) => {
               const topicProgress = profile.topicProgress?.[concept.id];
               const isCompleted = topicProgress?.status === "completed";
               const isInProgress = topicProgress?.status === "in_progress";
@@ -271,12 +264,8 @@ export default function StudentLearnPage() {
               return (
                 <div
                   key={concept.id}
-                  className={`glass-panel p-5 rounded-2xl border transition-all ${
-                    isCompleted
-                      ? "border-emerald-300/80 bg-white/80 shadow-[0_4px_16px_rgba(16,185,129,0.06)]"
-                      : isInProgress || isAvailable
-                      ? "border-emerald-500/60 bg-white/90 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-500"
-                      : "border-slate-200/80 bg-white/50 opacity-80"
+                  className={`bg-[#FFFDF7] p-4 sm:p-5 rounded-[2px] border-3 border-[#2B1B0F] shadow-block transition-all ${
+                    isLocked ? "opacity-75" : ""
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -286,28 +275,28 @@ export default function StudentLearnPage() {
                       <div className="shrink-0 mt-0.5">
                         {isCompleted ? (
                           <div
-                            className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs"
+                            className="w-8 h-8 rounded-[2px] bg-[#5DAA3A] text-white border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] flex items-center justify-center"
                             title="Concept Mastered"
                           >
-                            <CheckCircle2 className="w-5 h-5" />
+                            <CheckCircle2 className="w-4 h-4" />
                           </div>
                         ) : isInProgress ? (
                           <div
-                            className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-xs animate-pulse"
+                            className="w-8 h-8 rounded-[2px] bg-[#F4C542] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] flex items-center justify-center"
                             title="In Progress"
                           >
-                            <Clock className="w-5 h-5" />
+                            <Clock className="w-4 h-4" />
                           </div>
                         ) : isAvailable ? (
                           <div
-                            className="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-xs"
+                            className="w-8 h-8 rounded-[2px] bg-[#FFF7E6] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] flex items-center justify-center"
                             title="Ready to Learn"
                           >
-                            <Sparkles className="w-5 h-5" />
+                            <Sparkles className="w-4 h-4 text-[#5DAA3A]" />
                           </div>
                         ) : (
                           <div
-                            className="w-9 h-9 rounded-xl bg-slate-300 text-slate-600 flex items-center justify-center shadow-xs"
+                            className="w-8 h-8 rounded-[2px] bg-[#E5E0D8] text-[#8B8B8B] border-2 border-[#8B8B8B] flex items-center justify-center"
                             title="Locked Topic"
                           >
                             <Lock className="w-4 h-4" />
@@ -318,47 +307,47 @@ export default function StudentLearnPage() {
                       {/* Content details */}
                       <div className="space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                          <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-[2px] bg-[#FFF7E6] border border-[#2B1B0F] text-[#2B1B0F]">
                             {concept.chapter || `Class ${studyClass}`}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-500">
+                          <span className="text-[10px] font-mono text-[#2B1B0F]/60">
                             {concept.id}
                           </span>
                           {isCompleted && (
-                            <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-600 text-white">
+                            <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-[2px] bg-[#5DAA3A] text-white border border-[#2B1B0F]">
                               Mastered
                             </span>
                           )}
                           {isInProgress && (
-                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">
+                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded-[2px] bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F]">
                               In progress
                             </span>
                           )}
                           {isAvailable && (
-                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded-[2px] bg-[#FFF7E6] text-[#2B1B0F] border border-[#2B1B0F]">
                               Available
                             </span>
                           )}
                           {isLocked && (
-                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">
+                            <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded-[2px] bg-[#E5E0D8] text-[#8B8B8B] border border-[#8B8B8B]">
                               Locked
                             </span>
                           )}
                         </div>
 
                         {/* Title */}
-                        <h2 className="font-heading font-extrabold text-base text-emerald-950">
+                        <h2 className="font-pixel text-xs sm:text-sm text-[#2B1B0F] leading-snug">
                           {concept.name[currentLang] || concept.name.en}
                         </h2>
 
                         {/* Objective */}
-                        <p className="text-xs text-slate-600 font-sans leading-relaxed">
+                        <p className="text-xs text-[#2B1B0F]/80 font-sans leading-relaxed">
                           {concept.learningObjective[currentLang] || concept.learningObjective.en}
                         </p>
 
                         {/* Prerequisite Requirement Message if Locked */}
                         {isLocked && missingPrereqNames.length > 0 && (
-                          <div className="pt-1 flex items-center gap-1.5 text-xs font-sans text-rose-700">
+                          <div className="pt-1 flex items-center gap-1.5 text-xs font-sans text-[#E04A3F]">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>
                               <strong>Prerequisite needed:</strong> Complete {missingPrereqNames.join(", ")} first.
@@ -369,20 +358,20 @@ export default function StudentLearnPage() {
                     </div>
 
                     {/* Right: Action Buttons */}
-                    <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200">
+                    <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-[#2B1B0F]/20">
                       {isUnlocked ? (
                         <>
                           <Link
                             href={`/lesson/${concept.id}`}
-                            className="flex-1 sm:flex-initial py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all hover:scale-[1.02]"
+                            className="flex-1 sm:flex-initial py-2 px-4 rounded-[2px] bg-[#5DAA3A] hover:bg-[#4C8D2F] text-white border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] font-heading font-bold text-xs flex items-center justify-center gap-1.5 active:translate-x-[1px] active:translate-y-[1px] transition-colors cursor-pointer"
                           >
-                            <span>Open Lesson</span>
+                            <span>Open lesson</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                           {isCompleted && (
                             <Link
                               href={`/student/worksheet/${concept.id}`}
-                              className="py-2 px-3 rounded-xl bg-white/80 hover:bg-white text-emerald-900 border border-white font-heading font-bold text-xs flex items-center justify-center gap-1 shadow-xs transition-colors"
+                              className="py-2 px-3 rounded-[2px] bg-[#FFF7E6] hover:bg-[#F4C542] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] font-heading font-bold text-xs flex items-center justify-center gap-1 active:translate-x-[1px] active:translate-y-[1px] transition-colors cursor-pointer"
                               title="Practice Worksheet"
                             >
                               <Compass className="w-3.5 h-3.5" />
@@ -394,7 +383,7 @@ export default function StudentLearnPage() {
                         <button
                           type="button"
                           disabled
-                          className="flex-1 sm:flex-initial py-2 px-4 rounded-xl bg-slate-200 text-slate-500 font-heading font-bold text-xs flex items-center justify-center gap-1.5 cursor-not-allowed"
+                          className="flex-1 sm:flex-initial py-2 px-4 rounded-[2px] bg-[#E5E0D8] text-[#8B8B8B] border-2 border-[#8B8B8B] font-heading font-bold text-xs flex items-center justify-center gap-1.5 cursor-not-allowed"
                           title="Complete prerequisites first"
                         >
                           <Lock className="w-3.5 h-3.5" />
@@ -411,7 +400,7 @@ export default function StudentLearnPage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
         Margam · Maths for Classes 6-10
       </footer>
     </div>

@@ -55,69 +55,80 @@ export async function middleware(req: NextRequest) {
   let isAuthenticated = false;
 
   if (isConfigured && url && anonKey) {
-    const supabase = createServerClient(url, anonKey, {
-      cookies: {
-        get(name: string) {
-          return req.cookies.get(name)?.value;
+    try {
+      const supabase = createServerClient(url, anonKey, {
+        cookies: {
+          get(name: string) {
+            return req.cookies.get(name)?.value;
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            req.cookies.set({ name, value, ...options });
+            res = NextResponse.next({
+              request: { headers: req.headers },
+            });
+            res.cookies.set({ name, value, ...options });
+          },
+          remove(name: string, options: CookieOptions) {
+            req.cookies.set({ name, value: "", ...options });
+            res = NextResponse.next({
+              request: { headers: req.headers },
+            });
+            res.cookies.set({ name, value: "", ...options });
+          },
         },
-        set(name: string, value: string, options: CookieOptions) {
-          req.cookies.set({ name, value, ...options });
-          res = NextResponse.next({
-            request: { headers: req.headers },
-          });
-          res.cookies.set({ name, value, ...options });
-        },
-        remove(name: string, options: CookieOptions) {
-          req.cookies.set({ name, value: "", ...options });
-          res = NextResponse.next({
-            request: { headers: req.headers },
-          });
-          res.cookies.set({ name, value: "", ...options });
-        },
-      },
-    });
+      });
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+      const {
+        data: { user },
+        error: getUserError,
+      } = await supabase.auth.getUser();
 
-    if (user) {
-      isAuthenticated = true;
-      // Database profile is the primary source of truth for user role
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
+      if (!getUserError && user) {
+        isAuthenticated = true;
+        try {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .single();
 
-      if (profile?.role) {
-        userRole = profile.role === "teacher" ? "teacher" : "student";
-      } else {
-        userRole =
-          (user.app_metadata?.role || user.user_metadata?.role) === "teacher"
-            ? "teacher"
-            : "student";
-      }
-    }
-  } else {
-    // Non-production fallback check for signed token or test header
-    if (process.env.NODE_ENV !== "production") {
-      const mockToken =
-        req.cookies.get("margam_auth_token")?.value ||
-        req.headers.get("x-test-auth-token");
-      if (mockToken) {
-        const secret = getSessionSecret();
-        const verifiedPayload = await verifyEdgeToken(mockToken, secret);
-        if (verifiedPayload && (!verifiedPayload.expiresAt || verifiedPayload.expiresAt > Date.now())) {
-          isAuthenticated = true;
-          userRole = verifiedPayload.role === "teacher" ? "teacher" : "student";
+          if (profile?.role) {
+            userRole = profile.role === "teacher" ? "teacher" : "student";
+          } else {
+            userRole =
+              (user.app_metadata?.role || user.user_metadata?.role) === "teacher"
+                ? "teacher"
+                : "student";
+          }
+        } catch {
+          userRole =
+            (user.app_metadata?.role || user.user_metadata?.role) === "teacher"
+              ? "teacher"
+              : "student";
         }
       }
-    } else {
-      console.error(
-        "[Margam Middleware] Supabase credentials missing in production. Route protection active; protected routes will be rejected."
-      );
+    } catch (authErr) {
+      console.error("[Margam Middleware] Supabase auth check error:", authErr);
     }
+  }
+
+  // Non-production fallback check for signed token or test header
+  if (!isAuthenticated && process.env.NODE_ENV !== "production") {
+    const mockToken =
+      req.cookies.get("margam_auth_token")?.value ||
+      req.headers.get("x-test-auth-token");
+    if (mockToken) {
+      const secret = getSessionSecret();
+      const verifiedPayload = await verifyEdgeToken(mockToken, secret);
+      if (verifiedPayload && (!verifiedPayload.expiresAt || verifiedPayload.expiresAt > Date.now())) {
+        isAuthenticated = true;
+        userRole = verifiedPayload.role === "teacher" ? "teacher" : "student";
+      }
+    }
+  } else if (!isAuthenticated && process.env.NODE_ENV === "production" && !isConfigured) {
+    console.error(
+      "[Margam Middleware] Supabase credentials missing in production. Route protection active; protected routes will be rejected."
+    );
   }
 
   const pathname = req.nextUrl.pathname;

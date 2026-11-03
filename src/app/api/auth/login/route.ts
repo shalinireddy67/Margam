@@ -137,15 +137,20 @@ export async function POST(req: NextRequest) {
         avatarPixel: profile.avatar_pixel,
       };
 
-      // Return user data in response body (cookies are already set on response by routeClient)
-      return NextResponse.json({
+      // Return user data in response body with cookies attached directly
+      const authResponse = NextResponse.json({
         success: true,
         user: authenticatedUser,
         role: profile.role,
         redirectUrl: profile.role === "teacher" ? "/teacher" : "/student",
-      }, {
-        headers: response.headers,
       });
+
+      // Transfer all cookies set by Supabase auth to the final response
+      response.cookies.getAll().forEach((cookie) => {
+        authResponse.cookies.set(cookie.name, cookie.value, cookie);
+      });
+
+      return authResponse;
     } else {
       if (process.env.NODE_ENV === 'production') {
       return NextResponse.json(

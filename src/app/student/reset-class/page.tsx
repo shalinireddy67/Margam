@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ArrowLeft, RotateCcw, ShieldAlert, Compass } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile, clearActiveProfile } from "@/lib/storage";
-import { WitchCat } from "@/components/ui/WitchCat";
 
 export default function ResetClassPage() {
   const router = useRouter();
@@ -49,11 +48,13 @@ export default function ResetClassPage() {
       <main className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center items-center my-auto">
         <div className="bg-white p-6 sm:p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-6 text-center w-full">
           <div className="flex justify-center mb-2">
-            <WitchCat pose="oops" size={80} sticker={false} alt="Margam companion warning" />
+            <div className="w-14 h-14 bg-[#FFF7E6] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center text-2xl">
+              ⚠️
+            </div>
           </div>
 
           <div>
-            <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">
+            <h1 className="font-pixel text-base sm:text-lg text-[#2B1B0F]">
               Switch Grade for {profile.name}?
             </h1>
             <p className="text-xs sm:text-sm text-[#2B1B0F]/80 mt-2 leading-relaxed font-sans font-medium">

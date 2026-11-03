@@ -32,7 +32,6 @@ import {
 } from "@/lib/curriculum";
 import StudentHeader from "@/components/StudentHeader";
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   OfflineBanner,
@@ -252,7 +251,7 @@ export default function AdaptivePracticeRunnerPage() {
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="bg-white p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-4">
-            <div className="w-12 h-12 bg-[#FFE9A8] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]">
+            <div className="w-12 h-12 bg-[#F4C542] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]">
               <Lock className="w-6 h-6" />
             </div>
             <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">
@@ -525,14 +524,7 @@ export default function AdaptivePracticeRunnerPage() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="shrink-0 p-2 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
-                      <WitchCat
-                        pose={result.percentage >= 70 || result.passed ? "cheer" : "think"}
-                        size={72}
-                        sticker={true}
-                        alt="Margam Learning Companion reviewing practice results"
-                      />
-                    </div>
+
                     <div>
                       <h3 className="font-heading font-extrabold text-base sm:text-lg flex items-center gap-2">
                         {result.passed ? (
@@ -777,14 +769,7 @@ export default function AdaptivePracticeRunnerPage() {
                 {feedbackItem && (
                   <div className="mt-4 p-4 rounded-2xl bg-white/80 border border-white/90 space-y-3">
                     <div className="flex items-start gap-3">
-                      <div className="shrink-0 pt-0.5">
-                        <WitchCat
-                          pose={feedbackItem.isCorrect ? "cheer" : "think"}
-                          size={56}
-                          sticker={false}
-                          alt="Margam Learning Companion"
-                        />
-                      </div>
+
 
                       <div className="flex-1 space-y-2">
                         <div className="flex items-center gap-2 font-heading font-extrabold text-xs sm:text-sm">
@@ -855,28 +840,18 @@ export default function AdaptivePracticeRunnerPage() {
 
           {/* Desktop Side Companion & Progress Panel (Hidden on mobile & tablet) */}
           <aside className="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 select-none">
-            {/* Companion Card */}
-            <div className="glass-panel p-5 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-center space-y-3">
-              <div className="flex justify-center">
-                <WitchCat
-                  pose={result ? (result.percentage >= 70 ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
-                  size={96}
-                  sticker={false}
-                  alt="Margam companion study buddy"
-                />
-              </div>
-              <div className="space-y-1">
-                <span className="text-[10px] font-heading font-extrabold text-emerald-900 uppercase tracking-wider block">
-                  Companion Study Guide
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
-                  {result
-                    ? result.percentage >= 70
-                      ? "Worksheet complete. Your progress has been updated."
-                      : "Review the step-by-step explanation above to see how this problem is solved."
-                    : "Focused adaptive practice. Each question adapts to your current level."}
-                </p>
-              </div>
+            {/* Practice Study Guide Card */}
+            <div className="bg-[#FFFDF7] p-5 border-3 border-[#2B1B0F] shadow-block rounded-[2px] space-y-2">
+              <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
+                Practice Session
+              </span>
+              <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans font-medium">
+                {result
+                  ? result.percentage >= 70
+                    ? "Worksheet complete. Your progress has been updated."
+                    : "Review the step-by-step explanation above to see how this problem is solved."
+                  : "Focused adaptive practice. Each question adapts to your current level."}
+              </p>
             </div>
 
             {/* Live Progress Card */}

@@ -51,7 +51,6 @@ import {
   getConceptById,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import { WitchCat } from "@/components/ui/WitchCat";
 import { isIstNightTime, getLevelProgress } from "@/lib/xp-config";
 import { SegmentedXpBar } from "@/components/ui/PixelEffects";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
@@ -222,14 +221,7 @@ export default function StudentDashboardPage() {
         {/* Welcome Companion & Hero Bar */}
         <div className="bg-[#FFFDF7] p-5 sm:p-7 border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
-            <div className="shrink-0 p-2.5 bg-[#FFF7E6] border-2 border-[#2B1B0F]">
-              <WitchCat
-                pose={isIstNightTime() ? "sleepy" : "greet"}
-                size={64}
-                sticker={false}
-                alt="Maru companion"
-              />
-            </div>
+
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide">
@@ -244,7 +236,7 @@ export default function StudentDashboardPage() {
                   {levelInfo.rank.badge} {levelInfo.rank.name}, level {levelInfo.level}
                 </span>
               </div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#2B1B0F] leading-tight">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-pixel text-[#2B1B0F] leading-tight">
                 Welcome back, {profile.name}!
               </h1>
               <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans max-w-xl">

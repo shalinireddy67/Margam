@@ -20,7 +20,6 @@ import {
   getActiveProfile,
   saveProfile,
 } from "@/lib/storage";
-import { WitchCat } from "@/components/ui/WitchCat";
 import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
 
 export default function LoginForm() {
@@ -351,21 +350,14 @@ export default function LoginForm() {
       {/* 1. REAL SIGN-IN FORM (COMES FIRST)                            */}
       {/* ============================================================= */}
       <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px] p-6 sm:p-8 space-y-6 text-[#2B1B0F]">
-        {/* Companion Mascot: Maru shown once, awake, NO caption */}
-        {!isTeacherFlow && !recoveryCode && (
-          <div className="flex justify-center -mb-2">
-            <div className="p-2 rounded-[2px] bg-[#FFF7E6] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]">
-              <WitchCat pose="greet" size={54} sticker={false} alt="Maru" />
-            </div>
-          </div>
-        )}
+
 
         {/* Heading & Role Label */}
         <div className="text-center space-y-1">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 border-2 border-[#2B1B0F] text-[10px] font-heading font-extrabold uppercase tracking-wider mb-1 rounded-[2px] shadow-[1px_1px_0px_#2B1B0F] bg-[#FFF7E6] text-[#2B1B0F]">
             <span>{isTeacherFlow ? "Teacher" : "Student"}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-heading font-bold text-[#2B1B0F]">
+          <h1 className="text-lg sm:text-xl font-pixel text-[#2B1B0F]">
             {isTeacherFlow ? "Teacher sign in" : "Student sign in"}
           </h1>
           <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans">

@@ -13,7 +13,7 @@ export const tagRoots: Record<string, string> = tagRootsData as unknown as Recor
 /**
  * Computes verified question counts dynamically from data/questions/*.json on the server/Node,
  * while safely falling back to data/chapter-counts.json in client browser bundles so that
- * question content (correctAnswer, mistakeTag) is never bundled into client JS.
+ * question content (solutions, evaluation tags) is never bundled into client JS.
  */
 function computeChapterQuestionCounts(): Record<string, number> {
   if (typeof window !== "undefined") {

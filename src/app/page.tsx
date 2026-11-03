@@ -32,7 +32,6 @@ import {
   getConceptById,
 } from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
-import { WitchCat } from "@/components/ui/WitchCat";
 import { isIstNightTime } from "@/lib/xp-config";
 import { SegmentedXpBar } from "@/components/ui/PixelEffects";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
@@ -254,46 +253,34 @@ export default function HomePage() {
         {profile && (
           <section aria-labelledby="dashboard-heading" className="space-y-6">
             {/* Student Dashboard Banner */}
-            <div className="p-6 sm:p-7 bg-[#5A3720] border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-5">
+            <div className="p-6 sm:p-7 bg-[#FFFDF7] border-3 border-[#2B1B0F] border-t-4 border-t-[#5DAA3A] shadow-block space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  {/* Mascot Companion with Pose */}
-                  <div className="shrink-0 p-2 bg-[#422816] border-2 border-[#7A4B2A] shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
-                    <WitchCat
-                      pose="cheer"
-                      size={90}
-                      sticker={false}
-                      alt="Margam Learning Companion"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-heading font-bold text-[#FFE9A8] uppercase tracking-wider block">
-                      {catGreeting.text}
-                    </span>
-                    <h1
-                      id="dashboard-heading"
-                      className="font-heading font-extrabold text-2xl sm:text-3xl text-[#FFF7E6] leading-tight drop-shadow-[2px_2px_0px_#422816]"
-                    >
-                      {profile.name}
-                    </h1>
-                    <p className="text-xs text-[#E5D7BE] mt-1 font-bold">
-                      Class {profile.selectedClass}, level {profile.currentDifficulty} of 3
-                    </p>
-                  </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
+                    {catGreeting.text}
+                  </span>
+                  <h1
+                    id="dashboard-heading"
+                    className="font-pixel text-lg sm:text-xl md:text-2xl text-[#2B1B0F] leading-tight"
+                  >
+                    {profile.name}
+                  </h1>
+                  <p className="text-xs text-[#2B1B0F]/70 mt-1 font-bold">
+                    Class {profile.selectedClass}, level {profile.currentDifficulty} of 3
+                  </p>
                 </div>
 
                 {/* Progress / Mastery Stats */}
                 <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2">
-                  <span className="px-3 py-1 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                  <span className="px-3 py-1 bg-[#5DAA3A] text-white border-2 border-[#2B1B0F] font-heading font-bold text-xs shadow-[2px_2px_0px_#2B1B0F]">
                     {completedConceptsCount} {copy.conceptsMastered}
                   </span>
                   {resolvedGapsCount > 0 && (
-                    <span className="px-3 py-1 bg-[#FFE9A8] text-[#2B1B0F] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>{resolvedGapsCount} Foundations Repaired</span>
+                    <span className="px-3 py-1 bg-[#F4C542] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-bold text-xs shadow-[2px_2px_0px_#2B1B0F] flex items-center gap-1.5">
+                      <span>✦ {resolvedGapsCount} Foundations Repaired</span>
                     </span>
                   )}
-                  <span className="text-[11px] font-bold text-[#FFE9A8]">
+                  <span className="text-[11px] font-bold text-[#2B1B0F]">
                     XP Level: {Math.max(1, completedConceptsCount * 10 + resolvedGapsCount * 25)}
                   </span>
                 </div>
@@ -302,8 +289,8 @@ export default function HomePage() {
               {/* XP Progress Bar */}
               <div className="space-y-1.5 pt-1">
                 <div className="flex items-center justify-between text-xs font-heading font-bold">
-                  <span className="text-[#E5D7BE]">Topic progress</span>
-                  <span className="text-[#FFE9A8]">
+                  <span className="text-[#2B1B0F]/70">Topic progress</span>
+                  <span className="text-[#2B1B0F] font-bold">
                     {completedConceptsCount} / {gradeChapters.length * 2} concepts
                   </span>
                 </div>
@@ -320,28 +307,28 @@ export default function HomePage() {
 
               {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
-                <div className="p-5 bg-[#422816] border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[4px_4px_0px_rgba(0,0,0,0.5)] space-y-3">
+                <div className="p-5 bg-[#FFF7E6] border-3 border-[#2B1B0F] border-l-[8px] border-l-[#E04A3F] shadow-block space-y-3">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-2 text-[#FFE9A8]">
-                      <AlertCircle className="w-5 h-5 shrink-0" />
+                    <div className="flex items-center gap-2 text-[#2B1B0F]">
+                      <AlertCircle className="w-5 h-5 shrink-0 text-[#E04A3F]" />
                       <span className="font-heading font-extrabold text-xs sm:text-sm">
                         {copy.activeGapFound} {gapConcept ? `(Class ${gapConcept.class})` : ""}
                       </span>
                     </div>
                     {gapConcept && (
-                      <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
+                      <span className="text-[10px] font-pixel px-2 py-0.5 bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F]">
                         Class {gapConcept.class} Prerequisite
                       </span>
                     )}
                   </div>
 
                   {gapConcept && (
-                    <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
+                    <h3 className="font-pixel text-sm sm:text-base text-[#2B1B0F]">
                       {gapConcept.name[currentLang] || gapConcept.name.en}
                     </h3>
                   )}
 
-                  <p className="text-xs text-[#E5D7BE] leading-relaxed">
+                  <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans">
                     {profile?.activeGap?.plainLanguageReason ||
                       "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade chapters much easier."}
                   </p>
@@ -349,14 +336,13 @@ export default function HomePage() {
                   <div className="pt-1 flex items-center gap-2 flex-wrap">
                     <Link
                       href={`/lesson/${firstActiveGapId}?fromGap=true`}
-                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#FFE9A8] hover:bg-[#FFF2CC] text-[#2B1B0F] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#F4C542] hover:bg-[#F4C542]/20 text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                     >
-                      <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                       <span>{copy.fixGapBtn}</span>
                     </Link>
                     <Link
                       href={`/student/worksheet/${firstActiveGapId}`}
-                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:brightness-105 text-white border-2 border-[#2B1B0F] font-heading font-bold text-xs shadow-[2px_2px_0px_#2B1B0F] no-underline transition-colors"
                     >
                       <span>Start practice</span>
                     </Link>
@@ -376,7 +362,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={handleResetProfile}
-                    className="min-h-[44px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#E5D7BE] hover:text-[#FFE9A8] underline cursor-pointer"
+                    className="min-h-[44px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#2B1B0F]/70 hover:text-[#2B1B0F] underline cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5 mr-1" />
                     <span>{copy.switchProfile}</span>
@@ -392,55 +378,48 @@ export default function HomePage() {
         {/* ================================================================= */}
         {profile && (
           <section aria-labelledby="revision-zone-heading" className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#7A4B2A] pb-2">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#2B1B0F] pb-2">
               <div className="flex items-center gap-2">
-                <span className="text-[#FFE9A8] text-lg">⚔️</span>
+                <span className="text-lg">⚔️</span>
                 <h2
                   id="revision-zone-heading"
-                  className="font-heading font-extrabold text-xl sm:text-2xl text-[#FFF7E6]"
+                  className="font-pixel text-base sm:text-lg text-[#2B1B0F]"
                 >
                   Your revision topics
                 </h2>
               </div>
-              <span className="text-xs font-heading font-bold text-[#FFE9A8]">
+              <span className="text-xs font-pixel text-[#5DAA3A]">
                 {revisionQueue.length > 0
                   ? `${revisionQueue.length} Topic${revisionQueue.length > 1 ? "s" : ""} Prioritized`
                   : "All Foundations Up to Date"}
               </span>
             </div>
 
-            {/* Companion Dialogue & Advice Card */}
-            <div className="p-4 sm:p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col sm:flex-row items-center gap-4">
-              <div className="shrink-0 p-1.5 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-                <WitchCat
-                  pose={companionRevision?.pose || "greet"}
-                  size={74}
-                  sticker={false}
-                  alt="Margam Zombie Chicken Jockey companion revision advice"
-                />
-              </div>
-
-              <div className="flex-1 text-center sm:text-left space-y-1">
-                <span className="text-[10px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
-                  Companion advice, {companionRevision?.title || "Daily check-in"}
-                </span>
-                <p className="text-xs sm:text-sm text-[#FFF7E6] font-medium leading-relaxed">
-                  &ldquo;{companionRevision?.message}&rdquo;
-                </p>
-              </div>
-
-              {revisionQueue.length > 0 && (
-                <div className="shrink-0">
-                  <Link
-                    href={revisionQueue[0].href}
-                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
-                  >
-                    <span>Start revision</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                  </Link>
+            {/* Daily Revision Advice Card */}
+            {companionRevision && (
+              <div className="p-4 sm:p-5 bg-[#FFFDF7] border-3 border-[#2B1B0F] shadow-block flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex-1 text-center sm:text-left space-y-1">
+                  <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
+                    Daily check-in: {companionRevision.title || "Spaced revision"}
+                  </span>
+                  <p className="text-xs sm:text-sm text-[#2B1B0F] font-medium leading-relaxed font-sans">
+                    &ldquo;{companionRevision.message}&rdquo;
+                  </p>
                 </div>
-              )}
-            </div>
+
+                {revisionQueue.length > 0 && (
+                  <div className="shrink-0">
+                    <Link
+                      href={revisionQueue[0].href}
+                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:brightness-105 text-white border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                    >
+                      <span>Start revision</span>
+                      <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Revision Cards Grid */}
             {revisionQueue.length > 0 ? (
@@ -451,12 +430,12 @@ export default function HomePage() {
                   const isDue = item.priority === "due_revision";
 
                   const badgeColor = isCritical
-                    ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816]"
+                    ? "bg-[#F4C542] text-[#2B1B0F] border-[#2B1B0F]"
                     : isNeedsPractice
-                    ? "bg-[#E04A3F] text-[#FFF7E6] border-[#422816]"
+                    ? "bg-[#E04A3F] text-white border-[#2B1B0F]"
                     : isDue
-                    ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#422816]"
-                    : "bg-[#3FA7C9] text-[#FFF7E6] border-[#422816]";
+                    ? "bg-[#5DAA3A] text-white border-[#2B1B0F]"
+                    : "bg-[#3FA7C9] text-white border-[#2B1B0F]";
 
                   const badgeLabel = isCritical
                     ? "CRITICAL GAP"
@@ -469,48 +448,46 @@ export default function HomePage() {
                   return (
                     <div
                       key={item.conceptId}
-                      className={`p-4 bg-[#5A3720] border-3 shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col justify-between gap-3 ${
-                        isCritical ? "border-[#FFE9A8]" : "border-[#7A4B2A]"
-                      }`}
+                      className="p-4 bg-[#FFFDF7] border-3 border-[#2B1B0F] shadow-block flex flex-col justify-between gap-3"
                     >
                       <div className="space-y-2">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className={`px-2 py-0.5 text-[10px] font-heading font-extrabold border ${badgeColor}`}>
+                          <span className={`px-2 py-0.5 text-[10px] font-pixel border ${badgeColor}`}>
                             {badgeLabel}
                           </span>
-                          <span className="text-[11px] font-heading font-bold text-[#E5D7BE]">
+                          <span className="text-[11px] font-sans font-bold text-[#2B1B0F]/70">
                             Class {item.class}, level {item.currentDifficulty}
                           </span>
                         </div>
 
-                        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] leading-snug">
+                        <h3 className="font-pixel text-xs sm:text-sm text-[#2B1B0F] leading-snug">
                           {item.conceptName}
                         </h3>
 
-                        <p className="text-xs text-[#E5D7BE] leading-relaxed">
+                        <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans">
                           {item.reason}
                         </p>
 
                         {/* Historical Attempt Improvement if recorded */}
                         {item.previousImprovement && (
-                          <div className="p-2 bg-[#422816] border border-[#7A4B2A] flex items-center justify-between text-[11px]">
-                            <span className="text-[#E5D7BE]">
+                          <div className="p-2 bg-[#FFF7E6] border border-[#2B1B0F] flex items-center justify-between text-[11px]">
+                            <span className="text-[#2B1B0F]/70">
                               Prev: {item.previousImprovement.previousPercentage}% ➔ Latest: {item.previousImprovement.latestPercentage}%
                             </span>
-                            <span className={`font-heading font-extrabold ${item.previousImprovement.delta >= 0 ? "text-[#5DAA3A]" : "text-[#E04A3F]"}`}>
+                            <span className={`font-bold ${item.previousImprovement.delta >= 0 ? "text-[#5DAA3A]" : "text-[#E04A3F]"}`}>
                               {item.previousImprovement.delta >= 0 ? `+${item.previousImprovement.delta}%` : `${item.previousImprovement.delta}%`}
                             </span>
                           </div>
                         )}
                       </div>
 
-                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#7A4B2A]">
-                        <span className="text-[11px] font-heading font-bold text-[#FFE9A8]">
+                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#2B1B0F]">
+                        <span className="text-[11px] font-pixel text-[#5DAA3A]">
                           Progress: {item.mastery}%
                         </span>
                         <Link
                           href={item.href}
-                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:brightness-105 text-white border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                         >
                           <span>Start practice</span>
                           <ArrowRight className="w-3 h-3 ml-1" />
@@ -521,12 +498,12 @@ export default function HomePage() {
                 })}
               </div>
             ) : (
-              <div className="p-6 bg-[#5A3720] border-3 border-[#7A4B2A] text-center space-y-2">
+              <div className="p-6 bg-[#FFFDF7] border-3 border-[#2B1B0F] shadow-block text-center space-y-2">
                 <CheckCircle2 className="w-8 h-8 text-[#5DAA3A] mx-auto" />
-                <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
+                <h3 className="font-pixel text-xs sm:text-sm text-[#2B1B0F]">
                   All math topics in good shape
                 </h3>
-                <p className="text-xs text-[#E5D7BE] max-w-md mx-auto">
+                <p className="text-xs text-[#2B1B0F]/70 max-w-md mx-auto font-sans">
                   No concepts are currently overdue for spaced revision. Complete new lessons below to keep moving forward.
                 </p>
               </div>
@@ -561,7 +538,7 @@ export default function HomePage() {
                 {copy.chaptersSubtitle}
               </p>
             </div>
-            <span className="text-xs font-heading font-bold text-[#FFE9A8] shrink-0">
+            <span className="text-xs font-heading font-bold text-[#2B1B0F] shrink-0">
               {gradeChapters.length} Chapters
             </span>
           </div>
@@ -631,7 +608,7 @@ export default function HomePage() {
           <div className="pt-4 text-center sm:hidden">
             <Link
               href="/teacher"
-              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#FFE9A8] underline"
+              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#2B1B0F] underline"
             >
               {copy.teacherLink}
             </Link>

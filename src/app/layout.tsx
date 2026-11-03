@@ -59,7 +59,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-full flex flex-col bg-[#FFF7E6] text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
+      <body className="min-h-full flex flex-col text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden selection:bg-[#FFE9A8] selection:text-[#2B1B0F]">
+        {/* Universal Fixed Minecraft Nature Background Scenery */}
+        <div
+          className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/minecraft/meadow-day.jpg')",
+            transform: "translateZ(0)",
+          }}
+          aria-hidden="true"
+        />
+        {/* Soft Ambient Wash to ensure high contrast without hiding the world */}
+        <div
+          className="fixed inset-0 pointer-events-none -z-10 bg-[#FFF7E6]/40"
+          aria-hidden="true"
+        />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

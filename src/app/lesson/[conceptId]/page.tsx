@@ -1,3 +1,4 @@
+type CompanionContext = "lesson_start" | "completed" | "correct" | "incorrect";
 "use client";
 
 import React, { useEffect, useState, useCallback, Suspense } from "react";
@@ -30,9 +31,7 @@ import {
   selectLessonVariant,
   resolveLocalizedString,
 } from "@/lib/curriculum";
-import WitchCatCompanion, { CompanionContext } from "@/components/WitchCatCompanion";
 import Footer from "@/components/Footer";
-import { WitchCat } from "@/components/ui/WitchCat";
 import {
   SkeletonCard,
   OfflineBanner,
@@ -430,14 +429,7 @@ function LessonContent() {
             {/* Core Explanation Card */}
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex flex-col sm:flex-row items-start gap-5">
-                <div className="shrink-0 p-2.5 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
-                  <WitchCat
-                    pose="read"
-                    size={88}
-                    sticker={false}
-                    alt="Margam Learning Companion reading the maths lesson"
-                  />
-                </div>
+
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-emerald-800">
                     <BookOpen className="w-4 h-4 text-emerald-700" />
@@ -487,14 +479,15 @@ function LessonContent() {
             </div>
           </div>
 
-          {/* Side Column: Mascot Companion Dialogue */}
+          {/* Side Column: Lesson Study Tips */}
           <div className="md:col-span-4 sticky top-24 space-y-4">
-            <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] flex flex-col items-center text-center text-slate-800">
-              <WitchCatCompanion
-                context={companionContext}
-                studentName={profile.name}
-                mode="inline"
-              />
+            <div className="bg-[#FFFDF7] p-5 sm:p-6 border-3 border-[#2B1B0F] shadow-block rounded-[2px] space-y-3">
+              <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
+                Study Method
+              </span>
+              <p className="text-xs text-[#2B1B0F]/80 font-sans leading-relaxed">
+                Take your time reading each variant. Once confident, test your understanding on the practice problems below.
+              </p>
             </div>
           </div>
         </div>
@@ -601,14 +594,7 @@ function LessonContent() {
                     {feedbackItem && !feedbackItem.isCorrect && (
                       <div className="p-4 rounded-2xl bg-rose-50/80 border border-rose-200 text-xs text-rose-950 space-y-2">
                         <div className="flex items-start gap-3">
-                          <div className="shrink-0 pt-0.5">
-                            <WitchCat
-                              pose="oops"
-                              size={56}
-                              sticker={true}
-                              alt="Margam Learning Companion offering mistake hint"
-                            />
-                          </div>
+
                           <div className="flex-1 space-y-1.5">
                             <p className="font-heading font-bold text-rose-700 flex items-center gap-1.5">
                               <AlertCircle className="w-4 h-4 text-[#E04A3F] shrink-0" />

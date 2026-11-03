@@ -162,7 +162,7 @@ export function Navigation({
                         className={`min-h-[44px] px-3.5 py-2 text-xs font-heading font-extrabold flex items-center gap-2 rounded-[2px] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] ${
                           isActive
                             ? "bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]"
-                            : "text-[#2B1B0F] hover:text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                            : "text-[#2B1B0F] hover:text-[#2B1B0F] hover:bg-[#F4C542]/20"
                         }`}
                       >
                         <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#2B1B0F]" : "text-[#1E6F8C]"}`} aria-hidden="true" />
@@ -174,7 +174,7 @@ export function Navigation({
                   {/* Subtle Teacher link on desktop */}
                   <Link
                     href="/teacher"
-                    className="min-h-[44px] px-2.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#FFE9A8] rounded-[2px] transition-all flex items-center gap-1.5 ml-1"
+                    className="min-h-[44px] px-2.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#F4C542]/20 rounded-[2px] transition-all flex items-center gap-1.5 ml-1"
                     title="Teacher"
                   >
                     <Users className="w-3.5 h-3.5 text-[#1E6F8C]" aria-hidden="true" />
@@ -185,13 +185,13 @@ export function Navigation({
                 <div className="flex items-center gap-2">
                   <Link
                     href="/login?role=student"
-                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-[#FFF7E6] hover:bg-[#FFE9A8] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-[#FFF7E6] hover:bg-[#F4C542]/20 border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
                   >
                     <span>Student sign in</span>
                   </Link>
                   <Link
                     href="/login?role=teacher"
-                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-white hover:bg-[#FFE9A8] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-white hover:bg-[#F4C542]/20 border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
                   >
                     <span>Teacher sign in</span>
                   </Link>
@@ -233,7 +233,7 @@ export function Navigation({
               <button
                 type="button"
                 onClick={toggleSound}
-                className="min-h-[38px] min-w-[38px] sm:min-h-[44px] sm:min-w-[44px] p-1.5 sm:p-2 bg-[#FFFFFF] border-2 border-[#2B1B0F] rounded-[2px] text-[#2B1B0F] hover:bg-[#FFE9A8] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+                className="min-h-[38px] min-w-[38px] sm:min-h-[44px] sm:min-w-[44px] p-1.5 sm:p-2 bg-[#FFFFFF] border-2 border-[#2B1B0F] rounded-[2px] text-[#2B1B0F] hover:bg-[#F4C542]/20 shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
                 aria-label={soundOn ? "Mute Game Audio" : "Enable Game Audio (8-bit synth sound effects)"}
                 title={soundOn ? "Sound: ON" : "Sound: OFF"}
               >
@@ -258,7 +258,7 @@ export function Navigation({
                     className={`min-h-[34px] sm:min-h-[38px] min-w-[30px] sm:min-w-[38px] px-1 sm:px-2 text-[11px] sm:text-xs font-bold rounded-[2px] transition-all cursor-pointer ${
                       currentLang === "en"
                         ? "bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.9)]"
-                        : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                        : "text-[#2B1B0F] hover:bg-[#F4C542]/20"
                     }`}
                   >
                     EN
@@ -270,7 +270,7 @@ export function Navigation({
                     className={`min-h-[38px] min-w-[38px] sm:min-w-[42px] px-1.5 sm:px-2 text-xs font-bold rounded-[2px] transition-all cursor-pointer ${
                       currentLang === "hi"
                         ? "bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.9)]"
-                        : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                        : "text-[#2B1B0F] hover:bg-[#F4C542]/20"
                     }`}
                   >
                     हिन्दी
@@ -282,7 +282,7 @@ export function Navigation({
                     className={`min-h-[38px] min-w-[38px] sm:min-w-[42px] px-1.5 sm:px-2 text-xs font-bold rounded-[2px] transition-all cursor-pointer ${
                       currentLang === "te"
                         ? "bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.9)]"
-                        : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                        : "text-[#2B1B0F] hover:bg-[#F4C542]/20"
                     }`}
                   >
                     తెలుగు
@@ -315,7 +315,7 @@ export function Navigation({
                 className={`w-16 min-h-[56px] p-2 flex flex-col items-center justify-center gap-1 rounded-[2px] transition-all no-underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] ${
                   isActive
                     ? "bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]"
-                    : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                    : "text-[#2B1B0F] hover:bg-[#F4C542]/20"
                 }`}
               >
                 <Icon className={`w-5 h-5 shrink-0 ${isActive ? "text-[#2B1B0F]" : "text-[#1E6F8C]"}`} aria-hidden="true" />
@@ -351,7 +351,7 @@ export function Navigation({
                     className={`flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none transition-colors px-1 ${
                       isActive
                         ? "bg-[#5DAA3A] text-[#2B1B0F] border-t-4 border-t-[#F4C542] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)] font-bold"
-                        : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                        : "text-[#2B1B0F] hover:bg-[#F4C542]/20"
                     }`}
                   >
                     <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
@@ -365,7 +365,7 @@ export function Navigation({
               <>
                 <Link
                   href="/"
-                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#F4C542]/20 px-1"
                 >
                   <Home className="w-5 h-5 shrink-0" aria-hidden="true" />
                   <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
@@ -374,7 +374,7 @@ export function Navigation({
                 </Link>
                 <Link
                   href="/login?role=student"
-                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#F4C542]/20 px-1"
                 >
                   <User className="w-5 h-5 shrink-0" aria-hidden="true" />
                   <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
@@ -383,7 +383,7 @@ export function Navigation({
                 </Link>
                 <Link
                   href="/login?role=teacher"
-                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#F4C542]/20 px-1"
                 >
                   <Users className="w-5 h-5 shrink-0" aria-hidden="true" />
                   <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
