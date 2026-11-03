@@ -165,10 +165,9 @@ const config: Config = {
       },
       fontFamily: {
         heading: [
-          "'Press Start 2P'",
+          "'Nunito'",
           "'Baloo 2'",
           "'Baloo Tammudu 2'",
-          "monospace",
           "sans-serif",
         ],
         pixel: [

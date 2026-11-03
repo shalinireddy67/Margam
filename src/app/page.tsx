@@ -73,7 +73,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen text-slate-800 flex flex-col justify-between">
       {/* Floating Top Frosted Glass Header */}
-      <header className="sticky top-3 z-50 max-w-[1240px] mx-auto px-3 sm:px-6 w-full">
+      <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full">
         <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-sm border border-white/60 flex items-center justify-center shrink-0">
@@ -130,7 +130,7 @@ export default function HomePage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full flex-1 flex flex-col justify-center items-center">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full flex-1 flex flex-col justify-center items-center">
         {/* Active Session Resume Card (If already logged in) */}
         {!loading && authStatus?.authenticated && authStatus.user && (
           <div className="w-full max-w-2xl mb-8">
@@ -332,7 +332,7 @@ export default function HomePage() {
       </main>
 
       {/* Lightweight Frosted Glass Footer */}
-      <footer className="max-w-[1240px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
         Margam • Adaptive Mathematics for NCERT Classes 6–10 •{" "}
         <Link href="/privacy" className="underline hover:text-emerald-950">
           Privacy Policy

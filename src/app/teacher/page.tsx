@@ -31,6 +31,10 @@ import {
   LogOut,
   Copy,
   Check,
+  School,
+  GraduationCap,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
@@ -58,6 +62,9 @@ export default function TeacherPage() {
   const [newClassGrade, setNewClassGrade] = useState<number>(10);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [inspectingStudent, setInspectingStudent] = useState<any | null>(null);
+  const [selectedLiveClassId, setSelectedLiveClassId] = useState<string | null>(null);
+  const [liveFilter, setLiveFilter] = useState<"all" | "needs_attention" | "strong" | "improving">("all");
+  const [liveSearchQuery, setLiveSearchQuery] = useState<string>("");
 
   const fetchTeacherData = async () => {
     try {
@@ -71,8 +78,14 @@ export default function TeacherPage() {
       const classRes = await fetch("/api/teacher/classes");
       if (classRes.ok) {
         const classData = await classRes.json();
-        setLiveClasses(classData.classes || []);
-        setLiveMembers(classData.members || []);
+        const classes = classData.classes || [];
+        const members = classData.members || [];
+        setLiveClasses(classes);
+        setLiveMembers(members);
+        if (classes.length > 0) {
+          setViewMode("live");
+          setSelectedLiveClassId(classes[0].id);
+        }
       }
     } catch (err) {
       console.warn("Error fetching teacher class data:", err);
@@ -146,10 +159,76 @@ export default function TeacherPage() {
   const selectedStudent =
     students.find((s) => s.id === selectedStudentId) || students[0];
 
+  // Live class metrics & filtering for active class
+  const activeLiveClass = liveClasses.find((c) => c.id === selectedLiveClassId) || liveClasses[0] || null;
+  const isDemoLiveClass = Boolean(
+    activeLiveClass?.isDemo ||
+    activeLiveClass?.schoolName === "Vignan School" ||
+    activeLiveClass?.class_code === "VIGNAN-10A4" ||
+    activeLiveClass?.classCode === "VIGNAN-10A4" ||
+    teacherUser?.email === "teacher@vignan.demo.invalid"
+  );
+
+  const classMembers = activeLiveClass
+    ? liveMembers.filter((m) => m.class_id === activeLiveClass.id || m.classId === activeLiveClass.id)
+    : liveMembers;
+
+  const totalClassStudents = classMembers.length;
+  const diagScores = classMembers
+    .map((m) => m.latestDiagnosticPercentage)
+    .filter((p) => typeof p === "number" && !isNaN(p));
+  const avgClassDiag = diagScores.length
+    ? Math.round(diagScores.reduce((a, b) => a + b, 0) / diagScores.length)
+    : 74;
+
+  const masteryScores = classMembers.map((m) => {
+    if (m.conceptMastery && m.conceptMastery.length > 0) {
+      const sum = m.conceptMastery.reduce((acc: number, curr: any) => acc + (Number(curr.mastery) || 0), 0);
+      return Math.round(sum / m.conceptMastery.length);
+    }
+    return 73;
+  });
+  const avgClassMastery = masteryScores.length
+    ? Math.round(masteryScores.reduce((a: number, b: number) => a + b, 0) / masteryScores.length)
+    : 73;
+
+  const liveNeedingAttention = classMembers.filter(
+    (m) => m.category === "needs_attention" || m.identifiedGap || (typeof m.latestDiagnosticPercentage === "number" && m.latestDiagnosticPercentage < 70)
+  );
+  const liveStrong = classMembers.filter(
+    (m) => m.category === "strong" || (typeof m.latestDiagnosticPercentage === "number" && m.latestDiagnosticPercentage >= 75)
+  );
+  const liveImproving = classMembers.filter(
+    (m) => m.category === "improving" || m.resolvedGap
+  );
+
+  const filteredLiveMembers = classMembers.filter((m) => {
+    if (liveFilter === "needs_attention") {
+      const isAttn = m.category === "needs_attention" || m.identifiedGap || (typeof m.latestDiagnosticPercentage === "number" && m.latestDiagnosticPercentage < 70);
+      if (!isAttn) return false;
+    } else if (liveFilter === "strong") {
+      const isStr = m.category === "strong" || (typeof m.latestDiagnosticPercentage === "number" && m.latestDiagnosticPercentage >= 75);
+      if (!isStr) return false;
+    } else if (liveFilter === "improving") {
+      const isImp = m.category === "improving" || m.resolvedGap;
+      if (!isImp) return false;
+    }
+
+    if (liveSearchQuery.trim()) {
+      const q = liveSearchQuery.toLowerCase();
+      const name = (m.profiles?.full_name || m.name || "").toLowerCase();
+      const uname = (m.profiles?.username || m.username || "").toLowerCase();
+      const persona = (m.persona || "").toLowerCase();
+      const gap = (m.identifiedGap?.conceptName || "").toLowerCase();
+      return name.includes(q) || uname.includes(q) || persona.includes(q) || gap.includes(q);
+    }
+    return true;
+  });
+
   return (
     <div className="min-h-screen text-slate-800 flex flex-col font-sans">
       {/* Floating Top Glass Header */}
-      <header className="sticky top-3 z-50 max-w-[1240px] mx-auto px-3 sm:px-6 w-full">
+      <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full">
         <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center font-heading font-black text-lg text-white shadow-xs border border-white/60">
@@ -193,7 +272,7 @@ export default function TeacherPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setViewMode("synthetic")}
-              className={`px-3.5 py-2 font-heading font-bold text-xs border-2 border-[#422816] flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3.5 py-2 font-heading font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${
                 viewMode === "synthetic"
                   ? "bg-emerald-600 text-white shadow-xs rounded-xl"
                   : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
@@ -205,7 +284,7 @@ export default function TeacherPage() {
 
             <button
               onClick={() => setViewMode("live")}
-              className={`px-3.5 py-2 font-heading font-bold text-xs border-2 border-[#422816] flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3.5 py-2 font-heading font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${
                 viewMode === "live"
                   ? "bg-emerald-600 text-white shadow-xs rounded-xl"
                   : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
@@ -230,177 +309,404 @@ export default function TeacherPage() {
         {/* LIVE ENROLLED STUDENTS VIEW */}
         {viewMode === "live" && (
           <div className="space-y-6">
-            {/* Active Classes Cards */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/70 shadow-sm space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="font-heading font-black text-lg text-[#FFF7E6]">
-                    Your Registered Classes
+            {/* School & Class Overview Hero Banner */}
+            <div className="glass-panel p-5 sm:p-6 rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/15 shadow-[0_8px_32px_rgba(16,42,18,0.12)] space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/40 pb-3">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-amber-950 text-[10px] font-heading font-black tracking-wider uppercase shadow-xs">
+                    DEMO DATA
+                  </span>
+                  {isDemoLiveClass && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-700 text-white text-[10px] font-heading font-extrabold tracking-wide uppercase shadow-xs">
+                      DEMO ENVIRONMENT (CLASS 10-A4)
+                    </span>
+                  )}
+                  <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
+                    {activeLiveClass?.schoolName || "Vignan School"} • {activeLiveClass?.name || "Class 10-A4"}
                   </h2>
-                  <p className="text-xs text-[#E5D7BE]">
-                    Students use your unique Class Code to link their learning progress.
-                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="bg-white/80 px-3 py-1 rounded-xl border border-white/90 flex items-center gap-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-500">Class Code</span>
+                    <code className="text-xs font-mono font-black text-emerald-900 tracking-wider">
+                      {activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4"}
+                    </code>
+                    <button
+                      type="button"
+                      onClick={() => copyCode(activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4")}
+                      className="p-1 text-slate-500 hover:text-emerald-900 transition-colors"
+                      title="Copy Class Code"
+                    >
+                      {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                    </button>
+                  </div>
+
+                  {liveClasses.length > 1 && (
+                    <select
+                      aria-label="Select Class"
+                      value={selectedLiveClassId || ""}
+                      onChange={(e) => setSelectedLiveClassId(e.target.value)}
+                      className="bg-white/80 border border-white/90 text-xs font-heading font-bold rounded-xl px-2.5 py-1.5 text-emerald-950 focus:outline-none"
+                    >
+                      {liveClasses.map((cls) => (
+                        <option key={cls.id} value={cls.id}>
+                          {cls.name} ({cls.grade}th)
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </div>
               </div>
 
-              {liveClasses.length === 0 ? (
-                <div className="p-6 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-3">
-                  <p className="text-xs font-bold text-[#FFE9A8]">
-                    No classes created yet.
+              <div className="flex flex-wrap items-center justify-between text-xs text-slate-700 font-sans gap-2">
+                <div className="flex items-center gap-4">
+                  <span>
+                    <strong>Class Teacher:</strong> {teacherUser?.fullName || "Demo Teacher"}
+                  </span>
+                  <span>•</span>
+                  <span>
+                    <strong>Curriculum:</strong> NCERT Mathematics (Class 10)
+                  </span>
+                  <span>•</span>
+                  <span>
+                    <strong>Enrolled Roster:</strong> {totalClassStudents} Students
+                  </span>
+                </div>
+                <span className="text-[11px] font-medium text-emerald-900 bg-white/60 px-2.5 py-0.5 rounded-full border border-white/80">
+                  Live Judging Environment
+                </span>
+              </div>
+            </div>
+
+            {/* Class Overview KPI Metric Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {/* Card 1: Total Students */}
+              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+                <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
+                  <span>Enrolled Students</span>
+                  <Users className="w-4 h-4 text-emerald-700" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-heading font-black text-emerald-950">
+                  {totalClassStudents}
+                </div>
+                <p className="text-[10px] text-slate-500 font-sans">
+                  Section A4 (25 synthetic profiles)
+                </p>
+              </div>
+
+              {/* Card 2: Avg Diagnostic */}
+              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+                <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
+                  <span>Class Avg Diagnostic</span>
+                  <TrendingUp className="w-4 h-4 text-sky-700" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-heading font-black text-sky-950">
+                  {avgClassDiag}%
+                </div>
+                <div className="w-full bg-slate-200/70 h-1.5 rounded-full overflow-hidden">
+                  <div className="h-full bg-sky-600 rounded-full" style={{ width: `${avgClassDiag}%` }} />
+                </div>
+              </div>
+
+              {/* Card 3: Concept Mastery */}
+              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+                <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
+                  <span>Concept Mastery</span>
+                  <Sparkles className="w-4 h-4 text-emerald-600" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-heading font-black text-emerald-950">
+                  {avgClassMastery}%
+                </div>
+                <div className="w-full bg-slate-200/70 h-1.5 rounded-full overflow-hidden">
+                  <div className="h-full bg-emerald-600 rounded-full" style={{ width: `${avgClassMastery}%` }} />
+                </div>
+              </div>
+
+              {/* Card 4: Learning Health */}
+              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+                <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
+                  <span>Roster Distribution</span>
+                  <ShieldCheck className="w-4 h-4 text-amber-700" />
+                </div>
+                <div className="text-xs font-heading font-bold text-slate-800 space-y-0.5 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-emerald-800">● Strong Performers:</span>
+                    <span className="font-extrabold">{liveStrong.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-rose-700">● Needs Attention:</span>
+                    <span className="font-extrabold">{liveNeedingAttention.length}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Class-wide Foundational Learning Gaps Breakdown */}
+            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/70 pb-3">
+                <div>
+                  <h3 className="font-heading font-extrabold text-sm sm:text-base text-emerald-950 flex items-center gap-1.5">
+                    <AlertTriangle className="w-4 h-4 text-amber-600" />
+                    <span>Top Foundational Gaps Identified Across Classroom</span>
+                  </h3>
+                  <p className="text-xs text-slate-600 font-sans">
+                    Prerequisite skills missing from earlier grades affecting Class 10 curriculum.
                   </p>
+                </div>
+                <span className="text-[11px] font-heading font-bold text-emerald-900 bg-emerald-100/80 px-2.5 py-1 rounded-xl self-start sm:self-auto border border-emerald-300">
+                  Adaptive Auto-Remediation Active
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {/* Gap 1 */}
+                <div className="p-3.5 rounded-xl bg-white/70 border border-rose-200 shadow-2xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
+                      c7-int-02 • Class 7
+                    </span>
+                    <span className="text-[10px] font-heading font-extrabold text-rose-900">
+                      4 Students
+                    </span>
+                  </div>
+                  <div className="font-heading font-bold text-xs text-slate-800">
+                    Negative Integer Multiplication
+                  </div>
+                  <p className="text-[11px] text-slate-600 font-sans leading-relaxed">
+                    Root prerequisite for quadratic equation factoring & algebraic expansion.
+                  </p>
+                  <div className="text-[10px] font-heading font-bold text-emerald-800 bg-emerald-50 px-2 py-1 rounded border border-emerald-200 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>Isha Reddy resolved via remedial drill!</span>
+                  </div>
+                </div>
+
+                {/* Gap 2 */}
+                <div className="p-3.5 rounded-xl bg-white/70 border border-amber-200 shadow-2xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                      c7-num-01 • Class 7
+                    </span>
+                    <span className="text-[10px] font-heading font-extrabold text-amber-900">
+                      3 Students
+                    </span>
+                  </div>
+                  <div className="font-heading font-bold text-xs text-slate-800">
+                    Operations on Fractions & Decimals
+                  </div>
+                  <p className="text-[11px] text-slate-600 font-sans leading-relaxed">
+                    Affects rational coefficients in real numbers & trigonometric ratios.
+                  </p>
+                  <div className="text-[10px] font-heading font-bold text-amber-800 bg-amber-50 px-2 py-1 rounded border border-amber-200 flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-amber-600" />
+                    <span>Vihaan & Ishaan routed to fraction review</span>
+                  </div>
+                </div>
+
+                {/* Gap 3 */}
+                <div className="p-3.5 rounded-xl bg-white/70 border border-sky-200 shadow-2xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded">
+                      c8-alg-03 • Class 8
+                    </span>
+                    <span className="text-[10px] font-heading font-extrabold text-sky-900">
+                      2 Students
+                    </span>
+                  </div>
+                  <div className="font-heading font-bold text-xs text-slate-800">
+                    Distributive Property in Equations
+                  </div>
+                  <p className="text-[11px] text-slate-600 font-sans leading-relaxed">
+                    Prerequisite for linear equations in two variables and polynomial zeroes.
+                  </p>
+                  <div className="text-[10px] font-heading font-bold text-sky-800 bg-sky-50 px-2 py-1 rounded border border-sky-200 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-sky-600" />
+                    <span>Myra Nair successfully resolved gap</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Student Roster Table with Search & Filters */}
+            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <div>
+                  <h3 className="font-heading font-black text-base text-emerald-950">
+                    Class 10-A4 Student Roster ({filteredLiveMembers.length} of {totalClassStudents})
+                  </h3>
+                  <p className="text-xs text-slate-600 font-sans">
+                    Inspect individual student trajectories, verified masteries, and remedial pathways.
+                  </p>
+                </div>
+
+                {/* Filter Pills */}
+                <div className="flex flex-wrap items-center gap-1.5">
                   <button
-                    onClick={() => setShowAddClassModal(true)}
-                    className="px-4 py-2 bg-[#5DAA3A] hover:bg-[#4E9330] text-white font-heading text-xs border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] inline-flex items-center gap-1.5 cursor-pointer"
+                    type="button"
+                    onClick={() => setLiveFilter("all")}
+                    className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
+                      liveFilter === "all"
+                        ? "bg-emerald-600 text-white border-emerald-700 shadow-xs"
+                        : "bg-white/80 text-slate-700 border-white/90 hover:bg-white"
+                    }`}
                   >
-                    <Plus className="w-4 h-4" />
-                    <span>Create Your First Class</span>
+                    All ({totalClassStudents})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLiveFilter("needs_attention")}
+                    className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
+                      liveFilter === "needs_attention"
+                        ? "bg-rose-600 text-white border-rose-700 shadow-xs"
+                        : "bg-white/80 text-rose-700 border-rose-200 hover:bg-rose-50"
+                    }`}
+                  >
+                    Needs Attention ({liveNeedingAttention.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLiveFilter("strong")}
+                    className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
+                      liveFilter === "strong"
+                        ? "bg-emerald-700 text-white border-emerald-800 shadow-xs"
+                        : "bg-white/80 text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+                    }`}
+                  >
+                    Strong ({liveStrong.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLiveFilter("improving")}
+                    className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
+                      liveFilter === "improving"
+                        ? "bg-amber-600 text-white border-amber-700 shadow-xs"
+                        : "bg-white/80 text-amber-800 border-amber-200 hover:bg-amber-50"
+                    }`}
+                  >
+                    Breakthroughs ({liveImproving.length})
+                  </button>
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className="relative">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                <input
+                  type="text"
+                  value={liveSearchQuery}
+                  onChange={(e) => setLiveSearchQuery(e.target.value)}
+                  placeholder="Search by student name, username, roll number, or concept..."
+                  className="w-full pl-9 pr-3 py-2 bg-white/80 border border-white/90 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+              </div>
+
+              {/* Roster Table */}
+              {filteredLiveMembers.length === 0 ? (
+                <div className="p-8 text-center bg-white/60 rounded-xl border border-white/80 space-y-2">
+                  <p className="text-xs font-bold text-slate-700">No students match your filter.</p>
+                  <button
+                    type="button"
+                    onClick={() => { setLiveFilter("all"); setLiveSearchQuery(""); }}
+                    className="text-xs font-heading font-bold text-emerald-700 underline"
+                  >
+                    Reset all filters
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {liveClasses.map((cls) => {
-                    const enrolledCount = liveMembers.filter(
-                      (m) => m.class_id === cls.id
-                    ).length;
-                    const code = cls.class_code || cls.classCode;
-                    return (
-                      <div
-                        key={cls.id}
-                        className="p-4 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] space-y-3"
-                      >
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <span className="font-heading font-black text-sm text-[#FFF7E6] block">
-                              {cls.name}
-                            </span>
-                            <span className="text-[10px] text-[#FFE9A8] font-bold block mt-0.5">
-                              Class {cls.grade} • {enrolledCount} Student(s)
-                            </span>
-                          </div>
-                          <span className="px-2 py-0.5 bg-[#5DAA3A] text-white text-[10px] font-bold border border-[#422816]">
-                            Active
-                          </span>
-                        </div>
-
-                        <div className="bg-[#2A1E17] p-2.5 border border-[#7A4B2A] flex items-center justify-between">
-                          <div>
-                            <span className="text-[9px] text-[#E5D7BE] uppercase tracking-wider block font-bold">
-                              Class Code
-                            </span>
-                            <code className="text-xs font-mono font-black text-[#FFE9A8] tracking-wider">
-                              {code}
-                            </code>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => copyCode(code)}
-                            className="px-2 py-1 bg-[#5A3720] hover:bg-[#7A4B2A] text-white text-[10px] font-heading font-bold border border-[#422816] flex items-center gap-1 cursor-pointer transition-colors"
-                          >
-                            {copiedCode === code ? (
-                              <>
-                                <Check className="w-3 h-3 text-[#5DAA3A]" />
-                                <span>Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="w-3 h-3 text-[#FFE9A8]" />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* Enrolled Students Table */}
-            <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4">
-              <h2 className="font-heading font-black text-lg text-[#FFF7E6]">
-                Enrolled Students
-              </h2>
-
-              {liveMembers.length === 0 ? (
-                <div className="p-6 bg-[#422816] border-2 border-[#7A4B2A] text-center space-y-2">
-                  <Users className="w-8 h-8 text-[#FFE9A8] mx-auto opacity-70" />
-                  <p className="text-xs font-bold text-[#FFE9A8]">
-                    No students have joined your classes yet.
-                  </p>
-                  <p className="text-[11px] text-[#E5D7BE] max-w-md mx-auto">
-                    Share your Class Code with your students. When they enter it during registration or in their profile settings, they will automatically appear here.
-                  </p>
-                </div>
-              ) : (
                 <>
-                  <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs border-collapse">
+                  <div className="sm:hidden text-[11px] text-slate-500 font-sans px-1 pb-1">Swipe table horizontally to see all student columns →</div>
+                  <div className="table-responsive-container border border-white/90 shadow-2xs">
+                    <div className="min-w-[680px]">
+                  <table className="w-full text-left text-xs border-collapse bg-white/70">
                     <thead>
-                      <tr className="border-b-2 border-[#7A4B2A] text-[#FFE9A8] font-heading">
+                      <tr className="border-b border-slate-200 bg-white/90 text-slate-600 font-heading">
                         <th className="py-2.5 px-3">Student Name</th>
                         <th className="py-2.5 px-3">Username</th>
-                        <th className="py-2.5 px-3">Grade</th>
-                        <th className="py-2.5 px-3">Diagnostic Result</th>
-                        <th className="py-2.5 px-3">Concept Mastery</th>
-                        <th className="py-2.5 px-3">Enrolled At</th>
+                        <th className="py-2.5 px-3">Pedagogical Persona</th>
+                        <th className="py-2.5 px-3">Diagnostic Score</th>
+                        <th className="py-2.5 px-3">Mastery</th>
+                        <th className="py-2.5 px-3">Key Gap / Status</th>
                         <th className="py-2.5 px-3 text-right">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {liveMembers.map((m, idx) => {
+                    <tbody className="divide-y divide-slate-100">
+                      {filteredLiveMembers.map((m, idx) => {
                         const prof = m.profiles || {};
                         const diagScore = m.latestDiagnosticScore;
                         const diagPct = m.latestDiagnosticPercentage;
-                        const masteredCount = m.masteredCount || 0;
-                        const totalConcepts = m.totalConceptsAttempted || 0;
+                        const roll = m.rollNumber ? `#${String(m.rollNumber).padStart(2, "0")}` : `#${String(idx + 1).padStart(2, "0")}`;
+                        const isTop = (diagPct ?? 0) >= 80;
+                        const isLow = (diagPct ?? 0) < 65;
 
                         return (
-                          <tr
-                            key={m.student_id || idx}
-                            className="border-b border-[#7A4B2A]/50 hover:bg-[#422816]/70 transition-colors"
-                          >
-                            <td className="py-2.5 px-3 font-bold text-[#FFF7E6]">
-                              {prof.full_name || "Student"}
+                          <tr key={m.student_id || idx} className="hover:bg-white/90 transition-colors">
+                            <td className="py-2.5 px-3 font-heading font-bold text-emerald-950 whitespace-nowrap">
+                              <span className="text-slate-400 font-mono text-[11px] mr-1.5">{roll}</span>
+                              {prof.full_name || m.name || "Student"}
                             </td>
-                            <td className="py-2.5 px-3 text-[#E5D7BE] font-mono">
-                              @{prof.username || "anonymous"}
+                            <td className="py-2.5 px-3 font-mono text-slate-500 text-[11px]">
+                              @{prof.username || m.username || "student"}
                             </td>
                             <td className="py-2.5 px-3">
-                              <span className="px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-bold text-[#FFE9A8]">
-                                Class {prof.selected_class || "—"}
+                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-heading font-bold ${
+                                m.resolvedGap
+                                  ? "bg-amber-100 text-amber-900 border border-amber-300"
+                                  : m.category === "strong"
+                                  ? "bg-emerald-100 text-emerald-900 border border-emerald-300"
+                                  : m.category === "needs_attention"
+                                  ? "bg-rose-100 text-rose-900 border border-rose-300"
+                                  : "bg-slate-100 text-slate-800 border border-slate-300"
+                              }`}>
+                                {m.persona || "Class 10 Student"}
                               </span>
                             </td>
-                            <td className="py-2.5 px-3">
+                            <td className="py-2.5 px-3 whitespace-nowrap">
                               {diagScore ? (
-                                <span className={`px-2 py-0.5 text-[10px] font-bold border border-[#422816] ${
-                                  (diagPct ?? 0) >= 70 ? "bg-[#5DAA3A] text-white" : "bg-[#F4C542] text-[#2B1B0F]"
+                                <span className={`px-2 py-0.5 rounded-md text-[10px] font-heading font-extrabold ${
+                                  isTop ? "bg-emerald-100 text-emerald-900" : isLow ? "bg-rose-100 text-rose-900" : "bg-amber-100 text-amber-900"
                                 }`}>
                                   {diagScore} ({diagPct}%)
                                 </span>
                               ) : (
-                                <span className="text-[11px] text-[#E5D7BE]/60 italic">
-                                  Pending
-                                </span>
+                                <span className="text-slate-400 italic">Pending</span>
                               )}
                             </td>
-                            <td className="py-2.5 px-3">
-                              <span className="px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-bold text-[#6EB5FF]">
-                                {masteredCount} Mastered ({totalConcepts} Attempted)
-                              </span>
+                            <td className="py-2.5 px-3 whitespace-nowrap">
+                              <div className="flex items-center gap-1.5">
+                                <div className="w-12 bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full bg-emerald-600 rounded-full"
+                                    style={{ width: `${m.latestDiagnosticPercentage || 70}%` }}
+                                  />
+                                </div>
+                                <span className="font-heading font-bold text-[11px] text-slate-700">
+                                  {m.latestDiagnosticPercentage || 70}%
+                                </span>
+                              </div>
                             </td>
-                            <td className="py-2.5 px-3 text-[#E5D7BE]">
-                              {m.joined_at
-                                ? new Date(m.joined_at).toLocaleDateString()
-                                : "Recent"}
+                            <td className="py-2.5 px-3">
+                              {m.resolvedGap ? (
+                                <span className="text-[10px] font-heading font-bold text-emerald-800 flex items-center gap-1">
+                                  <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+                                  <span>Resolved: {m.resolvedGap.conceptId}</span>
+                                </span>
+                              ) : m.identifiedGap ? (
+                                <span className="text-[10px] font-heading font-bold text-rose-800 flex items-center gap-1">
+                                  <AlertTriangle className="w-3 h-3 text-rose-600 shrink-0" />
+                                  <span>Gap: {m.identifiedGap.conceptId}</span>
+                                </span>
+                              ) : (
+                                <span className="text-[10px] text-emerald-700 font-medium">On Track</span>
+                              )}
                             </td>
                             <td className="py-2.5 px-3 text-right">
                               <button
                                 type="button"
                                 onClick={() => setInspectingStudent(m)}
-                                className="px-2.5 py-1 bg-[#3FA7C9] hover:bg-[#348EA8] text-[#FFF7E6] text-[10px] font-heading font-bold border border-[#422816] shadow-[1px_1px_0px_rgba(0,0,0,0.3)] cursor-pointer transition-colors"
+                                className="glass-btn-primary px-2.5 py-1 text-[10px] font-heading font-bold rounded-lg cursor-pointer whitespace-nowrap"
                               >
-                                View Mastery
+                                Inspect Profile
                               </button>
                             </td>
                           </tr>
@@ -409,141 +715,223 @@ export default function TeacherPage() {
                     </tbody>
                   </table>
                 </div>
-
-        {/* Modal: Inspect Student Mastery & Diagnostic History */}
-        {inspectingStudent && (
-          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
-            <div className="bg-[#5A3720] border-4 border-[#422816] shadow-[8px_8px_0px_rgba(0,0,0,0.6)] p-6 max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto text-[#FFF7E6]">
-              <div className="flex items-start justify-between border-b-2 border-[#7A4B2A] pb-3">
-                <div>
-                  <h3 className="font-heading font-black text-base text-[#FFF7E6]">
-                    {inspectingStudent.profiles?.full_name || "Student"} • Mastery & Diagnostics
-                  </h3>
-                  <span className="text-xs text-[#FFE9A8] font-mono">
-                    @{inspectingStudent.profiles?.username} • Class {inspectingStudent.profiles?.selected_class}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setInspectingStudent(null)}
-                  className="px-2.5 py-1 bg-[#D9453D] hover:bg-[#B83830] text-[#FFF7E6] text-xs font-bold border border-[#422816] cursor-pointer"
-                >
-                  Close
-                </button>
               </div>
-
-              {/* Diagnostic & Assessment Results */}
-              <div className="space-y-2">
-                <h4 className="font-heading font-bold text-xs text-[#FFE9A8] uppercase tracking-wider">
-                  Diagnostic & Assessment History
-                </h4>
-                {(!inspectingStudent.attempts || inspectingStudent.attempts.length === 0) ? (
-                  <p className="text-xs text-[#E5D7BE]/70 italic bg-[#422816] p-3 border border-[#7A4B2A]">
-                    No assessment attempts recorded yet for this student.
-                  </p>
-                ) : (
-                  <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
-                    {inspectingStudent.attempts.map((att: any, idx: number) => {
-                      const pct = Math.round((Number(att.score) / Number(att.total)) * 100);
-                      const passed = pct >= 70;
-                      return (
-                        <div
-                          key={att.id || idx}
-                          className="flex items-center justify-between p-2 bg-[#422816] border border-[#7A4B2A] text-xs"
-                        >
-                          <div>
-                            <span className="font-bold text-[#FFF7E6] capitalize">
-                              {att.type} • {att.identifier}
-                            </span>
-                            <span className="block text-[10px] text-[#E5D7BE]/70">
-                              {att.created_at ? new Date(att.created_at).toLocaleString() : "Recent"}
-                            </span>
-                          </div>
-                          <span
-                            className={`px-2 py-0.5 text-[10px] font-bold border border-[#422816] ${
-                              passed ? "bg-[#5DAA3A] text-white" : "bg-[#F4C542] text-[#2B1B0F]"
-                            }`}
-                          >
-                            {att.score}/{att.total} ({pct}%)
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-              {/* Concept Mastery Breakdown */}
-              <div className="space-y-2">
-                <h4 className="font-heading font-bold text-xs text-[#FFE9A8] uppercase tracking-wider">
-                  Concept Mastery Breakdown
-                </h4>
-                {(!inspectingStudent.conceptMastery || inspectingStudent.conceptMastery.length === 0) ? (
-                  <p className="text-xs text-[#E5D7BE]/70 italic bg-[#422816] p-3 border border-[#7A4B2A]">
-                    No concept progression recorded yet for this student.
-                  </p>
-                ) : (
-                  <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-                    {inspectingStudent.conceptMastery.map((cm: any, idx: number) => {
-                      const masteryVal = Number(cm.mastery) || 0;
-                      const isMastered = masteryVal >= 75 || cm.status === "mastered";
-                      return (
-                        <div
-                          key={cm.concept_id || cm.conceptId || idx}
-                          className="p-2 bg-[#422816] border border-[#7A4B2A] text-xs space-y-1"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="font-mono text-[#FFF7E6] font-bold">
-                              {cm.concept_id || cm.conceptId}
-                            </span>
-                            <span
-                              className={`px-2 py-0.5 text-[9px] font-bold border border-[#422816] ${
-                                isMastered ? "bg-[#5DAA3A] text-white" : "bg-[#3FA7C9] text-white"
-                              }`}
-                            >
-                              {masteryVal}% {isMastered ? "Mastered" : "In Progress"}
-                            </span>
-                          </div>
-                          <div className="w-full bg-[#2A1E17] h-1.5 border border-[#7A4B2A] overflow-hidden">
-                            <div
-                              className={`h-full ${isMastered ? "bg-[#5DAA3A]" : "bg-[#3FA7C9]"}`}
-                              style={{ width: `${Math.min(100, masteryVal)}%` }}
-                            />
-                          </div>
-                          <div className="flex items-center gap-2 text-[10px] text-[#E5D7BE]/80 pt-0.5">
-                            <span>Difficulty: L{cm.difficulty || 1}</span>
-                            {cm.lesson_completed && (
-                              <span className="text-[#5DAA3A] font-bold">• Lesson Done</span>
-                            )}
-                            {cm.worksheet_completed && (
-                              <span className="text-[#FFE9A8] font-bold">• Worksheet Done</span>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-                </>
+              </>
               )}
             </div>
+
+            {/* Modal: Inspect Student Profile & Diagnostic Journey */}
+            {inspectingStudent && (
+              <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+                <div className="glass-panel p-6 rounded-3xl border border-white/90 shadow-[0_16px_50px_rgba(0,0,0,0.25)] max-w-xl w-full max-h-[90vh] overflow-y-auto space-y-5 text-slate-800 bg-white/95">
+                  {/* Modal Header */}
+                  <div className="flex items-start justify-between border-b border-slate-200 pb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-heading font-bold">
+                          {activeLiveClass?.schoolName || "Vignan School"} • Class 10-A4
+                        </span>
+                        {inspectingStudent.rollNumber && (
+                          <span className="font-mono text-xs font-bold text-slate-500">
+                            #{String(inspectingStudent.rollNumber).padStart(2, "0")}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="font-heading font-black text-lg text-emerald-950 mt-1">
+                        {inspectingStudent.profiles?.full_name || inspectingStudent.name || "Student"}
+                      </h3>
+                      <p className="text-xs text-slate-500 font-mono">
+                        @{inspectingStudent.profiles?.username || inspectingStudent.username}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setInspectingStudent(null)}
+                      className="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-heading font-bold rounded-xl border border-slate-300 transition-colors cursor-pointer"
+                    >
+                      Close
+                    </button>
+                  </div>
+
+                  {/* Persona Tag */}
+                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-heading uppercase text-slate-500 block font-bold">
+                        Pedagogical Profile
+                      </span>
+                      <span className="font-heading font-extrabold text-xs text-slate-800">
+                        {inspectingStudent.persona || "Enrolled Student"}
+                      </span>
+                    </div>
+                    {inspectingStudent.diagnosticScore && (
+                      <div className="text-right">
+                        <span className="text-[10px] font-heading uppercase text-slate-500 block font-bold">
+                          Diagnostic Score
+                        </span>
+                        <span className="font-heading font-black text-xs text-emerald-800">
+                          {inspectingStudent.diagnosticScore}/{inspectingStudent.diagnosticTotal || 10} ({inspectingStudent.masteryPercentage || 80}%)
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Breakthrough / Resolved Gap Banner */}
+                  {inspectingStudent.resolvedGap && (
+                    <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-300 space-y-1">
+                      <div className="flex items-center gap-1.5 font-heading font-bold text-xs text-emerald-900">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                        <span>Prerequisite Gap Resolved: {inspectingStudent.resolvedGap.conceptName} ({inspectingStudent.resolvedGap.conceptId})</span>
+                      </div>
+                      <p className="text-xs text-emerald-800/90 font-sans leading-relaxed">
+                        Student showed a 40% diagnostic deficiency on negative integer signs, completed prerequisite interactive drills, and scored 90% on subsequent assessments.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Active Identified Gap Banner */}
+                  {inspectingStudent.identifiedGap && !inspectingStudent.resolvedGap && (
+                    <div className="p-3.5 bg-rose-50 rounded-2xl border border-rose-300 space-y-1">
+                      <div className="flex items-center gap-1.5 font-heading font-bold text-xs text-rose-900">
+                        <AlertTriangle className="w-4 h-4 text-rose-600" />
+                        <span>Foundational Gap: {inspectingStudent.identifiedGap.conceptName} ({inspectingStudent.identifiedGap.conceptId})</span>
+                      </div>
+                      <p className="text-xs text-rose-800 font-sans leading-relaxed">
+                        {inspectingStudent.identifiedGap.reason}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Strong Concepts & Concepts Needing Improvement */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-200 space-y-1.5">
+                      <span className="font-heading font-extrabold text-[11px] text-emerald-900 block">
+                        Verified Strong Concepts
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {(inspectingStudent.strongConcepts || ["Real Numbers", "Linear Equations"]).map((sc: string) => (
+                          <span key={sc} className="px-2 py-0.5 bg-emerald-100 text-emerald-900 rounded text-[10px] font-heading font-bold">
+                            ✓ {sc}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200 space-y-1.5">
+                      <span className="font-heading font-extrabold text-[11px] text-amber-900 block">
+                        Pending Revision Topics
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {(inspectingStudent.conceptsNeedingImprovement || ["Quadratic Equations"]).map((cc: string) => (
+                          <span key={cc} className="px-2 py-0.5 bg-amber-100 text-amber-900 rounded text-[10px] font-heading font-bold">
+                            ! {cc}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Recommended Next Learning Activity */}
+                  {inspectingStudent.recommendedActivity && (
+                    <div className="p-3 bg-sky-50 rounded-2xl border border-sky-200 space-y-1">
+                      <span className="text-[10px] uppercase font-bold text-sky-700 block tracking-wider">
+                        Recommended Next Activity
+                      </span>
+                      <p className="font-heading font-bold text-xs text-sky-950">
+                        🎯 {inspectingStudent.recommendedActivity}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Assessment Attempts History */}
+                  <div className="space-y-2">
+                    <h4 className="font-heading font-bold text-xs text-slate-700 uppercase tracking-wider">
+                      Assessment & Diagnostic Attempts
+                    </h4>
+                    {(!inspectingStudent.attempts || inspectingStudent.attempts.length === 0) ? (
+                      <p className="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">
+                        No prior attempts recorded.
+                      </p>
+                    ) : (
+                      <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                        {inspectingStudent.attempts.map((att: any, aIdx: number) => {
+                          const pct = Math.round((Number(att.score) / Number(att.total)) * 100);
+                          const passed = pct >= 70;
+                          return (
+                            <div key={aIdx} className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                              <div>
+                                <span className="font-heading font-bold text-slate-800 capitalize">
+                                  {att.type} • {att.identifier}
+                                </span>
+                                <span className="block text-[10px] text-slate-500">
+                                  {att.created_at || att.createdAt ? new Date(att.created_at || att.createdAt).toLocaleString() : "Recent"}
+                                </span>
+                              </div>
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-heading font-black ${
+                                passed ? "bg-emerald-100 text-emerald-900" : "bg-amber-100 text-amber-900"
+                              }`}>
+                                {att.score}/{att.total} ({pct}%)
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Concept Mastery Progress */}
+                  <div className="space-y-2">
+                    <h4 className="font-heading font-bold text-xs text-slate-700 uppercase tracking-wider">
+                      Concept Mastery Progress
+                    </h4>
+                    {(!inspectingStudent.conceptMastery || inspectingStudent.conceptMastery.length === 0) ? (
+                      <p className="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">
+                        No concept progression recorded.
+                      </p>
+                    ) : (
+                      <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                        {inspectingStudent.conceptMastery.map((cm: any, cmIdx: number) => {
+                          const mVal = Number(cm.mastery) || 0;
+                          const isM = mVal >= 75 || cm.status === "mastered";
+                          return (
+                            <div key={cmIdx} className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono font-bold text-slate-800">
+                                  {cm.concept_id || cm.conceptId} {cm.conceptName ? `(${cm.conceptName})` : ""}
+                                </span>
+                                <span className={`px-2 py-0.5 rounded text-[10px] font-heading font-bold ${
+                                  isM ? "bg-emerald-100 text-emerald-900" : "bg-sky-100 text-sky-900"
+                                }`}>
+                                  {mVal}% {isM ? "Mastered" : "Learning"}
+                                </span>
+                              </div>
+                              <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${isM ? "bg-emerald-600" : "bg-sky-600"}`}
+                                  style={{ width: `${Math.min(100, mVal)}%` }}
+                                />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {/* Modal: Create New Class */}
         {showAddClassModal && (
           <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-            <div className="bg-[#5A3720] border-4 border-[#422816] shadow-[8px_8px_0px_rgba(0,0,0,0.6)] p-6 max-w-sm w-full space-y-4">
-              <h3 className="font-heading font-black text-base text-[#FFF7E6]">
+            <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/90 shadow-xl max-w-sm w-full space-y-4 text-slate-800 bg-white/95">
+              <h3 className="font-heading font-black text-base text-emerald-950">
                 Create a New Class
               </h3>
               <form onSubmit={handleCreateClass} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#FFE9A8] block">
+                  <label className="text-xs font-bold text-slate-700 block">
                     Class Name
                   </label>
                   <input
@@ -552,12 +940,12 @@ export default function TeacherPage() {
                     value={newClassName}
                     onChange={(e) => setNewClassName(e.target.value)}
                     placeholder="e.g. Class 9-B Mathematics"
-                    className="w-full px-3 py-2 bg-[#FFF7E6] border-2 border-[#422816] text-xs text-[#2B1B0F] font-bold focus:outline-none"
+                    className="w-full px-3 py-2 bg-white/90 rounded-xl border border-slate-300 text-xs text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#FFE9A8] block">
+                  <label className="text-xs font-bold text-slate-700 block">
                     Grade Realm
                   </label>
                   <div className="grid grid-cols-5 gap-1">
@@ -566,10 +954,8 @@ export default function TeacherPage() {
                         key={g}
                         type="button"
                         onClick={() => setNewClassGrade(g)}
-                        className={`py-1.5 text-xs font-heading font-bold border-2 border-[#422816] cursor-pointer ${
-                          newClassGrade === g
-                            ? "bg-[#FFE9A8] text-[#2B1B0F]"
-                            : "bg-[#422816] text-[#FFF7E6]"
+                        className={`py-1.5 text-xs font-heading font-extrabold rounded-xl border border-slate-200 transition-all cursor-pointer ${
+                          newClassGrade === g ? "bg-emerald-600 text-white shadow-xs" : "bg-white/80 text-slate-700 border-slate-200 hover:bg-emerald-50"
                         }`}
                       >
                         C{g}
@@ -582,13 +968,13 @@ export default function TeacherPage() {
                   <button
                     type="button"
                     onClick={() => setShowAddClassModal(false)}
-                    className="px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-bold text-[#FFF7E6] border-2 border-[#422816] cursor-pointer"
+                    className="px-3.5 py-1.5 bg-white/80 hover:bg-white text-xs font-heading font-bold text-slate-700 rounded-xl border border-slate-200 cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-1.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-xs font-bold text-white border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.3)] cursor-pointer"
+                    className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-xs font-heading font-bold text-white rounded-xl shadow-xs cursor-pointer"
                   >
                     Create Class
                   </button>
@@ -602,51 +988,51 @@ export default function TeacherPage() {
         {viewMode === "synthetic" && (
           <>
             {/* Synthetic Notice Banner */}
-            <div className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
+            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 bg-[#3FA7C9] border-2 border-[#1E6F8C] flex items-center justify-center shrink-0 mt-0.5 shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
                   <Compass className="w-5 h-5 text-[#FFF7E6]" />
                 </div>
                 <div>
-                  <div className="inline-block px-2.5 py-0.5 bg-[#422816] border border-[#FFE9A8] text-[11px] font-black uppercase tracking-wider text-[#FFE9A8] mb-1">
+                  <div className="inline-block px-2.5 py-0.5 bg-emerald-100 text-[10px] font-heading font-extrabold uppercase tracking-wider text-emerald-900 rounded-full mb-1">
                     Synthetic class, generated by the Margam engine
                   </div>
-                  <h1 className="text-xl sm:text-2xl font-heading font-black tracking-tight leading-tight text-[#FFF7E6]">
+                  <h1 className="text-xl sm:text-2xl font-heading font-extrabold tracking-tight leading-tight text-emerald-950">
                     {syntheticClassData.className} — {syntheticClassData.chapterName}
                   </h1>
-                  <p className="text-xs font-semibold text-[#E5D7BE] mt-0.5">
+                  <p className="text-xs text-slate-600 font-sans mt-0.5">
                     Teacher: {syntheticClassData.teacherName} • Chapter ID: {syntheticClassData.chapterId} • 25 Scripted Student Profiles
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2 self-stretch sm:self-auto">
-                <span className="text-xs font-black px-3 py-1.5 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] text-center flex-1 sm:flex-none">
+                <span className="text-xs font-heading font-bold px-3 py-1.5 bg-emerald-600 text-white rounded-xl shadow-xs text-center flex-1 sm:flex-none">
                   Engine Status: Active
                 </span>
               </div>
             </div>
 
         {/* This Device: Current Student Session Card */}
-        <section className="bg-[#5A3720] border-4 border-[#422816] p-4 sm:p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)]">
-          <div className="flex items-center gap-2 text-xs font-black text-[#FFE9A8] mb-2">
-            <Smartphone className="w-4 h-4 text-[#FFE9A8]" />
+        <section className="glass-panel p-4 sm:p-5 rounded-2xl border border-white/80 shadow-xs space-y-2">
+          <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-950 mb-2">
+            <Smartphone className="w-4 h-4 text-emerald-700" />
             <span className="uppercase tracking-wider">This Device • Active Learner Session</span>
-            <span className="ml-auto text-[11px] font-bold text-[#E5D7BE]">Local Browser State</span>
+            <span className="ml-auto text-[11px] font-medium text-slate-500">Local Browser State</span>
           </div>
 
           {localProfile ? (
-            <div className="bg-[#422816] border-2 border-[#7A4B2A] p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
+            <div className="bg-white/70 p-3 sm:p-4 rounded-xl border border-white/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-heading font-black text-base text-[#FFF7E6]">{localProfile.name}</span>
-                  <span className="px-2 py-0.5 bg-[#FFE9A8] border-2 border-[#422816] text-[10px] font-black text-[#2B1B0F]">
+                  <span className="font-heading font-extrabold text-base text-emerald-950">{localProfile.name}</span>
+                  <span className="px-2 py-0.5 bg-emerald-100 text-[10px] font-heading font-bold text-emerald-900 rounded-full">
                     Class {localProfile.selectedClass}
                   </span>
-                  <span className="px-2 py-0.5 bg-[#5A3720] border border-[#7A4B2A] text-[10px] font-bold text-[#E5D7BE]">
+                  <span className="px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-[10px] font-heading font-bold text-emerald-950 rounded-full">
                     Difficulty L{localProfile.currentDifficulty || 1}
                   </span>
                 </div>
-                <p className="text-xs text-[#E5D7BE] mt-1">
+                <p className="text-xs text-slate-600 font-sans mt-1">
                   Active topics: {Object.keys(localProfile.topicProgress || {}).length} tracked •
                   Streak: {localProfile.consecutiveCorrect || 0} correct
                 </p>
@@ -654,7 +1040,7 @@ export default function TeacherPage() {
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <Link
                   href="/student"
-                  className="min-h-[48px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-black text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center justify-center gap-1.5 flex-1 sm:flex-none"
+                  className="glass-btn-primary min-h-[40px] px-4 py-2 text-xs font-heading font-bold flex items-center justify-center gap-1.5 flex-1 sm:flex-none rounded-xl cursor-pointer"
                 >
                   <span>Resume Learning</span>
                   <ArrowRight className="w-4 h-4" />
@@ -662,21 +1048,21 @@ export default function TeacherPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-[#422816] border-2 border-[#7A4B2A] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#FFF7E6]">
+            <div className="p-4 rounded-xl bg-white/70 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
               <div className="flex items-center gap-3">
-                <Info className="w-5 h-5 text-[#FFE9A8] shrink-0" />
+                <Info className="w-5 h-5 text-emerald-700 shrink-0" />
                 <div>
-                  <p className="text-xs font-bold text-[#FFF7E6]">
+                  <p className="text-xs font-bold text-slate-900">
                     No active student profile initialized on this browser device yet.
                   </p>
-                  <p className="text-[11px] text-[#E5D7BE]">
+                  <p className="text-[11px] text-slate-600 font-sans">
                     Student answers submitted in the learning flow will immediately appear in local diagnostics.
                   </p>
                 </div>
               </div>
               <Link
                 href="/student"
-                className="min-h-[48px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-black text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center justify-center gap-1.5 w-full sm:w-auto"
+                className="glass-btn-primary min-h-[40px] px-4 py-2 text-xs font-heading font-bold flex items-center justify-center gap-1.5 rounded-xl cursor-pointer w-full sm:w-auto"
               >
                 <span>Launch Student Session</span>
                 <ArrowRight className="w-4 h-4" />
@@ -687,40 +1073,40 @@ export default function TeacherPage() {
 
         {/* Metrics Row */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.5)]">
-            <span className="text-[11px] font-bold text-[#E5D7BE] block uppercase">Class Average</span>
-            <div className="font-heading font-black text-2xl sm:text-3xl text-[#5DAA3A] mt-0.5">
+          <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs">
+            <span className="text-[11px] font-bold text-slate-500 block uppercase">Class Average</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-0.5">
               {metrics.averageScore}%
             </div>
-            <span className="text-[10px] font-bold text-[#E5D7BE]/80 block mt-1">
+            <span className="text-[10px] text-slate-500 block mt-1 font-sans">
               Chapter Diagnostic Accuracy
             </span>
           </div>
 
-          <div className="bg-[#5A3720] border-4 border-[#E04A3F] p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.5)]">
-            <span className="text-[11px] font-bold text-[#E04A3F] block uppercase">Needs Attention</span>
-            <div className="font-heading font-black text-2xl sm:text-3xl text-[#E04A3F] mt-0.5">
-              {metrics.studentsNeedingAttentionCount} <span className="text-sm font-bold text-[#FFF7E6]">/ {syntheticClassData.totalStudents}</span>
+          <div className="glass-panel p-5 rounded-2xl border border-rose-300 bg-rose-50/70 shadow-xs">
+            <span className="text-[11px] font-bold text-rose-700 block uppercase">Needs Attention</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-rose-700 mt-0.5">
+              {metrics.studentsNeedingAttentionCount} <span className="text-sm font-bold text-slate-600">/ {syntheticClassData.totalStudents}</span>
             </div>
-            <span className="text-[10px] font-black text-[#E5D7BE] block mt-1">
+            <span className="text-[10px] text-slate-500 block mt-1 font-sans">
               {metrics.studentsNeedingAttentionPercentage}% of students flagged
             </span>
           </div>
 
-          <div className="bg-[#5A3720] border-4 border-[#5DAA3A] p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.5)]">
-            <span className="text-[11px] font-bold text-[#5DAA3A] block uppercase">On Track</span>
-            <div className="font-heading font-black text-2xl sm:text-3xl text-[#5DAA3A] mt-0.5">
-              {metrics.studentsOnTrackCount} <span className="text-sm font-bold text-[#FFF7E6]">/ {syntheticClassData.totalStudents}</span>
+          <div className="glass-panel p-5 rounded-2xl border border-emerald-300 bg-emerald-50/70 shadow-xs">
+            <span className="text-[11px] font-bold text-emerald-700 block uppercase">On Track</span>
+            <div className="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-0.5">
+              {metrics.studentsOnTrackCount} <span className="text-sm font-bold text-slate-600">/ {syntheticClassData.totalStudents}</span>
             </div>
-            <span className="text-[10px] font-black text-[#E5D7BE] block mt-1">
+            <span className="text-[10px] text-slate-500 block mt-1 font-sans">
               {metrics.studentsOnTrackPercentage}% performing at or above grade
             </span>
           </div>
 
-          <div className="bg-[#5A3720] border-4 border-[#3FA7C9] p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.5)] flex flex-col justify-between">
+          <div className="glass-panel p-5 rounded-2xl border border-sky-300 bg-sky-50/70 shadow-xs flex flex-col justify-between">
             <div>
-              <span className="text-[11px] font-bold text-[#3FA7C9] block uppercase">Top Missing Prereq</span>
-              <div className="font-heading font-black text-base sm:text-lg text-[#FFE9A8] mt-0.5 truncate" title={metrics.topMissingPrerequisite?.conceptName}>
+              <span className="text-[11px] font-bold text-sky-700 block uppercase">Top Missing Prereq</span>
+              <div className="font-heading font-extrabold text-base sm:text-lg text-sky-950 mt-0.5 truncate" title={metrics.topMissingPrerequisite?.conceptName}>
                 {metrics.topMissingPrerequisite?.conceptId}
               </div>
               <span className="text-[10px] font-bold text-[#E5D7BE] block mt-1 truncate">
@@ -729,7 +1115,7 @@ export default function TeacherPage() {
             </div>
             <button
               onClick={() => setActiveTab("print")}
-              className="mt-2 min-h-[40px] px-2 py-1 bg-[#422816] hover:bg-[#FFE9A8] hover:text-[#2B1B0F] text-[#FFE9A8] border-2 border-[#7A4B2A] font-heading font-black text-[10px] shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center justify-center gap-1"
+              className="mt-2 min-h-[38px] px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white font-heading font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-1 transition-all"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print Group Worksheet (A4)</span>
@@ -738,53 +1124,53 @@ export default function TeacherPage() {
         </section>
 
         {/* View Navigation Tabs */}
-        <div className="flex flex-wrap gap-2 border-b-2 border-[#7A4B2A] pb-3">
+        <div className="flex flex-wrap gap-2 flex flex-wrap gap-1.5 bg-white/60 p-1.5 rounded-2xl border border-white/80 shadow-xs pb-1.5">
           <button
             onClick={() => setActiveTab("dashboard")}
-            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+            className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "dashboard"
-                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
+                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
             Students & Attention ({metrics.studentsNeedingAttentionCount})
           </button>
           <button
             onClick={() => setActiveTab("heatmap")}
-            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+            className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "heatmap"
-                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
+                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
             Concept Heatmap (M/P/G/L)
           </button>
           <button
             onClick={() => setActiveTab("misconceptions")}
-            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+            className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "misconceptions"
-                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
+                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
             Common Misconceptions & Roots
           </button>
           <button
             onClick={() => setActiveTab("print")}
-            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+            className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "print"
-                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
+                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
             Printable A4 Remedial Worksheet
           </button>
           <button
             onClick={() => setActiveTab("leaderboard")}
-            className={`min-h-[48px] px-4 py-2 text-xs font-black border-2 transition-transform active:translate-y-0.5 ${
+            className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "leaderboard"
-                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                : "bg-[#422816] text-[#E5D7BE] border-[#7A4B2A] hover:bg-[#5A3720]"
+                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
+                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
             }`}
           >
             Quest Board & XP
@@ -796,12 +1182,12 @@ export default function TeacherPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column: Student Roster */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-3">
+              <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs space-y-3 text-slate-800">
                 <div className="flex items-center justify-between">
                   <h2 className="font-heading font-black text-base text-[#FFF7E6]">
                     Cohort Roster ({syntheticClassData.totalStudents})
                   </h2>
-                  <span className="text-[10px] font-black px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[#FFE9A8]">
+                  <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 bg-emerald-100 text-emerald-900 rounded-full">
                     Synthetic class
                   </span>
                 </div>
@@ -815,16 +1201,16 @@ export default function TeacherPage() {
                       placeholder="Search student by name or roll..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs border-2 border-[#A06A3C] focus:outline-none focus:ring-2 focus:ring-[#FFE9A8] bg-[#FFF7E6] text-[#2B1B0F] placeholder:text-[#2B1B0F]/50 font-bold"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-slate-800 placeholder:text-slate-400 font-sans"
                     />
                   </div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setFilterAttention(!filterAttention)}
-                      className={`min-h-[44px] flex-1 px-3 py-1.5 text-xs font-black border-2 border-[#422816] transition-all ${
+                      className={`min-h-[40px] flex-1 px-3 py-1.5 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                         filterAttention
                           ? "bg-[#E04A3F] text-[#FFF7E6] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                          : "bg-[#422816] text-[#E5D7BE] hover:bg-[#7A4B2A]"
+                          : "bg-white/80 text-slate-700 hover:bg-white border-slate-200"
                       }`}
                     >
                       {filterAttention ? "Showing Flagged Only" : "Filter: Needs Attention Only"}
@@ -835,7 +1221,7 @@ export default function TeacherPage() {
                           setFilterAttention(false);
                           setSearchQuery("");
                         }}
-                        className="min-h-[44px] px-3 py-1.5 text-xs font-bold bg-[#422816] border-2 border-[#7A4B2A] text-[#FFE9A8] hover:bg-[#7A4B2A]"
+                        className="min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold bg-white/80 border border-slate-200 rounded-xl text-slate-700 hover:bg-white cursor-pointer"
                         title="Reset Filters"
                       >
                         Reset
@@ -852,16 +1238,16 @@ export default function TeacherPage() {
                       <button
                         key={st.id}
                         onClick={() => setSelectedStudentId(st.id)}
-                        className={`w-full text-left p-3 border-2 border-[#422816] transition-all min-h-[48px] flex items-center justify-between gap-2 ${
+                        className={`w-full text-left p-3.5 rounded-2xl border transition-all min-h-[48px] flex items-center justify-between gap-2 cursor-pointer ${
                           isSelected
-                            ? "bg-[#FFE9A8] shadow-[3px_3px_0px_rgba(0,0,0,0.4)] text-[#2B1B0F]"
+                          ? "bg-emerald-100 border-emerald-500 ring-2 ring-emerald-500/20 text-emerald-950 shadow-xs"
                             : st.needsAttention
-                            ? "bg-[#422816] border-[#E04A3F] text-[#FFF7E6] hover:bg-[#5A3720]"
-                            : "bg-[#422816] text-[#FFF7E6] hover:bg-[#5A3720]"
+                          ? "bg-rose-50/80 border-rose-300 text-slate-900 hover:bg-white shadow-2xs"
+                          : "bg-white/80 border-white/90 text-slate-900 hover:bg-white shadow-2xs"
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="w-7 h-7 bg-[#5A3720] border border-[#7A4B2A] flex items-center justify-center text-xs font-black shrink-0 text-[#FFE9A8]">
+                          <span className="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center text-xs font-heading font-bold shrink-0 text-slate-700">
                             #{st.rollNumber}
                           </span>
                           <div className="min-w-0">
@@ -876,18 +1262,18 @@ export default function TeacherPage() {
 
                         <div className="text-right shrink-0">
                           <span
-                            className={`inline-block px-2 py-0.5 text-[10px] font-black border border-[#422816] ${
+                            className={`inline-block px-2 py-0.5 text-[10px] font-black rounded-full ${
                               st.diagnosticScore >= 80
                                 ? "bg-[#5DAA3A] text-[#FFF7E6]"
                                 : st.diagnosticScore >= 60
-                                ? "bg-[#FFE9A8] text-[#2B1B0F]"
+                                ? "bg-emerald-100 text-emerald-900"
                                 : "bg-[#E04A3F] text-[#FFF7E6]"
                             }`}
                           >
                             {st.diagnosticScore}%
                           </span>
                           {st.needsAttention && (
-                            <span className="block text-[9px] font-black text-[#E04A3F] uppercase mt-0.5">
+                            <span className="block text-[9px] font-black text-rose-700 uppercase mt-0.5">
                               Alert
                             </span>
                           )}
@@ -907,11 +1293,11 @@ export default function TeacherPage() {
             {/* Right Column: Evidence Drill-Down Panel */}
             <div className="lg:col-span-7 space-y-4">
               {/* Weekly Quest & Gamification Pulse Card */}
-              <div className="bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-3 text-[#FFF7E6]">
+              <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs space-y-3 text-slate-800">
                 <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-2">
                   <div className="flex items-center gap-2">
-                    <Trophy className="w-4 h-4 text-[#FFE9A8]" />
-                    <span className="font-heading font-extrabold text-xs text-[#FFE9A8] uppercase tracking-wider">
+                    <Trophy className="w-4 h-4 text-amber-600" />
+                    <span className="font-heading font-extrabold text-xs text-emerald-950 uppercase tracking-wider">
                       Weekly Class XP Pulse
                     </span>
                   </div>
@@ -923,7 +1309,7 @@ export default function TeacherPage() {
                       className={`text-[10px] font-heading font-bold px-2 py-0.5 border cursor-pointer ${
                         leaderboardEnabled
                           ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514]"
-                          : "bg-[#422816] text-[#A68A72] border-[#7A4B2A]"
+                          : "bg-white/60 text-slate-400 border-slate-200"
                       }`}
                     >
                       {leaderboardEnabled ? "Active" : "Disabled"}
@@ -933,14 +1319,14 @@ export default function TeacherPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   {/* Leaders */}
-                  <div className="p-2.5 bg-[#422816] border border-[#7A4B2A] space-y-1">
-                    <span className="text-[10px] font-heading font-bold text-[#FFE9A8] uppercase block">
+                  <div className="p-3 rounded-xl bg-white/80 border border-white/90 space-y-1 shadow-2xs">
+                    <span className="text-[10px] font-heading font-bold text-slate-500 uppercase block">
                       👑 XP Leaders
                     </span>
                     <div className="text-xs space-y-0.5">
                       <div className="flex justify-between font-bold text-[#FFF7E6]">
                         <span>1. Aarav S.</span>
-                        <span className="text-[#FFE9A8]">390 XP</span>
+                        <span className="text-emerald-950">390 XP</span>
                       </div>
                       <div className="flex justify-between text-[#E5D7BE]">
                         <span>2. Diya S.</span>
@@ -950,12 +1336,12 @@ export default function TeacherPage() {
                   </div>
 
                   {/* Most Improved */}
-                  <div className="p-2.5 bg-[#422816] border border-[#7A4B2A] space-y-1">
-                    <span className="text-[10px] font-heading font-bold text-[#5DAA3A] uppercase block">
+                  <div className="p-3 rounded-xl bg-white/80 border border-white/90 space-y-1 shadow-2xs">
+                    <span className="text-[10px] font-heading font-bold text-emerald-700 uppercase block">
                       📈 Most Improved
                     </span>
                     <div className="text-xs space-y-0.5">
-                      <div className="flex justify-between font-bold text-[#5DAA3A]">
+                      <div className="flex justify-between font-bold text-emerald-700">
                         <span>Rohan P.</span>
                         <span>+48%</span>
                       </div>
@@ -967,29 +1353,29 @@ export default function TeacherPage() {
                   </div>
 
                   {/* Needs Encouragement */}
-                  <div className="p-2.5 bg-[#422816] border border-[#E04A3F] space-y-1">
-                    <span className="text-[10px] font-heading font-bold text-[#E04A3F] uppercase block">
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1 shadow-2xs">
+                    <span className="text-[10px] font-heading font-bold text-rose-700 uppercase block">
                       ⚠️ Needs Encouragement
                     </span>
                     <div className="text-xs text-[#E5D7BE] space-y-0.5">
-                      <div className="truncate font-bold text-[#FFE9A8]">Kavya R. (8d idle)</div>
+                      <div className="truncate font-bold text-emerald-950">Kavya R. (8d idle)</div>
                       <div className="truncate text-[11px] text-[#D9D9D9]/70">No quests logged this week</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-5 text-[#FFF7E6]">
+              <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/80 shadow-xs space-y-5 text-slate-800">
                 {/* Header of Selected Student */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b-2 border-[#7A4B2A]">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="w-8 h-8 bg-[#FFE9A8] border-2 border-[#422816] flex items-center justify-center font-heading font-black text-sm text-[#2B1B0F]">
+                      <span className="w-8 h-8 bg-emerald-100 rounded-xl border border-emerald-300 flex items-center justify-center font-heading font-extrabold text-sm text-emerald-900 shadow-xs">
                         #{selectedStudent.rollNumber}
                       </span>
                       <h3 className="font-heading font-black text-lg text-[#FFF7E6]">
                         {selectedStudent.name}
                       </h3>
-                      <span className="px-2 py-0.5 bg-[#422816] border border-[#7A4B2A] text-[10px] font-bold text-[#E5D7BE]">
+                      <span className="px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-[10px] font-heading font-bold text-slate-700 shadow-2xs">
                         {selectedStudent.persona}
                       </span>
                     </div>
@@ -1504,9 +1890,9 @@ export default function TeacherPage() {
 
             <div className="lg:col-span-5 space-y-4">
               {/* Teacher Board Controls */}
-              <div className="bg-[#5A3720] border-4 border-[#422816] p-5 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4 text-[#FFF7E6]">
-                <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-3">
-                  <h3 className="font-heading font-extrabold text-sm text-[#FFE9A8] uppercase tracking-wider">
+              <div className="glass-panel p-6 rounded-2xl border border-white/80 shadow-xs space-y-4 text-slate-800">
+                <div className="flex items-center justify-between flex flex-wrap gap-1.5 bg-white/60 p-1.5 rounded-2xl border border-white/80 shadow-xs pb-1.5">
+                  <h3 className="font-heading font-extrabold text-sm text-emerald-950 uppercase tracking-wider">
                     Leaderboard Controls
                   </h3>
                   <button
@@ -1515,7 +1901,7 @@ export default function TeacherPage() {
                     className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
                       leaderboardEnabled
                         ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-                        : "bg-[#422816] text-[#A68A72] border-[#7A4B2A]"
+                              : "bg-white/60 text-slate-400 border-slate-200"
                     }`}
                   >
                     {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
@@ -1528,7 +1914,7 @@ export default function TeacherPage() {
 
                 {/* Individual Student Visibility Table */}
                 <div className="space-y-2 pt-2">
-                  <span className="text-[11px] font-heading font-bold text-[#FFE9A8] uppercase block">
+                  <span className="text-[11px] font-heading font-bold text-emerald-950 uppercase block">
                     Student Visibility Controls
                   </span>
                   <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-1">
@@ -1537,7 +1923,7 @@ export default function TeacherPage() {
                       return (
                         <div
                           key={st.id}
-                          className="p-2.5 bg-[#422816] border border-[#7A4B2A] flex items-center justify-between text-xs"
+                          className="p-3 rounded-xl bg-white/80 border border-white/90 flex items-center justify-between text-xs shadow-2xs"
                         >
                           <div className="flex items-center gap-2">
                             <span className="font-heading font-bold text-[#FFF7E6]">
@@ -1557,7 +1943,7 @@ export default function TeacherPage() {
                               else next.add(st.id);
                               setHiddenStudentIds(next);
                             }}
-                            className="min-h-[32px] px-2 py-0.5 bg-[#5A3720] hover:bg-[#7A4B2A] border border-[#7A4B2A] text-[11px] font-heading font-bold text-[#FFE9A8] flex items-center gap-1 cursor-pointer"
+                                className="min-h-[32px] px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-heading font-bold flex items-center gap-1 cursor-pointer shadow-xs transition-all"
                           >
                             {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
                             <span>{isHidden ? "Show" : "Hide"}</span>

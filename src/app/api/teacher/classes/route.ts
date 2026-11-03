@@ -3,6 +3,8 @@ import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { generateClassCode, mockDb } from "@/lib/server/auth-helpers";
 import { requireTeacher, AuthUserSession } from "@/lib/server/auth";
+import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
+import { seedMockDatabase } from "@/lib/demo/seeder";
 
 export async function GET(req: NextRequest) {
   let session: AuthUserSession;
@@ -14,6 +16,10 @@ export async function GET(req: NextRequest) {
       { status: err.statusCode || 401 }
     );
   }
+
+  const isDemoTeacher =
+    session.id === DEMO_SCHOOL_CONFIG.teacher.id ||
+    session.email?.toLowerCase() === DEMO_SCHOOL_CONFIG.teacher.email.toLowerCase();
 
   const supabaseActive = isSupabaseConfigured();
 
@@ -27,7 +33,7 @@ export async function GET(req: NextRequest) {
     }
 
     // 1. Fetch only classes owned by this teacher (strict isolation)
-    const { data: classes, error } = await admin
+    let { data: classes, error } = await admin
       .from("classes")
       .select("id, name, grade, class_code, created_at")
       .eq("teacher_id", session.id);
@@ -83,12 +89,15 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Enrich member rows with real student progress data
+    // Enrich member rows with real student progress data and demo metadata
     const enrichedMembers = members.map((m: any) => {
       const mastery = studentMastery[m.student_id] || [];
       const attempts = studentAttempts[m.student_id] || [];
       const masteredCount = mastery.filter((item) => Number(item.mastery) >= 75 || item.status === "mastered").length;
       const latestDiagnostic = attempts.find((a) => a.type === "diagnostic");
+      const demoMeta = DEMO_STUDENTS.find(
+        (s) => s.id === m.student_id || s.username === m.profiles?.username
+      );
 
       return {
         ...m,
@@ -98,10 +107,26 @@ export async function GET(req: NextRequest) {
         totalConceptsAttempted: mastery.length,
         latestDiagnosticScore: latestDiagnostic ? `${latestDiagnostic.score}/${latestDiagnostic.total}` : null,
         latestDiagnosticPercentage: latestDiagnostic ? Math.round((Number(latestDiagnostic.score) / Number(latestDiagnostic.total)) * 100) : null,
+        persona: demoMeta?.persona || null,
+        category: demoMeta?.category || null,
+        identifiedGap: demoMeta?.identifiedGap || null,
+        resolvedGap: demoMeta?.resolvedGap || null,
+        strongConcepts: demoMeta?.strongConcepts || [],
+        conceptsNeedingImprovement: demoMeta?.conceptsNeedingImprovement || [],
+        completedLessons: demoMeta?.completedLessons || [],
+        pendingTopics: demoMeta?.pendingTopics || [],
+        recommendedActivity: demoMeta?.recommendedActivity || null,
+        schoolName: isDemoTeacher ? DEMO_SCHOOL_CONFIG.schoolName : undefined,
       };
     });
 
-    return NextResponse.json({ classes: classes || [], members: enrichedMembers });
+    const enrichedClasses = (classes || []).map((cls: any) => ({
+      ...cls,
+      schoolName: isDemoTeacher || cls.class_code === DEMO_SCHOOL_CONFIG.classCode ? DEMO_SCHOOL_CONFIG.schoolName : undefined,
+      isDemo: isDemoTeacher || cls.class_code === DEMO_SCHOOL_CONFIG.classCode,
+    }));
+
+    return NextResponse.json({ classes: enrichedClasses, members: enrichedMembers });
   } else {
     if (process.env.NODE_ENV === "production") {
       return NextResponse.json(
@@ -110,10 +135,20 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // Auto-seed mockDb if demo teacher is accessing with empty classes
+    if (isDemoTeacher && !mockDb.classes.has(`cls_${DEMO_SCHOOL_CONFIG.classCode.toLowerCase().replace(/[^a-z0-9]/g, "_")}`)) {
+      seedMockDatabase();
+    }
+
     // Mock store fallback (dev/test only)
     const teacherClasses = Array.from(mockDb.classes.values()).filter(
       (c) => c.teacherId === session.id
-    );
+    ).map((cls) => ({
+      ...cls,
+      schoolName: isDemoTeacher || cls.classCode === DEMO_SCHOOL_CONFIG.classCode ? DEMO_SCHOOL_CONFIG.schoolName : undefined,
+      isDemo: isDemoTeacher || cls.classCode === DEMO_SCHOOL_CONFIG.classCode,
+    }));
+
     const classIds = new Set(teacherClasses.map((c) => c.id));
     const members = Array.from(mockDb.classMembers.values())
       .filter((m) => classIds.has(m.classId))
@@ -127,6 +162,9 @@ export async function GET(req: NextRequest) {
         );
         const masteredCount = mastery.filter((item) => Number(item.mastery) >= 75 || item.status === "mastered").length;
         const latestDiagnostic = attempts.find((a) => a.type === "diagnostic");
+        const demoMeta = DEMO_STUDENTS.find(
+          (s) => s.id === m.studentId || s.username === student?.username
+        );
 
         return {
           class_id: m.classId,
@@ -146,6 +184,16 @@ export async function GET(req: NextRequest) {
           totalConceptsAttempted: mastery.length,
           latestDiagnosticScore: latestDiagnostic ? `${latestDiagnostic.score}/${latestDiagnostic.total}` : null,
           latestDiagnosticPercentage: latestDiagnostic ? Math.round((Number(latestDiagnostic.score) / Number(latestDiagnostic.total)) * 100) : null,
+          persona: demoMeta?.persona || null,
+          category: demoMeta?.category || null,
+          identifiedGap: demoMeta?.identifiedGap || null,
+          resolvedGap: demoMeta?.resolvedGap || null,
+          strongConcepts: demoMeta?.strongConcepts || [],
+          conceptsNeedingImprovement: demoMeta?.conceptsNeedingImprovement || [],
+          completedLessons: demoMeta?.completedLessons || [],
+          pendingTopics: demoMeta?.pendingTopics || [],
+          recommendedActivity: demoMeta?.recommendedActivity || null,
+          schoolName: isDemoTeacher ? DEMO_SCHOOL_CONFIG.schoolName : undefined,
         };
       });
 

@@ -20,8 +20,11 @@
     "test:bundle": "node scripts/test-bundle-secrets.mjs",
     "eval": "npx tsx scripts/eval-scenarios.mjs",
     "generate:class": "node scripts/generate-synthetic-class.mjs",
+    "seed": "npx tsx scripts/seed-demo-school.ts",
+    "seed:clean": "npx tsx scripts/seed-demo-school.ts --clean",
     "smoke": "node scripts/smoke-test.mjs",
-    "clean:ports": "node scripts/cleanup-ports.mjs"
+    "clean:ports": "node scripts/cleanup-ports.mjs",
+    "test:viewport": "node scripts/test-responsive-viewport.mjs"
   },
   "dependencies": {
     "@fontsource/baloo-2": "^5.3.0",

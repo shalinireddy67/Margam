@@ -119,10 +119,10 @@ export default function StudentDashboardPage() {
       />
 
       {/* Main Student Realm Content */}
-      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Welcome Companion & Hero Bar */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="glass-panel p-5 sm:p-7 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
             <div className="shrink-0 p-2.5 rounded-2xl bg-white/70 border border-white/80 shadow-xs">
               <WitchCat
@@ -146,7 +146,7 @@ export default function StudentDashboardPage() {
                   {levelInfo.rank.badge} {levelInfo.rank.name} • Lv {levelInfo.level}
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-emerald-950 leading-tight">
                 Welcome back, {profile.name}!
               </h1>
               <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
@@ -175,11 +175,11 @@ export default function StudentDashboardPage() {
         </div>
 
         {/* 4 Primary Navigation Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {/* 1. LEARN */}
           <Link
             href="/student/learn"
-            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.02] transition-all flex flex-col justify-between group"
+            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.01] transition-all flex flex-col justify-between group min-h-[200px]"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -199,7 +199,7 @@ export default function StudentDashboardPage() {
                 </p>
               </div>
             </div>
-            <div className="pt-4 mt-2 border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-emerald-800">
+            <div className="pt-3 mt-auto border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-emerald-800">
               <span>Open Lessons</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -208,7 +208,7 @@ export default function StudentDashboardPage() {
           {/* 2. PRACTICE */}
           <Link
             href="/student/practice"
-            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.02] transition-all flex flex-col justify-between group"
+            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.01] transition-all flex flex-col justify-between group min-h-[200px]"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -228,7 +228,7 @@ export default function StudentDashboardPage() {
                 </p>
               </div>
             </div>
-            <div className="pt-4 mt-2 border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-amber-800">
+            <div className="pt-3 mt-auto border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-amber-800">
               <span>Start Practice</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -237,7 +237,7 @@ export default function StudentDashboardPage() {
           {/* 3. DIAGNOSE */}
           <Link
             href="/student/diagnostic"
-            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.02] transition-all flex flex-col justify-between group"
+            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.01] transition-all flex flex-col justify-between group min-h-[200px]"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -257,7 +257,7 @@ export default function StudentDashboardPage() {
                 </p>
               </div>
             </div>
-            <div className="pt-4 mt-2 border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-cyan-800">
+            <div className="pt-3 mt-auto border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-cyan-800">
               <span>Take Diagnostic</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -266,7 +266,7 @@ export default function StudentDashboardPage() {
           {/* 4. PROFILE */}
           <Link
             href="/student/profile"
-            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.02] transition-all flex flex-col justify-between group"
+            className="glass-panel p-5 rounded-2xl border border-white/80 shadow-[0_8px_24px_rgba(16,42,18,0.08)] hover:border-emerald-400/70 hover:scale-[1.01] transition-all flex flex-col justify-between group min-h-[200px]"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -286,7 +286,7 @@ export default function StudentDashboardPage() {
                 </p>
               </div>
             </div>
-            <div className="pt-4 mt-2 border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-purple-800">
+            <div className="pt-3 mt-auto border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-purple-800">
               <span>Edit Profile</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -472,7 +472,7 @@ export default function StudentDashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1240px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
         Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>

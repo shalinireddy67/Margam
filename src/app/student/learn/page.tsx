@@ -123,7 +123,7 @@ export default function StudentLearnPage() {
       />
 
       {/* Main Content */}
-      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Header Banner */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -150,7 +150,7 @@ export default function StudentLearnPage() {
             <span className="text-[10px] font-heading font-bold text-emerald-950/70 uppercase">
               Switch Study Class:
             </span>
-            <div className="flex items-center gap-1.5 bg-white/70 p-1.5 rounded-2xl border border-white/80 shadow-xs">
+            <div className="flex items-center gap-1.5 bg-white/70 p-1.5 rounded-2xl border border-white/80 shadow-xs flex-wrap sm:flex-nowrap">
               {([6, 7, 8, 9, 10] as const).map((grade) => (
                 <button
                   key={grade}
@@ -410,7 +410,7 @@ export default function StudentLearnPage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1240px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
         Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>

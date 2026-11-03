@@ -235,20 +235,20 @@ export default function AdaptivePracticeRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-[#5A3720] border-4 border-[#422816] p-8 shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-4">
-            <div className="w-12 h-12 bg-[#FFE9A8] border-2 border-[#422816] flex items-center justify-center mx-auto text-[#2B1B0F]">
+          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4">
+            <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-[#FFF7E6]">
+            <h1 className="font-heading font-extrabold text-xl text-emerald-950">
               Practice Locked
             </h1>
-            <p className="text-xs sm:text-sm font-bold text-[#E5D7BE] leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
               {lockedReason || "You must complete prerequisite topics before accessing this practice."}
             </p>
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] text-xs font-heading font-extrabold shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px]"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>
@@ -264,15 +264,15 @@ export default function AdaptivePracticeRunnerPage() {
 
   if (!concept || questions.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#2A1E17] p-6 text-[#FFF7E6]">
-        <div className="bg-[#5A3720] p-6 border-4 border-[#422816] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] max-w-md text-center space-y-3">
-          <h2 className="font-heading font-extrabold text-lg text-[#FFF7E6]">No Questions Found</h2>
-          <p className="text-xs font-bold text-[#E5D7BE]">
+      <div className="min-h-screen flex items-center justify-center p-6 text-slate-800">
+        <div className="glass-panel p-6 rounded-3xl border border-white/80 shadow-lg max-w-md text-center space-y-3">
+          <h2 className="font-heading font-extrabold text-lg text-emerald-950">No Questions Found</h2>
+          <p className="text-xs text-slate-600 font-sans">
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
             href="/"
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 border-2 border-[#422816] bg-[#5DAA3A] text-[#FFF7E6] text-xs font-heading font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
+            className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-heading font-bold px-4 py-2 shadow-sm"
           >
             Return to Learning Path
           </Link>
@@ -401,7 +401,7 @@ export default function AdaptivePracticeRunnerPage() {
         backLabel="Class Lessons"
       />
 
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 relative">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 relative has-mobile-nav">
         <PixelConfetti active={showConfetti} />
         <FloatingXp xp={awardedXpAnim} active={showConfetti} />
         {showLevelUp && (
@@ -423,16 +423,16 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Main Focused Column: max ~720px wide */}
           <div className="lg:col-span-8 max-w-[720px] mx-auto w-full space-y-6">
             {/* Title Header Card */}
-            <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/75 shadow-sm space-y-4 text-emerald-950">
+            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-xs font-heading font-bold text-[#FFE9A8]">
+            <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
               <span>Adaptive Practice</span>
               <span>•</span>
               <span>Class {concept.class}</span>
               {isPersonalized && (
                 <>
                   <span>•</span>
-                  <span className="text-[#FFE9A8] font-extrabold flex items-center gap-1">
+                  <span className="text-amber-800 font-extrabold flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />
                     Personalized Worksheet
                   </span>
@@ -441,7 +441,7 @@ export default function AdaptivePracticeRunnerPage() {
             </div>
 
             {/* Difficulty Badge with 1 to 3 stars */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FFE9A8] border-2 border-[#422816] text-xs font-heading font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.4)] text-[#2B1B0F]">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100/90 border border-amber-300 rounded-full text-xs font-heading font-extrabold shadow-xs text-amber-950">
               <span>Level {difficultyLevel}</span>
               {renderStars(difficultyLevel)}
             </div>
@@ -451,19 +451,19 @@ export default function AdaptivePracticeRunnerPage() {
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-[#E5D7BE] bg-[#422816] p-3.5 border-2 border-[#7A4B2A] leading-relaxed font-medium">
+          <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium">
             {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
           {/* Personalized Worksheet Metadata Banner */}
           {isPersonalized && personalizedReason && (
-            <div className="p-3.5 bg-[#422816] border-2 border-[#FFE9A8] flex items-start gap-3">
-              <Sparkles className="w-4 h-4 text-[#FFE9A8] shrink-0 mt-0.5" />
+            <div className="glass-panel p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-950 flex items-start gap-3">
+              <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <span className="text-[11px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
+                <span className="text-[11px] font-heading font-extrabold text-amber-900 uppercase tracking-wider block">
                   Tailored Practice Strategy
                 </span>
-                <p className="text-xs text-[#E5D7BE] leading-snug">
+                <p className="text-xs text-slate-700 font-sans leading-snug">
                   {personalizedReason}
                 </p>
                 {prereqsIncluded.length > 0 && (
@@ -472,7 +472,7 @@ export default function AdaptivePracticeRunnerPage() {
                     {prereqsIncluded.map((pr) => (
                       <span
                         key={pr.conceptId}
-                        className="px-2 py-0.5 bg-[#5A3720] border border-[#7A4B2A] text-[10px] font-heading font-bold text-[#FFF7E6]"
+                        className="px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-lg text-[10px] font-heading font-bold text-slate-700 shadow-2xs"
                       >
                         {pr.name} ({pr.count} question{pr.count > 1 ? "s" : ""})
                       </span>
@@ -487,15 +487,15 @@ export default function AdaptivePracticeRunnerPage() {
           {result && (
             <div className="space-y-4 mt-6">
               {result.gapResolved && (
-                <div className="animate-voxel-glow p-5 bg-[#2F6B22]/40 border-3 border-[#5DAA3A] border-l-[8px] border-l-[#79B82A] shadow-[0_0_15px_rgba(93,170,58,0.5)] space-y-2">
-                  <div className="flex items-center gap-2 text-[#FFE9A8] font-heading font-extrabold text-xs uppercase tracking-wider">
-                    <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
+                <div className="glass-panel p-5 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-emerald-950 space-y-2">
+                  <div className="flex items-center gap-2 text-emerald-900 font-heading font-extrabold text-xs uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 text-emerald-600" />
                     <span>✨ Foundational Prerequisite Gap Resolved! (+50 XP Bonus)</span>
                   </div>
-                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-[#FFF7E6]">
+                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
                     Foundation Successfully Repaired!
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#E5D7BE] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-700 font-sans leading-relaxed">
                     You scored <strong>{result.percentage}%</strong> and demonstrated mastery on this foundational topic. This block is now illuminated on your Concept Pathway!
                   </p>
                 </div>
@@ -503,15 +503,15 @@ export default function AdaptivePracticeRunnerPage() {
 
               {/* Main Score & Mastery Card */}
               <div
-                className={`p-6 border-4 border-[#422816] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] bg-[#5A3720] text-[#FFF7E6] ${
+                className={`glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-slate-800 ${
                   result.passed
-                    ? "border-t-4 border-t-[#5DAA3A]"
-                    : "border-t-4 border-t-[#FFE9A8]"
+                    ? "border-t-4 border-t-emerald-500"
+                    : "border-t-4 border-t-amber-400"
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="shrink-0 p-1 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                    <div className="shrink-0 p-2 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
                       <WitchCat
                         pose={result.percentage >= 70 || result.passed ? "cheer" : "think"}
                         size={72}
@@ -540,7 +540,7 @@ export default function AdaptivePracticeRunnerPage() {
                           : " • Keep practicing to build confidence."}
                       </p>
                       {result.mistakeHint && (
-                        <p className="text-xs mt-2 p-2.5 bg-[#422816] border-2 border-[#7A4B2A] font-bold text-[#FFF7E6]">
+                        <p className="text-xs mt-2 p-3 rounded-xl bg-white/80 border border-white/90 font-sans font-medium text-slate-700">
                           💡 <strong>Hint:</strong> {result.mistakeHint}
                         </p>
                       )}
@@ -550,7 +550,7 @@ export default function AdaptivePracticeRunnerPage() {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={handleRetry}
-                      className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-3.5 py-2 bg-[#422816] text-[#E5D7BE] hover:text-[#FFF7E6] border-2 border-[#7A4B2A] text-xs font-heading font-bold shadow-[2px_2px_0px_rgba(0,0,0,0.4)] active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-4 py-2 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs transition-all"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>Practice Again</span>
@@ -558,7 +558,7 @@ export default function AdaptivePracticeRunnerPage() {
 
                     <Link
                       href={result.nextAction?.href || `/lesson/${conceptId}`}
-                      className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] gap-1.5 px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] text-xs font-heading font-extrabold shadow-[2px_2px_0px_rgba(0,0,0,0.4)] active:translate-x-[1px] active:translate-y-[1px] no-underline transition-colors"
+                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
                     >
                       <span>{result.nextAction?.title || "Continue Path"}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -570,7 +570,7 @@ export default function AdaptivePracticeRunnerPage() {
                 {result.comparison && (
                   <div className="mt-4 pt-4 border-t-2 border-[#7A4B2A]">
                     {result.comparison.hasPreviousAttempt ? (
-                      <div className="p-4 bg-[#422816] border-2 border-[#5DAA3A] space-y-2">
+                      <div className="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-2">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
                           <span className="text-[11px] font-heading font-extrabold text-[#5DAA3A] uppercase tracking-wider flex items-center gap-1.5">
                             <TrendingUp className="w-4 h-4 text-[#5DAA3A]" />
@@ -580,10 +580,10 @@ export default function AdaptivePracticeRunnerPage() {
                             <span
                               className={`px-2 py-0.5 text-xs font-heading font-extrabold border ${
                                 result.comparison.improvementDelta > 0
-                                  ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#422816]"
+                                  ? "bg-emerald-600 text-white rounded-full shadow-xs"
                                   : result.comparison.improvementDelta === 0
-                                  ? "bg-[#5A3720] text-[#E5D7BE] border-[#7A4B2A]"
-                                  : "bg-[#E04A3F] text-[#FFF7E6] border-[#422816]"
+                                  ? "bg-white/80 text-slate-700 border-white/90 rounded-full"
+                                  : "bg-rose-100 text-rose-900 border-rose-300 rounded-full"
                               }`}
                             >
                               {result.comparison.improvementDelta > 0
@@ -596,28 +596,28 @@ export default function AdaptivePracticeRunnerPage() {
                         </div>
 
                         <div className="flex items-baseline gap-3 text-sm">
-                          <span className="text-[#E5D7BE]">
+                          <span className="text-slate-600">
                             Previous Attempt:{" "}
-                            <strong className="text-[#FFF7E6]">
+                            <strong className="text-slate-900">
                               {result.comparison.previousScore} / {result.comparison.previousTotal} ({result.comparison.previousPercentage}%)
                             </strong>
                           </span>
-                          <span className="text-[#5DAA3A] font-extrabold">➔</span>
-                          <span className="text-[#E5D7BE]">
+                          <span className="text-emerald-700 font-extrabold">➔</span>
+                          <span className="text-slate-600">
                             Latest Attempt:{" "}
-                            <strong className="text-[#5DAA3A]">
+                            <strong className="text-emerald-800 font-bold">
                               {result.comparison.latestScore} / {result.comparison.latestTotal} ({result.comparison.latestPercentage}%)
                             </strong>
                           </span>
                         </div>
 
-                        <p className="text-xs text-[#E5D7BE] leading-snug">
+                        <p className="text-xs text-slate-700 font-sans leading-snug">
                           {result.comparison.message}
                         </p>
                       </div>
                     ) : (
-                      <div className="p-3 bg-[#422816] border-2 border-[#7A4B2A] text-xs text-[#E5D7BE] flex items-center gap-2">
-                        <Award className="w-4 h-4 text-[#FFE9A8] shrink-0" />
+                      <div className="p-3 rounded-xl bg-white/80 border border-white/90 text-xs text-slate-700 font-sans flex items-center gap-2">
+                        <Award className="w-4 h-4 text-emerald-700 shrink-0" />
                         <span>
                           <strong>First Attempt Recorded:</strong> Scored {result.score}/{result.total} ({result.percentage}%). Future attempts will track your growth delta!
                         </span>
@@ -628,11 +628,11 @@ export default function AdaptivePracticeRunnerPage() {
 
                 {/* Spaced Revision Indicator */}
                 {result.nextRevisionAt && (
-                  <div className="mt-3 flex items-center gap-2 text-xs text-[#E5D7BE] font-medium">
-                    <Calendar className="w-4 h-4 text-[#FFE9A8]" />
+                  <div className="mt-3 flex items-center gap-2 text-xs text-slate-600 font-sans font-medium">
+                    <Calendar className="w-4 h-4 text-emerald-700" />
                     <span>
                       Next scheduled revision:{" "}
-                      <strong className="text-[#FFE9A8]">
+                      <strong className="text-emerald-950 font-bold">
                         {new Date(result.nextRevisionAt).toLocaleDateString(undefined, {
                           month: "short",
                           day: "numeric",
@@ -647,7 +647,7 @@ export default function AdaptivePracticeRunnerPage() {
           )}
 
           {errorMessage && (
-            <div className="mt-4 p-3.5 bg-[#E04A3F]/20 border-2 border-[#E04A3F] text-xs font-bold flex items-center gap-2 text-[#FFF7E6]">
+            <div className="mt-4 p-3.5 bg-rose-50 border border-rose-300 rounded-xl text-xs font-sans font-bold flex items-center gap-2 text-rose-900 p-3.5">
               <AlertCircle className="w-4 h-4 shrink-0 text-[#E04A3F]" />
               <span>{errorMessage}</span>
             </div>
@@ -664,18 +664,18 @@ export default function AdaptivePracticeRunnerPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="bg-[#5A3720] p-6 sm:p-7 border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-4 text-[#FFF7E6]"
+                className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800"
               >
-                <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
-                  <span className="text-xs font-heading font-bold text-[#FFE9A8] uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 border-b border-white/80 pb-3">
+                  <span className="text-xs font-heading font-bold text-emerald-900 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-heading font-bold px-2 py-0.5 border border-[#422816] bg-[#FFE9A8] text-[#2B1B0F]">
+                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded-full border border-amber-300 bg-amber-100 text-amber-900">
                       Level {q.difficulty}
                     </span>
                     {isAnswered && !result && (
-                      <span className="text-[10px] font-heading font-bold bg-[#5DAA3A] text-[#FFF7E6] px-2 py-0.5 border border-[#422816]">
+                      <span className="text-[10px] font-heading font-bold bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full border border-emerald-300">
                         Selected
                       </span>
                     )}
@@ -686,10 +686,10 @@ export default function AdaptivePracticeRunnerPage() {
                 {(() => {
                   const promptData = resolveLocalizedString(q.prompt, currentLang);
                   return (
-                    <div className="font-sans text-base sm:text-lg lg:text-xl font-medium text-[#FFF7E6] leading-relaxed flex items-center flex-wrap gap-2">
+                    <div className="font-sans text-base sm:text-lg font-bold text-slate-900 leading-relaxed flex items-center flex-wrap gap-2">
                       <span className="break-words">{promptData.text}</span>
                       {promptData.isDraft && (
-                        <span className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-heading font-bold bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
+                        <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-heading font-bold bg-amber-100 text-amber-900 rounded-full border border-amber-300">
                           Draft Translation
                         </span>
                       )}
@@ -703,20 +703,20 @@ export default function AdaptivePracticeRunnerPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-2 border-[#7A4B2A]";
-                    let optionBgClass = "bg-[#422816] text-[#E5D7BE] hover:border-[#3FA7C9] hover:bg-[#5A3720]";
+                    let optionBorderClass = "border-white/80";
+                    let optionBgClass = "bg-white/70 text-slate-800 hover:bg-white hover:border-emerald-300 hover:shadow-xs";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#2F6B22]";
-                        optionBgClass = "bg-[#5DAA3A] text-[#FFF7E6]";
+                        optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
+                        optionBgClass = "bg-emerald-100 text-emerald-950";
                       } else if (isSelected && !feedbackItem.isCorrect) {
-                        optionBorderClass = "border-2 border-[#8B2323]";
-                        optionBgClass = "bg-[#E04A3F] text-[#FFF7E6]";
+                        optionBorderClass = "border-rose-400 ring-2 ring-rose-400/20";
+                        optionBgClass = "bg-rose-50 text-rose-950";
                       }
                     } else if (isSelected) {
-                      optionBorderClass = "border-2 border-[#1E6F8C]";
-                      optionBgClass = "bg-[#3FA7C9] text-[#FFF7E6] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),2px_2px_0px_rgba(0,0,0,0.4)]";
+                      optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
+                      optionBgClass = "bg-emerald-100/90 text-emerald-950 shadow-xs";
                     }
 
                     return (
@@ -733,14 +733,14 @@ export default function AdaptivePracticeRunnerPage() {
                             handleSelectOption(q.id, opt.id);
                           }
                         }}
-                        className={`min-h-[48px] p-3.5 border-2 cursor-pointer flex items-center justify-between transition-transform active:translate-x-[1px] active:translate-y-[1px] ${optionBorderClass} ${optionBgClass}`}
+                        className={`min-h-[48px] p-3.5 rounded-2xl border cursor-pointer flex items-center justify-between transition-all ${optionBorderClass} ${optionBgClass}`}
                       >
                         <div className="flex items-center gap-3">
                           <span
                             className={`w-6 h-6 border-2 font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
                               isSelected
-                                ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816]"
-                                : "bg-[#422816] text-[#FFE9A8] border-[#7A4B2A]"
+                                ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                                : "bg-white text-slate-700 border-slate-300"
                             }`}
                           >
                             {opt.id}
@@ -761,7 +761,7 @@ export default function AdaptivePracticeRunnerPage() {
 
                 {/* Question Feedback Post-Submission with Mascot & Educational Guidance */}
                 {feedbackItem && (
-                  <div className="mt-4 p-4 bg-[#422816] border-2 border-[#7A4B2A] space-y-3">
+                  <div className="mt-4 p-4 rounded-2xl bg-white/80 border border-white/90 space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="shrink-0 pt-0.5">
                         <WitchCat
@@ -781,8 +781,8 @@ export default function AdaptivePracticeRunnerPage() {
                             </>
                           ) : (
                             <>
-                              <AlertCircle className="w-4 h-4 text-[#FFE9A8]" />
-                              <span className="text-[#FFE9A8]">
+                              <AlertCircle className="w-4 h-4 text-amber-700" />
+                              <span className="text-amber-900">
                                 {feedbackItem.misconceptionCategory
                                   ? `Concept Note: ${feedbackItem.misconceptionCategory.replace(/_/g, " ").toUpperCase()}`
                                   : "Review Method"}
@@ -799,7 +799,7 @@ export default function AdaptivePracticeRunnerPage() {
                         )}
 
                         {feedbackItem.explanation && (
-                          <div className="p-3 bg-[#422816] border border-[#7A4B2A] text-xs text-[#E5D7BE] leading-relaxed space-y-1">
+                          <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs text-slate-700 font-sans leading-relaxed space-y-1">
                             <span className="font-heading font-bold text-[10px] text-[#5DAA3A] uppercase block">
                               Step-by-step Solution:
                             </span>
@@ -808,7 +808,7 @@ export default function AdaptivePracticeRunnerPage() {
                         )}
 
                         {feedbackItem.hint && (
-                          <p className="text-xs text-[#FFE9A8] pt-1">
+                          <p className="text-xs text-emerald-950 font-sans font-medium pt-1">
                             <strong>Tip:</strong> {typeof feedbackItem.hint === 'string' ? feedbackItem.hint : resolveLocalizedString(feedbackItem.hint, currentLang).text}
                           </p>
                         )}
@@ -821,15 +821,15 @@ export default function AdaptivePracticeRunnerPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 bg-[#5A3720] border-4 border-[#422816] p-4 shadow-[0px_4px_0px_rgba(0,0,0,0.5)] flex items-center justify-between gap-4 text-[#FFF7E6]">
-              <span className="text-xs font-heading font-bold text-[#FFE9A8]">
+            <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 text-slate-800">
+              <span className="text-xs font-heading font-extrabold text-emerald-950">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[3px_3px_0px_rgba(0,0,0,0.4)] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer disabled:opacity-50 transition-colors"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm cursor-pointer disabled:opacity-50 transition-all"
               >
                 <span>{submitting ? "Checking..." : "Submit Practice Worksheet"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -842,7 +842,7 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Desktop Side Companion & Progress Panel (Hidden on mobile & tablet) */}
           <aside className="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 select-none">
             {/* Companion Card */}
-            <div className="p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] text-center space-y-3">
+            <div className="glass-panel p-5 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-center space-y-3">
               <div className="flex justify-center">
                 <WitchCat
                   pose={result ? (result.percentage >= 70 ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
@@ -852,10 +852,10 @@ export default function AdaptivePracticeRunnerPage() {
                 />
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
+                <span className="text-[10px] font-heading font-extrabold text-emerald-900 uppercase tracking-wider block">
                   Companion Study Guide
                 </span>
-                <p className="text-xs text-[#FFF7E6] leading-relaxed font-sans font-medium">
+                <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
                   {result
                     ? result.percentage >= 70
                       ? "Great job on this worksheet! Your concept foundation is growing stronger."
@@ -866,8 +866,8 @@ export default function AdaptivePracticeRunnerPage() {
             </div>
 
             {/* Live Progress Card */}
-            <div className="p-4 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] space-y-3">
-              <div className="flex items-center justify-between text-xs font-heading font-bold text-[#FFE9A8]">
+            <div className="glass-panel p-4 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-3 text-slate-800">
+              <div className="flex items-center justify-between text-xs font-heading font-bold text-emerald-950">
                 <span>Worksheet Progress</span>
                 <span>{Object.keys(answers).length} / {questions.length} Answered</span>
               </div>
@@ -878,10 +878,10 @@ export default function AdaptivePracticeRunnerPage() {
                   return (
                     <div
                       key={q.id}
-                      className={`h-4 border-2 border-[#422816] flex items-center justify-center text-[9px] font-heading font-extrabold ${
+                      className={`h-4 rounded-md border border-white/90 flex items-center justify-center text-[9px] font-heading font-extrabold shadow-2xs ${
                         isDone
                           ? "bg-[#5DAA3A] text-[#FFF7E6]"
-                          : "bg-[#422816] text-[#A68A72]"
+                          : "bg-white/60 text-slate-400"
                       }`}
                     >
                       {idx + 1}
@@ -892,20 +892,20 @@ export default function AdaptivePracticeRunnerPage() {
             </div>
 
             {/* Practice XP Bounty */}
-            <div className="p-4 bg-[#422816] border-2 border-[#7A4B2A] space-y-2 text-xs">
-              <div className="flex items-center gap-1.5 text-[#FFE9A8] font-heading font-extrabold">
-                <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
+            <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
+              <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
+                <Sparkles className="w-4 h-4 text-amber-600" />
                 <span>Practice XP Rewards</span>
               </div>
-              <p className="text-[11px] text-[#E5D7BE] leading-relaxed">
-                Earn <strong className="text-[#FFE9A8]">10 XP × Difficulty</strong> for each correct answer plus first-try bonuses!
+              <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
+                Earn <strong className="text-amber-900 font-bold">10 XP × Difficulty</strong> for each correct answer plus first-try bonuses!
               </p>
             </div>
           </aside>
         </div>
       </main>
 
-      <footer className="border-t-4 border-[#422816] py-4 text-center text-xs font-heading text-[#E5D7BE]/70 bg-[#1A1614]">
+      <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
         Margam Adaptive Mathematics • Practice Workspace
       </footer>
     </div>

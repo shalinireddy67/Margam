@@ -182,7 +182,7 @@ export default function StudentProfilePage() {
       />
 
       {/* Main Profile Content */}
-      <main className="max-w-[1240px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Profile Hero Header */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col sm:flex-row items-center gap-6">
@@ -493,7 +493,7 @@ export default function StudentProfilePage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1240px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
         Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>

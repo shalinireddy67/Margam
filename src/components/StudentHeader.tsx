@@ -46,25 +46,26 @@ export default function StudentHeader({
   };
 
   return (
-    <header className="sticky top-3 z-50 max-w-[1240px] mx-auto px-3 sm:px-6 w-full transition-all">
-      <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
+    <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full transition-all">
+      <div className="glass-panel px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
         {/* Left: Brand + Back or Grade Scope */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {backHref ? (
             <Link
               href={backHref}
-              className="inline-flex items-center justify-center min-h-[38px] gap-2 text-xs font-heading font-bold text-emerald-950 hover:text-emerald-900 py-1.5 px-3 bg-white/75 hover:bg-white border border-white/80 rounded-xl shadow-xs transition-all"
+              className="inline-flex items-center justify-center min-h-[38px] gap-1.5 text-xs font-heading font-bold text-emerald-950 hover:text-emerald-900 py-1.5 px-3 bg-white/75 hover:bg-white border border-white/80 rounded-xl shadow-xs transition-all cursor-pointer"
             >
-              <ArrowLeft className="w-4 h-4 text-emerald-600" />
+              <ArrowLeft className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="hidden sm:inline">{backLabel}</span>
+              <span className="sm:hidden">Back</span>
             </Link>
           ) : (
             <Link
               href="/"
-              className="flex items-center min-h-[44px] gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl"
+              className="flex items-center min-h-[44px] gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-sm border border-white/60 flex items-center justify-center text-white">
-                <Logo className="w-5 h-5 text-white" ariaLabel="Margam" />
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-sm border border-white/60 flex items-center justify-center text-white shrink-0">
+                <Logo className="w-4 h-4 sm:w-5 sm:h-5 text-white" ariaLabel="Margam" />
               </div>
               <span className="font-heading font-extrabold text-base sm:text-lg text-emerald-950 tracking-wider">
                 MARGAM
@@ -73,7 +74,7 @@ export default function StudentHeader({
           )}
 
           {profile && (
-            <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-emerald-900/10">
+            <div className="hidden md:flex items-center gap-2 pl-3 border-l border-emerald-900/10">
               <span className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-heading font-bold bg-emerald-100/90 text-emerald-900 border border-emerald-300 rounded-full shadow-xs">
                 {gradeNames[profile.selectedClass] || `Class ${profile.selectedClass}`}
               </span>
@@ -82,16 +83,15 @@ export default function StudentHeader({
         </div>
 
         {/* Right: Sound Toggle, Streak, Level, & Language Switcher */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {profile && (
-            <div className="hidden xs:flex items-center gap-1.5">
+            <div className="hidden lg:flex items-center gap-1.5">
               {/* Level & Rank Pill */}
               <div
                 className="flex items-center gap-1 px-2.5 py-1 bg-emerald-50/90 border border-emerald-200/80 rounded-xl text-xs font-heading font-bold text-emerald-800 shadow-xs select-none"
                 title={`${levelInfo?.rank.name} Rank • Level ${levelInfo?.level} (${profile.xp || 0} XP)`}
               >
                 <span>{levelInfo?.rank.badge}</span>
-                <span className="hidden sm:inline">{levelInfo?.rank.name}</span>
                 <span>Lv {levelInfo?.level}</span>
               </div>
 
@@ -112,14 +112,14 @@ export default function StudentHeader({
           <button
             type="button"
             onClick={toggleSound}
-            className="min-h-[38px] min-w-[38px] p-2 bg-white/70 hover:bg-white/90 border border-white/80 rounded-xl text-emerald-950 shadow-xs flex items-center justify-center transition-all cursor-pointer"
-            aria-label={soundOn ? "Mute Game Audio" : "Enable Game Audio"}
+            className="min-h-[36px] min-w-[36px] p-2 bg-white/70 hover:bg-white border border-white/80 rounded-xl text-emerald-950 shadow-xs flex items-center justify-center transition-all cursor-pointer"
+            aria-label={soundOn ? "Mute Audio" : "Enable Audio"}
             title={soundOn ? "Sound: ON" : "Sound: OFF"}
           >
             {soundOn ? (
-              <Volume2 className="w-4 h-4 text-emerald-600" aria-hidden="true" />
+              <Volume2 className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
             ) : (
-              <VolumeX className="w-4 h-4 text-slate-400" aria-hidden="true" />
+              <VolumeX className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
             )}
           </button>
 
@@ -133,7 +133,7 @@ export default function StudentHeader({
               type="button"
               data-l="en"
               onClick={() => onLanguageChange("en")}
-              className={`min-h-[34px] min-w-[32px] sm:min-w-[36px] px-1.5 sm:px-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              className={`min-h-[32px] min-w-[28px] sm:min-w-[34px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer ${
                 currentLang === "en"
                   ? "bg-emerald-600 text-white shadow-xs font-extrabold"
                   : "text-emerald-950/70 hover:text-emerald-950 hover:bg-white/50"
@@ -145,25 +145,27 @@ export default function StudentHeader({
               type="button"
               data-l="hi"
               onClick={() => onLanguageChange("hi")}
-              className={`min-h-[34px] min-w-[36px] sm:min-w-[40px] px-1.5 sm:px-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              className={`min-h-[32px] min-w-[28px] sm:min-w-[38px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer ${
                 currentLang === "hi"
                   ? "bg-emerald-600 text-white shadow-xs font-extrabold"
                   : "text-emerald-950/70 hover:text-emerald-950 hover:bg-white/50"
               }`}
             >
-              हिन्दी
+              <span className="sm:hidden">हि</span>
+              <span className="hidden sm:inline">हिन्दी</span>
             </button>
             <button
               type="button"
               data-l="te"
               onClick={() => onLanguageChange("te")}
-              className={`min-h-[34px] min-w-[36px] sm:min-w-[40px] px-1.5 sm:px-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+              className={`min-h-[32px] min-w-[28px] sm:min-w-[38px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer ${
                 currentLang === "te"
                   ? "bg-emerald-600 text-white shadow-xs font-extrabold"
                   : "text-emerald-950/70 hover:text-emerald-950 hover:bg-white/50"
               }`}
             >
-              తెలుగు
+              <span className="sm:hidden">తె</span>
+              <span className="hidden sm:inline">తెలుగు</span>
             </button>
           </div>
         </div>

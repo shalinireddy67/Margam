@@ -12,7 +12,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 my-10">
+    <footer className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 my-10">
       <div className="glass-panel p-6 sm:p-8 space-y-6 border border-white/70 shadow-[0_8px_32px_rgba(16,42,18,0.08)]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-emerald-900/10">
           <div className="flex items-center gap-3">
