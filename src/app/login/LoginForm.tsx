@@ -568,48 +568,48 @@ export default function LoginForm() {
           {/* RECOVERY CODE MODAL (STUDENT SIGN-UP ONLY) */}
           {recoveryCode && (
             <div className="space-y-4 animate-in fade-in">
-              <div className="p-4 bg-amber-50 rounded-2xl border border-amber-300 space-y-2.5 text-amber-950 shadow-xs">
-                <div className="flex items-center gap-2 font-pixel text-xs">
+              <div className="p-4 bg-[#FFFDF7] border-3 border-[#2B1B0F] shadow-block space-y-3 text-[#2B1B0F]">
+                <div className="flex items-center gap-2 font-pixel text-xs text-[#2B1B0F]">
                   <KeyRound className="w-4 h-4 text-[#A06A3C]" />
                   <span>One-Time Account Recovery Code</span>
                 </div>
-                <p className="text-xs text-[#2B1B0F] leading-relaxed font-semibold font-sans">
-                  ⚠️ <strong>IMPORTANT:</strong> Passwords cannot be reset by email because we do not collect your email or phone.
+                <p className="text-xs text-[#2B1B0F] leading-relaxed font-sans font-medium">
+                  ⚠️ <strong>IMPORTANT:</strong> Passwords cannot be reset by email because we do not collect your email or phone number.
                   This code is shown <strong>ONLY ONCE</strong>.
                 </p>
 
-                <div className="bg-white p-3 rounded-xl border border-slate-300 shadow-2xs flex items-center justify-between gap-2">
+                <div className="bg-white p-3 border-2 border-[#2B1B0F] shadow-2xs flex items-center justify-between gap-2">
                   <code className="font-mono text-sm sm:text-base font-extrabold tracking-wider text-[#2B1B0F] select-all">
                     {recoveryCode}
                   </code>
                   <button
                     type="button"
                     onClick={copyRecoveryCode}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-heading font-bold rounded-lg shadow-xs transition-all"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] text-xs font-heading font-bold border-2 border-[#2B1B0F] shadow-xs transition-all cursor-pointer"
                   >
                     <Copy className="w-3.5 h-3.5" />
-                    <span>{copiedRecovery ? "Copied!" : "Copy"}</span>
+                    <span>{copiedRecovery ? "Copied!" : "Copy Code"}</span>
                   </button>
                 </div>
               </div>
 
-              <label className="flex items-start gap-2.5 text-xs text-slate-700 cursor-pointer pt-1 font-semibold">
+              <label className="flex items-start gap-2.5 text-xs text-[#2B1B0F] cursor-pointer pt-1 font-semibold">
                 <input
                   type="checkbox"
                   checked={savedRecoveryCodeCheckbox}
                   onChange={(e) => setSavedRecoveryCodeCheckbox(e.target.checked)}
-                  className="mt-0.5 w-4 h-4 rounded-none accent-[#5DAA3A]"
+                  className="mt-0.5 w-4 h-4 rounded-none accent-[#5DAA3A] border-2 border-[#2B1B0F]"
                 />
-                <span>I have written down or saved my recovery code in a safe place.</span>
+                <span>I&apos;ve saved it — I have written down or safely stored my recovery code.</span>
               </label>
 
               <button
                 type="button"
                 disabled={!savedRecoveryCodeCheckbox}
                 onClick={() => router.push("/student")}
-                className="w-full min-h-[46px] py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-heading font-extrabold rounded-xl shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full min-h-[46px] py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] disabled:opacity-40 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:cursor-not-allowed text-[#2B1B0F] text-xs font-heading font-extrabold uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>Continue to Learning Path</span>
+                <span>Continue to Margam</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

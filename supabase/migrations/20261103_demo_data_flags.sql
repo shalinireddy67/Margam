@@ -35,3 +35,4 @@ CREATE INDEX IF NOT EXISTS idx_concept_mastery_is_demo
 
 CREATE INDEX IF NOT EXISTS idx_xp_events_is_demo 
   ON public.xp_events(is_demo) WHERE is_demo = true;
+

@@ -79,3 +79,4 @@ When `npm run seed:demo:reset` is executed:
 
 ### Multi-Tenant Recommendation:
 - We strongly recommend maintaining a **dedicated, isolated Supabase project** exclusively for public hackathon demonstration and testing, completely separated from school production databases.
+

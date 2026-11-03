@@ -6,13 +6,18 @@ import { spawn } from "child_process";
 
 const edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 
-// External artifact directory outside repo
-const externalDir = "C:\\Users\\reddy\\.gemini\\antigravity-ide\\brain\\23cf73e6-37f4-4a19-b3c2-71392b274026\\screenshots";
+// Screenshot directories
+const artifactDir = process.env.ARTIFACT_DIR || "C:\\Users\\pbala\\.gemini\\antigravity\\brain\\9c709130-55ac-45c2-be66-97a5f14dcdb5\\screenshots";
 const localDir = path.join(process.cwd(), "screenshots");
 
-[externalDir, localDir].forEach((dir) => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+[artifactDir, localDir].forEach((dir) => {
+  try {
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  } catch (e) {
+    // Ignore external dir error
+  }
 });
+const externalDir = artifactDir;
 
 async function isServerRunning(port = 3008) {
   return new Promise((resolve) => {

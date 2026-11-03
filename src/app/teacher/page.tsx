@@ -143,18 +143,24 @@ export default function TeacherPage() {
   const heatmapConcepts = syntheticClassData.heatmapConcepts;
   const metrics = syntheticClassData.metrics;
 
-  const filteredStudents = students.filter((s) => {
-    if (filterAttention && !s.needsAttention) return false;
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      return (
-        s.name.toLowerCase().includes(q) ||
-        String(s.rollNumber).includes(q) ||
-        (s.persona && s.persona.toLowerCase().includes(q))
-      );
-    }
-    return true;
-  });
+  const filteredStudents = [...students]
+    .sort((a, b) => {
+      if (a.needsAttention && !b.needsAttention) return -1;
+      if (!a.needsAttention && b.needsAttention) return 1;
+      return a.diagnosticScore - b.diagnosticScore;
+    })
+    .filter((s) => {
+      if (filterAttention && !s.needsAttention) return false;
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        return (
+          s.name.toLowerCase().includes(q) ||
+          String(s.rollNumber).includes(q) ||
+          (s.persona && s.persona.toLowerCase().includes(q))
+        );
+      }
+      return true;
+    });
 
   const selectedStudent =
     students.find((s) => s.id === selectedStudentId) || students[0];
@@ -202,7 +208,17 @@ export default function TeacherPage() {
     (m) => m.category === "improving" || m.resolvedGap
   );
 
-  const filteredLiveMembers = classMembers.filter((m) => {
+  const filteredLiveMembers = [...classMembers]
+    .sort((a, b) => {
+      const aAttn = a.category === "needs_attention" || a.identifiedGap || (typeof a.latestDiagnosticPercentage === "number" && a.latestDiagnosticPercentage < 70);
+      const bAttn = b.category === "needs_attention" || b.identifiedGap || (typeof b.latestDiagnosticPercentage === "number" && b.latestDiagnosticPercentage < 70);
+      if (aAttn && !bAttn) return -1;
+      if (!aAttn && bAttn) return 1;
+      const aDiag = typeof a.latestDiagnosticPercentage === "number" ? a.latestDiagnosticPercentage : 70;
+      const bDiag = typeof b.latestDiagnosticPercentage === "number" ? b.latestDiagnosticPercentage : 70;
+      return aDiag - bDiag;
+    })
+    .filter((m) => {
     if (liveFilter === "needs_attention") {
       const isAttn = m.category === "needs_attention" || m.identifiedGap || (typeof m.latestDiagnosticPercentage === "number" && m.latestDiagnosticPercentage < 70);
       if (!isAttn) return false;
@@ -309,6 +325,41 @@ export default function TeacherPage() {
         {/* LIVE ENROLLED STUDENTS VIEW */}
         {viewMode === "live" && (
           <div className="space-y-6">
+            {liveClasses.length === 0 && !loadingLive ? (
+              <div className="bg-[#FFFDF7] p-8 sm:p-12 border-3 border-[#2B1B0F] shadow-block text-center max-w-2xl mx-auto space-y-5 my-8">
+                <div className="w-16 h-16 mx-auto bg-[#F4C542] border-3 border-[#2B1B0F] shadow-block flex items-center justify-center text-3xl">
+                  🏫
+                </div>
+                <div className="space-y-2">
+                  <span className="px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide">
+                    TEACHER PORTAL
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#2B1B0F]">
+                    No Classes Created Yet
+                  </h2>
+                  <p className="text-sm text-[#2B1B0F]/80 font-sans max-w-md mx-auto leading-relaxed">
+                    Create your first classroom to generate a unique join code for your students, track diagnostic mastery, and automatically surface foundational gaps.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                  <button
+                    onClick={() => setShowAddClassModal(true)}
+                    className="w-full sm:w-auto px-6 py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Create Your First Class</span>
+                  </button>
+                  <button
+                    onClick={() => setViewMode("synthetic")}
+                    className="w-full sm:w-auto px-5 py-3 bg-white hover:bg-slate-50 text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <Sparkles className="w-4 h-4 text-[#A06A3C]" />
+                    <span>Explore Demo Class</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
             {/* School & Class Overview Hero Banner */}
             <div className="glass-panel p-5 sm:p-6 rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/15 shadow-[0_8px_32px_rgba(16,42,18,0.12)] space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/40 pb-3">
@@ -327,19 +378,38 @@ export default function TeacherPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="bg-white/80 px-3 py-1 rounded-xl border border-white/90 flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-bold text-slate-500">Class Code</span>
-                    <code className="text-xs font-mono font-black text-emerald-900 tracking-wider">
-                      {activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4"}
-                    </code>
-                    <button
-                      type="button"
-                      onClick={() => copyCode(activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4")}
-                      className="p-1 text-slate-500 hover:text-emerald-900 transition-colors"
-                      title="Copy Class Code"
-                    >
-                      {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                    </button>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {liveClasses.map((cls) => {
+                      const isSelected = cls.id === (selectedLiveClassId || liveClasses[0]?.id);
+                      const code = cls.class_code || cls.classCode || "DEMO26";
+                      return (
+                        <div
+                          key={cls.id}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 border-2 border-[#2B1B0F] text-xs font-heading font-bold transition-all ${
+                            isSelected ? "bg-[#5DAA3A] text-[#2B1B0F] shadow-xs" : "bg-white/90 text-[#2B1B0F] hover:bg-white"
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setSelectedLiveClassId(cls.id)}
+                            className="cursor-pointer"
+                          >
+                            {cls.name} ({cls.grade}th)
+                          </button>
+                          <span className="font-mono text-[10px] bg-black/10 px-1 py-0.5 border border-[#2B1B0F]/20 select-all">
+                            {code}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => copyCode(code)}
+                            className="p-0.5 hover:text-[#5DAA3A] transition-colors"
+                            title={`Copy ${code}`}
+                          >
+                            {copiedCode === code ? <Check className="w-3 h-3 text-[#5DAA3A]" /> : <Copy className="w-3 h-3" />}
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {liveClasses.length > 1 && (
@@ -918,6 +988,8 @@ export default function TeacherPage() {
                   </div>
                 </div>
               </div>
+            )}
+              </>
             )}
           </div>
         )}
