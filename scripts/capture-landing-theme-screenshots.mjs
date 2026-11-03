@@ -147,6 +147,7 @@ async function run() {
     }
 
     console.log("All landing theme screenshots captured successfully!");
+    process.exit(0);
   } finally {
     await browser.close();
     if (serverProcess) {

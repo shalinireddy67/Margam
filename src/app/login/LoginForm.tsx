@@ -67,6 +67,21 @@ export default function LoginForm() {
   const [isLocked, setIsLocked] = useState(false);
   const [lockoutMinutes, setLockoutMinutes] = useState<number>(15);
 
+  // Auto-prefill demo credentials when ?demo=1 is provided
+  useEffect(() => {
+    const demo = searchParams.get("demo");
+    if (demo === "1" || demo === "true") {
+      setSubMode("signin");
+      if (isTeacherFlow) {
+        setTeacherEmail(DEMO_SCHOOL_CONFIG.teacher.email);
+        setTeacherPassword(DEMO_SCHOOL_CONFIG.demoPassword);
+      } else {
+        setStudentUsername("student01");
+        setStudentPassword(DEMO_SCHOOL_CONFIG.demoPassword);
+      }
+    }
+  }, [searchParams, isTeacherFlow]);
+
   const resetMessages = () => {
     setErrorMessage(null);
     setSuccessMessage(null);

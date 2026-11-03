@@ -16,6 +16,7 @@ import {
 } from "@/components/ui";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { LandingSections } from "@/components/landing/LandingSections";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
@@ -245,111 +246,9 @@ export default function HomePage() {
         {/* ONBOARDING / LANDING (For First-Time Visitors)                    */}
         {/* ================================================================= */}
         {!profile && (
-          <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
-            {/* Hero Section: WitchCat Mascot + H1 + Subline */}
-            <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
-              <div className="shrink-0 mb-2 p-2 bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F]">
-                <WitchCat
-                  pose={isIstNightTime() ? "sleepy" : "greet"}
-                  size={110}
-                  sticker={false}
-                  alt="Maru the cat mascot"
-                />
-              </div>
-
-              <h1
-                id="hero-heading"
-                className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#2B1B0F] leading-tight max-w-[22ch]"
-              >
-                {copy.h1}
-              </h1>
-
-              <p className="font-sans text-base sm:text-lg text-[#2B1B0F] max-w-[65ch] leading-relaxed">
-                {copy.subline}
-              </p>
-            </div>
-
-            {/* Two Role Cards: Student & Teacher (side by side on desktop, stacked on mobile) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
-              {/* Card 1: Student */}
-              <div className="bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                <div className="space-y-3">
-                  <span className="font-pixel text-[11px] uppercase tracking-wider text-[#5DAA3A] block">
-                    {copy.studentLabel}
-                  </span>
-                  <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
-                    {copy.studentTitle}
-                  </h2>
-                  <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
-                    {copy.studentBody}
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <Link
-                    href="/login?role=student"
-                    className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
-                  >
-                    <span>{copy.studentBtn}</span>
-                    <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
-                  </Link>
-
-                  <div className="text-center">
-                    <Link
-                      href="/login?role=student"
-                      className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
-                    >
-                      {copy.studentSignIn}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2: Teacher */}
-              <div className="bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                <div className="space-y-3">
-                  <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3FA7C9] block">
-                    {copy.teacherLabel}
-                  </span>
-                  <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
-                    {copy.teacherTitle}
-                  </h2>
-                  <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
-                    {copy.teacherBody}
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <Link
-                    href="/login?role=teacher"
-                    className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
-                  >
-                    <span>{copy.teacherBtn}</span>
-                    <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
-                  </Link>
-
-                  <div className="text-center">
-                    <Link
-                      href="/login?role=teacher"
-                      className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
-                    >
-                      {copy.teacherSignIn}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Line Below Cards */}
-            <div className="text-center pt-2 pb-4">
-              <p className="font-sans text-sm text-[#5A3720] max-w-none">
-                {copy.trustLine}
-              </p>
-            </div>
-          </section>
+          <LandingSections currentLang={currentLang as ("en" | "hi" | "te")} />
         )}
 
-        {/* ================================================================= */}
         {/* STUDENT DASHBOARD (When Profile is Active)                        */}
         {/* ================================================================= */}
         {profile && (
@@ -645,6 +544,8 @@ export default function HomePage() {
         )}
 
         {/* ================================================================= */}
+        {profile && (
+          <>
         {/* CHAPTERS GRID (Minecraft Voxel Tiles)                             */}
         {/* ================================================================= */}
         <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
@@ -735,6 +636,8 @@ export default function HomePage() {
               {copy.teacherLink}
             </Link>
           </div>
+        )}
+        </>
         )}
       </main>
 

@@ -79,7 +79,7 @@ export default function Footer() {
 
         <div className="pt-2 border-t border-[#7A4B2A]/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FFF7E6]/70 font-sans gap-2">
           <p className="m-0">
-            © 2026 Margam. Built for Indian students and teachers across Classes 6–10.
+            © 2026 Margam. Built for Code Kernel '26 · Classes 6–10.
           </p>
           <p className="m-0 text-[#FFE9A8]/90 font-medium">
             English · हिन्दी · తెలుగు

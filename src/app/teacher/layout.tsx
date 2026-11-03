@@ -13,3 +13,4 @@ export default function TeacherLayout({
 }) {
   return <>{children}</>;
 }
+
