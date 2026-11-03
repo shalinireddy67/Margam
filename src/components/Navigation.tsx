@@ -129,7 +129,7 @@ export function Navigation({
                     MARGAM
                   </span>
                   <span className="text-[10px] font-sans font-bold text-[#7A4B2A] leading-tight hidden sm:block mt-0.5">
-                    Classes 6–10
+                    Maths for Classes 6-10
                   </span>
                 </div>
               </Link>
@@ -147,37 +147,56 @@ export function Navigation({
               className="hidden lg:flex items-center gap-1.5"
               aria-label="Desktop primary navigation"
             >
-              {NAV_ITEMS.map((item) => {
-                const Icon = item.icon;
-                const isActive = active === item.id;
-                const localizedLabel = item.label[currentLang] || item.label.en;
+              {profile ? (
+                <>
+                  {NAV_ITEMS.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = active === item.id;
+                    const localizedLabel = item.label[currentLang] || item.label.en;
 
-                return (
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`min-h-[44px] px-3.5 py-2 text-xs font-heading font-extrabold flex items-center gap-2 rounded-[2px] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] ${
+                          isActive
+                            ? "bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]"
+                            : "text-[#2B1B0F] hover:text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                        }`}
+                      >
+                        <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#2B1B0F]" : "text-[#1E6F8C]"}`} aria-hidden="true" />
+                        <span>{localizedLabel}</span>
+                      </Link>
+                    );
+                  })}
+
+                  {/* Subtle Teacher link on desktop */}
                   <Link
-                    key={item.id}
-                    href={item.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`min-h-[44px] px-3.5 py-2 text-xs font-heading font-extrabold flex items-center gap-2 rounded-[2px] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] ${
-                      isActive
-                        ? "bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]"
-                        : "text-[#2B1B0F] hover:text-[#2B1B0F] hover:bg-[#FFE9A8]"
-                    }`}
+                    href="/teacher"
+                    className="min-h-[44px] px-2.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#FFE9A8] rounded-[2px] transition-all flex items-center gap-1.5 ml-1"
+                    title="Teacher"
                   >
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#2B1B0F]" : "text-[#1E6F8C]"}`} aria-hidden="true" />
-                    <span>{localizedLabel}</span>
+                    <Users className="w-3.5 h-3.5 text-[#1E6F8C]" aria-hidden="true" />
+                    <span className="text-[11px]">Teacher</span>
                   </Link>
-                );
-              })}
-
-              {/* Subtle Teacher Portal link for educators on desktop */}
-              <Link
-                href="/teacher"
-                className="min-h-[44px] px-2.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#FFE9A8] rounded-[2px] transition-all flex items-center gap-1.5 ml-1"
-                title="Teacher Hub"
-              >
-                <Users className="w-3.5 h-3.5 text-[#1E6F8C]" aria-hidden="true" />
-                <span className="text-[11px]">Teacher</span>
-              </Link>
+                </>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/login?role=student"
+                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-[#FFF7E6] hover:bg-[#FFE9A8] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+                  >
+                    <span>Student sign in</span>
+                  </Link>
+                  <Link
+                    href="/login?role=teacher"
+                    className="min-h-[40px] px-3.5 py-2 text-xs font-heading font-bold text-[#2B1B0F] bg-white hover:bg-[#FFE9A8] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] rounded-[2px] transition-all flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+                  >
+                    <span>Teacher sign in</span>
+                  </Link>
+                </div>
+              )}
             </nav>
 
             {/* Right: Sound, Streak, Level Chip & Language Switcher */}
@@ -318,29 +337,61 @@ export function Navigation({
           className="md:hidden fixed left-0 right-0 bottom-0 z-40 bg-[#FFFFFF] border-t-[3px] border-[#2B1B0F] shadow-[0px_-3px_0px_rgba(43,27,15,0.1)] pb-[env(safe-area-inset-bottom,0px)]"
         >
           <div className="flex w-full h-16 min-h-[64px] max-w-[600px] mx-auto">
-            {NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              const isActive = active === item.id;
-              const localizedLabel = item.label[currentLang] || item.label.en;
+            {profile ? (
+              NAV_ITEMS.map((item) => {
+                const Icon = item.icon;
+                const isActive = active === item.id;
+                const localizedLabel = item.label[currentLang] || item.label.en;
 
-              return (
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none transition-colors px-1 ${
+                      isActive
+                        ? "bg-[#5DAA3A] text-[#2B1B0F] border-t-4 border-t-[#F4C542] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)] font-bold"
+                        : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
+                    }`}
+                  >
+                    <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
+                    <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
+                      {localizedLabel}
+                    </span>
+                  </Link>
+                );
+              })
+            ) : (
+              <>
                 <Link
-                  key={item.id}
-                  href={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none transition-colors px-1 ${
-                    isActive
-                      ? "bg-[#5DAA3A] text-[#2B1B0F] border-t-4 border-t-[#F4C542] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)] font-bold"
-                      : "text-[#2B1B0F] hover:bg-[#FFE9A8]"
-                  }`}
+                  href="/"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
                 >
-                  <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
+                  <Home className="w-5 h-5 shrink-0" aria-hidden="true" />
                   <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
-                    {localizedLabel}
+                    Home
                   </span>
                 </Link>
-              );
-            })}
+                <Link
+                  href="/login?role=student"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
+                >
+                  <User className="w-5 h-5 shrink-0" aria-hidden="true" />
+                  <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
+                    Student sign in
+                  </span>
+                </Link>
+                <Link
+                  href="/login?role=teacher"
+                  className="flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none text-[#2B1B0F] hover:bg-[#FFE9A8] px-1"
+                >
+                  <Users className="w-5 h-5 shrink-0" aria-hidden="true" />
+                  <span className="font-sans font-bold text-[10px] leading-normal text-center truncate max-w-full">
+                    Teacher sign in
+                  </span>
+                </Link>
+              </>
+            )}
           </div>
         </nav>
       )}

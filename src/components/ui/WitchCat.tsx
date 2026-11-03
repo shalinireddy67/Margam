@@ -16,8 +16,7 @@ export interface WitchCatProps {
 }
 
 /**
- * Margam Learning Companion: Minecraft Zombie riding a Chicken (Chicken Jockey).
- * Faithful to the authentic Minecraft character identity, proportions, and transparent rendering.
+ * Margam Learning Companion: Maru the companion (block-world character).
  */
 export function WitchCat({
   pose = "greet",
@@ -37,17 +36,17 @@ export function WitchCat({
     dimension = 220;
   }
 
-  // Chicken Jockey aspect ratio: width is ~0.51 of height (328 x 640)
+  // Mascot aspect ratio: width is ~0.51 of height (328 x 640)
   const mascotHeight = dimension;
   const mascotWidth = Math.round(dimension * 0.52);
 
   const defaultAlt = {
-    greet: "Margam Zombie Chicken Jockey companion greeting you",
-    read: "Margam Zombie Chicken Jockey companion reading math lessons",
-    think: "Margam Zombie Chicken Jockey companion thinking carefully",
-    cheer: "Margam Zombie Chicken Jockey companion celebrating your victory!",
-    oops: "Margam Zombie Chicken Jockey companion offering encouragement",
-    sleepy: "Margam Zombie Chicken Jockey companion resting peacefully at night",
+    greet: "Margam companion greeting you",
+    read: "Margam companion reading math lessons",
+    think: "Margam companion thinking carefully",
+    cheer: "Margam companion celebrating your progress",
+    oops: "Margam companion offering encouragement",
+    sleepy: "Margam companion resting peacefully",
   }[pose];
 
   const animationClass =
@@ -72,7 +71,7 @@ export function WitchCat({
         <div className="absolute inset-0 bg-[#5A3720] border-2 border-[#422816] shadow-[3px_3px_0px_rgba(0,0,0,0.4)] -z-10" />
       )}
 
-      {/* Mascot Container with Subtle Minecraft Animation */}
+      {/* Mascot Container with Subtle Block Animation */}
       <div className={`relative w-full h-full flex items-center justify-center ${animationClass} motion-reduce:animate-none`}>
         <img
           src="/images/companion/mascot-trimmed.png"
@@ -116,14 +115,6 @@ export function WitchCat({
         {pose === "greet" && (
           <div className="absolute -top-1.5 -left-1.5 text-xs animate-pulse">
             👋
-          </div>
-        )}
-
-        {pose === "sleepy" && (
-          <div className="absolute -top-2 -right-1 flex gap-0.5 items-center select-none font-pixel text-[10px] text-[#6EB5FF] animate-pulse">
-            <span>z</span>
-            <span className="text-xs">Z</span>
-            <span className="text-sm">z</span>
           </div>
         )}
       </div>

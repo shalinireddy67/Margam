@@ -2,24 +2,25 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const SITE_NAME = "Margam";
-const SITE_DESCRIPTION =
-  "Margam — Adaptive Mathematics learning platform for Indian students in Classes 6 to 10 (NCERT curriculum).";
+const LANDING_TITLE = "Margam: find the gap behind your maths mistakes";
+const LANDING_DESCRIPTION =
+  "Margam finds the earlier maths topic you missed and walks you back to fix it. NCERT Classes 6-10, in English, Hindi and Telugu.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://margam-learningspace.vercel.app"
   ),
   title: {
-    default: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
+    default: LANDING_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
-  description: SITE_DESCRIPTION,
+  description: LANDING_DESCRIPTION,
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: `${SITE_NAME} | Every learner has a path. Find yours.`,
-    description: SITE_DESCRIPTION,
+    title: LANDING_TITLE,
+    description: LANDING_DESCRIPTION,
     type: "website",
     locale: "en_IN",
     siteName: SITE_NAME,
@@ -28,14 +29,14 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Margam — Adaptive Mathematics for Classes 6 to 10",
+        alt: LANDING_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
-    description: SITE_DESCRIPTION,
+    title: LANDING_TITLE,
+    description: LANDING_DESCRIPTION,
     images: ["/og-image.png"],
   },
   robots: {

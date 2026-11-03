@@ -99,96 +99,96 @@ export default function HomePage() {
   const copy = {
     en: {
       appName: "Margam",
-      tagline: "Adaptive Mathematics for Classes 6–10",
+      tagline: "Maths for Classes 6-10",
       h1: "Stuck in Class 10 maths? It probably started in Class 7.",
       subline:
-        "Margam finds the earlier topic you missed, like integer signs hiding behind your quadratic mistakes, and walks you back to fix it. NCERT Classes 6-10, in English, हिन्दी and తెలుగు.",
-      studentLabel: "STUDENT",
+        "Margam finds the earlier topic you missed, like integer signs hiding behind your quadratic mistakes, and walks you back to fix it. NCERT, in English, हिन्दी and తెలుగు.",
+      studentLabel: "Student",
       studentTitle: "I'm a student",
       studentBody:
         "Take a short diagnostic, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
       studentBtn: "Start learning",
       studentSignIn: "Already have an account? Sign in",
-      teacherLabel: "TEACHER",
+      teacherLabel: "Teacher",
       teacherTitle: "I'm a teacher",
       teacherBody:
-        "Create a class, share a code, and see which foundational concepts from earlier grades your students are actually stuck on.",
+        "Make a class, share a code, and see which earlier topics your students are actually missing.",
       teacherBtn: "Set up my class",
       teacherSignIn: "Already registered? Sign in",
-      trustLine: "Follows NCERT 2024–26 · No trackers · No email needed",
+      trustLine: "Built around NCERT chapters for Classes 6-10 · No email or phone asked · No ad trackers",
       reviewed: true,
       welcomeBack: "Welcome back",
       classBadge: "Class",
-      activeGapFound: "Prerequisite Gap Detected",
-      fixGapBtn: "Strengthen Foundation",
-      continueLessonBtn: "Continue Quest",
-      switchProfile: "Switch Grade / Reset Profile",
-      chaptersHeading: "Math Chapters & Diagnostics",
-      chaptersSubtitle: "Choose a chapter to diagnose prerequisite mastery or start lessons.",
-      teacherLink: "Teacher Hub",
-      conceptsMastered: "Concepts Mastered",
+      activeGapFound: "Prerequisite gap detected",
+      fixGapBtn: "Fix this first",
+      continueLessonBtn: "Continue lesson",
+      switchProfile: "Switch class or reset profile",
+      chaptersHeading: "Maths chapters and diagnostics",
+      chaptersSubtitle: "Choose a chapter to diagnose prerequisite gaps or start lessons.",
+      teacherLink: "Teacher",
+      conceptsMastered: "concepts completed",
     },
     hi: {
       appName: "मार्गम्",
-      tagline: "कक्षा 6–10 के लिए अनुकूली गणित",
+      tagline: "कक्षा 6-10 के लिए गणित",
       h1: "कक्षा 10 के गणित में अटक रहे हैं? इसकी शुरुआत शायद कक्षा 7 में हुई थी।",
       subline:
-        "मार्गम् उस पुरानी कमी को खोजता है जो छूट गई थी—जैसे द्विघात समीकरण की गलतियों के पीछे छिपे पूर्णांकों के चिह्न—और उसे सुधारने का मार्ग दिखाता है। एनसीईआरटी कक्षा 6-10, अंग्रेजी, हिन्दी और తెలుగు में।",
-      studentLabel: "STUDENT",
+        "मार्गम् उस पिछली कमी को खोजता है जो छूट गई थी, जैसे द्विघात समीकरण की गलतियों के पीछे छिपे पूर्णांकों के चिह्न, और उसे सुधारने का रास्ता दिखाता है। एनसीईआरटी, अंग्रेजी, हिन्दी और తెలుగు में।",
+      studentLabel: "Student",
       studentTitle: "मैं एक विद्यार्थी हूँ",
       studentBody:
-        "एक संक्षिप्त जांच परीक्षा दें, अपनी समझ का मानचित्र देखें, और एक-एक छोटे कदम के साथ कमियों को दूर करें। किसी ईमेल या फ़ोन नंबर की आवश्यकता नहीं है।",
+        "एक छोटी जांच परीक्षा दें, अपनी समझ का नक्शा देखें, और एक-एक छोटे कदम से कमियों को ठीक करें। किसी ईमेल या फ़ोन नंबर की जरूरत नहीं है।",
       studentBtn: "सीखना शुरू करें",
       studentSignIn: "पहले से खाता है? साइन इन करें",
-      teacherLabel: "TEACHER",
+      teacherLabel: "Teacher",
       teacherTitle: "मैं एक शिक्षक हूँ",
       teacherBody:
-        "कक्षा बनाएं, कोड साझा करें, और देखें कि आपके विद्यार्थी वास्तव में किन पुराने विषयों में कठिनाई महसूस कर रहे हैं।",
+        "कक्षा बनाएं, कोड साझा करें, और देखें कि आपके विद्यार्थी वास्तव में किन पिछली कक्षाओं के विषयों में अटक रहे हैं।",
       teacherBtn: "मेरी कक्षा सेट करें",
       teacherSignIn: "पहले से पंजीकृत हैं? साइन इन करें",
-      trustLine: "एनसीईआरटी 2024–26 पर आधारित · कोई ट्रैकर नहीं · ईमेल की आवश्यकता नहीं",
+      trustLine: "कक्षा 6-10 के एनसीईआरटी अध्यायों पर आधारित · न ईमेल, न फ़ोन · कोई विज्ञापन ट्रैकर नहीं",
       reviewed: false,
       welcomeBack: "पुनः स्वागत है",
       classBadge: "कक्षा",
       activeGapFound: "बुनियादी कमी पाई गई",
-      fixGapBtn: "बुनियादी कमी सुधारें",
+      fixGapBtn: "पहले इसे सुधारें",
       continueLessonBtn: "पाठ जारी रखें",
-      switchProfile: "कक्षा बदलें",
-      chaptersHeading: "गणित के अध्याय",
-      chaptersSubtitle: "अभ्यास करने या जांच के लिए अध्याय चुनें।",
-      teacherLink: "शिक्षक दृश्य",
+      switchProfile: "कक्षा बदलें या प्रोफ़ाइल रीसेट करें",
+      chaptersHeading: "गणित के अध्याय और जांच",
+      chaptersSubtitle: "बुनियादी कमियों की जांच या पाठ शुरू करने के लिए अध्याय चुनें।",
+      teacherLink: "शिक्षक",
       conceptsMastered: "अवधारणाएं पूर्ण",
     },
     te: {
       appName: "మార్గం",
-      tagline: "6–10 తరగతుల అనుకూల గణితం",
+      tagline: "6-10 తరగతుల గణితం",
       h1: "10వ తరగతి లెక్కల్లో ఇబ్బంది పడుతున్నారా? అది బహుశా 7వ తరగతిలోనే మొదలై ఉండవచ్చు.",
       subline:
-        "మార్గం మీరు గతంలో తప్పిపోయిన పునాది అంశాన్ని గుర్తిస్తుంది—ఉదాహరణకు వర్గ సమీకరణాల తప్పుల వెనుక దాగి ఉన్న పూర్ణ సంఖ్యల సంకేత నియమాలు—మరియు దానిని సరిదిద్దేందుకు మార్గదర్శనం చేస్తుంది. NCERT 6-10 తరగతులు, English, हिन्दी మరియు తెలుగులో.",
-      studentLabel: "STUDENT",
+        "మార్గం మీరు గతంలో తప్పిపోయిన పాఠాన్ని గుర్తిస్తుంది, ఉదాహరణకు వర్గ సమీకరణాల తప్పుల వెనుక దాగి ఉన్న పూర్ణ సంఖ్యల సంకేత నియమాలు, మరియు దానిని సరిదిద్దేందుకు మార్గదర్శనం చేస్తుంది. NCERT, English, हिन्दी మరియు తెలుగులో.",
+      studentLabel: "Student",
       studentTitle: "నేను విద్యార్థిని",
       studentBody:
-        "ఒక చిన్న రోగనిర్ధారణ పరీక్ష రాయండి, మీకు తెలిసిన అంశాల పటాన్ని చూడండి, మరియు చిన్న చిన్న దశల్లో లోపాలను సరిదిద్దండి. ఈమెయిల్ లేదా ఫోన్ నంబర్ అవసరం లేదు.",
+        "ఒక చిన్న రోగనిర్ధారణ పరీక్ష రాయండి, మీకు తెలిసిన విషయాల మ్యాప్ చూడండి, మరియు చిన్న చిన్న దశల్లో లోపాలను సరిదిద్దండి. ఈమెయిల్ లేదా ఫోన్ నంబర్ అవసరం లేదు.",
       studentBtn: "నేర్చుకోవడం ప్రారంభించండి",
       studentSignIn: "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
-      teacherLabel: "TEACHER",
+      teacherLabel: "Teacher",
       teacherTitle: "నేను ఉపాధ్యాయుడిని",
       teacherBody:
-        "తరగతిని సృష్టించండి, కోడ్‌ను పంచుకోండి, మరియు మీ విద్యార్థులు గతంలోని ఏ పునాది అంశాలలో వెనుకబడ్డారో చూడండి.",
+        "తరగతిని సృష్టించండి, కోడ్‌ను పంచుకోండి, మరియు మీ విద్యార్థులు ఏ మునుపటి అంశాలలో వెనుకబడ్డారో చూడండి.",
       teacherBtn: "నా తరగతిని సిద్ధం చేయండి",
       teacherSignIn: "ఇప్పటికే నమోదు చేసుకున్నారా? సైన్ ఇన్ చేయండి",
-      trustLine: "NCERT 2024–26 ఆధారంగా · ట్రాకర్లు లేవు · ఈమెయిల్ అవసరం లేదు",
+      trustLine: "6-10 తరగతుల NCERT అధ్యాయాల ఆధారంగా · ఈమెయిల్ లేదా ఫోన్ అడగము · యాడ్ ట్రాకర్లు లేవు",
       reviewed: false,
       welcomeBack: "పునఃస్వాగతం",
       classBadge: "తరగతి",
-      activeGapFound: "పునాది అంశంలో లోపం గుర్తించబడింది",
-      fixGapBtn: "పునాది లోపాన్ని సరిచేయండి",
-      continueLessonBtn: "అభ్యాసం కొనసాగించండి",
-      switchProfile: "తరగతి లేదా పేరు మార్చండి",
-      chaptersHeading: "గణిత అధ్యాయాలు",
-      chaptersSubtitle: "అభ్యాసం చేయడానికి లేదా లోపాలను గుర్తించడానికి ఒక అధ్యాయాన్ని ఎంచుకోండి.",
-      teacherLink: "ఉపాధ్యాయుల వీక్షణ",
-      conceptsMastered: "కాన్సెప్ట్‌లు పూర్తి అయ్యాయి",
+      activeGapFound: "పునాది లోపం గుర్తించబడింది",
+      fixGapBtn: "ముందుగా దీన్ని సరిచేయండి",
+      continueLessonBtn: "పాఠం కొనసాగించండి",
+      switchProfile: "తరగతి మార్చండి లేదా ప్రొఫైల్ రీసెట్ చేయండి",
+      chaptersHeading: "గణిత అధ్యాయాలు మరియు రోగనిర్ధారణ",
+      chaptersSubtitle: "పునాది లోపాలను గుర్తించడానికి లేదా పాఠాలు ప్రారంభించడానికి అధ్యాయాన్ని ఎంచుకోండి.",
+      teacherLink: "ఉపాధ్యాయుడు",
+      conceptsMastered: "పూర్తయిన కాన్సెప్ట్‌లు",
     },
   }[currentLang];
 
@@ -253,7 +253,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         {profile && (
           <section aria-labelledby="dashboard-heading" className="space-y-6">
-            {/* Hero Student Realm Banner */}
+            {/* Student Dashboard Banner */}
             <div className="p-6 sm:p-7 bg-[#5A3720] border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
@@ -277,7 +277,7 @@ export default function HomePage() {
                       {profile.name}
                     </h1>
                     <p className="text-xs text-[#E5D7BE] mt-1 font-bold">
-                      Class {profile.selectedClass} Realm • Adaptive Level {profile.currentDifficulty} / 3
+                      Class {profile.selectedClass}, level {profile.currentDifficulty} of 3
                     </p>
                   </div>
                 </div>
@@ -299,10 +299,10 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Minecraft XP Progress Bar */}
+              {/* XP Progress Bar */}
               <div className="space-y-1.5 pt-1">
                 <div className="flex items-center justify-between text-xs font-heading font-bold">
-                  <span className="text-[#E5D7BE]">Realm Mastery Progress</span>
+                  <span className="text-[#E5D7BE]">Topic progress</span>
                   <span className="text-[#FFE9A8]">
                     {completedConceptsCount} / {gradeChapters.length * 2} concepts
                   </span>
@@ -343,7 +343,7 @@ export default function HomePage() {
 
                   <p className="text-xs text-[#E5D7BE] leading-relaxed">
                     {profile?.activeGap?.plainLanguageReason ||
-                      "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade quests much easier!"}
+                      "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade chapters much easier."}
                   </p>
 
                   <div className="pt-1 flex items-center gap-2 flex-wrap">
@@ -422,7 +422,7 @@ export default function HomePage() {
 
               <div className="flex-1 text-center sm:text-left space-y-1">
                 <span className="text-[10px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
-                  Companion Quest Advice • {companionRevision?.title || "Daily Check-in"}
+                  Companion advice, {companionRevision?.title || "Daily check-in"}
                 </span>
                 <p className="text-xs sm:text-sm text-[#FFF7E6] font-medium leading-relaxed">
                   &ldquo;{companionRevision?.message}&rdquo;
@@ -479,7 +479,7 @@ export default function HomePage() {
                             {badgeLabel}
                           </span>
                           <span className="text-[11px] font-heading font-bold text-[#E5D7BE]">
-                            Class {item.class} • Level {item.currentDifficulty}
+                            Class {item.class}, level {item.currentDifficulty}
                           </span>
                         </div>
 
@@ -524,10 +524,10 @@ export default function HomePage() {
               <div className="p-6 bg-[#5A3720] border-3 border-[#7A4B2A] text-center space-y-2">
                 <CheckCircle2 className="w-8 h-8 text-[#5DAA3A] mx-auto" />
                 <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
-                  All Math Blocks in Great Shape!
+                  All math topics in good shape
                 </h3>
                 <p className="text-xs text-[#E5D7BE] max-w-md mx-auto">
-                  No concepts are currently overdue for spaced revision. Complete new lessons below to advance your learning realm!
+                  No concepts are currently overdue for spaced revision. Complete new lessons below to keep moving forward.
                 </p>
               </div>
             )}
@@ -587,7 +587,7 @@ export default function HomePage() {
               const localizedTitle = `Ch ${chapter.chapterNumber}: ${
                 chapter.name[currentLang] || chapter.name.en
               }`;
-              const localizedSubtitle = `NCERT • ${chapter.bookName}`;
+              const localizedSubtitle = `NCERT, ${chapter.bookName}`;
 
               const firstConceptId = chapterConcepts[0]?.id;
               const diagnosticHref = isReady

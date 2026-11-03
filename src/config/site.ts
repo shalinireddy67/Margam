@@ -5,9 +5,9 @@
  */
 
 export const SITE_NAME = "Margam";
-export const SITE_TAGLINE = "Every learner has a path. Find yours.";
+export const SITE_TAGLINE = "Find the gap behind your maths mistakes";
 export const SITE_DESCRIPTION =
-  "Margam is an adaptive mathematics learning platform for Indian students in Classes 6–10. We diagnose root prerequisite gaps, adapt lessons to individual needs, and support classroom teachers.";
+  "Margam finds the earlier maths topic you missed and walks you back to fix it. NCERT Classes 6-10, in English, Hindi and Telugu.";
 
 export const SITE_CONFIG = {
   name: SITE_NAME,
@@ -56,7 +56,7 @@ export const SITE_CONFIG = {
     "Diagnose root prerequisite gaps, don't just assign more drill",
     "Adapt all three stages: Learn, Solve, and Test",
     "Teachers remain in control, never replaced",
-    "Zero tracking cookies, DPDP Act 2023 privacy-by-design",
+    "No tracking cookies, private by design",
     "Works on low-data devices and includes printable single-sheet A4 worksheets",
   ],
 };

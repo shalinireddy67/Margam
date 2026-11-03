@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Student Portal",
+  title: "Student",
   description:
-    "Explore your mathematics learning path, diagnose foundational prerequisite gaps, and practice NCERT concepts.",
+    "Diagnose prerequisite maths gaps, follow your learning path, and practice NCERT concepts.",
+  openGraph: {
+    title: "Student | Margam",
+    description:
+      "Diagnose prerequisite maths gaps, follow your learning path, and practice NCERT concepts.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Student | Margam",
+    description:
+      "Diagnose prerequisite maths gaps, follow your learning path, and practice NCERT concepts.",
+  },
 };
 
 export default function StudentLayout({

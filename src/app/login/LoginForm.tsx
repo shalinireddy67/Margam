@@ -30,10 +30,13 @@ export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
+  const modeParam = searchParams.get("mode");
   const isTeacherFlow = roleParam === "teacher";
 
   // Mode within the role portal: "signin" or "signup"
-  const [subMode, setSubMode] = useState<"signin" | "signup">("signin");
+  const [subMode, setSubMode] = useState<"signin" | "signup">(
+    modeParam === "signup" ? "signup" : "signin"
+  );
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -69,6 +72,10 @@ export default function LoginForm() {
 
   // Auto-prefill demo credentials when ?demo=1 is provided
   useEffect(() => {
+    const mode = searchParams.get("mode");
+    if (mode === "signup") {
+      setSubMode("signup");
+    }
     const demo = searchParams.get("demo");
     if (demo === "1" || demo === "true") {
       setSubMode("signin");

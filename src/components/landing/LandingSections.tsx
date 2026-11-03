@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowDown,
-  Sparkles,
   Copy,
   Check,
   ShieldCheck,
@@ -22,7 +21,6 @@ import {
 } from "lucide-react";
 import { WitchCat } from "@/components/ui/WitchCat";
 import { MistakeCreature } from "@/components/ui/MistakeCreature";
-import { isIstNightTime } from "@/lib/xp-config";
 
 export interface LandingSectionsProps {
   currentLang: "en" | "hi" | "te";
@@ -49,18 +47,18 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       reviewed: true,
       hero: {
         h1: "Stuck in Class 10 maths? It probably started in Class 7.",
-        sub: "Margam finds the earlier topic you missed, like integer signs hiding behind your quadratic mistakes, and walks you back to fix it. NCERT Classes 6-10, in English, हिन्दी and తెలుగు.",
-        demoBtn: "Try the Demo (Judge Access)",
-        demoSub: "Pre-fills synthetic credentials for instant evaluation",
+        sub: "Margam finds the earlier topic you missed, like integer signs hiding behind your quadratic mistakes, and walks you back to fix it. NCERT, in English, हिन्दी and తెలుగు.",
+        demoBtn: "Try the demo (judges)",
+        demoSub: "Pre-fills demo credentials for quick evaluation",
         student: {
-          tag: "STUDENT",
+          tag: "Student",
           title: "I'm a student",
           desc: "Take a short diagnostic, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
           btn: "Start learning",
           signIn: "Already have an account? Sign in",
         },
         teacher: {
-          tag: "TEACHER",
+          tag: "Teacher",
           title: "I'm a teacher",
           desc: "Make a class, share a code, and see which earlier topics your students are actually missing.",
           btn: "Set up my class",
@@ -137,7 +135,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         row4Rate: "16 / 25 Mastered (64%)",
         insight:
           "Teaching insight: 7 students failed quadratic factoring solely because of negative integer sign errors. A 10-minute targeted refresher resolves the bottleneck.",
-        cta: "Explore Teacher Portal",
+        cta: "Open the teacher dashboard",
       },
       s5: {
         tag: "05 // YOUR LANGUAGE",
@@ -222,8 +220,8 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       reviewed: false,
       hero: {
         h1: "कक्षा 10 के गणित में अटक रहे हैं? इसकी शुरुआत शायद कक्षा 7 में हुई थी।",
-        sub: "मार्गम् उस पुरानी कमी को खोजता है जो छूट गई थी—जैसे द्विघात समीकरण की गलतियों के पीछे छिपे पूर्णांकों के चिह्न—और उसे सुधारने का मार्ग दिखाता है। एनसीईआरटी कक्षा 6-10, अंग्रेजी, हिन्दी और తెలుగు में।",
-        demoBtn: "डेमो आज़माएँ (जज एक्सेस)",
+        sub: "मार्गम् उस पुरानी कमी को खोजता है जो छूट गई थी—जैसे द्विघात समीकरण की गलतियों के पीछे छिपे पूर्णांकों के चिह्न—और उसे सुधारने का मार्ग दिखाता है। एनसीईआरटी, अंग्रेजी, हिन्दी और తెలుగు में।",
+        demoBtn: "डेमो आज़माएँ (जज)",
         demoSub: "त्वरित मूल्यांकन के लिए परीक्षण क्रेडेंशियल पहले से भरे गए हैं",
         student: {
           tag: "विद्यार्थी",
@@ -310,7 +308,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         row4Rate: "16 / 25 पूर्ण (64%)",
         insight:
           "शिक्षण अंतर्दृष्टि: 7 विद्यार्थी केवल ऋणात्मक चिह्न की गलती के कारण द्विघात गुणनखंड में असफल हुए। 10 मिनट का त्वरित अभ्यास इसे हल कर देता है।",
-        cta: "शिक्षक पोर्टल खोलें",
+        cta: "शिक्षक डैशबोर्ड खोलें",
       },
       s5: {
         tag: "05 // आपकी भाषा",
@@ -395,8 +393,8 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       reviewed: false,
       hero: {
         h1: "10వ తరగతి లెక్కల్లో ఇబ్బంది పడుతున్నారా? అది బహుశా 7వ తరగతిలోనే మొదలై ఉండవచ్చు.",
-        sub: "మార్గం మీరు గతంలో తప్పిపోయిన పునాది అంశాన్ని గుర్తిస్తుంది—ఉదాహరణకు వర్గ సమీకరణాల తప్పుల వెనుక దాగి ఉన్న పూర్ణ సంఖ్యల సంకేత నియమాలు—మరియు దానిని సరిదిద్దేందుకు మార్గదర్శనం చేస్తుంది. NCERT 6-10 తరగతులు, English, हिन्दी మరియు తెలుగులో.",
-        demoBtn: "డెమోను ప్రయత్నించండి (జడ్జ్ యాక్సెస్)",
+        sub: "మార్గం మీరు గతంలో తప్పిపోయిన పునాది అంశాన్ని గుర్తిస్తుంది—ఉదాహరణకు వర్గ సమీకరణాల తప్పుల వెనుక దాగి ఉన్న పూర్ణ సంఖ్యల సంకేత నియమాలు—మరియు దానిని సరిదిద్దేందుకు మార్గదర్శనం చేస్తుంది. NCERT, English, हिन्दी మరియు తెలుగులో.",
+        demoBtn: "డెమోను ప్రయత్నించండి (జడ్జ్)",
         demoSub: "త్వరిత పరిశీలన కోసం ఆధారాలు ముందుగానే పూరించబడతాయి",
         student: {
           tag: "విద్యార్థి",
@@ -483,7 +481,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         row4Rate: "16 / 25 పూర్తి (64%)",
         insight:
           "బోధన విశ్లేషణ: 7 మంది విద్యార్థులు కేవలం రుణ పూర్ణ సంఖ్యల సంకేతాల వల్లే వర్గ సమీకరణాలలో విఫలమయ్యారు. 10 నిమిషాల పునశ్చరణతో సమస్య పరిష్కారమవుతుంది.",
-        cta: "ఉపాధ్యాయుల పోర్టల్ తెరవండి",
+        cta: "ఉపాధ్యాయ డ్యాష్‌బోర్డ్ తెరవండి",
       },
       s5: {
         tag: "05 // మీ భాష",
@@ -591,7 +589,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
           <div className="shrink-0 mb-1 p-2 bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px]">
             <WitchCat
-              pose={isIstNightTime() ? "sleepy" : "greet"}
+              pose="greet"
               size={110}
               sticker={false}
               alt="Maru the cat companion"
@@ -615,7 +613,6 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
               href="/login?role=student&demo=1"
               className="w-full inline-flex items-center justify-center min-h-[50px] px-6 py-3 bg-[#F4C542] hover:bg-[#F6CF5C] text-[#2B1B0F] font-heading font-bold text-base sm:text-lg border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline gap-2 rounded-[2px]"
             >
-              <Sparkles className="w-5 h-5 text-[#2B1B0F]" />
               <span>{copy.hero.demoBtn}</span>
               <ArrowRight className="w-5 h-5 text-[#2B1B0F]" />
             </Link>
@@ -643,7 +640,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
 
             <div className="space-y-3 pt-2">
               <Link
-                href="/login?role=student"
+                href="/login?role=student&mode=signup"
                 className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline rounded-[2px]"
               >
                 <span>{copy.hero.student.btn}</span>
@@ -677,7 +674,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
 
             <div className="space-y-3 pt-2">
               <Link
-                href="/login?role=teacher"
+                href="/login?role=teacher&mode=signup"
                 className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline rounded-[2px]"
               >
                 <span>{copy.hero.teacher.btn}</span>

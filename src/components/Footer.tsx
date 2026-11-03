@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { ShieldCheck, ArrowUp } from "lucide-react";
-import { SITE_TAGLINE } from "@/config/site";
 import { Logo } from "@/components/ui";
 
 export default function Footer() {
@@ -39,7 +38,7 @@ export default function Footer() {
                 MARGAM
               </span>
               <span className="text-[11px] text-[#FFF7E6]/75 ml-2 font-sans">
-                Adaptive Maths · Classes 6–10
+                Maths for Classes 6-10
               </span>
             </div>
           </div>
@@ -79,7 +78,7 @@ export default function Footer() {
 
         <div className="pt-2 border-t border-[#7A4B2A]/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FFF7E6]/70 font-sans gap-2">
           <p className="m-0">
-            © 2026 Margam. Built for Code Kernel '26 · Classes 6–10.
+            No email or phone asked. No ad trackers. Built around NCERT chapters for Classes 6-10.
           </p>
           <p className="m-0 text-[#FFE9A8]/90 font-medium">
             English · हिन्दी · తెలుగు

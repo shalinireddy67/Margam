@@ -6,9 +6,20 @@ import LoginForm from "./LoginForm";
 import LoginShellFallback from "./LoginShellFallback";
 
 export const metadata: Metadata = {
-  title: "Sign In",
+  title: "Sign in",
   description:
-    "Sign in to your Margam student or teacher space to diagnose prerequisite learning gaps and access NCERT lessons.",
+    "Sign in to Margam as a student or teacher to diagnose prerequisite gaps and access lessons.",
+  openGraph: {
+    title: "Sign in | Margam",
+    description:
+      "Sign in to Margam as a student or teacher to diagnose prerequisite gaps and access lessons.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sign in | Margam",
+    description:
+      "Sign in to Margam as a student or teacher to diagnose prerequisite gaps and access lessons.",
+  },
 };
 
 export default function LoginPage() {
