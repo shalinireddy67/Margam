@@ -33,34 +33,34 @@ export interface ButtonProps
 
 const variantStyles: Record<ButtonVariant, string> = {
   // Primary Grass (#5DAA3A) with Ink (#2B1B0F) text for WCAG AA contrast (4.8:1)
-  primary: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  grass: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  green: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  primary: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
+  grass: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
+  green: "bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
 
   // Secondary White with Ink text
-  secondary: "bg-[#FFFFFF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:bg-[#FFF7E6] active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  white: "bg-[#FFFFFF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:bg-[#FFF7E6] active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  outline: "bg-transparent text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:bg-white active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  secondary: "bg-[#FFFFFF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:bg-[#FFF7E6] font-heading font-extrabold",
+  white: "bg-[#FFFFFF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:bg-[#FFF7E6] font-heading font-extrabold",
+  outline: "bg-transparent text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:bg-white font-heading font-extrabold",
 
   // Accent Gold (#F4C542)
-  gold: "bg-[#F4C542] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  yellow: "bg-[#F4C542] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  gold: "bg-[#F4C542] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
+  yellow: "bg-[#F4C542] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
 
   // Neutral Stone
-  stone: "bg-[#D9D9D9] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:bg-[#EAEAEA] active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  stone: "bg-[#D8D8D8] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:bg-[#EAEAEA] font-heading font-extrabold",
 
   // Ground Dirt
-  dirt: "bg-[#7A4B2A] text-[#FFF7E6] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-110 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  ink: "bg-[#2B1B0F] text-[#FFF7E6] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:bg-[#422816] active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  dirt: "bg-[#7A4B2A] text-[#FFF7E6] border-[3px] border-[#2B1B0F] hover:brightness-110 font-heading font-extrabold",
+  ink: "bg-[#2B1B0F] text-[#FFF7E6] border-[3px] border-[#2B1B0F] hover:bg-[#422816] font-heading font-extrabold",
 
   // Sky / Water
-  sky: "bg-[#6EB5FF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  cyan: "bg-[#3FA7C9] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  sky: "bg-[#6EB5FF] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
+  cyan: "bg-[#3FA7C9] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
 
   // Flower Accents
-  red: "bg-[#E04A3F] text-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-110 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  pink: "bg-[#FF8FA3] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
-  orange: "bg-[#FFB36B] text-[#2B1B0F] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] font-bold",
+  red: "bg-[#E04A3F] text-[#FFFFFF] border-[3px] border-[#2B1B0F] hover:brightness-110 font-heading font-extrabold",
+  pink: "bg-[#FF8FA3] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
+  orange: "bg-[#FFB36B] text-[#2B1B0F] border-[3px] border-[#2B1B0F] hover:brightness-105 font-heading font-extrabold",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -89,14 +89,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={`
           inline-flex items-center justify-center text-center font-heading
-          border-3 rounded-[2px]
+          border-[3px] rounded-[2px]
           box-border select-none cursor-pointer
           ${disabled
             ? "bg-[#8B8B8B] text-[#5E5E5E] border-[#5E5E5E] shadow-none cursor-not-allowed opacity-75"
-            : `shadow-[inset_2px_2px_0px_rgba(255,255,255,0.4),inset_-2px_-2px_0px_rgba(0,0,0,0.4),4px_4px_0px_rgba(0,0,0,0.35)]
+            : `shadow-[4px_4px_0px_#2B1B0F]
                hover:translate-x-0 hover:translate-y-0
-               active:translate-x-[2px] active:translate-y-[2px] active:shadow-[inset_2px_2px_0px_rgba(0,0,0,0.5),2px_2px_0px_rgba(0,0,0,0.35)]
-               focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[#FFE9A8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#2B1B0F]`
+               active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
+               focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-[#6EB5FF] focus-visible:ring-offset-2`
           }
           ${sizeStyles[size]}
           ${variantStyles[variant] || variantStyles.grass}

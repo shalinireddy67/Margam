@@ -3,10 +3,16 @@ import "./globals.css";
 
 const SITE_NAME = "Margam";
 const SITE_DESCRIPTION =
-  "Margam — Adaptive Mathematics learning platform for Classes 6 to 10 (NCERT curriculum).";
+  "Margam — Adaptive Mathematics learning platform for Indian students in Classes 6 to 10 (NCERT curriculum).";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://margam-learningspace.vercel.app"
+  ),
+  title: {
+    default: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: SITE_DESCRIPTION,
   icons: {
     icon: "/favicon.ico",
@@ -16,6 +22,21 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     type: "website",
     locale: "en_IN",
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Margam — Adaptive Mathematics for Classes 6 to 10",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Adaptive Mathematics (Classes 6–10)`,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

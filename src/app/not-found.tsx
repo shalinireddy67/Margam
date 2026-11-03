@@ -3,39 +3,42 @@ import { Compass, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-voxel-sky text-[#2B1B0F] flex flex-col justify-between">
-      <header className="border-b-[3px] border-[#422816] bg-[#5A3720] text-[#FFF7E6] shadow-[0px_4px_0px_#1B120C]">
+    <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between">
+      {/* Header */}
+      <header className="border-b-[3px] border-[#2B1B0F] bg-white text-[#2B1B0F] shadow-[0px_3px_0px_rgba(43,27,15,0.1)]">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#5DAA3A] border-[2px] border-[#422816] shadow-[2px_2px_0px_#1B120C] flex items-center justify-center text-white">
-              <Compass className="w-4 h-4" />
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-[#5DAA3A] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center text-[#2B1B0F]">
+              <Compass className="w-5 h-5" />
             </div>
-            <span className="font-pixel text-base text-[#FFE9A8]">MARGAM</span>
+            <span className="font-pixel text-base text-[#2B1B0F]">MARGAM</span>
           </Link>
         </div>
       </header>
 
-      <main className="max-w-md mx-auto px-4 py-16 text-center">
-        <div className="bg-[#FFF7E6] border-[3px] border-[#422816] shadow-[6px_6px_0px_#1B120C] p-8 space-y-4">
-          <span className="font-pixel text-3xl sm:text-4xl text-[#D9453D] block">404</span>
-          <h1 className="font-pixel text-lg text-[#2B1B0F]">Page Not Found</h1>
-          <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed font-sans">
-            The requested mathematics realm or learning route does not exist.
+      {/* Main 404 Card */}
+      <main className="max-w-md mx-auto px-4 py-16 text-center w-full my-auto">
+        <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-8 space-y-4">
+          <span className="font-pixel text-4xl text-[#E04A3F] block">404</span>
+          <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page Not Found</h1>
+          <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
+            The requested mathematics lesson or page does not exist. Check the URL or return to the home screen.
           </p>
           <div className="pt-2">
             <Link
               href="/"
-              className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] no-underline"
+              className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[4px_4px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] no-underline"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Return to Realm Home</span>
+              <span>Return Home</span>
             </Link>
           </div>
         </div>
       </main>
 
-      <footer className="border-t-2 border-[#422816]/20 py-4 text-center text-xs text-[#5A3720] bg-[#FFF7E6]">
-        Margam Educational Platform
+      {/* Footer Ground Strip */}
+      <footer className="border-t-[3px] border-[#422816] py-4 text-center text-xs text-[#FFF7E6] bg-[#5A3720]">
+        Margam Educational Platform • Classes 6–10
       </footer>
     </div>
   );

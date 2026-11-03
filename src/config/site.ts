@@ -7,7 +7,7 @@
 export const SITE_NAME = "Margam";
 export const SITE_TAGLINE = "Every learner has a path. Find yours.";
 export const SITE_DESCRIPTION =
-  "Margam is an adaptive mathematics learning platform for Indian students in Classes 6–10. We diagnose root prerequisite gaps, adapt lessons to individual needs, and empower classroom teachers.";
+  "Margam is an adaptive mathematics learning platform for Indian students in Classes 6–10. We diagnose root prerequisite gaps, adapt lessons to individual needs, and support classroom teachers.";
 
 export const SITE_CONFIG = {
   name: SITE_NAME,

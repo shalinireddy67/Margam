@@ -212,7 +212,7 @@ export default function AdaptivePracticeRunnerPage() {
   // Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading adaptive practice">
           <SkeletonCard />
@@ -225,7 +225,7 @@ export default function AdaptivePracticeRunnerPage() {
   // Locked State
   if (isLocked) {
     return (
-      <div className="min-h-screen bg-[#2A1E17] text-[#FFF7E6] flex flex-col justify-between pb-16">
+      <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between pb-16">
         <OfflineBanner />
         <StudentHeader
           profile={profile}
@@ -235,20 +235,20 @@ export default function AdaptivePracticeRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4">
-            <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
+          <div className="bg-white p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-4">
+            <div className="w-12 h-12 bg-[#FFE9A8] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]">
               <Lock className="w-6 h-6" />
             </div>
-            <h1 className="font-heading font-extrabold text-xl text-emerald-950">
+            <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">
               Practice Locked
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans leading-relaxed">
               {lockedReason || "You must complete prerequisite topics before accessing this practice."}
             </p>
             <div className="pt-2">
               <Link
                 href="/student"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[3px] border-[#2B1B0F] text-sm font-heading font-extrabold shadow-[3px_3px_0px_#2B1B0F] no-underline transition-all"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>

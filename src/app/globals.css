@@ -441,7 +441,9 @@ button[aria-pressed="true"] {
   background: linear-gradient(180deg, #A4D2FF 0%, #D8EBFF 180px, #FFF7E6 420px, #FFF7E6 100%);
 }
 
-.card-block, .voxel-card-white {
+.card-block, .voxel-card-white, .glass-panel {
+  border: 3px solid #2B1B0F !important;
+  box-shadow: 4px 4px 0px #2B1B0F !important;
   background-color: #FFFFFF;
   border: 3px solid #2B1B0F;
   box-shadow: 4px 4px 0px #2B1B0F;
@@ -816,4 +818,30 @@ button[aria-pressed="true"] {
   .print-only {
     display: block !important;
   }
+}
+
+/* Glass / Pixel Button Utility Aliases */
+.glass-btn-primary, .pixel-btn-primary {
+  background-color: #5DAA3A;
+  color: #2B1B0F;
+  border: 3px solid #2B1B0F !important;
+  box-shadow: 3px 3px 0px #2B1B0F !important;
+  border-radius: 2px !important;
+  font-weight: 700;
+}
+.glass-btn-primary:active, .pixel-btn-primary:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px #2B1B0F !important;
+}
+.glass-btn-secondary, .pixel-btn-secondary {
+  background-color: #FFFFFF;
+  color: #2B1B0F;
+  border: 3px solid #2B1B0F !important;
+  box-shadow: 3px 3px 0px #2B1B0F !important;
+  border-radius: 2px !important;
+  font-weight: 700;
+}
+.glass-btn-secondary:active, .pixel-btn-secondary:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px #2B1B0F !important;
 }

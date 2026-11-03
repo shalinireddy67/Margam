@@ -144,7 +144,7 @@ function LessonContent() {
   // Loading Skeleton State
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
           <SkeletonCard />
@@ -701,7 +701,7 @@ export default function LessonPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+        <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] p-4 sm:p-6 pb-28">
           <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
             <SkeletonCard />
             <SkeletonCard />

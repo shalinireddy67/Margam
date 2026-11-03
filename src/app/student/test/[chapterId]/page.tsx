@@ -537,7 +537,7 @@ export default function ChapterTestRunnerPage() {
                       }
                     } else if (isSelected) {
                         optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
-                      optionBgClass = "bg-[#3FA7C9] text-white shadow-[3px_3px_0px_#1B120C]";
+                      optionBgClass = "bg-[#3FA7C9] text-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F]";
                     }
 
                     return (
