@@ -178,11 +178,11 @@ function LessonContent() {
         <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/60 shadow-xs">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
             <Link
-              href="/"
+              href="/student/learn"
               className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-emerald-950 py-1.5 px-3.5 rounded-xl bg-white/80 hover:bg-white border border-white/90 shadow-xs no-underline transition-all"
             >
               <ArrowLeft className="w-4 h-4 mr-1.5" />
-              <span>Back to Lessons</span>
+              <span>Back to Curriculum</span>
             </Link>
           </div>
         </header>
@@ -343,11 +343,11 @@ function LessonContent() {
       <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/60 shadow-xs">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <Link
-            href="/"
+            href="/student/learn"
             className="inline-flex items-center justify-center min-h-[40px] gap-2 text-xs font-heading font-bold text-emerald-950 py-1.5 px-3.5 rounded-xl bg-white/80 hover:bg-white border border-white/90 shadow-xs no-underline transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Lessons</span>
+            <span>Back to Curriculum</span>
           </Link>
 
           {/* Language Switcher */}
@@ -698,10 +698,10 @@ function LessonContent() {
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/"
+                  href={fromGap ? "/student" : "/student/learn"}
                   className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-4 py-2.5 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs no-underline transition-all"
                 >
-                  <span>Return to Path</span>
+                  <span>{fromGap ? "Return to Dashboard" : "Return to Curriculum"}</span>
                 </Link>
               </>
             )}

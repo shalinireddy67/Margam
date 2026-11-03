@@ -128,6 +128,13 @@ export default function ChapterTestRunnerPage() {
             setQuestions(data.questions || []);
             setSessionToken(data.token || null);
             setConceptAllocation(data.conceptAllocation || {});
+            try {
+              const draft = sessionStorage.getItem(`margam_test_draft_${chapterId}`);
+              if (draft) {
+                const parsed = JSON.parse(draft);
+                if (parsed && typeof parsed === 'object') setAnswers(parsed);
+              }
+            } catch {}
             setLoading(false);
           }
         } catch (err: any) {
@@ -249,16 +256,20 @@ export default function ChapterTestRunnerPage() {
   }
 
   const handleSelectOption = (questionId: string, optionId: string) => {
-    if (result) return;
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
+    if (result || submitting) return;
+    setAnswers((prev) => {
+      const next = { ...prev, [questionId]: optionId };
+      try {
+        sessionStorage.setItem(`margam_test_draft_${chapterId}`, JSON.stringify(next));
+      } catch {}
+      return next;
+    });
     setErrorMessage(null);
   };
 
   const handleSubmitTest = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting || result) return;
     if (Object.keys(answers).length < questions.length) {
       setErrorMessage(`Please answer all ${questions.length} questions before submitting.`);
       return;
@@ -290,6 +301,9 @@ export default function ChapterTestRunnerPage() {
       }
 
       const testRes: ChapterTestResultResponse = await res.json();
+      try {
+        sessionStorage.removeItem(`margam_test_draft_${chapterId}`);
+      } catch {}
       setResult(testRes);
 
       const refreshed = getActiveProfile();
@@ -316,8 +330,8 @@ export default function ChapterTestRunnerPage() {
         profile={profile}
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
-        backHref="/"
-        backLabel="Class Lessons"
+        backHref="/student"
+        backLabel="Student Dashboard"
       />
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
@@ -400,10 +414,10 @@ export default function ChapterTestRunnerPage() {
                   </button>
 
                   <Link
-                    href="/"
+                    href="/student"
                     className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                   >
-                    <span>Back to Learning</span>
+                    <span>Return to Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1" />
                   </Link>
                 </div>
@@ -490,6 +504,32 @@ export default function ChapterTestRunnerPage() {
 
         {/* Test Questions List */}
         <form onSubmit={handleSubmitTest} className="space-y-6">
+          {/* Chapter Test Header & Live Progress */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
+            <div>
+              <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
+                {result ? "Test Review & Performance" : "Chapter Test Questions"}
+              </h2>
+              {!result && (
+                <p className="font-sans text-xs text-slate-600 mt-0.5">
+                  Answer each test question carefully. Your progress is saved as you work.
+                </p>
+              )}
+            </div>
+            <span className="text-xs font-heading font-bold text-emerald-900">
+              {result ? `${questions.length} Total Questions` : `${Object.keys(answers).length} of ${questions.length} answered`}
+            </span>
+          </div>
+          {!result && (
+            <div className="w-full bg-white/60 rounded-full h-2 overflow-hidden border border-white/80">
+              <div
+                className="bg-emerald-600 h-full transition-all duration-300"
+                style={{
+                  width: `${(Object.keys(answers).length / Math.max(1, questions.length)) * 100}%`,
+                }}
+              />
+            </div>
+          )}
           {questions.map((q, qIndex) => {
             const isAnswered = !!answers[q.id];
             const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);

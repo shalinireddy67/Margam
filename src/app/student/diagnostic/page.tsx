@@ -33,14 +33,15 @@ export default function DiagnosticHubPage() {
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
 
   useEffect(() => {
-    let active = getActiveProfile();
-    if (!active) {
-      active = createLearnerProfile("Student", 10);
+    const active = getActiveProfile();
+    if (!active || !active.selectedClass) {
+      router.replace("/student/select-class");
+      return;
     }
     const synced = syncClassProgression(active);
     setProfile(synced);
     setIsLoaded(true);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     document.documentElement.lang = currentLang;

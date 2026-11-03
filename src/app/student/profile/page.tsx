@@ -55,16 +55,17 @@ export default function StudentProfilePage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    let active = getActiveProfile();
-    if (!active) {
-      active = createLearnerProfile("Student", 10);
+    const active = getActiveProfile();
+    if (!active || !active.selectedClass) {
+      router.replace("/student/select-class");
+      return;
     }
     const synced = syncClassProgression(active);
     setProfile(synced);
     setNameInput(synced.name || "Student");
     setChosenStudyClass((synced.studyClass || synced.selectedClass || 10) as 6 | 7 | 8 | 9 | 10);
     setIsLoaded(true);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     document.documentElement.lang = currentLang;

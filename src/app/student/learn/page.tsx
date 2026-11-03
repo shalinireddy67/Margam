@@ -41,14 +41,15 @@ export default function StudentLearnPage() {
   const [statusFilter, setStatusFilter] = useState<"all" | "unlocked" | "completed" | "locked">("all");
 
   useEffect(() => {
-    let active = getActiveProfile();
-    if (!active) {
-      active = createLearnerProfile("Student", 10);
+    const active = getActiveProfile();
+    if (!active || !active.selectedClass) {
+      router.replace("/student/select-class");
+      return;
     }
     const updated = syncClassProgression(active);
     setProfile(updated);
     setIsLoaded(true);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     document.documentElement.lang = currentLang;

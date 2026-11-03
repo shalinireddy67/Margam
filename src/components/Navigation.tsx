@@ -51,7 +51,7 @@ export const NAV_ITEMS: readonly NavItemConfig[] = [
   {
     id: "profile",
     label: { en: "Profile", hi: "प्रोफ़ाइल", te: "ప్రొఫైల్" },
-    href: "/student/select-class",
+    href: "/student/profile",
     icon: User,
   },
 ] as const;

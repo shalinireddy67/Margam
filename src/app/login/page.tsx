@@ -202,7 +202,9 @@ function LoginForm() {
   };
 
   const handleGuestContinue = () => {
-    createLearnerProfile("Student", Number(studentClass) as 6 | 7 | 8 | 9 | 10);
+    const chosenName = studentFullName.trim() || studentUsername.trim() || "Student";
+    const chosenGrade = (Number(studentClass) || 10) as 6 | 7 | 8 | 9 | 10;
+    createLearnerProfile(chosenName, chosenGrade);
     router.push("/student");
   };
 

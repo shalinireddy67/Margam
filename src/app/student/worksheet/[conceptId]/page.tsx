@@ -182,6 +182,13 @@ export default function AdaptivePracticeRunnerPage() {
             if (data.targetDifficulty) {
               setDifficultyLevel(data.targetDifficulty);
             }
+            try {
+              const draft = sessionStorage.getItem(`margam_worksheet_draft_${conceptId}`);
+              if (draft) {
+                const parsed = JSON.parse(draft);
+                if (parsed && typeof parsed === 'object') setAnswers(parsed);
+              }
+            } catch {}
             setLoading(false);
           }
         } catch (err: any) {
@@ -247,11 +254,11 @@ export default function AdaptivePracticeRunnerPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student/learn"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
-                <span>Return to Learning Path</span>
+                <span>Return to Curriculum</span>
               </Link>
             </div>
           </div>
@@ -282,16 +289,20 @@ export default function AdaptivePracticeRunnerPage() {
   }
 
   const handleSelectOption = (questionId: string, optionId: string) => {
-    if (result) return;
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
+    if (result || submitting) return;
+    setAnswers((prev) => {
+      const next = { ...prev, [questionId]: optionId };
+      try {
+        sessionStorage.setItem(`margam_worksheet_draft_${conceptId}`, JSON.stringify(next));
+      } catch {}
+      return next;
+    });
     setErrorMessage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting || result) return;
     setErrorMessage(null);
 
     const answeredCount = Object.keys(answers).length;
@@ -333,6 +344,9 @@ export default function AdaptivePracticeRunnerPage() {
       }
 
       const practiceRes: PracticeResultResponse = await res.json();
+      try {
+        sessionStorage.removeItem(`margam_worksheet_draft_${conceptId}`);
+      } catch {}
       setResult(practiceRes);
       if (practiceRes.nextDifficulty) {
         setDifficultyLevel(practiceRes.nextDifficulty);
@@ -397,8 +411,8 @@ export default function AdaptivePracticeRunnerPage() {
         profile={profile}
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
-        backHref="/"
-        backLabel="Class Lessons"
+        backHref="/student/practice"
+        backLabel="Practice Hub"
       />
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 relative has-mobile-nav">
@@ -656,6 +670,32 @@ export default function AdaptivePracticeRunnerPage() {
 
         {/* Practice Questions List */}
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Worksheet Header & Live Progress */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
+            <div>
+              <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
+                {result ? "Practice Review & Educational Feedback" : "Practice Questions"}
+              </h2>
+              {!result && (
+                <p className="font-sans text-xs text-slate-600 mt-0.5">
+                  Answer each problem carefully. Your selections are automatically remembered.
+                </p>
+              )}
+            </div>
+            <span className="text-xs font-heading font-bold text-emerald-900">
+              {result ? `${questions.length} Total Questions` : `${Object.keys(answers).length} of ${questions.length} answered`}
+            </span>
+          </div>
+          {!result && (
+            <div className="w-full bg-white/60 rounded-full h-2 overflow-hidden border border-white/80">
+              <div
+                className="bg-amber-600 h-full transition-all duration-300"
+                style={{
+                  width: `${(Object.keys(answers).length / Math.max(1, questions.length)) * 100}%`,
+                }}
+              />
+            </div>
+          )}
           {questions.map((q, qIndex) => {
             const isAnswered = !!answers[q.id];
             const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);

@@ -36,14 +36,15 @@ export default function PracticeHubPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    let active = getActiveProfile();
-    if (!active) {
-      active = createLearnerProfile("Student", 10);
+    const active = getActiveProfile();
+    if (!active || !active.selectedClass) {
+      router.replace("/student/select-class");
+      return;
     }
     const synced = syncClassProgression(active);
     setProfile(synced);
     setIsLoaded(true);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     document.documentElement.lang = currentLang;

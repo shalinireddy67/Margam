@@ -205,6 +205,15 @@ export default function ChapterDiagnosticPage() {
           if (!isCancelled) {
             setQuestions(data.questions || []);
             setSessionToken(data.token || null);
+            try {
+              const draft = sessionStorage.getItem(`margam_diag_draft_${chapterId}`);
+              if (draft) {
+                const parsed = JSON.parse(draft);
+                if (parsed && typeof parsed === "object") {
+                  setAnswers(parsed);
+                }
+              }
+            } catch {}
             setLoading(false);
           }
         } catch (err: any) {
@@ -325,16 +334,20 @@ export default function ChapterDiagnosticPage() {
   }
 
   const handleSelectOption = (questionId: string, optionId: string) => {
-    if (result) return;
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
+    if (result || submitting) return;
+    setAnswers((prev) => {
+      const next = { ...prev, [questionId]: optionId };
+      try {
+        sessionStorage.setItem(`margam_diag_draft_${chapterId}`, JSON.stringify(next));
+      } catch {}
+      return next;
+    });
     setErrorMessage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting || result) return;
     setErrorMessage(null);
 
     const answeredCount = Object.keys(answers).length;
@@ -373,6 +386,9 @@ export default function ChapterDiagnosticPage() {
       }
 
       const diagResult: DiagnosticResultResponse = await res.json();
+      try {
+        sessionStorage.removeItem(`margam_diag_draft_${chapterId}`);
+      } catch {}
       setResult(diagResult);
 
       if (diagResult.passed) {
@@ -503,8 +519,8 @@ export default function ChapterDiagnosticPage() {
         profile={profile}
         currentLang={currentLang}
         onLanguageChange={setCurrentLang}
-        backHref="/"
-        backLabel="Class Lessons"
+        backHref="/student/diagnostic"
+        backLabel="All Diagnostics"
       />
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1 relative has-mobile-nav">
@@ -600,10 +616,10 @@ export default function ChapterDiagnosticPage() {
                 </div>
 
                 <Link
-                  href="/"
+                  href="/student"
                   className="self-start sm:self-center inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                 >
-                  <span>Return to Learning Path</span>
+                  <span>Return to Dashboard</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
               </div>
@@ -802,14 +818,31 @@ export default function ChapterDiagnosticPage() {
         {/* DIAGNOSTIC QUESTIONS & STEP-BY-STEP REVIEW                        */}
         {/* ================================================================= */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="flex items-center justify-between border-b border-white/80 pb-2">
-            <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
-              {result ? "Diagnostic Questions Review & Educational Feedback" : "Assessment Questions"}
-            </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
+            <div>
+              <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
+                {result ? "Diagnostic Questions Review & Educational Feedback" : "Assessment Questions"}
+              </h2>
+              {!result && (
+                <p className="font-sans text-xs text-slate-600 mt-0.5">
+                  Answer each question carefully. Your progress is saved as you select answers.
+                </p>
+              )}
+            </div>
             <span className="text-xs font-heading font-bold text-emerald-900">
-              {questions.length} Total Questions
+              {result ? `${questions.length} Total Questions` : `${Object.keys(answers).length} of ${questions.length} answered`}
             </span>
           </div>
+          {!result && (
+            <div className="w-full bg-white/60 rounded-full h-2 overflow-hidden border border-white/80">
+              <div
+                className="bg-emerald-600 h-full transition-all duration-300"
+                style={{
+                  width: `${(Object.keys(answers).length / Math.max(1, questions.length)) * 100}%`,
+                }}
+              />
+            </div>
+          )}
 
           {questions.map((q, qIndex) => {
             const isAnswered = !!answers[q.id];
