@@ -38,6 +38,10 @@ CREATE TABLE IF NOT EXISTS public.xp_events (
 -- Enable RLS on xp_events
 ALTER TABLE public.xp_events ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if already defined
+DROP POLICY IF EXISTS "xp_events_student_select_own" ON public.xp_events;
+DROP POLICY IF EXISTS "xp_events_teacher_select_scoped" ON public.xp_events;
+
 -- Direct writes by students or teachers are strictly disallowed.
 -- ONLY backend server with service_role can INSERT/UPDATE/DELETE.
 -- Students can read only their own XP events:
@@ -60,6 +64,7 @@ CREATE POLICY "xp_events_teacher_select_scoped"
   );
 
 -- 5. Helper Function: Get Start of Current Week in IST (Monday 00:00:00 IST)
+DROP FUNCTION IF EXISTS public.get_current_week_start_ist() CASCADE;
 CREATE OR REPLACE FUNCTION public.get_current_week_start_ist()
 RETURNS TIMESTAMPTZ
 LANGUAGE sql
@@ -70,12 +75,8 @@ AS $$
 $$;
 
 -- 6. CLASS_WEEKLY_LEADERBOARD VIEW
--- Aggregates weekly XP strictly within Monday 00:00 IST reset window.
--- Enforces privacy filters:
--- - Excludes students where opt_out_leaderboard = true
--- - Excludes students where hidden_by_teacher = true
--- - Excludes classes where leaderboard_enabled = false
-CREATE OR REPLACE VIEW public.class_weekly_leaderboard AS
+DROP VIEW IF EXISTS public.class_weekly_leaderboard CASCADE;
+CREATE VIEW public.class_weekly_leaderboard AS
 SELECT
   cm.class_id,
   cm.student_id,
@@ -106,6 +107,7 @@ GROUP BY
 -- 7. Secure Leaderboard RPC with Strict Class-Membership RLS check
 -- Students can ONLY query the leaderboard of a class they belong to.
 -- Teachers can ONLY query the leaderboard of a class they own.
+DROP FUNCTION IF EXISTS public.get_class_leaderboard(UUID) CASCADE;
 CREATE OR REPLACE FUNCTION public.get_class_leaderboard(target_class_id UUID)
 RETURNS TABLE (
   student_id UUID,
