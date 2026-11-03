@@ -27,19 +27,19 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between">
       {/* Floating Top Header */}
       <header className="max-w-[1200px] mx-auto mt-3 px-3 sm:px-6 w-full">
-        <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3">
+        <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 rounded-[2px]">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-[#5DAA3A] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center text-[#2B1B0F]">
+            <div className="w-9 h-9 bg-[#5DAA3A] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center text-[#2B1B0F] rounded-[2px]">
               <Compass className="w-5 h-5" />
             </div>
             <span className="font-heading font-extrabold text-base sm:text-lg text-[#2B1B0F]">MARGAM</span>
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#FFF7E6] py-1.5 px-3 border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-[1px] active:translate-y-[1px] transition-all"
+            className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#2B1B0F] hover:bg-[#FFF7E6] py-1.5 px-3 border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-[1px] active:translate-y-[1px] transition-all rounded-[2px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return Home</span>
+            <span>Back to home</span>
           </Link>
         </div>
       </header>
@@ -53,7 +53,7 @@ export default function LoginPage() {
 
       {/* Lightweight Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
+        Margam · Maths for Classes 6-10
       </footer>
     </div>
   );

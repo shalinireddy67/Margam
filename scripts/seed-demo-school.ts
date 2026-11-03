@@ -6,11 +6,11 @@ async function main() {
   const isClean = process.argv.includes("--clean");
 
   console.log("================================================================================");
-  console.log("  MARGAM — DEMO SCHOOL PROVISIONING ENGINE (VIGNAN SCHOOL CLASS 10-A4)");
+  console.log("  MARGAM — DEMO SCHOOL PROVISIONING ENGINE (EXAMPLE PUBLIC SCHOOL CLASS 10-A (DEMO))");
   console.log("================================================================================");
 
   if (isClean) {
-    console.log("🧹 [ACTION] Cleaning only demo dataset (@vignan.demo.invalid / VIGNAN-10A4)...");
+    console.log("🧹 [ACTION] Cleaning only demo dataset (@example.demo.invalid / DEMO-10A)...");
     const cleanResult = await cleanDemoData();
     console.log(`✅ [CLEAN RESULT]: ${cleanResult.message}`);
     process.exit(0);
@@ -54,8 +54,8 @@ async function main() {
   console.log("================================================================================");
   console.log("🔑 DEMO LOGIN CREDENTIALS:");
   console.log(`   - Demo Teacher:  ${DEMO_SCHOOL_CONFIG.teacher.email} / ${DEMO_SCHOOL_CONFIG.demoPassword}`);
-  console.log(`   - Demo Student:  student01 (or student01@vignan.demo.invalid) / ${DEMO_SCHOOL_CONFIG.demoPassword}`);
-  console.log(`   - Gap Student:   student08 (or student08@vignan.demo.invalid) / ${DEMO_SCHOOL_CONFIG.demoPassword}`);
+  console.log(`   - Demo Student:  student01 (or student01@example.demo.invalid) / ${DEMO_SCHOOL_CONFIG.demoPassword}`);
+  console.log(`   - Gap Student:   student08 (or student08@example.demo.invalid) / ${DEMO_SCHOOL_CONFIG.demoPassword}`);
   console.log("================================================================================");
 }
 

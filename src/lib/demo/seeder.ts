@@ -1,10 +1,10 @@
 /**
  * Margam Demo School Seeder
- * Idempotently seeds Vignan School, Class 10-A4, Demo Teacher, and all 25 students
+ * Idempotently seeds Example Public School, Class 10-A (demo), Demo Teacher, and all 25 students
  * into both Supabase PostgreSQL (when credentials are active) and the in-memory mockDb.
  *
  * SAFETY GUARDS:
- * - Operates strictly on domain '@vignan.demo.invalid' and classCode 'VIGNAN-10A4'.
+ * - Operates strictly on domain '@example.demo.invalid' and classCode 'DEMO-10A'.
  * - Never modifies, drops, or overwrites any real student or teacher record.
  * - Idempotent: can be safely executed repeatedly without creating duplicates.
  */
@@ -63,7 +63,7 @@ export function seedMockDatabase(): SeedingResult {
   };
   mockDb.profiles.set(teacherId, teacherProfile);
 
-  // 2. Seed Class 10-A4
+  // 2. Seed Class 10-A (demo)
   const classRecord: StoredClass = {
     id: classId,
     teacherId,
@@ -154,13 +154,13 @@ export function seedMockDatabase(): SeedingResult {
     attemptsSeeded: totalAttempts,
     conceptMasteryRecordsSeeded: totalMastery,
     success: true,
-    message: `Successfully seeded Vignan School (Class 10-A4) with ${DEMO_STUDENTS.length} students into Mock Store.`,
+    message: `Successfully seeded Example Public School (Class 10-A (demo)) with ${DEMO_STUDENTS.length} students into Mock Store.`,
   };
 }
 
 /**
  * Seeds the live Supabase PostgreSQL database via service_role admin client.
- * Strictly scoped to Vignan School demo identifiers to protect all real production data.
+ * Strictly scoped to Example Public School demo identifiers to protect all real production data.
  */
 export async function seedSupabaseDatabase(): Promise<SeedingResult> {
   const admin = getSeederAdminClient();
@@ -208,7 +208,7 @@ export async function seedSupabaseDatabase(): Promise<SeedingResult> {
     throw new Error(`Failed to upsert demo teacher profile: ${teacherProfileErr.message}`);
   }
 
-  // 3. Upsert Class 10-A4 in public.classes
+  // 3. Upsert Class 10-A (demo) in public.classes
   let classId: string;
   const { data: existingClass } = await admin
     .from("classes")
@@ -232,7 +232,7 @@ export async function seedSupabaseDatabase(): Promise<SeedingResult> {
       .single();
 
     if (classErr || !newClass) {
-      throw new Error(`Failed to create Class 10-A4: ${classErr?.message}`);
+      throw new Error(`Failed to create Class 10-A (demo): ${classErr?.message}`);
     }
     classId = newClass.id;
   }
@@ -278,7 +278,7 @@ export async function seedSupabaseDatabase(): Promise<SeedingResult> {
       updated_at: new Date().toISOString(),
     });
 
-    // Enroll in Class 10-A4
+    // Enroll in Class 10-A (demo)
     await admin.from("class_members").upsert(
       {
         class_id: classId,
@@ -343,7 +343,7 @@ export async function seedSupabaseDatabase(): Promise<SeedingResult> {
     attemptsSeeded: totalAttempts,
     conceptMasteryRecordsSeeded: totalMastery,
     success: true,
-    message: `Successfully seeded Vignan School (Class 10-A4) with ${DEMO_STUDENTS.length} students into Supabase PostgreSQL.`,
+    message: `Successfully seeded Example Public School (Class 10-A (demo)) with ${DEMO_STUDENTS.length} students into Supabase PostgreSQL.`,
   };
 }
 
@@ -370,13 +370,13 @@ export async function cleanDemoData(): Promise<{ success: boolean; message: stri
   if (isSupabaseConfigured()) {
     const admin = getSeederAdminClient();
     if (admin) {
-      // Delete Class 10-A4 (cascades to class_members)
+      // Delete Class 10-A (demo) (cascades to class_members)
       await admin.from("classes").delete().eq("class_code", DEMO_SCHOOL_CONFIG.classCode);
 
       // Find and delete demo users in auth
       const { data: list } = await admin.auth.admin.listUsers();
       const demoUsers = (list?.users || []).filter(
-        (u) => u.email?.endsWith("@vignan.demo.invalid")
+        (u) => u.email?.endsWith("@example.demo.invalid")
       );
 
       for (const u of demoUsers) {

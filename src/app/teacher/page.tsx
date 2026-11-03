@@ -169,10 +169,10 @@ export default function TeacherPage() {
   const activeLiveClass = liveClasses.find((c) => c.id === selectedLiveClassId) || liveClasses[0] || null;
   const isDemoLiveClass = Boolean(
     activeLiveClass?.isDemo ||
-    activeLiveClass?.schoolName === "Vignan School" ||
-    activeLiveClass?.class_code === "VIGNAN-10A4" ||
-    activeLiveClass?.classCode === "VIGNAN-10A4" ||
-    teacherUser?.email === "teacher@vignan.demo.invalid"
+    activeLiveClass?.schoolName === "Example Public School" ||
+    activeLiveClass?.class_code === "DEMO-10A" ||
+    activeLiveClass?.classCode === "DEMO-10A" ||
+    teacherUser?.email === "teacher@example.demo.invalid"
   );
 
   const classMembers = activeLiveClass
@@ -373,7 +373,7 @@ export default function TeacherPage() {
                     </span>
                   )}
                   <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
-                    {activeLiveClass?.schoolName || "Vignan School"} • {activeLiveClass?.name || "Class 10-A4"}
+                    {activeLiveClass?.schoolName || "Example Public School"} • {activeLiveClass?.name || "Class 10-A (demo)"}
                   </h2>
                 </div>
 
@@ -603,7 +603,7 @@ export default function TeacherPage() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <div>
                   <h3 className="font-heading font-black text-base text-emerald-950">
-                    Class 10-A4 Student Roster ({filteredLiveMembers.length} of {totalClassStudents})
+                    Class 10-A (demo) Student Roster ({filteredLiveMembers.length} of {totalClassStudents})
                   </h3>
                   <p className="text-xs text-slate-600 font-sans">
                     Inspect individual student trajectories, verified masteries, and remedial pathways.
@@ -799,7 +799,7 @@ export default function TeacherPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-heading font-bold">
-                          {activeLiveClass?.schoolName || "Vignan School"} • Class 10-A4
+                          {activeLiveClass?.schoolName || "Example Public School"} • Class 10-A (demo)
                         </span>
                         {inspectingStudent.rollNumber && (
                           <span className="font-mono text-xs font-bold text-slate-500">
