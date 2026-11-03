@@ -417,3 +417,4 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
     </div>
   );
 }
+
