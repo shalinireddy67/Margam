@@ -27,7 +27,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#FFF7E6",
+  themeColor: "#5DAA3A",
 };
 
 export default function RootLayout({
@@ -37,7 +37,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-full flex flex-col bg-[#FFF7E6] text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
+      <body className="min-h-full flex flex-col text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden selection:bg-[#5DAA3A]/30 selection:text-[#1B3811]">
+        {/* Universal Fixed Minecraft Nature Background Scenery */}
+        <div
+          className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat responsive-bg-fixed"
+          style={{ backgroundImage: "url('/images/minecraft/meadow-day.jpg')" }}
+          aria-hidden="true"
+        />
+        {/* Subtle Ambient Daylight Overlay for Readability */}
+        <div
+          className="fixed inset-0 pointer-events-none -z-10 bg-[#FFFDF7]/30 backdrop-blur-[1px]"
+          aria-hidden="true"
+        />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

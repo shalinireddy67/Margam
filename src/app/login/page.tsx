@@ -482,7 +482,7 @@ function LoginForm() {
           {/* Companion Mascot on Student Portal */}
           {!isTeacherFlow && !recoveryCode && (
             <div className="flex justify-center -mb-2">
-              <div className="p-2 rounded-2xl bg-white/70 border border-white/80 shadow-xs flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Companion
                   pose={isIstNightTime() ? "sleepy" : "greet"}
                   size={50}

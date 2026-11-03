@@ -187,7 +187,7 @@ export default function StudentProfilePage() {
         
         {/* Profile Hero Header */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col sm:flex-row items-center gap-6">
-          <div className="p-3 rounded-2xl bg-white/80 border border-white/90 shadow-xs shrink-0">
+          <div className="shrink-0">
             <Companion
               pose={isIstNightTime() ? "sleepy" : "greet"}
               size={72}

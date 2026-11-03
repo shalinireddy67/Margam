@@ -182,7 +182,7 @@ export default function StudentDashboardPage() {
         {/* 1. Welcome Companion & Hero Bar */}
         <div className="glass-panel p-5 sm:p-7 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
-            <div className="shrink-0 p-2.5 rounded-2xl bg-white/70 border border-white/80 shadow-xs">
+            <div className="shrink-0">
               <Companion
                 pose={isIstNightTime() ? "sleepy" : "greet"}
                 size={64}
@@ -368,25 +368,25 @@ export default function StudentDashboardPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
             <div className="p-3 rounded-xl bg-white border border-[#8C6D53]/40 text-center">
-              <span className="font-pixel text-[10px] text-[#3D6926] block">Completed</span>
+              <span className="text-[10px] font-heading font-extrabold uppercase text-[#3D6926] block tracking-wide">Completed</span>
               <span className="font-pixel text-base text-[#2B1B0F]">
                 {completedInClass.length}
               </span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#8C6D53]/40 text-center">
-              <span className="font-pixel text-[10px] text-[#D97706] block">In Progress</span>
+              <span className="text-[10px] font-heading font-extrabold uppercase text-[#D97706] block tracking-wide">In Progress</span>
               <span className="font-pixel text-base text-[#2B1B0F]">
                 {inProgressInClass.length}
               </span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#8C6D53]/40 text-center">
-              <span className="font-pixel text-[10px] text-[#2563EB] block">Available</span>
+              <span className="text-[10px] font-heading font-extrabold uppercase text-[#2563EB] block tracking-wide">Available</span>
               <span className="font-pixel text-base text-[#2B1B0F]">
                 {availableInClass.length}
               </span>
             </div>
             <div className="p-3 rounded-xl bg-white border border-[#8C6D53]/40 text-center">
-              <span className="font-pixel text-[10px] text-[#6B7280] block">Locked</span>
+              <span className="text-[10px] font-heading font-extrabold uppercase text-[#6B7280] block tracking-wide">Locked</span>
               <span className="font-pixel text-base text-[#2B1B0F]">
                 {lockedInClass.length}
               </span>

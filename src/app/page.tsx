@@ -227,7 +227,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between bg-sky-cream-gradient">
+    <div className="min-h-screen text-[#2B1B0F] flex flex-col justify-between">
       {/* Offline Status Listener */}
       <OfflineBanner />
 
@@ -248,7 +248,7 @@ export default function HomePage() {
           <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
             {/* Hero Section: Learning Companion Mascot + H1 + Subline */}
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
-              <div className="shrink-0 mb-2 p-2 bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F]">
+              <div className="shrink-0 mb-3">
                 <Companion
                   pose={isIstNightTime() ? "sleepy" : "greet"}
                   size={110}
@@ -272,7 +272,7 @@ export default function HomePage() {
             {/* Two Role Cards: Student & Teacher (side by side on desktop, stacked on mobile) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
               {/* Card 1: Student */}
-              <div className="bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 flex flex-col justify-between space-y-6">
+              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
                 <div className="space-y-3">
                   <span className="font-pixel text-[11px] uppercase tracking-wider text-[#5DAA3A] block">
                     {copy.studentLabel}
@@ -306,7 +306,7 @@ export default function HomePage() {
               </div>
 
               {/* Card 2: Teacher */}
-              <div className="bg-[#FFFFFF] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 flex flex-col justify-between space-y-6">
+              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
                 <div className="space-y-3">
                   <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3FA7C9] block">
                     {copy.teacherLabel}
@@ -359,7 +359,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   {/* Mascot Companion with Pose */}
-                  <div className="shrink-0 p-2 bg-[#422816] border-2 border-[#7A4B2A] shadow-[3px_3px_0px_rgba(0,0,0,0.4)]">
+                  <div className="shrink-0">
                     <Companion
                       pose="cheer"
                       size={90}
@@ -519,7 +519,7 @@ export default function HomePage() {
 
             {/* Companion Dialogue & Advice Card */}
             <div className="p-4 sm:p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col sm:flex-row items-center gap-4">
-              <div className="shrink-0 p-1.5 bg-[#422816] border-2 border-[#7A4B2A] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+              <div className="shrink-0">
                 <Companion
                   pose={companionRevision?.pose || "greet"}
                   size={74}

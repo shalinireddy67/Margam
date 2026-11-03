@@ -128,7 +128,7 @@ export default function SelectClassPage() {
       </header>
 
       <main className="max-w-3xl mx-auto w-full flex-1 flex flex-col justify-center">
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#e0dcd1] border-3 border-[#5A3720] shadow-[4px_4px_0px_#5A3720] space-y-6">
+        <div className="glass-panel-cream p-6 sm:p-8 space-y-6 border border-[#7A4B2A]/30">
           <div className="space-y-2 text-center">
             <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3D6926] block">
               NCERT Mathematics Curriculum
