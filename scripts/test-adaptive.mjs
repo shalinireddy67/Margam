@@ -28,7 +28,7 @@ import {
   canReadConcept,
 } from "../src/lib/storage";
 import { canAccessTopic } from "../src/lib/progression";
-import { getConceptById, getQuestionsByConceptId } from "../src/lib/curriculum";
+import { getConceptById, getQuestionsByConceptId, getQuestionsByChapterId } from "../src/lib/curriculum";
 
 console.log("--------------------------------------------------");
 console.log("  MARGAM — Step 5: Adaptive Engine Test Suite     ");
@@ -254,9 +254,11 @@ console.log(`  Chapter Test Score: ${testResult.correctCount}/${testResult.total
 console.log(`  Concepts Tested: ${Object.keys(testResult.conceptBreakdown).join(", ")}`);
 
 // Test Blueprint disjoint exclusion & shortfall detection
-const diagExcludedIds = ["q-c10-sol-01", "q-c10-form-01", "q-c10-sol-02", "q-c10-form-02", "q-c10-quad-d3-01", "q-c10-form-03"];
+const c10Pool = getQuestionsByChapterId("c10-ch04");
+// Exclude enough questions so exactly 8 questions remain available out of the pool to test shortfall detection
+const diagExcludedIds = c10Pool.slice(0, c10Pool.length - 8).map(q => q.id);
 const disjointTest = generateChapterTest("c10-ch04", 10, { excludeQuestionIds: diagExcludedIds });
-assert.equal(disjointTest.shortfall, true, "Correctly flags shortfall when 6 diagnostic questions are excluded from 14-item pool");
+assert.equal(disjointTest.shortfall, true, "Correctly flags shortfall when questions available < requested count");
 assert.equal(disjointTest.questions.length, 8, "Returns exact 8 available non-diagnostic questions");
 console.log("  [PASS] Blueprint question shortfall and disjoint exclusion correctly enforced.");
 console.log("  [PASS] Stage 3 Chapter Test generation and evaluation verified.");

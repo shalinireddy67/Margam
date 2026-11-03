@@ -468,11 +468,21 @@ export function recommendLessonVariant(
  */
 export function getConfirmationQuestions(
   rootConceptId: string,
-  count = 2
+  count = 2,
+  options?: {
+    excludeQuestionIds?: string[];
+    offset?: number;
+  }
 ): Question[] {
   const pool = getQuestionsByConceptId(rootConceptId);
-  const sorted = [...pool].sort((a, b) => a.difficulty - b.difficulty);
-  return sorted.slice(0, count);
+  const excluded = new Set(options?.excludeQuestionIds || []);
+  const available = pool.filter((q) => !excluded.has(q.id));
+  const poolToUse = available.length >= count ? available : pool;
+  const sorted = [...poolToUse].sort((a, b) => a.difficulty - b.difficulty);
+  const offset = options?.offset || 0;
+  const start = sorted.length > 0 ? (offset % sorted.length) : 0;
+  const rotated = [...sorted.slice(start), ...sorted.slice(0, start)];
+  return rotated.slice(0, count);
 }
 
 // ==========================================
@@ -886,7 +896,12 @@ export function diagnosePrerequisiteGap(
  */
 export function generateChapterDiagnostic(
   chapterId: string,
-  requestedCount = 6
+  requestedCount = 6,
+  options?: {
+    excludeQuestionIds?: string[];
+    offset?: number;
+    seed?: number;
+  }
 ): { questions: Question[]; shortfall: boolean } {
   const chapterConcepts = getConceptsByChapter(chapterId);
   if (chapterConcepts.length === 0) {
@@ -903,21 +918,48 @@ export function generateChapterDiagnostic(
     return { questions: pool, shortfall: true };
   }
 
+  const excluded = new Set(options?.excludeQuestionIds || []);
+  const offset = options?.offset || 0;
+
   // Balanced selection across concepts and difficulty (1, 2, 3)
+  // Pass 1: Prioritize fresh unattempted questions across concepts and difficulties
   for (const diff of [1, 2, 3] as const) {
     for (const cId of conceptIds) {
       if (collected.length >= requestedCount) break;
-      const match = pool.find(
+      const candidates = pool.filter(
         (q) => q.conceptId === cId && q.difficulty === diff && !collected.some((x) => x.id === q.id)
       );
-      if (match) collected.push(match);
+      if (candidates.length === 0) continue;
+      const freshCandidates = candidates.filter((q) => !excluded.has(q.id));
+      if (freshCandidates.length > 0) {
+        const chosen = freshCandidates[offset % freshCandidates.length];
+        if (chosen) collected.push(chosen);
+      }
     }
   }
 
-  // Fill remainder if needed
-  for (const q of pool) {
-    if (collected.length >= requestedCount) break;
-    if (!collected.some((x) => x.id === q.id)) {
+  // Pass 2: Fill remaining slots from any fresh questions in the chapter pool
+  if (collected.length < requestedCount) {
+    const freshRemainder = pool.filter(
+      (q) => !collected.some((x) => x.id === q.id) && !excluded.has(q.id)
+    );
+    const startIdx = freshRemainder.length > 0 ? (offset % freshRemainder.length) : 0;
+    const rotatedFresh = [...freshRemainder.slice(startIdx), ...freshRemainder.slice(0, startIdx)];
+
+    for (const q of rotatedFresh) {
+      if (collected.length >= requestedCount) break;
+      collected.push(q);
+    }
+  }
+
+  // Pass 3: Only if all fresh questions are exhausted, recycle from remaining chapter questions
+  if (collected.length < requestedCount) {
+    const recycledPool = pool.filter((q) => !collected.some((x) => x.id === q.id));
+    const startIdx = recycledPool.length > 0 ? (offset % recycledPool.length) : 0;
+    const rotatedRecycled = [...recycledPool.slice(startIdx), ...recycledPool.slice(0, startIdx)];
+
+    for (const q of rotatedRecycled) {
+      if (collected.length >= requestedCount) break;
       collected.push(q);
     }
   }
@@ -1026,7 +1068,12 @@ export interface PersonalizedWorksheet {
 export function generatePersonalizedWorksheet(
   conceptId: string,
   profile: LearnerProfile | null = null,
-  targetCount = 5
+  targetCount = 5,
+  options?: {
+    excludeQuestionIds?: string[];
+    offset?: number;
+    seed?: number;
+  }
 ): PersonalizedWorksheet {
   const concept = getConceptById(conceptId);
   if (!concept) {
@@ -1043,6 +1090,10 @@ export function generatePersonalizedWorksheet(
   const selectedIds = new Set<string>();
   const prereqsIncluded: Array<{ conceptId: string; name: string; count: number }> = [];
 
+  const excluded = new Set(options?.excludeQuestionIds || []);
+  const attemptCount = progress?.attemptHistory?.length ?? 0;
+  const offset = options?.offset !== undefined ? options.offset : attemptCount;
+
   let isPersonalized = false;
   let personalizedReason = "Standard adaptive practice session.";
   let targetDifficulty: 1 | 2 | 3 = currentDiff;
@@ -1055,9 +1106,13 @@ export function generatePersonalizedWorksheet(
       const rootQuestions = getQuestionsByConceptId(rootId);
       // Pick 1-2 foundational questions from root gap
       const foundational = rootQuestions.filter((q) => q.difficulty === 1);
-      const pool = foundational.length > 0 ? foundational : rootQuestions;
-      const countToTake = Math.min(2, pool.length);
-      const chosen = pool.slice(0, countToTake);
+      const rootPool = foundational.length > 0 ? foundational : rootQuestions;
+      const unattemptedRoot = rootPool.filter((q) => !excluded.has(q.id));
+      const poolToUse = unattemptedRoot.length > 0 ? unattemptedRoot : rootPool;
+      const rootStart = poolToUse.length > 0 ? (offset % poolToUse.length) : 0;
+      const rotatedRoot = [...poolToUse.slice(rootStart), ...poolToUse.slice(0, rootStart)];
+      const countToTake = Math.min(2, rotatedRoot.length);
+      const chosen = rotatedRoot.slice(0, countToTake);
 
       for (const q of chosen) {
         if (!selectedIds.has(q.id)) {
@@ -1091,8 +1146,10 @@ export function generatePersonalizedWorksheet(
       const prereqConcept = getConceptById(prereqId);
       if (prereqConcept) {
         const prereqQuestions = getQuestionsByConceptId(prereqId).filter((q) => q.difficulty === 1);
-        if (prereqQuestions.length > 0) {
-          const q = prereqQuestions[0];
+        const unattemptedPrereq = prereqQuestions.filter((q) => !excluded.has(q.id));
+        const prereqPool = unattemptedPrereq.length > 0 ? unattemptedPrereq : prereqQuestions;
+        if (prereqPool.length > 0) {
+          const q = prereqPool[offset % prereqPool.length];
           selectedQuestions.push(q);
           selectedIds.add(q.id);
           prereqsIncluded.push({
@@ -1119,31 +1176,51 @@ export function generatePersonalizedWorksheet(
     personalizedReason = `Adaptive balanced practice tailored to your current performance level.`;
   }
 
-  // Fill remaining questions from target conceptQuestions matching targetDifficulty
-  const remaining = targetCount - selectedQuestions.length;
-  if (remaining > 0) {
-    const matched = conceptQuestions.filter(
-      (q) => q.difficulty === targetDifficulty && !selectedIds.has(q.id)
-    );
-    for (const q of matched) {
+  // Fill remaining questions using hierarchical anti-repetition:
+  // 1. Fresh questions of targetDifficulty
+  const unattemptedTarget = conceptQuestions.filter(
+    (q) => q.difficulty === targetDifficulty && !selectedIds.has(q.id) && !excluded.has(q.id)
+  );
+  const tStart = unattemptedTarget.length > 0 ? (offset % unattemptedTarget.length) : 0;
+  const rotatedTarget = [...unattemptedTarget.slice(tStart), ...unattemptedTarget.slice(0, tStart)];
+
+  for (const q of rotatedTarget) {
+    if (selectedQuestions.length >= targetCount) break;
+    selectedQuestions.push(q);
+    selectedIds.add(q.id);
+  }
+
+  // 2. If still needed, fresh questions from other difficulties
+  if (selectedQuestions.length < targetCount) {
+    const unattemptedOther = conceptQuestions
+      .filter((q) => !selectedIds.has(q.id) && !excluded.has(q.id))
+      .sort((a, b) =>
+        targetDifficulty === 3 ? b.difficulty - a.difficulty : a.difficulty - b.difficulty
+      );
+    const oStart = unattemptedOther.length > 0 ? (offset % unattemptedOther.length) : 0;
+    const rotatedOther = [...unattemptedOther.slice(oStart), ...unattemptedOther.slice(0, oStart)];
+
+    for (const q of rotatedOther) {
       if (selectedQuestions.length >= targetCount) break;
       selectedQuestions.push(q);
       selectedIds.add(q.id);
     }
+  }
 
-    // Supplement with other difficulties if pool is smaller than targetCount
-    if (selectedQuestions.length < targetCount) {
-      const otherQuestions = conceptQuestions
-        .filter((q) => !selectedIds.has(q.id))
-        .sort((a, b) =>
-          targetDifficulty === 3 ? b.difficulty - a.difficulty : a.difficulty - b.difficulty
-        );
+  // 3. If no excluded were specified, or if fresh pool was smaller than targetCount, use rotated target/other
+  if (selectedQuestions.length < targetCount) {
+    const fallbackPool = conceptQuestions
+      .filter((q) => !selectedIds.has(q.id))
+      .sort((a, b) =>
+        Math.abs(a.difficulty - targetDifficulty) - Math.abs(b.difficulty - targetDifficulty)
+      );
+    const fStart = fallbackPool.length > 0 ? (offset % fallbackPool.length) : 0;
+    const rotatedFallback = [...fallbackPool.slice(fStart), ...fallbackPool.slice(0, fStart)];
 
-      for (const q of otherQuestions) {
-        if (selectedQuestions.length >= targetCount) break;
-        selectedQuestions.push(q);
-        selectedIds.add(q.id);
-      }
+    for (const q of rotatedFallback) {
+      if (selectedQuestions.length >= targetCount) break;
+      selectedQuestions.push(q);
+      selectedIds.add(q.id);
     }
   }
 
@@ -1389,6 +1466,7 @@ export function generateChapterTest(
   options?: {
     excludeQuestionIds?: string[];
     seed?: number;
+    offset?: number;
   }
 ): {
   questions: Question[];
@@ -1432,8 +1510,12 @@ export function generateChapterTest(
 
     const available = getQuestionsByConceptId(cw.concept.id).filter((q) => !excluded.has(q.id));
     const matched = available.filter((q) => q.difficulty === cw.targetDiff);
+    const poolToUse = matched.length > 0 ? matched : available;
+    const offset = options?.offset || 0;
+    const startIdx = poolToUse.length > 0 ? (offset % poolToUse.length) : 0;
+    const rotated = [...poolToUse.slice(startIdx), ...poolToUse.slice(0, startIdx)];
 
-    for (const q of matched) {
+    for (const q of rotated) {
       if (selected.filter((x) => x.conceptId === cw.concept.id).length >= share) break;
       if (!selected.some((x) => x.id === q.id)) selected.push(q);
     }

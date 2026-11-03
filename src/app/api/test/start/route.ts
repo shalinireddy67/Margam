@@ -8,7 +8,7 @@ import { getAuthenticatedUser } from "@/lib/server/auth";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { chapterId, studentId } = body;
+    const { chapterId, studentId, excludeQuestionIds, offset, seed } = body;
 
     if (!chapterId || typeof chapterId !== "string") {
       return NextResponse.json(
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate chapter test questions using blueprint
-    const { questions, conceptAllocation, shortfall } = generateChapterTest(chapterId);
+    const { questions, conceptAllocation, shortfall } = generateChapterTest(chapterId, 10, { excludeQuestionIds, offset, seed });
 
     if (questions.length === 0) {
       return NextResponse.json(

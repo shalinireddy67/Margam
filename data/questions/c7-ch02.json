@@ -594,5 +594,608 @@
       "te": "రుణ సంఖ్యను తీసివేయడం అంటే ధన సంఖ్యను కలపడమే: -(-3) = +3.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c7-alg-d1-01",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 35 - 4 × 3",
+      "hi": "मान ज्ञात कीजिए: 35 - 4 × 3",
+      "te": "విలువను కనుగొనండి: 35 - 4 × 3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "23",
+          "hi": "23",
+          "te": "23",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "93",
+          "hi": "93",
+          "te": "93",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "47",
+          "hi": "47",
+          "te": "47",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "28",
+          "hi": "28",
+          "te": "28",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "According to BODMAS, multiplication precedes subtraction: 4 × 3 = 12, then 35 - 12 = 23.",
+      "hi": "BODMAS नियम के अनुसार, गुणा घटाव से पहले होता है: 35 - 12 = 23।",
+      "te": "BODMAS ప్రకారం గుణకారం తీసివేత కంటే ముందు జరుగుతుంది: 35 - 12 = 23.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "BODMAS: Perform multiplication before subtraction.",
+      "hi": "BODMAS: घटाने से पहले गुणा करें।",
+      "te": "BODMAS: తీసివేత కంటే ముందు గుణకారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d2-02",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (5 + 2) × 4 - 12 ÷ 3",
+      "hi": "सरल कीजिए: (5 + 2) × 4 - 12 ÷ 3",
+      "te": "సూక్ష్మీకరించండి: (5 + 2) × 4 - 12 ÷ 3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-18.666666666666668",
+          "hi": "-18.666666666666668",
+          "te": "-18.666666666666668",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Brackets first: (5+2) = 7. Multiplication & division: 7 × 4 = 28 and 12 ÷ 3 = 4. Then subtraction: 28 - 4 = 24.",
+      "hi": "कोष्ठक पहले: 7। फिर गुणा और भाग, अंत में घटाव: 24।",
+      "te": "మొదట బ్రాకెట్: 7. తర్వాత గుణకారం మరియు భాగాహారం, చివరగా తీసివేత: 24.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Evaluate brackets first, then multiplication and division from left to right.",
+      "hi": "पहले कोष्ठक हल करें, फिर बाएँ से दाएँ गुणा और भाग करें।",
+      "te": "మొదట బ్రాకెట్లను సాధించి, తర్వాత గుణకారం మరియు భాగాహారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d3-03",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 29 - [5 + 2 × (6 - 2)]",
+      "hi": "मान ज्ञात कीजिए: 29 - [5 + 2 × (6 - 2)]",
+      "te": "విలువను కనుగొనండి: 29 - [5 + 2 × (6 - 2)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "42",
+          "hi": "42",
+          "te": "42",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Innermost brackets first: (6 - 2) = 4. Then multiply: 2 × 4 = 8. Square bracket: 5 + 8 = 13. Finally: 29 - 13 = 16.",
+      "hi": "सबसे अंदर का कोष्ठक पहले: (6 - 2) = 4। चरणबद्ध हल करने पर: 16।",
+      "te": "అంతర్గత బ్రాకెట్ మొదట: (6 - 2) = 4. దశలవారీగా సాధించగా: 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Work from the innermost parentheses outward.",
+      "hi": "सबसे अंदर वाले कोष्ठक से बाहर की ओर हल करें।",
+      "te": "లోపలి బ్రాకెట్ల నుండి బయటకు సాధించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d1-04",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 32 - 5 × 3",
+      "hi": "मान ज्ञात कीजिए: 32 - 5 × 3",
+      "te": "విలువను కనుగొనండి: 32 - 5 × 3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "81",
+          "hi": "81",
+          "te": "81",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "17",
+          "hi": "17",
+          "te": "17",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "47",
+          "hi": "47",
+          "te": "47",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "According to BODMAS, multiplication precedes subtraction: 5 × 3 = 15, then 32 - 15 = 17.",
+      "hi": "BODMAS नियम के अनुसार, गुणा घटाव से पहले होता है: 32 - 15 = 17।",
+      "te": "BODMAS ప్రకారం గుణకారం తీసివేత కంటే ముందు జరుగుతుంది: 32 - 15 = 17.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "BODMAS: Perform multiplication before subtraction.",
+      "hi": "BODMAS: घटाने से पहले गुणा करें।",
+      "te": "BODMAS: తీసివేత కంటే ముందు గుణకారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d2-05",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (5 + 5) × 3 - 12 ÷ 3",
+      "hi": "सरल कीजिए: (5 + 5) × 3 - 12 ÷ 3",
+      "te": "సూక్ష్మీకరించండి: (5 + 5) × 3 - 12 ÷ 3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-30",
+          "hi": "-30",
+          "te": "-30",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "26",
+          "hi": "26",
+          "te": "26",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Brackets first: (5+5) = 10. Multiplication & division: 10 × 3 = 30 and 12 ÷ 3 = 4. Then subtraction: 30 - 4 = 26.",
+      "hi": "कोष्ठक पहले: 10। फिर गुणा और भाग, अंत में घटाव: 26।",
+      "te": "మొదట బ్రాకెట్: 10. తర్వాత గుణకారం మరియు భాగాహారం, చివరగా తీసివేత: 26.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Evaluate brackets first, then multiplication and division from left to right.",
+      "hi": "पहले कोष्ठक हल करें, फिर बाएँ से दाएँ गुणा और भाग करें।",
+      "te": "మొదట బ్రాకెట్లను సాధించి, తర్వాత గుణకారం మరియు భాగాహారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d3-06",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 28 - [4 + 2 × (8 - 3)]",
+      "hi": "मान ज्ञात कीजिए: 28 - [4 + 2 × (8 - 3)]",
+      "te": "విలువను కనుగొనండి: 28 - [4 + 2 × (8 - 3)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "11",
+          "hi": "11",
+          "te": "11",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "42",
+          "hi": "42",
+          "te": "42",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Innermost brackets first: (8 - 3) = 5. Then multiply: 2 × 5 = 10. Square bracket: 4 + 10 = 14. Finally: 28 - 14 = 14.",
+      "hi": "सबसे अंदर का कोष्ठक पहले: (8 - 3) = 5। चरणबद्ध हल करने पर: 14।",
+      "te": "అంతర్గత బ్రాకెట్ మొదట: (8 - 3) = 5. దశలవారీగా సాధించగా: 14.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Work from the innermost parentheses outward.",
+      "hi": "सबसे अंदर वाले कोष्ठक से बाहर की ओर हल करें।",
+      "te": "లోపలి బ్రాకెట్ల నుండి బయటకు సాధించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d1-07",
+    "conceptId": "c7-alg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 19 - 5 × 5",
+      "hi": "मान ज्ञात कीजिए: 19 - 5 × 5",
+      "te": "విలువను కనుగొనండి: 19 - 5 × 5",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "44",
+          "hi": "44",
+          "te": "44",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_addition_before_subtraction_erroneously"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "70",
+          "hi": "70",
+          "te": "70",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "According to BODMAS, multiplication precedes subtraction: 5 × 5 = 25, then 19 - 25 = -6.",
+      "hi": "BODMAS नियम के अनुसार, गुणा घटाव से पहले होता है: 19 - 25 = -6।",
+      "te": "BODMAS ప్రకారం గుణకారం తీసివేత కంటే ముందు జరుగుతుంది: 19 - 25 = -6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "BODMAS: Perform multiplication before subtraction.",
+      "hi": "BODMAS: घटाने से पहले गुणा करें।",
+      "te": "BODMAS: తీసివేత కంటే ముందు గుణకారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d2-08",
+    "conceptId": "c7-alg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (8 + 3) × 2 - 12 ÷ 3",
+      "hi": "सरल कीजिए: (8 + 3) × 2 - 12 ÷ 3",
+      "te": "సూక్ష్మీకరించండి: (8 + 3) × 2 - 12 ÷ 3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "26",
+          "hi": "26",
+          "te": "26",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-36.666666666666664",
+          "hi": "-36.666666666666664",
+          "te": "-36.666666666666664",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Brackets first: (8+3) = 11. Multiplication & division: 11 × 2 = 22 and 12 ÷ 3 = 4. Then subtraction: 22 - 4 = 18.",
+      "hi": "कोष्ठक पहले: 11। फिर गुणा और भाग, अंत में घटाव: 18।",
+      "te": "మొదట బ్రాకెట్: 11. తర్వాత గుణకారం మరియు భాగాహారం, చివరగా తీసివేత: 18.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Evaluate brackets first, then multiplication and division from left to right.",
+      "hi": "पहले कोष्ठक हल करें, फिर बाएँ से दाएँ गुणा और भाग करें।",
+      "te": "మొదట బ్రాకెట్లను సాధించి, తర్వాత గుణకారం మరియు భాగాహారం చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-alg-d3-09",
+    "conceptId": "c7-alg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: 28 - [3 + 3 × (5 - 2)]",
+      "hi": "मान ज्ञात कीजिए: 28 - [3 + 3 × (5 - 2)]",
+      "te": "విలువను కనుగొనండి: 28 - [3 + 3 × (5 - 2)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_bracket_as_nine_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "40",
+          "hi": "40",
+          "te": "40",
+          "reviewed": false
+        },
+        "mistakeTag": "added_multiplication_product_instead_of_subtracting"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "performed_subtraction_before_multiplication"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Innermost brackets first: (5 - 2) = 3. Then multiply: 3 × 3 = 9. Square bracket: 3 + 9 = 12. Finally: 28 - 12 = 16.",
+      "hi": "सबसे अंदर का कोष्ठक पहले: (5 - 2) = 3। चरणबद्ध हल करने पर: 16।",
+      "te": "అంతర్గత బ్రాకెట్ మొదట: (5 - 2) = 3. దశలవారీగా సాధించగా: 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Work from the innermost parentheses outward.",
+      "hi": "सबसे अंदर वाले कोष्ठक से बाहर की ओर हल करें।",
+      "te": "లోపలి బ్రాకెట్ల నుండి బయటకు సాధించండి.",
+      "reviewed": false
+    }
   }
 ]

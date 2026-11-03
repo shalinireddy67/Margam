@@ -936,5 +936,474 @@
       "te": "b(b + 7) = 60 సమీకరణాన్ని రాసి, కారణాంకాలుగా మార్చి, ధన మూలాన్ని ఎంచుకోండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c10-quad-d1-01",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation by factoring: x² - 10x + 24 = 0",
+      "hi": "गुणनखंडन द्वारा द्विघात समीकरण हल कीजिए: x² - 10x + 24 = 0",
+      "te": "కారణాంక పద్ధతిలో వర్గ సమీకరణాన్ని సాధించండి: x² - 10x + 24 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 5, x = 5",
+          "hi": "x = 5, x = 5",
+          "te": "x = 5, x = 5",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -4, x = -6",
+          "hi": "x = -4, x = -6",
+          "te": "x = -4, x = -6",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 4, x = 6",
+          "hi": "x = 4, x = 6",
+          "te": "x = 4, x = 6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 4, x = -6",
+          "hi": "x = 4, x = -6",
+          "te": "x = 4, x = -6",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Factor into (x - 4)(x - 6) = 0. By zero product property, x = 4 or x = 6.",
+      "hi": "(x - 4)(x - 6) = 0 के रूप में गुणनखंडित करें। शून्य गुणनफल नियम से x = 4 या x = 6।",
+      "te": "(x - 4)(x - 6) = 0 గా మార్చండి. శూన్య లబ్ద నియమం ప్రకారం x = 4 లేదా x = 6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find two numbers multiplying to +c and adding to -b, then invert signs for the roots: (x - r) = 0 => x = +r.",
+      "hi": "दो संख्याएँ खोजें जिनका गुणन +c और योग -b हो, फिर मूलों के लिए चिह्न बदलें।",
+      "te": "గుణిస్తే +c మరియు కూడితే -b వచ్చే రెండు సంఖ్యలను కనుగొని, మూలాల కోసం గుర్తులను మార్చండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d2-02",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the roots of: x² + 2x - 24 = 0",
+      "hi": "समीकरण के मूल ज्ञात कीजिए: x² + 2x - 24 = 0",
+      "te": "సమీకరణ మూలాలను కనుగొనండి: x² + 2x - 24 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -6, x = 4",
+          "hi": "x = -6, x = 4",
+          "te": "x = -6, x = 4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 6, x = 4",
+          "hi": "x = 6, x = 4",
+          "te": "x = 6, x = 4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -6, x = -4",
+          "hi": "x = -6, x = -4",
+          "te": "x = -6, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_roots_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 6, x = -4",
+          "hi": "x = 6, x = -4",
+          "te": "x = 6, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Factors are (x + 6)(x - 4) = 0. Solving gives x = -6 and x = 4.",
+      "hi": "गुणनखंड (x + 6)(x - 4) = 0 हैं। अतः x = -6 और x = 4।",
+      "te": "కారణాంకాలు (x + 6)(x - 4) = 0. కాబట్టి x = -6 మరియు x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Because the middle term is positive, the factor with larger magnitude takes the plus sign.",
+      "hi": "चूँकि मध्य पद धनात्मक है, बड़े परिमाण वाले गुणनखंड का चिह्न धनात्मक होगा।",
+      "te": "మధ్య పదం ధనాత్మకం కాబట్టి, పెద్ద సంఖ్యకు ప్లస్ గుర్తు వస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d3-03",
+    "conceptId": "c10-quad-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation: 2x² - 10x + 8 = 0",
+      "hi": "द्विघात समीकरण हल कीजिए: 2x² - 10x + 8 = 0",
+      "te": "వర్గ సమీకరణాన్ని సాధించండి: 2x² - 10x + 8 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 2, x = 8",
+          "hi": "x = 2, x = 8",
+          "te": "x = 2, x = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 2/2, x = 4",
+          "hi": "x = 2/2, x = 4",
+          "te": "x = 2/2, x = 4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -2/2, x = -4",
+          "hi": "x = -2/2, x = -4",
+          "te": "x = -2/2, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -2, x = 4",
+          "hi": "x = -2, x = 4",
+          "te": "x = -2, x = 4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Splitting middle term: (2x - 2)(x - 4) = 0. Roots are x = 2/2 and x = 4.",
+      "hi": "मध्य पद विभाजन से: (2x - 2)(x - 4) = 0। मूल: x = 2/2 और x = 4।",
+      "te": "మధ్య పదాన్ని విభజించగా: (2x - 2)(x - 4) = 0. మూలాలు x = 2/2 మరియు x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Split the middle term by finding factors of a × c that sum to b.",
+      "hi": "a × c के ऐसे गुणनखंड खोजें जिनका योग b हो।",
+      "te": "a × c లబ్దాన్ని ఇచ్చే మరియు కూడితే b వచ్చే కారణాంకాలతో మధ్య పదాన్ని విభజించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d1-04",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation by factoring: x² - 14x + 48 = 0",
+      "hi": "गुणनखंडन द्वारा द्विघात समीकरण हल कीजिए: x² - 14x + 48 = 0",
+      "te": "కారణాంక పద్ధతిలో వర్గ సమీకరణాన్ని సాధించండి: x² - 14x + 48 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -6, x = -8",
+          "hi": "x = -6, x = -8",
+          "te": "x = -6, x = -8",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 6, x = 8",
+          "hi": "x = 6, x = 8",
+          "te": "x = 6, x = 8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 6, x = -8",
+          "hi": "x = 6, x = -8",
+          "te": "x = 6, x = -8",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 7, x = 7",
+          "hi": "x = 7, x = 7",
+          "te": "x = 7, x = 7",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Factor into (x - 6)(x - 8) = 0. By zero product property, x = 6 or x = 8.",
+      "hi": "(x - 6)(x - 8) = 0 के रूप में गुणनखंडित करें। शून्य गुणनफल नियम से x = 6 या x = 8।",
+      "te": "(x - 6)(x - 8) = 0 గా మార్చండి. శూన్య లబ్ద నియమం ప్రకారం x = 6 లేదా x = 8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find two numbers multiplying to +c and adding to -b, then invert signs for the roots: (x - r) = 0 => x = +r.",
+      "hi": "दो संख्याएँ खोजें जिनका गुणन +c और योग -b हो, फिर मूलों के लिए चिह्न बदलें।",
+      "te": "గుణిస్తే +c మరియు కూడితే -b వచ్చే రెండు సంఖ్యలను కనుగొని, మూలాల కోసం గుర్తులను మార్చండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d2-05",
+    "conceptId": "c10-quad-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the roots of: x² + 2x - 24 = 0",
+      "hi": "समीकरण के मूल ज्ञात कीजिए: x² + 2x - 24 = 0",
+      "te": "సమీకరణ మూలాలను కనుగొనండి: x² + 2x - 24 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 6, x = 4",
+          "hi": "x = 6, x = 4",
+          "te": "x = 6, x = 4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -6, x = -4",
+          "hi": "x = -6, x = -4",
+          "te": "x = -6, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_roots_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 6, x = -4",
+          "hi": "x = 6, x = -4",
+          "te": "x = 6, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -6, x = 4",
+          "hi": "x = -6, x = 4",
+          "te": "x = -6, x = 4",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Factors are (x + 6)(x - 4) = 0. Solving gives x = -6 and x = 4.",
+      "hi": "गुणनखंड (x + 6)(x - 4) = 0 हैं। अतः x = -6 और x = 4।",
+      "te": "కారణాంకాలు (x + 6)(x - 4) = 0. కాబట్టి x = -6 మరియు x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Because the middle term is positive, the factor with larger magnitude takes the plus sign.",
+      "hi": "चूँकि मध्य पद धनात्मक है, बड़े परिमाण वाले गुणनखंड का चिह्न धनात्मक होगा।",
+      "te": "మధ్య పదం ధనాత్మకం కాబట్టి, పెద్ద సంఖ్యకు ప్లస్ గుర్తు వస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d3-06",
+    "conceptId": "c10-quad-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation: 2x² - 9x + 4 = 0",
+      "hi": "द्विघात समीकरण हल कीजिए: 2x² - 9x + 4 = 0",
+      "te": "వర్గ సమీకరణాన్ని సాధించండి: 2x² - 9x + 4 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -1/2, x = -4",
+          "hi": "x = -1/2, x = -4",
+          "te": "x = -1/2, x = -4",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 1/2, x = 4",
+          "hi": "x = 1/2, x = 4",
+          "te": "x = 1/2, x = 4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -1, x = 4",
+          "hi": "x = -1, x = 4",
+          "te": "x = -1, x = 4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_moving_terms_across_equality"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 1, x = 8",
+          "hi": "x = 1, x = 8",
+          "te": "x = 1, x = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Splitting middle term: (2x - 1)(x - 4) = 0. Roots are x = 1/2 and x = 4.",
+      "hi": "मध्य पद विभाजन से: (2x - 1)(x - 4) = 0। मूल: x = 1/2 और x = 4।",
+      "te": "మధ్య పదాన్ని విభజించగా: (2x - 1)(x - 4) = 0. మూలాలు x = 1/2 మరియు x = 4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Split the middle term by finding factors of a × c that sum to b.",
+      "hi": "a × c के ऐसे गुणनखंड खोजें जिनका योग b हो।",
+      "te": "a × c లబ్దాన్ని ఇచ్చే మరియు కూడితే b వచ్చే కారణాంకాలతో మధ్య పదాన్ని విభజించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-quad-d1-07",
+    "conceptId": "c10-quad-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Solve the quadratic equation by factoring: x² - 12x + 27 = 0",
+      "hi": "गुणनखंडन द्वारा द्विघात समीकरण हल कीजिए: x² - 12x + 27 = 0",
+      "te": "కారణాంక పద్ధతిలో వర్గ సమీకరణాన్ని సాధించండి: x² - 12x + 27 = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -3, x = -9",
+          "hi": "x = -3, x = -9",
+          "te": "x = -3, x = -9",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_to_invert_signs_from_factors_to_roots"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = 4, x = 8",
+          "hi": "x = 4, x = 8",
+          "te": "x = 4, x = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 3, x = -9",
+          "hi": "x = 3, x = -9",
+          "te": "x = 3, x = -9",
+          "reviewed": false
+        },
+        "mistakeTag": "inconsistent_sign_inversion"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 3, x = 9",
+          "hi": "x = 3, x = 9",
+          "te": "x = 3, x = 9",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Factor into (x - 3)(x - 9) = 0. By zero product property, x = 3 or x = 9.",
+      "hi": "(x - 3)(x - 9) = 0 के रूप में गुणनखंडित करें। शून्य गुणनफल नियम से x = 3 या x = 9।",
+      "te": "(x - 3)(x - 9) = 0 గా మార్చండి. శూన్య లబ్ద నియమం ప్రకారం x = 3 లేదా x = 9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find two numbers multiplying to +c and adding to -b, then invert signs for the roots: (x - r) = 0 => x = +r.",
+      "hi": "दो संख्याएँ खोजें जिनका गुणन +c और योग -b हो, फिर मूलों के लिए चिह्न बदलें।",
+      "te": "గుణిస్తే +c మరియు కూడితే -b వచ్చే రెండు సంఖ్యలను కనుగొని, మూలాల కోసం గుర్తులను మార్చండి.",
+      "reviewed": false
+    }
   }
 ]

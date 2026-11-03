@@ -869,5 +869,474 @@
       "te": "49a² = (7a)² మరియు 4b² = (2b)², మరియు 2(7a)(2b) = 28ab.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c9-id-d1-01",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using algebraic identity: (x + 9)²",
+      "hi": "बीजीय सर्वसमिका का उपयोग करके प्रसार कीजिए: (x + 9)²",
+      "te": "బీజీయ సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (x + 9)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 18x + 81",
+          "hi": "x² + 18x + 81",
+          "te": "x² + 18x + 81",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 81",
+          "hi": "x² - 81",
+          "te": "x² - 81",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 81",
+          "hi": "x² + 81",
+          "te": "x² + 81",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 9x + 81",
+          "hi": "x² + 9x + 81",
+          "te": "x² + 9x + 81",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using (a + b)² = a² + 2ab + b²: x² + 2(x)(9) + 9² = x² + 18x + 81.",
+      "hi": "(a + b)² = a² + 2ab + b² से: x² + 18x + 81।",
+      "te": "(a + b)² = a² + 2ab + b² ఉపయోగించి: x² + 18x + 81.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Do not forget the middle term 2ab in (a + b)².",
+      "hi": "(a + b)² में मध्य पद 2ab को न भूलें।",
+      "te": "(a + b)² లో మధ్య పదం 2ab ని మర్చిపోకండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d2-02",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using identity: (4x - 3)²",
+      "hi": "सर्वसमिका का उपयोग करके प्रसार कीजिए: (4x - 3)²",
+      "te": "సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (4x - 3)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "16x² + 24x + 9",
+          "hi": "16x² + 24x + 9",
+          "te": "16x² + 24x + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_middle_term_positive_instead_of_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "8x² - 24x + 6",
+          "hi": "8x² - 24x + 6",
+          "te": "8x² - 24x + 6",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_by_two_instead_of_squaring"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "16x² - 9",
+          "hi": "16x² - 9",
+          "te": "16x² - 9",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16x² - 24x + 9",
+          "hi": "16x² - 24x + 9",
+          "te": "16x² - 24x + 9",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Using (a - b)² = a² - 2ab + b²: (4x)² - 2(4x)(3) + (3)² = 16x² - 24x + 9.",
+      "hi": "(a - b)² = a² - 2ab + b² से: 16x² - 24x + 9।",
+      "te": "(a - b)² = a² - 2ab + b² ఉపయోగించి: 16x² - 24x + 9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "In (a - b)², the middle term is -2ab and the last term +b² is always positive.",
+      "hi": "(a - b)² में मध्य पद -2ab होता है तथा अंतिम पद +b² सदैव धनात्मक होता है।",
+      "te": "(a - b)² లో మధ్య పదం -2ab మరియు చివరి పదం +b² ఎల్లప్పుడూ ధనాత్మకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d3-03",
+    "conceptId": "c9-id-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using difference of squares: (3x + 3)(3x - 3)",
+      "hi": "वर्गों के अंतर की सर्वसमिका का उपयोग करके प्रसार कीजिए: (3x + 3)(3x - 3)",
+      "te": "వర్గాల తేడా సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (3x + 3)(3x - 3)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9x² - 9",
+          "hi": "9x² - 9",
+          "te": "9x² - 9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9x² + 18x - 9",
+          "hi": "9x² + 18x - 9",
+          "te": "9x² + 18x - 9",
+          "reviewed": false
+        },
+        "mistakeTag": "included_non_existent_middle_term_in_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9x² - 18x + 9",
+          "hi": "9x² - 18x + 9",
+          "te": "9x² - 18x + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "9x² + 9",
+          "hi": "9x² + 9",
+          "te": "9x² + 9",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_difference_of_squares"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Using (a + b)(a - b) = a² - b²: (3x)² - (3)² = 9x² - 9. The linear middle terms cancel out.",
+      "hi": "(a + b)(a - b) = a² - b² से: 9x² - 9।",
+      "te": "(a + b)(a - b) = a² - b² ఉపయోగించి: 9x² - 9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "(a + b)(a - b) yields difference of squares a² - b² with no middle term.",
+      "hi": "(a + b)(a - b) से a² - b² प्राप्त होता है, इसमें कोई मध्य पद नहीं होता।",
+      "te": "(a + b)(a - b) అనేది a² - b² ని ఇస్తుంది, ఇందులో మధ్య పదం ఉండదు.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d1-04",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using algebraic identity: (x + 4)²",
+      "hi": "बीजीय सर्वसमिका का उपयोग करके प्रसार कीजिए: (x + 4)²",
+      "te": "బీజీయ సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (x + 4)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 16",
+          "hi": "x² + 16",
+          "te": "x² + 16",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² + 4x + 16",
+          "hi": "x² + 4x + 16",
+          "te": "x² + 4x + 16",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 8x + 16",
+          "hi": "x² + 8x + 16",
+          "te": "x² + 8x + 16",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² - 16",
+          "hi": "x² - 16",
+          "te": "x² - 16",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Using (a + b)² = a² + 2ab + b²: x² + 2(x)(4) + 4² = x² + 8x + 16.",
+      "hi": "(a + b)² = a² + 2ab + b² से: x² + 8x + 16।",
+      "te": "(a + b)² = a² + 2ab + b² ఉపయోగించి: x² + 8x + 16.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Do not forget the middle term 2ab in (a + b)².",
+      "hi": "(a + b)² में मध्य पद 2ab को न भूलें।",
+      "te": "(a + b)² లో మధ్య పదం 2ab ని మర్చిపోకండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d2-05",
+    "conceptId": "c9-id-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using identity: (4x - 6)²",
+      "hi": "सर्वसमिका का उपयोग करके प्रसार कीजिए: (4x - 6)²",
+      "te": "సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (4x - 6)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "16x² + 48x + 36",
+          "hi": "16x² + 48x + 36",
+          "te": "16x² + 48x + 36",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_middle_term_positive_instead_of_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16x² - 36",
+          "hi": "16x² - 36",
+          "te": "16x² - 36",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "16x² - 48x + 36",
+          "hi": "16x² - 48x + 36",
+          "te": "16x² - 48x + 36",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "8x² - 48x + 12",
+          "hi": "8x² - 48x + 12",
+          "te": "8x² - 48x + 12",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_by_two_instead_of_squaring"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Using (a - b)² = a² - 2ab + b²: (4x)² - 2(4x)(6) + (6)² = 16x² - 48x + 36.",
+      "hi": "(a - b)² = a² - 2ab + b² से: 16x² - 48x + 36।",
+      "te": "(a - b)² = a² - 2ab + b² ఉపయోగించి: 16x² - 48x + 36.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "In (a - b)², the middle term is -2ab and the last term +b² is always positive.",
+      "hi": "(a - b)² में मध्य पद -2ab होता है तथा अंतिम पद +b² सदैव धनात्मक होता है।",
+      "te": "(a - b)² లో మధ్య పదం -2ab మరియు చివరి పదం +b² ఎల్లప్పుడూ ధనాత్మకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d3-06",
+    "conceptId": "c9-id-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using difference of squares: (3x + 8)(3x - 8)",
+      "hi": "वर्गों के अंतर की सर्वसमिका का उपयोग करके प्रसार कीजिए: (3x + 8)(3x - 8)",
+      "te": "వర్గాల తేడా సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (3x + 8)(3x - 8)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9x² + 64",
+          "hi": "9x² + 64",
+          "te": "9x² + 64",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_difference_of_squares"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9x² - 64",
+          "hi": "9x² - 64",
+          "te": "9x² - 64",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9x² + 48x - 64",
+          "hi": "9x² + 48x - 64",
+          "te": "9x² + 48x - 64",
+          "reviewed": false
+        },
+        "mistakeTag": "included_non_existent_middle_term_in_difference_of_squares"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "9x² - 48x + 64",
+          "hi": "9x² - 48x + 64",
+          "te": "9x² - 48x + 64",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Using (a + b)(a - b) = a² - b²: (3x)² - (8)² = 9x² - 64. The linear middle terms cancel out.",
+      "hi": "(a + b)(a - b) = a² - b² से: 9x² - 64।",
+      "te": "(a + b)(a - b) = a² - b² ఉపయోగించి: 9x² - 64.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "(a + b)(a - b) yields difference of squares a² - b² with no middle term.",
+      "hi": "(a + b)(a - b) से a² - b² प्राप्त होता है, इसमें कोई मध्य पद नहीं होता।",
+      "te": "(a + b)(a - b) అనేది a² - b² ని ఇస్తుంది, ఇందులో మధ్య పదం ఉండదు.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-id-d1-07",
+    "conceptId": "c9-id-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using algebraic identity: (x + 8)²",
+      "hi": "बीजीय सर्वसमिका का उपयोग करके प्रसार कीजिए: (x + 8)²",
+      "te": "బీజీయ సర్వసమీకరణాన్ని ఉపయోగించి విస్తరించండి: (x + 8)²",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 64",
+          "hi": "x² + 64",
+          "te": "x² + 64",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_middle_linear_terms"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 64",
+          "hi": "x² - 64",
+          "te": "x² - 64",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_squared_binomial_with_difference_of_squares"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 16x + 64",
+          "hi": "x² + 16x + 64",
+          "te": "x² + 16x + 64",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 8x + 64",
+          "hi": "x² + 8x + 64",
+          "te": "x² + 8x + 64",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_factor_of_two_in_middle_term"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Using (a + b)² = a² + 2ab + b²: x² + 2(x)(8) + 8² = x² + 16x + 64.",
+      "hi": "(a + b)² = a² + 2ab + b² से: x² + 16x + 64।",
+      "te": "(a + b)² = a² + 2ab + b² ఉపయోగించి: x² + 16x + 64.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Do not forget the middle term 2ab in (a + b)².",
+      "hi": "(a + b)² में मध्य पद 2ab को न भूलें।",
+      "te": "(a + b)² లో మధ్య పదం 2ab ని మర్చిపోకండి.",
+      "reviewed": false
+    }
   }
 ]

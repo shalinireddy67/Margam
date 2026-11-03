@@ -869,5 +869,474 @@
       "te": "రెండు సంఖ్యలను కలిపి 2 తో భాగించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c6-neg-d1-01",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A town's temperature drops to 15°C below 0°C. Which integer represents this temperature?",
+      "hi": "एक शहर का तापमान 0°C से 15°C नीचे चला जाता है। कौन सा पूर्णांक इस तापमान को दर्शाता है?",
+      "te": "ఒక పట్టణ ఉష్ణోగ్రత 0°C కంటే 15°C తక్కువకు పడిపోయింది. ఈ ఉష్ణోగ్రతను ఏ పూర్ణసంఖ్య సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-25°C",
+          "hi": "-25°C",
+          "te": "-25°C",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_minimum_negative_integer"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "0°C",
+          "hi": "0°C",
+          "te": "0°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-15°C",
+          "hi": "-15°C",
+          "te": "-15°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+15°C",
+          "hi": "+15°C",
+          "te": "+15°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Values below 0 are negative integers. 15°C below zero is written as -15°C.",
+      "hi": "शून्य से नीचे के मान ऋणात्मक होते हैं। 0°C से 15°C नीचे को -15°C लिखा जाता है।",
+      "te": "0 కంటే తక్కువ విలువలు రుణ పూర్ణసంఖ్యలు. 0°C కంటే 15°C తక్కువను -15°C గా రాస్తారు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quantities below zero or reference points use the minus (-) sign.",
+      "hi": "शून्य से नीचे की मात्राओं के लिए ऋण (-) चिह्न का प्रयोग करें।",
+      "te": "సున్నా కంటే తక్కువ ఉన్న పరిమాణాలకు మైనస్ (-) గుర్తును ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d2-02",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A drone flies at +235 m above sea level, and a submarine explores at -99 m below sea level. What is the vertical distance between them?",
+      "hi": "एक ड्रोन समुद्र तल से +235 मीटर ऊपर उड़ता है, और एक पनडुब्बी समुद्र तल से -99 मीटर नीचे है। उनके बीच की ऊर्ध्वाधर दूरी क्या है?",
+      "te": "ఒక డ్రోన్ సముద్ర మట్టానికి +235 మీటర్ల ఎత్తులో ఎగురుతోంది, జలాంతర్గామి -99 మీటర్ల లోతులో ఉంది. వాటి మధ్య నిలువు దూరం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "136 m",
+          "hi": "136 m",
+          "te": "136 m",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_difference_fallacy"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-334 m",
+          "hi": "-334 m",
+          "te": "-334 m",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "235 m",
+          "hi": "235 m",
+          "te": "235 m",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "334 m",
+          "hi": "334 m",
+          "te": "334 m",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Vertical distance = (+235) - (-99) = 235 + 99 = 334 m. Distance is always positive.",
+      "hi": "ऊर्ध्वाधर दूरी = (+235) - (-99) = 235 + 99 = 334 मीटर।",
+      "te": "నిలువు దూరం = (+235) - (-99) = 235 + 99 = 334 మీటర్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtracting a negative depth adds to the positive altitude: a - (-b) = a + b.",
+      "hi": "ऋणात्मक गहराई को घटाने पर वह धनात्मक में जुड़ जाती है: a - (-b) = a + b।",
+      "te": "రుణ లోతును తీసివేస్తే అది ధనాత్మక ఎత్తుకు కలుస్తుంది: a - (-b) = a + b.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d3-03",
+    "conceptId": "c6-neg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "The morning temperature was -5°C. By noon, it rose by 9°C, but by midnight it fell by 21°C. What was the midnight temperature?",
+      "hi": "सुबह का तापमान -5°C था। दोपहर तक इसमें 9°C की वृद्धि हुई, लेकिन आधी रात तक इसमें 21°C की गिरावट आई। आधी रात का तापमान क्या था?",
+      "te": "ఉదయం ఉష్ణోగ్రత -5°C. మధ్యాహ్నానికి 9°C పెరిగింది, కానీ అర్ధరాత్రికి 21°C తగ్గింది. అర్ధరాత్రి ఉష్ణోగ్రత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-17°C",
+          "hi": "-17°C",
+          "te": "-17°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "17°C",
+          "hi": "17°C",
+          "te": "17°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "35°C",
+          "hi": "35°C",
+          "te": "35°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-35°C",
+          "hi": "-35°C",
+          "te": "-35°C",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_difference_fallacy"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Calculate step-by-step: -5 + 9 = 4, then 4 - 21 = -17°C.",
+      "hi": "चरणबद्ध गणना: -5 + 9 = 4, फिर 4 - 21 = -17°C।",
+      "te": "దశలవారీగా లెక్కించండి: -5 + 9 = 4, తర్వాత 4 - 21 = -17°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Track the signs sequentially: start with -a, add the rise (+b), subtract the drop (-c).",
+      "hi": "चिह्नों का क्रमानुसार ध्यान रखें: -a से शुरू करें, वृद्धि (+b) जोड़ें, गिरावट (-c) घटाएँ।",
+      "te": "గుర్తులను వరుసగా గమనించండి: -a తో ప్రారంభించి, పెరుగుదలను (+b) కలిపి, తగ్గుదలను (-c) తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d1-04",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A town's temperature drops to 10°C below 0°C. Which integer represents this temperature?",
+      "hi": "एक शहर का तापमान 0°C से 10°C नीचे चला जाता है। कौन सा पूर्णांक इस तापमान को दर्शाता है?",
+      "te": "ఒక పట్టణ ఉష్ణోగ్రత 0°C కంటే 10°C తక్కువకు పడిపోయింది. ఈ ఉష్ణోగ్రతను ఏ పూర్ణసంఖ్య సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-10°C",
+          "hi": "-10°C",
+          "te": "-10°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+10°C",
+          "hi": "+10°C",
+          "te": "+10°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0°C",
+          "hi": "0°C",
+          "te": "0°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-20°C",
+          "hi": "-20°C",
+          "te": "-20°C",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_minimum_negative_integer"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Values below 0 are negative integers. 10°C below zero is written as -10°C.",
+      "hi": "शून्य से नीचे के मान ऋणात्मक होते हैं। 0°C से 10°C नीचे को -10°C लिखा जाता है।",
+      "te": "0 కంటే తక్కువ విలువలు రుణ పూర్ణసంఖ్యలు. 0°C కంటే 10°C తక్కువను -10°C గా రాస్తారు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quantities below zero or reference points use the minus (-) sign.",
+      "hi": "शून्य से नीचे की मात्राओं के लिए ऋण (-) चिह्न का प्रयोग करें।",
+      "te": "సున్నా కంటే తక్కువ ఉన్న పరిమాణాలకు మైనస్ (-) గుర్తును ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d2-05",
+    "conceptId": "c6-neg-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A drone flies at +270 m above sea level, and a submarine explores at -65 m below sea level. What is the vertical distance between them?",
+      "hi": "एक ड्रोन समुद्र तल से +270 मीटर ऊपर उड़ता है, और एक पनडुब्बी समुद्र तल से -65 मीटर नीचे है। उनके बीच की ऊर्ध्वाधर दूरी क्या है?",
+      "te": "ఒక డ్రోన్ సముద్ర మట్టానికి +270 మీటర్ల ఎత్తులో ఎగురుతోంది, జలాంతర్గామి -65 మీటర్ల లోతులో ఉంది. వాటి మధ్య నిలువు దూరం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "205 m",
+          "hi": "205 m",
+          "te": "205 m",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_difference_fallacy"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-335 m",
+          "hi": "-335 m",
+          "te": "-335 m",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "335 m",
+          "hi": "335 m",
+          "te": "335 m",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "270 m",
+          "hi": "270 m",
+          "te": "270 m",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Vertical distance = (+270) - (-65) = 270 + 65 = 335 m. Distance is always positive.",
+      "hi": "ऊर्ध्वाधर दूरी = (+270) - (-65) = 270 + 65 = 335 मीटर।",
+      "te": "నిలువు దూరం = (+270) - (-65) = 270 + 65 = 335 మీటర్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtracting a negative depth adds to the positive altitude: a - (-b) = a + b.",
+      "hi": "ऋणात्मक गहराई को घटाने पर वह धनात्मक में जुड़ जाती है: a - (-b) = a + b।",
+      "te": "రుణ లోతును తీసివేస్తే అది ధనాత్మక ఎత్తుకు కలుస్తుంది: a - (-b) = a + b.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d3-06",
+    "conceptId": "c6-neg-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "The morning temperature was -3°C. By noon, it rose by 7°C, but by midnight it fell by 20°C. What was the midnight temperature?",
+      "hi": "सुबह का तापमान -3°C था। दोपहर तक इसमें 7°C की वृद्धि हुई, लेकिन आधी रात तक इसमें 20°C की गिरावट आई। आधी रात का तापमान क्या था?",
+      "te": "ఉదయం ఉష్ణోగ్రత -3°C. మధ్యాహ్నానికి 7°C పెరిగింది, కానీ అర్ధరాత్రికి 20°C తగ్గింది. అర్ధరాత్రి ఉష్ణోగ్రత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-16°C",
+          "hi": "-16°C",
+          "te": "-16°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16°C",
+          "hi": "16°C",
+          "te": "16°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "30°C",
+          "hi": "30°C",
+          "te": "30°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-30°C",
+          "hi": "-30°C",
+          "te": "-30°C",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_difference_fallacy"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Calculate step-by-step: -3 + 7 = 4, then 4 - 20 = -16°C.",
+      "hi": "चरणबद्ध गणना: -3 + 7 = 4, फिर 4 - 20 = -16°C।",
+      "te": "దశలవారీగా లెక్కించండి: -3 + 7 = 4, తర్వాత 4 - 20 = -16°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Track the signs sequentially: start with -a, add the rise (+b), subtract the drop (-c).",
+      "hi": "चिह्नों का क्रमानुसार ध्यान रखें: -a से शुरू करें, वृद्धि (+b) जोड़ें, गिरावट (-c) घटाएँ।",
+      "te": "గుర్తులను వరుసగా గమనించండి: -a తో ప్రారంభించి, పెరుగుదలను (+b) కలిపి, తగ్గుదలను (-c) తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-neg-d1-07",
+    "conceptId": "c6-neg-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A town's temperature drops to 6°C below 0°C. Which integer represents this temperature?",
+      "hi": "एक शहर का तापमान 0°C से 6°C नीचे चला जाता है। कौन सा पूर्णांक इस तापमान को दर्शाता है?",
+      "te": "ఒక పట్టణ ఉష్ణోగ్రత 0°C కంటే 6°C తక్కువకు పడిపోయింది. ఈ ఉష్ణోగ్రతను ఏ పూర్ణసంఖ్య సూచిస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-6°C",
+          "hi": "-6°C",
+          "te": "-6°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-16°C",
+          "hi": "-16°C",
+          "te": "-16°C",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_minimum_negative_integer"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0°C",
+          "hi": "0°C",
+          "te": "0°C",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+6°C",
+          "hi": "+6°C",
+          "te": "+6°C",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Values below 0 are negative integers. 6°C below zero is written as -6°C.",
+      "hi": "शून्य से नीचे के मान ऋणात्मक होते हैं। 0°C से 6°C नीचे को -6°C लिखा जाता है।",
+      "te": "0 కంటే తక్కువ విలువలు రుణ పూర్ణసంఖ్యలు. 0°C కంటే 6°C తక్కువను -6°C గా రాస్తారు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quantities below zero or reference points use the minus (-) sign.",
+      "hi": "शून्य से नीचे की मात्राओं के लिए ऋण (-) चिह्न का प्रयोग करें।",
+      "te": "సున్నా కంటే తక్కువ ఉన్న పరిమాణాలకు మైనస్ (-) గుర్తును ఉపయోగించండి.",
+      "reviewed": false
+    }
   }
 ]

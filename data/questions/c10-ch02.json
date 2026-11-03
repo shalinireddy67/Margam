@@ -594,5 +594,608 @@
       "te": "α + β మరియు αβ లను k రూపంలో రాసి, సరళ సమీకరణాన్ని సాధించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c10-poly-d1-01",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "For the quadratic polynomial P(x) = x² - 5x + 6, what is the sum of its zeroes?",
+      "hi": "द्विघात बहुपद P(x) = x² - 5x + 6 के लिए, इसके शून्यकों का योग क्या है?",
+      "te": "వర్గ బహుపది P(x) = x² - 5x + 6 యొక్క శూన్యాల మొత్తం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Sum of zeroes = -b/a = -(-5)/1 = +5.",
+      "hi": "शून्यकों का योग = -b/a = -(-5)/1 = +5।",
+      "te": "శూన్యాల మొత్తం = -b/a = -(-5)/1 = +5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Sum of zeroes of ax² + bx + c is given by -b/a.",
+      "hi": "ax² + bx + c के शून्यकों का योग -b/a होता है।",
+      "te": "ax² + bx + c శూన్యాల మొత్తం -b/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d2-02",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product of zeroes of the quadratic polynomial: 3x² + 6x - 6",
+      "hi": "द्विघात बहुपद 3x² + 6x - 6 के शून्यकों का गुणनफल ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది 3x² + 6x - 6 యొక్క శూన్యాల లబ్దాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6/3",
+          "hi": "6/3",
+          "te": "6/3",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-6/3",
+          "hi": "-6/3",
+          "te": "-6/3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-6/3",
+          "hi": "-6/3",
+          "te": "-6/3",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6/3",
+          "hi": "6/3",
+          "te": "6/3",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Product of zeroes = c/a = (-6) / 3 = -6/3.",
+      "hi": "शून्यकों का गुणनफल = c/a = -6/3।",
+      "te": "శూన్యాల లబ్దం = c/a = -6/3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Product of zeroes of ax² + bx + c is given by c/a.",
+      "hi": "ax² + bx + c के शून्यकों का गुणनफल c/a होता है।",
+      "te": "ax² + bx + c శూన్యాల లబ్దం c/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d3-03",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A quadratic polynomial whose sum and product of zeroes are 4 and 6 respectively is:",
+      "hi": "एक द्विघात बहुपद जिसके शून्यकों का योग और गुणनफल क्रमशः 4 और 6 हैं, वह है:",
+      "te": "శూన్యాల మొత్తం మరియు లబ్దాలు వరుసగా 4 మరియు 6 గా గల వర్గ బహుపది:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² - 6x + 4",
+          "hi": "x² - 6x + 4",
+          "te": "x² - 6x + 4",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² + 4x - 6",
+          "hi": "x² + 4x - 6",
+          "te": "x² + 4x - 6",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² - 4x + 6",
+          "hi": "x² - 4x + 6",
+          "te": "x² - 4x + 6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 4x + 6",
+          "hi": "x² + 4x + 6",
+          "te": "x² + 4x + 6",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Formula: k[x² - (sum)x + (product)] = x² - 4x + 6.",
+      "hi": "सूत्र: k[x² - (योग)x + (गुणनफल)] = x² - 4x + 6।",
+      "te": "సూత్రం: k[x² - (మొత్తం)x + (లబ్దం)] = x² - 4x + 6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Formula: x² - (sum of zeroes)x + (product of zeroes).",
+      "hi": "सूत्र: x² - (शून्यकों का योग)x + (शून्यकों का गुणनफल)।",
+      "te": "సూత్రం: x² - (శూన్యాల మొత్తం)x + (శూన్యాల లబ్దం).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d1-04",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "For the quadratic polynomial P(x) = x² - 6x + 7, what is the sum of its zeroes?",
+      "hi": "द्विघात बहुपद P(x) = x² - 6x + 7 के लिए, इसके शून्यकों का योग क्या है?",
+      "te": "వర్గ బహుపది P(x) = x² - 6x + 7 యొక్క శూన్యాల మొత్తం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Sum of zeroes = -b/a = -(-6)/1 = +6.",
+      "hi": "शून्यकों का योग = -b/a = -(-6)/1 = +6।",
+      "te": "శూన్యాల మొత్తం = -b/a = -(-6)/1 = +6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Sum of zeroes of ax² + bx + c is given by -b/a.",
+      "hi": "ax² + bx + c के शून्यकों का योग -b/a होता है।",
+      "te": "ax² + bx + c శూన్యాల మొత్తం -b/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d2-05",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product of zeroes of the quadratic polynomial: 2x² + 9x - 5",
+      "hi": "द्विघात बहुपद 2x² + 9x - 5 के शून्यकों का गुणनफल ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది 2x² + 9x - 5 యొక్క శూన్యాల లబ్దాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5/2",
+          "hi": "5/2",
+          "te": "5/2",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-9/2",
+          "hi": "-9/2",
+          "te": "-9/2",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9/2",
+          "hi": "9/2",
+          "te": "9/2",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-5/2",
+          "hi": "-5/2",
+          "te": "-5/2",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Product of zeroes = c/a = (-5) / 2 = -5/2.",
+      "hi": "शून्यकों का गुणनफल = c/a = -5/2।",
+      "te": "శూన్యాల లబ్దం = c/a = -5/2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Product of zeroes of ax² + bx + c is given by c/a.",
+      "hi": "ax² + bx + c के शून्यकों का गुणनफल c/a होता है।",
+      "te": "ax² + bx + c శూన్యాల లబ్దం c/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d3-06",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A quadratic polynomial whose sum and product of zeroes are 7 and 5 respectively is:",
+      "hi": "एक द्विघात बहुपद जिसके शून्यकों का योग और गुणनफल क्रमशः 7 और 5 हैं, वह है:",
+      "te": "శూన్యాల మొత్తం మరియు లబ్దాలు వరుసగా 7 మరియు 5 గా గల వర్గ బహుపది:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² + 7x - 5",
+          "hi": "x² + 7x - 5",
+          "te": "x² + 7x - 5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 7x + 5",
+          "hi": "x² - 7x + 5",
+          "te": "x² - 7x + 5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² - 5x + 7",
+          "hi": "x² - 5x + 7",
+          "te": "x² - 5x + 7",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 7x + 5",
+          "hi": "x² + 7x + 5",
+          "te": "x² + 7x + 5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Formula: k[x² - (sum)x + (product)] = x² - 7x + 5.",
+      "hi": "सूत्र: k[x² - (योग)x + (गुणनफल)] = x² - 7x + 5।",
+      "te": "సూత్రం: k[x² - (మొత్తం)x + (లబ్దం)] = x² - 7x + 5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Formula: x² - (sum of zeroes)x + (product of zeroes).",
+      "hi": "सूत्र: x² - (शून्यकों का योग)x + (शून्यकों का गुणनफल)।",
+      "te": "సూత్రం: x² - (శూన్యాల మొత్తం)x + (శూన్యాల లబ్దం).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d1-07",
+    "conceptId": "c10-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "For the quadratic polynomial P(x) = x² - 8x + 9, what is the sum of its zeroes?",
+      "hi": "द्विघात बहुपद P(x) = x² - 8x + 9 के लिए, इसके शून्यकों का योग क्या है?",
+      "te": "వర్గ బహుపది P(x) = x² - 8x + 9 యొక్క శూన్యాల మొత్తం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "9",
+          "hi": "9",
+          "te": "9",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-9",
+          "hi": "-9",
+          "te": "-9",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Sum of zeroes = -b/a = -(-8)/1 = +8.",
+      "hi": "शून्यकों का योग = -b/a = -(-8)/1 = +8।",
+      "te": "శూన్యాల మొత్తం = -b/a = -(-8)/1 = +8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Sum of zeroes of ax² + bx + c is given by -b/a.",
+      "hi": "ax² + bx + c के शून्यकों का योग -b/a होता है।",
+      "te": "ax² + bx + c శూన్యాల మొత్తం -b/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d2-08",
+    "conceptId": "c10-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product of zeroes of the quadratic polynomial: 2x² + 6x - 8",
+      "hi": "द्विघात बहुपद 2x² + 6x - 8 के शून्यकों का गुणनफल ज्ञात कीजिए।",
+      "te": "వర్గ బహుపది 2x² + 6x - 8 యొక్క శూన్యాల లబ్దాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6/2",
+          "hi": "6/2",
+          "te": "6/2",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8/2",
+          "hi": "-8/2",
+          "te": "-8/2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8/2",
+          "hi": "8/2",
+          "te": "8/2",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-6/2",
+          "hi": "-6/2",
+          "te": "-6/2",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Product of zeroes = c/a = (-8) / 2 = -8/2.",
+      "hi": "शून्यकों का गुणनफल = c/a = -8/2।",
+      "te": "శూన్యాల లబ్దం = c/a = -8/2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Product of zeroes of ax² + bx + c is given by c/a.",
+      "hi": "ax² + bx + c के शून्यकों का गुणनफल c/a होता है।",
+      "te": "ax² + bx + c శూన్యాల లబ్దం c/a అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c10-poly-d3-09",
+    "conceptId": "c10-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "A quadratic polynomial whose sum and product of zeroes are 5 and 7 respectively is:",
+      "hi": "एक द्विघात बहुपद जिसके शून्यकों का योग और गुणनफल क्रमशः 5 और 7 हैं, वह है:",
+      "te": "శూన్యాల మొత్తం మరియు లబ్దాలు వరుసగా 5 మరియు 7 గా గల వర్గ బహుపది:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x² - 5x + 7",
+          "hi": "x² - 5x + 7",
+          "te": "x² - 5x + 7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x² - 7x + 5",
+          "hi": "x² - 7x + 5",
+          "te": "x² - 7x + 5",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_sum_with_product"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x² + 5x + 7",
+          "hi": "x² + 5x + 7",
+          "te": "x² + 5x + 7",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_in_sum_formula"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x² + 5x - 7",
+          "hi": "x² + 5x - 7",
+          "te": "x² + 5x - 7",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zeroes_with_y_intercept"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Formula: k[x² - (sum)x + (product)] = x² - 5x + 7.",
+      "hi": "सूत्र: k[x² - (योग)x + (गुणनफल)] = x² - 5x + 7।",
+      "te": "సూత్రం: k[x² - (మొత్తం)x + (లబ్దం)] = x² - 5x + 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Formula: x² - (sum of zeroes)x + (product of zeroes).",
+      "hi": "सूत्र: x² - (शून्यकों का योग)x + (शून्यकों का गुणनफल)।",
+      "te": "సూత్రం: x² - (శూన్యాల మొత్తం)x + (శూన్యాల లబ్దం).",
+      "reviewed": false
+    }
   }
 ]

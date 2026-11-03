@@ -8,7 +8,7 @@ import { getAuthenticatedUser } from "@/lib/server/auth";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { conceptId, studentId, count = 5, profile } = body;
+    const { conceptId, studentId, count = 5, profile, excludeQuestionIds, offset } = body;
 
     if (!conceptId || typeof conceptId !== "string") {
       return NextResponse.json(
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
     // Generate personalized worksheet based on student gaps, mastery, and difficulty
     const targetCount = typeof count === "number" && count >= 3 && count <= 10 ? count : 5;
-    const worksheet = generatePersonalizedWorksheet(conceptId, profile, targetCount);
+    const worksheet = generatePersonalizedWorksheet(conceptId, profile, targetCount, { excludeQuestionIds, offset });
 
     if (worksheet.questions.length === 0) {
       return NextResponse.json(

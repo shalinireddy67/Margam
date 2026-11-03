@@ -869,5 +869,474 @@
       "te": "(-3q) × (-q) = +3q² అవుతుంది, మరియు -2pq - 3pq = -5pq కలపండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c8-dist-d1-01",
+    "conceptId": "c8-dist-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using the distributive law: 3(3x + 5)",
+      "hi": "वितरण नियम का उपयोग करके प्रसार कीजिए: 3(3x + 5)",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి విస్తరించండి: 3(3x + 5)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "9x + 15",
+          "hi": "9x + 15",
+          "te": "9x + 15",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "9x + 5",
+          "hi": "9x + 5",
+          "te": "9x + 5",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3x + 15",
+          "hi": "3x + 15",
+          "te": "3x + 15",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_variable_only"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6x + 8",
+          "hi": "6x + 8",
+          "te": "6x + 8",
+          "reviewed": false
+        },
+        "mistakeTag": "added_coefficients_instead_of_multiplied"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Multiply the outside factor 3 with both terms inside: (3 × 3x) + (3 × 5) = 9x + 15.",
+      "hi": "बाहरी पद 3 को कोष्ठक के दोनों पदों से गुणा करें: 9x + 15।",
+      "te": "బయట ఉన్న 3 తో బ్రాకెట్ లోని రెండు పదాలను గుణించండి: 9x + 15.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "a(b + c) = ab + ac. Make sure to multiply every term inside the parentheses.",
+      "hi": "a(b + c) = ab + ac। कोष्ठक के अंदर प्रत्येक पद से गुणा करना सुनिश्चित करें।",
+      "te": "a(b + c) = ab + ac. బ్రాకెట్ లోపల ఉన్న ప్రతి పదాన్ని గుణించాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d2-02",
+    "conceptId": "c8-dist-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand and simplify: -7(2x - 3)",
+      "hi": "प्रसार और सरल कीजिए: -7(2x - 3)",
+      "te": "విస్తరించి సూక్ష్మీకరించండి: -7(2x - 3)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "14x + 21",
+          "hi": "14x + 21",
+          "te": "14x + 21",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_on_first_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-14x + 21",
+          "hi": "-14x + 21",
+          "te": "-14x + 21",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-14x - 3",
+          "hi": "-14x - 3",
+          "te": "-14x - 3",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-14x - 21",
+          "hi": "-14x - 21",
+          "te": "-14x - 21",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "(-7) × (2x) = -14x and (-7) × (-3) = +21. Result: -14x + 21.",
+      "hi": "(-7) × (2x) = -14x तथा (-7) × (-3) = +21। परिणाम: -14x + 21।",
+      "te": "(-7) × (2x) = -14x మరియు (-7) × (-3) = +21. ఫలితం: -14x + 21.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Watch the negative multiplier: (-a) × (-c) produces a positive (+ac) second term.",
+      "hi": "ऋणात्मक गुणक का ध्यान रखें: (-a) × (-c) से धनात्मक (+ac) दूसरा पद बनता है।",
+      "te": "రుణ గుణకాన్ని గమనించండి: (-a) × (-c) ధనాత్మక (+ac) రెండవ పదాన్ని ఇస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d3-03",
+    "conceptId": "c8-dist-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand: -4x(2x - 3)",
+      "hi": "प्रसार कीजिए: -4x(2x - 3)",
+      "te": "విస్తరించండి: -4x(2x - 3)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-8x² + 12",
+          "hi": "-8x² + 12",
+          "te": "-8x² + 12",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8x² - 12x",
+          "hi": "-8x² - 12x",
+          "te": "-8x² - 12x",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-8x² + 12x",
+          "hi": "-8x² + 12x",
+          "te": "-8x² + 12x",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "8x² + 12x",
+          "hi": "8x² + 12x",
+          "te": "8x² + 12x",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_on_first_term"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "(-4x) × (2x) = -8x² and (-4x) × (-3) = +12x. Result: -8x² + 12x.",
+      "hi": "(-4x) × (2x) = -8x² तथा (-4x) × (-3) = +12x। परिणाम: -8x² + 12x।",
+      "te": "(-4x) × (2x) = -8x² మరియు (-4x) × (-3) = +12x. ఫలితం: -8x² + 12x.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply coefficients and add exponents: x × x = x², and (-ax) × (-c) = +acx.",
+      "hi": "गुणांकों को गुणा करें और घातों को जोड़ें: x × x = x² तथा (-ax) × (-c) = +acx।",
+      "te": "గుణకాలను గుణించి ఘాతాలను కూడండి: x × x = x² మరియు (-ax) × (-c) = +acx.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d1-04",
+    "conceptId": "c8-dist-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using the distributive law: 7(5x + 6)",
+      "hi": "वितरण नियम का उपयोग करके प्रसार कीजिए: 7(5x + 6)",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి విస్తరించండి: 7(5x + 6)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "5x + 42",
+          "hi": "5x + 42",
+          "te": "5x + 42",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_variable_only"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "12x + 13",
+          "hi": "12x + 13",
+          "te": "12x + 13",
+          "reviewed": false
+        },
+        "mistakeTag": "added_coefficients_instead_of_multiplied"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "35x + 42",
+          "hi": "35x + 42",
+          "te": "35x + 42",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "35x + 6",
+          "hi": "35x + 6",
+          "te": "35x + 6",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Multiply the outside factor 7 with both terms inside: (7 × 5x) + (7 × 6) = 35x + 42.",
+      "hi": "बाहरी पद 7 को कोष्ठक के दोनों पदों से गुणा करें: 35x + 42।",
+      "te": "బయట ఉన్న 7 తో బ్రాకెట్ లోని రెండు పదాలను గుణించండి: 35x + 42.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "a(b + c) = ab + ac. Make sure to multiply every term inside the parentheses.",
+      "hi": "a(b + c) = ab + ac। कोष्ठक के अंदर प्रत्येक पद से गुणा करना सुनिश्चित करें।",
+      "te": "a(b + c) = ab + ac. బ్రాకెట్ లోపల ఉన్న ప్రతి పదాన్ని గుణించాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d2-05",
+    "conceptId": "c8-dist-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand and simplify: -4(4x - 8)",
+      "hi": "प्रसार और सरल कीजिए: -4(4x - 8)",
+      "te": "విస్తరించి సూక్ష్మీకరించండి: -4(4x - 8)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-16x - 8",
+          "hi": "-16x - 8",
+          "te": "-16x - 8",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16x + 32",
+          "hi": "16x + 32",
+          "te": "16x + 32",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_on_first_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-16x - 32",
+          "hi": "-16x - 32",
+          "te": "-16x - 32",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-16x + 32",
+          "hi": "-16x + 32",
+          "te": "-16x + 32",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "(-4) × (4x) = -16x and (-4) × (-8) = +32. Result: -16x + 32.",
+      "hi": "(-4) × (4x) = -16x तथा (-4) × (-8) = +32। परिणाम: -16x + 32।",
+      "te": "(-4) × (4x) = -16x మరియు (-4) × (-8) = +32. ఫలితం: -16x + 32.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Watch the negative multiplier: (-a) × (-c) produces a positive (+ac) second term.",
+      "hi": "ऋणात्मक गुणक का ध्यान रखें: (-a) × (-c) से धनात्मक (+ac) दूसरा पद बनता है।",
+      "te": "రుణ గుణకాన్ని గమనించండి: (-a) × (-c) ధనాత్మక (+ac) రెండవ పదాన్ని ఇస్తుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d3-06",
+    "conceptId": "c8-dist-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand: -2x(2x - 7)",
+      "hi": "प्रसार कीजिए: -2x(2x - 7)",
+      "te": "విస్తరించండి: -2x(2x - 7)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4x² + 14x",
+          "hi": "4x² + 14x",
+          "te": "4x² + 14x",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_on_first_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4x² + 14x",
+          "hi": "-4x² + 14x",
+          "te": "-4x² + 14x",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-4x² - 14x",
+          "hi": "-4x² - 14x",
+          "te": "-4x² - 14x",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-4x² + 14",
+          "hi": "-4x² + 14",
+          "te": "-4x² + 14",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "(-2x) × (2x) = -4x² and (-2x) × (-7) = +14x. Result: -4x² + 14x.",
+      "hi": "(-2x) × (2x) = -4x² तथा (-2x) × (-7) = +14x। परिणाम: -4x² + 14x।",
+      "te": "(-2x) × (2x) = -4x² మరియు (-2x) × (-7) = +14x. ఫలితం: -4x² + 14x.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply coefficients and add exponents: x × x = x², and (-ax) × (-c) = +acx.",
+      "hi": "गुणांकों को गुणा करें और घातों को जोड़ें: x × x = x² तथा (-ax) × (-c) = +acx।",
+      "te": "గుణకాలను గుణించి ఘాతాలను కూడండి: x × x = x² మరియు (-ax) × (-c) = +acx.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-dist-d1-07",
+    "conceptId": "c8-dist-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Expand using the distributive law: 3(4x + 5)",
+      "hi": "वितरण नियम का उपयोग करके प्रसार कीजिए: 3(4x + 5)",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి విస్తరించండి: 3(4x + 5)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "12x + 5",
+          "hi": "12x + 5",
+          "te": "12x + 5",
+          "reviewed": false
+        },
+        "mistakeTag": "neglected_distributing_to_second_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4x + 15",
+          "hi": "4x + 15",
+          "te": "4x + 15",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_variable_only"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "12x + 15",
+          "hi": "12x + 15",
+          "te": "12x + 15",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7x + 8",
+          "hi": "7x + 8",
+          "te": "7x + 8",
+          "reviewed": false
+        },
+        "mistakeTag": "added_coefficients_instead_of_multiplied"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Multiply the outside factor 3 with both terms inside: (3 × 4x) + (3 × 5) = 12x + 15.",
+      "hi": "बाहरी पद 3 को कोष्ठक के दोनों पदों से गुणा करें: 12x + 15।",
+      "te": "బయట ఉన్న 3 తో బ్రాకెట్ లోని రెండు పదాలను గుణించండి: 12x + 15.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "a(b + c) = ab + ac. Make sure to multiply every term inside the parentheses.",
+      "hi": "a(b + c) = ab + ac। कोष्ठक के अंदर प्रत्येक पद से गुणा करना सुनिश्चित करें।",
+      "te": "a(b + c) = ab + ac. బ్రాకెట్ లోపల ఉన్న ప్రతి పదాన్ని గుణించాలి.",
+      "reviewed": false
+    }
   }
 ]

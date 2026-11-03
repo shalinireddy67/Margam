@@ -9,7 +9,7 @@ import { getAuthenticatedUser } from "@/lib/server/auth";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { chapterId, studentId } = body;
+    const { chapterId, studentId, excludeQuestionIds, offset } = body;
 
     if (!chapterId || typeof chapterId !== "string") {
       return NextResponse.json(
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate chapter diagnostic questions
-    const { questions, shortfall } = generateChapterDiagnostic(chapterId, 6);
+    const { questions, shortfall } = generateChapterDiagnostic(chapterId, 6, { excludeQuestionIds, offset });
 
     if (questions.length === 0) {
       return NextResponse.json(

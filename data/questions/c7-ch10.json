@@ -869,5 +869,474 @@
       "te": "మైనస్ గుర్తులను లెక్కించండి: 3 మైనస్ గుర్తులు ఉన్నందున ఫలితం రుణాత్మకం.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c7-int-d1-01",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: (-7) × (-9)",
+      "hi": "मान ज्ञात कीजिए: (-7) × (-9)",
+      "te": "విలువను కనుగొనండి: (-7) × (-9)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-16",
+          "hi": "-16",
+          "te": "-16",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-63",
+          "hi": "-63",
+          "te": "-63",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "63",
+          "hi": "63",
+          "te": "63",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "The product of two negative integers is always positive: (-7) × (-9) = +(7 × 9) = 63.",
+      "hi": "दो ऋणात्मक पूर्णांकों का गुणनफल सदैव धनात्मक होता है: (-7) × (-9) = +63।",
+      "te": "రెండు రుణ పూర్ణసంఖ్యల లబ్దం ఎల్లప్పుడూ ధనాత్మకం: (-7) × (-9) = +63.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember the fundamental rule: negative × negative = positive.",
+      "hi": "मूलभूत नियम याद रखें: ऋण × ऋण = धन।",
+      "te": "ప్రాథమిక సూత్రం గుర్తుంచుకోండి: మైనస్ × మైనస్ = ప్లస్.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d2-02",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: (-5) × (-6) × (-2)",
+      "hi": "गुणनफल ज्ञात कीजिए: (-5) × (-6) × (-2)",
+      "te": "లబ్దాన్ని కనుగొనండి: (-5) × (-6) × (-2)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "60",
+          "hi": "60",
+          "te": "60",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-60",
+          "hi": "-60",
+          "te": "-60",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-13",
+          "hi": "-13",
+          "te": "-13",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-30",
+          "hi": "-30",
+          "te": "-30",
+          "reviewed": false
+        },
+        "mistakeTag": "incomplete_multiplication_of_factors"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Odd number of negative factors (3) yields a negative product: (-5) × (-6) = +30, then (+30) × (-2) = -60.",
+      "hi": "विषम संख्या (3) में ऋणात्मक गुणनखंड होने पर परिणाम ऋणात्मक होता है: -60।",
+      "te": "బేసి సంఖ్యలో (3) రుణాంకాలు ఉన్నప్పుడు ఫలితం రుణాత్మకం అవుతుంది: -60.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "An odd number of negative signs yields a negative answer; an even number yields positive.",
+      "hi": "ऋणात्मक चिह्नों की विषम संख्या पर उत्तर ऋणात्मक और सम संख्या पर धनात्मक होता है।",
+      "te": "రుణ గుర్తుల సంఖ్య బేసి అయితే ఫలితం రుణాత్మకం, సరి అయితే ధనాత్మకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d3-03",
+    "conceptId": "c7-int-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Calculate using the distributive property: (-5) × [(-7) + (-11)]",
+      "hi": "वितरण नियम का उपयोग करके गणना कीजिए: (-5) × [(-7) + (-11)]",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి లెక్కించండి: (-5) × [(-7) + (-11)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-90",
+          "hi": "-90",
+          "te": "-90",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-20",
+          "hi": "-20",
+          "te": "-20",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-23",
+          "hi": "-23",
+          "te": "-23",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "90",
+          "hi": "90",
+          "te": "90",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "(-5) × (-7) + (-5) × (-11) = +35 + +55 = 90. Both terms become positive!",
+      "hi": "(-5) × (-7) + (-5) × (-11) = +35 + +55 = 90।",
+      "te": "(-5) × (-7) + (-5) × (-11) = +35 + +55 = 90. రెండు పదాలు ధనాత్మకం అవుతాయి!",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Distribute -a across both negative terms: (-a) × (-b) + (-a) × (-c).",
+      "hi": "दोनों ऋणात्मक पदों में -a को गुणा करें: (-a) × (-b) + (-a) × (-c) ।",
+      "te": "రెండు రుణ పదాలతో -a ని గుణించండి: (-a) × (-b) + (-a) × (-c).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d1-04",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: (-12) × (-6)",
+      "hi": "मान ज्ञात कीजिए: (-12) × (-6)",
+      "te": "విలువను కనుగొనండి: (-12) × (-6)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-18",
+          "hi": "-18",
+          "te": "-18",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-72",
+          "hi": "-72",
+          "te": "-72",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "72",
+          "hi": "72",
+          "te": "72",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The product of two negative integers is always positive: (-12) × (-6) = +(12 × 6) = 72.",
+      "hi": "दो ऋणात्मक पूर्णांकों का गुणनफल सदैव धनात्मक होता है: (-12) × (-6) = +72।",
+      "te": "రెండు రుణ పూర్ణసంఖ్యల లబ్దం ఎల్లప్పుడూ ధనాత్మకం: (-12) × (-6) = +72.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember the fundamental rule: negative × negative = positive.",
+      "hi": "मूलभूत नियम याद रखें: ऋण × ऋण = धन।",
+      "te": "ప్రాథమిక సూత్రం గుర్తుంచుకోండి: మైనస్ × మైనస్ = ప్లస్.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d2-05",
+    "conceptId": "c7-int-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the product: (-2) × (-4) × (-3)",
+      "hi": "गुणनफल ज्ञात कीजिए: (-2) × (-4) × (-3)",
+      "te": "లబ్దాన్ని కనుగొనండి: (-2) × (-4) × (-3)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-9",
+          "hi": "-9",
+          "te": "-9",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        },
+        "mistakeTag": "incomplete_multiplication_of_factors"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "odd_even_negative_count_confusion"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-24",
+          "hi": "-24",
+          "te": "-24",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Odd number of negative factors (3) yields a negative product: (-2) × (-4) = +8, then (+8) × (-3) = -24.",
+      "hi": "विषम संख्या (3) में ऋणात्मक गुणनखंड होने पर परिणाम ऋणात्मक होता है: -24।",
+      "te": "బేసి సంఖ్యలో (3) రుణాంకాలు ఉన్నప్పుడు ఫలితం రుణాత్మకం అవుతుంది: -24.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "An odd number of negative signs yields a negative answer; an even number yields positive.",
+      "hi": "ऋणात्मक चिह्नों की विषम संख्या पर उत्तर ऋणात्मक और सम संख्या पर धनात्मक होता है।",
+      "te": "రుణ గుర్తుల సంఖ్య బేసి అయితే ఫలితం రుణాత్మకం, సరి అయితే ధనాత్మకం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d3-06",
+    "conceptId": "c7-int-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Calculate using the distributive property: (-4) × [(-6) + (-10)]",
+      "hi": "वितरण नियम का उपयोग करके गणना कीजिए: (-4) × [(-6) + (-10)]",
+      "te": "విభాగ న్యాయాన్ని ఉపయోగించి లెక్కించండి: (-4) × [(-6) + (-10)]",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-64",
+          "hi": "-64",
+          "te": "-64",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_positive_times_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-20",
+          "hi": "-20",
+          "te": "-20",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-16",
+          "hi": "-16",
+          "te": "-16",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "64",
+          "hi": "64",
+          "te": "64",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "(-4) × (-6) + (-4) × (-10) = +24 + +40 = 64. Both terms become positive!",
+      "hi": "(-4) × (-6) + (-4) × (-10) = +24 + +40 = 64।",
+      "te": "(-4) × (-6) + (-4) × (-10) = +24 + +40 = 64. రెండు పదాలు ధనాత్మకం అవుతాయి!",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Distribute -a across both negative terms: (-a) × (-b) + (-a) × (-c).",
+      "hi": "दोनों ऋणात्मक पदों में -a को गुणा करें: (-a) × (-b) + (-a) × (-c) ।",
+      "te": "రెండు రుణ పదాలతో -a ని గుణించండి: (-a) × (-b) + (-a) × (-c).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c7-int-d1-07",
+    "conceptId": "c7-int-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate: (-12) × (-4)",
+      "hi": "मान ज्ञात कीजिए: (-12) × (-4)",
+      "te": "విలువను కనుగొనండి: (-12) × (-4)",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-16",
+          "hi": "-16",
+          "te": "-16",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_with_negative"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "added_instead_of_multiplied_positive"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-48",
+          "hi": "-48",
+          "te": "-48",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_times_negative_equals_negative_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "48",
+          "hi": "48",
+          "te": "48",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "The product of two negative integers is always positive: (-12) × (-4) = +(12 × 4) = 48.",
+      "hi": "दो ऋणात्मक पूर्णांकों का गुणनफल सदैव धनात्मक होता है: (-12) × (-4) = +48।",
+      "te": "రెండు రుణ పూర్ణసంఖ్యల లబ్దం ఎల్లప్పుడూ ధనాత్మకం: (-12) × (-4) = +48.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember the fundamental rule: negative × negative = positive.",
+      "hi": "मूलभूत नियम याद रखें: ऋण × ऋण = धन।",
+      "te": "ప్రాథమిక సూత్రం గుర్తుంచుకోండి: మైనస్ × మైనస్ = ప్లస్.",
+      "reviewed": false
+    }
   }
 ]

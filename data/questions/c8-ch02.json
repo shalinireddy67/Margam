@@ -594,5 +594,608 @@
       "te": "రుణ ఘాతాలను ధన ఘాతాలుగా మార్చేటప్పుడు భిన్నాలను తిరగరాయండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c8-exp-d1-01",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify using the product law: 6ᵐ × 6ⁿ where m = 3 and n = 4.",
+      "hi": "गुणन नियम से सरल कीजिए: 6^3 × 6^4।",
+      "te": "లబ్ద న్యాయాన్ని ఉపయోగించి సూక్ష్మీకరించండి: 6^3 × 6^4.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6^7",
+          "hi": "6^7",
+          "te": "6^7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "6^12",
+          "hi": "6^12",
+          "te": "6^12",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "12^7",
+          "hi": "12^7",
+          "te": "12^7",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6^1",
+          "hi": "6^1",
+          "te": "6^1",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Law of exponents for same base: aᵐ × aⁿ = aᵐ⁺ⁿ. Thus 6^3 × 6^4 = 6^(3+4) = 6^7.",
+      "hi": "समान आधार पर घातांक नियम: aᵐ × aⁿ = aᵐ⁺ⁿ। अतः 6^7।",
+      "te": "సమాన భూములు ఉన్నప్పుడు: aᵐ × aⁿ = aᵐ⁺ⁿ. కాబట్టి 6^7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When multiplying terms with the same base, add their exponents.",
+      "hi": "समान आधार वाली संख्याओं का गुणा करते समय घातों को जोड़ें।",
+      "te": "సమాన భూములు ఉన్న పదాలను గుణించేటప్పుడు ఘాతాలను కలపాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d2-02",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (2^4)^2",
+      "hi": "सरल कीजिए: (2^4)^2",
+      "te": "సూక్ష్మీకరించండి: (2^4)^2",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2^8",
+          "hi": "2^8",
+          "te": "2^8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2^6",
+          "hi": "2^6",
+          "te": "2^6",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_power_of_power_as_addition"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2^16",
+          "hi": "2^16",
+          "te": "2^16",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4^4",
+          "hi": "4^4",
+          "te": "4^4",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Power of a power law: (aᵐ)ⁿ = aᵐˣⁿ. Thus (2^4)^2 = 2^(4×2) = 2^8.",
+      "hi": "घात की घात का नियम: (aᵐ)ⁿ = aᵐˣⁿ। अतः 2^8।",
+      "te": "ఘాతం యొక్క ఘాత న్యాయం: (aᵐ)ⁿ = aᵐˣⁿ. కాబట్టి 2^8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "For a power raised to another power, multiply the exponents: (aᵐ)ⁿ = aᵐⁿ.",
+      "hi": "घात की घात होने पर घातों का गुणा करें: (aᵐ)ⁿ = aᵐⁿ।",
+      "te": "ఘాతాన్ని మరో ఘాతానికి పెంచినప్పుడు ఘాతాలను గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d3-03",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate in positive exponent form: 2^3 ÷ 2^5",
+      "hi": "धनात्मक घातांक रूप में मान ज्ञात कीजिए: 2^3 ÷ 2^5",
+      "te": "ధనాత్మక ఘాతాంక రూపంలో తెలపండి: 2^3 ÷ 2^5",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-2^2",
+          "hi": "-2^2",
+          "te": "-2^2",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2^2",
+          "hi": "2^2",
+          "te": "2^2",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "2^8",
+          "hi": "2^8",
+          "te": "2^8",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "1 / 2^2",
+          "hi": "1 / 2^2",
+          "te": "1 / 2^2",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Quotient law: 2^3 ÷ 2^5 = 2^(3-5) = 2^(-2) = 1 / 2^2.",
+      "hi": "भागफल नियम: 2^3 ÷ 2^5 = 1 / 2^2।",
+      "te": "భాగాహార న్యాయం: 2^3 ÷ 2^5 = 1 / 2^2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract exponents in division: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, and a⁻ᵏ = 1 / aᵏ.",
+      "hi": "भाग में घातों को घटाएँ: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, और a⁻ᵏ = 1 / aᵏ।",
+      "te": "భాగాహారంలో ఘాతాలను తీసివేయండి: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, మరియు a⁻ᵏ = 1 / aᵏ.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d1-04",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify using the product law: 3ᵐ × 3ⁿ where m = 3 and n = 3.",
+      "hi": "गुणन नियम से सरल कीजिए: 3^3 × 3^3।",
+      "te": "లబ్ద న్యాయాన్ని ఉపయోగించి సూక్ష్మీకరించండి: 3^3 × 3^3.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3^6",
+          "hi": "3^6",
+          "te": "3^6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3^0",
+          "hi": "3^0",
+          "te": "3^0",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "6^6",
+          "hi": "6^6",
+          "te": "6^6",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3^9",
+          "hi": "3^9",
+          "te": "3^9",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Law of exponents for same base: aᵐ × aⁿ = aᵐ⁺ⁿ. Thus 3^3 × 3^3 = 3^(3+3) = 3^6.",
+      "hi": "समान आधार पर घातांक नियम: aᵐ × aⁿ = aᵐ⁺ⁿ। अतः 3^6।",
+      "te": "సమాన భూములు ఉన్నప్పుడు: aᵐ × aⁿ = aᵐ⁺ⁿ. కాబట్టి 3^6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When multiplying terms with the same base, add their exponents.",
+      "hi": "समान आधार वाली संख्याओं का गुणा करते समय घातों को जोड़ें।",
+      "te": "సమాన భూములు ఉన్న పదాలను గుణించేటప్పుడు ఘాతాలను కలపాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d2-05",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (3^4)^2",
+      "hi": "सरल कीजिए: (3^4)^2",
+      "te": "సూక్ష్మీకరించండి: (3^4)^2",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6^4",
+          "hi": "6^4",
+          "te": "6^4",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3^8",
+          "hi": "3^8",
+          "te": "3^8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3^6",
+          "hi": "3^6",
+          "te": "3^6",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_power_of_power_as_addition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3^16",
+          "hi": "3^16",
+          "te": "3^16",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Power of a power law: (aᵐ)ⁿ = aᵐˣⁿ. Thus (3^4)^2 = 3^(4×2) = 3^8.",
+      "hi": "घात की घात का नियम: (aᵐ)ⁿ = aᵐˣⁿ। अतः 3^8।",
+      "te": "ఘాతం యొక్క ఘాత న్యాయం: (aᵐ)ⁿ = aᵐˣⁿ. కాబట్టి 3^8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "For a power raised to another power, multiply the exponents: (aᵐ)ⁿ = aᵐⁿ.",
+      "hi": "घात की घात होने पर घातों का गुणा करें: (aᵐ)ⁿ = aᵐⁿ।",
+      "te": "ఘాతాన్ని మరో ఘాతానికి పెంచినప్పుడు ఘాతాలను గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d3-06",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate in positive exponent form: 3^3 ÷ 3^5",
+      "hi": "धनात्मक घातांक रूप में मान ज्ञात कीजिए: 3^3 ÷ 3^5",
+      "te": "ధనాత్మక ఘాతాంక రూపంలో తెలపండి: 3^3 ÷ 3^5",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "3^8",
+          "hi": "3^8",
+          "te": "3^8",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-3^2",
+          "hi": "-3^2",
+          "te": "-3^2",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "1 / 3^2",
+          "hi": "1 / 3^2",
+          "te": "1 / 3^2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3^2",
+          "hi": "3^2",
+          "te": "3^2",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Quotient law: 3^3 ÷ 3^5 = 3^(3-5) = 3^(-2) = 1 / 3^2.",
+      "hi": "भागफल नियम: 3^3 ÷ 3^5 = 1 / 3^2।",
+      "te": "భాగాహార న్యాయం: 3^3 ÷ 3^5 = 1 / 3^2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract exponents in division: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, and a⁻ᵏ = 1 / aᵏ.",
+      "hi": "भाग में घातों को घटाएँ: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, और a⁻ᵏ = 1 / aᵏ।",
+      "te": "భాగాహారంలో ఘాతాలను తీసివేయండి: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, మరియు a⁻ᵏ = 1 / aᵏ.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d1-07",
+    "conceptId": "c8-exp-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify using the product law: 3ᵐ × 3ⁿ where m = 5 and n = 3.",
+      "hi": "गुणन नियम से सरल कीजिए: 3^5 × 3^3।",
+      "te": "లబ్ద న్యాయాన్ని ఉపయోగించి సూక్ష్మీకరించండి: 3^5 × 3^3.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "6^8",
+          "hi": "6^8",
+          "te": "6^8",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3^8",
+          "hi": "3^8",
+          "te": "3^8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3^15",
+          "hi": "3^15",
+          "te": "3^15",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "3^2",
+          "hi": "3^2",
+          "te": "3^2",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Law of exponents for same base: aᵐ × aⁿ = aᵐ⁺ⁿ. Thus 3^5 × 3^3 = 3^(5+3) = 3^8.",
+      "hi": "समान आधार पर घातांक नियम: aᵐ × aⁿ = aᵐ⁺ⁿ। अतः 3^8।",
+      "te": "సమాన భూములు ఉన్నప్పుడు: aᵐ × aⁿ = aᵐ⁺ⁿ. కాబట్టి 3^8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "When multiplying terms with the same base, add their exponents.",
+      "hi": "समान आधार वाली संख्याओं का गुणा करते समय घातों को जोड़ें।",
+      "te": "సమాన భూములు ఉన్న పదాలను గుణించేటప్పుడు ఘాతాలను కలపాలి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d2-08",
+    "conceptId": "c8-exp-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Simplify: (4^4)^3",
+      "hi": "सरल कीजिए: (4^4)^3",
+      "te": "సూక్ష్మీకరించండి: (4^4)^3",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4^7",
+          "hi": "4^7",
+          "te": "4^7",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_power_of_power_as_addition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4^12",
+          "hi": "4^12",
+          "te": "4^12",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "12^4",
+          "hi": "12^4",
+          "te": "12^4",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4^64",
+          "hi": "4^64",
+          "te": "4^64",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Power of a power law: (aᵐ)ⁿ = aᵐˣⁿ. Thus (4^4)^3 = 4^(4×3) = 4^12.",
+      "hi": "घात की घात का नियम: (aᵐ)ⁿ = aᵐˣⁿ। अतः 4^12।",
+      "te": "ఘాతం యొక్క ఘాత న్యాయం: (aᵐ)ⁿ = aᵐˣⁿ. కాబట్టి 4^12.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "For a power raised to another power, multiply the exponents: (aᵐ)ⁿ = aᵐⁿ.",
+      "hi": "घात की घात होने पर घातों का गुणा करें: (aᵐ)ⁿ = aᵐⁿ।",
+      "te": "ఘాతాన్ని మరో ఘాతానికి పెంచినప్పుడు ఘాతాలను గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c8-exp-d3-09",
+    "conceptId": "c8-exp-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Evaluate in positive exponent form: 4^3 ÷ 4^5",
+      "hi": "धनात्मक घातांक रूप में मान ज्ञात कीजिए: 4^3 ÷ 4^5",
+      "te": "ధనాత్మక ఘాతాంక రూపంలో తెలపండి: 4^3 ÷ 4^5",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1 / 4^2",
+          "hi": "1 / 4^2",
+          "te": "1 / 4^2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4^2",
+          "hi": "-4^2",
+          "te": "-4^2",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_powers_instead_of_adding"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4^2",
+          "hi": "4^2",
+          "te": "4^2",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_bases_as_well_as_added_powers"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4^8",
+          "hi": "4^8",
+          "te": "4^8",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_powers_instead_of_adding"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Quotient law: 4^3 ÷ 4^5 = 4^(3-5) = 4^(-2) = 1 / 4^2.",
+      "hi": "भागफल नियम: 4^3 ÷ 4^5 = 1 / 4^2।",
+      "te": "భాగాహార న్యాయం: 4^3 ÷ 4^5 = 1 / 4^2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract exponents in division: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, and a⁻ᵏ = 1 / aᵏ.",
+      "hi": "भाग में घातों को घटाएँ: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, और a⁻ᵏ = 1 / aᵏ।",
+      "te": "భాగాహారంలో ఘాతాలను తీసివేయండి: aᵐ ÷ aⁿ = aᵐ⁻ⁿ, మరియు a⁻ᵏ = 1 / aᵏ.",
+      "reviewed": false
+    }
   }
 ]

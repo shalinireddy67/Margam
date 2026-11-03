@@ -594,5 +594,608 @@
       "te": "4వ పదం కోసం 18 ను 3 తో గుణించి, 5వ పదం కోసం మళ్లీ 3 తో గుణించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c6-pat-d1-01",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the next number in the sequence: 8, 14, 20, 26, ___?",
+      "hi": "अनुक्रम 8, 14, 20, 26, ___ में अगली संख्या क्या है?",
+      "te": "శ్రేణి 8, 14, 20, 26, ___ లో తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "52",
+          "hi": "52",
+          "te": "52",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "31",
+          "hi": "31",
+          "te": "31",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "33",
+          "hi": "33",
+          "te": "33",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The common difference is +6. Next term = 26 + 6 = 32.",
+      "hi": "समान अंतर +6 है। अगला पद = 26 + 6 = 32।",
+      "te": "సాధారణ భేదం +6. తర్వాతి పదం = 26 + 6 = 32.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate the difference between consecutive terms: second - first.",
+      "hi": "क्रमागत पदों के बीच का अंतर ज्ञात करें: दूसरा पद - पहला पद।",
+      "te": "వరుస పదాల మధ్య తేడాను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d2-02",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "The nth term of a number pattern is given by 4n + 2. Find the 9th term.",
+      "hi": "किसी संख्या प्रतिरूप का n-वाँ पद 4n + 2 है। 9-वाँ पद ज्ञात कीजिए।",
+      "te": "సంఖ్యా క్రమం యొక్క nవ పదం 4n + 2. 9వ పదాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "40",
+          "hi": "40",
+          "te": "40",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_four_by_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "36",
+          "hi": "36",
+          "te": "36",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "38",
+          "hi": "38",
+          "te": "38",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Substitute n = 9: 4(9) + 2 = 36 + 2 = 38.",
+      "hi": "n = 9 प्रतिस्थापित करें: 4(9) + 2 = 38।",
+      "te": "n = 9 ప్రతిక్షేపించండి: 4(9) + 2 = 38.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute the given position n into the formula.",
+      "hi": "दिए गए पद n को सूत्र में प्रतिस्थापित करें।",
+      "te": "ఇచ్చిన n విలువను సూత్రంలో ప్రతిక్షేపించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d3-03",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the rule T = 5n + 2, which position n produces the value 47?",
+      "hi": "नियम T = 5n + 2 में, कौन सा पद n मान 47 देता है?",
+      "te": "T = 5n + 2 సూత్రంలో, ఏ స్థానం n వద్ద విలువ 47 వస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "n = 9",
+          "hi": "n = 9",
+          "te": "n = 9",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "n = 10",
+          "hi": "n = 10",
+          "te": "n = 10",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "n = 9",
+          "hi": "n = 9",
+          "te": "n = 9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "n = 8",
+          "hi": "n = 8",
+          "te": "n = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Set 5n + 2 = 47. Subtract 2: 5n = 45. Divide by 5: n = 9.",
+      "hi": "5n + 2 = 47 हल करें। 45 ÷ 5 = 9।",
+      "te": "5n + 2 = 47 సాధించగా, n = 9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the constant first, then divide by the coefficient.",
+      "hi": "पहले अचर पद को घटाएँ, फिर गुणांक से भाग दें।",
+      "te": "మొదట స్థిరపదాన్ని తీసివేసి, తర్వాత గుణకంతో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d1-04",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the next number in the sequence: 9, 15, 21, 27, ___?",
+      "hi": "अनुक्रम 9, 15, 21, 27, ___ में अगली संख्या क्या है?",
+      "te": "శ్రేణి 9, 15, 21, 27, ___ లో తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "54",
+          "hi": "54",
+          "te": "54",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "33",
+          "hi": "33",
+          "te": "33",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The common difference is +6. Next term = 27 + 6 = 33.",
+      "hi": "समान अंतर +6 है। अगला पद = 27 + 6 = 33।",
+      "te": "సాధారణ భేదం +6. తర్వాతి పదం = 27 + 6 = 33.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate the difference between consecutive terms: second - first.",
+      "hi": "क्रमागत पदों के बीच का अंतर ज्ञात करें: दूसरा पद - पहला पद।",
+      "te": "వరుస పదాల మధ్య తేడాను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d2-05",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "The nth term of a number pattern is given by 3n + 1. Find the 6th term.",
+      "hi": "किसी संख्या प्रतिरूप का n-वाँ पद 3n + 1 है। 6-वाँ पद ज्ञात कीजिए।",
+      "te": "సంఖ్యా క్రమం యొక్క nవ పదం 3n + 1. 6వ పదాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "20",
+          "hi": "20",
+          "te": "20",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_four_by_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "19",
+          "hi": "19",
+          "te": "19",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Substitute n = 6: 3(6) + 1 = 18 + 1 = 19.",
+      "hi": "n = 6 प्रतिस्थापित करें: 3(6) + 1 = 19।",
+      "te": "n = 6 ప్రతిక్షేపించండి: 3(6) + 1 = 19.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute the given position n into the formula.",
+      "hi": "दिए गए पद n को सूत्र में प्रतिस्थापित करें।",
+      "te": "ఇచ్చిన n విలువను సూత్రంలో ప్రతిక్షేపించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d3-06",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the rule T = 3n + 5, which position n produces the value 26?",
+      "hi": "नियम T = 3n + 5 में, कौन सा पद n मान 26 देता है?",
+      "te": "T = 3n + 5 సూత్రంలో, ఏ స్థానం n వద్ద విలువ 26 వస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "n = 8",
+          "hi": "n = 8",
+          "te": "n = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "n = 7",
+          "hi": "n = 7",
+          "te": "n = 7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "n = 6",
+          "hi": "n = 6",
+          "te": "n = 6",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "n = 8",
+          "hi": "n = 8",
+          "te": "n = 8",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Set 3n + 5 = 26. Subtract 5: 3n = 21. Divide by 3: n = 7.",
+      "hi": "3n + 5 = 26 हल करें। 21 ÷ 3 = 7।",
+      "te": "3n + 5 = 26 సాధించగా, n = 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the constant first, then divide by the coefficient.",
+      "hi": "पहले अचर पद को घटाएँ, फिर गुणांक से भाग दें।",
+      "te": "మొదట స్థిరపదాన్ని తీసివేసి, తర్వాత గుణకంతో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d1-07",
+    "conceptId": "c6-pat-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "What is the next number in the sequence: 10, 15, 20, 25, ___?",
+      "hi": "अनुक्रम 10, 15, 20, 25, ___ में अगली संख्या क्या है?",
+      "te": "శ్రేణి 10, 15, 20, 25, ___ లో తర్వాతి సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "31",
+          "hi": "31",
+          "te": "31",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "29",
+          "hi": "29",
+          "te": "29",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "30",
+          "hi": "30",
+          "te": "30",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "50",
+          "hi": "50",
+          "te": "50",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The common difference is +5. Next term = 25 + 5 = 30.",
+      "hi": "समान अंतर +5 है। अगला पद = 25 + 5 = 30।",
+      "te": "సాధారణ భేదం +5. తర్వాతి పదం = 25 + 5 = 30.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate the difference between consecutive terms: second - first.",
+      "hi": "क्रमागत पदों के बीच का अंतर ज्ञात करें: दूसरा पद - पहला पद।",
+      "te": "వరుస పదాల మధ్య తేడాను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d2-08",
+    "conceptId": "c6-pat-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "The nth term of a number pattern is given by 2n + 4. Find the 10th term.",
+      "hi": "किसी संख्या प्रतिरूप का n-वाँ पद 2n + 4 है। 10-वाँ पद ज्ञात कीजिए।",
+      "te": "సంఖ్యా క్రమం యొక్క nవ పదం 2n + 4. 10వ పదాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "28",
+          "hi": "28",
+          "te": "28",
+          "reviewed": false
+        },
+        "mistakeTag": "multiplied_four_by_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "22",
+          "hi": "22",
+          "te": "22",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "20",
+          "hi": "20",
+          "te": "20",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Substitute n = 10: 2(10) + 4 = 20 + 4 = 24.",
+      "hi": "n = 10 प्रतिस्थापित करें: 2(10) + 4 = 24।",
+      "te": "n = 10 ప్రతిక్షేపించండి: 2(10) + 4 = 24.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute the given position n into the formula.",
+      "hi": "दिए गए पद n को सूत्र में प्रतिस्थापित करें।",
+      "te": "ఇచ్చిన n విలువను సూత్రంలో ప్రతిక్షేపించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c6-pat-d3-09",
+    "conceptId": "c6-pat-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the rule T = 5n + 5, which position n produces the value 55?",
+      "hi": "नियम T = 5n + 5 में, कौन सा पद n मान 55 देता है?",
+      "te": "T = 5n + 5 సూత్రంలో, ఏ స్థానం n వద్ద విలువ 55 వస్తుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "n = 11",
+          "hi": "n = 11",
+          "te": "n = 11",
+          "reviewed": false
+        },
+        "mistakeTag": "added_two_instead_of_three"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "n = 9",
+          "hi": "n = 9",
+          "te": "n = 9",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_instead_of_three"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "n = 11",
+          "hi": "n = 11",
+          "te": "n = 11",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiplication_rule"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "n = 10",
+          "hi": "n = 10",
+          "te": "n = 10",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Set 5n + 5 = 55. Subtract 5: 5n = 50. Divide by 5: n = 10.",
+      "hi": "5n + 5 = 55 हल करें। 50 ÷ 5 = 10।",
+      "te": "5n + 5 = 55 సాధించగా, n = 10.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the constant first, then divide by the coefficient.",
+      "hi": "पहले अचर पद को घटाएँ, फिर गुणांक से भाग दें।",
+      "te": "మొదట స్థిరపదాన్ని తీసివేసి, తర్వాత గుణకంతో భాగించండి.",
+      "reviewed": false
+    }
   }
 ]

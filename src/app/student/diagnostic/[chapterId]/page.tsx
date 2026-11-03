@@ -187,12 +187,19 @@ export default function ChapterDiagnosticPage() {
       let isCancelled = false;
       async function loadQuestions() {
         try {
+          let excludeQuestionIds: string[] = [];
+          try {
+            const cached = sessionStorage.getItem(`last_diag_qids_${chapterId}`);
+            if (cached) excludeQuestionIds = JSON.parse(cached);
+          } catch (e) {}
+
           const res = await fetch("/api/diagnostic/start", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               chapterId,
               studentId: active!.id,
+              excludeQuestionIds,
             }),
           });
 
@@ -203,7 +210,16 @@ export default function ChapterDiagnosticPage() {
 
           const data = await res.json();
           if (!isCancelled) {
-            setQuestions(data.questions || []);
+            const receivedQuestions = data.questions || [];
+            setQuestions(receivedQuestions);
+            try {
+              if (receivedQuestions.length > 0) {
+                sessionStorage.setItem(
+                  `last_diag_qids_${chapterId}`,
+                  JSON.stringify(receivedQuestions.map((q: any) => q.id))
+                );
+              }
+            } catch (e) {}
             setSessionToken(data.token || null);
             setLoading(false);
           }

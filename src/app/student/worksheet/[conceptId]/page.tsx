@@ -155,6 +155,12 @@ export default function AdaptivePracticeRunnerPage() {
       let isCancelled = false;
       async function loadPractice() {
         try {
+          let excludeQuestionIds: string[] = [];
+          try {
+            const cached = sessionStorage.getItem(`last_practice_qids_${conceptId}`);
+            if (cached) excludeQuestionIds = JSON.parse(cached);
+          } catch (e) {}
+
           const res = await fetch("/api/practice/start", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -163,6 +169,7 @@ export default function AdaptivePracticeRunnerPage() {
               studentId: active!.id,
               count: 5,
               profile: active,
+              excludeQuestionIds,
             }),
           });
 
@@ -173,7 +180,16 @@ export default function AdaptivePracticeRunnerPage() {
 
           const data = await res.json();
           if (!isCancelled) {
-            setQuestions(data.questions || []);
+            const receivedQuestions = data.questions || [];
+            setQuestions(receivedQuestions);
+            try {
+              if (receivedQuestions.length > 0) {
+                sessionStorage.setItem(
+                  `last_practice_qids_${conceptId}`,
+                  JSON.stringify(receivedQuestions.map((q: any) => q.id))
+                );
+              }
+            } catch (e) {}
             setSessionToken(data.token || null);
             setWorksheetTitle(data.worksheetTitle || "");
             setIsPersonalized(!!data.isPersonalized);

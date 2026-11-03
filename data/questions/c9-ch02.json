@@ -594,5 +594,608 @@
       "te": "3x - 2 = 0 మరియు 2x + 5 = 0 లను వేర్వేరుగా సాధించండి.",
       "reviewed": false
     }
+  },
+  {
+    "id": "q-gen-c9-poly-d1-01",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial p(x) = 5x + 10.",
+      "hi": "रैखिक बहुपद p(x) = 5x + 10 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది p(x) = 5x + 10 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 10/5",
+          "hi": "x = 10/5",
+          "te": "x = 10/5",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -10/5",
+          "hi": "x = -10/5",
+          "te": "x = -10/5",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = -5/10",
+          "hi": "x = -5/10",
+          "te": "x = -5/10",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -10",
+          "hi": "x = -10",
+          "te": "x = -10",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Set p(x) = 0: 5x + 10 = 0 => 5x = -10 => x = -10/5.",
+      "hi": "p(x) = 0 रखें: 5x + 10 = 0 => x = -10/5।",
+      "te": "p(x) = 0 అని ప్రతిక్షేపించండి: 5x + 10 = 0 => x = -10/5.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "To find the zero of a polynomial, equate p(x) = 0 and solve for x.",
+      "hi": "शून्यक ज्ञात करने के लिए p(x) = 0 रखें और x का मान निकालें।",
+      "te": "శూన్యాన్ని కనుగొనడానికి p(x) = 0 గా తీసుకొని x విలువను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d2-02",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the polynomial P(x) = 7x³ - 4x² + 4x - 5, what is the coefficient of x²?",
+      "hi": "बहुपद P(x) = 7x³ - 4x² + 4x - 5 में, x² का गुणांक क्या है?",
+      "te": "P(x) = 7x³ - 4x² + 4x - 5 బహుపదిలో, x² యొక్క గుణకం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The term with x² is -4x². The coefficient includes the negative sign: -4.",
+      "hi": "x² वाला पद -4x² है। गुणांक में ऋण चिह्न शामिल होता है: -4।",
+      "te": "x² పదం -4x². గుణకంలో మైనస్ గుర్తు కూడా ఉంటుంది: -4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Always include the operational sign preceding the term as part of the coefficient.",
+      "hi": "हमेशा पद के आगे लगे चिह्न को गुणांक के साथ शामिल करें।",
+      "te": "పదం ముందున్న గుర్తును కూడా గుణకంలో భాగంగా పరిగణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d3-03",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If p(x) = 4x² - 4x + 4, evaluate p(3).",
+      "hi": "यदि p(x) = 4x² - 4x + 4 है, तो p(3) का मान ज्ञात कीजिए।",
+      "te": "p(x) = 4x² - 4x + 4 అయితే, p(3) విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "28",
+          "hi": "28",
+          "te": "28",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "52",
+          "hi": "52",
+          "te": "52",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "p(3) = 4(3)² - 4(3) + 4 = 36 - 12 + 4 = 28.",
+      "hi": "p(3) = 4(3)² - 4(3) + 4 = 28।",
+      "te": "p(3) = 4(3)² - 4(3) + 4 = 28.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute x = k and evaluate exponents before multiplying.",
+      "hi": "x = k रखें और गुणा करने से पहले घात हल करें।",
+      "te": "x = k ప్రతిక్షేపించి, గుణించే ముందు ఘాతాలను లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d1-04",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial p(x) = 2x + 9.",
+      "hi": "रैखिक बहुपद p(x) = 2x + 9 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది p(x) = 2x + 9 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -2/9",
+          "hi": "x = -2/9",
+          "te": "x = -2/9",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -9/2",
+          "hi": "x = -9/2",
+          "te": "x = -9/2",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 9/2",
+          "hi": "x = 9/2",
+          "te": "x = 9/2",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -9",
+          "hi": "x = -9",
+          "te": "x = -9",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Set p(x) = 0: 2x + 9 = 0 => 2x = -9 => x = -9/2.",
+      "hi": "p(x) = 0 रखें: 2x + 9 = 0 => x = -9/2।",
+      "te": "p(x) = 0 అని ప్రతిక్షేపించండి: 2x + 9 = 0 => x = -9/2.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "To find the zero of a polynomial, equate p(x) = 0 and solve for x.",
+      "hi": "शून्यक ज्ञात करने के लिए p(x) = 0 रखें और x का मान निकालें।",
+      "te": "శూన్యాన్ని కనుగొనడానికి p(x) = 0 గా తీసుకొని x విలువను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d2-05",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the polynomial P(x) = 4x³ - 8x² + 5x - 5, what is the coefficient of x²?",
+      "hi": "बहुपद P(x) = 4x³ - 8x² + 5x - 5 में, x² का गुणांक क्या है?",
+      "te": "P(x) = 4x³ - 8x² + 5x - 5 బహుపదిలో, x² యొక్క గుణకం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The term with x² is -8x². The coefficient includes the negative sign: -8.",
+      "hi": "x² वाला पद -8x² है। गुणांक में ऋण चिह्न शामिल होता है: -8।",
+      "te": "x² పదం -8x². గుణకంలో మైనస్ గుర్తు కూడా ఉంటుంది: -8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Always include the operational sign preceding the term as part of the coefficient.",
+      "hi": "हमेशा पद के आगे लगे चिह्न को गुणांक के साथ शामिल करें।",
+      "te": "పదం ముందున్న గుర్తును కూడా గుణకంలో భాగంగా పరిగణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d3-06",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If p(x) = 3x² - 5x + 5, evaluate p(3).",
+      "hi": "यदि p(x) = 3x² - 5x + 5 है, तो p(3) का मान ज्ञात कीजिए।",
+      "te": "p(x) = 3x² - 5x + 5 అయితే, p(3) విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "47",
+          "hi": "47",
+          "te": "47",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "12",
+          "hi": "12",
+          "te": "12",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "21",
+          "hi": "21",
+          "te": "21",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "17",
+          "hi": "17",
+          "te": "17",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "p(3) = 3(3)² - 5(3) + 5 = 27 - 15 + 5 = 17.",
+      "hi": "p(3) = 3(3)² - 5(3) + 5 = 17।",
+      "te": "p(3) = 3(3)² - 5(3) + 5 = 17.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute x = k and evaluate exponents before multiplying.",
+      "hi": "x = k रखें और गुणा करने से पहले घात हल करें।",
+      "te": "x = k ప్రతిక్షేపించి, గుణించే ముందు ఘాతాలను లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d1-07",
+    "conceptId": "c9-poly-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "Find the zero of the linear polynomial p(x) = 4x + 5.",
+      "hi": "रैखिक बहुपद p(x) = 4x + 5 का शून्यक ज्ञात कीजिए।",
+      "te": "రేఖీయ బహుపది p(x) = 4x + 5 యొక్క శూన్యాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -5/4",
+          "hi": "x = -5/4",
+          "te": "x = -5/4",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -4/5",
+          "hi": "x = -4/5",
+          "te": "x = -4/5",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 5/4",
+          "hi": "x = 5/4",
+          "te": "x = 5/4",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = -5",
+          "hi": "x = -5",
+          "te": "x = -5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Set p(x) = 0: 4x + 5 = 0 => 4x = -5 => x = -5/4.",
+      "hi": "p(x) = 0 रखें: 4x + 5 = 0 => x = -5/4।",
+      "te": "p(x) = 0 అని ప్రతిక్షేపించండి: 4x + 5 = 0 => x = -5/4.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "To find the zero of a polynomial, equate p(x) = 0 and solve for x.",
+      "hi": "शून्यक ज्ञात करने के लिए p(x) = 0 रखें और x का मान निकालें।",
+      "te": "శూన్యాన్ని కనుగొనడానికి p(x) = 0 గా తీసుకొని x విలువను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d2-08",
+    "conceptId": "c9-poly-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "In the polynomial P(x) = 6x³ - 7x² + 8x - 5, what is the coefficient of x²?",
+      "hi": "बहुपद P(x) = 6x³ - 7x² + 8x - 5 में, x² का गुणांक क्या है?",
+      "te": "P(x) = 6x³ - 7x² + 8x - 5 బహుపదిలో, x² యొక్క గుణకం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "The term with x² is -7x². The coefficient includes the negative sign: -7.",
+      "hi": "x² वाला पद -7x² है। गुणांक में ऋण चिह्न शामिल होता है: -7।",
+      "te": "x² పదం -7x². గుణకంలో మైనస్ గుర్తు కూడా ఉంటుంది: -7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Always include the operational sign preceding the term as part of the coefficient.",
+      "hi": "हमेशा पद के आगे लगे चिह्न को गुणांक के साथ शामिल करें।",
+      "te": "పదం ముందున్న గుర్తును కూడా గుణకంలో భాగంగా పరిగణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-gen-c9-poly-d3-09",
+    "conceptId": "c9-poly-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "prompt": {
+      "en": "If p(x) = 3x² - 4x + 3, evaluate p(2).",
+      "hi": "यदि p(x) = 3x² - 4x + 3 है, तो p(2) का मान ज्ञात कीजिए।",
+      "te": "p(x) = 3x² - 4x + 3 అయితే, p(2) విలువను కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_constant_term_with_coefficient_of_x"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "11",
+          "hi": "11",
+          "te": "11",
+          "reviewed": false
+        },
+        "mistakeTag": "omitted_negative_sign_of_coefficient"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "23",
+          "hi": "23",
+          "te": "23",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_during_transposition"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "p(2) = 3(2)² - 4(2) + 3 = 12 - 8 + 3 = 7.",
+      "hi": "p(2) = 3(2)² - 4(2) + 3 = 7।",
+      "te": "p(2) = 3(2)² - 4(2) + 3 = 7.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Substitute x = k and evaluate exponents before multiplying.",
+      "hi": "x = k रखें और गुणा करने से पहले घात हल करें।",
+      "te": "x = k ప్రతిక్షేపించి, గుణించే ముందు ఘాతాలను లెక్కించండి.",
+      "reviewed": false
+    }
   }
 ]
