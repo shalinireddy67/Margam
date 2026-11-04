@@ -173,6 +173,7 @@ export interface RemediationGap {
   confirmationQuestionIds: string[];
   status: "pending_confirmation" | "confirmed" | "resolved";
   misconceptionCategory?: string;
+  recommendationExplanation?: RecommendationExplanation;
 }
 
 export interface ResolvedGapRecord {
@@ -321,6 +322,63 @@ export interface WorksheetResult {
 export type ConfidenceLevel = "high" | "medium" | "low" | "insufficient";
 export type RoutingAction = "gap_card" | "confirmation_only" | "none";
 
+export type ConceptMasteryStatus =
+  | "mastered"
+  | "in_progress"
+  | "needs_practice"
+  | "insufficient_evidence";
+
+export interface ConceptMasteryEvaluation {
+  status: ConceptMasteryStatus;
+  isWeak: boolean;
+  isMastered: boolean;
+  hasSufficientEvidence: boolean;
+  scorePercentage?: number;
+  masteryPercentage: number;
+  totalAttempts: number;
+  totalQuestions: number;
+  consecutiveIncorrect: number;
+  consecutiveCorrect: number;
+  reason: string;
+  recommendation: string;
+}
+
+export interface RecommendationExplanation {
+  summary: string;
+  triggerDescription: string;
+  prerequisiteReasoning: string;
+  observedMistakes: Array<{
+    tag: string;
+    category: string;
+    educationalFeedback: string;
+  }>;
+  prerequisitePathConcepts: Array<{
+    id: string;
+    name: string;
+    class: number;
+    relationshipStatus: "verified" | "tentative, pending teacher review";
+    reason?: string;
+  }>;
+  actionableNextStep: string;
+  requiresTeacherReview: boolean;
+}
+
+export interface GraphAuditReport {
+  totalConcepts: number;
+  totalEdges: number;
+  hasCycle: boolean;
+  cyclePath?: string[];
+  missingPrerequisites: Array<{ conceptId: string; missingPrereqId: string }>;
+  duplicatePrerequisites: Array<{ conceptId: string; duplicatePrereqId: string }>;
+  gradeInversions: Array<{ conceptId: string; conceptClass: number; prereqId: string; prereqClass: number }>;
+  questionableLinks: Array<{ conceptId: string; prereqId: string; reason: string }>;
+  tentativeEdges: Array<{ conceptId: string; prereqId: string; reason: string }>;
+  verifiedEdges: Array<{ conceptId: string; prereqId: string; reason: string }>;
+  educatorReviewedCount: number;
+  tentativeCount: number;
+  isValid: boolean;
+}
+
 export interface CandidateRootCause {
   conceptId: string;
   concept?: Concept;
@@ -334,6 +392,7 @@ export interface CandidateRootCause {
   isDirectRoot: boolean;
   prerequisitePath: string[];
   misconceptionCategory?: string;
+  recommendationExplanation?: RecommendationExplanation;
 }
 
 export interface GapTraceResult {
@@ -351,6 +410,7 @@ export interface GapTraceResult {
   routing?: RoutingAction;
   score?: number;
   candidates?: CandidateRootCause[];
+  recommendationExplanation?: RecommendationExplanation;
 }
 
 export interface ConceptDiagnosticBreakdown {

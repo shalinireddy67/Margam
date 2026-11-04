@@ -18,6 +18,9 @@ import {
   CandidateRootCause,
   AttemptComparison,
   PersonalizedWorksheetMeta,
+  ConceptMasteryEvaluation,
+  ConceptMasteryStatus,
+  RecommendationExplanation,
 } from "./types";
 import {
   getConceptById,
@@ -384,6 +387,105 @@ export function updateConceptDifficulty(
 /**
  * Backwards compatible helper for profile-level difficulty stepping.
  */
+
+/**
+ * Evaluates concept mastery status using principled multi-attempt evidence thresholds:
+ * - Insufficient evidence: < 3 questions attempted AND < 2 consecutive errors.
+ *   Prevents a single slip or incomplete attempt from labeling a student as weak.
+ * - Mastered: >= 80% mastery with verified question volume (>= 3 questions).
+ * - Needs practice: < 60% mastery OR >= 2 consecutive errors with verified evidence.
+ * - In progress: 60% - 79% mastery developing understanding.
+ */
+export function evaluateMasteryStatus(
+  currentMastery: number | undefined | null,
+  totalQuestionsAttempted: number,
+  recentScorePercentage?: number,
+  consecutiveIncorrect = 0,
+  consecutiveCorrect = 0,
+  totalAttempts = 1
+): ConceptMasteryEvaluation {
+  const hasSufficientEvidence =
+    totalQuestionsAttempted >= 3 || consecutiveIncorrect >= 2 || totalAttempts >= 2;
+
+  const effectiveScore =
+    recentScorePercentage !== undefined
+      ? recentScorePercentage
+      : currentMastery !== undefined && currentMastery !== null
+      ? currentMastery
+      : 50;
+
+  const effectiveMastery =
+    currentMastery !== undefined && currentMastery !== null
+      ? currentMastery
+      : effectiveScore;
+
+  if (!hasSufficientEvidence) {
+    return {
+      status: "insufficient_evidence",
+      isWeak: false,
+      isMastered: false,
+      hasSufficientEvidence: false,
+      scorePercentage: recentScorePercentage,
+      masteryPercentage: effectiveMastery,
+      totalAttempts,
+      totalQuestions: totalQuestionsAttempted,
+      consecutiveIncorrect,
+      consecutiveCorrect,
+      reason: `Preliminary evidence only (${totalQuestionsAttempted}/3 questions attempted). At least 3 questions required to reliably evaluate concept mastery.`,
+      recommendation: "Complete additional practice questions to establish an accurate mastery baseline.",
+    };
+  }
+
+  if (effectiveMastery >= 80 && (recentScorePercentage === undefined || recentScorePercentage >= 70)) {
+    return {
+      status: "mastered",
+      isWeak: false,
+      isMastered: true,
+      hasSufficientEvidence: true,
+      scorePercentage: recentScorePercentage,
+      masteryPercentage: effectiveMastery,
+      totalAttempts,
+      totalQuestions: totalQuestionsAttempted,
+      consecutiveIncorrect,
+      consecutiveCorrect,
+      reason: `Mastery demonstrated with sustained high accuracy (${effectiveMastery}%).`,
+      recommendation: "Ready for higher difficulty challenges or next syllabus topics.",
+    };
+  }
+
+  if (effectiveMastery < 60 || consecutiveIncorrect >= 2) {
+    return {
+      status: "needs_practice",
+      isWeak: true,
+      isMastered: false,
+      hasSufficientEvidence: true,
+      scorePercentage: recentScorePercentage,
+      masteryPercentage: effectiveMastery,
+      totalAttempts,
+      totalQuestions: totalQuestionsAttempted,
+      consecutiveIncorrect,
+      consecutiveCorrect,
+      reason: `Sustained difficulty detected (${effectiveMastery}% mastery${consecutiveIncorrect >= 2 ? `, ${consecutiveIncorrect} consecutive errors` : ""}).`,
+      recommendation: "Review the worked examples in the lesson and practice foundational exercises.",
+    };
+  }
+
+  return {
+    status: "in_progress",
+    isWeak: false,
+    isMastered: false,
+    hasSufficientEvidence: true,
+    scorePercentage: recentScorePercentage,
+    masteryPercentage: effectiveMastery,
+    totalAttempts,
+    totalQuestions: totalQuestionsAttempted,
+    consecutiveIncorrect,
+    consecutiveCorrect,
+    reason: `In progress (${effectiveMastery}%). Good conceptual foundation forming.`,
+    recommendation: "Continue practice to advance toward full mastery.",
+  };
+}
+
 export function calculateNextDifficulty(
   currentDifficulty: 1 | 2 | 3,
   consecutiveCorrect: number,
@@ -707,7 +809,83 @@ export function rankCandidateRootCauses(
       reason = `Strong persistent error evidence identifies critical prerequisite gap in ${gradeText} concept "${conceptName}" (score: ${score.toFixed(2)}). Routes directly to remedial gap card.`;
     }
 
+
     const prerequisitePath = findPrerequisitePath(anchorConceptId, cand.conceptId);
+
+    // Build explainable recommendation details with verified vs tentative teacher review status
+    let recommendationExplanation: RecommendationExplanation | undefined;
+    if (confidence !== "insufficient") {
+      const anchorConcept = getConceptById(anchorConceptId);
+      const rootConcept = concept;
+
+      const prerequisitePathConcepts = prerequisitePath.map((id, index) => {
+        const c = getConceptById(id);
+        let relationshipStatus: "verified" | "tentative, pending teacher review" = "tentative, pending teacher review";
+        let reason = "Prerequisite foundational dependency.";
+
+        if (index > 0) {
+          const parentConcept = getConceptById(prerequisitePath[index - 1]);
+          if (parentConcept?.edgeMeta?.[id]) {
+            relationshipStatus = parentConcept.edgeMeta[id].status;
+            reason = parentConcept.edgeMeta[id].reason;
+          }
+        }
+
+        return {
+          id,
+          name: c ? c.name.en : id,
+          class: c ? c.class : 10,
+          relationshipStatus,
+          reason,
+        };
+      });
+
+      const observedMistakes = Array.from(cand.tags).map((t) => {
+        const insight = classifyMisconception(t);
+        return {
+          tag: t,
+          category: insight.category,
+          educationalFeedback: insight.educationalFeedback,
+        };
+      });
+
+      const isEarlierClass = rootConcept && anchorConcept && rootConcept.class < anchorConcept.class;
+      const classDiffText = isEarlierClass
+        ? `earlier grade (Class ${rootConcept.class}) prerequisite`
+        : `foundational concept`;
+
+      const summary = `Detected ${confidence} confidence prerequisite gap in ${classDiffText} "${rootConcept?.name.en || cand.conceptId}".`;
+
+      const triggerDescription =
+        cand.directEvidenceCount >= 2
+          ? `Observed repeated error pattern (${cand.directEvidenceCount} errors) matching: ${Array.from(cand.tags).join(", ")}.`
+          : `Observed error evidence pointing toward ${rootConcept?.name.en || cand.conceptId}.`;
+
+      const prerequisiteReasoning =
+        anchorConcept && rootConcept
+          ? `Mastering Class ${anchorConcept.class} "${anchorConcept.name.en}" depends on Class ${rootConcept.class} "${rootConcept.name.en}".`
+          : "Foundational mastery is required before proceeding.";
+
+      const actionableNextStep =
+        routing === "confirmation_only"
+          ? `Take 2 quick verification questions on ${rootConcept?.name.en || cand.conceptId} to confirm whether remediation is needed.`
+          : `Review the worked examples in Class ${rootConcept?.class || ""} "${rootConcept?.name.en || cand.conceptId}" lesson.`;
+
+      const requiresTeacherReview = prerequisitePathConcepts.some(
+        (p) => p.relationshipStatus !== "verified"
+      );
+
+      recommendationExplanation = {
+        summary,
+        triggerDescription,
+        prerequisiteReasoning,
+        observedMistakes,
+        prerequisitePathConcepts,
+        actionableNextStep,
+        requiresTeacherReview,
+      };
+    }
+
 
     return {
       conceptId: cand.conceptId,
@@ -721,6 +899,7 @@ export function rankCandidateRootCauses(
       reason,
       isDirectRoot: cand.isDirectRoot,
       prerequisitePath,
+      recommendationExplanation,
     };
   });
 
@@ -846,6 +1025,7 @@ export function evaluateGapTracing(
       ? undefined
       : `Root concept ${topCandidate.conceptId} has fewer than ${minQuestionsRequired} questions in the question bank. Routing withheld.`,
     plainLanguageReason: topCandidate.reason,
+    recommendationExplanation: topCandidate.recommendationExplanation,
   };
 }
 
@@ -1535,17 +1715,24 @@ export function evaluateChapterTest(
 
       updateTopicProgress(c.id, { mastery: newMastery });
 
-      // Blueprint accuracy categorization
+      // Blueprint accuracy categorization:
+      // Single question or insufficient attempts (< 2 questions) cannot label a concept as needs_attention or weak.
       if (data.scorePercentage >= 80) {
         data.accuracyCategory = "mastered";
       } else if (data.scorePercentage >= 60) {
         data.accuracyCategory = "in_progress";
-      } else {
+      } else if (data.total >= 2) {
         data.accuracyCategory = "needs_attention";
+      } else {
+        data.accuracyCategory = "in_progress"; // Single error is preliminary/careless slip
       }
 
-      if (newMastery < 60) weakConcepts.push(c.id);
-      else if (newMastery >= 80) strongConcepts.push(c.id);
+      // Mastery tracking: only declare weak if sufficient questions attempted (total >= 2)
+      if (newMastery < 60 && data.total >= 2) {
+        weakConcepts.push(c.id);
+      } else if (newMastery >= 80) {
+        strongConcepts.push(c.id);
+      }
     }
   }
 
@@ -1572,7 +1759,7 @@ export function evaluateChapterTest(
   }
 
   for (const c of chapterConcepts) {
-    if (!conceptBreakdown[c.id] || conceptBreakdown[c.id].total < 2) {
+    if (!conceptBreakdown[c.id] || conceptBreakdown[c.id].total < 3) {
       if (!insufficientEvidence.includes(c.id)) {
         insufficientEvidence.push(c.id);
       }

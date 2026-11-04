@@ -149,12 +149,8 @@ export async function POST(req: NextRequest) {
       newConsecutiveIncorrect += 1;
     }
 
-    const nextDiffResult = calculateNextDifficulty(
-      (practiceResult.updatedDifficulty || currentDifficulty) as 1 | 2 | 3,
-      newConsecutiveCorrect,
-      newConsecutiveIncorrect
-    );
-    const nextDiff = nextDiffResult.newDifficulty;
+    // Consistency fix: Use practiceResult updated difficulty directly to prevent double promotion
+    const nextDiff = (practiceResult.updatedDifficulty || currentDifficulty) as 1 | 2 | 3;
 
     // Generate readable mistake hint if incorrect
     let mistakeHint: string | undefined;
