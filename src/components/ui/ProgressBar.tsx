@@ -24,11 +24,11 @@ export function ProgressBar({
   const filledCount = Math.round(ratio * safeSegments);
 
   const fillColors = {
-    grass: "bg-[#5DAA3A]",
-    gold: "bg-[#F4C542]",
-    sand: "bg-[#FFE9A8]",
-    sky: "bg-[#3FA7C9]",
-    red: "bg-[#E04A3F]",
+    grass: "bg-[#6DB33F]",
+    gold: "bg-[#F2C230]",
+    sand: "bg-[#E8CF9C]",
+    sky: "bg-[#78BDE8]",
+    red: "bg-[#D1362B]",
   };
 
   const activeColor = fillColors[color] || fillColors.grass;
@@ -49,11 +49,11 @@ export function ProgressBar({
             key={i}
             className={`
               flex-1 h-3 sm:h-3.5
-              border-2 border-[#422816] rounded-[2px]
+              border-2 border-[#1E1610] rounded-xs
               box-border
               ${isFilled
-                ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(255,255,255,0.6),inset_-1px_-1px_0px_rgba(0,0,0,0.3)]`
-                : "bg-[#3F2615]/80 shadow-[inset_1px_1px_0px_rgba(0,0,0,0.5)]"
+                ? `${activeColor} shadow-[inset_1px_1px_0px_rgba(243,227,188,0.6),inset_-1px_-1px_0px_rgba(30,22,16,0.4)]`
+                : "bg-[#232634] shadow-[inset_1px_1px_0px_rgba(0,0,0,0.5)]"
               }
             `.trim()}
           />

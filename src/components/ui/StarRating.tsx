@@ -16,10 +16,10 @@ const sizeClasses = {
 };
 
 /**
- * Square pixel star SVG on 16x16 grid with crispEdges
+ * Square star SVG on 16x16 grid with crispEdges
  */
 function PixelStar({ filled, className }: { filled: boolean; className?: string }) {
-  const fillColor = filled ? "#F2D16B" : "#FFFFFF";
+  const fillColor = filled ? "#F2C230" : "#B9BCC0";
   return (
     <svg
       viewBox="0 0 16 16"
@@ -28,47 +28,47 @@ function PixelStar({ filled, className }: { filled: boolean; className?: string 
       aria-hidden="true"
       shapeRendering="crispEdges"
     >
-      {/* Pixel star fill base */}
+      {/* Star fill base */}
       <rect x="6" y="2" width="4" height="3" fill={fillColor} />
       <rect x="1" y="5" width="14" height="3" fill={fillColor} />
       <rect x="4" y="8" width="8" height="3" fill={fillColor} />
       <rect x="2" y="11" width="4" height="3" fill={fillColor} />
       <rect x="10" y="11" width="4" height="3" fill={fillColor} />
 
-      {/* Pixel star 1px ink outline */}
+      {/* Star ink outline */}
       {/* Top tip */}
-      <rect x="7" y="1" width="2" height="1" fill="#111111" />
-      <rect x="6" y="2" width="1" height="2" fill="#111111" />
-      <rect x="9" y="2" width="1" height="2" fill="#111111" />
+      <rect x="7" y="1" width="2" height="1" fill="#1E1610" />
+      <rect x="6" y="2" width="1" height="2" fill="#1E1610" />
+      <rect x="9" y="2" width="1" height="2" fill="#1E1610" />
 
       {/* Shoulder to arm tops */}
-      <rect x="1" y="4" width="5" height="1" fill="#111111" />
-      <rect x="10" y="4" width="5" height="1" fill="#111111" />
+      <rect x="1" y="4" width="5" height="1" fill="#1E1610" />
+      <rect x="10" y="4" width="5" height="1" fill="#1E1610" />
 
       {/* Arm outer tips */}
-      <rect x="0" y="5" width="1" height="3" fill="#111111" />
-      <rect x="15" y="5" width="1" height="3" fill="#111111" />
+      <rect x="0" y="5" width="1" height="3" fill="#1E1610" />
+      <rect x="15" y="5" width="1" height="3" fill="#1E1610" />
 
-      {/* Arm bottom lines */}
-      <rect x="1" y="8" width="3" height="1" fill="#111111" />
-      <rect x="12" y="8" width="3" height="1" fill="#111111" />
+      {/* Arm undercuts */}
+      <rect x="1" y="8" width="3" height="1" fill="#1E1610" />
+      <rect x="12" y="8" width="3" height="1" fill="#1E1610" />
 
-      {/* Waist indents */}
-      <rect x="4" y="9" width="1" height="2" fill="#111111" />
-      <rect x="11" y="9" width="1" height="2" fill="#111111" />
+      {/* Waist inner corners */}
+      <rect x="3" y="9" width="1" height="2" fill="#1E1610" />
+      <rect x="12" y="9" width="1" height="2" fill="#1E1610" />
 
-      {/* Outer legs */}
-      <rect x="1" y="11" width="1" height="3" fill="#111111" />
-      <rect x="14" y="11" width="1" height="3" fill="#111111" />
+      {/* Leg outers */}
+      <rect x="1" y="11" width="1" height="3" fill="#1E1610" />
+      <rect x="14" y="11" width="1" height="3" fill="#1E1610" />
 
-      {/* Feet bottoms */}
-      <rect x="2" y="14" width="4" height="1" fill="#111111" />
-      <rect x="10" y="14" width="4" height="1" fill="#111111" />
+      {/* Leg bottom feet */}
+      <rect x="2" y="14" width="4" height="1" fill="#1E1610" />
+      <rect x="10" y="14" width="4" height="1" fill="#1E1610" />
 
-      {/* Inner legs & crotch */}
-      <rect x="6" y="12" width="1" height="2" fill="#111111" />
-      <rect x="9" y="12" width="1" height="2" fill="#111111" />
-      <rect x="7" y="11" width="2" height="1" fill="#111111" />
+      {/* Crotch inner notch */}
+      <rect x="5" y="11" width="1" height="3" fill="#1E1610" />
+      <rect x="10" y="11" width="1" height="3" fill="#1E1610" />
+      <rect x="6" y="10" width="4" height="1" fill="#1E1610" />
     </svg>
   );
 }
@@ -79,21 +79,26 @@ export function StarRating({
   size = "default",
   className = "",
 }: StarRatingProps) {
-  const safeRating = Math.max(0, Math.min(rating, max));
+  const boundedRating = Math.max(0, Math.min(max, Math.round(rating)));
 
   return (
     <div
-      className={`inline-flex items-center gap-1 ${className}`}
-      role="img"
-      aria-label={`Difficulty ${safeRating} of ${max}`}
+      role="meter"
+      aria-valuenow={boundedRating}
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-label={`Mastery rating: ${boundedRating} out of ${max} stars`}
+      className={`inline-flex items-center gap-1.5 ${className}`.trim()}
     >
-      {Array.from({ length: max }).map((_, index) => (
+      {Array.from({ length: max }).map((_, i) => (
         <PixelStar
-          key={index}
-          filled={index < safeRating}
-          className={sizeClasses[size]}
+          key={i}
+          filled={i < boundedRating}
+          className={`${sizeClasses[size]} shrink-0`}
         />
       ))}
     </div>
   );
 }
+
+export default StarRating;

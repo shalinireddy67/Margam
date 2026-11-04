@@ -242,7 +242,7 @@ export default function AdaptivePracticeRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4">
+          <div className="panel-plank p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
             <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
               <Lock className="w-6 h-6" />
             </div>
@@ -255,7 +255,7 @@ export default function AdaptivePracticeRunnerPage() {
             <div className="pt-2">
               <Link
                 href="/student/learn"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Curriculum</span>
@@ -272,14 +272,14 @@ export default function AdaptivePracticeRunnerPage() {
   if (!concept || questions.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 text-slate-800">
-        <div className="glass-panel p-6 rounded-3xl border border-white/80 shadow-lg max-w-md text-center space-y-3">
+        <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] max-w-md text-center space-y-3 text-[#1E1610]">
           <h2 className="font-heading font-extrabold text-lg text-emerald-950">No Questions Found</h2>
           <p className="text-xs text-slate-600 font-sans">
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
             href="/"
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-heading font-bold px-4 py-2 shadow-sm"
+            className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
           >
             Return to Learning Path
           </Link>
@@ -437,7 +437,7 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Main Focused Column: max ~720px wide */}
           <div className="lg:col-span-8 max-w-[720px] mx-auto w-full space-y-6">
             {/* Title Header Card */}
-            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
+            <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
               <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
               <span>Adaptive Practice</span>
@@ -465,7 +465,7 @@ export default function AdaptivePracticeRunnerPage() {
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium">
+          <p className="text-xs sm:text-sm text-[#5A3720] bg-[#E8CF9C]/70 p-4 border-2 border-[#1E1610] leading-relaxed font-sans font-medium">
             {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
@@ -486,7 +486,7 @@ export default function AdaptivePracticeRunnerPage() {
                     {prereqsIncluded.map((pr) => (
                       <span
                         key={pr.conceptId}
-                        className="px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-lg text-[10px] font-heading font-bold text-slate-700 shadow-2xs"
+                        className="px-2.5 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[11px] font-heading font-bold text-[#1E1610]"
                       >
                         {pr.name} ({pr.count} question{pr.count > 1 ? "s" : ""})
                       </span>
@@ -517,7 +517,7 @@ export default function AdaptivePracticeRunnerPage() {
 
               {/* Main Score & Mastery Card */}
               <div
-                className={`glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-slate-800 ${
+                className={`panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] text-[#1E1610] ${
                   result.passed
                     ? "border-t-4 border-t-emerald-500"
                     : "border-t-4 border-t-amber-400"
@@ -525,7 +525,7 @@ export default function AdaptivePracticeRunnerPage() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="shrink-0 p-2 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
+                    <div className="shrink-0 p-2 bg-[#E8CF9C] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]">
                       <Companion
                         pose={result.percentage >= 70 || result.passed ? "cheer" : "think"}
                         size={72}
@@ -554,7 +554,7 @@ export default function AdaptivePracticeRunnerPage() {
                           : " • Keep practicing to build confidence."}
                       </p>
                       {result.mistakeHint && (
-                        <p className="text-xs mt-2 p-3 rounded-xl bg-white/80 border border-white/90 font-sans font-medium text-slate-700">
+                        <p className="text-xs mt-2 p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] font-sans font-medium text-[#5A3720]">
                           💡 <strong>Hint:</strong> {result.mistakeHint}
                         </p>
                       )}
@@ -564,7 +564,7 @@ export default function AdaptivePracticeRunnerPage() {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={handleRetry}
-                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-4 py-2 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs transition-all"
+                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-4 py-2 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-bold text-xs border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>Practice Again</span>
@@ -572,7 +572,7 @@ export default function AdaptivePracticeRunnerPage() {
 
                     <Link
                       href={result.nextAction?.href || `/lesson/${conceptId}`}
-                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
+                      className="inline-flex items-center justify-center min-h-[42px] gap-1.5 px-5 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
                     >
                       <span>{result.nextAction?.title || "Continue Path"}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -594,9 +594,9 @@ export default function AdaptivePracticeRunnerPage() {
                             <span
                               className={`px-2 py-0.5 text-xs font-heading font-extrabold border ${
                                 result.comparison.improvementDelta > 0
-                                  ? "bg-emerald-600 text-white rounded-full shadow-xs"
+                                  ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610]"
                                   : result.comparison.improvementDelta === 0
-                                  ? "bg-white/80 text-slate-700 border-white/90 rounded-full"
+                                  ? "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610]"
                                   : "bg-rose-100 text-rose-900 border-rose-300 rounded-full"
                               }`}
                             >
@@ -630,7 +630,7 @@ export default function AdaptivePracticeRunnerPage() {
                         </p>
                       </div>
                     ) : (
-                      <div className="p-3 rounded-xl bg-white/80 border border-white/90 text-xs text-slate-700 font-sans flex items-center gap-2">
+                      <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-xs text-[#5A3720] font-sans flex items-center gap-2">
                         <Award className="w-4 h-4 text-emerald-700 shrink-0" />
                         <span>
                           <strong>First Attempt Recorded:</strong> Scored {result.score}/{result.total} ({result.percentage}%). Future attempts will track your growth delta!
@@ -671,7 +671,7 @@ export default function AdaptivePracticeRunnerPage() {
         {/* Practice Questions List */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Worksheet Header & Live Progress */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-[#1E1610]/20 pb-2">
             <div>
               <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
                 {result ? "Practice Review & Educational Feedback" : "Practice Questions"}
@@ -687,7 +687,7 @@ export default function AdaptivePracticeRunnerPage() {
             </span>
           </div>
           {!result && (
-            <div className="w-full bg-white/60 rounded-full h-2 overflow-hidden border border-white/80">
+            <div className="w-full bg-[#E8CF9C] border-2 border-[#1E1610] h-2.5 overflow-hidden">
               <div
                 className="bg-amber-600 h-full transition-all duration-300"
                 style={{
@@ -704,9 +704,9 @@ export default function AdaptivePracticeRunnerPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800"
+                className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-white/80 pb-3">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#1E1610]/20 pb-3">
                   <span className="text-xs font-heading font-bold text-emerald-900 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
@@ -743,8 +743,8 @@ export default function AdaptivePracticeRunnerPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-white/80";
-                    let optionBgClass = "bg-white/70 text-slate-800 hover:bg-white hover:border-emerald-300 hover:shadow-xs";
+                    let optionBorderClass = "border-2 border-[#1E1610]";
+                    let optionBgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
@@ -779,8 +779,8 @@ export default function AdaptivePracticeRunnerPage() {
                           <span
                             className={`w-6 h-6 border-2 font-heading font-bold flex items-center justify-center text-xs shrink-0 ${
                               isSelected
-                                ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                                : "bg-white text-slate-700 border-slate-300"
+                                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                                : "bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610]"
                             }`}
                           >
                             {opt.id}
@@ -801,7 +801,7 @@ export default function AdaptivePracticeRunnerPage() {
 
                 {/* Question Feedback Post-Submission with Mascot & Educational Guidance */}
                 {feedbackItem && (
-                  <div className="mt-4 p-4 rounded-2xl bg-white/80 border border-white/90 space-y-3">
+                  <div className="mt-4 p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="shrink-0 pt-0.5">
                         <Companion
@@ -861,7 +861,7 @@ export default function AdaptivePracticeRunnerPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 text-slate-800">
+            <div className="sticky bottom-4 z-30 panel-night p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex items-center justify-between gap-4 text-[#F3E3BC]">
               <span className="text-xs font-heading font-extrabold text-emerald-950">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
@@ -869,7 +869,7 @@ export default function AdaptivePracticeRunnerPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm cursor-pointer disabled:opacity-50 transition-all"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs cursor-pointer disabled:opacity-50 transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <span>{submitting ? "Checking..." : "Submit Practice Worksheet"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -882,7 +882,7 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Desktop Side Companion & Progress Panel (Hidden on mobile & tablet) */}
           <aside className="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 select-none">
             {/* Companion Card */}
-            <div className="glass-panel p-5 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] text-center space-y-3">
+            <div className="panel-plank p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] text-center space-y-3">
               <div className="flex justify-center">
                 <Companion
                   pose={result ? (result.percentage >= 70 ? "cheer" : "think") : isIstNightTime() ? "sleepy" : "greet"}
@@ -906,7 +906,7 @@ export default function AdaptivePracticeRunnerPage() {
             </div>
 
             {/* Live Progress Card */}
-            <div className="glass-panel p-4 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-3 text-slate-800">
+            <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-3 text-[#1E1610]">
               <div className="flex items-center justify-between text-xs font-heading font-bold text-emerald-950">
                 <span>Worksheet Progress</span>
                 <span>{Object.keys(answers).length} / {questions.length} Answered</span>
@@ -918,10 +918,10 @@ export default function AdaptivePracticeRunnerPage() {
                   return (
                     <div
                       key={q.id}
-                      className={`h-4 rounded-md border border-white/90 flex items-center justify-center text-[9px] font-heading font-extrabold shadow-2xs ${
+                      className={`h-4 border-2 border-[#1E1610] flex items-center justify-center text-[9px] font-heading font-extrabold ${
                         isDone
                           ? "bg-[#5DAA3A] text-[#FFF7E6]"
-                          : "bg-white/60 text-slate-400"
+                          : "bg-[#E8CF9C] text-[#5A3720]"
                       }`}
                     >
                       {idx + 1}
@@ -932,7 +932,7 @@ export default function AdaptivePracticeRunnerPage() {
             </div>
 
             {/* Practice XP Bounty */}
-            <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
+            <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-2 text-xs text-[#1E1610]">
               <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
                 <Sparkles className="w-4 h-4 text-amber-600" />
                 <span>Practice XP Rewards</span>

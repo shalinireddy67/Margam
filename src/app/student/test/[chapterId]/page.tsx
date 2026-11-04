@@ -190,7 +190,7 @@ export default function ChapterTestRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 max-w-lg mx-auto text-center text-slate-800">
+          <div className="panel-plank p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 max-w-lg mx-auto text-center text-[#1E1610]">
             <div className="w-12 h-12 bg-rose-100 border border-rose-300 rounded-2xl flex items-center justify-center mx-auto text-rose-900 font-heading font-extrabold text-lg shadow-xs">
               !
             </div>
@@ -230,7 +230,7 @@ export default function ChapterTestRunnerPage() {
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 max-w-lg mx-auto text-center text-slate-800">
+          <div className="panel-plank p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 max-w-lg mx-auto text-center text-[#1E1610]">
             <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
               <Lock className="w-6 h-6" />
             </div>
@@ -243,7 +243,7 @@ export default function ChapterTestRunnerPage() {
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
+                className="inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>
@@ -336,7 +336,7 @@ export default function ChapterTestRunnerPage() {
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         {/* Header Card */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
+        <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
           <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
             <span>Chapter Mastery Test</span>
             <span>•</span>
@@ -355,7 +355,7 @@ export default function ChapterTestRunnerPage() {
 
           {/* Test Allocation Breakdown */}
           {Object.keys(conceptAllocation).length > 0 && (
-            <div className="mt-4 p-4 rounded-2xl bg-white/80 border border-white/90 flex items-center flex-wrap gap-2 text-xs shadow-2xs">
+            <div className="mt-4 p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center flex-wrap gap-2 text-xs">
               <span className="font-heading font-extrabold text-emerald-900 flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
                 <span>Test Blueprint:</span>
@@ -378,7 +378,7 @@ export default function ChapterTestRunnerPage() {
           {/* Results Summary Card */}
           {result && (
             <div
-              className={`mt-6 glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-5 text-slate-800 ${
+              className={`mt-6 panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-5 text-[#1E1610] ${
                 result.passed ? "border-t-4 border-t-emerald-500" : "border-t-4 border-t-amber-400"
               }`}
             >
@@ -407,7 +407,7 @@ export default function ChapterTestRunnerPage() {
                   <button
                     type="button"
                     onClick={handleRetry}
-                    className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-4 py-2 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs transition-all"
+                    className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-4 py-2 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-bold text-xs border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Retake Test</span>
@@ -415,7 +415,7 @@ export default function ChapterTestRunnerPage() {
 
                   <Link
                     href="/student"
-                    className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
+                    className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-5 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     <span>Return to Dashboard</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -424,7 +424,7 @@ export default function ChapterTestRunnerPage() {
               </div>
 
               {/* SEPARATE WEAK AND STRONG CONCEPTS */}
-              <div className="space-y-4 pt-3 border-t border-white/80">
+              <div className="space-y-4 pt-3 border-t-2 border-[#1E1610]/20">
                 {/* 1. Strong Concepts Section */}
                 {result.strongConcepts && result.strongConcepts.length > 0 && (
                   <div className="space-y-2">
@@ -436,7 +436,7 @@ export default function ChapterTestRunnerPage() {
                       {result.strongConcepts.map((sc) => (
                         <div
                           key={sc.conceptId}
-                          className="bg-white/80 text-slate-800 p-3 rounded-2xl border border-white/90 text-xs flex items-center justify-between shadow-2xs"
+                          className="bg-[#E8CF9C]/70 text-[#1E1610] p-3 border-2 border-[#1E1610] text-xs flex items-center justify-between"
                         >
                           <span className="font-bold truncate mr-2">
                             {sc.conceptName}
@@ -461,7 +461,7 @@ export default function ChapterTestRunnerPage() {
                       {result.weakConcepts.map((wc) => (
                         <div
                           key={wc.conceptId}
-                          className="bg-white/80 text-slate-800 p-3 rounded-2xl border border-white/90 text-xs flex items-center justify-between shadow-2xs"
+                          className="bg-[#E8CF9C]/70 text-[#1E1610] p-3 border-2 border-[#1E1610] text-xs flex items-center justify-between"
                         >
                           <span className="font-bold truncate mr-2">
                             {wc.conceptName}
@@ -505,7 +505,7 @@ export default function ChapterTestRunnerPage() {
         {/* Test Questions List */}
         <form onSubmit={handleSubmitTest} className="space-y-6">
           {/* Chapter Test Header & Live Progress */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-[#1E1610]/20 pb-2">
             <div>
               <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
                 {result ? "Test Review & Performance" : "Chapter Test Questions"}
@@ -521,7 +521,7 @@ export default function ChapterTestRunnerPage() {
             </span>
           </div>
           {!result && (
-            <div className="w-full bg-white/60 rounded-full h-2 overflow-hidden border border-white/80">
+            <div className="w-full bg-[#E8CF9C] border-2 border-[#1E1610] h-2.5 overflow-hidden">
               <div
                 className="bg-emerald-600 h-full transition-all duration-300"
                 style={{
@@ -539,9 +539,9 @@ export default function ChapterTestRunnerPage() {
               <div
                 key={q.id}
                 data-qid={q.id}
-                className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800"
+                className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]"
               >
-                <div className="flex items-center justify-between gap-2 border-b border-white/80 pb-3">
+                <div className="flex items-center justify-between gap-2 border-b-2 border-[#1E1610]/20 pb-3">
                   <span className="text-xs font-heading font-bold text-emerald-900 uppercase tracking-wider">
                     Question {qIndex + 1} of {questions.length}
                   </span>
@@ -564,20 +564,20 @@ export default function ChapterTestRunnerPage() {
                     const isSelected = answers[q.id] === opt.id;
                     const optData = resolveLocalizedString(opt.text, currentLang);
 
-                    let optionBorderClass = "border-white/80";
-                    let optionBgClass = "bg-white/70 text-slate-800 hover:bg-white hover:border-emerald-300 hover:shadow-xs";
+                    let optionBorderClass = "border-2 border-[#1E1610]";
+                    let optionBgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";
 
                     if (result && feedbackItem) {
                       if (isSelected && feedbackItem.isCorrect) {
                         optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
-                        optionBgClass = "bg-[#5DAA3A] text-white";
+                        optionBgClass = "bg-[#6DB33F] text-[#1E1610]";
                       } else if (isSelected && !feedbackItem.isCorrect) {
                         optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
-                        optionBgClass = "bg-[#D9453D] text-white";
+                        optionBgClass = "bg-[#D1362B] text-[#F3E3BC]";
                       }
                     } else if (isSelected) {
                         optionBorderClass = "border-emerald-500 ring-2 ring-emerald-500/20";
-                      optionBgClass = "bg-[#3FA7C9] text-white shadow-[3px_3px_0px_#1B120C]";
+                      optionBgClass = "bg-[#6DB33F] text-[#1E1610] shadow-[2px_2px_0px_#1E1610]";
                     }
 
                     return (
@@ -600,8 +600,8 @@ export default function ChapterTestRunnerPage() {
                         <span
                           className={`w-7 h-7 rounded-xl border font-heading font-extrabold flex items-center justify-center text-xs shrink-0 ${
                             isSelected
-                              ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                              : "bg-white text-slate-700 border-slate-300"
+                              ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                              : "bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610]"
                           }`}
                         >
                           {opt.id}
@@ -616,9 +616,9 @@ export default function ChapterTestRunnerPage() {
                         </div>
                         {result && feedbackItem && isSelected && (
                           feedbackItem.isCorrect ? (
-                            <CheckCircle2 className="w-5 h-5 text-white shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-[#1E1610] shrink-0" />
                           ) : (
-                            <XCircle className="w-5 h-5 text-white shrink-0" />
+                            <XCircle className="w-5 h-5 text-[#F3E3BC] shrink-0" />
                           )
                         )}
                       </div>
@@ -630,7 +630,7 @@ export default function ChapterTestRunnerPage() {
           })}
 
           {!result && (
-            <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 text-slate-800">
+            <div className="sticky bottom-4 z-30 panel-night p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex items-center justify-between gap-4 text-[#F3E3BC]">
               <span className="text-xs font-heading font-extrabold text-emerald-950">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
@@ -638,7 +638,7 @@ export default function ChapterTestRunnerPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm cursor-pointer disabled:opacity-50 transition-all"
+                className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs cursor-pointer disabled:opacity-50 transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <span>{submitting ? "Evaluating..." : "Submit test"}</span>
                 <ArrowRight className="w-4 h-4" />

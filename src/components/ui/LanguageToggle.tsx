@@ -26,7 +26,7 @@ export function LanguageToggle({
     <div
       role="group"
       aria-label="Language selection"
-      className={`inline-flex border-3 border-[#422816] rounded-[2px] bg-[#5A3720] shadow-[2px_2px_0px_rgba(0,0,0,0.35)] overflow-hidden ${className}`.trim()}
+      className={`inline-flex border-[3px] border-[#1E1610] rounded-xs bg-[#232634]/95 shadow-[2px_2px_0px_#1E1610] overflow-hidden ${className}`.trim()}
     >
       {languages.map(({ code, label, ariaLabel }) => {
         const isActive = currentLang === code;
@@ -44,10 +44,10 @@ export function LanguageToggle({
               font-bold text-xs select-none
               border-0 rounded-none cursor-pointer
               flex items-center justify-center
-              ${code !== "en" ? "border-l-2 border-[#422816]" : ""}
+              ${code !== "en" ? "border-l-2 border-[#1E1610]" : ""}
               ${isActive
-                ? "bg-[#FFE9A8] text-[#2B1B0F] shadow-[inset_1px_1px_0px_#FFFFFF]"
-                : "bg-transparent text-[#FFF7E6] hover:bg-[#7A4B2A]"
+                ? "bg-[#F2C230] text-[#1E1610] shadow-[inset_1px_1px_0px_#F3E3BC]"
+                : "bg-transparent text-[#F3E3BC] hover:bg-[#D9B87A]/20"
               }
             `.trim()}
           >

@@ -29,35 +29,35 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const colorStyles: Record<CardColor, string> = {
-  // White card with Ink border (Canonical)
-  white: "bg-[#FFFFFF] text-[#2B1B0F] border-[#2B1B0F]",
-  cream: "bg-[#FFF7E6] text-[#2B1B0F] border-[#2B1B0F]",
+  // Semi-opaque plank panel (canonical replacement for white cards)
+  white: "bg-[#D9B87A]/90 text-[#1E1610] border-[#1E1610]",
+  cream: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
 
   // Neutral Stone
-  stone: "bg-[#8B8B8B] text-[#FFF7E6] border-[#3F3F3F]",
+  stone: "bg-[#B9BCC0]/90 text-[#1E1610] border-[#1E1610]",
 
-  // Grass Accent
-  grass: "bg-[#5DAA3A] text-[#2B1B0F] border-[#2B1B0F]",
-  green: "bg-[#5DAA3A] text-[#2B1B0F] border-[#2B1B0F]",
+  // Grass Accent (Success)
+  grass: "bg-[#6DB33F]/90 text-[#1E1610] border-[#1E1610]",
+  green: "bg-[#6DB33F]/90 text-[#1E1610] border-[#1E1610]",
 
   // Highlights
-  gold: "bg-[#F4C542] text-[#2B1B0F] border-[#2B1B0F]",
-  sand: "bg-[#FFE9A8] text-[#2B1B0F] border-[#2B1B0F]",
-  yellow: "bg-[#F4C542] text-[#2B1B0F] border-[#2B1B0F]",
-  orange: "bg-[#FFB36B] text-[#2B1B0F] border-[#2B1B0F]",
+  gold: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
+  sand: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
+  yellow: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
+  orange: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
 
-  // Water / Sky
-  sky: "bg-[#6EB5FF] text-[#2B1B0F] border-[#2B1B0F]",
-  cyan: "bg-[#3FA7C9] text-[#2B1B0F] border-[#2B1B0F]",
+  // Water / Sky (Hints and Info)
+  sky: "bg-[#78BDE8]/90 text-[#1E1610] border-[#1E1610]",
+  cyan: "bg-[#4EDBD3]/90 text-[#1E1610] border-[#1E1610]",
 
-  // Ground Wood & Dirt panels
-  dirt: "bg-[#7A4B2A] text-[#FFF7E6] border-[#422816]",
-  charcoal: "bg-[#5A3720] text-[#FFF7E6] border-[#422816]",
-  translucent: "bg-[#5A3720]/90 text-[#FFF7E6] border-[#7A4B2A] backdrop-blur-md",
+  // Ground Wood & Dirt / HUD Night panels
+  dirt: "bg-[#8B5A2B]/92 text-[#F3E3BC] border-[#1E1610]",
+  charcoal: "bg-[#232634]/92 text-[#F3E3BC] border-[#1E1610]",
+  translucent: "bg-[#232634]/92 text-[#F3E3BC] border-[#1E1610]",
 
-  // Flower Red / Pink
-  red: "bg-[#E04A3F] text-[#FFFFFF] border-[#701A13]",
-  pink: "bg-[#FF8FA3] text-[#2B1B0F] border-[#2B1B0F]",
+  // Gaps and Mistakes ONLY
+  red: "bg-[#D1362B]/92 text-[#F3E3BC] border-[#1E1610]",
+  pink: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -76,18 +76,19 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
+        data-panel="card"
         className={`
-          border-[3px] rounded-[2px]
+          border-[3px] rounded-xs
           p-4 sm:p-5
           box-border
-          ${grassTrim ? "border-t-[8px] border-t-[#5DAA3A]" : ""}
+          ${grassTrim ? "border-t-[6px] border-t-[#6DB33F]" : ""}
           ${interactive
             ? "cursor-pointer transition-transform hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5"
             : ""
           }
           ${dashed ? "border-dashed" : "border-solid"}
           ${colorStyles[color] || colorStyles.white}
-          shadow-[4px_4px_0px_#2B1B0F]
+          shadow-[3px_3px_0px_#1E1610]
           ${className}
         `.trim()}
         {...props}
@@ -99,4 +100,5 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = "Card";
+
 export default Card;

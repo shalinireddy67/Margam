@@ -175,11 +175,11 @@ function LessonContent() {
     return (
       <div className="min-h-screen text-slate-800 flex flex-col justify-between pb-16">
         <OfflineBanner />
-        <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/60 shadow-xs">
+        <header className="sticky top-0 z-40 bg-[#232634]/92 border-b-3 border-[#1E1610] shadow-[0_3px_0px_#1E1610]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
             <Link
               href="/student/learn"
-              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-emerald-950 py-1.5 px-3.5 rounded-xl bg-white/80 hover:bg-white border border-white/90 shadow-xs no-underline transition-all"
+              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#1E1610] bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
             >
               <ArrowLeft className="w-4 h-4 mr-1.5" />
               <span>Back to Curriculum</span>
@@ -188,7 +188,7 @@ function LessonContent() {
         </header>
 
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 max-w-lg mx-auto text-center">
+          <div className="panel-plank p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 max-w-lg mx-auto text-center text-[#1E1610]">
             <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
               <Lock className="w-6 h-6" />
             </div>
@@ -201,7 +201,7 @@ function LessonContent() {
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-heading font-extrabold shadow-sm no-underline transition-all"
+                className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
                 <span>Return to Learning Path</span>
@@ -219,12 +219,12 @@ function LessonContent() {
   if (!concept || !lesson) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 text-slate-800">
-        <div className="glass-panel p-6 rounded-3xl border border-white/80 shadow-lg max-w-sm text-center space-y-3">
+        <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] max-w-sm text-center space-y-3 text-[#1E1610]">
           <h2 className="font-heading font-extrabold text-base text-emerald-950">Lesson Not Found</h2>
           <p className="text-xs text-slate-600 font-sans">This lesson content is not yet available.</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-heading font-bold px-4 py-2 shadow-sm"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Lessons</span>
@@ -340,23 +340,23 @@ function LessonContent() {
       <OfflineBanner />
 
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/60 shadow-xs">
+      <header className="sticky top-0 z-40 bg-[#232634]/92 border-b-3 border-[#1E1610] shadow-[0_3px_0px_#1E1610]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <Link
             href="/student/learn"
-            className="inline-flex items-center justify-center min-h-[40px] gap-2 text-xs font-heading font-bold text-emerald-950 py-1.5 px-3.5 rounded-xl bg-white/80 hover:bg-white border border-white/90 shadow-xs no-underline transition-all"
+            className="inline-flex items-center justify-center min-h-[40px] gap-2 text-xs font-heading font-bold text-[#1E1610] bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Curriculum</span>
           </Link>
 
           {/* Language Switcher */}
-          <div className="flex items-center gap-1 bg-white/70 p-1 rounded-xl border border-white/80 shadow-xs">
+          <div className="flex items-center gap-1 bg-[#E8CF9C]/80 p-1 border-2 border-[#1E1610]">
             <button
               type="button"
               onClick={() => setCurrentLang("en")}
               className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
-                currentLang === "en" ? "bg-emerald-600 text-white rounded-lg shadow-xs" : "text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white/60"
+                currentLang === "en" ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610]" : "text-[#1E1610] hover:bg-[#D9B87A] border-2 border-transparent"
               }`}
             >
               EN
@@ -365,7 +365,7 @@ function LessonContent() {
               type="button"
               onClick={() => setCurrentLang("hi")}
               className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
-                currentLang === "hi" ? "bg-emerald-600 text-white rounded-lg shadow-xs" : "text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white/60"
+                currentLang === "hi" ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610]" : "text-[#1E1610] hover:bg-[#D9B87A] border-2 border-transparent"
               }`}
             >
               हिन्दी
@@ -374,7 +374,7 @@ function LessonContent() {
               type="button"
               onClick={() => setCurrentLang("te")}
               className={`min-h-[36px] min-w-[36px] flex items-center justify-center px-2 py-1 text-xs font-heading font-bold border-2 transition-all ${
-                currentLang === "te" ? "bg-emerald-600 text-white rounded-lg shadow-xs" : "text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white/60"
+                currentLang === "te" ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610]" : "text-[#1E1610] hover:bg-[#D9B87A] border-2 border-transparent"
               }`}
             >
               తెలుగు
@@ -399,7 +399,7 @@ function LessonContent() {
         )}
 
         {/* Lesson Header Card */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
+        <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
               <span>Class {concept.class}</span>
@@ -428,7 +428,7 @@ function LessonContent() {
             {concept.name[currentLang] || concept.name.en}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium">
+          <p className="text-xs sm:text-sm text-[#5A3720] bg-[#E8CF9C]/70 p-4 border-2 border-[#1E1610] leading-relaxed font-sans font-medium">
             <strong className="text-emerald-950 font-bold">Goal:</strong> {concept.learningObjective[currentLang] || concept.learningObjective.en}
           </p>
 
@@ -444,9 +444,9 @@ function LessonContent() {
           {/* Main Conceptual Explanation */}
           <div className="md:col-span-8 space-y-6">
             {/* Core Explanation Card */}
-            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
+            <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
               <div className="flex flex-col sm:flex-row items-start gap-5">
-                <div className="shrink-0 p-2.5 rounded-2xl bg-white/80 border border-white/90 shadow-xs">
+                <div className="shrink-0 p-2.5 bg-[#E8CF9C] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]">
                   <Companion
                     pose="read"
                     size={88}
@@ -483,13 +483,13 @@ function LessonContent() {
             </div>
 
             {/* Step-by-Step Worked Example Card */}
-            <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800">
+            <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
               <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-emerald-800">
                 <Sparkles className="w-4 h-4 text-emerald-700" />
                 <span>Step-by-Step Example</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/80 border border-white/90 space-y-1">
+              <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
                 <p className="text-xs font-heading font-bold text-emerald-900 uppercase tracking-wider">Problem</p>
                 <p className="text-xs sm:text-sm font-bold text-slate-800">{workedProblem.text}</p>
               </div>
@@ -505,7 +505,7 @@ function LessonContent() {
 
           {/* Side Column: Mascot Companion Dialogue */}
           <div className="md:col-span-4 sticky top-24 space-y-4">
-            <div className="glass-panel p-5 sm:p-6 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] flex flex-col items-center text-center text-slate-800">
+            <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col items-center text-center text-[#1E1610]">
               <Companion
                 pose={companionPoseMap[companionContext] || "read"}
                 size={84}
@@ -520,8 +520,8 @@ function LessonContent() {
 
         {/* Embedded Practice Section */}
         {practiceQuestions.length > 0 && (
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-6 text-slate-800">
-            <div className="flex items-center justify-between gap-3 border-b border-white/80 pb-4 flex-wrap">
+          <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-6 text-[#1E1610]">
+            <div className="flex items-center justify-between gap-3 border-b-2 border-[#1E1610]/20 pb-4 flex-wrap">
               <div>
                 <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
                   Check Your Understanding
@@ -534,7 +534,7 @@ function LessonContent() {
               {worksheetResult && (
                 <button
                   onClick={handleRetryPractice}
-                  className="inline-flex items-center justify-center min-h-[44px] gap-1 px-3 py-1.5 rounded-xl border border-white/90 bg-white/80 hover:bg-white shadow-xs text-xs font-heading font-bold text-slate-700 hover:text-slate-900 active:translate-x-[1px] active:translate-y-[1px]"
+                  className="inline-flex items-center justify-center min-h-[44px] gap-1 px-3 py-1.5 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Try Again</span>
@@ -568,8 +568,8 @@ function LessonContent() {
                         const isSelected = answers[q.id] === opt.id;
                         const optText = resolveLocalizedString(opt.text, currentLang);
 
-                        let borderClass = "border-white/80";
-                        let bgClass = "bg-white/70 text-slate-800 hover:bg-white hover:border-emerald-300 hover:shadow-xs";
+                        let borderClass = "border-2 border-[#1E1610]";
+                        let bgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";
 
                         if (worksheetResult && feedbackItem) {
                           if (isSelected && feedbackItem.isCorrect) {
@@ -602,8 +602,8 @@ function LessonContent() {
                             <span
                               className={`w-7 h-7 rounded-xl border font-heading font-extrabold flex items-center justify-center shrink-0 mt-0.5 text-xs ${
                                 isSelected
-                                  ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
-                                  : "bg-white text-slate-700 border-slate-300"
+                                  ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                                  : "bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610]"
                               }`}
                             >
                               {opt.id}
@@ -656,7 +656,7 @@ function LessonContent() {
               {!worksheetResult && (
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-extrabold text-xs rounded-2xl shadow-sm transition-all cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs transition-all active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                 >
                   <span>Submit Practice Answer</span>
                 </button>
@@ -666,12 +666,12 @@ function LessonContent() {
         )}
 
         {/* Sticky Next Button Bar */}
-        <div className="sticky bottom-4 z-30 glass-panel-elevated rounded-2xl p-4 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-800">
+        <div className="sticky bottom-4 z-30 panel-night p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col sm:flex-row items-center justify-between gap-3 text-[#F3E3BC]">
           <div className="text-center sm:text-left">
-            <span className="text-xs font-heading font-extrabold text-emerald-950 block">
+            <span className="text-xs font-heading font-extrabold text-[#F3E3BC] block">
               {isCompleted ? "Topic Completed!" : "Finished Reviewing?"}
             </span>
-            <span className="text-[11px] text-slate-600 font-sans block">
+            <span className="text-[11px] text-[#F3E3BC]/80 font-sans block">
               {isCompleted
                 ? "You can now attempt the full practice worksheet or return to your path."
                 : "Mark this lesson completed to unlock practice and next topics."}
@@ -683,7 +683,7 @@ function LessonContent() {
               <button
                 type="button"
                 onClick={handleFinishLesson}
-                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm transition-all cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs transition-all active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Next: Finish Lesson & Complete</span>
@@ -692,14 +692,14 @@ function LessonContent() {
               <>
                 <Link
                   href={`/student/worksheet/${conceptId}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-5 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-extrabold text-xs no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <span>Attempt Practice Worksheet</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href={fromGap ? "/student" : "/student/learn"}
-                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-4 py-2.5 bg-white/80 hover:bg-white text-slate-700 font-heading font-bold text-xs rounded-xl border border-white/90 shadow-xs no-underline transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center min-h-[46px] gap-2 px-4 py-2.5 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold text-xs no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
                 >
                   <span>{fromGap ? "Return to Dashboard" : "Return to Curriculum"}</span>
                 </Link>

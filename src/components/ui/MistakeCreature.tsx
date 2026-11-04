@@ -57,9 +57,9 @@ export function MistakeCreature({
           <rect x="11" y="2" width="1" height="2" fill="#D9453D" />
 
           {/* Googly Eyes */}
-          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="5" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="6" y="7" width="1" height="1" fill="#111111" />
-          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="9" y="7" width="1" height="1" fill="#111111" />
 
           {/* Cheeky Mouth */}
@@ -146,9 +146,9 @@ export function MistakeCreature({
           <rect x="4" y="5" width="8" height="8" fill="#F2D16B" />
 
           {/* Sideways Looking Eyes */}
-          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="5" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="6" y="6" width="1" height="2" fill="#111111" />
-          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="10" y="6" width="1" height="2" fill="#111111" />
 
           {/* Smirk */}
@@ -186,9 +186,9 @@ export function MistakeCreature({
           <rect x="10" y="12" width="2" height="2" fill="#8B5A2B" />
 
           {/* Astonished Eyes */}
-          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="5" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="5" y="6" width="1" height="1" fill="#111111" />
-          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="9" y="6" width="1" height="1" fill="#111111" />
 
           {/* Astonished Open Mouth */}
@@ -222,9 +222,9 @@ export function MistakeCreature({
           <rect x="4" y="6" width="8" height="6" fill="#5DB84A" />
 
           {/* Big Happy Eyes */}
-          <rect x="5" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="5" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="6" y="6" width="1" height="1" fill="#111111" />
-          <rect x="9" y="6" width="2" height="2" fill="#FFFFFF" />
+          <rect x="9" y="6" width="2" height="2" fill="#F3E3BC" />
           <rect x="9" y="6" width="1" height="1" fill="#111111" />
 
           {/* Big Happy Smile */}

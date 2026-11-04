@@ -19,88 +19,45 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Blocky Voxel World Design Tokens
-        ink: "#2B1B0F",
-        charcoal: "#20251F",
-        
-        // Sky (day blue to sunset orange-pink)
-        sky: {
-          DEFAULT: "#6EB5FF",
-          blue: "#6EB5FF",
-          sunset: "#FFB36B",
-          pink: "#FF8FA3",
-          light: "#A4D2FF",
-          dark: "#1E6F8C",
-        },
-        sunglow: {
-          DEFAULT: "#FFE9A8",
-          light: "#FFF4D1",
-          dark: "#F4C542",
-        },
+        // Block-World Palette (Phase 2 Official Tokens)
+        ink: "#1E1610",
+        plank: "#D9B87A",
+        plankLight: "#E8CF9C",
+        stone: "#B9BCC0",
+        stoneDark: "#6B6F76",
+        night: "#232634",
+        parchment: "#F3E3BC",
+        grass: "#6DB33F",
+        grassTop: "#8CCB55",
+        dirt: "#8B5A2B",
+        dirtDark: "#5A3720",
+        sky: "#78BDE8",
+        gold: "#F2C230",
+        redstone: "#D1362B",
+        diamond: "#4EDBD3",
+        emerald: "#17B862",
+        lapis: "#2F4FB5",
 
-        // Grass Accent (Buttons, success, progress only)
-        grass: {
-          DEFAULT: "#5DAA3A",
-          dark: "#2F6B22",
-          light: "#7BC458",
-        },
-
-        // Dirt & Wood (Cards, panels, borders)
-        dirt: {
-          DEFAULT: "#7A4B2A",
-          dark: "#422816",
-          light: "#A06A3C",
-          bedrock: "#1B120C",
-        },
-        wood: {
-          DEFAULT: "#A06A3C",
-          dark: "#5A3720",
-          light: "#C68B59",
-        },
-
-        // Stone & Redstone Accents
-        stone: {
-          DEFAULT: "#6B7280",
-          dark: "#374151",
-          light: "#9CA3AF",
-        },
-        redstone: {
-          DEFAULT: "#E04A3F",
-          dark: "#991B1B",
-          light: "#F87171",
-        },
-        diamond: {
-          DEFAULT: "#3FA7C9",
-          dark: "#1E6F8C",
-          light: "#6ED3F5",
-        },
-        gold: {
-          DEFAULT: "#F4C542",
-          dark: "#B88E14",
-          light: "#FFE9A8",
-        },
-        iron: {
-          DEFAULT: "#D8D8D8",
-          dark: "#8B8B8B",
-          light: "#F0F0F0",
-        },
-
-        // UI Neutral Backgrounds
+        // Palette Aliases for seamless migration
         cream: {
-          DEFAULT: "#FFF7E6",
-          dark: "#E5D7BE",
-          light: "#FFFDF7",
+          DEFAULT: "#D9B87A",
+          light: "#E8CF9C",
+          dark: "#B9BCC0",
         },
         sand: {
-          DEFAULT: "#FFE9A8",
-          light: "#FFF4D1",
-          dark: "#F4C542",
+          DEFAULT: "#E8CF9C",
+          light: "#F3E3BC",
+          dark: "#D9B87A",
         },
-
-        // Semantic mappings: Cream background, Ink foreground
-        background: "#FFF7E6",
-        foreground: "#2B1B0F",
-        muted: "#D9D9D9",
+        wood: {
+          DEFAULT: "#8B5A2B",
+          dark: "#5A3720",
+          light: "#D9B87A",
+        },
+        charcoal: "#1E1610",
+        background: "transparent",
+        foreground: "#1E1610",
+        muted: "#B9BCC0",
       },
       fontFamily: {
         heading: [
@@ -109,8 +66,9 @@ const config: Config = {
           "sans-serif",
         ],
         pixel: [
-          "'Press Start 2P'",
-          "monospace",
+          "'Baloo 2'",
+          "'Baloo Tammudu 2'",
+          "sans-serif",
         ],
         sans: [
           "'Nunito'",
@@ -128,31 +86,33 @@ const config: Config = {
         "4": "4px",
       },
       boxShadow: {
-        hard: "4px 4px 0px rgba(0, 0, 0, 0.35)",
-        "hard-sm": "2px 2px 0px rgba(0, 0, 0, 0.35)",
-        "hard-lg": "6px 6px 0px rgba(0, 0, 0, 0.35)",
-        pixel: "4px 4px 0px rgba(0, 0, 0, 0.35)",
-        "pixel-sm": "2px 2px 0px rgba(0, 0, 0, 0.35)",
-        "pixel-lg": "6px 6px 0px rgba(0, 0, 0, 0.35)",
-        "pixel-pressed": "0px 0px 0px rgba(0, 0, 0, 0.35)",
-        block: "4px 4px 0px #2B1B0F",
-        "block-sm": "2px 2px 0px #2B1B0F",
-        "block-lg": "6px 6px 0px #2B1B0F",
-        voxel: "inset 2px 2px 0px rgba(255,255,255,0.35), inset -2px -2px 0px rgba(0,0,0,0.35), 4px 4px 0px rgba(0,0,0,0.35)",
-        "voxel-pressed": "inset 2px 2px 0px rgba(0,0,0,0.45), inset -2px -2px 0px rgba(255,255,255,0.2)",
+        hard: "3px 3px 0px #1E1610",
+        "hard-sm": "2px 2px 0px #1E1610",
+        "hard-lg": "4px 4px 0px #1E1610",
+        "hard-xl": "6px 6px 0px #1E1610",
+        block: "3px 3px 0px #1E1610",
+        "block-sm": "2px 2px 0px #1E1610",
+        "block-lg": "4px 4px 0px #1E1610",
+        pixel: "3px 3px 0px #1E1610",
+        "pixel-sm": "2px 2px 0px #1E1610",
+        "pixel-lg": "4px 4px 0px #1E1610",
+        "pixel-pressed": "0px 0px 0px #1E1610",
+        voxel: "inset 2px 2px 0px rgba(243,227,188,0.4), inset -2px -2px 0px rgba(30,22,16,0.4), 3px 3px 0px #1E1610",
+        "voxel-pressed": "inset 2px 2px 0px rgba(30,22,16,0.5), inset -2px -2px 0px rgba(243,227,188,0.3)",
       },
       borderRadius: {
         DEFAULT: "0px",
         none: "0px",
+        xs: "2px",
         sm: "2px",
         md: "2px",
-        lg: "2px",
-        xl: "2px",
-        "2xl": "2px",
-        "3xl": "2px",
-        full: "2px",
+        lg: "4px",
+        xl: "4px",
+        "2xl": "4px",
+        "3xl": "4px",
+        full: "4px",
         hand: "2px",
-        pill: "2px",
+        pill: "4px",
       },
     },
   },

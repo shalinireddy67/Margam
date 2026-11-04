@@ -119,7 +119,7 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
-                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
+                        : "border-[#422816]/30 bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
@@ -164,7 +164,7 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
-                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
+                        : "border-[#422816]/30 bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">
@@ -209,7 +209,7 @@ export default function ConceptPathway({ currentLang }: ConceptPathwayProps) {
                     } ${
                       isSelected
                         ? "border-[#422816] bg-[#3FA7C9] text-[#FFF7E6] shadow-[3px_3px_0px_#1B120C] font-bold"
-                        : "border-[#422816]/30 bg-white/80 hover:bg-white text-[#2B1B0F] hover:border-[#422816]"
+                        : "border-[#422816]/30 bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#2B1B0F] hover:border-[#422816]"
                     }`}
                   >
                     <div className="flex items-center justify-between text-[11px] font-mono opacity-80 mb-1">

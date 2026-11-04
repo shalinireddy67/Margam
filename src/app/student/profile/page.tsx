@@ -73,10 +73,10 @@ export default function StudentProfilePage() {
 
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-800">
-        <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
-          <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-emerald-950">Loading Profile...</p>
+      <div className="min-h-screen flex items-center justify-center text-[#1E1610]">
+        <div className="panel-plank p-6 text-center border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
+          <div className="w-8 h-8 border-3 border-[#6DB33F] border-t-transparent animate-spin mx-auto mb-2" />
+          <p className="font-heading font-extrabold text-xs text-[#1E1610]">Loading Profile...</p>
         </div>
       </div>
     );
@@ -123,7 +123,7 @@ export default function StudentProfilePage() {
       setIsEditingName(false);
       setNameSuccess(true);
       setTimeout(() => setNameSuccess(false), 3000);
-    } catch (err: any) {
+    } catch {
       setErrorMsg("Failed to save nickname.");
     } finally {
       setSavingName(false);
@@ -172,8 +172,8 @@ export default function StudentProfilePage() {
   };
 
   return (
-    <div className="min-h-screen text-slate-800 flex flex-col justify-between">
-      {/* Top Floating Glass Navigation */}
+    <div className="min-h-screen text-[#1E1610] flex flex-col justify-between">
+      {/* Top Floating Navigation */}
       <Navigation
         currentTab="profile"
         currentLang={currentLang}
@@ -186,7 +186,7 @@ export default function StudentProfilePage() {
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Profile Hero Header */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col sm:flex-row items-center gap-6">
+        <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col sm:flex-row items-center gap-6">
           <div className="shrink-0">
             <Companion
               pose={isIstNightTime() ? "sleepy" : "greet"}
@@ -198,18 +198,18 @@ export default function StudentProfilePage() {
 
           <div className="space-y-1 text-center sm:text-left flex-1">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100/90 border border-emerald-300 text-[10px] font-heading font-extrabold text-emerald-900 uppercase tracking-wide">
+              <span className="px-2.5 py-0.5 bg-[#8CCB55] border-2 border-[#1E1610] text-[11px] font-heading font-extrabold text-[#1E1610] uppercase tracking-wide">
                 Student Profile
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-amber-100/90 border border-amber-300 text-[10px] font-heading font-extrabold text-amber-900">
+              <span className="px-2.5 py-0.5 bg-[#F2C230] border-2 border-[#1E1610] text-[11px] font-heading font-extrabold text-[#1E1610]">
                 {levelInfo.rank.badge} {levelInfo.rank.name} Scholar
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
+            <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#1E1610]">
               {profile.name}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 font-sans">
+            <p className="text-xs sm:text-sm text-[#5A3720] font-sans">
               Manage your personal nickname, choose your daily NCERT study class, and view your academic achievements.
             </p>
           </div>
@@ -218,7 +218,7 @@ export default function StudentProfilePage() {
           <button
             type="button"
             onClick={handleUserLogout}
-            className="py-2 px-4 rounded-xl bg-white/70 hover:bg-white text-rose-700 hover:text-rose-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white/80 transition-all shadow-xs shrink-0 cursor-pointer"
+            className="py-2 px-4 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#D1362B] font-heading font-bold text-xs flex items-center gap-1.5 border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none shrink-0 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Log Out</span>
@@ -227,40 +227,39 @@ export default function StudentProfilePage() {
 
         {/* Alerts */}
         {errorMsg && (
-          <div className="glass-panel p-3.5 rounded-2xl border border-rose-300 bg-rose-50/90 text-rose-800 text-xs font-sans flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+          <div className="panel-plank p-3.5 border-3 border-[#D1362B] bg-[#E8CF9C] text-[#D1362B] text-xs font-sans flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-[#D1362B]" />
             <span>{errorMsg}</span>
           </div>
         )}
         {nameSuccess && (
-          <div className="glass-panel p-3.5 rounded-2xl border border-emerald-300 bg-emerald-50/90 text-emerald-800 text-xs font-sans flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+          <div className="panel-grass p-3.5 border-3 border-[#1E1610] text-[#1E1610] text-xs font-sans flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-[#1E1610]" />
             <span>Nickname saved.</span>
           </div>
         )}
         {classSuccess && (
-          <div className="glass-panel p-3.5 rounded-2xl border border-emerald-300 bg-emerald-50/90 text-emerald-800 text-xs font-sans flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+          <div className="panel-grass p-3.5 border-3 border-[#1E1610] text-[#1E1610] text-xs font-sans flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-[#1E1610]" />
             <span>Daily study class switched to Class {chosenStudyClass}! Your previous progress is fully preserved.</span>
           </div>
         )}
 
         {/* Section A: Nickname Card & Section B: Study Class */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           {/* A. NICKNAME CARD */}
-          <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/80 shadow-[0_8px_32px_rgba(16,42,18,0.08)] flex flex-col justify-between space-y-4">
+          <div className="panel-plank p-6 sm:p-7 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs">
+                  <div className="w-9 h-9 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] flex items-center justify-center">
                     <User className="w-4 h-4" />
                   </div>
                   <div>
-                    <h2 className="font-heading font-extrabold text-base text-emerald-950">
+                    <h2 className="font-heading font-extrabold text-base text-[#1E1610]">
                       Display Nickname
                     </h2>
-                    <p className="text-[11px] text-slate-500 font-sans">
+                    <p className="text-[11px] text-[#5A3720] font-sans">
                       Used on greetings, companion dialogue, and leaderboard.
                     </p>
                   </div>
@@ -273,9 +272,9 @@ export default function StudentProfilePage() {
                       setIsEditingName(true);
                       setNameInput(profile.name);
                     }}
-                    className="py-1 px-2.5 rounded-lg bg-white/70 hover:bg-white text-emerald-900 border border-white font-heading font-bold text-xs flex items-center gap-1 shadow-xs cursor-pointer transition-colors"
+                    className="py-1 px-2.5 bg-[#E8CF9C] hover:bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610] font-heading font-bold text-xs flex items-center gap-1 shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                   >
-                    <Edit3 className="w-3.5 h-3.5 text-emerald-600" />
+                    <Edit3 className="w-3.5 h-3.5 text-[#1E1610]" />
                     <span>Edit</span>
                   </button>
                 )}
@@ -285,7 +284,7 @@ export default function StudentProfilePage() {
               {isEditingName ? (
                 <form onSubmit={handleSaveNickname} className="space-y-3 pt-2">
                   <div>
-                    <label className="block text-xs font-heading font-bold text-emerald-950 mb-1">
+                    <label className="block text-xs font-heading font-bold text-[#1E1610] mb-1">
                       Enter New Nickname
                     </label>
                     <input
@@ -293,7 +292,7 @@ export default function StudentProfilePage() {
                       value={nameInput}
                       onChange={(e) => setNameInput(e.target.value)}
                       placeholder="e.g. Arya, ScholarSteve, MathWizard"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-emerald-400 text-xs font-sans text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-xs"
+                      className="w-full px-3.5 py-2.5 bg-[#E8CF9C] border-3 border-[#1E1610] text-xs font-sans text-[#1E1610] placeholder:text-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
                       maxLength={60}
                       autoFocus
                     />
@@ -302,7 +301,7 @@ export default function StudentProfilePage() {
                     <button
                       type="submit"
                       disabled={savingName}
-                      className="py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+                      className="py-2 px-4 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] font-heading font-bold text-xs flex items-center gap-1.5 shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                     >
                       <Save className="w-3.5 h-3.5" />
                       <span>{savingName ? "Saving..." : "Save Nickname"}</span>
@@ -310,62 +309,62 @@ export default function StudentProfilePage() {
                     <button
                       type="button"
                       onClick={() => setIsEditingName(false)}
-                      className="py-2 px-3 rounded-xl bg-white/70 hover:bg-white text-slate-700 font-heading font-bold text-xs border border-white shadow-xs cursor-pointer transition-colors"
+                      className="py-2 px-3 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-bold text-xs border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                     >
                       Cancel
                     </button>
                   </div>
                 </form>
               ) : (
-                <div className="p-3.5 rounded-2xl bg-white/70 border border-white/80 flex items-center justify-between">
-                  <span className="font-heading font-extrabold text-sm text-emerald-950">
+                <div className="p-3.5 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center justify-between">
+                  <span className="font-heading font-extrabold text-sm text-[#1E1610]">
                     {profile.name}
                   </span>
-                  <span className="text-[10px] font-sans text-slate-500">
+                  <span className="text-[10px] font-sans text-[#5A3720]">
                     Active Nickname
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-sans">
+            <div className="pt-3 border-t-2 border-[#1E1610]/20 text-[11px] text-[#5A3720] font-sans">
               Tip: Your nickname updates everywhere right away.
             </div>
           </div>
 
           {/* B. STUDY CLASS VS ENROLLED ACADEMIC GRADE */}
-          <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/80 shadow-[0_8px_32px_rgba(16,42,18,0.08)] flex flex-col justify-between space-y-4">
+          <div className="panel-plank p-6 sm:p-7 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-cyan-600 text-white flex items-center justify-center shadow-xs">
+                <div className="w-9 h-9 bg-[#78BDE8] text-[#1E1610] border-2 border-[#1E1610] flex items-center justify-center">
                   <GraduationCap className="w-4 h-4" />
                 </div>
                 <div>
-                  <h2 className="font-heading font-extrabold text-base text-emerald-950">
+                  <h2 className="font-heading font-extrabold text-base text-[#1E1610]">
                     Daily Study Class
                   </h2>
-                  <p className="text-[11px] text-slate-500 font-sans">
+                  <p className="text-[11px] text-[#5A3720] font-sans">
                     Choose which NCERT class syllabus you want to learn today.
                   </p>
                 </div>
               </div>
 
               {/* Enrolled Grade Indicator */}
-              <div className="p-3 rounded-2xl bg-slate-100/80 border border-slate-200/80 flex items-center justify-between text-xs">
+              <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <Lock className="w-3.5 h-3.5 text-slate-500" />
-                  <span className="font-heading font-bold text-slate-800">
+                  <Lock className="w-3.5 h-3.5 text-[#5A3720]" />
+                  <span className="font-heading font-bold text-[#1E1610]">
                     Registered Academic Grade:
                   </span>
                 </div>
-                <span className="px-2 py-0.5 rounded-full bg-slate-200 font-heading font-extrabold text-slate-900">
+                <span className="px-2 py-0.5 bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-extrabold text-[#1E1610]">
                   Class {enrolledClass}
                 </span>
               </div>
 
               {/* Study Class Pill Selector */}
               <div className="space-y-1.5 pt-1">
-                <label className="block text-xs font-heading font-bold text-emerald-950">
+                <label className="block text-xs font-heading font-bold text-[#1E1610]">
                   Select Study Class (Classes 6–10):
                 </label>
                 <div className="grid grid-cols-5 gap-1.5">
@@ -374,10 +373,10 @@ export default function StudentProfilePage() {
                       key={grade}
                       type="button"
                       onClick={() => setChosenStudyClass(grade)}
-                      className={`min-h-[40px] py-2 px-1 text-center font-heading font-extrabold text-xs rounded-xl transition-all cursor-pointer border ${
+                      className={`min-h-[40px] py-2 px-1 text-center font-heading font-extrabold text-xs transition-all cursor-pointer ${
                         chosenStudyClass === grade
-                          ? "bg-emerald-600 text-white border-emerald-700 shadow-sm scale-105"
-                          : "bg-white/80 hover:bg-white text-slate-700 border-white/80 hover:border-emerald-300"
+                          ? "bg-[#6DB33F] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                          : "bg-[#E8CF9C] hover:bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610]"
                       }`}
                     >
                       Class {grade}
@@ -391,7 +390,7 @@ export default function StudentProfilePage() {
                   type="button"
                   onClick={handleSaveStudyClass}
                   disabled={savingClass}
-                  className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors cursor-pointer mt-2"
+                  className="w-full py-2.5 px-4 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer mt-2"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>
@@ -401,21 +400,21 @@ export default function StudentProfilePage() {
               )}
             </div>
 
-            <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-sans">
+            <div className="pt-3 border-t-2 border-[#1E1610]/20 text-[11px] text-[#5A3720] font-sans">
               Switching your study class never resets or deletes your completed lessons, mastery records, or streak.
             </div>
           </div>
         </div>
 
         {/* Section C: Learning Progress Summary */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] space-y-4">
+        <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-heading font-extrabold text-emerald-950">
+            <h2 className="text-xl font-heading font-extrabold text-[#1E1610]">
               Academic Learning Summary
             </h2>
             <Link
               href="/student/learn"
-              className="text-xs font-heading font-bold text-emerald-700 hover:underline flex items-center gap-1"
+              className="text-xs font-heading font-bold text-[#1E1610] hover:text-[#2F4FB5] flex items-center gap-1"
             >
               <span>Explore Curriculum</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -423,59 +422,59 @@ export default function StudentProfilePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-4 rounded-2xl bg-white/70 border border-white/80 text-center space-y-1">
-              <span className="text-2xl font-heading font-extrabold text-emerald-700">
+            <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center space-y-1">
+              <span className="text-2xl font-heading font-extrabold text-[#1E1610]">
                 {masteredCount}
               </span>
-              <p className="text-xs font-heading font-bold text-emerald-950">
+              <p className="text-xs font-heading font-bold text-[#1E1610]">
                 Topics Mastered
               </p>
-              <p className="text-[10px] text-slate-500 font-sans">NCERT Curriculum</p>
+              <p className="text-[10px] text-[#5A3720] font-sans">NCERT Curriculum</p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 border border-white/80 text-center space-y-1">
-              <span className="text-2xl font-heading font-extrabold text-cyan-700">
+            <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center space-y-1">
+              <span className="text-2xl font-heading font-extrabold text-[#2F4FB5]">
                 {resolvedGapsCount}
               </span>
-              <p className="text-xs font-heading font-bold text-emerald-950">
+              <p className="text-xs font-heading font-bold text-[#1E1610]">
                 Gaps Resolved
               </p>
-              <p className="text-[10px] text-slate-500 font-sans">Diagnostic Backtracks</p>
+              <p className="text-[10px] text-[#5A3720] font-sans">Diagnostic Backtracks</p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 border border-white/80 text-center space-y-1">
-              <span className="text-2xl font-heading font-extrabold text-amber-600">
+            <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center space-y-1">
+              <span className="text-2xl font-heading font-extrabold text-[#5A3720]">
                 {profile.xp || 0}
               </span>
-              <p className="text-xs font-heading font-bold text-emerald-950">
+              <p className="text-xs font-heading font-bold text-[#1E1610]">
                 Total XP Earned
               </p>
-              <p className="text-[10px] text-slate-500 font-sans">Level {levelInfo.level}</p>
+              <p className="text-[10px] text-[#5A3720] font-sans">Level {levelInfo.level}</p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/70 border border-white/80 text-center space-y-1">
-              <span className="text-2xl font-heading font-extrabold text-purple-700">
+            <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center space-y-1">
+              <span className="text-2xl font-heading font-extrabold text-[#1E1610]">
                 {profile.streak?.current || 0}d
               </span>
-              <p className="text-xs font-heading font-bold text-emerald-950">
+              <p className="text-xs font-heading font-bold text-[#1E1610]">
                 Daily Streak
               </p>
-              <p className="text-[10px] text-slate-500 font-sans">Longest: {profile.streak?.longest || 0}d</p>
+              <p className="text-[10px] text-[#5A3720] font-sans">Longest: {profile.streak?.longest || 0}d</p>
             </div>
           </div>
         </div>
 
         {/* Section D: Privacy and Account Safety */}
-        <div className="glass-panel p-6 rounded-3xl border border-white/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] flex items-center justify-center shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading font-bold text-xs text-emerald-950">
+              <h3 className="font-heading font-bold text-xs text-[#1E1610]">
                 Privacy-Protected Student Session
               </h3>
-              <p className="text-[11px] text-slate-600 font-sans">
+              <p className="text-[11px] text-[#5A3720] font-sans">
                 Margam does not collect email or phone numbers for student accounts. All progress is tied safely to your account.
               </p>
             </div>
@@ -484,7 +483,7 @@ export default function StudentProfilePage() {
           <button
             type="button"
             onClick={handleUserLogout}
-            className="w-full sm:w-auto py-2 px-4 rounded-xl bg-white/80 hover:bg-white text-rose-700 font-heading font-bold text-xs flex items-center justify-center gap-1.5 border border-white shadow-xs transition-colors cursor-pointer shrink-0"
+            className="w-full sm:w-auto py-2 px-4 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#D1362B] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer shrink-0"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign Out of Margam</span>
@@ -494,10 +493,9 @@ export default function StudentProfilePage() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
+      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#5A3720]">
         Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>
   );
 }
-

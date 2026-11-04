@@ -71,7 +71,7 @@ export const XP_CONFIG = {
       minXp: 600,
       badge: "⚔️",
       color: "#8B8B8B",
-      textColor: "#FFFFFF",
+      textColor: "#F3E3BC",
       borderColor: "#422816",
     },
     {

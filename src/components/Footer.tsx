@@ -20,11 +20,11 @@ export default function Footer() {
       >
         <div className="w-1.5 h-1.5 bg-[#E04A3F]" />
         <div className="w-1.5 h-1.5 bg-[#F4C542]" />
-        <div className="w-1.5 h-1.5 bg-[#FFFFFF]" />
+        <div className="w-1.5 h-1.5 bg-[#F3E3BC]" />
         <div className="w-1.5 h-1.5 bg-[#B070C9]" />
         <div className="w-1.5 h-1.5 bg-[#F4C542]" />
         <div className="w-1.5 h-1.5 bg-[#E04A3F]" />
-        <div className="w-1.5 h-1.5 bg-[#FFFFFF]" />
+        <div className="w-1.5 h-1.5 bg-[#F3E3BC]" />
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-4">

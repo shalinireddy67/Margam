@@ -229,9 +229,9 @@ export default function TeacherPage() {
     <div className="min-h-screen text-slate-800 flex flex-col font-sans">
       {/* Floating Top Glass Header */}
       <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full">
-        <div className="glass-panel px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 shadow-[0_8px_32px_rgba(16,42,18,0.1)] border border-white/70">
+        <div className="panel-night px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] text-[#F3E3BC]">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center font-heading font-black text-lg text-white shadow-xs border border-white/60">
+            <div className="w-9 h-9 bg-[#6DB33F] border-2 border-[#1E1610] flex items-center justify-center font-heading font-black text-lg text-[#1E1610] shadow-[2px_2px_0px_#1E1610]">
               M
             </div>
             <div>
@@ -268,14 +268,14 @@ export default function TeacherPage() {
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 space-y-6">
 
         {/* View Mode Switcher: Synthetic Demo Class vs Enrolled Students */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 glass-panel p-3 border border-white/70 shadow-xs rounded-2xl">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 panel-plank p-3 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setViewMode("synthetic")}
               className={`px-3.5 py-2 font-heading font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${
                 viewMode === "synthetic"
-                  ? "bg-emerald-600 text-white shadow-xs rounded-xl"
-                  : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
+                  ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                  : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610]"
               }`}
             >
               <Sparkles className="w-4 h-4 text-[#A06A3C]" />
@@ -286,11 +286,11 @@ export default function TeacherPage() {
               onClick={() => setViewMode("live")}
               className={`px-3.5 py-2 font-heading font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer ${
                 viewMode === "live"
-                  ? "bg-emerald-600 text-white shadow-xs rounded-xl"
-                  : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
+                  ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                  : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610]"
               }`}
             >
-              <Users className="w-4 h-4 text-white" />
+              <Users className="w-4 h-4 text-[#1E1610]" />
               <span>My Enrolled Students ({liveMembers.length})</span>
             </button>
           </div>
@@ -311,13 +311,13 @@ export default function TeacherPage() {
           <div className="space-y-6">
             {/* School & Class Overview Hero Banner */}
             <div className="glass-panel p-5 sm:p-6 rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/15 shadow-[0_8px_32px_rgba(16,42,18,0.12)] space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/40 pb-3">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#1E1610]/20 pb-3">
                 <div className="flex flex-wrap items-center gap-2.5">
                   <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-amber-950 text-[10px] font-heading font-black tracking-wider uppercase shadow-xs">
                     DEMO DATA
                   </span>
                   {isDemoLiveClass && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-700 text-white text-[10px] font-heading font-extrabold tracking-wide uppercase shadow-xs">
+                    <span className="px-2.5 py-0.5 bg-[#8CCB55] border-2 border-[#1E1610] text-[#1E1610] text-[10px] font-heading font-extrabold tracking-wide uppercase">
                       DEMO ENVIRONMENT (CLASS 10-A4)
                     </span>
                   )}
@@ -327,7 +327,7 @@ export default function TeacherPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="bg-white/80 px-3 py-1 rounded-xl border border-white/90 flex items-center gap-2">
+                  <div className="bg-[#E8CF9C] px-3 py-1 border-2 border-[#1E1610] flex items-center gap-2">
                     <span className="text-[10px] uppercase font-bold text-slate-500">Class Code</span>
                     <code className="text-xs font-mono font-black text-emerald-900 tracking-wider">
                       {activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4"}
@@ -347,7 +347,7 @@ export default function TeacherPage() {
                       aria-label="Select Class"
                       value={selectedLiveClassId || ""}
                       onChange={(e) => setSelectedLiveClassId(e.target.value)}
-                      className="bg-white/80 border border-white/90 text-xs font-heading font-bold rounded-xl px-2.5 py-1.5 text-emerald-950 focus:outline-none"
+                      className="bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-heading font-bold px-2.5 py-1.5 text-[#1E1610] focus:outline-none"
                     >
                       {liveClasses.map((cls) => (
                         <option key={cls.id} value={cls.id}>
@@ -373,7 +373,7 @@ export default function TeacherPage() {
                     <strong>Enrolled Roster:</strong> {totalClassStudents} Students
                   </span>
                 </div>
-                <span className="text-[11px] font-medium text-emerald-900 bg-white/60 px-2.5 py-0.5 rounded-full border border-white/80">
+                <span className="text-[11px] font-medium text-[#1E1610] bg-[#E8CF9C] px-2.5 py-0.5 border-2 border-[#1E1610]">
                   Live Judging Environment
                 </span>
               </div>
@@ -382,7 +382,7 @@ export default function TeacherPage() {
             {/* Class Overview KPI Metric Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {/* Card 1: Total Students */}
-              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+              <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
                   <span>Enrolled Students</span>
                   <Users className="w-4 h-4 text-emerald-700" />
@@ -396,7 +396,7 @@ export default function TeacherPage() {
               </div>
 
               {/* Card 2: Avg Diagnostic */}
-              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+              <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
                   <span>Class Avg Diagnostic</span>
                   <TrendingUp className="w-4 h-4 text-sky-700" />
@@ -410,7 +410,7 @@ export default function TeacherPage() {
               </div>
 
               {/* Card 3: Concept Mastery */}
-              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+              <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
                   <span>Concept Mastery</span>
                   <Sparkles className="w-4 h-4 text-emerald-600" />
@@ -424,7 +424,7 @@ export default function TeacherPage() {
               </div>
 
               {/* Card 4: Learning Health */}
-              <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
+              <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
                   <span>Roster Distribution</span>
                   <ShieldCheck className="w-4 h-4 text-amber-700" />
@@ -443,7 +443,7 @@ export default function TeacherPage() {
             </div>
 
             {/* Class-wide Foundational Learning Gaps Breakdown */}
-            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs space-y-4">
+            <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/70 pb-3">
                 <div>
                   <h3 className="font-heading font-extrabold text-sm sm:text-base text-emerald-950 flex items-center gap-1.5">
@@ -461,7 +461,7 @@ export default function TeacherPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {/* Gap 1 */}
-                <div className="p-3.5 rounded-xl bg-white/70 border border-rose-200 shadow-2xs space-y-2">
+                <div className="p-3.5 bg-[#E8CF9C]/70 border-2 border-[#D1362B] space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
                       c7-int-02 • Class 7
@@ -483,7 +483,7 @@ export default function TeacherPage() {
                 </div>
 
                 {/* Gap 2 */}
-                <div className="p-3.5 rounded-xl bg-white/70 border border-amber-200 shadow-2xs space-y-2">
+                <div className="p-3.5 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
                       c7-num-01 • Class 7
@@ -505,7 +505,7 @@ export default function TeacherPage() {
                 </div>
 
                 {/* Gap 3 */}
-                <div className="p-3.5 rounded-xl bg-white/70 border border-sky-200 shadow-2xs space-y-2">
+                <div className="p-3.5 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded">
                       c8-alg-03 • Class 8
@@ -529,7 +529,7 @@ export default function TeacherPage() {
             </div>
 
             {/* Student Roster Table with Search & Filters */}
-            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs space-y-4">
+            <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <div>
                   <h3 className="font-heading font-black text-base text-emerald-950">
@@ -547,8 +547,8 @@ export default function TeacherPage() {
                     onClick={() => setLiveFilter("all")}
                     className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                       liveFilter === "all"
-                        ? "bg-emerald-600 text-white border-emerald-700 shadow-xs"
-                        : "bg-white/80 text-slate-700 border-white/90 hover:bg-white"
+                        ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                        : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] hover:bg-[#D9B87A]"
                     }`}
                   >
                     All ({totalClassStudents})
@@ -558,8 +558,8 @@ export default function TeacherPage() {
                     onClick={() => setLiveFilter("needs_attention")}
                     className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                       liveFilter === "needs_attention"
-                        ? "bg-rose-600 text-white border-rose-700 shadow-xs"
-                        : "bg-white/80 text-rose-700 border-rose-200 hover:bg-rose-50"
+                        ? "bg-[#D1362B] text-[#F3E3BC] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                        : "bg-[#E8CF9C] text-[#D1362B] border-2 border-[#1E1610] hover:bg-[#D9B87A]"
                     }`}
                   >
                     Needs Attention ({liveNeedingAttention.length})
@@ -569,8 +569,8 @@ export default function TeacherPage() {
                     onClick={() => setLiveFilter("strong")}
                     className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                       liveFilter === "strong"
-                        ? "bg-emerald-700 text-white border-emerald-800 shadow-xs"
-                        : "bg-white/80 text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+                        ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                        : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] hover:bg-[#D9B87A]"
                     }`}
                   >
                     Strong ({liveStrong.length})
@@ -580,8 +580,8 @@ export default function TeacherPage() {
                     onClick={() => setLiveFilter("improving")}
                     className={`px-3 py-1 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                       liveFilter === "improving"
-                        ? "bg-amber-600 text-white border-amber-700 shadow-xs"
-                        : "bg-white/80 text-amber-800 border-amber-200 hover:bg-amber-50"
+                        ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                        : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] hover:bg-[#D9B87A]"
                     }`}
                   >
                     Breakthroughs ({liveImproving.length})
@@ -597,13 +597,13 @@ export default function TeacherPage() {
                   value={liveSearchQuery}
                   onChange={(e) => setLiveSearchQuery(e.target.value)}
                   placeholder="Search by student name, username, roll number, or concept..."
-                  className="w-full pl-9 pr-3 py-2 bg-white/80 border border-white/90 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full pl-9 pr-3 py-2 bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-medium text-[#1E1610] placeholder-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
                 />
               </div>
 
               {/* Roster Table */}
               {filteredLiveMembers.length === 0 ? (
-                <div className="p-8 text-center bg-white/60 rounded-xl border border-white/80 space-y-2">
+                <div className="p-8 text-center bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-2">
                   <p className="text-xs font-bold text-slate-700">No students match your filter.</p>
                   <button
                     type="button"
@@ -616,11 +616,11 @@ export default function TeacherPage() {
               ) : (
                 <>
                   <div className="sm:hidden text-[11px] text-slate-500 font-sans px-1 pb-1">Swipe table horizontally to see all student columns →</div>
-                  <div className="table-responsive-container border border-white/90 shadow-2xs">
+                  <div className="table-responsive-container border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
                     <div className="min-w-[680px]">
-                  <table className="w-full text-left text-xs border-collapse bg-white/70">
+                  <table className="w-full text-left text-xs border-collapse bg-[#E8CF9C]/70">
                     <thead>
-                      <tr className="border-b border-slate-200 bg-white/90 text-slate-600 font-heading">
+                      <tr className="border-b-2 border-[#1E1610] bg-[#D9B87A] text-[#1E1610] font-heading font-extrabold">
                         <th className="py-2.5 px-3">Student Name</th>
                         <th className="py-2.5 px-3">Username</th>
                         <th className="py-2.5 px-3">Pedagogical Persona</th>
@@ -640,7 +640,7 @@ export default function TeacherPage() {
                         const isLow = (diagPct ?? 0) < 65;
 
                         return (
-                          <tr key={m.student_id || idx} className="hover:bg-white/90 transition-colors">
+                          <tr key={m.student_id || idx} className="hover:bg-[#E8CF9C] border-b border-[#1E1610]/20 transition-colors">
                             <td className="py-2.5 px-3 font-heading font-bold text-emerald-950 whitespace-nowrap">
                               <span className="text-slate-400 font-mono text-[11px] mr-1.5">{roll}</span>
                               {prof.full_name || m.name || "Student"}
@@ -656,7 +656,7 @@ export default function TeacherPage() {
                                   ? "bg-emerald-100 text-emerald-900 border border-emerald-300"
                                   : m.category === "needs_attention"
                                   ? "bg-rose-100 text-rose-900 border border-rose-300"
-                                  : "bg-slate-100 text-slate-800 border border-slate-300"
+                                  : "bg-[#E8CF9C] text-[#1E1610] border border-[#1E1610]"
                               }`}>
                                 {m.persona || "Class 10 Student"}
                               </span>
@@ -723,7 +723,7 @@ export default function TeacherPage() {
             {/* Modal: Inspect Student Profile & Diagnostic Journey */}
             {inspectingStudent && (
               <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-                <div className="glass-panel p-6 rounded-3xl border border-white/90 shadow-[0_16px_50px_rgba(0,0,0,0.25)] max-w-xl w-full max-h-[90vh] overflow-y-auto space-y-5 text-slate-800 bg-white/95">
+                <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] max-w-xl w-full max-h-[90vh] overflow-y-auto space-y-5 text-[#1E1610]">
                   {/* Modal Header */}
                   <div className="flex items-start justify-between border-b border-slate-200 pb-3">
                     <div>
@@ -747,14 +747,14 @@ export default function TeacherPage() {
                     <button
                       type="button"
                       onClick={() => setInspectingStudent(null)}
-                      className="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-heading font-bold rounded-xl border border-slate-300 transition-colors cursor-pointer"
+                      className="px-3 py-1 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] text-xs font-heading font-bold border-2 border-[#1E1610] transition-colors cursor-pointer"
                     >
                       Close
                     </button>
                   </div>
 
                   {/* Persona Tag */}
-                  <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
+                  <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-heading uppercase text-slate-500 block font-bold">
                         Pedagogical Profile
@@ -848,7 +848,7 @@ export default function TeacherPage() {
                       Assessment & Diagnostic Attempts
                     </h4>
                     {(!inspectingStudent.attempts || inspectingStudent.attempts.length === 0) ? (
-                      <p className="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">
+                      <p className="text-xs text-[#5A3720] italic p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610]">
                         No prior attempts recorded.
                       </p>
                     ) : (
@@ -857,7 +857,7 @@ export default function TeacherPage() {
                           const pct = Math.round((Number(att.score) / Number(att.total)) * 100);
                           const passed = pct >= 70;
                           return (
-                            <div key={aIdx} className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                            <div key={aIdx} className="flex items-center justify-between p-2 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-xs">
                               <div>
                                 <span className="font-heading font-bold text-slate-800 capitalize">
                                   {att.type} • {att.identifier}
@@ -884,7 +884,7 @@ export default function TeacherPage() {
                       Concept Mastery Progress
                     </h4>
                     {(!inspectingStudent.conceptMastery || inspectingStudent.conceptMastery.length === 0) ? (
-                      <p className="text-xs text-slate-400 italic p-3 bg-slate-50 rounded-xl">
+                      <p className="text-xs text-[#5A3720] italic p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610]">
                         No concept progression recorded.
                       </p>
                     ) : (
@@ -893,7 +893,7 @@ export default function TeacherPage() {
                           const mVal = Number(cm.mastery) || 0;
                           const isM = mVal >= 75 || cm.status === "mastered";
                           return (
-                            <div key={cmIdx} className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+                            <div key={cmIdx} className="p-2 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-xs space-y-1">
                               <div className="flex items-center justify-between">
                                 <span className="font-mono font-bold text-slate-800">
                                   {cm.concept_id || cm.conceptId} {cm.conceptName ? `(${cm.conceptName})` : ""}
@@ -925,7 +925,7 @@ export default function TeacherPage() {
         {/* Modal: Create New Class */}
         {showAddClassModal && (
           <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-            <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/90 shadow-xl max-w-sm w-full space-y-4 text-slate-800 bg-white/95">
+            <div className="panel-plank p-6 sm:p-7 border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] max-w-sm w-full space-y-4 text-[#1E1610]">
               <h3 className="font-heading font-black text-base text-emerald-950">
                 Create a New Class
               </h3>
@@ -940,7 +940,7 @@ export default function TeacherPage() {
                     value={newClassName}
                     onChange={(e) => setNewClassName(e.target.value)}
                     placeholder="e.g. Class 9-B Mathematics"
-                    className="w-full px-3 py-2 bg-white/90 rounded-xl border border-slate-300 text-xs text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-[#E8CF9C] border-2 border-[#1E1610] text-xs text-[#1E1610] font-medium focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
                   />
                 </div>
 
@@ -955,7 +955,7 @@ export default function TeacherPage() {
                         type="button"
                         onClick={() => setNewClassGrade(g)}
                         className={`py-1.5 text-xs font-heading font-extrabold rounded-xl border border-slate-200 transition-all cursor-pointer ${
-                          newClassGrade === g ? "bg-emerald-600 text-white shadow-xs" : "bg-white/80 text-slate-700 border-slate-200 hover:bg-emerald-50"
+                          newClassGrade === g ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]" : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] hover:bg-[#D9B87A]"
                         }`}
                       >
                         C{g}
@@ -968,13 +968,13 @@ export default function TeacherPage() {
                   <button
                     type="button"
                     onClick={() => setShowAddClassModal(false)}
-                    className="px-3.5 py-1.5 bg-white/80 hover:bg-white text-xs font-heading font-bold text-slate-700 rounded-xl border border-slate-200 cursor-pointer"
+                    className="px-3.5 py-1.5 bg-[#D9B87A] hover:bg-[#E8CF9C] text-xs font-heading font-bold text-[#1E1610] border-2 border-[#1E1610] cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-xs font-heading font-bold text-white rounded-xl shadow-xs cursor-pointer"
+                    className="px-4 py-1.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-xs font-heading font-bold text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] cursor-pointer active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     Create Class
                   </button>
@@ -988,7 +988,7 @@ export default function TeacherPage() {
         {viewMode === "synthetic" && (
           <>
             {/* Synthetic Notice Banner */}
-            <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
+            <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#1E1610]">
               <div className="flex items-start gap-3">
                 <div className="w-9 h-9 bg-[#3FA7C9] border-2 border-[#1E6F8C] flex items-center justify-center shrink-0 mt-0.5 shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
                   <Compass className="w-5 h-5 text-[#FFF7E6]" />
@@ -1006,14 +1006,14 @@ export default function TeacherPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 self-stretch sm:self-auto">
-                <span className="text-xs font-heading font-bold px-3 py-1.5 bg-emerald-600 text-white rounded-xl shadow-xs text-center flex-1 sm:flex-none">
+                <span className="text-xs font-heading font-bold px-3 py-1.5 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-center flex-1 sm:flex-none">
                   Engine Status: Active
                 </span>
               </div>
             </div>
 
         {/* This Device: Current Student Session Card */}
-        <section className="glass-panel p-4 sm:p-5 rounded-2xl border border-white/80 shadow-xs space-y-2">
+        <section className="panel-plank p-4 sm:p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-2">
           <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-950 mb-2">
             <Smartphone className="w-4 h-4 text-emerald-700" />
             <span className="uppercase tracking-wider">This Device • Active Learner Session</span>
@@ -1021,7 +1021,7 @@ export default function TeacherPage() {
           </div>
 
           {localProfile ? (
-            <div className="bg-white/70 p-3 sm:p-4 rounded-xl border border-white/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
+            <div className="bg-[#E8CF9C]/70 p-3 sm:p-4 border-2 border-[#1E1610] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#1E1610]">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-heading font-extrabold text-base text-emerald-950">{localProfile.name}</span>
@@ -1048,7 +1048,7 @@ export default function TeacherPage() {
               </div>
             </div>
           ) : (
-            <div className="p-4 rounded-xl bg-white/70 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-800">
+            <div className="p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[#1E1610]">
               <div className="flex items-center gap-3">
                 <Info className="w-5 h-5 text-emerald-700 shrink-0" />
                 <div>
@@ -1073,7 +1073,7 @@ export default function TeacherPage() {
 
         {/* Metrics Row */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs">
+          <div className="panel-plank p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
             <span className="text-[11px] font-bold text-slate-500 block uppercase">Class Average</span>
             <div className="font-heading font-black text-2xl sm:text-3xl text-emerald-700 mt-0.5">
               {metrics.averageScore}%
@@ -1115,7 +1115,7 @@ export default function TeacherPage() {
             </div>
             <button
               onClick={() => setActiveTab("print")}
-              className="mt-2 min-h-[38px] px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white font-heading font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-1 transition-all"
+              className="mt-2 min-h-[38px] px-3 py-1.5 bg-[#78BDE8] hover:bg-[#4EDBD3] text-[#1E1610] font-heading font-bold text-xs border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center gap-1 transition-all active:translate-x-[1px] active:translate-y-[1px]"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print Group Worksheet (A4)</span>
@@ -1124,13 +1124,13 @@ export default function TeacherPage() {
         </section>
 
         {/* View Navigation Tabs */}
-        <div className="flex flex-wrap gap-2 flex flex-wrap gap-1.5 bg-white/60 p-1.5 rounded-2xl border border-white/80 shadow-xs pb-1.5">
+        <div className="flex flex-wrap gap-1.5 bg-[#E8CF9C]/70 p-1.5 border-2 border-[#1E1610]">
           <button
             onClick={() => setActiveTab("dashboard")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "dashboard"
-                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
-                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
+                : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
             Students & Attention ({metrics.studentsNeedingAttentionCount})
@@ -1139,8 +1139,8 @@ export default function TeacherPage() {
             onClick={() => setActiveTab("heatmap")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "heatmap"
-                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
-                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
+                : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
             Concept Heatmap (M/P/G/L)
@@ -1149,8 +1149,8 @@ export default function TeacherPage() {
             onClick={() => setActiveTab("misconceptions")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "misconceptions"
-                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
-                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
+                : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
             Common Misconceptions & Roots
@@ -1159,8 +1159,8 @@ export default function TeacherPage() {
             onClick={() => setActiveTab("print")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "print"
-                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
-                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
+                : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
             Printable A4 Remedial Worksheet
@@ -1169,8 +1169,8 @@ export default function TeacherPage() {
             onClick={() => setActiveTab("leaderboard")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === "leaderboard"
-                ? "bg-emerald-600 text-white shadow-xs rounded-xl font-heading font-bold"
-                : "bg-white/70 text-slate-700 hover:bg-white rounded-xl font-heading font-bold"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
+                : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
             Quest Board & XP
@@ -1182,7 +1182,7 @@ export default function TeacherPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column: Student Roster */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs space-y-3 text-slate-800">
+              <div className="panel-plank p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-3 text-[#1E1610]">
                 <div className="flex items-center justify-between">
                   <h2 className="font-heading font-black text-base text-[#FFF7E6]">
                     Cohort Roster ({syntheticClassData.totalStudents})
@@ -1201,7 +1201,7 @@ export default function TeacherPage() {
                       placeholder="Search student by name or roll..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-slate-800 placeholder:text-slate-400 font-sans"
+                      className="w-full pl-9 pr-3 py-2 text-xs bg-[#E8CF9C] border-2 border-[#1E1610] text-[#1E1610] placeholder:text-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5] font-sans"
                     />
                   </div>
                   <div className="flex items-center gap-2">
@@ -1210,7 +1210,7 @@ export default function TeacherPage() {
                       className={`min-h-[40px] flex-1 px-3 py-1.5 text-xs font-heading font-bold rounded-xl border transition-all cursor-pointer ${
                         filterAttention
                           ? "bg-[#E04A3F] text-[#FFF7E6] shadow-[2px_2px_0px_rgba(0,0,0,0.4)]"
-                          : "bg-white/80 text-slate-700 hover:bg-white border-slate-200"
+                          : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610]"
                       }`}
                     >
                       {filterAttention ? "Showing Flagged Only" : "Filter: Needs Attention Only"}
@@ -1221,7 +1221,7 @@ export default function TeacherPage() {
                           setFilterAttention(false);
                           setSearchQuery("");
                         }}
-                        className="min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold bg-white/80 border border-slate-200 rounded-xl text-slate-700 hover:bg-white cursor-pointer"
+                        className="min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-bold bg-[#E8CF9C] border-2 border-[#1E1610] text-[#1E1610] hover:bg-[#D9B87A] cursor-pointer"
                         title="Reset Filters"
                       >
                         Reset
@@ -1242,12 +1242,12 @@ export default function TeacherPage() {
                           isSelected
                           ? "bg-emerald-100 border-emerald-500 ring-2 ring-emerald-500/20 text-emerald-950 shadow-xs"
                             : st.needsAttention
-                          ? "bg-rose-50/80 border-rose-300 text-slate-900 hover:bg-white shadow-2xs"
-                          : "bg-white/80 border-white/90 text-slate-900 hover:bg-white shadow-2xs"
+                          ? "bg-[#E8CF9C] border-2 border-[#D1362B] text-[#1E1610]"
+                          : "bg-[#E8CF9C] border-2 border-[#1E1610] text-[#1E1610]"
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="w-7 h-7 bg-white rounded-lg border border-slate-200 flex items-center justify-center text-xs font-heading font-bold shrink-0 text-slate-700">
+                          <span className="w-7 h-7 bg-[#D9B87A] border-2 border-[#1E1610] flex items-center justify-center text-xs font-heading font-bold shrink-0 text-[#1E1610]">
                             #{st.rollNumber}
                           </span>
                           <div className="min-w-0">
@@ -1293,7 +1293,7 @@ export default function TeacherPage() {
             {/* Right Column: Evidence Drill-Down Panel */}
             <div className="lg:col-span-7 space-y-4">
               {/* Weekly Quest & Gamification Pulse Card */}
-              <div className="glass-panel p-5 rounded-2xl border border-white/80 shadow-xs space-y-3 text-slate-800">
+              <div className="panel-plank p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-3 text-[#1E1610]">
                 <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-2">
                   <div className="flex items-center gap-2">
                     <Trophy className="w-4 h-4 text-amber-600" />
@@ -1309,7 +1309,7 @@ export default function TeacherPage() {
                       className={`text-[10px] font-heading font-bold px-2 py-0.5 border cursor-pointer ${
                         leaderboardEnabled
                           ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514]"
-                          : "bg-white/60 text-slate-400 border-slate-200"
+                          : "bg-[#E8CF9C] text-[#5A3720] border-2 border-[#1E1610]"
                       }`}
                     >
                       {leaderboardEnabled ? "Active" : "Disabled"}
@@ -1319,7 +1319,7 @@ export default function TeacherPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   {/* Leaders */}
-                  <div className="p-3 rounded-xl bg-white/80 border border-white/90 space-y-1 shadow-2xs">
+                  <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
                     <span className="text-[10px] font-heading font-bold text-slate-500 uppercase block">
                       👑 XP Leaders
                     </span>
@@ -1336,7 +1336,7 @@ export default function TeacherPage() {
                   </div>
 
                   {/* Most Improved */}
-                  <div className="p-3 rounded-xl bg-white/80 border border-white/90 space-y-1 shadow-2xs">
+                  <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
                     <span className="text-[10px] font-heading font-bold text-emerald-700 uppercase block">
                       📈 Most Improved
                     </span>
@@ -1364,7 +1364,7 @@ export default function TeacherPage() {
                   </div>
                 </div>
               </div>
-              <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-white/80 shadow-xs space-y-5 text-slate-800">
+              <div className="panel-plank p-6 sm:p-7 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-5 text-[#1E1610]">
                 {/* Header of Selected Student */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b-2 border-[#7A4B2A]">
                   <div>
@@ -1375,7 +1375,7 @@ export default function TeacherPage() {
                       <h3 className="font-heading font-black text-lg text-[#FFF7E6]">
                         {selectedStudent.name}
                       </h3>
-                      <span className="px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-[10px] font-heading font-bold text-slate-700 shadow-2xs">
+                      <span className="px-2.5 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[10px] font-heading font-bold text-[#1E1610]">
                         {selectedStudent.persona}
                       </span>
                     </div>
@@ -1402,12 +1402,12 @@ export default function TeacherPage() {
                         <AlertTriangle className="w-4 h-4 text-pink-700" />
                         <span>Recommended Remedial Intervention</span>
                       </div>
-                      <span className="text-[10px] font-black px-2 py-0.5 rounded-pill bg-white border border-ink">
+                      <span className="text-[10px] font-black px-2 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[#1E1610]">
                         Confidence: {selectedStudent.recommendedRemedialConcept.confidence}
                       </span>
                     </div>
 
-                    <div className="bg-white border-2 border-ink rounded-lg p-3">
+                    <div className="bg-[#E8CF9C]/70 border-2 border-[#1E1610] p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <div className="flex items-center gap-2">
@@ -1489,7 +1489,7 @@ export default function TeacherPage() {
                         key={item.questionId}
                         className={`p-3 rounded-xl border-2 border-ink text-xs ${
                           item.isCorrect
-                            ? "bg-white"
+                            ? "bg-[#E8CF9C]"
                             : "bg-pink-light/30"
                         }`}
                       >
@@ -1524,7 +1524,7 @@ export default function TeacherPage() {
 
                         {item.mistakeTag && (
                           <div className="mt-2 pl-6">
-                            <span className="inline-block px-2 py-0.5 rounded-md bg-white border border-pink-400 text-pink-800 text-[10px] font-black">
+                            <span className="inline-block px-2 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[#D1362B] text-[10px] font-black">
                               Tag: {item.mistakeTag.replace(/_/g, " ")}
                             </span>
                           </div>
@@ -1553,7 +1553,7 @@ export default function TeacherPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-200">
                           {selectedStudent.gapAnalysis.candidates.map((cand) => (
-                            <tr key={cand.conceptId} className="hover:bg-slate-50">
+                            <tr key={cand.conceptId} className="hover:bg-[#E8CF9C] border-b border-[#1E1610]/20">
                               <td className="py-1.5 font-bold text-ink">
                                 {cand.conceptName} ({cand.conceptId})
                               </td>
@@ -1563,7 +1563,7 @@ export default function TeacherPage() {
                                 <span className={`px-1.5 py-0.2 rounded text-[10px] font-black ${
                                   cand.confidence === "high" || cand.confidence === "medium"
                                     ? "bg-pink-light text-pink-900 border border-pink-400"
-                                    : "bg-slate-100 text-slate-700"
+                                    : "bg-[#D9B87A] text-[#1E1610]"
                                 }`}>
                                   {cand.confidence}
                                 </span>
@@ -1583,7 +1583,7 @@ export default function TeacherPage() {
 
         {/* TAB 2: Concept Heatmap (M, P, G, L) */}
         {activeTab === "heatmap" && (
-          <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-5">
+          <div className="panel-plank border-3 border-[#1E1610] p-5 shadow-[3px_3px_0px_#1E1610] space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="font-heading font-black text-lg text-ink">
@@ -1649,11 +1649,11 @@ export default function TeacherPage() {
                           setActiveTab("dashboard");
                         }}
                         className={`cursor-pointer transition-colors ${
-                          isSelected ? "bg-yellow-light/40" : "hover:bg-slate-50"
+                          isSelected ? "bg-[#8CCB55]/40" : "hover:bg-[#E8CF9C]"
                         }`}
                       >
                         {/* Student Name Sticky Left */}
-                        <td className="p-2.5 text-left font-bold text-ink sticky left-0 bg-white border-r-2 border-ink whitespace-nowrap z-10">
+                        <td className="p-2.5 text-left font-bold text-[#1E1610] sticky left-0 bg-[#D9B87A] border-r-2 border-[#1E1610] whitespace-nowrap z-10">
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] font-mono text-slate-500">#{st.rollNumber}</span>
                             <span className="truncate max-w-[110px]">{st.name}</span>
@@ -1662,7 +1662,7 @@ export default function TeacherPage() {
 
                         {/* Concept Cells with Letter + Color */}
                         {st.heatmap.map((cell) => {
-                          let cellStyle = "bg-white text-ink";
+                          let cellStyle = "bg-[#E8CF9C] text-[#1E1610]";
                           if (cell.status === "M") cellStyle = "bg-green text-ink";
                           else if (cell.status === "P") cellStyle = "bg-cyan text-ink";
                           else if (cell.status === "G") cellStyle = "bg-pink text-ink font-black animate-pulse";
@@ -1703,7 +1703,7 @@ export default function TeacherPage() {
         {activeTab === "misconceptions" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Common Misconceptions List */}
-            <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-4">
+            <div className="panel-plank border-3 border-[#1E1610] p-5 shadow-[3px_3px_0px_#1E1610] space-y-4">
               <div className="flex items-center justify-between pb-2 border-b-2 border-ink">
                 <h3 className="font-heading font-black text-base text-ink">
                   Common Mistake Tags & Frequency
@@ -1720,7 +1720,7 @@ export default function TeacherPage() {
                 {syntheticClassData.commonMisconceptions.map((m) => (
                   <div
                     key={m.tag}
-                    className="p-3 bg-white border-2 border-ink rounded-xl shadow-hard-sm space-y-1.5"
+                    className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] space-y-1.5"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-heading font-black text-xs text-ink uppercase">
@@ -1739,7 +1739,7 @@ export default function TeacherPage() {
             </div>
 
             {/* Frequently Missing Prerequisites */}
-            <div className="bg-white border-3 border-ink rounded-2xl p-5 shadow-hard space-y-4">
+            <div className="panel-plank border-3 border-[#1E1610] p-5 shadow-[3px_3px_0px_#1E1610] space-y-4">
               <div className="flex items-center justify-between pb-2 border-b-2 border-ink">
                 <h3 className="font-heading font-black text-base text-ink">
                   Frequently Missing Prerequisites
@@ -1760,7 +1760,7 @@ export default function TeacherPage() {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <span className="inline-block px-2 py-0.5 rounded-pill bg-white border border-ink text-[10px] font-black text-ink mb-1">
+                        <span className="inline-block px-2 py-0.5 bg-[#D9B87A] border-2 border-[#1E1610] text-[10px] font-black text-[#1E1610] mb-1">
                           Class {p.class} Foundational Concept
                         </span>
                         <h4 className="font-heading font-black text-xs sm:text-sm text-ink">
@@ -1772,7 +1772,7 @@ export default function TeacherPage() {
                       </span>
                     </div>
 
-                    <p className="text-xs text-slate-700 leading-relaxed bg-white p-2.5 rounded-lg border border-ink">
+                    <p className="text-xs text-[#5A3720] leading-relaxed bg-[#E8CF9C]/70 p-2.5 border-2 border-[#1E1610]">
                       {p.learningObjective}
                     </p>
                   </div>
@@ -1784,7 +1784,7 @@ export default function TeacherPage() {
 
         {/* TAB 4: Printable A4 Worksheet Preview */}
         {activeTab === "print" && (
-          <div className="bg-white border-3 border-ink rounded-2xl p-6 shadow-hard space-y-5 print:border-none print:shadow-none">
+          <div className="panel-plank border-3 border-[#1E1610] p-6 shadow-[3px_3px_0px_#1E1610] space-y-5 print:border-none print:shadow-none">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-ink pb-4">
               <div>
                 <h2 className="font-heading font-black text-lg text-ink">
@@ -1804,7 +1804,7 @@ export default function TeacherPage() {
             </div>
 
             {/* A4 Sheet Preview & Print Container */}
-            <div className="printable-a4-sheet p-6 border-2 border-dashed border-ink rounded-xl bg-white space-y-6 text-xs text-ink max-w-2xl mx-auto">
+            <div className="printable-a4-sheet p-6 border-2 border-dashed border-[#1E1610] bg-[#F3E3BC] space-y-6 text-xs text-[#1E1610] max-w-2xl mx-auto">
               {/* Print media query styling */}
               <style jsx global>{`
                 @media print {
@@ -1890,8 +1890,8 @@ export default function TeacherPage() {
 
             <div className="lg:col-span-5 space-y-4">
               {/* Teacher Board Controls */}
-              <div className="glass-panel p-6 rounded-2xl border border-white/80 shadow-xs space-y-4 text-slate-800">
-                <div className="flex items-center justify-between flex flex-wrap gap-1.5 bg-white/60 p-1.5 rounded-2xl border border-white/80 shadow-xs pb-1.5">
+              <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
+                <div className="flex items-center justify-between flex flex-wrap gap-1.5 bg-[#E8CF9C]/70 p-1.5 border-2 border-[#1E1610]">
                   <h3 className="font-heading font-extrabold text-sm text-emerald-950 uppercase tracking-wider">
                     Leaderboard Controls
                   </h3>
@@ -1900,8 +1900,8 @@ export default function TeacherPage() {
                     onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
                     className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
                       leaderboardEnabled
-                        ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-                              : "bg-white/60 text-slate-400 border-slate-200"
+                        ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                              : "bg-[#E8CF9C] text-[#5A3720] border-2 border-[#1E1610]"
                     }`}
                   >
                     {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
@@ -1923,7 +1923,7 @@ export default function TeacherPage() {
                       return (
                         <div
                           key={st.id}
-                          className="p-3 rounded-xl bg-white/80 border border-white/90 flex items-center justify-between text-xs shadow-2xs"
+                          className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center justify-between text-xs"
                         >
                           <div className="flex items-center gap-2">
                             <span className="font-heading font-bold text-[#FFF7E6]">
@@ -1943,7 +1943,7 @@ export default function TeacherPage() {
                               else next.add(st.id);
                               setHiddenStudentIds(next);
                             }}
-                                className="min-h-[32px] px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-heading font-bold flex items-center gap-1 cursor-pointer shadow-xs transition-all"
+                                className="min-h-[32px] px-3 py-1 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#1E1610] text-xs font-heading font-bold flex items-center gap-1 cursor-pointer shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
                           >
                             {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
                             <span>{isHidden ? "Show" : "Hide"}</span>
@@ -1962,7 +1962,7 @@ export default function TeacherPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-3 border-ink py-6 text-center text-xs font-bold bg-white mt-12">
+      <footer className="border-t-3 border-[#1E1610] py-6 text-center text-xs font-bold bg-[#D9B87A] text-[#1E1610] mt-12">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>Margam • Teacher Partnership & Classroom Practice</span>
           <span className="text-[11px] font-black px-2 py-0.5 rounded-pill bg-yellow-light border border-ink text-ink">

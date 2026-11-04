@@ -217,7 +217,7 @@ export default function HomePage() {
   if (!isLoaded) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFF7E6]">
-        <div className="p-6 border-[3px] border-[#2B1B0F] bg-[#FFFFFF] shadow-[4px_4px_0px_#2B1B0F] text-center text-[#2B1B0F]">
+        <div className="p-6 border-[3px] border-[#2B1B0F] bg-[#D9B87A]/90 shadow-[4px_4px_0px_#2B1B0F] text-center text-[#2B1B0F]">
           <p className="font-heading font-extrabold text-base text-[#2B1B0F] animate-pulse">
             Loading Margam...
           </p>

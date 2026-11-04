@@ -1,32 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  Target,
-  Sparkles,
-  CheckCircle2,
-  Lock,
-  ArrowRight,
-  ShieldAlert,
-  GitBranch,
-  BookOpen,
-} from "lucide-react";
-import { Navigation } from "@/components/Navigation";
+import Link from "next/link";
+import { ArrowRight, BookOpen, Target } from "lucide-react";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
-import {
-  getActiveProfile,
-  createLearnerProfile,
-} from "@/lib/storage";
+import { getActiveProfile } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
 import {
   getChaptersByClass,
-  canTakeChapterDiagnostic,
   getConceptsByChapter,
+  canTakeChapterDiagnostic,
 } from "@/lib/curriculum";
+import Navigation from "@/components/Navigation";
 
-export default function DiagnosticHubPage() {
+export default function DiagnosticDirectoryPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,7 +22,7 @@ export default function DiagnosticHubPage() {
 
   useEffect(() => {
     const active = getActiveProfile();
-    if (!active || !active.selectedClass) {
+    if (!active) {
       router.replace("/student/select-class");
       return;
     }
@@ -49,10 +37,13 @@ export default function DiagnosticHubPage() {
 
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-800">
-        <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
-          <div className="w-8 h-8 border-3 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-cyan-950">Opening quick check...</p>
+      <div className="min-h-screen flex items-center justify-center text-[#1E1610] bg-transparent">
+        <div
+          data-panel="loading"
+          className="bg-[#D9B87A]/90 p-6 rounded-xs text-center border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610]"
+        >
+          <div className="w-8 h-8 border-[3px] border-[#6DB33F] border-t-transparent rounded-none animate-spin mx-auto mb-2" />
+          <p className="font-heading font-extrabold text-xs text-[#1E1610] m-0">Opening quick check...</p>
         </div>
       </div>
     );
@@ -62,8 +53,8 @@ export default function DiagnosticHubPage() {
   const chapters = getChaptersByClass(studyClass);
 
   return (
-    <div className="min-h-screen text-slate-800 flex flex-col justify-between">
-      {/* Top Floating Glass Navigation */}
+    <div className="min-h-screen text-[#1E1610] bg-transparent flex flex-col justify-between">
+      {/* Top Navigation */}
       <Navigation
         currentTab="diagnostic"
         currentLang={currentLang}
@@ -76,29 +67,32 @@ export default function DiagnosticHubPage() {
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Diagnostic Header */}
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.1)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div
+          data-panel="diagnostic-header"
+          className="bg-[#D9B87A]/90 p-6 sm:p-8 rounded-xs border-[3px] border-[#1E1610] shadow-[4px_4px_0px_#1E1610] flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+        >
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-cyan-100/90 border border-cyan-300 text-[10px] font-heading font-extrabold text-cyan-900 uppercase tracking-wide">
+              <span className="px-2.5 py-0.5 rounded-none bg-[#78BDE8] border-2 border-[#1E1610] text-[10px] font-heading font-extrabold text-[#1E1610] uppercase tracking-wide">
                 Chapter Placement
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-white text-[10px] font-heading font-bold text-slate-700">
+              <span className="px-2.5 py-0.5 rounded-none bg-[#E8CF9C] border-2 border-[#1E1610] text-[10px] font-heading font-extrabold text-[#1E1610]">
                 Class {studyClass} Mathematics
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
+            <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#1E1610] m-0">
               Chapter quick checks
             </h1>
-            <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
+            <p className="text-xs sm:text-sm text-[#5A3720] font-sans font-semibold max-w-xl m-0 leading-relaxed">
               Quick checks show how well you know earlier topics. Scoring 70% or higher opens all chapter lessons.
             </p>
           </div>
 
           <Link
             href="/student/learn"
-            className="py-2.5 px-4 rounded-xl bg-white/80 hover:bg-white text-emerald-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white shadow-xs transition-colors shrink-0"
+            className="py-2.5 px-4 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center gap-1.5 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors shrink-0 no-underline"
           >
-            <BookOpen className="w-3.5 h-3.5" />
+            <BookOpen className="w-3.5 h-3.5 text-[#1E1610]" />
             <span>View all lessons</span>
           </Link>
         </div>
@@ -112,53 +106,53 @@ export default function DiagnosticHubPage() {
             return (
               <div
                 key={chapter.id}
-                className={`glass-panel p-5 rounded-2xl border transition-all flex flex-col justify-between gap-4 ${
+                data-panel="chapter-diagnostic-card"
+                className={`p-5 rounded-xs border-[3px] border-[#1E1610] transition-all flex flex-col justify-between gap-4 ${
                   hasDiagnostic
-                    ? "border-cyan-400/80 hover:scale-[1.01] shadow-xs"
-                    : "border-slate-200/80 bg-white/60 opacity-80"
+                    ? "bg-[#D9B87A]/90 shadow-[3px_3px_0px_#1E1610]"
+                    : "bg-[#B9BCC0]/85 opacity-90 shadow-[2px_2px_0px_#1E1610]"
                 }`}
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-cyan-100 text-cyan-900">
+                    <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-none bg-[#E8CF9C] text-[#1E1610] border border-[#1E1610]">
                       Chapter {chapter.chapterNumber}
                     </span>
                     {hasDiagnostic ? (
-                      <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                      <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded-none bg-[#6DB33F] text-[#1E1610] border border-[#1E1610]">
                         Quick check ready
                       </span>
                     ) : (
-                      <span className="text-[10px] font-heading font-bold text-slate-500">
+                      <span className="text-[10px] font-heading font-bold text-[#5A3720]">
                         Learn Direct
                       </span>
                     )}
                   </div>
 
-                  <h3 className="font-heading font-extrabold text-base text-emerald-950">
+                  <h3 className="font-heading font-extrabold text-base text-[#1E1610] m-0">
                     {chapter.name[currentLang] || chapter.name.en}
                   </h3>
-                  <p className="text-xs text-slate-600 font-sans">
+                  <p className="text-xs text-[#5A3720] font-sans font-medium m-0">
                     {chapterConcepts.length} Concepts in this chapter syllabus.
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200/60">
+                <div className="pt-3 border-t-2 border-[#1E1610]/20">
                   {hasDiagnostic ? (
                     <Link
                       href={`/student/diagnostic/${chapter.id}`}
-                      className="w-full py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors"
+                      className="w-full py-2.5 px-4 rounded-xs bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-2 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors no-underline"
                     >
-                      <Target className="w-3.5 h-3.5" />
+                      <Target className="w-3.5 h-3.5 text-[#1E1610]" />
                       <span>Start check</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#1E1610]" />
                     </Link>
                   ) : (
                     <Link
                       href="/student/learn"
-                      className="w-full py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-heading font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                      className="w-full py-2 px-3.5 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-1.5 border-[2px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors no-underline"
                     >
                       <span>Go to lessons</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   )}
                 </div>
@@ -166,14 +160,7 @@ export default function DiagnosticHubPage() {
             );
           })}
         </div>
-
       </main>
-
-      {/* Footer */}
-      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-emerald-950/70">
-        Margam • Adaptive Mathematics for NCERT Classes 6–10
-      </footer>
     </div>
   );
 }
-
