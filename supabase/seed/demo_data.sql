@@ -339,3 +339,4 @@ SELECT id, c.id, 40, 'chapter_test', 'demo_xp_' || username || '_test', true, NO
 ON CONFLICT (idempotency_key) DO NOTHING;
 
 COMMIT;
+

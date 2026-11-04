@@ -76,3 +76,4 @@ In your Vercel Project Dashboard:
 
 > [!CAUTION]
 > Never commit `.env.local` to Git. The Margam CI/CD pipeline runs `npm run test:bundle` and `npm run check:supabase` on every build to guarantee zero secret keys leak into client JavaScript bundles.
+

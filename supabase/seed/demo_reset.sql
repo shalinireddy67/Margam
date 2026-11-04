@@ -43,3 +43,4 @@ WHERE email LIKE '%@demo.margam.invalid'
    OR (email = 'neha_new_student@student.internal.margam.local');
 
 COMMIT;
+
