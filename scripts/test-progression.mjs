@@ -161,7 +161,9 @@ console.log("  [PASS] Deterministic adaptive difficulty stepping verified.");
 // 4. Chapter Diagnostic Eligibility & Placement Unlock
 console.log("\n4. Testing Chapter Diagnostic Eligibility & Placement Unlock...");
 assert.equal(canTakeChapterDiagnostic("c10-ch04"), true, "c10-ch04 with 14 questions is eligible for diagnostic");
-assert.equal(canTakeChapterDiagnostic("c10-ch01"), false, "c10-ch01 with 2 questions must NOT show diagnostic (lesson-only)");
+assert.equal(canTakeChapterDiagnostic("c10-ch01"), true, "c10-ch01 with 8 verified questions is eligible for diagnostic");
+assert.equal(canTakeChapterDiagnostic("c10-ch03"), false, "c10-ch03 with 0 verified questions must NOT show diagnostic");
+assert.equal(canTakeChapterDiagnostic("c6-ch03"), false, "c6-ch03 incomplete chapter must NOT show diagnostic");
 
 clearActiveProfile();
 const p10 = createLearnerProfile("PlacementTester", 10);

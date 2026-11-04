@@ -64,7 +64,8 @@
       "hi": "संदर्भ शून्य बिंदु से नीचे की राशियों में ऋण (-) चिह्न लगाया जाता है।",
       "te": "ఆధార సున్నా బిందువు కంటే తక్కువ ఉన్న రాశులకు ఋణ (-) సంకేతం ఉంటుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-02",
@@ -131,7 +132,8 @@
       "hi": "कुल दूरी ज्ञात करने के लिए समुद्र तल के ऊपर की ऊँचाई और नीचे की गहराई को जोड़ें।",
       "te": "మొత్తం నిలువు దూరాన్ని కనుగొనడానికి సముద్ర మట్టం పై ఎత్తును మరియు దిగువ లోతును కలపండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-ord-01",
@@ -198,7 +200,8 @@
       "hi": "याद रखें कि ऋणात्मक संख्याओं में अंक जितना बड़ा होगा, वह संख्या रेखा पर उतनी ही अधिक बाईं ओर होगी।",
       "te": "ఋణ సంఖ్యలలో అంకె విలువ ఎక్కువ ఉంటే, సంఖ్యా రేఖపై అది మరింత ఎడమవైపు ఉంటుందని గుర్తుంచుకోండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-ord-02",
@@ -265,7 +268,8 @@
       "hi": "सबसे बड़ी ऋणात्मक संख्या सबसे छोटी होती है और आरोही क्रम में सबसे पहले आती है।",
       "te": "అత్యధిక ఋణ విలువ గల సంఖ్య అత్యంత చిన్నది, ఆరోహణ క్రమంలో మొదట వస్తుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d1-01",
@@ -332,7 +336,8 @@
       "hi": "शून्य से नीचे के मानों में ऋण (-) चिह्न लगता है।",
       "te": "సున్నా కంటే తక్కువ ఉన్న విలువలకు మైనస్ (-) గుర్తు ఉంటుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d1-02",
@@ -399,7 +404,8 @@
       "hi": "समुद्र तल से नीचे का स्थान ऊंचाई के विपरीत होता है।",
       "te": "సముద్ర మట్టం కంటే దిగువన ఉండటం ఎత్తుకు వ్యతిరేకం.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d1-03",
@@ -466,7 +472,8 @@
       "hi": "जमीन के स्तर से नीचे के तलों का मान ऋणात्मक होता है।",
       "te": "భూగర్భ అంతస్తులకు రుణ విలువలు ఉంటాయి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d2-01",
@@ -533,7 +540,8 @@
       "hi": "छोटी राशि में से बड़ी राशि घटाने पर ऋणात्मक शेष प्राप्त होता है।",
       "te": "చిన్న మొత్తం నుండి పెద్ద మొత్తాన్ని తీసివేస్తే రుణ విలువ వస్తుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d2-02",
@@ -600,7 +608,8 @@
       "hi": "विपरीत दिशाओं को विपरीत चिह्न दिए जाते हैं।",
       "te": "వ్యతిరేక దిశలకు వ్యతిరేక గుర్తులు ఇవ్వబడతాయి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d2-03",
@@ -667,7 +676,8 @@
       "hi": "किसी ऋणात्मक संख्या को घटाना उसके धनात्मक मान को जोड़ने के बराबर है।",
       "te": "రుణ సంఖ్యను తీసివేయడం దాని ధన విలువను కలపడంతో సమానం.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d3-01",
@@ -734,7 +744,8 @@
       "hi": "क्रम से गणना करें: -4 से शुरू करें, 7 जोड़ें, फिर 9 घटाएं।",
       "te": "-4 తో ప్రారంభించి, 7 కలిపి, తర్వాత 9 తీసివేయండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d3-02",
@@ -801,7 +812,8 @@
       "hi": "ऊपर चढ़ना धनात्मक (+) है; नीचे उतरना ऋणात्मक (-) है।",
       "te": "పైకి వెళ్లడం ధనాత్మకం (+); కిందకు వెళ్లడం రుణాత్మకం (-).",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-neg-d3-03",
@@ -867,6 +879,415 @@
       "en": "Add the two numbers and divide by 2.",
       "hi": "दोनों संख्याओं को जोड़ें और 2 से भाग दें।",
       "te": "రెండు సంఖ్యలను కలిపి 2 తో భాగించండి.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c6-ord-d1-01",
+    "conceptId": "c6-neg-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "On a horizontal number line, which integer lies 4 units to the left of 1?",
+      "hi": "एक क्षैतिज संख्या रेखा पर, कौन सा पूर्णांक 1 के बाईं ओर 4 इकाई की दूरी पर स्थित है?",
+      "te": "సంఖ్యా రేఖపై, 1 కి ఎడమవైపు 4 యూనిట్ల దూరంలో ఉన్న పూర్ణసంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-4",
+          "hi": "-4",
+          "te": "-4",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_zero_as_smallest"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-3",
+          "hi": "-3",
+          "te": "-3",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-5",
+          "hi": "-5",
+          "te": "-5",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Moving left on the number line means subtracting: 1 - 4 = -3.",
+      "hi": "संख्या रेखा पर बाईं ओर जाने का अर्थ घटाना है: 1 - 4 = -3।",
+      "te": "సంఖ్యా రేఖపై ఎడమవైపు వెళ్లడం అంటే తీసివేయడం: 1 - 4 = -3.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Start at 1 and jump 4 steps to the left: 0, -1, -2, -3.",
+      "hi": "1 से शुरू करके बाईं ओर 4 कदम चलें: 0, -1, -2, -3।",
+      "te": "1 నుండి ఎడమవైపు 4 అడుగులు వేయండి: 0, -1, -2, -3.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-d1-02",
+    "conceptId": "c6-neg-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the predecessor of the integer -8 on the number line?",
+      "hi": "संख्या रेखा पर पूर्णांक -8 का पूर्ववर्ती (predecessor) क्या है?",
+      "te": "సంఖ్యా రేఖపై -8 యొక్క పూర్వగామి (ముందు వచ్చే సంఖ్య) ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-9",
+          "hi": "-9",
+          "te": "-9",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-7",
+          "hi": "-7",
+          "te": "-7",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The predecessor of an integer is obtained by subtracting 1: (-8) - 1 = -9 (one step to the left).",
+      "hi": "किसी पूर्णांक का पूर्ववर्ती 1 घटाने पर प्राप्त होता है: (-8) - 1 = -9 (बाईं ओर एक कदम)।",
+      "te": "పూర్వగామి అంటే 1 తీసివేయాలి: (-8) - 1 = -9.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Predecessor is to the left on the number line (subtract 1).",
+      "hi": "पूर्ववर्ती संख्या रेखा पर बाईं ओर होता है (1 घटाएं)।",
+      "te": "పూర్వగామి సంఖ్యా రేఖపై ఎడమవైపు ఉంటుంది (1 తీసివేయండి).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-d2-01",
+    "conceptId": "c6-neg-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Which of the following numbers is the greatest negative integer?",
+      "hi": "निम्नलिखित में से सबसे बड़ा ऋणात्मक पूर्णांक कौन सा है?",
+      "te": "కింది వాటిలో అతిపెద్ద ఋణ పూర్ణసంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "0",
+          "hi": "0",
+          "te": "0",
+          "reviewed": false
+        },
+        "mistakeTag": "negative_greater_than_zero_misconception"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-100",
+          "hi": "-100",
+          "te": "-100",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_minimum_negative_integer"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-1",
+          "hi": "-1",
+          "te": "-1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-10",
+          "hi": "-10",
+          "te": "-10",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_absolute_value_with_signed_value"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "-1 is the largest negative integer because it lies closest to 0 on the negative side of the number line. 0 is neither positive nor negative.",
+      "hi": "-1 सबसे बड़ा ऋणात्मक पूर्णांक है क्योंकि यह संख्या रेखा पर 0 के सबसे करीब है। 0 न तो धनात्मक है और न ही ऋणात्मक।",
+      "te": "-1 అతిపెద్ద ఋణ పూర్ణసంఖ్య, ఎందుకంటే ఇది సంఖ్యా రేఖపై 0 కి అత్యంత సమీపంలో ఉంటుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Remember: as negative numbers move left, their value decreases.",
+      "hi": "याद रखें: ऋणात्मक संख्याएं जैसे-जैसे बाईं ओर बढ़ती हैं, उनका मान घटता जाता है।",
+      "te": "ఋణ సంఖ్యలు ఎడమవైపు వెళ్లేకొద్దీ వాటి విలువ తగ్గుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-d2-02",
+    "conceptId": "c6-neg-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "How many integers lie strictly between -4 and 3 on the number line?",
+      "hi": "संख्या रेखा पर -4 और 3 के बीच कितने पूर्णांक स्थित हैं?",
+      "te": "సంఖ్యా రేఖపై -4 మరియు 3 ల మధ్య ఎన్ని పూర్ణసంఖ్యలు ఉంటాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        },
+        "mistakeTag": "ordered_negatives_by_absolute_value_ascending"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "5",
+          "hi": "5",
+          "te": "5",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The integers strictly between -4 and 3 are: -3, -2, -1, 0, 1, 2. Counting them gives exactly 6 integers.",
+      "hi": "-4 और 3 के बीच के पूर्णांक: -3, -2, -1, 0, 1, 2 हैं। कुल 6 पूर्णांक हैं।",
+      "te": "-4 మరియు 3 ల మధ్య గల పూర్ణసంఖ్యలు: -3, -2, -1, 0, 1, 2. మొత్తం 6 పూర్ణసంఖ్యలు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "List the integers between -4 and 3 without including -4 and 3.",
+      "hi": "-4 और 3 को शामिल किए बिना उनके बीच के पूर्णांकों को सूचीबद्ध करें।",
+      "te": "-4 మరియు 3 లను కలపకుండా మధ్యలోని సంఖ్యలను రాయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-d3-01",
+    "conceptId": "c6-neg-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "A submarine is at -45 m relative to sea level. It descends 25 m further, then ascends 30 m. What is its final position relative to sea level?",
+      "hi": "एक पनडुब्बी समुद्र तल से -45 मी की गहराई पर है। यह 25 मी और नीचे जाती है, फिर 30 मी ऊपर आती है। समुद्र तल के सापेक्ष इसकी अंतिम स्थिति क्या है?",
+      "te": "ఒక జలాంతర్గామి సముద్ర మట్టానికి -45 మీ లోతులో ఉంది. అది మరో 25 మీ లోపలికి వెళ్లి, ఆపై 30 మీ పైకి వచ్చింది. సముద్ర మట్టం పరంగా దాని ప్రస్తుత స్థానం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-40 m",
+          "hi": "-40 मी",
+          "te": "-40 మీ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-50 m",
+          "hi": "-50 मी",
+          "te": "-50 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-100 m",
+          "hi": "-100 मी",
+          "te": "-100 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+40 m",
+          "hi": "+40 मी",
+          "te": "+40 మీ",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Descending means subtracting: -45 - 25 = -70 m. Ascending means adding: -70 + 30 = -40 m.",
+      "hi": "नीचे जाना = घटाना: -45 - 25 = -70 मी। ऊपर आना = जोड़ना: -70 + 30 = -40 मी।",
+      "te": "లోపలికి వెళ్లడం అంటే తీసివేయడం: -45 - 25 = -70 మీ. పైకి రావడం అంటే కూడడం: -70 + 30 = -40 మీ.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate: -45 - 25 + 30.",
+      "hi": "गणना करें: -45 - 25 + 30।",
+      "te": "లెక్కించండి: -45 - 25 + 30.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-ord-d3-02",
+    "conceptId": "c6-neg-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Which sequence correctly arranges the integers 7, -15, 0, -2, 11, -8 in descending order (largest to smallest)?",
+      "hi": "पूर्णांकों 7, -15, 0, -2, 11, -8 को अवरोही क्रम (बड़े से छोटे) में कौन सा क्रम सही ढंग से व्यवस्थित करता है?",
+      "te": "7, -15, 0, -2, 11, -8 పూర్ణసంఖ్యలను అవరోహణ క్రమంలో (పెద్ద నుండి చిన్నకు) సరిగ్గా అమర్చిన శ్రేణి ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-15, -8, -2, 0, 7, 11",
+          "hi": "-15, -8, -2, 0, 7, 11",
+          "te": "-15, -8, -2, 0, 7, 11",
+          "reviewed": false
+        },
+        "mistakeTag": "descending_order_instead_of_ascending"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "11, 7, 0, -15, -8, -2",
+          "hi": "11, 7, 0, -15, -8, -2",
+          "te": "11, 7, 0, -15, -8, -2",
+          "reviewed": false
+        },
+        "mistakeTag": "ordered_negatives_by_absolute_value_ascending"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0, 7, 11, -2, -8, -15",
+          "hi": "0, 7, 11, -2, -8, -15",
+          "te": "0, 7, 11, -2, -8, -15",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_zero_as_smallest"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "11, 7, 0, -2, -8, -15",
+          "hi": "11, 7, 0, -2, -8, -15",
+          "te": "11, 7, 0, -2, -8, -15",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Descending order starts with largest positive number and ends with the most negative number: 11 > 7 > 0 > -2 > -8 > -15.",
+      "hi": "अवरोही क्रम सबसे बड़े धनात्मक से शुरू होकर सबसे छोटे ऋणात्मक पर समाप्त होता है: 11, 7, 0, -2, -8, -15।",
+      "te": "అవరోహణ క్రమం పెద్ద సంఖ్య నుండి చిన్న సంఖ్యకు ఉంటుంది: 11, 7, 0, -2, -8, -15.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Start with the highest positive number (11) and finish with the furthest left on number line (-15).",
+      "hi": "सबसे बड़ी धनात्मक संख्या (11) से शुरू करें और सबसे छोटी ऋणात्मक संख्या (-15) पर समाप्त करें।",
+      "te": "అత్యధిక ధనాత్మక సంఖ్య (11) తో మొదలుపెట్టి, కనిష్ట ఋణాత్మక సంఖ్య (-15) తో ముగించండి.",
       "reviewed": false
     }
   }

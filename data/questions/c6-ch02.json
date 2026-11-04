@@ -64,7 +64,8 @@
       "hi": "क्या 65° 90° से छोटा है या बड़ा?",
       "te": "65° అనేది 90° కంటే చిన్నదా లేక పెద్దదా?",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c6-geo-02",
@@ -130,6 +131,415 @@
       "en": "A straight line represents half of a full 360° revolution.",
       "hi": "एक सीधी रेखा 360° के पूरे घूर्णन का आधा हिस्सा होती है।",
       "te": "సరళ రేఖ అనేది 360° పూర్తి భ్రమణంలో సగం.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c6-geo-d1-01",
+    "conceptId": "c6-geo-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "An angle measuring 135° is classified as which type of angle?",
+      "hi": "135° माप वाला कोण किस प्रकार के कोण के रूप में वर्गीकृत किया जाता है?",
+      "te": "135° కొలత కలిగిన కోణాన్ని ఏ రకమైన కోణంగా వర్గీకరిస్తారు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Acute angle",
+          "hi": "न्यून कोण",
+          "te": "లఘు కోణము",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_obtuse_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Obtuse angle",
+          "hi": "अधिक कोण",
+          "te": "గురు కోణము",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Right angle",
+          "hi": "समकोण",
+          "te": "లంబ కోణము",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_right_angle"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Reflex angle",
+          "hi": "प्रतिवर्ती कोण",
+          "te": "పరావర్తన కోణము",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_straight_angle"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "An obtuse angle is strictly greater than 90° and less than 180°. Since 90° < 135° < 180°, 135° is an obtuse angle.",
+      "hi": "अधिक कोण 90° से बड़ा और 180° से छोटा होता है। चूँकि 90° < 135° < 180°, अतः 135° एक अधिक कोण है।",
+      "te": "గురు కోణము 90° కంటే ఎక్కువ మరియు 180° కంటే తక్కువగా ఉంటుంది. 90° < 135° < 180° కాబట్టి, 135° ఒక గురు కోణము.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Recall: Acute is < 90°, Right is 90°, and Obtuse is between 90° and 180°.",
+      "hi": "याद रखें: न्यून कोण < 90°, समकोण = 90°, और अधिक कोण 90° और 180° के बीच होता है।",
+      "te": "గుర్తుంచుకోండి: లఘు కోణము < 90°, లంబ కోణము = 90°, గురు కోణము 90° నుండి 180° మధ్య ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-d1-02",
+    "conceptId": "c6-geo-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "How many straight lines can pass through two distinct given points on a plane?",
+      "hi": "एक समतल पर दिए गए दो भिन्न बिंदुओं से होकर कितनी सीधी रेखाएं गुजर सकती हैं?",
+      "te": "ఒక తలంలో ఇచ్చిన రెండు వేర్వేరు బిందువుల గుండా ఎన్ని సరళరేఖలు వెళ్ళగలవు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Exactly one line",
+          "hi": "केवल एक रेखा",
+          "te": "ఖచ్చితంగా ఒకే ఒక రేఖ",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Two lines",
+          "hi": "दो रेखाएं",
+          "te": "రెండు రేఖలు",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_perpendicular_rays"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Infinitely many lines",
+          "hi": "अनंत रेखाएं",
+          "te": "అనంతమైన రేఖలు",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_multiple_lines_through_two_points"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Zero lines",
+          "hi": "शून्य रेखाएं",
+          "te": "సున్నా రేఖలు",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "According to basic geometric postulates (NCERT Class 6), given any two distinct points, there is one and only one straight line that passes through them.",
+      "hi": "ज्यामितीय अभिगृहीत के अनुसार, किन्हीं दो भिन्न बिंदुओं से होकर ठीक एक और केवल एक ही सीधी रेखा खींची जा सकती है।",
+      "te": "ప్రాథమిక జ్యామితి సిద్ధాంతం ప్రకారం, ఇచ్చిన ఏవైనా రెండు వేర్వేరు బిందువుల గుండా ఖచ్చితంగా ఒకే ఒక సరళరేఖ వెళుతుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Connect two dots with a ruler — can you draw a second different straight line between them?",
+      "hi": "पैमाने से दो बिंदुओं को मिलाएँ — क्या आप उनके बीच कोई दूसरी अलग सीधी रेखा खींच सकते हैं?",
+      "te": "రెండు చుక్కలను స్కేలుతో కలపండి — వాటి మధ్య వేరే సరళరేఖను గీయగలరా?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-d2-01",
+    "conceptId": "c6-geo-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Two adjacent angles form a linear pair on a straight line. If one angle measures 72°, what is the measure of the other angle?",
+      "hi": "एक सीधी रेखा पर दो आसन्न कोण एक रैखिक युग्म बनाते हैं। यदि एक कोण का माप 72° है, तो दूसरे कोण का माप क्या है?",
+      "te": "సరళరేఖపై రెండు ఆసన్న కోణాలు రేఖీయ యుగ్మాన్ని ఏర్పరుస్తాయి. ఒక కోణం 72° అయితే, రెండవ కోణం కొలత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "18°",
+          "hi": "18°",
+          "te": "18°",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_perpendicular_rays"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "118°",
+          "hi": "118°",
+          "te": "118°",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "108°",
+          "hi": "108°",
+          "te": "108°",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "288°",
+          "hi": "288°",
+          "te": "288°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_straight_angle_with_complete_angle"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The sum of angles in a linear pair is 180°. Therefore, the required angle is 180° - 72° = 108°.",
+      "hi": "रैखिक युग्म के कोणों का योग 180° होता है। अतः दूसरा कोण = 180° - 72° = 108°।",
+      "te": "రేఖీయ యుగ్మంలోని కోణాల మొత్తం 180°. కావున, కావలసిన కోణం = 180° - 72° = 108°.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract 72° from 180°.",
+      "hi": "180° में से 72° घटाइए।",
+      "te": "180° నుండి 72° తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-d2-02",
+    "conceptId": "c6-geo-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "A ray stands on a line such that the two adjacent angles are in the ratio 2 : 3. What is the measure of the smaller angle?",
+      "hi": "एक किरण एक रेखा पर इस प्रकार खड़ी है कि दोनों आसन्न कोण 2 : 3 के अनुपात में हैं। छोटे कोण का माप क्या है?",
+      "te": "ఒక కిరణం సరళరేఖపై నిలిచి ఉంది, తద్వారా ఏర్పడిన రెండు ఆసన్న కోణాలు 2 : 3 నిష్పత్తిలో ఉన్నాయి. చిన్న కోణం కొలత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "36°",
+          "hi": "36°",
+          "te": "36°",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_fraction_of_right_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "72°",
+          "hi": "72°",
+          "te": "72°",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "108°",
+          "hi": "108°",
+          "te": "108°",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "60°",
+          "hi": "60°",
+          "te": "60°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_right_angle"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Let the angles be 2x and 3x. Since they form a linear pair, 2x + 3x = 180° => 5x = 180° => x = 36°. The smaller angle is 2x = 2 * 36° = 72°.",
+      "hi": "माना कोण 2x और 3x हैं। रैखिक युग्म से: 2x + 3x = 180° => 5x = 180° => x = 36°। छोटा कोण = 2 * 36° = 72°।",
+      "te": "కోణాలు 2x మరియు 3x అనుకుందాం. 2x + 3x = 180° => 5x = 180° => x = 36°. చిన్న కోణం = 2 * 36° = 72°.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Total ratio parts = 2 + 3 = 5. Divide 180° by 5, then multiply by 2.",
+      "hi": "अनुपाती योग = 2 + 3 = 5। 180° को 5 से विभाजित करें और 2 से गुणा करें।",
+      "te": "మొత్తం భాగాలు = 5. 180° ని 5 తో భాగించి 2 తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-d3-01",
+    "conceptId": "c6-geo-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "What is the angle traversed by the hour hand of a clock between 2:00 PM and 5:00 PM on the same day?",
+      "hi": "उसी दिन दोपहर 2:00 बजे से शाम 5:00 बजे के बीच घड़ी की घंटे की सुई द्वारा तय किया गया कोण क्या होगा?",
+      "te": "అదే రోజు మధ్యాహ్నం 2:00 నుండి సాయంత్రం 5:00 గంటల మధ్య గడియారపు గంటల ముల్లు తిరిగే కోణం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "60°",
+          "hi": "60°",
+          "te": "60°",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_fraction_of_right_angle"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "120°",
+          "hi": "120°",
+          "te": "120°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_acute_with_obtuse_angle"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "180°",
+          "hi": "180°",
+          "te": "180°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_straight_angle_with_complete_angle"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "90°",
+          "hi": "90°",
+          "te": "90°",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "A full clock revolution is 360° across 12 hours, meaning 30° per hour. From 2:00 to 5:00 is 3 hours: 3 * 30° = 90° (a right angle).",
+      "hi": "घड़ी का एक पूरा चक्कर 12 घंटों में 360° होता है, यानी प्रति घंटा 30°। 2:00 से 5:00 तक 3 घंटे होते हैं: 3 * 30° = 90° (एक समकोण)।",
+      "te": "గడియారంలో 12 గంటలకు 360°, అంటే గంటకు 30°. 2 నుండి 5 వరకు 3 గంటలు: 3 * 30° = 90° (లంబ కోణము).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Each hour corresponds to 360° / 12 = 30°.",
+      "hi": "प्रत्येक घंटा 360° / 12 = 30° के बराबर होता है।",
+      "te": "ప్రతి గంట 360° / 12 = 30° కు సమానం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c6-geo-d3-02",
+    "conceptId": "c6-geo-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "In a figure, lines AB and CD intersect at point O. If ∠AOC + ∠BOE = 70° and ∠BOD = 40°, find the measure of ∠AOC.",
+      "hi": "एक आकृति में, रेखाएं AB और CD बिंदु O पर प्रतिच्छेद करती हैं। यदि ∠AOC + ∠BOE = 70° और ∠BOD = 40° है, तो ∠AOC का मान ज्ञात कीजिए।",
+      "te": "ఒక పటంలో AB మరియు CD సరళరేఖలు O వద్ద ఖండించుకుంటున్నాయి. ∠AOC + ∠BOE = 70° మరియు ∠BOD = 40° అయితే, ∠AOC విలువ కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "40°",
+          "hi": "40°",
+          "te": "40°",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "30°",
+          "hi": "30°",
+          "te": "30°",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_fraction_of_right_angle"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "70°",
+          "hi": "70°",
+          "te": "70°",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_perpendicular_rays"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "110°",
+          "hi": "110°",
+          "te": "110°",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_straight_angle_with_complete_angle"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "When lines AB and CD intersect, ∠AOC and ∠BOD are vertically opposite angles. Vertically opposite angles are equal, so ∠AOC = ∠BOD = 40°.",
+      "hi": "जब रेखाएं AB और CD प्रतिच्छेद करती हैं, तो ∠AOC और ∠BOD शीर्षाभिमुख कोण होते हैं। शीर्षाभिमुख कोण बराबर होते हैं, अतः ∠AOC = ∠BOD = 40°।",
+      "te": "AB, CD రేఖలు ఖండించుకున్నప్పుడు ∠AOC, ∠BOD లు శీర్షాభిముఖ కోణాలు. అవి సమానంగా ఉంటాయి, కాబట్టి ∠AOC = ∠BOD = 40°.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Look for vertically opposite angles formed by the intersecting lines AB and CD.",
+      "hi": "प्रतिच्छेदी रेखाओं AB और CD द्वारा बने शीर्षाभिमुख कोणों को पहचानें।",
+      "te": "ఖండన రేఖలు AB, CD లతో ఏర్పడిన శీర్షాభిముఖ కోణాలను గమనించండి.",
       "reviewed": false
     }
   }

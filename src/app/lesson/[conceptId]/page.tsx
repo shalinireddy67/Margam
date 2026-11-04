@@ -115,7 +115,7 @@ function LessonContent() {
 
       if (!access.accessible) {
         setIsLocked(true);
-        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this lesson.");
+        setLockedReason(access.reason || "Please finish earlier topics before opening this lesson.");
         setIsLoaded(true);
         return;
       }
@@ -160,7 +160,7 @@ function LessonContent() {
   // Loading Skeleton State
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#102610] voxel-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
           <SkeletonCard />
@@ -196,7 +196,7 @@ function LessonContent() {
               Lesson Locked
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-              {lockedReason || "You must complete prerequisite topics before accessing this lesson."}
+              {lockedReason || "Please finish earlier topics before opening this lesson."}
             </p>
             <div className="pt-2">
               <Link
@@ -390,7 +390,7 @@ function LessonContent() {
           <div className="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-l-amber-500 bg-amber-50/70 border border-amber-200/80 text-amber-950 space-y-2">
             <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-amber-900">
               <GitBranch className="w-4 h-4 text-amber-600" />
-              <span>Diagnostic Remediation Route</span>
+              <span>Fix earlier topic</span>
             </div>
             <p className="text-xs sm:text-sm font-semibold leading-relaxed text-slate-700">
               {variantReason}
@@ -631,7 +631,7 @@ function LessonContent() {
                           <div className="flex-1 space-y-1.5">
                             <p className="font-heading font-bold text-rose-700 flex items-center gap-1.5">
                               <AlertCircle className="w-4 h-4 text-[#E04A3F] shrink-0" />
-                              <span>Needs Review: {feedbackItem.mistakeDescription || "Incorrect Choice"}</span>
+                              <span>Common mix-up: {feedbackItem.mistakeDescription || "Not quite right"}</span>
                             </p>
                             {feedbackItem.hint && (
                               <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 font-sans font-medium">
@@ -720,7 +720,7 @@ export default function LessonPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+        <div className="min-h-screen bg-[#102610] voxel-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
           <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading lesson">
             <SkeletonCard />
             <SkeletonCard />

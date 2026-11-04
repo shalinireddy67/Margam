@@ -81,12 +81,12 @@ console.log("  [PASS] Convergent tags trigger confirmation and routing.");
 // Case D: Concept with too few questions -> cannot route, reports shortfall
 const shortfallRes = evaluateGapTracing(
   "c7-alg-01",
-  ["confused_crore_with_million", "confused_crore_with_million"], // maps to c7-num-01 (2 questions)
-  3
+  ["confused_crore_with_million", "confused_crore_with_million"], // maps to c7-num-01 (8 questions)
+  10 // exceeds pool of 8 questions to trigger shortfall guard
 );
 assert.equal(shortfallRes.confirmed, true);
 assert.equal(shortfallRes.rootConceptId, "c7-num-01");
-assert.equal(shortfallRes.canRoute, false, "Cannot route to concept with < 3 questions");
+assert.equal(shortfallRes.canRoute, false, "Cannot route to concept with < 10 questions");
 assert.ok(shortfallRes.shortfallReport, "Must provide shortfall report");
 console.log(`  Shortfall report: "${shortfallRes.shortfallReport}"`);
 console.log("  [PASS] Question count guard correctly blocks routing when questions are insufficient.");

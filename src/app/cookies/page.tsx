@@ -189,7 +189,7 @@ function CookiesView() {
   const showOfflineBanner = !isOnline || stateParam === "offline";
 
   return (
-    <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-safe">
+    <div className="min-h-screen bg-[#102610] voxel-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-safe">
       {showOfflineBanner && (
         <div className="fixed top-2 left-4 right-4 z-50 max-w-[480px] mx-auto">
           <Toast
@@ -320,7 +320,7 @@ function CookiesView() {
               {content.sections.map((sec, idx) => (
                 <section
                   key={idx}
-                  className="p-4 bg-[#102610] minecraft-grid-bg border-[2px] border-[#315B2A] rounded-none space-y-1.5"
+                  className="p-4 bg-[#102610] voxel-grid-bg border-[2px] border-[#315B2A] rounded-none space-y-1.5"
                 >
                   <h2 className="font-heading font-extrabold text-base text-[#F2F0DF]">
                     {sec.title}
@@ -366,7 +366,7 @@ export default function CookiesPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#102610] minecraft-grid-bg p-6">
+        <div className="min-h-screen bg-[#102610] voxel-grid-bg p-6">
           <SkeletonCard />
         </div>
       }

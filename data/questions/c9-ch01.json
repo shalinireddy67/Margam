@@ -64,7 +64,8 @@
       "hi": "चतुर्थांशों के चिह्न याद रखें: QI (+,+), QII (-,+), QIII (-,-), QIV (+,-)।",
       "te": "పాదాల సంకేతాలను గుర్తుచేసుకోండి: QI (+,+), QII (-,+), QIII (-,-), QIV (+,-).",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-coord-02",
@@ -130,6 +131,415 @@
       "en": "Points on the y-axis always have an x-coordinate of 0.",
       "hi": "y-अक्ष पर स्थित बिंदुओं का x-निर्देशांक सदैव 0 होता है।",
       "te": "y-అక్షంపై ఉన్న బిందువుల x నిరూపకం ఎల్లప్పుడూ 0 గా ఉంటుంది.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c9-coord-d1-01",
+    "conceptId": "c9-coord-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "The abscissa and ordinate of the origin (0, 0) are respectively:",
+      "hi": "मूल बिंदु (0, 0) का भुज और कोटि क्रमशः हैं:",
+      "te": "మూల బిందువు (0, 0) యొక్క ఎక్స్-నిరూపకం (భుజం) మరియు వై-నిరూపకం (కోటి) వరుసగా:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "0 and 0",
+          "hi": "0 और 0",
+          "te": "0 మరియు 0",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "1 and 1",
+          "hi": "1 और 1",
+          "te": "1 మరియు 1",
+          "reviewed": false
+        },
+        "mistakeTag": "assigned_value_to_both_coordinates"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0 and 1",
+          "hi": "0 और 1",
+          "te": "0 మరియు 1",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_point_on_x_axis_instead_of_y_axis"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "1 and 0",
+          "hi": "1 और 0",
+          "te": "1 మరియు 0",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The origin is the intersection of both axes where x = 0 and y = 0. Therefore, abscissa = 0 and ordinate = 0.",
+      "hi": "मूल बिंदु दोनों अक्षों का प्रतिच्छेद बिंदु है जहाँ x = 0 और y = 0 होता है। अतः भुज = 0 और कोटि = 0।",
+      "te": "మూల బిందువు వద్ద రెండు అక్షాలు ఖండించుకుంటాయి కాబట్టి x = 0 మరియు y = 0.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Both coordinates at the origin are zero.",
+      "hi": "मूल बिंदु पर दोनों निर्देशांक शून्य होते हैं।",
+      "te": "మూల బిందువు వద్ద రెండు నిరూపకాలు సున్నా.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-d1-02",
+    "conceptId": "c9-coord-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "If both coordinates of a point are negative, like (-7, -3), in which quadrant does it lie?",
+      "hi": "यदि किसी बिंदु के दोनों निर्देशांक ऋणात्मक हैं, जैसे (-7, -3), तो वह किस चतुर्थांश में स्थित है?",
+      "te": "ఒక బిందువు యొక్క రెండు నిరూపకాలు ఋణాత్మకం అయితే, ఉదాహరణకు (-7, -3), అది ఏ పాదంలో ఉంటుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Quadrant I",
+          "hi": "चतुर्थांश I",
+          "te": "మొదటి పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "ignored_negative_sign_of_x"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Quadrant II",
+          "hi": "चतुर्थांश II",
+          "te": "రెండవ పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Quadrant III",
+          "hi": "चतुर्थांश III",
+          "te": "మూడవ పాదం",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Quadrant IV",
+          "hi": "चतुर्थांश IV",
+          "te": "నాల్గవ పాదం",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_both_coordinates_negative"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "In Quadrant I (+, +), Quadrant II (-, +), Quadrant III (-, -), Quadrant IV (+, -). Since both are negative, (-7, -3) lies in Quadrant III.",
+      "hi": "चतुर्थांश III में दोनों निर्देशांक ऋणात्मक (-, -) होते हैं। अतः (-7, -3) चतुर्थांश III में है।",
+      "te": "మూడవ పాదంలో రెండు నిరూపకాలు ఋణాత్మకం (-, -). కాబట్టి (-7, -3) మూడవ పాదంలో ఉంటుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quadrant III has negative x and negative y.",
+      "hi": "चतुर्थांश III में x और y दोनों ऋणात्मक होते हैं।",
+      "te": "మూడవ పాదంలో x మరియు y రెండూ ఋణాత్మకంగా ఉంటాయి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-d2-01",
+    "conceptId": "c9-coord-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "A point whose ordinate (y-coordinate) is 4 and which lies on the y-axis has coordinates:",
+      "hi": "एक बिंदु जिसकी कोटि (y-निर्देशांक) 4 है और जो y-अक्ष पर स्थित है, के निर्देशांक हैं:",
+      "te": "y-అక్షంపై ఉంటూ, y-నిరూపకం (కోటి) 4 గా గల బిందువు నిరూపకాలు:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(4, 0)",
+          "hi": "(4, 0)",
+          "te": "(4, 0)",
+          "reviewed": false
+        },
+        "mistakeTag": "placed_point_on_x_axis_instead_of_y_axis"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(0, 4)",
+          "hi": "(0, 4)",
+          "te": "(0, 4)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(4, 4)",
+          "hi": "(4, 4)",
+          "te": "(4, 4)",
+          "reviewed": false
+        },
+        "mistakeTag": "assigned_value_to_both_coordinates"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(-4, 0)",
+          "hi": "(-4, 0)",
+          "te": "(-4, 0)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Every point on the y-axis has an x-coordinate (abscissa) equal to 0. With ordinate y = 4, the coordinates are (0, 4).",
+      "hi": "y-अक्ष पर स्थित प्रत्येक बिंदु का x-निर्देशांक शून्य होता है। कोटि 4 होने पर निर्देशांक (0, 4) होंगे।",
+      "te": "y-అక్షంపై ఉండే ప్రతి బిందువు యొక్క x-నిరూపకం సున్నా. కాబట్టి బిందువు (0, 4).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Points on the y-axis always have x = 0.",
+      "hi": "y-अक्ष पर बिंदुओं का x हमेशा 0 होता है।",
+      "te": "y-అక్షంపై బిందువులకు x ఎల్లప్పుడూ 0.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-d2-02",
+    "conceptId": "c9-coord-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the perpendicular distance of the point P(3, -4) from the x-axis?",
+      "hi": "बिंदु P(3, -4) की x-अक्ष से लंबवत दूरी क्या है?",
+      "te": "P(3, -4) బిందువు యొక్క x-అక్షం నుండి లంబ దూరం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "4 units",
+          "hi": "4 मात्रक",
+          "te": "4 యూనిట్లు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "3 units",
+          "hi": "3 मात्रक",
+          "te": "3 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-4 units",
+          "hi": "-4 मात्रक",
+          "te": "-4 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "5 units",
+          "hi": "5 मात्रक",
+          "te": "5 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "assigned_value_to_both_coordinates"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "The perpendicular distance of a point (x, y) from the x-axis is given by |y|. Here | -4 | = 4 units. Distance is always non-negative.",
+      "hi": "x-अक्ष से किसी बिंदु की लंबवत दूरी उसके y-निर्देशांक का निरपेक्ष मान |y| होती है। अतः |-4| = 4 मात्रक। दूरी कभी ऋणात्मक नहीं होती।",
+      "te": "x-అక్షం నుండి దూరం |y| అవుతుంది. |-4| = 4 యూనిట్లు. దూరం ఎప్పుడూ ధనాత్మకం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Distance from x-axis is the absolute value of the y-coordinate.",
+      "hi": "x-अक्ष से दूरी y-निर्देशांक का धनात्मक मान होती है।",
+      "te": "x-అక్షం నుండి దూరం y-నిరూపకం యొక్క పరిమాణం.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-d3-01",
+    "conceptId": "c9-coord-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Three vertices of a rectangle are (0, 0), (4, 0), and (0, 3). What are the coordinates of its fourth vertex?",
+      "hi": "एक आयत के तीन शीर्ष (0, 0), (4, 0) और (0, 3) हैं। इसके चौथे शीर्ष के निर्देशांक क्या होंगे?",
+      "te": "ఒక దీర్ఘచతురస్రం యొక్క మూడు శీర్షాలు (0, 0), (4, 0), (0, 3). దాని నాల్గవ శీర్షం నిరూపకాలు ఏవి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(3, 4)",
+          "hi": "(3, 4)",
+          "te": "(3, 4)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_x_and_y_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(4, -3)",
+          "hi": "(4, -3)",
+          "te": "(4, -3)",
+          "reviewed": false
+        },
+        "mistakeTag": "ignored_negative_sign_of_x"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(7, 0)",
+          "hi": "(7, 0)",
+          "te": "(7, 0)",
+          "reviewed": false
+        },
+        "mistakeTag": "assigned_value_to_both_coordinates"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(4, 3)",
+          "hi": "(4, 3)",
+          "te": "(4, 3)",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "The opposite sides of a rectangle are parallel and equal. From (4, 0) moving 3 units vertically up gives (4, 3).",
+      "hi": "आयत की सम्मुख भुजाएँ बराबर और समानांतर होती हैं। (4, 0) से 3 मात्रक ऊपर जाने पर चौथा शीर्ष (4, 3) प्राप्त होता है।",
+      "te": "దీర్ఘచతురస్రంలో ఎదురెదురు భుజాలు సమానం. (4, 0) నుండి 3 యూనిట్లు పైకి వెళ్తే (4, 3) వస్తుంది.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The x-coordinate matches (4, 0) and the y-coordinate matches (0, 3).",
+      "hi": "x-निर्देशांक (4, 0) जैसा और y-निर्देशांक (0, 3) जैसा होगा।",
+      "te": "x-నిరూపకం 4 మరియు y-నిరూపకం 3 అవుతుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-coord-d3-02",
+    "conceptId": "c9-coord-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "If the coordinates of two points are A(-2, 5) and B(-2, -3), what is the length of line segment AB?",
+      "hi": "यदि दो बिंदुओं के निर्देशांक A(-2, 5) और B(-2, -3) हैं, तो रेखाखंड AB की लंबाई क्या है?",
+      "te": "రెండు బిందువుల నిరూపకాలు A(-2, 5) మరియు B(-2, -3) అయితే, రేఖాఖండం AB పొడవు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "2 units",
+          "hi": "2 मात्रक",
+          "te": "2 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8 units",
+          "hi": "-8 मात्रक",
+          "te": "-8 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "distance_expressed_as_negative"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8 units",
+          "hi": "8 मात्रक",
+          "te": "8 యూనిట్లు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "4 units",
+          "hi": "4 मात्रक",
+          "te": "4 యూనిట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_fraction_of_right_angle"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Since both points have the same x-coordinate (-2), the segment is vertical. Length = |y₂ - y₁| = |5 - (-3)| = |5 + 3| = 8 units.",
+      "hi": "दोनों बिंदुओं का x-निर्देशांक (-2) समान है, अतः दूरी = |y₂ - y₁| = |5 - (-3)| = 8 मात्रक।",
+      "te": "రెండు బిందువుల x-నిరూపకం సమానం (-2). పొడవు = |5 - (-3)| = 8 యూనిట్లు.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Subtract the y-coordinates: 5 - (-3).",
+      "hi": "y-निर्देशांकों को घटाएं: 5 - (-3)।",
+      "te": "y-నిరూపకాలను తీసివేయండి: 5 - (-3).",
       "reviewed": false
     }
   }

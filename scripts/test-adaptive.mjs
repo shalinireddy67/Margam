@@ -255,9 +255,16 @@ console.log(`  Concepts Tested: ${Object.keys(testResult.conceptBreakdown).join(
 
 // Test Blueprint disjoint exclusion & shortfall detection
 const diagExcludedIds = ["q-c10-sol-01", "q-c10-form-01", "q-c10-sol-02", "q-c10-form-02", "q-c10-quad-d3-01", "q-c10-form-03"];
+// With 19 questions in c10-ch04 and 6 excluded, exactly 13 non-diagnostic questions remain.
+// A 10-question test is now fully satisfied without shortfall:
 const disjointTest = generateChapterTest("c10-ch04", 10, { excludeQuestionIds: diagExcludedIds });
-assert.equal(disjointTest.shortfall, true, "Correctly flags shortfall when 6 diagnostic questions are excluded from 14-item pool");
-assert.equal(disjointTest.questions.length, 8, "Returns exact 8 available non-diagnostic questions");
+assert.equal(disjointTest.shortfall, false, "With 19-item pool (13 non-diagnostic), 10-question disjoint test succeeds without shortfall");
+assert.equal(disjointTest.questions.length, 10, "Returns full 10 disjoint questions");
+
+// Requesting 15 questions when only 13 are available correctly triggers the shortfall handler:
+const shortfallTest = generateChapterTest("c10-ch04", 15, { excludeQuestionIds: diagExcludedIds });
+assert.equal(shortfallTest.shortfall, true, "Correctly flags shortfall when requested (15) exceeds available disjoint pool (13)");
+assert.equal(shortfallTest.questions.length, 13, "Returns exact 13 available non-diagnostic questions without fabricating content");
 console.log("  [PASS] Blueprint question shortfall and disjoint exclusion correctly enforced.");
 console.log("  [PASS] Stage 3 Chapter Test generation and evaluation verified.");
 

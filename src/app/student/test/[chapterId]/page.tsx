@@ -640,7 +640,7 @@ export default function ChapterTestRunnerPage() {
                 disabled={submitting}
                 className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm cursor-pointer disabled:opacity-50 transition-all"
               >
-                <span>{submitting ? "Evaluating..." : "Submit Chapter Test"}</span>
+                <span>{submitting ? "Evaluating..." : "Submit test"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -649,7 +649,7 @@ export default function ChapterTestRunnerPage() {
       </main>
 
       <footer className="py-6 text-center text-xs font-heading font-bold text-slate-600/80">
-        Margam Adaptive Mathematics • Chapter Assessment
+        Margam Mathematics • Chapter Test
       </footer>
     </div>
   );

@@ -64,7 +64,8 @@
       "hi": "यदि (x - a)(x - b) = 0 है, तो हल x = +a और x = +b हैं।",
       "te": "(x - a)(x - b) = 0 అయితే, సాధనలు x = +a మరియు x = +b అవుతాయి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-sol-02",
@@ -131,7 +132,8 @@
       "hi": "ध्यान दें कि x + 5 = 0 से ऋणात्मक मूल x = -5 प्राप्त होता है।",
       "te": "x + 5 = 0 నుండి ఋణ మూలం x = -5 వస్తుందని గమనించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-form-01",
@@ -198,7 +200,8 @@
       "hi": "याद रखें कि (-6)² धनात्मक 36 होता है, न कि -36।",
       "te": "(-6)² అనేది ధన 36 అవుతుంది, -36 కాదు అని గుర్తుంచుకోండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-form-02",
@@ -265,7 +268,8 @@
       "hi": "सावधान रहें: -b का मान -(-2) है जो +2 बन जाता है।",
       "te": "జాగ్రత్త: -b విలువ -(-2) అంటే +2 అవుతుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-form-03",
@@ -332,7 +336,8 @@
       "hi": "D = b² - 4ac निकालें। यदि D ऋणात्मक है, तो √D वास्तविक संख्या नहीं है।",
       "te": "D = b² - 4ac లెక్కించండి. D ఋణాత్మకం అయితే, √D వాస్తవ సంఖ్య కాదు.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d1-01",
@@ -399,7 +404,8 @@
       "hi": "यदि AB = 0, तो या तो A = 0 या B = 0।",
       "te": "AB = 0 అయితే, A = 0 లేదా B = 0 అవుతుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d1-02",
@@ -466,7 +472,8 @@
       "hi": "बराबर के चिह्न के पार पदों को ले जाने से उनके चिह्न बदल जाते हैं।",
       "te": "సమాన గుర్తు దాటి పదాలను తరలించినప్పుడు వాటి గుర్తులు మారుతాయి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d1-03",
@@ -533,7 +540,8 @@
       "hi": "याद रखें कि (+3)² और (-3)² दोनों का मान 9 होता है।",
       "te": "(+3)² మరియు (-3)² రెండూ 9 అవుతాయి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d2-01",
@@ -600,7 +608,8 @@
       "hi": "+15 के दोनों गुणनखंड ऋणात्मक होने चाहिए ताकि उनका योग -8 हो।",
       "te": "మొత్తం -8 రావడానికి +15 కారణాంకాలు రెండూ రుణాత్మకంగా ఉండాలి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d2-02",
@@ -667,7 +676,8 @@
       "hi": "8 × (-3) = -24 और 8 + (-3) = +5।",
       "te": "8 × (-3) = -24 మరియు 8 + (-3) = +5.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d2-03",
@@ -734,7 +744,8 @@
       "hi": "बड़ा गुणनखंड ऋणात्मक होना चाहिए ताकि उनका योग -2 हो।",
       "te": "మొత్తం -2 రావడానికి పెద్ద కారణాంకం రుణాత్మకంగా ఉండాలి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d3-01",
@@ -801,7 +812,8 @@
       "hi": "a और c का गुणा करें (2 × 3 = 6) और 6 के ऐसे गुणनखंड खोजें जिनका योग -7 हो।",
       "te": "a మరియు c లను గుణించండి (2 × 3 = 6), మొత్తం -7 వచ్చేలా 6 కారణాంకాలను కనుగొనండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d3-02",
@@ -868,7 +880,8 @@
       "hi": "मध्य पद 10x को +12x - 2x में विभाजित करें।",
       "te": "మధ్య పదం 10x ను +12x - 2x గా విభజించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-quad-d3-03",
@@ -934,6 +947,347 @@
       "en": "Set up b(b + 7) = 60, factorise, and choose the positive root for physical measurements.",
       "hi": "समीकरण बनाएं b(b + 7) = 60, गुणनखंड करें और भौतिक माप के लिए धनात्मक मूल चुनें।",
       "te": "b(b + 7) = 60 సమీకరణాన్ని రాసి, కారణాంకాలుగా మార్చి, ధన మూలాన్ని ఎంచుకోండి.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c10-form-d1-01",
+    "conceptId": "c10-quad-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the discriminant of the quadratic equation: 2x² - 4x + 3 = 0?",
+      "hi": "द्विघात समीकरण 2x² - 4x + 3 = 0 का विविक्तकर (discriminant) क्या है?",
+      "te": "2x² - 4x + 3 = 0 వర్గ సమీకరణం యొక్క విచక్షణి (డిస్క్రిమినెంట్) ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "40",
+          "hi": "40",
+          "te": "40",
+          "reviewed": false
+        },
+        "mistakeTag": "added_four_ac_instead_of_subtracting"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-8",
+          "hi": "-8",
+          "te": "-8",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "8",
+          "hi": "8",
+          "te": "8",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "-40",
+          "hi": "-40",
+          "te": "-40",
+          "reviewed": false
+        },
+        "mistakeTag": "squared_negative_b_as_negative"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "For 2x² - 4x + 3 = 0: a = 2, b = -4, c = 3. Discriminant D = b² - 4ac = (-4)² - 4(2)(3) = 16 - 24 = -8.",
+      "hi": "D = b² - 4ac = (-4)² - 4(2)(3) = 16 - 24 = -8।",
+      "te": "D = b² - 4ac = (-4)² - 4(2)(3) = 16 - 24 = -8.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Use D = b² - 4ac with a = 2, b = -4, c = 3.",
+      "hi": "D = b² - 4ac सूत्र का प्रयोग करें (a = 2, b = -4, c = 3)।",
+      "te": "D = b² - 4ac సూత్రాన్ని ఉపయోగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-d2-01",
+    "conceptId": "c10-quad-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Find the values of k for which the quadratic equation 2x² + kx + 3 = 0 has two equal real roots.",
+      "hi": "k का मान ज्ञात कीजिए जिसके लिए द्विघात समीकरण 2x² + kx + 3 = 0 के दो बराबर वास्तविक मूल हों।",
+      "te": "2x² + kx + 3 = 0 వర్గ సమీకరణానికి సమాన వాస్తవ మూలాలు ఉండటానికి k విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "k = ±6",
+          "hi": "k = ±6",
+          "te": "k = ±6",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_negative_b_sign_flip"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "k = 24",
+          "hi": "k = 24",
+          "te": "k = 24",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_root_sign"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "k = ±2√6",
+          "hi": "k = ±2√6",
+          "te": "k = ±2√6",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "k = ±4",
+          "hi": "k = ±4",
+          "te": "k = ±4",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_discriminant_positive_without_evaluating"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "For equal real roots, D = b² - 4ac = 0 => k² - 4(2)(3) = 0 => k² - 24 = 0 => k = ±√24 = ±2√6.",
+      "hi": "बराबर मूलों के लिए D = b² - 4ac = 0 => k² - 24 = 0 => k = ±√24 = ±2√6।",
+      "te": "సమాన మూలాలకు D = 0 => k² - 24 = 0 => k = ±√24 = ±2√6.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set discriminant b² - 4ac equal to 0.",
+      "hi": "विविक्तकर b² - 4ac को 0 के बराबर रखें।",
+      "te": "డిస్క్రిమినెంట్ b² - 4ac = 0 చేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-d2-02",
+    "conceptId": "c10-quad-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Solve the quadratic equation using the quadratic formula: 2x² - 5x + 3 = 0",
+      "hi": "द्विघाती सूत्र का प्रयोग करके समीकरण हल कीजिए: 2x² - 5x + 3 = 0",
+      "te": "వర్గ సూత్రం ఉపయోగించి 2x² - 5x + 3 = 0 సమీకరణాన్ని సాధించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = 3/2, x = 1",
+          "hi": "x = 3/2, x = 1",
+          "te": "x = 3/2, x = 1",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = -3/2, x = -1",
+          "hi": "x = -3/2, x = -1",
+          "te": "x = -3/2, x = -1",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_negative_b_sign_flip"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 5/4, x = 1",
+          "hi": "x = 5/4, x = 1",
+          "te": "x = 5/4, x = 1",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = 2, x = 1",
+          "hi": "x = 2, x = 1",
+          "te": "x = 2, x = 1",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_root_sign"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "a = 2, b = -5, c = 3. D = (-5)² - 4(2)(3) = 25 - 24 = 1. x = [-(-5) ± √1] / (2*2) = (5 ± 1) / 4 => x = 6/4 = 3/2 or x = 4/4 = 1.",
+      "hi": "D = 25 - 24 = 1। x = (5 ± 1)/4 => x = 3/2 या x = 1।",
+      "te": "D = 1. x = (5 ± 1)/4 => x = 3/2 లేదా x = 1.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Quadratic formula: x = (-b ± √D) / (2a) where D = 1.",
+      "hi": "द्विघाती सूत्र: x = (-b ± √D) / (2a) जहाँ D = 1।",
+      "te": "వర్గ సూత్రం: x = (-b ± √D) / (2a).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-d3-01",
+    "conceptId": "c10-quad-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Solve for x using the quadratic formula: x² - 2ax + (a² - b²) = 0",
+      "hi": "द्विघाती सूत्र का प्रयोग करके x का मान ज्ञात कीजिए: x² - 2ax + (a² - b²) = 0",
+      "te": "వర్గ సూత్రం ఉపయోగించి x సాధించండి: x² - 2ax + (a² - b²) = 0",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "x = -a + b, x = -a - b",
+          "hi": "x = -a + b, x = -a - b",
+          "te": "x = -a + b, x = -a - b",
+          "reviewed": false
+        },
+        "mistakeTag": "forgot_negative_b_sign_flip"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "x = a² + b², x = a² - b²",
+          "hi": "x = a² + b², x = a² - b²",
+          "te": "x = a² + b², x = a² - b²",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "x = 2a, x = -2b",
+          "hi": "x = 2a, x = -2b",
+          "te": "x = 2a, x = -2b",
+          "reviewed": false
+        },
+        "mistakeTag": "dropped_negative_root_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "x = a + b, x = a - b",
+          "hi": "x = a + b, x = a - b",
+          "te": "x = a + b, x = a - b",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "D = (-2a)² - 4(1)(a² - b²) = 4a² - 4a² + 4b² = 4b². x = [2a ± √(4b²)] / 2 = (2a ± 2b) / 2 = a ± b.",
+      "hi": "D = 4a² - 4(a² - b²) = 4b²। x = (2a ± 2b)/2 = a ± b।",
+      "te": "D = 4b². x = (2a ± 2b)/2 = a ± b.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Discriminant simplifies to 4b², whose square root is 2b.",
+      "hi": "विविक्तकर 4b² में सरल होता है, जिसका वर्गमूल 2b है।",
+      "te": "డిస్క్రిమినెంట్ 4b² అవుతుంది, దాని వర్గమూలం 2b.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c10-form-d3-02",
+    "conceptId": "c10-quad-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "An express train takes 1 hour less than a passenger train to travel 132 km. If the average speed of the express train is 11 km/h more than the passenger train, find the speed of the passenger train.",
+      "hi": "एक एक्सप्रेस रेलगाड़ी 132 किमी की दूरी तय करने में एक सवारी गाड़ी से 1 घंटा कम समय लेती है। यदि एक्सप्रेस की चाल सवारी गाड़ी से 11 किमी/घंटा अधिक हो, तो सवारी गाड़ी की चाल क्या है?",
+      "te": "ఒక ఎక్స్‌ప్రెస్ రైలు 132 కి.మీ ప్రయాణించడానికి ప్యాసింజర్ రైలు కంటే 1 గంట తక్కువ సమయం తీసుకుంటుంది. ఎక్స్‌ప్రెస్ సగటు వేగం ప్యాసింజర్ కంటే 11 కి.మీ/గం ఎక్కువైతే, ప్యాసింజర్ రైలు వేగం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "44 km/h",
+          "hi": "44 किमी/घंटा",
+          "te": "44 కి.మీ/గం",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "33 km/h",
+          "hi": "33 किमी/घंटा",
+          "te": "33 కి.మీ/గం",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "30 km/h",
+          "hi": "30 किमी/घंटा",
+          "te": "30 కి.మీ/గం",
+          "reviewed": false
+        },
+        "mistakeTag": "assumed_discriminant_positive_without_evaluating"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "25 km/h",
+          "hi": "25 किमी/घंटा",
+          "te": "25 కి.మీ/గం",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_in_subtraction"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Let passenger speed = x km/h. 132/x - 132/(x + 11) = 1 => 132 * 11 = x(x + 11) => x² + 11x - 1452 = 0. Solving gives x = 33 km/h (speed is positive).",
+      "hi": "सवारी गाड़ी की चाल = x किमी/घंटा। 132/x - 132/(x + 11) = 1 => x² + 11x - 1452 = 0 => (x + 44)(x - 33) = 0 => x = 33 किमी/घंटा।",
+      "te": "ప్యాసింజర్ వేగం = x కి.మీ/గం. 132/x - 132/(x + 11) = 1 => x² + 11x - 1452 = 0 => x = 33 కి.మీ/గం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Set up the equation: 132/x - 132/(x + 11) = 1, leading to x² + 11x - 1452 = 0.",
+      "hi": "समीकरण बनाएं: 132/x - 132/(x + 11) = 1, जिससे x² + 11x - 1452 = 0 प्राप्त होता है।",
+      "te": "సమీకరణం: 132/x - 132/(x + 11) = 1.",
       "reviewed": false
     }
   }

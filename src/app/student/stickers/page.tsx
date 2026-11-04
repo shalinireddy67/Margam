@@ -87,10 +87,10 @@ export default function StickersPage() {
               !
             </div>
             <h1 className="font-pixel text-lg text-[#2B1B0F]">
-              Sticker Showcase Error
+              Could not load stickers
             </h1>
             <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed">
-              {errorMessage || "Unable to display learner trophy badges."}
+              {errorMessage || "Could not show stickers. Please tap Try again."}
             </p>
             <div className="pt-2">
               <Button
@@ -99,7 +99,7 @@ export default function StickersPage() {
                 onClick={initStickers}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                <span>Try Again</span>
+                <span>Try again</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -121,17 +121,17 @@ export default function StickersPage() {
               <Lock className="w-6 h-6" />
             </div>
             <h1 className="font-pixel text-lg text-[#2B1B0F]">
-              Stickers Locked
+              Stickers locked
             </h1>
             <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed">
-              Start learning on Margam to earn achievement stickers and track your mastery milestones.
+              Finish lessons and quick checks to earn stickers.
             </p>
             <div className="pt-2">
               <Link
                 href="/"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#FFF7E6] border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] no-underline hover:bg-[#4E9330]"
               >
-                <span>Get Started</span>
+                <span>Start now</span>
               </Link>
             </div>
           </div>

@@ -64,7 +64,8 @@
       "hi": "1 लाख और 1 करोड़ में शून्यों की संख्या गिनें।",
       "te": "1 లక్ష మరియు 1 కోటిలో ఉన్న సున్నాల సంఖ్యను లెక్కించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-num-02",
@@ -130,6 +131,415 @@
       "en": "Look at the digit in the thousands place (7) to decide whether to round up or down.",
       "hi": "सन्निकटन का निर्णय लेने के लिए हजार के स्थान का अंक (7) देखें।",
       "te": "సవరించడానికి వేల స్థానంలో ఉన్న అంకెను (7) చూడండి.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c7-num-d1-01",
+    "conceptId": "c7-num-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "In the International Number System, how many thousands make 1 million?",
+      "hi": "अंतर्राष्ट्रीय संख्या पद्धति में, कितने हजार मिलकर 1 मिलियन बनाते हैं?",
+      "te": "అంతర్జాతీయ సంఖ్యా మానంలో, ఎన్ని వేలు కలిసి 1 మిలియన్ అవుతాయి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "100 thousands",
+          "hi": "100 हजार",
+          "te": "100 వేలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_crore_with_million"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "1,000 thousands",
+          "hi": "1,000 हजार",
+          "te": "1,000 వేలు",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "10 thousands",
+          "hi": "10 हजार",
+          "te": "10 వేలు",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_place_value"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "500 thousands",
+          "hi": "500 हजार",
+          "te": "500 వేలు",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "1 million = 1,000,000 = 1,000 * 1,000. Hence, 1,000 thousands make 1 million.",
+      "hi": "1 मिलियन = 10,00,000 = 1,000 * 1,000। अतः 1,000 हजार मिलकर 1 मिलियन बनाते हैं।",
+      "te": "1 మిలియన్ = 1,000,000. కాబట్టి 1,000 వేలు కలిసి 1 మిలియన్ అవుతాయి.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Divide 1,000,000 by 1,000.",
+      "hi": "10,00,000 को 1,000 से भाग दीजिए।",
+      "te": "1,000,000 ను 1,000 తో భాగించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-d1-02",
+    "conceptId": "c7-num-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the place value of the digit 7 in the Indian numeral 8,72,34,519?",
+      "hi": "भारतीय संख्या 8,72,34,519 में अंक 7 का स्थानीय मान क्या है?",
+      "te": "భారతీయ సంఖ్యా మానంలో 8,72,34,519 లో అంకె 7 యొక్క స్థాన విలువ ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7 crores",
+          "hi": "7 करोड़",
+          "te": "7 కోట్లు",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_place_value"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "7 lakhs",
+          "hi": "7 लाख",
+          "te": "7 లక్షలు",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_crore_with_million"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "70 lakhs (70,00,000)",
+          "hi": "70 लाख (70,00,000)",
+          "te": "70 లక్షలు (70,00,000)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "70 thousand",
+          "hi": "70 हजार",
+          "te": "70 వేలు",
+          "reviewed": false
+        },
+        "mistakeTag": "arbitrary_place_estimation"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "In 8,72,34,519, the digit 7 is in the ten-lakhs place. Place value = 7 * 10,00,000 = 70,00,000 (70 lakhs).",
+      "hi": "8,72,34,519 में अंक 7 दस लाख के स्थान पर है। स्थानीय मान = 7 * 10,00,000 = 70,00,000 (70 लाख)।",
+      "te": "8,72,34,519 లో 7 పది లక్షల స్థానంలో ఉంది. స్థాన విలువ = 70,00,000 (70 లక్షలు).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Count place positions: ones, tens, hundreds, thousands, ten-thousands, lakhs, ten-lakhs.",
+      "hi": "स्थान गिनिए: इकाई, दहाई, सैकड़ा, हजार, दस हजार, लाख, दस लाख।",
+      "te": "స్థానాలను లెక్కించండి: ఒకట్లు, పదులు, వందలు, వేలు, పది వేలు, లక్షలు, పది లక్షలు.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-d2-01",
+    "conceptId": "c7-num-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Estimate the sum 5,290 + 17,986 by rounding each number to the nearest thousand.",
+      "hi": "प्रत्येक संख्या को निकटतम हजार तक सन्निकटित करके 5,290 + 17,986 के योग का आकलन कीजिए।",
+      "te": "ప్రతి సంఖ్యను సమీప వేయికి సవరించడం ద్వారా 5,290 + 17,986 మొత్తం అంచనా వేయండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "22,000",
+          "hi": "22,000",
+          "te": "22,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_down_ignoring_digit_seven"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "23,000",
+          "hi": "23,000",
+          "te": "23,000",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24,000",
+          "hi": "24,000",
+          "te": "24,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_lakh_instead"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "23,276",
+          "hi": "23,276",
+          "te": "23,276",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_thousand_instead"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "5,290 rounds to 5,000 (hundreds digit 2 < 5). 17,986 rounds to 18,000 (hundreds digit 9 >= 5). Estimated sum = 5,000 + 18,000 = 23,000.",
+      "hi": "5,290 का सन्निकटन 5,000 है (सैकड़ा 2 < 5)। 17,986 का सन्निकटन 18,000 है (सैकड़ा 9 >= 5)। आकलित योग = 5,000 + 18,000 = 23,000।",
+      "te": "5,290 సవరించిన విలువ 5,000. 17,986 సవరించిన విలువ 18,000. మొత్తం = 5,000 + 18,000 = 23,000.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Round 5,290 to 5,000 and 17,986 to 18,000, then add.",
+      "hi": "5,290 को 5,000 और 17,986 को 18,000 सन्निकटित करके जोड़ें।",
+      "te": "5,290 ని 5,000 గా, 17,986 ని 18,000 గా సవరించి కూడండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-d2-02",
+    "conceptId": "c7-num-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Find the difference between the greatest and least 5-digit numbers formed using the digits 6, 2, 7, 4, 3 each only once.",
+      "hi": "अंकों 6, 2, 7, 4, 3 में से प्रत्येक का केवल एक बार प्रयोग करते हुए 5 अंकों की सबसे बड़ी और सबसे छोटी संख्या का अंतर ज्ञात कीजिए।",
+      "te": "6, 2, 7, 4, 3 అంకెలను ఒక్కొక్కసారి మాత్రమే ఉపయోగిస్తూ ఏర్పడే 5 అంకెల గరిష్ట మరియు కనిష్ట సంఖ్యల భేదాన్ని కనుగొనండి.",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "52,965",
+          "hi": "52,965",
+          "te": "52,965",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "53,000",
+          "hi": "53,000",
+          "te": "53,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_down_ignoring_digit_seven"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "52,975",
+          "hi": "52,975",
+          "te": "52,975",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "50,000",
+          "hi": "50,000",
+          "te": "50,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_lakh_instead"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Greatest number formed = 76,432. Least number formed = 23,467. Difference = 76,432 - 23,467 = 52,965.",
+      "hi": "सबसे बड़ी संख्या = 76,432। सबसे छोटी संख्या = 23,467। अंतर = 76,432 - 23,467 = 52,965।",
+      "te": "గరిష్ట సంఖ్య = 76,432. కనిష్ట సంఖ్య = 23,467. భేదం = 76,432 - 23,467 = 52,965.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Greatest starts with 7 and arranges descending; least starts with 2 and arranges ascending.",
+      "hi": "बड़ी संख्या 7 से शुरू होकर घटते क्रम में; छोटी संख्या 2 से शुरू होकर बढ़ते क्रम में होती है।",
+      "te": "పెద్ద సంఖ్య 7 తో మొదలై అవరోహణ క్రమంలో, చిన్న సంఖ్య 2 తో మొదలై ఆరోహణ క్రమంలో ఉంటుంది.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-d3-01",
+    "conceptId": "c7-num-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "A merchant had ₹78,592. She placed an order for purchasing 40 radio sets at ₹1,200 each. How much money will remain with her after the purchase?",
+      "hi": "एक व्यापारी के पास ₹78,592 थे। उसने ₹1,200 प्रति रेडियो की दर से 40 रेडियो खरीदने का आर्डर दिया। खरीद के बाद उसके पास कितना धन शेष रहेगा?",
+      "te": "ఒక వ్యాపారి వద్ద ₹78,592 ఉన్నాయి. ఆమె ఒక్కొక్కటి ₹1,200 చొప్పున 40 రేడియో సెట్లను ఆర్డర్ చేసింది. కొనుగోలు తర్వాత ఆమె వద్ద ఎంత డబ్బు మిగులుతుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "₹38,592",
+          "hi": "₹38,592",
+          "te": "₹38,592",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_without_signs"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "₹28,592",
+          "hi": "₹28,592",
+          "te": "₹28,592",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "₹30,592",
+          "hi": "₹30,592",
+          "te": "₹30,592",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "₹48,000",
+          "hi": "₹48,000",
+          "te": "₹48,000",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_to_nearest_lakh_instead"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Cost of 40 radio sets = 40 * ₹1,200 = ₹48,000. Remaining money = ₹78,592 - ₹48,000 = ₹30,592.",
+      "hi": "40 रेडियो सेटों का मूल्य = 40 * ₹1,200 = ₹48,000। शेष राशि = ₹78,592 - ₹48,000 = ₹30,592।",
+      "te": "40 రేడియోల ఖర్చు = 40 * ₹1,200 = ₹48,000. మిగిలిన మొత్తం = ₹78,592 - ₹48,000 = ₹30,592.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate total cost (40 * 1,200), then subtract from 78,592.",
+      "hi": "कुल खर्च निकालें (40 * 1,200), फिर 78,592 से घटाएं।",
+      "te": "మొత్తం ఖర్చు లెక్కించి (40 * 1,200), 78,592 నుండి తీసివేయండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-num-d3-02",
+    "conceptId": "c7-num-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "To stitch a shirt, 2 m 15 cm cloth is needed. Out of 40 m cloth, how many shirts can be stitched and how much cloth will remain?",
+      "hi": "एक कमीज सीने के लिए 2 मी 15 सेमी कपड़े की आवश्यकता है। 40 मी कपड़े में से कितनी कमीजें सिली जा सकती हैं और कितना कपड़ा शेष बचेगा?",
+      "te": "ఒక చొక్కా కుట్టడానికి 2 మీ 15 సెం.మీ గుడ్డ అవసరం. 40 మీ గుడ్డలో ఎన్ని చొక్కాలు కుట్టవచ్చు మరియు ఎంత గుడ్డ మిగులుతుంది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "17 shirts stitched, 2 m 15 cm cloth remains",
+          "hi": "17 कमीजें, 2 मी 15 सेमी शेष",
+          "te": "17 చొక్కాలు, 2 మీ 15 సెం.మీ మిగులుతుంది",
+          "reviewed": false
+        },
+        "mistakeTag": "rounded_down_ignoring_digit_seven"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "18 shirts stitched, 1 m 30 cm cloth remains",
+          "hi": "18 कमीजें, 1 मी 30 सेमी शेष",
+          "te": "18 చొక్కాలు, 1 మీ 30 సెం.మీ మిగులుతుంది",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "19 shirts stitched, 0 cloth remains",
+          "hi": "19 कमीजें, 0 शेष",
+          "te": "19 చొక్కాలు, గుడ్డ మిగలదు",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "20 shirts stitched, 50 cm cloth remains",
+          "hi": "20 कमीजें, 50 सेमी शेष",
+          "te": "20 చొక్కాలు, 50 సెం.మీ మిగులుతుంది",
+          "reviewed": false
+        },
+        "mistakeTag": "added_extra_place_value"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "Convert all to cm: 40 m = 4000 cm. 2 m 15 cm = 215 cm. 4000 / 215 = 18 with remainder 130 cm. 130 cm = 1 m 30 cm. So 18 shirts stitched and 1 m 30 cm remains.",
+      "hi": "सभी को सेमी में बदलें: 40 मी = 4000 सेमी। 2 मी 15 सेमी = 215 सेमी। 4000 / 215 = 18 भागफल, शेषफल = 130 सेमी (1 मी 30 सेमी)।",
+      "te": "సెంటీమీటర్లలోకి మార్చండి: 40 మీ = 4000 సెం.మీ. 2 మీ 15 సెం.మీ = 215 సెం.మీ. 4000 / 215 = 18, శేషం 130 సెం.మీ (1 మీ 30 సెం.మీ).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Convert both measurements to centimetres before dividing (1 m = 100 cm).",
+      "hi": "भाग देने से पहले दोनों मापों को सेंटीमीटर में बदलें (1 मी = 100 सेमी)।",
+      "te": "భాగించడానికి ముందు రెండు కొలతలను సెంటీమీటర్లలోకి మార్చండి (1 మీ = 100 సెం.మీ).",
       "reviewed": false
     }
   }

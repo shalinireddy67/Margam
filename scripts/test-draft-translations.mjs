@@ -51,10 +51,10 @@ console.log("  [PASS] Translation protection verified: unreviewed HI/TE never sh
 
 // 2. Silent Shortfall Handling
 console.log("\n2. Testing Silent Shortfall Guarding...");
-// Concept with 2 questions (c7-num-01) requested for 6 questions
-const shortfallDiag = generateChapterDiagnostic("c7-ch01", 6);
+// Concept with 8 questions (c7-num-01) requested for 12 questions
+const shortfallDiag = generateChapterDiagnostic("c7-ch01", 12);
 assert.equal(shortfallDiag.shortfall, true, "Must flag shortfall: true when questions < requested");
-assert.ok(shortfallDiag.questions.length <= 2, "Does not invent fake questions; returns only authentic questions");
+assert.ok(shortfallDiag.questions.length <= 8, "Does not invent fake questions; returns only authentic questions");
 
 // Concept with 11 questions (c10-quad-01) requested for 3 questions
 const healthySet = selectPracticeQuestions("c10-quad-01", 3);

@@ -251,5 +251,6 @@
   "inverted_fraction_divided_product_by_sum": "c10-poly-01",
   "sign_error_in_sum_of_roots_formula": "c10-poly-01",
   "subtracted_constants_instead_of_adding_in_transposition": "c10-poly-01",
-  "confused_product_of_roots_with_sum_of_roots": "c10-poly-01"
+  "confused_product_of_roots_with_sum_of_roots": "c10-poly-01",
+  "assumed_multiple_lines_through_two_points": "c6-geo-01"
 }

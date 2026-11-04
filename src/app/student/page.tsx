@@ -65,7 +65,7 @@ export default function StudentDashboardPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
           <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-emerald-950">Opening Student Realm...</p>
+          <p className="font-heading text-xs text-emerald-950">Opening student home...</p>
         </div>
       </div>
     );
@@ -114,7 +114,7 @@ export default function StudentDashboardPage() {
   if (activeGap && rootConcept) {
     nextRecommendation = {
       badge: "Foundational Gap Review",
-      title: `Review Prerequisite: ${rootConcept.name[currentLang] || rootConcept.name.en}`,
+      title: `Fix earlier topic: ${rootConcept.name[currentLang] || rootConcept.name.en}`,
       description:
         activeGap.plainLanguageReason ||
         `Our diagnostic detected a prerequisite gap from Class ${rootConcept.class}. Reviewing this concept will make current grade quests effortless.`,
@@ -158,7 +158,7 @@ export default function StudentDashboardPage() {
       title: `Diagnose Mastery: ${firstEligibleChapter?.name[currentLang] || firstEligibleChapter?.name.en || "Chapter"}`,
       description: "Take the chapter diagnostic or test to evaluate your understanding.",
       href: `/student/diagnostic/${firstEligibleChapter?.id || "c10-ch04"}`,
-      cta: "Take Chapter Diagnostic",
+      cta: "Take quick check",
     };
   }
 
@@ -298,7 +298,7 @@ export default function StudentDashboardPage() {
                 </h3>
               </div>
               <span className="px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-[10px] font-heading font-bold text-amber-900">
-                Prerequisite from Class {rootConcept.class}
+                Earlier topic from Class {rootConcept.class}
               </span>
             </div>
 
@@ -340,7 +340,8 @@ export default function StudentDashboardPage() {
                 )}`}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white font-heading font-bold text-xs shadow-xs"
               >
-                <span>Study Prerequisite Lesson</span>
+                <svg className="w-4 h-4 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                      <span>Learn this topic</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -473,12 +474,12 @@ export default function StudentDashboardPage() {
                   Diagnose Mastery
                 </h2>
                 <p className="text-xs text-slate-600 font-sans mt-1">
-                  Take chapter diagnostics to pinpoint hidden learning gaps and auto-unlock chapter concepts.
+                  Take quick checks to find topics you missed and open new lessons.
                 </p>
               </div>
             </div>
             <div className="pt-3 mt-auto border-t border-emerald-950/10 flex items-center justify-between text-xs font-heading font-bold text-cyan-800">
-              <span>Take Diagnostic</span>
+              <span>Take quick check</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -666,7 +667,7 @@ export default function StudentDashboardPage() {
                 </Link>
               </div>
               <p className="text-xs text-slate-600 font-sans mt-1">
-                Earn badges by completing lessons, scoring streaks, and resolving diagnostic gaps.
+                Earn stickers by finishing lessons, keeping streaks, and fixing gaps.
               </p>
             </div>
 

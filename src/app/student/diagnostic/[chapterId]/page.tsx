@@ -548,12 +548,12 @@ export default function ChapterDiagnosticPage() {
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-                  <span>Chapter Diagnostic</span>
+                  <span>Chapter Quick Check</span>
                   <span>•</span>
                   <span>Class {profile.selectedClass}</span>
                 </div>
                 <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-slate-700 shadow-2xs">
-                  Intelligent Learning Gap Engine
+                  Finds topics you missed
                 </span>
               </div>
 
@@ -562,7 +562,7 @@ export default function ChapterDiagnosticPage() {
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium text-xs sm:text-sm">
-                Answer these 6 questions. Our adaptive engine investigates your responses against the NCERT prerequisite graph to pinpoint exactly what you understand and detect any missing foundational concepts from earlier grades.
+                Answer these 6 questions. We check your answers to find any earlier topics you missed.
               </p>
 
               {errorMessage && (
@@ -598,19 +598,19 @@ export default function ChapterDiagnosticPage() {
                   </div>
                   <div>
                     <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-emerald-900 block">
-                      Diagnostic Evaluation Complete
+                      Quick check complete
                     </span>
                     <h2 className="font-heading font-extrabold text-lg sm:text-2xl text-emerald-950 mt-0.5">
                       {result.passed
-                        ? "Chapter Mastery Unlocked! 🎉"
+                        ? "All chapter lessons open"
                         : foundGapsCount > 0
-                        ? "Foundational Gap Identified"
-                        : "Practice Recommended"}
+                        ? "Earlier topic found"
+                        : "More practice needed"}
                     </h2>
                     <p className="text-xs text-slate-600 font-sans font-medium mt-1">
                       {result.passed
-                        ? "You demonstrated strong mastery of the chapter prerequisites. All chapter quests are unlocked!"
-                        : "We analyzed your error patterns. Strengthening prerequisite concepts will make this chapter effortless."}
+                        ? "You know this chapter well. All lessons in this chapter are now open."
+                        : "We found an earlier topic you missed. Practicing it first will make this chapter easier."}
                     </p>
                   </div>
                 </div>
@@ -619,7 +619,7 @@ export default function ChapterDiagnosticPage() {
                   href="/student"
                   className="self-start sm:self-center inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                 >
-                  <span>Return to Dashboard</span>
+                  <span>Go to home</span>
                   <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Link>
               </div>
@@ -644,7 +644,7 @@ export default function ChapterDiagnosticPage() {
                 </div>
                 <div className="p-3.5 rounded-2xl bg-white/80 border border-white/90 text-center space-y-1 shadow-2xs">
                   <span className="text-[10px] font-heading font-bold uppercase text-slate-500 block">
-                    Gaps Traced
+                    Topics to fix
                   </span>
                   <span className="text-lg sm:text-xl font-heading font-extrabold text-amber-600">
                     {foundGapsCount}
@@ -666,7 +666,7 @@ export default function ChapterDiagnosticPage() {
               <div className="glass-panel p-6 rounded-2xl bg-amber-50/70 border border-amber-200/80 border-l-4 border-l-amber-500 text-amber-950 space-y-3 shadow-xs">
                 <div className="flex items-center gap-2 text-xs font-heading font-extrabold text-amber-900 uppercase tracking-wider">
                   <Target className="w-4 h-4 text-amber-600" />
-                  <span>Immediate Recommended Next Action</span>
+                  <span>What to do next</span>
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -683,7 +683,7 @@ export default function ChapterDiagnosticPage() {
                     href={result.nextAction.href}
                     className="inline-flex items-center justify-center shrink-0 min-h-[46px] px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm no-underline transition-all"
                   >
-                    <span>Start This Quest</span>
+                    <span>Start now</span>
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </div>
@@ -696,10 +696,10 @@ export default function ChapterDiagnosticPage() {
                 <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
                   <h3 className="font-heading font-extrabold text-sm sm:text-base text-emerald-950 flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-[#5DAA3A]" />
-                    <span>Concept-Level Mastery Analysis</span>
+                    <span>Topic results</span>
                   </h3>
                   <span className="text-[10px] font-heading text-slate-500 uppercase">
-                    Diagnosed against Prerequisite Graph
+                    Checked with topic map
                   </span>
                 </div>
 
@@ -757,13 +757,13 @@ export default function ChapterDiagnosticPage() {
               </div>
             )}
 
-            {/* C. Recommended Learning Path (Following Prerequisite Graph) */}
+            {/* C. Recommended Learning Path (Following Earlier topic Graph) */}
             {result.learningPath && result.learningPath.length > 0 && (
               <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800">
                 <div className="flex items-center justify-between gap-2 border-b-2 border-[#7A4B2A] pb-3">
                   <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] flex items-center gap-2">
                     <GitBranch className="w-4 h-4 text-[#5DAA3A]" />
-                    <span>Your Recommended Learning Roadmap</span>
+                    <span>Next topics to learn</span>
                   </h3>
                   <span className="text-[10px] font-heading font-bold text-emerald-900">
                     {result.learningPath.length} Steps
@@ -802,7 +802,7 @@ export default function ChapterDiagnosticPage() {
                           href={step.href}
                           className="self-end sm:self-center inline-flex items-center justify-center px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-bold text-xs shadow-xs no-underline transition-all shrink-0"
                         >
-                          <span>Open Quest</span>
+                          <span>Start topic</span>
                           <ArrowRight className="w-3.5 h-3.5 ml-1" />
                         </Link>
                       </div>
@@ -821,7 +821,7 @@ export default function ChapterDiagnosticPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/80 pb-2">
             <div>
               <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
-                {result ? "Diagnostic Questions Review & Educational Feedback" : "Assessment Questions"}
+                {result ? "Review your answers" : "Questions"}
               </h2>
               {!result && (
                 <p className="font-sans text-xs text-slate-600 mt-0.5">
@@ -1099,9 +1099,9 @@ export default function ChapterDiagnosticPage() {
                 <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
                   {result
                     ? result.passed
-                      ? "Incredible work! You conquered the prerequisites for this chapter."
+                      ? "Well done. You know the earlier topics for this chapter."
                       : "We found the exact concept to practice. You've got this!"
-                    : "Take your time! No rush, every question diagnoses your foundational skills."}
+                    : "Take your time. Each question shows what topics you know."}
                 </p>
               </div>
             </div>
@@ -1136,10 +1136,10 @@ export default function ChapterDiagnosticPage() {
             <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
               <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
                 <Sparkles className="w-4 h-4 text-amber-600" />
-                <span>Diagnostic Bounty</span>
+                <span>Check bonus</span>
               </div>
               <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
-                Complete this diagnostic to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and unlock personalized practice worksheets!
+                Finish this check to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and open practice questions.
               </p>
             </div>
           </aside>

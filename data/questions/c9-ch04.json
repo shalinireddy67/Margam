@@ -64,7 +64,8 @@
       "hi": "मध्य पद को न भूलें: -2 × a × b।",
       "te": "మధ్య పదం -2 × a × b ను మర్చిపోకండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-02",
@@ -131,7 +132,8 @@
       "hi": "ध्यान दें कि मध्य पद एक दूसरे को निरस्त कर देते हैं।",
       "te": "మధ్య పదాలు పరస్పరం రద్దవుతాయని గమనించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-split-01",
@@ -198,7 +200,8 @@
       "hi": "15 के गुणनखंड जोड़ियों की सूची बनाएं: (1, 15) और (3, 5)। किस जोड़ी का योग 8 है?",
       "te": "15 యొక్క కారణాంక జతలను చూడండి: (1, 15) మరియు (3, 5). ఏ జత మొత్తం 8 అవుతుంది?",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-split-02",
@@ -265,7 +268,8 @@
       "hi": "जब गुणनफल ऋणात्मक हो, तो बड़े अंक का चिह्न मध्य पद (-) के समान होना चाहिए।",
       "te": "లబ్దం ఋణాత్మకం అయినప్పుడు, పెద్ద సంఖ్యకు మధ్య పదం (-) సంకేతం ఉండాలి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d1-01",
@@ -332,7 +336,8 @@
       "hi": "मध्य पद 2ab को न भूलें।",
       "te": "మధ్య పదం 2ab ని మర్చిపోకండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d1-02",
@@ -399,7 +404,8 @@
       "hi": "ऋणात्मक संख्या का वर्ग धनात्मक होता है: (-6)² = +36, लेकिन मध्य पद ऋणात्मक होता है।",
       "te": "రుణ సంఖ్య వర్గం ధనాత్మకం: (-6)² = +36, కానీ మధ్య పదం రుణాత్మకం.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d1-03",
@@ -466,7 +472,8 @@
       "hi": "पूरे पहले पद का वर्ग करें: (2x)² = 4x²।",
       "te": "మొత్తం మొదటి పదాన్ని వర్గం చేయండి: (2x)² = 4x².",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d2-01",
@@ -533,7 +540,8 @@
       "hi": "योग और अंतर के गुणनफल में कोई मध्य पद नहीं होता: a² - b²।",
       "te": "కూడిక మరియు తీసివేతల లబ్దంలో మధ్య పదం ఉండదు: a² - b².",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d2-02",
@@ -600,7 +608,8 @@
       "hi": "मध्य पद 7 और -3 का योग है; अचर पद उनका गुणनफल है।",
       "te": "మధ్య పదం 7 మరియు -3 ల మొత్తం; స్థిర పదం వాటి లబ్ధం.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d2-03",
@@ -667,7 +676,8 @@
       "hi": "103 को (100 + 3) और 97 को (100 - 3) के रूप में लिखें।",
       "te": "103 ని (100 + 3) గా మరియు 97 ని (100 - 3) గా రాయండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d3-01",
@@ -734,7 +744,8 @@
       "hi": "ऋणात्मक गुणनखंड वाले पदों का गुणनफल ऋणात्मक होता है: 2(x)(-2y) = -4xy।",
       "te": "ఒక రుణ గుణకం ఉన్న పదాలు రుణాత్మకం అవుతాయి: 2(x)(-2y) = -4xy.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d3-02",
@@ -801,7 +812,8 @@
       "hi": "मध्य पद 2·x·(1/x) सरल होकर 2 बन जाता है, जिसे 25 में से घटाना होगा।",
       "te": "మధ్య పదం 2·x·(1/x) 2 అవుతుంది, దానిని 25 నుండి తీసివేయాలి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c9-id-d3-03",
@@ -867,6 +879,415 @@
       "en": "49a² = (7a)² and 4b² = (2b)², and 2(7a)(2b) = 28ab.",
       "hi": "49a² = (7a)² और 4b² = (2b)², तथा 2(7a)(2b) = 28ab।",
       "te": "49a² = (7a)² మరియు 4b² = (2b)², మరియు 2(7a)(2b) = 28ab.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c9-split-d1-01",
+    "conceptId": "c9-id-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize the quadratic expression by splitting the middle term: x² - 9x + 20",
+      "hi": "मध्य पद को विभक्त करके द्विघात व्यंजक का गुणनखंडन कीजिए: x² - 9x + 20",
+      "te": "మధ్య పదాన్ని విభజించడం ద్వారా వర్గ సమాసాన్ని కారణాంకాలుగా మార్చండి: x² - 9x + 20",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x + 4)(x + 5)",
+          "hi": "(x + 4)(x + 5)",
+          "te": "(x + 4)(x + 5)",
+          "reviewed": false
+        },
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x - 4)(x - 5)",
+          "hi": "(x - 4)(x - 5)",
+          "te": "(x - 4)(x - 5)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(x - 2)(x - 10)",
+          "hi": "(x - 2)(x - 10)",
+          "te": "(x - 2)(x - 10)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x - 1)(x - 20)",
+          "hi": "(x - 1)(x - 20)",
+          "te": "(x - 1)(x - 20)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "We need two numbers with product 20 and sum -9: these are -4 and -5. Thus, x² - 9x + 20 = (x - 4)(x - 5).",
+      "hi": "हमें ऐसी दो संख्याएँ चाहिए जिनका गुणनफल 20 और योग -9 हो: वे -4 और -5 हैं। अतः x² - 9x + 20 = (x - 4)(x - 5) है।",
+      "te": "లబ్ధం 20 మరియు మొత్తం -9 వచ్చే సంఖ్యలు -4, -5. కావున x² - 9x + 20 = (x - 4)(x - 5).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find two negative numbers that multiply to 20 and add up to -9.",
+      "hi": "ऐसी दो ऋणात्मक संख्याएँ खोजें जिनका गुणनफल 20 और योग -9 हो।",
+      "te": "లబ్ధం 20 మరియు మొత్తం -9 వచ్చే రెండు ఋణ సంఖ్యలను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-d1-02",
+    "conceptId": "c9-id-02",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize: x² + 2x - 24",
+      "hi": "गुणनखंडन कीजिए: x² + 2x - 24",
+      "te": "కారణాంకాలుగా మార్చండి: x² + 2x - 24",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x + 6)(x - 4)",
+          "hi": "(x + 6)(x - 4)",
+          "te": "(x + 6)(x - 4)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x - 6)(x + 4)",
+          "hi": "(x - 6)(x + 4)",
+          "te": "(x - 6)(x + 4)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(x + 8)(x - 3)",
+          "hi": "(x + 8)(x - 3)",
+          "te": "(x + 8)(x - 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x - 6)(x - 4)",
+          "hi": "(x - 6)(x - 4)",
+          "te": "(x - 6)(x - 4)",
+          "reviewed": false
+        },
+        "mistakeTag": "sign_error_both_negative_yields_positive_product"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Factors of -24 adding to +2 are +6 and -4: (6)(-4) = -24 and 6 + (-4) = 2. Thus, x² + 2x - 24 = (x + 6)(x - 4).",
+      "hi": "-24 के ऐसे गुणनखंड जिनका योग +2 हो: +6 और -4। अतः x² + 2x - 24 = (x + 6)(x - 4) है।",
+      "te": "లబ్ధం -24, మొత్తం +2 వచ్చే సంఖ్యలు +6 మరియు -4. కాబట్టి (x + 6)(x - 4).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "The numbers are 6 and -4: 6 * (-4) = -24 and 6 - 4 = 2.",
+      "hi": "संख्याएं 6 और -4 हैं: 6 * (-4) = -24 और 6 - 4 = 2।",
+      "te": "సంఖ్యలు 6 మరియు -4.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-d2-01",
+    "conceptId": "c9-id-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize the quadratic polynomial with leading coefficient > 1: 6x² + 17x + 5",
+      "hi": "द्विघात बहुपद का गुणनखंडन कीजिए: 6x² + 17x + 5",
+      "te": "6x² + 17x + 5 వర్గ బహుపదిని కారణాంకాలుగా విభజించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(6x + 1)(x + 5)",
+          "hi": "(6x + 1)(x + 5)",
+          "te": "(6x + 1)(x + 5)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(2x - 5)(3x - 1)",
+          "hi": "(2x - 5)(3x - 1)",
+          "te": "(2x - 5)(3x - 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(2x + 5)(3x + 1)",
+          "hi": "(2x + 5)(3x + 1)",
+          "te": "(2x + 5)(3x + 1)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(3x + 5)(2x + 1)",
+          "hi": "(3x + 5)(2x + 1)",
+          "te": "(3x + 5)(2x + 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_product"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "ac = 6 * 5 = 30. Factors of 30 that add to 17 are 15 and 2: 6x² + 15x + 2x + 5 = 3x(2x + 5) + 1(2x + 5) = (2x + 5)(3x + 1).",
+      "hi": "ac = 6 * 5 = 30। 30 के गुणनखंड जिनका योग 17 हो: 15 और 2। 6x² + 15x + 2x + 5 = (2x + 5)(3x + 1)।",
+      "te": "ac = 30. మొత్తం 17 వచ్చే కారణాంకాలు 15, 2. 6x² + 15x + 2x + 5 = (2x + 5)(3x + 1).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply a and c (6 * 5 = 30), find two numbers that multiply to 30 and sum to 17 (15 and 2).",
+      "hi": "a और c का गुणा करें (6 * 5 = 30), ऐसी संख्याएँ ढूँढ़ें जिनका गुणनफल 30 और योग 17 हो (15 और 2)।",
+      "te": "a * c = 30. లబ్ధం 30, మొత్తం 17 వచ్చే సంఖ్యలు 15 మరియు 2.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-d2-02",
+    "conceptId": "c9-id-02",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize completely: 2x² - 7x - 15",
+      "hi": "पूर्ण गुणनखंडन कीजिए: 2x² - 7x - 15",
+      "te": "2x² - 7x - 15 ను పూర్తిగా కారణాంకాలుగా విభజించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x + 5)(2x - 3)",
+          "hi": "(x + 5)(2x - 3)",
+          "te": "(x + 5)(2x - 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x - 5)(2x + 3)",
+          "hi": "(x - 5)(2x + 3)",
+          "te": "(x - 5)(2x + 3)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(2x - 5)(x + 3)",
+          "hi": "(2x - 5)(x + 3)",
+          "te": "(2x - 5)(x + 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x - 15)(2x + 1)",
+          "hi": "(x - 15)(2x + 1)",
+          "te": "(x - 15)(2x + 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "ac = 2 * (-15) = -30. Factors adding to -7 are -10 and +3: 2x² - 10x + 3x - 15 = 2x(x - 5) + 3(x - 5) = (x - 5)(2x + 3).",
+      "hi": "ac = 2 * (-15) = -30। -30 के गुणनखंड जिनका योग -7 हो: -10 और +3। 2x(x - 5) + 3(x - 5) = (x - 5)(2x + 3)।",
+      "te": "ac = -30. మొత్తం -7 వచ్చే కారణాంకాలు -10 మరియు +3. (x - 5)(2x + 3).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Split the middle term into -10x and +3x.",
+      "hi": "मध्य पद को -10x और +3x में विभाजित करें।",
+      "te": "మధ్య పదాన్ని -10x మరియు +3x గా విడగొట్టండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-d3-01",
+    "conceptId": "c9-id-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize the quadratic expression: 12x² - 7x + 1",
+      "hi": "द्विघात व्यंजक का गुणनखंडन कीजिए: 12x² - 7x + 1",
+      "te": "12x² - 7x + 1 వర్గ సమాసాన్ని కారణాంకాలుగా విభజించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(3x + 1)(4x + 1)",
+          "hi": "(3x + 1)(4x + 1)",
+          "te": "(3x + 1)(4x + 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(6x - 1)(2x - 1)",
+          "hi": "(6x - 1)(2x - 1)",
+          "te": "(6x - 1)(2x - 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(12x - 1)(x - 1)",
+          "hi": "(12x - 1)(x - 1)",
+          "te": "(12x - 1)(x - 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(3x - 1)(4x - 1)",
+          "hi": "(3x - 1)(4x - 1)",
+          "te": "(3x - 1)(4x - 1)",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "ac = 12 * 1 = 12. Factors of 12 adding to -7 are -3 and -4: 12x² - 4x - 3x + 1 = 4x(3x - 1) - 1(3x - 1) = (3x - 1)(4x - 1).",
+      "hi": "ac = 12 * 1 = 12। -7 के लिए गुणनखंड -3 और -4 हैं: 4x(3x - 1) - 1(3x - 1) = (3x - 1)(4x - 1)।",
+      "te": "ac = 12. మొత్తం -7 వచ్చేవి -3, -4. (3x - 1)(4x - 1).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find two factors of 12 whose sum is -7: (-3 and -4).",
+      "hi": "12 के दो ऐसे गुणनखंड खोजें जिनका योग -7 हो: (-3 और -4)।",
+      "te": "లబ్ధం 12, మొత్తం -7 వచ్చే సంఖ్యలు -3 మరియు -4.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c9-split-d3-02",
+    "conceptId": "c9-id-02",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Factorize the cubic polynomial by factor theorem and splitting: x³ - 6x² + 11x - 6",
+      "hi": "गुणनखंड प्रमेय और विभक्तीकरण द्वारा त्रिघात बहुपद का गुणनखंडन कीजिए: x³ - 6x² + 11x - 6",
+      "te": "x³ - 6x² + 11x - 6 ఘన బహుపదిని కారణాంకాలుగా విభజించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "(x - 1)(x - 2)(x - 3)",
+          "hi": "(x - 1)(x - 2)(x - 3)",
+          "te": "(x - 1)(x - 2)(x - 3)",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "(x + 1)(x + 2)(x + 3)",
+          "hi": "(x + 1)(x + 2)(x + 3)",
+          "te": "(x + 1)(x + 2)(x + 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "both_factors_negative_for_positive_middle_term"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "(x - 1)(x + 2)(x - 3)",
+          "hi": "(x - 1)(x + 2)(x - 3)",
+          "te": "(x - 1)(x + 2)(x - 3)",
+          "reviewed": false
+        },
+        "mistakeTag": "swapped_factor_signs_producing_positive_middle_term"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "(x - 6)(x - 1)(x + 1)",
+          "hi": "(x - 6)(x - 1)(x + 1)",
+          "te": "(x - 6)(x - 1)(x + 1)",
+          "reviewed": false
+        },
+        "mistakeTag": "incorrect_factor_pair_sum"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Testing roots: x = 1 gives 1 - 6 + 11 - 6 = 0, so (x - 1) is a factor. Dividing gives x² - 5x + 6 = (x - 2)(x - 3). Complete factorization is (x - 1)(x - 2)(x - 3).",
+      "hi": "x = 1 रखने पर शून्य प्राप्त होता है, अतः (x - 1) एक गुणनखंड है। भाग देने पर x² - 5x + 6 = (x - 2)(x - 3) प्राप्त होता है। पूर्ण गुणनखंड = (x - 1)(x - 2)(x - 3)।",
+      "te": "x = 1 ప్రతిక్షేపిస్తే 0 వస్తుంది. భాగిస్తే x² - 5x + 6 = (x - 2)(x - 3). మొత్తం కారణాంకాలు (x - 1)(x - 2)(x - 3).",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Check if x = 1 is a zero, then factor the remaining quadratic.",
+      "hi": "जाँचें कि क्या x = 1 शून्यक है, फिर शेष द्विघात का गुणनखंडन करें।",
+      "te": "x = 1 వద్ద బహుపది విలువ 0 అవుతుందో లేదో చూడండి.",
       "reviewed": false
     }
   }

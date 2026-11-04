@@ -316,7 +316,7 @@ function LoginForm() {
             className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-emerald-900 hover:text-emerald-950 py-1.5 px-3 rounded-xl bg-white/70 hover:bg-white border border-white/80 transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Realm</span>
+            <span>Go back</span>
           </Link>
         </div>
       </header>
@@ -399,7 +399,7 @@ function LoginForm() {
                   Aarav Sharma (#01)
                 </div>
                 <p className="text-[10px] text-slate-600 font-sans mt-0.5 leading-tight">
-                  90% Diagnostic • Mastered Real Numbers & Linear Eq
+                  90% Quick check • Passed Real Numbers & Linear Eq
                 </p>
               </div>
               <div className="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[10px] font-heading font-bold text-emerald-800">
@@ -517,7 +517,7 @@ function LoginForm() {
             <p className="text-xs text-slate-600 font-sans font-medium">
               {isTeacherFlow
                 ? "Manage classrooms, track learning gaps & monitor diagnostics"
-                : "Privacy-first math realm. No email or phone required."}
+                : "Safe maths space. No email or phone needed."}
             </p>
           </div>
 
@@ -711,7 +711,7 @@ function LoginForm() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[46px] py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-heading font-extrabold rounded-xl shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
-                    <span>{loading ? "Entering Realm..." : "Log In to Student Realm"}</span>
+                    <span>{loading ? "Signing in..." : "Log in as student"}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>

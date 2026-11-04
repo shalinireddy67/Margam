@@ -235,7 +235,7 @@ export default function StudentProfilePage() {
         {nameSuccess && (
           <div className="glass-panel p-3.5 rounded-2xl border border-emerald-300 bg-emerald-50/90 text-emerald-800 text-xs font-sans flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
-            <span>Nickname successfully updated across the realm!</span>
+            <span>Nickname saved.</span>
           </div>
         )}
         {classSuccess && (
@@ -329,7 +329,7 @@ export default function StudentProfilePage() {
             </div>
 
             <div className="pt-3 border-t border-slate-200/60 text-[11px] text-slate-500 font-sans">
-              Tip: Your nickname updates everywhere across the realm immediately.
+              Tip: Your nickname updates everywhere right away.
             </div>
           </div>
 

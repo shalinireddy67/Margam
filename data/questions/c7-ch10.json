@@ -64,7 +64,8 @@
       "hi": "आप पर ₹15 का कर्ज है और आप ₹9 चुकाते हैं। अब आप पर कितना कर्ज बचा?",
       "te": "మీకు ₹15 అప్పు ఉంది, మీరు ₹9 చెల్లించారు. ఇంకా ఎంత అప్పు మిగిలి ఉంది?",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-sub-01",
@@ -131,7 +132,8 @@
       "hi": "नियम याद रखें: ऋण का ऋण धन बन जाता है।",
       "te": "ఋణాన్ని తీసివేయడం ధనంగా మారుతుందని గుర్తుంచుకోండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-mul-01",
@@ -198,7 +200,8 @@
       "hi": "गुणा में समान चिह्न होने पर परिणाम धनात्मक होता है।",
       "te": "గుణకారంలో ఒకే రకమైన సంకేతాలు ఉంటే ఫలితం ధనాత్మకం అవుతుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-mul-02",
@@ -265,7 +268,8 @@
       "hi": "बाएँ से दाएँ गुणा करें और देखें कि प्रत्येक चरण में चिह्न कैसे बदलता है।",
       "te": "ఎడమ నుండి కుడికి గుణిస్తూ, ప్రతి దశలో సంకేతాల మార్పును గమనించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d1-01",
@@ -332,7 +336,8 @@
       "hi": "ऋणात्मक × धनात्मक = ऋणात्मक।",
       "te": "రుణ సంఖ్య × ధన సంఖ్య = రుణ సంఖ్య.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d1-02",
@@ -399,7 +404,8 @@
       "hi": "ऋणात्मक × ऋणात्मक = धनात्मक।",
       "te": "రుణ సంఖ్య × రుణ సంఖ్య = ధన సంఖ్య.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d1-03",
@@ -466,7 +472,8 @@
       "hi": "एक ऋणात्मक गुणनखंड से गुणा करने पर ऋणात्मक परिणाम मिलता है।",
       "te": "ఒక రుణ గుణకం ఉంటే ఫలితం రుణాత్మకం అవుతుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d2-01",
@@ -533,7 +540,8 @@
       "hi": "ऋणात्मक चिह्नों की विषम संख्या होने पर गुणनफल ऋणात्मक होता है।",
       "te": "బేసి సంఖ్యలో మైనస్ గుర్తులు ఉంటే ఫలితం మైనస్ అవుతుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d2-02",
@@ -600,7 +608,8 @@
       "hi": "प्रति घंटे के बदलाव (-3) को 8 घंटों से गुणा करें।",
       "te": "గంట మార్పు (-3) ని 8 గంటలతో గుణించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d2-03",
@@ -667,7 +676,8 @@
       "hi": "ऋणात्मक चिह्नों के जोड़े धनात्मक बन जाते हैं; एक बिना जोड़े का ऋणात्मक चिह्न शेष रहता है।",
       "te": "మైనస్ గుర్తుల జతలు ప్లస్ అవుతాయి; ఒక మిగిలిన మైనస్ గుర్తు ఉంటుంది.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d3-01",
@@ -734,7 +744,8 @@
       "hi": "पहले कोष्ठक के अंदर के पदों को जोड़ें, फिर -7 से गुणा करें।",
       "te": "మొదట బ్రాకెట్ లోపల కూడి, తర్వాత -7 తో గుణించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d3-02",
@@ -801,7 +812,8 @@
       "hi": "12 को 4 से गुणा करें, 6 को -2 से गुणा करें, और दोनों को जोड़ें।",
       "te": "12 ని 4 తో, 6 ని -2 తో గుణించి, రెండింటినీ కలపండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c7-int-d3-03",
@@ -867,6 +879,415 @@
       "en": "Count the number of negative signs: 3 negative signs produce a negative result.",
       "hi": "ऋणात्मक चिह्नों की गिनती करें: 3 ऋणात्मक चिह्नों का परिणाम ऋणात्मक होता है।",
       "te": "మైనస్ గుర్తులను లెక్కించండి: 3 మైనస్ గుర్తులు ఉన్నందున ఫలితం రుణాత్మకం.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c7-int1-d1-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the additive inverse of the integer -28?",
+      "hi": "पूर्णांक -28 का योज्य प्रतिलोम (additive inverse) क्या है?",
+      "te": "-28 యొక్క సంకలన విలోమం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-28",
+          "hi": "-28",
+          "te": "-28",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+28",
+          "hi": "+28",
+          "te": "+28",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "0",
+          "hi": "0",
+          "te": "0",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_zero_with_below_zero"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "The additive inverse of any integer a is -a such that a + (-a) = 0. Therefore, the additive inverse of -28 is +28.",
+      "hi": "किसी पूर्णांक a का योज्य प्रतिलोम -a होता है जिससे a + (-a) = 0 हो। अतः -28 का योज्य प्रतिलोम +28 है।",
+      "te": "ఏదైనా పూర్ణసంఖ్య a కి సంకలన విలోమం -a, ఎందుకంటే a + (-a) = 0. కాబట్టి -28 కి సంకలన విలోమం +28.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "What number added to -28 gives 0?",
+      "hi": "-28 में क्या जोड़ने पर 0 प्राप्त होगा?",
+      "te": "-28 కి ఏ సంఖ్య కూడితే 0 వస్తుంది?",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int1-d1-02",
+    "conceptId": "c7-int-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Evaluate the integer expression: (-12) + (-18)",
+      "hi": "पूर्णांक व्यंजक का मान ज्ञात कीजिए: (-12) + (-18)",
+      "te": "(-12) + (-18) పూర్ణసంఖ్యల సమాసాన్ని గణించండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-30",
+          "hi": "-30",
+          "te": "-30",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+30",
+          "hi": "+30",
+          "te": "+30",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-6",
+          "hi": "-6",
+          "te": "-6",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_negative"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+6",
+          "hi": "+6",
+          "te": "+6",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "When adding two integers with the same negative sign, add their absolute values and prefix with a negative sign: -(12 + 18) = -30.",
+      "hi": "समान ऋणात्मक चिह्न वाले दो पूर्णांकों को जोड़ते समय उनके मानों को जोड़कर ऋणात्मक चिह्न लगाया जाता है: -(12 + 18) = -30।",
+      "te": "రెండు ఋణ పూర్ణసంఖ్యలను కూడునప్పుడు, వాటి పరిమాణాలను కూడి ఋణ చిహ్నం ఉంచాలి: -(12 + 18) = -30.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Both numbers are negative: add 12 and 18 and keep the negative sign.",
+      "hi": "दोनों संख्याएं ऋणात्मक हैं: 12 और 18 को जोड़ें और ऋणात्मक चिह्न लगाएं।",
+      "te": "రెండు సంఖ్యలు ఋణాత్మకం: 12 మరియు 18 ని కూడి ఋణ చిహ్నం ఉంచండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int1-d2-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Subtract (-15) from (-40): that is, (-40) - (-15).",
+      "hi": "(-40) में से (-15) घटाइए: अर्थात (-40) - (-15)।",
+      "te": "(-40) నుండి (-15) తీసివేయండి: అనగా (-40) - (-15).",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-55",
+          "hi": "-55",
+          "te": "-55",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "+25",
+          "hi": "+25",
+          "te": "+25",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-25",
+          "hi": "-25",
+          "te": "-25",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+55",
+          "hi": "+55",
+          "te": "+55",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "Subtracting a negative number is equivalent to adding its positive: (-40) - (-15) = -40 + 15 = -25.",
+      "hi": "ऋणात्मक संख्या घटाने का अर्थ उसका धनात्मक जोड़ना है: (-40) - (-15) = -40 + 15 = -25।",
+      "te": "ఋణ సంఖ్యను తీసివేయడం అంటే ధన సంఖ్యను కూడడం: (-40) - (-15) = -40 + 15 = -25.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "- (-15) becomes + 15. Then evaluate -40 + 15.",
+      "hi": "- (-15) बदलकर + 15 हो जाता है। फिर -40 + 15 हल करें।",
+      "te": "- (-15) అనేది + 15 అవుతుంది. అప్పుడు -40 + 15 లెక్కించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int1-d2-02",
+    "conceptId": "c7-int-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "At Srinagar, the temperature was -5°C on Monday and then it dropped by 2°C on Tuesday. What was the temperature on Tuesday?",
+      "hi": "श्रीनगर में सोमवार को तापमान -5°C था और मंगलवार को तापमान 2°C कम हो गया। मंगलवार को तापमान क्या था?",
+      "te": "శ్రీనగర్‌లో సోమవారం ఉష్ణోగ్రత -5°C. మంగళవారం 2°C తగ్గింది. మంగళవారం ఉష్ణోగ్రత ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-3°C",
+          "hi": "-3°C",
+          "te": "-3°C",
+          "reviewed": false
+        },
+        "mistakeTag": "subtracted_magnitudes_positive"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "-7°C",
+          "hi": "-7°C",
+          "te": "-7°C",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "+3°C",
+          "hi": "+3°C",
+          "te": "+3°C",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "+7°C",
+          "hi": "+7°C",
+          "te": "+7°C",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "A temperature drop means subtracting: (-5°C) - 2°C = -7°C.",
+      "hi": "तापमान कम होने का अर्थ घटाना है: (-5°C) - 2°C = -7°C।",
+      "te": "ఉష్ణోగ్రత తగ్గడం అంటే తీసివేయడం: (-5°C) - 2°C = -7°C.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Temperature started at -5 and got 2 degrees colder: -5 - 2.",
+      "hi": "तापमान -5 से शुरू हुआ और 2 डिग्री और ठंडा हो गया: -5 - 2।",
+      "te": "-5 కంటే 2 డిగ్రీలు తక్కువ: -5 - 2.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int1-d3-01",
+    "conceptId": "c7-int-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Find the value of the integer expression: (-13) + 32 - 8 - 1",
+      "hi": "पूर्णांक व्यंजक का मान ज्ञात कीजिए: (-13) + 32 - 8 - 1",
+      "te": "(-13) + 32 - 8 - 1 పూర్ణసంఖ్యల విలువను కనుగొనండి:",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "-10",
+          "hi": "-10",
+          "te": "-10",
+          "reviewed": false
+        },
+        "mistakeTag": "inverted_result_sign"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "54",
+          "hi": "54",
+          "te": "54",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_positive"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "-54",
+          "hi": "-54",
+          "te": "-54",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "10",
+          "hi": "10",
+          "te": "10",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "Combine negative terms: (-13) - 8 - 1 = -22. Then add positive term: -22 + 32 = 10.",
+      "hi": "ऋणात्मक पदों को जोड़ें: (-13) - 8 - 1 = -22। फिर धनात्मक जोड़ें: -22 + 32 = 10।",
+      "te": "ఋణ పదాలను కలపండి: -13 - 8 - 1 = -22. ధన పదాన్ని కూడండి: -22 + 32 = 10.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Group the negative numbers together: (-13 - 8 - 1) + 32.",
+      "hi": "ऋणात्मक संख्याओं को एक साथ समूहित करें: (-13 - 8 - 1) + 32।",
+      "te": "ఋణ సంఖ్యలను ఒకచోట చేర్చండి: (-13 - 8 - 1) + 32.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c7-int1-d3-02",
+    "conceptId": "c7-int-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "In a quiz, Team A scored -40, 10, 0 and Team B scored 10, 0, -40 in three successive rounds. What are their respective total scores?",
+      "hi": "एक प्रश्नोत्तरी में, तीन उत्तरोत्तर चक्रों में टीम A ने -40, 10, 0 और टीम B ने 10, 0, -40 अंक प्राप्त किए। उनके कुल प्राप्तांक क्रमशः क्या हैं?",
+      "te": "ఒక క్విజ్ పోటీలో మూడు రౌండ్లలో టీమ్ A స్కోర్లు -40, 10, 0 మరియు టీమ్ B స్కోర్లు 10, 0, -40. వారి మొత్తం స్కోర్లు ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "Both scored -30; their scores are equal",
+          "hi": "दोनों ने -30 अंक बनाए; स्कोर बराबर हैं",
+          "te": "ఇద్దరి స్కోరు -30; సమానంగా ఉన్నాయి",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "Team A scored -50, Team B scored -30",
+          "hi": "टीम A ने -50, टीम B ने -30",
+          "te": "టీమ్ A -50, టీమ్ B -30",
+          "reviewed": false
+        },
+        "mistakeTag": "added_magnitudes_with_negative_sign"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "Team A scored +30, Team B scored -30",
+          "hi": "टीम A ने +30, टीम B ने -30",
+          "te": "టీమ్ A +30, టీమ్ B -30",
+          "reviewed": false
+        },
+        "mistakeTag": "lost_negative_sign_on_larger_magnitude"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "Both scored +30",
+          "hi": "दोनों ने +30 अंक बनाए",
+          "te": "ఇద్దరి స్కోరు +30",
+          "reviewed": false
+        },
+        "mistakeTag": "positive_sign_for_below_zero"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Team A total = -40 + 10 + 0 = -30. Team B total = 10 + 0 + (-40) = -30. By the commutative property of addition, the order of numbers does not change the sum.",
+      "hi": "टीम A = -40 + 10 + 0 = -30। टीम B = 10 + 0 + (-40) = -30। योग के क्रमविनिमेय गुण से दोनों का योग -30 बराबर है।",
+      "te": "టీమ్ A = -40 + 10 + 0 = -30. టీమ్ B = 10 + 0 + (-40) = -30. స్థిత్యంతర ధర్మం ప్రకారం ఇద్దరి స్కోరు సమానం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Calculate the sum for each team and check if order of addition matters.",
+      "hi": "प्रत्येक टीम का कुल योग निकालें और देखें कि क्या जोड़ने का क्रम मायने रखता है।",
+      "te": "ప్రతి జట్టు యొక్క మొత్తం స్కోరును లెక్కించండి.",
       "reviewed": false
     }
   }

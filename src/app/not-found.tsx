@@ -20,7 +20,7 @@ export default function NotFound() {
           <span className="font-pixel text-3xl sm:text-4xl text-[#D9453D] block">404</span>
           <h1 className="font-pixel text-lg text-[#2B1B0F]">Page Not Found</h1>
           <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed font-sans">
-            The requested mathematics realm or learning route does not exist.
+            This page was not found. Tap below to return home.
           </p>
           <div className="pt-2">
             <Link
@@ -28,7 +28,7 @@ export default function NotFound() {
               className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-white border-[2px] border-[#422816] font-pixel text-xs shadow-[3px_3px_0px_#1B120C] no-underline"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Return to Realm Home</span>
+              <span>Go home</span>
             </Link>
           </div>
         </div>

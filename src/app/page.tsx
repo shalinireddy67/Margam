@@ -105,7 +105,7 @@ export default function HomePage() {
       studentLabel: "STUDENT",
       studentTitle: "I'm a student",
       studentBody:
-        "Take a short diagnostic, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
+        "Take a quick check, see what you know, then fix topics one small step at a time. No email or phone number needed.",
       studentBtn: "Start learning",
       studentSignIn: "Already have an account? Sign in",
       teacherLabel: "TEACHER",
@@ -118,12 +118,12 @@ export default function HomePage() {
       reviewed: true,
       welcomeBack: "Welcome back",
       classBadge: "Class",
-      activeGapFound: "Prerequisite Gap Detected",
-      fixGapBtn: "Strengthen Foundation",
-      continueLessonBtn: "Continue Quest",
+      activeGapFound: "Earlier Topic You Missed",
+      fixGapBtn: "Fix this topic",
+      continueLessonBtn: "Next lesson",
       switchProfile: "Switch Grade / Reset Profile",
-      chaptersHeading: "Math Chapters & Diagnostics",
-      chaptersSubtitle: "Choose a chapter to diagnose prerequisite mastery or start lessons.",
+      chaptersHeading: "Maths Chapters & Quick Checks",
+      chaptersSubtitle: "Choose a chapter to start a quick check or learn a lesson.",
       teacherLink: "Teacher Hub",
       conceptsMastered: "Concepts Mastered",
     },
@@ -149,8 +149,8 @@ export default function HomePage() {
       reviewed: false,
       welcomeBack: "पुनः स्वागत है",
       classBadge: "कक्षा",
-      activeGapFound: "बुनियादी कमी पाई गई",
-      fixGapBtn: "बुनियादी कमी सुधारें",
+      activeGapFound: "पिछला छूटा हुआ विषय",
+      fixGapBtn: "यह विषय सुधारें",
       continueLessonBtn: "पाठ जारी रखें",
       switchProfile: "कक्षा बदलें",
       chaptersHeading: "गणित के अध्याय",
@@ -180,8 +180,8 @@ export default function HomePage() {
       reviewed: false,
       welcomeBack: "పునఃస్వాగతం",
       classBadge: "తరగతి",
-      activeGapFound: "పునాది అంశంలో లోపం గుర్తించబడింది",
-      fixGapBtn: "పునాది లోపాన్ని సరిచేయండి",
+      activeGapFound: "గతంలో తప్పిన అంశం",
+      fixGapBtn: "ఈ అంశాన్ని సరిచేయండి",
       continueLessonBtn: "అభ్యాసం కొనసాగించండి",
       switchProfile: "తరగతి లేదా పేరు మార్చండి",
       chaptersHeading: "గణిత అధ్యాయాలు",
@@ -378,7 +378,7 @@ export default function HomePage() {
                       {profile.name}
                     </h1>
                     <p className="text-xs text-[#E5D7BE] mt-1 font-bold">
-                      Class {profile.selectedClass} Realm • Adaptive Level {profile.currentDifficulty} / 3
+                      Class {profile.selectedClass} • Level {profile.currentDifficulty} / 3
                     </p>
                   </div>
                 </div>
@@ -403,7 +403,7 @@ export default function HomePage() {
               {/* Minecraft XP Progress Bar */}
               <div className="space-y-1.5 pt-1">
                 <div className="flex items-center justify-between text-xs font-heading font-bold">
-                  <span className="text-[#E5D7BE]">Realm Mastery Progress</span>
+                  <span className="text-[#E5D7BE]">Your progress</span>
                   <span className="text-[#FFE9A8]">
                     {completedConceptsCount} / {gradeChapters.length * 2} concepts
                   </span>
@@ -444,7 +444,7 @@ export default function HomePage() {
 
                   <p className="text-xs text-[#E5D7BE] leading-relaxed">
                     {profile?.activeGap?.plainLanguageReason ||
-                      "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade quests much easier!"}
+                      "A quick check found an earlier topic you missed. Practicing it now will make your current lessons much easier."}
                   </p>
 
                   <div className="pt-1 flex items-center gap-2 flex-wrap">
@@ -452,7 +452,7 @@ export default function HomePage() {
                       href={`/lesson/${firstActiveGapId}?fromGap=true`}
                       className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#FFE9A8] hover:bg-[#FFF2CC] text-[#2B1B0F] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                     >
-                      <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                      <svg className="w-4 h-4 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                       <span>{copy.fixGapBtn}</span>
                     </Link>
                     <Link
@@ -469,7 +469,7 @@ export default function HomePage() {
                     href="/student"
                     className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
                   >
-                    <span>Enter Student Realm</span>
+                    <span>Go to student home</span>
                     <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Link>
 
@@ -478,7 +478,7 @@ export default function HomePage() {
                     size="sm"
                     onClick={handleTryQuestions}
                   >
-                    <span>Take Chapter Diagnostic</span>
+                    <span>Take quick check</span>
                   </Button>
 
                   <button
@@ -635,7 +635,7 @@ export default function HomePage() {
                   All Math Blocks in Great Shape!
                 </h3>
                 <p className="text-xs text-[#E5D7BE] max-w-md mx-auto">
-                  No concepts are currently overdue for spaced revision. Complete new lessons below to advance your learning realm!
+                  No topics are due for revision today. Start a new lesson below to keep learning.
                 </p>
               </div>
             )}

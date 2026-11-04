@@ -412,7 +412,7 @@ button[aria-pressed="true"] {
 
 
 /* Blocky Voxel World Grid & Palette Styles */
-.minecraft-grid-bg, .voxel-grid-bg {
+.voxel-grid-bg {
   background-color: #5A3720;
   background-image: 
     linear-gradient(to right, rgba(160, 106, 60, 0.16) 2px, transparent 2px),
@@ -420,7 +420,7 @@ button[aria-pressed="true"] {
   background-size: 32px 32px;
 }
 
-.minecraft-grass-pattern, .voxel-dirt-pattern {
+.voxel-dirt-pattern {
   background-color: #5A3720;
   background-image: radial-gradient(#7A4B2A 15%, transparent 16%), radial-gradient(#422816 15%, transparent 16%);
   background-size: 16px 16px;

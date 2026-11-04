@@ -38,10 +38,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-full flex flex-col text-[#2B1B0F] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden selection:bg-[#5DAA3A]/30 selection:text-[#1B3811]">
-        {/* Universal Fixed Minecraft Nature Background Scenery */}
+        {/* Universal Fixed Nature Background Scenery */}
         <div
           className="fixed inset-0 pointer-events-none -z-20 bg-cover bg-center bg-no-repeat responsive-bg-fixed"
-          style={{ backgroundImage: "url('/images/minecraft/meadow-day.jpg')" }}
+          style={{ backgroundImage: "url('/images/world/meadow-day.jpg')" }}
           aria-hidden="true"
         />
         {/* Subtle Ambient Daylight Overlay for Readability */}

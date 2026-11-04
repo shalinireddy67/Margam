@@ -28,9 +28,9 @@ export const TIME_GREETINGS: Record<TimeOfDay, LocalizedString> = {
 };
 
 export const GREETING_SUBTITLES: Record<SupportedLanguage, string> = {
-  en: "Ready for today's maths journey?",
-  hi: "क्या आप आज के गणित अभ्यास के लिए तैयार हैं?",
-  te: "ఈరోజు గణిత అభ్యాసానికి సిద్ధంగా ఉన్నారా?",
+  en: "Ready to practice maths today?",
+  hi: "क्या आप आज गणित का अभ्यास करने के लिए तैयार हैं?",
+  te: "ఈరోజు గణితం సాధన చేయడానికి సిద్ధంగా ఉన్నారా?",
 };
 
 // Aliases for compatibility

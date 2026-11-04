@@ -219,7 +219,7 @@ export default function AdaptivePracticeRunnerPage() {
   // Loading Skeleton State
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-[#102610] minecraft-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
+      <div className="min-h-screen bg-[#102610] voxel-grid-bg text-[#F2F0DF] p-4 sm:p-6 pb-28">
         <OfflineBanner />
         <div className="max-w-4xl mx-auto space-y-4 pt-4" role="status" aria-label="Loading adaptive practice">
           <SkeletonCard />
@@ -475,7 +475,7 @@ export default function AdaptivePracticeRunnerPage() {
               <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <span className="text-[11px] font-heading font-extrabold text-amber-900 uppercase tracking-wider block">
-                  Tailored Practice Strategy
+                  Your practice plan
                 </span>
                 <p className="text-xs text-slate-700 font-sans leading-snug">
                   {personalizedReason}
@@ -504,7 +504,7 @@ export default function AdaptivePracticeRunnerPage() {
                 <div className="glass-panel p-5 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-emerald-950 space-y-2">
                   <div className="flex items-center gap-2 text-emerald-900 font-heading font-extrabold text-xs uppercase tracking-wider">
                     <Sparkles className="w-4 h-4 text-emerald-600" />
-                    <span>✨ Foundational Prerequisite Gap Resolved! (+50 XP Bonus)</span>
+                    <span>✨ Earlier topic fixed! (+50 XP bonus)</span>
                   </div>
                   <h3 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
                     Foundation Successfully Repaired!

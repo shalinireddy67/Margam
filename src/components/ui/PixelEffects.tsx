@@ -253,7 +253,7 @@ export function LevelUpModal({
         </h2>
 
         <p className="text-xs text-[#E5D7BE] font-medium leading-relaxed mb-4">
-          You have achieved the <strong className="text-[#FFE9A8]">{rank.name} Rank</strong> in the Margam realm! Keep exploring to unlock diamond tier achievements.
+          You reached <strong className="text-[#FFE9A8]">{rank.name} level</strong> in maths. Keep practicing to reach the next tool tier.
         </p>
 
         <button
@@ -261,7 +261,7 @@ export function LevelUpModal({
           onClick={onClose}
           className="w-full min-h-[44px] px-4 py-2 bg-gradient-to-b from-[#5DAA3A] to-[#2F6B22] text-[#FFF7E6] border-2 border-[#204514] font-heading font-extrabold text-xs shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4),3px_3px_0px_#1B120C] active:translate-y-0.5"
         >
-          Claim Glory & Continue →
+          Continue
         </button>
       </div>
     </div>

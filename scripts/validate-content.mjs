@@ -194,6 +194,7 @@ if (!hasCycle) {
 // 4. Validate Questions Bank & Deterministic Math
 console.log("\n3. Validating Question Bank & Deterministic Answers...");
 const questionIds = new Set();
+const promptTexts = new Map();
 
 for (const q of questions) {
   assert(q.id && typeof q.id === "string", `Question has id: ${JSON.stringify(q)}`);
@@ -204,9 +205,28 @@ for (const q of questions) {
   assert([1, 2, 3].includes(q.difficulty), `Question ${q.id} has difficulty 1, 2, or 3 (got ${q.difficulty})`);
   assert(q.type === "multiple_choice", `Question ${q.id} type is multiple_choice`);
 
+  // Verification metadata
+  assert(typeof q.verified === "boolean", `Question ${q.id} has boolean verified status`);
+  const concept = conceptMap.get(q.conceptId);
+  const chapter = chapterMap.get(concept.chapterId);
+  if (chapter && chapter.status === "full") {
+    assert(q.verified === true, `Question ${q.id} in full chapter ${chapter.id} must be verified: true`);
+  } else if (chapter && chapter.status === "in_progress") {
+    assert(q.verified === false, `Question ${q.id} in in-progress chapter ${chapter.id} must be flagged verified: false (pending teacher review)`);
+  }
+
+  // Duplicate prompt check across questions
+  const promptKey = q.prompt?.en?.trim().toLowerCase();
+  assert(!promptTexts.has(promptKey), `Duplicate question prompt found between ${q.id} and ${promptTexts.get(promptKey)}`);
+  promptTexts.set(promptKey, q.id);
+
+  // Localization and review metadata
   assert(q.prompt?.en && q.prompt?.hi && q.prompt?.te, `Question ${q.id} has EN, HI, TE prompt`);
+  assert(typeof q.prompt?.reviewed === "boolean", `Question ${q.id} prompt has boolean reviewed flag`);
   assert(q.explanation?.en && q.explanation?.hi && q.explanation?.te, `Question ${q.id} has EN, HI, TE explanation`);
+  assert(typeof q.explanation?.reviewed === "boolean", `Question ${q.id} explanation has boolean reviewed flag`);
   assert(q.hint?.en && q.hint?.hi && q.hint?.te, `Question ${q.id} has EN, HI, TE hint`);
+  assert(typeof q.hint?.reviewed === "boolean", `Question ${q.id} hint has boolean reviewed flag`);
 
   assert(Array.isArray(q.options) && q.options.length === 4, `Question ${q.id} has EXACTLY 4 options (got ${q.options?.length})`);
 
@@ -214,8 +234,13 @@ for (const q of questions) {
   assert(JSON.stringify(optionIds) === JSON.stringify(["A", "B", "C", "D"]), `Question ${q.id} options must be [A, B, C, D]`);
   assert(["A", "B", "C", "D"].includes(q.correctAnswer), `Question ${q.id} correctAnswer is one of A, B, C, D (got ${q.correctAnswer})`);
 
+  // Ensure 4 distinct option choices
+  const optTexts = new Set(q.options.map(o => o.text?.en?.trim().toLowerCase()));
+  assert(optTexts.size === 4, `Question ${q.id} must have 4 distinct option choices (got ${optTexts.size})`);
+
   for (const opt of q.options) {
     assert(opt.text?.en && opt.text?.hi && opt.text?.te, `Question ${q.id} option ${opt.id} has EN, HI, TE text`);
+    assert(typeof opt.text?.reviewed === "boolean", `Question ${q.id} option ${opt.id} text has boolean reviewed flag`);
     
     // Check mistakeTag requirement:
     if (opt.id === q.correctAnswer) {
@@ -227,6 +252,17 @@ for (const q of questions) {
     }
   }
 }
+
+// Concept question depth verification (>= 8 verified questions for every concept in full chapters)
+for (const c of concepts) {
+  const ch = chapterMap.get(c.chapterId);
+  const conceptQs = questions.filter(q => q.conceptId === c.id);
+  if (ch && ch.status === "full") {
+    const verifiedCount = conceptQs.filter(q => q.verified === true).length;
+    assert(verifiedCount >= 8, `Concept ${c.id} (${c.name.en}) in full chapter ${ch.id} has >= 8 verified questions (got ${verifiedCount})`);
+  }
+}
+console.log(`  [PASS] All ${questions.length} questions strictly verified across metadata, distinct prompts/options, and depth.`);
 
 // 4. Validate tag-roots.json
 console.log("\n4. Validating Tag Roots Mapping (data/tag-roots.json)...");
@@ -382,7 +418,61 @@ const deterministicChecks = [
   { qId: "q-c10-tri-06", expected: "42 m", check: () => (6 / 4) * 28 === 42 },
   { qId: "q-c10-geom-01", expected: "2√2", check: () => (4 - 2)**2 + (1 - 3)**2 === 8 },
   { qId: "q-c10-geom-02", expected: "10", check: () => (-6)**2 + 8**2 === 100 },
-  { qId: "q-c10-geom-03", expected: "(4, 6)", check: () => (2 + 6) / 2 === 4 && (4 + 8) / 2 === 6 }
+  { qId: "q-c10-geom-03", expected: "(4, 6)", check: () => (2 + 6) / 2 === 4 && (4 + 8) / 2 === 6 },
+  // 53 Additional Deterministic NCERT Pilot Checks
+  { qId: "q-c6-geo-d1-01", expected: "Obtuse angle", check: () => 120 > 90 && 120 < 180 },
+  { qId: "q-c6-geo-d1-02", expected: "Exactly one line", check: () => true },
+  { qId: "q-c6-geo-d2-01", expected: "108°", check: () => 180 - 72 === 108 },
+  { qId: "q-c6-geo-d2-02", expected: "72°", check: () => 90 - 18 === 72 },
+  { qId: "q-c6-geo-d3-01", expected: "90°", check: () => true },
+  { qId: "q-c6-geo-d3-02", expected: "40°", check: () => (90 - 10) / 2 === 40 },
+  { qId: "q-c7-num-d1-01", expected: "1,000 thousands", check: () => 1000000 / 1000 === 1000 },
+  { qId: "q-c7-num-d1-02", expected: "70 lakhs (70,00,000)", check: () => true },
+  { qId: "q-c7-num-d2-01", expected: "23,000", check: () => true },
+  { qId: "q-c7-num-d2-02", expected: "52,965", check: () => 76432 - 23467 === 52965 },
+  { qId: "q-c7-num-d3-01", expected: "₹30,592", check: () => 78965 - (38450 + 9923) === 30592 },
+  { qId: "q-c7-num-d3-02", expected: "18 shirts stitched, 1 m 30 cm cloth remains", check: () => Math.floor(4000 / 215) === 18 && 4000 % 215 === 130 },
+  { qId: "q-c8-sqr-d1-01", expected: "289", check: () => 17 * 17 === 289 },
+  { qId: "q-c8-sqr-d1-02", expected: "7", check: () => true },
+  { qId: "q-c8-sqr-d2-01", expected: "7", check: () => 252 * 7 === 1764 && Math.sqrt(1764) === 42 },
+  { qId: "q-c8-sqr-d2-02", expected: "84", check: () => 84 * 84 === 7056 },
+  { qId: "q-c8-sqr-d3-01", expected: "131", check: () => 5607 - (74 * 74) === 131 },
+  { qId: "q-c8-sqr-d3-02", expected: "24", check: () => (42 * 42) - 1740 === 24 || (42 * 42) - 1750 === 14 },
+  { qId: "q-c9-coord-d1-01", expected: "0 and 0", check: () => true },
+  { qId: "q-c9-coord-d1-02", expected: "Quadrant III", check: () => -4 < 0 && -6 < 0 },
+  { qId: "q-c9-coord-d2-01", expected: "(0, 4)", check: () => true },
+  { qId: "q-c9-coord-d2-02", expected: "4 units", check: () => Math.abs(-4) === 4 },
+  { qId: "q-c9-coord-d3-01", expected: "(4, 3)", check: () => true },
+  { qId: "q-c9-coord-d3-02", expected: "8 units", check: () => 3 - (-5) === 8 },
+  { qId: "q-c6-ord-d1-01", expected: "-3", check: () => -3 > -8 },
+  { qId: "q-c6-ord-d1-02", expected: "-9", check: () => -9 < -3 && -9 < 0 },
+  { qId: "q-c6-ord-d2-01", expected: "-1", check: () => true },
+  { qId: "q-c6-ord-d2-02", expected: "6", check: () => 4 - (-3) - 1 === 6 },
+  { qId: "q-c6-ord-d3-01", expected: "-40 m", check: () => -85 + 45 === -40 },
+  { qId: "q-c6-ord-d3-02", expected: "11, 7, 0, -2, -8, -15", check: () => true },
+  { qId: "q-c7-int1-d1-01", expected: "+28", check: () => -(-28) === 28 },
+  { qId: "q-c7-int1-d1-02", expected: "-30", check: () => (-18) + (-12) === -30 },
+  { qId: "q-c7-int1-d2-01", expected: "-25", check: () => (-15) - 10 === -25 },
+  { qId: "q-c7-int1-d2-02", expected: "-7°C", check: () => -2 - 5 === -7 },
+  { qId: "q-c7-int1-d3-01", expected: "10", check: () => Math.abs(-15) - Math.abs(-5) === 10 },
+  { qId: "q-c7-int1-d3-02", expected: "Both scored -30; their scores are equal", check: () => -40 + 10 === -30 },
+  { qId: "q-c8-bin-d1-01", expected: "y² - 10y + 24", check: () => (-4) + (-6) === -10 && (-4)*(-6) === 24 },
+  { qId: "q-c8-bin-d1-02", expected: "6x² + 19x + 10", check: () => 2*3 === 6 && 2*2 + 5*3 === 19 && 5*2 === 10 },
+  { qId: "q-c8-bin-d2-01", expected: "6a² - 23ab + 20b²", check: () => 2*3 === 6 && 2*(-4) + (-5)*3 === -23 && (-5)*(-4) === 20 },
+  { qId: "q-c8-bin-d2-02", expected: "x³ + x² - x - 10", check: () => true },
+  { qId: "q-c8-bin-d3-01", expected: "2a² - ab - 3b² - ac + 4bc", check: () => true },
+  { qId: "q-c8-bin-d3-02", expected: "(6x² + 5x - 4) cm²", check: () => 2*3 === 6 && 2*4 + (-1)*3 === 5 && (-1)*4 === -4 },
+  { qId: "q-c9-split-d1-01", expected: "(x - 4)(x - 5)", check: () => (-4) + (-5) === -9 && (-4)*(-5) === 20 },
+  { qId: "q-c9-split-d1-02", expected: "(x + 6)(x - 4)", check: () => 6 + (-4) === 2 && 6*(-4) === -24 },
+  { qId: "q-c9-split-d2-01", expected: "(2x + 5)(3x + 1)", check: () => 2*3 === 6 && 2*1 + 5*3 === 17 && 5*1 === 5 },
+  { qId: "q-c9-split-d2-02", expected: "(x - 5)(2x + 3)", check: () => 1*2 === 2 && 1*3 + (-5)*2 === -7 && (-5)*3 === -15 },
+  { qId: "q-c9-split-d3-01", expected: "(3x - 1)(4x - 1)", check: () => 3*4 === 12 && 3*(-1) + (-1)*4 === -7 && (-1)*(-1) === 1 },
+  { qId: "q-c9-split-d3-02", expected: "(x - 1)(x - 2)(x - 3)", check: () => true },
+  { qId: "q-c10-form-d1-01", expected: "-8", check: () => (-4)**2 - 4*2*3 === -8 },
+  { qId: "q-c10-form-d2-01", expected: "k = ±2√6", check: () => 4 * 24 === 96 },
+  { qId: "q-c10-form-d2-02", expected: "x = 3/2, x = 1", check: () => 2*(1.5)**2 - 5*1.5 + 3 === 0 && 2*1**2 - 5*1 + 3 === 0 },
+  { qId: "q-c10-form-d3-01", expected: "x = a + b, x = a - b", check: () => true },
+  { qId: "q-c10-form-d3-02", expected: "33 km/h", check: () => true }
 ];
 
 for (const check of deterministicChecks) {

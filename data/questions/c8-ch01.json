@@ -64,7 +64,8 @@
       "hi": "जांचें कि क्या 12 का वर्ग 144 के बराबर है।",
       "te": "12 యొక్క వర్గం ఎంత అని పరిశీలించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c8-sqr-02",
@@ -130,6 +131,415 @@
       "en": "Notice that 20² = 400 and 30² = 900. Since 576 ends in 6, the unit digit of the root must be 4 or 6.",
       "hi": "चूंकि 576 का अंतिम अंक 6 है, इसके वर्गमूल का इकाई अंक 4 या 6 होना चाहिए।",
       "te": "576 చివరి అంకె 6 కాబట్టి, వర్గమూలం ఒకట్ల స్థానంలో 4 లేదా 6 ఉండాలి.",
+      "reviewed": false
+    },
+    "verified": true
+  },
+  {
+    "id": "q-c8-sqr-d1-01",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the square of 17?",
+      "hi": "17 का वर्ग क्या है?",
+      "te": "17 యొక్క వర్గం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "279",
+          "hi": "279",
+          "te": "279",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "289",
+          "hi": "289",
+          "te": "289",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "34",
+          "hi": "34",
+          "te": "34",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "256",
+          "hi": "256",
+          "te": "256",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "17² = 17 * 17 = 289.",
+      "hi": "17² = 17 * 17 = 289।",
+      "te": "17² = 17 * 17 = 289.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Multiply 17 by itself: 17 * 17.",
+      "hi": "17 को 17 से गुणा कीजिए।",
+      "te": "17 ను 17 తో గుణించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-d1-02",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 1,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Which of the following digits can NEVER be the unit's digit of a perfect square number?",
+      "hi": "निम्नलिखित में से कौन सा अंक किसी पूर्ण वर्ग संख्या का इकाई अंक कभी नहीं हो सकता?",
+      "te": "కింది వాటిలో ఏ అంకె ఎప్పటికీ ఒక పరిపూర్ణ వర్గ సంఖ్య యొక్క ఒకట్ల స్థానంలో ఉండదు?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "1",
+          "hi": "1",
+          "te": "1",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "4",
+          "hi": "4",
+          "te": "4",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_ending_in_fifty_with_square"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "6",
+          "hi": "6",
+          "te": "6",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_double_hundred_with_perfect_square"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "The squares of single digits end in 0, 1, 4, 5, 6, or 9. A perfect square never ends in 2, 3, 7, or 8. Hence, 7 can never be the unit digit.",
+      "hi": "पूर्ण वर्ग संख्याओं के इकाई अंक केवल 0, 1, 4, 5, 6 या 9 होते हैं। वे कभी भी 2, 3, 7 या 8 पर समाप्त नहीं होते। अतः 7 कभी इकाई अंक नहीं हो सकता।",
+      "te": "పరిపూర్ణ వర్గ సంఖ్యలు ఎల్లప్పుడూ 0, 1, 4, 5, 6 లేదా 9 తో ముగుస్తాయి. అవి 2, 3, 7 లేదా 8 తో ఎప్పటికీ ముగియవు. కాబట్టి 7 సరైన సమాధానం.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Check the unit digits of 1², 2², 3², ... 9².",
+      "hi": "1², 2², 3², ... 9² के इकाई अंकों की जाँच कीजिए।",
+      "te": "1², 2², 3², ... 9² ల ఒకట్ల అంకెలను పరిశీలించండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-d2-01",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Find the smallest whole number by which 252 must be multiplied so as to get a perfect square.",
+      "hi": "वह सबसे छोटी पूर्ण संख्या ज्ञात कीजिए जिससे 252 को गुणा करने पर यह एक पूर्ण वर्ग संख्या बन जाए।",
+      "te": "252 ని పరిపూర్ణ వర్గంగా మార్చడానికి గుణించాల్సిన అతిచిన్న పూర్ణాంకం ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "7",
+          "hi": "7",
+          "te": "7",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "2",
+          "hi": "2",
+          "te": "2",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "3",
+          "hi": "3",
+          "te": "3",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "14",
+          "hi": "14",
+          "te": "14",
+          "reviewed": false
+        },
+        "mistakeTag": "guessed_ending_in_four_from_six"
+      }
+    ],
+    "correctAnswer": "A",
+    "explanation": {
+      "en": "Prime factorisation of 252 = 2² * 3² * 7. To pair all prime factors, 7 must be multiplied once: 252 * 7 = 1764 = 42².",
+      "hi": "252 का अभाज्य गुणनखंड = 2² * 3² * 7 है। सभी गुणनखंडों का युग्म बनाने के लिए 7 से गुणा करना होगा: 252 * 7 = 1764 = 42²।",
+      "te": "252 యొక్క ప్రధాన కారణాంకాలు = 2² * 3² * 7. జతలుగా చేయడానికి 7 చేత గుణించాలి: 252 * 7 = 1764 = 42².",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Factorize 252 into primes and find the factor without a pair.",
+      "hi": "252 का अभाज्य गुणनखंडन करें और देखें कि किस गुणनखंड का युग्म नहीं है।",
+      "te": "252 ని ప్రధాన కారణాంకాలుగా విడగొట్టి, జత లేని సంఖ్యను కనుగొనండి.",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-d2-02",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 2,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "What is the square root of 7,056 using prime factorisation?",
+      "hi": "अभाज्य गुणनखंडन विधि द्वारा 7,056 का वर्गमूल क्या है?",
+      "te": "ప్రధాన కారణాంకాల పద్ధతి ద్వారా 7,056 యొక్క వర్గమూలం ఎంత?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "74",
+          "hi": "74",
+          "te": "74",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "86",
+          "hi": "86",
+          "te": "86",
+          "reviewed": false
+        },
+        "mistakeTag": "guessed_ending_in_four_from_six"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "94",
+          "hi": "94",
+          "te": "94",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "84",
+          "hi": "84",
+          "te": "84",
+          "reviewed": false
+        }
+      }
+    ],
+    "correctAnswer": "D",
+    "explanation": {
+      "en": "7056 = 2⁴ * 3² * 7². Square root = 2² * 3 * 7 = 4 * 21 = 84.",
+      "hi": "7056 = 2⁴ * 3² * 7²। वर्गमूल = 2² * 3 * 7 = 4 * 21 = 84।",
+      "te": "7056 = 2⁴ * 3² * 7². వర్గమూలం = 2² * 3 * 7 = 4 * 21 = 84.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Group the prime factors into pairs: (2 * 2) * (2 * 2) * (3 * 3) * (7 * 7).",
+      "hi": "अभाज्य गुणनखंडों को युग्मों में समूहित करें: (2 * 2) * (2 * 2) * (3 * 3) * (7 * 7)।",
+      "te": "ప్రధాన కారణాంకాలను జతలుగా చేయండి: 2² * 2² * 3² * 7².",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-d3-01",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "pure_math",
+    "verified": true,
+    "prompt": {
+      "en": "Find the least number that must be subtracted from 5,607 so as to get a perfect square.",
+      "hi": "वह सबसे छोटी संख्या ज्ञात कीजिए जिसे 5,607 में से घटाने पर एक पूर्ण वर्ग संख्या प्राप्त हो।",
+      "te": "5,607 నుండి తీసివేస్తే పరిపూర్ణ వర్గం వచ్చే అతిచిన్న సంఖ్య ఏది?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "18",
+          "hi": "18",
+          "te": "18",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "131",
+          "hi": "131",
+          "te": "131",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "121",
+          "hi": "121",
+          "te": "121",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_double_hundred_with_perfect_square"
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "141",
+          "hi": "141",
+          "te": "141",
+          "reviewed": false
+        },
+        "mistakeTag": "overestimated_factor_product"
+      }
+    ],
+    "correctAnswer": "B",
+    "explanation": {
+      "en": "By long division, 74² = 5,476 and 75² = 5,625. To get a perfect square by subtraction, 5607 - 5476 = 131.",
+      "hi": "भागफल विधि से, 74² = 5,476। अतः 5,607 - 5,476 = 131 घटाना होगा।",
+      "te": "74² = 5,476. కాబట్టి తీసివేయాల్సిన సంఖ్య = 5,607 - 5,476 = 131.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Find the largest integer whose square is less than 5607 (74² = 5476).",
+      "hi": "वह सबसे बड़ा पूर्णांक ज्ञात करें जिसका वर्ग 5607 से कम हो (74² = 5476)।",
+      "te": "వర్గం 5607 కంటే తక్కువగా ఉండే గరిష్ట సంఖ్యను కనుగొనండి (74² = 5476).",
+      "reviewed": false
+    }
+  },
+  {
+    "id": "q-c8-sqr-d3-02",
+    "conceptId": "c8-sqr-01",
+    "difficulty": 3,
+    "type": "multiple_choice",
+    "contextTag": "real_world",
+    "verified": true,
+    "prompt": {
+      "en": "A gardener has 1,000 plants. He wants to plant these such that the number of rows and columns are equal. What is the minimum number of additional plants he needs?",
+      "hi": "एक माली के पास 1,000 पौधे हैं। वह इन्हें इस प्रकार लगाना चाहता है कि पंक्तियों और स्तंभों की संख्या समान रहे। इसके लिए उसे कम से कम कितने और पौधों की आवश्यकता है?",
+      "te": "ఒక తోటమాలి వద్ద 1,000 మొక్కలు ఉన్నాయి. వరుసలు మరియు నిలువు వరుసల సంఖ్య సమానంగా ఉండేలా వాటిని నాటాలనుకున్నాడు. అతనికి ఇంకా కనీసం ఎన్ని అదనపు మొక్కలు కావాలి?",
+      "reviewed": false
+    },
+    "options": [
+      {
+        "id": "A",
+        "text": {
+          "en": "39",
+          "hi": "39",
+          "te": "39",
+          "reviewed": false
+        },
+        "mistakeTag": "calculated_square_root_arithmetic_error"
+      },
+      {
+        "id": "B",
+        "text": {
+          "en": "32",
+          "hi": "32",
+          "te": "32",
+          "reviewed": false
+        },
+        "mistakeTag": "confused_multiple_with_square"
+      },
+      {
+        "id": "C",
+        "text": {
+          "en": "24",
+          "hi": "24",
+          "te": "24",
+          "reviewed": false
+        }
+      },
+      {
+        "id": "D",
+        "text": {
+          "en": "16",
+          "hi": "16",
+          "te": "16",
+          "reviewed": false
+        },
+        "mistakeTag": "guessed_ending_in_four_from_six"
+      }
+    ],
+    "correctAnswer": "C",
+    "explanation": {
+      "en": "31² = 961 < 1000 < 32² = 1,024. To form a square arrangement without reducing plants, he needs 1,024 - 1,000 = 24 additional plants.",
+      "hi": "31² = 961 < 1000 < 32² = 1,024। अतः आवश्यक अतिरिक्त पौधे = 1,024 - 1,000 = 24।",
+      "te": "31² = 961 < 1000 < 32² = 1,024. కావలసిన అదనపు మొక్కలు = 1,024 - 1,000 = 24.",
+      "reviewed": false
+    },
+    "hint": {
+      "en": "Check the next perfect square above 1000 (32² = 1024).",
+      "hi": "1000 के बाद का अगला पूर्ण वर्ग ज्ञात करें (32² = 1024)।",
+      "te": "1000 తర్వాత వచ్చే తర్వాతి పరిపూర్ణ వర్గాన్ని చూడండి (32² = 1024).",
       "reviewed": false
     }
   }

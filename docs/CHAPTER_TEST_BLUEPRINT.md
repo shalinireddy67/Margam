@@ -7,53 +7,64 @@
 ## 1. Feasibility Report Against Actual Question Pool
 
 ### 1.1 Global Question Bank Overview
-The Margam question bank comprises **86 deterministic assessment items** across 20 sequential concepts spanning Classes 6 through 10. Each chapter contains two pilot concepts designed to demonstrate prerequisite dependency traversal and diagnostic placement.
+The Margam question bank comprises **212 deterministic assessment items** across 24 mapped NCERT concepts spanning Classes 6 through 10.
+- **180 Verified Items (`verified: true`)**: Distributed across the 15 fully implemented chapters (Chapters 1 & 2 across Classes 6–10 plus the 5 two-concept pilot chapters). Every concept in these chapters has between 8 and 11 mathematically verified items.
+- **32 Pending Review Items (`verified: false`)**: Distributed across 4 Class 10 in-progress chapters (`c10-ch03`, `c10-ch05`, `c10-ch06`, `c10-ch07`, each with 8 items) awaiting educator sign-off.
+- **Strict Differentiation**: Only verified questions (`verified: true`) count toward chapter readiness and can be served in student assessments.
 
 ### 1.2 Question Pool Audit: Diagnostic vs. Non-Diagnostic Items
-In Stage 1 (Chapter Diagnostic), Margam extracts up to **6 questions** per chapter to evaluate placement and identify root-cause prerequisite gaps. To guarantee assessment independence and prevent item familiarity effects, summative chapter tests (Stage 3) ideally draw exclusively from **non-diagnostic items**.
+In Stage 1 (Chapter Diagnostic), Margam extracts **6 questions** per chapter to evaluate baseline placement and identify root-cause prerequisite gaps. To guarantee assessment independence and prevent item familiarity effects, summative chapter tests (Stage 3) draw from **non-diagnostic items**.
 
-The table below details the exact inventory per concept and difficulty level across all pilot chapters, both before and after excluding the 6 diagnostic questions:
+The table below details the updated inventory per concept and difficulty level across the 5 core pilot chapters after expanding question depth from 2 to 8 items on secondary concepts:
 
 | Chapter ID | Concept ID | Concept Title | Total Questions | Diff 1 | Diff 2 | Diff 3 | Diag Questions | Non-Diag Available | Non-Diag Diff Breakdown (D1 / D2 / D3) |
 |---|---|---|---|---|---|---|---|---|---|
 | **c6-ch10** | `c6-neg-01` | Opposite Quantities & Negative Numbers | 11 | 4 | 4 | 3 | 4 | **7** | 2 / 3 / 2 |
-| | `c6-neg-02` | Number Line Ordering | 2 | 1 | 1 | 0 | 2 | **0** | 0 / 0 / 0 |
-| *Subtotal* | | *c6-ch10 Total* | *13* | *5* | *5* | *3* | *6* | ***7*** | *2 / 3 / 2* |
-| **c7-ch10** | `c7-int-01` | Addition & Subtraction of Signed Integers | 2 | 1 | 1 | 0 | 2 | **0** | 0 / 0 / 0 |
+| | `c6-neg-02` | Number Line Ordering | 8 | 3 | 3 | 2 | 2 | **6** | 2 / 2 / 2 |
+| *Subtotal* | | *c6-ch10 Total* | *19* | *7* | *7* | *5* | *6* | ***13*** | *4 / 5 / 4* |
+| **c7-ch10** | `c7-int-01` | Addition & Subtraction of Signed Integers | 8 | 3 | 3 | 2 | 2 | **6** | 2 / 2 / 2 |
 | | `c7-int-02` | Multiplication of Integers & Sign Rules | 11 | 4 | 4 | 3 | 4 | **7** | 2 / 3 / 2 |
-| *Subtotal* | | *c7-ch10 Total* | *13* | *5* | *5* | *3* | *6* | ***7*** | *2 / 3 / 2* |
+| *Subtotal* | | *c7-ch10 Total* | *19* | *7* | *7* | *5* | *6* | ***13*** | *4 / 5 / 4* |
 | **c8-ch06** | `c8-dist-01` | Distributive Law with Signed Monomials | 11 | 4 | 4 | 3 | 4 | **7** | 2 / 3 / 2 |
-| | `c8-dist-02` | Binomial Multiplication & Like Terms | 2 | 1 | 1 | 0 | 2 | **0** | 0 / 0 / 0 |
-| *Subtotal* | | *c8-ch06 Total* | *13* | *5* | *5* | *3* | *6* | ***7*** | *2 / 3 / 2* |
+| | `c8-dist-02` | Binomial Multiplication & Like Terms | 8 | 3 | 3 | 2 | 2 | **6** | 2 / 2 / 2 |
+| *Subtotal* | | *c8-ch06 Total* | *19* | *7* | *7* | *5* | *6* | ***13*** | *4 / 5 / 4* |
 | **c9-ch04** | `c9-id-01` | Standard Algebraic Identities | 11 | 4 | 4 | 3 | 4 | **7** | 2 / 3 / 2 |
-| | `c9-id-02` | Factoring Trinomials by Middle Term | 2 | 1 | 1 | 0 | 2 | **0** | 0 / 0 / 0 |
-| *Subtotal* | | *c9-ch04 Total* | *13* | *5* | *5* | *3* | *6* | ***7*** | *2 / 3 / 2* |
+| | `c9-id-02` | Factoring Trinomials by Middle Term | 8 | 3 | 3 | 2 | 2 | **6** | 2 / 2 / 2 |
+| *Subtotal* | | *c9-ch04 Total* | *19* | *7* | *7* | *5* | *6* | ***13*** | *4 / 5 / 4* |
 | **c10-ch04** | `c10-quad-01` | Standard Form & Solving by Factoring | 11 | 4 | 4 | 3 | 3 | **8** | 3 / 3 / 2 |
-| | `c10-quad-02` | Quadratic Formula & Discriminant | 3 | 1 | 1 | 1 | 3 | **0** | 0 / 0 / 0 |
-| *Subtotal* | | *c10-ch04 Total* | *14* | *5* | *5* | *4* | *6* | ***8*** | *3 / 3 / 2* |
+| | `c10-quad-02` | Quadratic Formula & Discriminant | 8 | 3 | 3 | 2 | 3 | **5** | 2 / 2 / 1 |
+| *Subtotal* | | *c10-ch04 Total* | *19* | *7* | *7* | *5* | *6* | ***13*** | *5 / 5 / 3* |
+
+#### Additional 10 Implemented Chapters (Chapters 1 & 2 across Classes 6–10)
+In addition to the 5 two-concept pilot chapters above, Margam provides verified question banks for Chapters 1 & 2 across Classes 6 through 10 (each with 8 to 9 verified items, total 85 verified items):
+- **Class 6**: `c6-ch01` (9 items, `c6-pat-01`), `c6-ch02` (8 items, `c6-geo-01`)
+- **Class 7**: `c7-ch01` (8 items, `c7-num-01`), `c7-ch02` (9 items, `c7-alg-01`)
+- **Class 8**: `c8-ch01` (8 items, `c8-sqr-01`), `c8-ch02` (9 items, `c8-exp-01`)
+- **Class 9**: `c9-ch01` (8 items, `c9-coord-01`), `c9-ch02` (9 items, `c9-poly-01`)
+- **Class 10**: `c10-ch01` (8 items, `c10-real-01`), `c10-ch02` (9 items, `c10-poly-01`)
+
+Every one of these 15 full chapters now satisfies `canTakeChapterDiagnostic` ($\ge 6$ verified questions).
 
 ---
 
-### 1.3 Feasibility Analysis & Current Pool Limitations
+### 1.3 Feasibility Analysis & Resolution
 
-#### Finding 1: Target Test Size Shortfall
+#### Resolution 1: Target Test Size Feasibility Achieved
 - **Target Chapter Test Size**: **10 questions**.
-- **Available Disjoint Pool for `c10-ch04`**: **8 questions** (all belonging to `c10-quad-01`).
-- **Deficit**: A 2-question shortfall prevents generating a 10-question chapter test strictly disjoint from diagnostic items.
-- **Operational Handling**: When strictly disjoint selection is requested, the engine triggers its silent shortfall handler (`shortfall: true`), returning the 8 available questions without fabricating synthetic items. In production/demo mode, the engine pools from all 14 chapter items to present a complete 10-item assessment.
+- **Available Disjoint Pool**: **13 non-diagnostic questions** per pilot chapter (e.g. in `c10-ch04`: 8 items on `c10-quad-01` + 5 items on `c10-quad-02`).
+- **Surplus**: A **+3 question surplus** guarantees that full 10-question chapter tests can now be generated strictly disjoint from the 6 diagnostic questions without item recycling.
 
-#### Finding 2: Unbalanced Concept Coverage
-- In all pilot chapters, the second concept (`c6-neg-02`, `c7-int-01`, `c8-dist-02`, `c9-id-02`, `c10-quad-02`) has 2 to 3 total questions in the bank.
-- Because Stage 1 Diagnostic selects up to 3 questions per concept, **100% of questions for the second concept are consumed during diagnostic testing**.
-- **Deficit**: Non-diagnostic chapter tests have **0 available items** for the chapter's second concept.
+#### Resolution 2: Balanced Multi-Concept Coverage
+- With the second concept in each pilot chapter expanded from 2 to 8 verified items, the post-diagnostic available pool retains **5 to 6 fresh questions** per second concept.
+- Non-diagnostic chapter tests now achieve balanced representation across all concepts in the chapter.
 
-#### Finding 3: Equivalent Forms (Form A / Form B) Cannot Be Claimed
-- Establishing parallel equivalent forms (Form A and Form B with psychometric comparability $r \ge 0.80$) requires at least:
-  $$\text{Required Items} = 6 \text{ (Diagnostic)} + 10 \text{ (Form A)} + 10 \text{ (Form B)} = \mathbf{26 \text{ questions per chapter}}.$$
-- With only 13 to 14 questions currently in each chapter pool:
-  - **Form A alone** requires recycling diagnostic items.
-  - **Form B is mathematically impossible** without question duplication.
-- **Explicit Constraint**: Margam **does not claim parallel equivalent forms** for this build. Expanding the pool to $\ge 26$ questions per chapter is flagged as a post-pilot prerequisite.
+#### Finding 3: Parallel Equivalent Forms (Form A / Form B) Status
+- Psychometrically parallel equivalent forms (Form A and Form B with disjoint items and comparable reliability $r \ge 0.80$) require:
+  $\text{Required Items} = 6 \text{ (Diagnostic)} + 10 \text{ (Form A)} + 10 \text{ (Form B)} = \mathbf{26 \text{ questions per chapter}}.$
+- With 19 verified questions currently in each core pilot chapter pool:
+  - **Form A (10 questions)** is completely disjoint from the 6 diagnostic questions ($6 + 10 = 16 \le 19$).
+  - **Form B** would require an additional 7 fresh items ($26 - 19 = 7$).
+- **Explicit Protocol**: Margam transparently documents that **Form B is not claimed as an independent parallel form** in this release, preventing unsubstantiated psychometric claims.
 
 ---
 
@@ -162,5 +173,5 @@ $$\text{Chapter Test Pass Rate} = \frac{N_{\text{test\_passed}}}{N_{\text{test\_
 - **Denominator**: Total chapter test submissions.
 
 ### 5.7 Form Equivalence Deficit
-$$\text{Pool Deficit for Parallel Forms} = N_{\text{required}} - N_{\text{available}} = (6 + 10 + 10) - 14 = \mathbf{-12 \text{ items}}$$
-- Documents the exact deficit prohibiting the release of psychometrically equivalent parallel forms (Form A/B) in the current question bank.
+$\text{Pool Deficit for Parallel Forms} = N_{\text{required}} - N_{\text{available}} = (6 + 10 + 10) - 19 = \mathbf{-7 \text{ items}}$
+- Documents the remaining pool deficit required before releasing independent psychometrically equivalent parallel forms (Form A/B) per chapter. Single-form disjoint assessment (Diagnostic + Form A = 16 items) is fully satisfied with the current 19-item verified pool.

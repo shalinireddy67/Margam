@@ -139,7 +139,7 @@ export default function SelectClassPage() {
             <p className="font-sans text-xs sm:text-sm text-[#5A3720] max-w-xl mx-auto leading-relaxed">
               {profile
                 ? "Switch your daily study class anytime. Your completed lessons, mastery records, and XP are strictly preserved."
-                : "Choose your name and class (Classes 6–10) to begin personalized NCERT mathematics learning with diagnostic gap detection."}
+                : "Choose your name and class (Classes 6–10) to begin. We pick questions to help you fix topics you missed."}
             </p>
           </div>
 
@@ -220,7 +220,7 @@ export default function SelectClassPage() {
                 type="submit"
                 className="w-full py-3 px-6 rounded-xl bg-[#3D6926] hover:bg-[#32561F] text-white font-heading font-bold text-sm border-2 border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer"
               >
-                {profile ? `Save & Enter Class ${selectedGrade}` : `Start Learning Class ${selectedGrade}`}
+                {profile ? `Save and start Class ${selectedGrade}` : `Start Class ${selectedGrade}`}
               </button>
             </div>
           </form>
@@ -230,7 +230,7 @@ export default function SelectClassPage() {
               href="/login?role=student"
               className="text-xs font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline"
             >
-              Have a registered student account? Log In here
+              Already have an account? Log in
             </Link>
           </div>
         </div>

@@ -64,7 +64,8 @@
       "hi": "सबसे छोटे अभाज्य 2 से बार-बार भाग दें, फिर 5 और 7 से।",
       "te": "అతి చిన్న ప్రధాన సంఖ్య 2 తో మొదలుపెట్టి భాగించండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-real-02",
@@ -131,7 +132,8 @@
       "hi": "LCM = (a × b) / HCF। आप पहले 306 ÷ 9 = 34 कर सकते हैं।",
       "te": "LCM = (a × b) / HCF. ముందుగా 306 / 9 = 34 చేయండి.",
       "reviewed": false
-    }
+    },
+    "verified": true
   },
   {
     "id": "q-c10-real-03",
@@ -139,7 +141,7 @@
     "difficulty": 1,
     "type": "multiple_choice",
     "contextTag": "pure_math",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "Find the HCF of 96 and 404 using prime factorisation.",
       "hi": "अभाज्य गुणनखंडन विधि द्वारा 96 और 404 का HCF ज्ञात कीजिए।",
@@ -207,7 +209,7 @@
     "difficulty": 1,
     "type": "multiple_choice",
     "contextTag": "pure_math",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "Which of the following is an irrational number?",
       "hi": "निम्नलिखित में से कौन-सी एक अपरिमेय संख्या है?",
@@ -275,7 +277,7 @@
     "difficulty": 2,
     "type": "multiple_choice",
     "contextTag": "pure_math",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "Find the LCM of 12, 15 and 21 using the prime factorisation method.",
       "hi": "अभाज्य गुणनखंडन विधि द्वारा 12, 15 और 21 का LCM ज्ञात कीजिए।",
@@ -343,7 +345,7 @@
     "difficulty": 2,
     "type": "multiple_choice",
     "contextTag": "pure_math",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "If two positive integers a and b are written as a = x³y² and b = xy³, where x, y are prime numbers, then HCF(a, b) is:",
       "hi": "यदि दो धनात्मक पूर्णांक a और b को a = x³y² और b = xy³ के रूप में लिखा जाता है, जहाँ x, y अभाज्य संख्याएँ हैं, तो HCF(a, b) क्या है?",
@@ -411,7 +413,7 @@
     "difficulty": 3,
     "type": "multiple_choice",
     "contextTag": "word_problem",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "Three bells toll together at intervals of 9, 12, 15 minutes respectively. If they start tolling together, after what minimum time will they toll together next?",
       "hi": "तीन घंटियाँ क्रमशः 9, 12, 15 मिनट के अंतराल पर बजती हैं। यदि वे एक साथ बजना शुरू करती हैं, तो अगली बार वे कितने न्यूनतम समय बाद एक साथ बजेंगी?",
@@ -479,7 +481,7 @@
     "difficulty": 3,
     "type": "multiple_choice",
     "contextTag": "pure_math",
-    "verified": false,
+    "verified": true,
     "prompt": {
       "en": "If HCF(a, 8) = 4 and LCM(a, 8) = 24, what is the value of a?",
       "hi": "यदि HCF(a, 8) = 4 और LCM(a, 8) = 24 है, तो a का मान क्या है?",

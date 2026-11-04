@@ -52,7 +52,7 @@ export default function DiagnosticHubPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
           <div className="w-8 h-8 border-3 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-cyan-950">Opening Diagnostic Portal...</p>
+          <p className="font-heading text-xs text-cyan-950">Opening quick check...</p>
         </div>
       </div>
     );
@@ -87,11 +87,10 @@ export default function DiagnosticHubPage() {
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
-              Diagnostic Mastery Tests
+              Chapter quick checks
             </h1>
             <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Diagnostics evaluate your mastery across chapter prerequisites. Scoring 70% or higher automatically
-              unlocks all chapter lessons, while detecting any specific misconceptions that need review.
+              Quick checks show how well you know earlier topics. Scoring 70% or higher opens all chapter lessons.
             </p>
           </div>
 
@@ -100,7 +99,7 @@ export default function DiagnosticHubPage() {
             className="py-2.5 px-4 rounded-xl bg-white/80 hover:bg-white text-emerald-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white shadow-xs transition-colors shrink-0"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Open Learn Cascade</span>
+            <span>View all lessons</span>
           </Link>
         </div>
 
@@ -126,7 +125,7 @@ export default function DiagnosticHubPage() {
                     </span>
                     {hasDiagnostic ? (
                       <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                        Diagnostic Active
+                        Quick check ready
                       </span>
                     ) : (
                       <span className="text-[10px] font-heading font-bold text-slate-500">
@@ -150,7 +149,7 @@ export default function DiagnosticHubPage() {
                       className="w-full py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors"
                     >
                       <Target className="w-3.5 h-3.5" />
-                      <span>Take Diagnostic</span>
+                      <span>Start check</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   ) : (
@@ -158,7 +157,7 @@ export default function DiagnosticHubPage() {
                       href="/student/learn"
                       className="w-full py-2 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-heading font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
                     >
-                      <span>Study Topics</span>
+                      <span>Go to lessons</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   )}

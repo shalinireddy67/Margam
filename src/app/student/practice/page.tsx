@@ -101,18 +101,17 @@ export default function PracticeHubPage() {
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-full bg-amber-100/90 border border-amber-300 text-[10px] font-heading font-extrabold text-amber-900 uppercase tracking-wide">
-                Adaptive Worksheets
+                Practice questions
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-white text-[10px] font-heading font-bold text-slate-700">
                 Class {studyClass} Mathematics
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
-              Concept Practice Worksheets
+              Practice topics
             </h1>
             <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Reinforce your understanding with interactive problem sets. Earn XP, receive diagnostic hints,
-              and build conceptual fluency.
+              Practice questions picked for you. Earn XP and get helpful hints as you solve.
             </p>
           </div>
 
@@ -121,7 +120,7 @@ export default function PracticeHubPage() {
             className="py-2.5 px-4 rounded-xl bg-white/80 hover:bg-white text-emerald-900 font-heading font-bold text-xs flex items-center gap-1.5 border border-white shadow-xs transition-colors shrink-0"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>View Lesson Cascade</span>
+            <span>View lessons</span>
           </Link>
         </div>
 

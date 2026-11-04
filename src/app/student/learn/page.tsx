@@ -361,7 +361,7 @@ export default function StudentLearnPage() {
                           <div className="pt-1 flex items-center gap-1.5 text-xs font-sans text-rose-700">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>
-                              <strong>Prerequisite required:</strong> Complete {missingPrereqNames.join(", ")} to unlock.
+                              <strong>Earlier topic needed:</strong> Finish {missingPrereqNames.join(", ")} first.
                             </span>
                           </div>
                         )}
@@ -376,7 +376,7 @@ export default function StudentLearnPage() {
                             href={`/lesson/${concept.id}`}
                             className="flex-1 sm:flex-initial py-2 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all hover:scale-[1.02]"
                           >
-                            <span>Open Lesson</span>
+                            <span>Open lesson</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                           {isCompleted && (
