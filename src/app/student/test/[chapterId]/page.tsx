@@ -208,7 +208,7 @@ export default function ChapterTestRunnerPage() {
                 onClick={initTest}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                <span>Try Again</span>
+                <span>{t("errors.tryAgainBtn") || "Try Again"}</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -247,7 +247,7 @@ export default function ChapterTestRunnerPage() {
                 className="inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
-                <span>Return to Learning Path</span>
+                <span>{t("test.returnToPath") || "Return to Learning Path"}</span>
               </Link>
             </div>
           </div>
@@ -339,7 +339,7 @@ export default function ChapterTestRunnerPage() {
         {/* Header Card */}
         <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
           <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-            <span>Chapter Mastery Test</span>
+            <span>{t("test.chapterMasteryTest") || "Chapter Mastery Test"}</span>
             <span>•</span>
             <span>Class {currentChapter.class}</span>
             <span>•</span>
@@ -359,7 +359,7 @@ export default function ChapterTestRunnerPage() {
             <div className="mt-4 p-4 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center flex-wrap gap-2 text-xs">
               <span className="font-heading font-extrabold text-emerald-900 flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
-                <span>Test Blueprint:</span>
+                <span>{t("test.testBlueprint") || "Test Blueprint:"}</span>
               </span>
               {Object.entries(conceptAllocation).map(([cId, count]) => {
                 const c = getConceptById(cId);
@@ -411,7 +411,7 @@ export default function ChapterTestRunnerPage() {
                     className="inline-flex items-center justify-center min-h-[44px] gap-1.5 px-4 py-2 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-bold text-xs border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Retake Test</span>
+                    <span>{t("test.retakeTest") || "Retake Test"}</span>
                   </button>
 
                   <Link

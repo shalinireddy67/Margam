@@ -5,8 +5,10 @@ import Link from "next/link";
 import { ShieldCheck, ArrowUp } from "lucide-react";
 import { SITE_TAGLINE } from "@/config/site";
 import { Logo } from "@/components/ui";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -39,7 +41,7 @@ export default function Footer() {
                 MARGAM
               </span>
               <span className="text-[11px] text-[#FFF7E6]/75 ml-2 font-sans">
-                Adaptive Maths · Classes 6–10
+                {t("footer.description") || "Adaptive Maths · Classes 6–10"}
               </span>
             </div>
           </div>
@@ -47,22 +49,22 @@ export default function Footer() {
           {/* Navigation Links */}
           <nav aria-label="Footer links" className="flex flex-wrap items-center justify-center gap-5 text-xs font-sans font-bold text-[#FFF7E6]">
             <Link href="/" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Home
+              {t("nav.home") || "Home"}
             </Link>
             <Link href="/student" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Learn
+              {t("nav.learn") || "Learn"}
             </Link>
             <Link href="/teacher" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Teacher
+              {t("nav.teacher") || "Teacher"}
             </Link>
             <Link href="/privacy" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Privacy
+              {t("footer.privacy") || "Privacy"}
             </Link>
             <Link href="/terms" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Terms
+              {t("footer.terms") || "Terms"}
             </Link>
             <Link href="/cookies" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Cookies
+              {t("footer.cookies") || "Cookies"}
             </Link>
           </nav>
 
@@ -70,16 +72,16 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-sans font-bold text-[#FFF7E6] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-sans font-bold text-[#FFF7E6] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_#2B1B0F] active:translate-x.5 active:translate-y.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
           >
-            <span>Top</span>
+            <span>{t("footer.topBtn") || "Top"}</span>
             <ArrowUp className="w-3.5 h-3.5 text-[#FFE9A8]" />
           </button>
         </div>
 
         <div className="pt-2 border-t border-[#7A4B2A]/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FFF7E6]/70 font-sans gap-2">
           <p className="m-0">
-            © 2026 Margam. Built for Indian students and teachers across Classes 6–10.
+            {t("footer.allRightsReserved") || "© 2026 Margam. Built for Indian students and teachers across Classes 6–10."}
           </p>
           <p className="m-0 text-[#FFE9A8]/90 font-medium">
             English · हिन्दी · తెలుగు

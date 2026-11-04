@@ -205,7 +205,7 @@ function LessonContent() {
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
-                <span>Return to Learning Path</span>
+                <span>{t("lesson.returnToLearningPath") || "Return to Learning Path"}</span>
               </Link>
             </div>
           </div>
@@ -221,14 +221,14 @@ function LessonContent() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 text-slate-800">
         <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] max-w-sm text-center space-y-3 text-[#1E1610]">
-          <h2 className="font-heading font-extrabold text-base text-emerald-950">Lesson Not Found</h2>
-          <p className="text-xs text-slate-600 font-sans">This lesson content is not yet available.</p>
+          <h2 className="font-heading font-extrabold text-base text-emerald-950">{t("lesson.lessonNotFound") || "Lesson Not Found"}</h2>
+          <p className="text-xs text-slate-600 font-sans">{t("lesson.lessonUnavailable") || "This lesson content is not yet available."}</p>
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Lessons</span>
+            <span>{t("lesson.returnToLessons") || "Return to Lessons"}</span>
           </Link>
         </div>
       </div>
@@ -348,7 +348,7 @@ function LessonContent() {
             className="inline-flex items-center justify-center min-h-[40px] gap-2 text-xs font-heading font-bold text-[#1E1610] bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Curriculum</span>
+            <span>{t("lesson.backToCurriculum") || "Back to Curriculum"}</span>
           </Link>
 
           {/* Language Switcher */}

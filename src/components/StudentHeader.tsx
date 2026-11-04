@@ -43,7 +43,7 @@ export default function StudentHeader({
     <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full transition-all">
       <div
         data-panel="student-header"
-        className="bg-[#232634]/92 text-[#F3E3BC] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] rounded-xs"
+        className="bg-[#FFF7E6]/95 text-[#1E1610] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] rounded-xs backdrop-blur-[2px]"
       >
         {/* Left: Brand + Back or Grade Scope */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -59,12 +59,12 @@ export default function StudentHeader({
           ) : (
             <Link
               href="/"
-              className="flex items-center min-h-[44px] gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5] rounded-xs"
+              className="flex items-center min-h-[44px] gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E1610] rounded-xs"
             >
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xs bg-[#6DB33F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center text-[#1E1610] shrink-0">
                 <Logo className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E1610]" ariaLabel="Margam" />
               </div>
-              <span className="font-heading font-extrabold text-base sm:text-lg text-[#F3E3BC] tracking-wider">
+              <span className="font-heading font-extrabold text-base sm:text-lg text-[#1E1610] tracking-wider">
                 MARGAM
               </span>
             </Link>
@@ -87,7 +87,7 @@ export default function StudentHeader({
               {/* Streak: plain wording */}
               {profile.streak && profile.streak.current > 0 && (
                 <div
-                  className="flex items-center gap-1 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#D1362B] shadow-[1px_1px_0px_#1E1610] select-none"
+                  className="flex items-center gap-1 px-2.5 py-1 bg-[#FAF3E3] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#D1362B] shadow-[1px_1px_0px_#1E1610] select-none"
                   title={t(
                     profile.streak.current === 1
                       ? "nav.streakDays"
@@ -111,13 +111,13 @@ export default function StudentHeader({
               {/* Tool Tier Level & XP bar */}
               {levelInfo && (
                 <div
-                  className="flex items-center gap-2 px-2.5 py-1 bg-[#18120C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#F3E3BC] shadow-[1px_1px_0px_#1E1610] select-none"
+                  className="flex items-center gap-2 px-2.5 py-1 bg-[#FAF3E3] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#1E1610] shadow-[1px_1px_0px_#1E1610] select-none"
                   title={`${levelInfo.rank.name} • ${levelInfo.progressPercent}%`}
                 >
                   <span className="text-sm select-none" aria-hidden="true">{levelInfo.rank.badge}</span>
-                  <span className="text-[#F2C230]">{levelInfo.rank.name}</span>
+                  <span className="text-[#1E1610]">{levelInfo.rank.name}</span>
                   <div
-                    className="w-14 h-2 bg-[#232634] border border-[#1E1610] overflow-hidden"
+                    className="w-14 h-2 bg-[#E8CF9C] border border-[#1E1610] overflow-hidden"
                     role="progressbar"
                     aria-valuenow={levelInfo.progressPercent}
                     aria-valuemin={0}
@@ -136,7 +136,7 @@ export default function StudentHeader({
 
           {/* Language Switcher */}
           <div
-            className="flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
+            className="flex items-center bg-[#EEDBB8]/80 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(30,22,16,0.1)] gap-1"
             role="group"
             aria-label={t("common.selectLanguage")}
           >
@@ -146,8 +146,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("en")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-[11px] sm:text-xs font-heading font-extrabold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "en"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#1E1610]"
+                  : "bg-[#FAF3E3] hover:bg-[#FFF7E6] text-[#1E1610] border border-[#1E1610]/40 hover:border-[#1E1610]"
               }`}
             >
               <span className="hidden sm:inline">English</span>
@@ -159,8 +159,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("hi")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "hi"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#1E1610]"
+                  : "bg-[#FAF3E3] hover:bg-[#FFF7E6] text-[#1E1610] border border-[#1E1610]/40 hover:border-[#1E1610]"
               }`}
             >
               हिंदी
@@ -171,8 +171,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("te")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "te"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#1E1610]"
+                  : "bg-[#FAF3E3] hover:bg-[#FFF7E6] text-[#1E1610] border border-[#1E1610]/40 hover:border-[#1E1610]"
               }`}
             >
               తెలుగు

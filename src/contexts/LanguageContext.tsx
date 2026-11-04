@@ -14,7 +14,9 @@ import { resolveLocalizedString } from "@/lib/curriculum";
 
 export interface LanguageContextValue {
   lang: SupportedLanguage;
+  language: SupportedLanguage;
   setLang: (newLang: SupportedLanguage) => void;
+  setLanguage: (newLang: SupportedLanguage) => void;
   t: (key: string, params?: Record<string, string | number>) => string;
   resolve: (
     localizedObj: any,
@@ -170,7 +172,9 @@ export function LanguageProvider({
   const value = useMemo<LanguageContextValue>(
     () => ({
       lang,
+      language: lang,
       setLang,
+      setLanguage: setLang,
       t,
       resolve,
     }),
@@ -194,22 +198,26 @@ export function useLanguage(): LanguageContextValue {
 
   // Fallback for SSR / isolated tests
   const fallbackLang = getInitialLanguage();
+  const fallbackSetLang = (newLang: SupportedLanguage) => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(STORAGE_KEY, newLang);
+        document.cookie = `${COOKIE_KEY}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+        document.documentElement.lang = newLang;
+        window.dispatchEvent(
+          new CustomEvent("margam-language-change", { detail: newLang })
+        );
+      } catch (e) {
+        // ignore
+      }
+    }
+  };
+
   return {
     lang: fallbackLang,
-    setLang: (newLang: SupportedLanguage) => {
-      if (typeof window !== "undefined") {
-        try {
-          localStorage.setItem(STORAGE_KEY, newLang);
-          document.cookie = `${COOKIE_KEY}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
-          document.documentElement.lang = newLang;
-          window.dispatchEvent(
-            new CustomEvent("margam-language-change", { detail: newLang })
-          );
-        } catch (e) {
-          // ignore
-        }
-      }
-    },
+    language: fallbackLang,
+    setLang: fallbackSetLang,
+    setLanguage: fallbackSetLang,
     t: (key: string, params?: Record<string, string | number>) => {
       const dict = translations[fallbackLang] || translations.en;
       const parts = key.split(".");

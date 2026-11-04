@@ -6,6 +6,7 @@ import { Network, ArrowRight, AlertCircle, Sparkles, Check } from "lucide-react"
 import conceptsData from "../../data/concepts.json";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ConceptPathwayProps {
   currentLang?: SupportedLanguage;
@@ -15,9 +16,11 @@ interface ConceptPathwayProps {
 export type BlockState = "solid" | "shaky" | "cracked" | "locked";
 
 export default function ConceptPathway({
-  currentLang = "en",
+  currentLang: propLang,
   profile: propProfile,
 }: ConceptPathwayProps) {
+  const { lang, t } = useLanguage();
+  const currentLang = propLang || lang || "en";
   const [profile, setProfile] = useState<LearnerProfile | null>(propProfile || null);
   const [selectedConceptId, setSelectedConceptId] = useState<string>("c7-int-01");
 
@@ -60,7 +63,7 @@ export default function ConceptPathway({
     if (isRootGap) {
       return {
         state: "cracked",
-        label: "Gap",
+        label: t("diagnostic.gapIdentified") || "Gap",
         pattern: "[ / | \\ ]",
         isRootGap: true,
       };
@@ -75,14 +78,14 @@ export default function ConceptPathway({
       if (isReviewDue) {
         return {
           state: "shaky",
-          label: "Review",
+          label: t("pathway.reviewBadge") || "Review",
           pattern: "[ ~ ~ ~ ]",
           isRootGap: false,
         };
       }
       return {
         state: "solid",
-        label: "Mastered",
+        label: t("pathway.masteredBadge") || "Mastered",
         pattern: "[ / / / ]",
         isRootGap: false,
       };
@@ -91,17 +94,17 @@ export default function ConceptPathway({
     // Default demo states for presentation if no deep progress yet
     if (!profile) {
       if (["c6-neg-01", "c6-neg-02"].includes(conceptId)) {
-        return { state: "solid", label: "Mastered", pattern: "[ / / / ]", isRootGap: false };
+        return { state: "solid", label: t("pathway.masteredBadge") || "Mastered", pattern: "[ / / / ]", isRootGap: false };
       }
       if (conceptId === "c7-int-02") {
-        return { state: "shaky", label: "Review", pattern: "[ ~ ~ ~ ]", isRootGap: false };
+        return { state: "shaky", label: t("pathway.reviewBadge") || "Review", pattern: "[ ~ ~ ~ ]", isRootGap: false };
       }
     }
 
     if (prog?.status === "available" || prog?.status === "in_progress") {
       return {
         state: "shaky",
-        label: "Review",
+        label: t("pathway.reviewBadge") || "Review",
         pattern: "[ ~ ~ ~ ]",
         isRootGap: false,
       };
@@ -109,7 +112,7 @@ export default function ConceptPathway({
 
     return {
       state: "locked",
-      label: "Locked",
+      label: t("pathway.lockedBadge") || "Locked",
       pattern: "[ - - - ]",
       isRootGap: false,
     };
@@ -134,13 +137,13 @@ export default function ConceptPathway({
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] font-heading font-extrabold text-xs shadow-[1px_1px_0px_#1E1610]">
               <Network className="w-3.5 h-3.5" />
-              <span>Classes 6–10 Prerequisite Backbone</span>
+              <span>{t("pathway.backboneTitle") || "Classes 6–10 Prerequisite Backbone"}</span>
             </div>
             <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#1E1610]">
-              Math Path Map: Classes 6 to 10
+              {t("pathway.backboneSubtitle") || "Math Path Map: Classes 6 to 10"}
             </h2>
             <p className="text-xs sm:text-sm text-[#5A3720] font-sans max-w-2xl">
-              Mathematics connects across grades. Solid grass blocks are mastered, cracked blocks show diagnosed gaps, shaky blocks need review, and stone blocks unlock as prerequisites are cleared.
+              {t("pathway.description") || "Mathematics connects across grades. Solid grass blocks are mastered, cracked blocks show diagnosed gaps, shaky blocks need review, and stone blocks unlock as prerequisites are cleared."}
             </p>
           </div>
 
@@ -149,22 +152,22 @@ export default function ConceptPathway({
             {/* Solid */}
             <div className="flex items-center gap-1 px-2 py-0.5 bg-[#6DB33F] text-[#1E1610] border border-[#1E1610]">
               <span>[///]</span>
-              <span>Mastered</span>
+              <span>{t("pathway.masteredBadge") || "Mastered"}</span>
             </div>
             {/* Shaky */}
             <div className="flex items-center gap-1 px-2 py-0.5 bg-[#F2C230] text-[#1E1610] border border-[#1E1610]">
               <span>[~~~]</span>
-              <span>Review</span>
+              <span>{t("pathway.reviewBadge") || "Review"}</span>
             </div>
             {/* Cracked */}
             <div className="flex items-center gap-1 px-2 py-0.5 bg-[#D1362B] text-[#F3E3BC] border border-[#1E1610]">
               <span>[/|\/]</span>
-              <span>Gap</span>
+              <span>{t("diagnostic.gapIdentified") || "Gap"}</span>
             </div>
             {/* Locked */}
             <div className="flex items-center gap-1 px-2 py-0.5 bg-[#B9BCC0] text-[#1E1610] border border-[#1E1610]">
               <span>[---]</span>
-              <span>Locked</span>
+              <span>{t("pathway.lockedBadge") || "Locked"}</span>
             </div>
           </div>
         </div>
@@ -189,11 +192,11 @@ export default function ConceptPathway({
                       {grade}
                     </span>
                     <span className="font-heading font-extrabold text-xs text-[#1E1610] uppercase tracking-wider">
-                      Class {grade} Concepts
+                      {t("common.classGrade", { grade })}
                     </span>
                   </div>
                   <span className="text-[11px] font-sans font-bold text-[#5A3720]">
-                    {gradeConcepts.length} Topic{gradeConcepts.length > 1 ? "s" : ""}
+                    {gradeConcepts.length} {t("dashboard.topics")}
                   </span>
                 </div>
 
@@ -248,7 +251,7 @@ export default function ConceptPathway({
                         {/* Soft pulsing "Fix this first" badge if root gap */}
                         {isRootGap && (
                           <div className="absolute -top-3 right-2 bg-[#D1362B] text-[#F3E3BC] border-2 border-[#1E1610] px-2 py-0.5 text-[9px] font-heading font-extrabold uppercase shadow-[2px_2px_0px_#1E1610] animate-bounce">
-                            ⚠️ Fix this first
+                            ⚠️ {t("diagnostic.fixFirst") || "Fix this first"}
                           </div>
                         )}
 
@@ -276,7 +279,7 @@ export default function ConceptPathway({
           <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
             <div className="flex items-center justify-between border-b-2 border-[#1E1610]/20 pb-3">
               <span className="font-heading font-extrabold text-xs text-[#1E1610] uppercase tracking-wider">
-                Block Details
+                {t("pathway.blockDetails") || "Block Details"}
               </span>
               <span
                 className={`px-2.5 py-0.5 text-xs font-heading font-extrabold border-2 border-[#1E1610] ${
@@ -305,7 +308,7 @@ export default function ConceptPathway({
             {/* Learning Objective */}
             <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1 text-xs">
               <span className="font-heading font-extrabold text-[10px] uppercase text-[#5A3720] block">
-                Learning Objective
+                {t("lesson.keyTakeaways") || "Learning Objective"}
               </span>
               <p className="text-xs text-[#1E1610] leading-relaxed font-sans">
                 {selectedConcept.learningObjective[currentLang] || selectedConcept.learningObjective.en}
@@ -315,11 +318,11 @@ export default function ConceptPathway({
             {/* Prerequisites */}
             <div className="space-y-2 text-xs">
               <span className="font-heading font-extrabold text-[10px] uppercase text-[#5A3720] block">
-                Required Prerequisite Topics ({selectedConcept.prerequisites.length})
+                {t("lesson.prerequisites") || "Required Prerequisite Topics"} ({selectedConcept.prerequisites.length})
               </span>
               {selectedConcept.prerequisites.length === 0 ? (
                 <p className="text-xs text-[#5A3720] italic p-2 bg-[#E8CF9C]/50 border border-[#1E1610]">
-                  Foundational topic. No prior prerequisites required.
+                  {t("lesson.noPrereqs") || "Foundational topic. No prior prerequisites required."}
                 </p>
               ) : (
                 <div className="space-y-1.5">
@@ -349,7 +352,7 @@ export default function ConceptPathway({
                 href={`/lesson/${selectedConcept.id}`}
                 className="w-full py-2.5 px-4 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#1E1610] flex items-center justify-center gap-1.5 active:translate-x-[1px] active:translate-y-[1px] transition-all no-underline"
               >
-                <span>{selectedState.state === "cracked" ? "Fix Foundation Lesson" : "Open Lesson"}</span>
+                <span>{selectedState.state === "cracked" ? (t("diagnostic.fixFirst") || "Fix Foundation Lesson") : (t("common.openLesson") || "Open Lesson")}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

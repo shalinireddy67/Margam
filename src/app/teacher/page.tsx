@@ -39,9 +39,12 @@ import {
 import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
 import { LearnerProfile } from "@/lib/types";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
 export default function TeacherPage() {
   const router = useRouter();
+  const { lang, setLang, t } = useLanguage();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("stu-synth-01");
   const [filterAttention, setFilterAttention] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -244,11 +247,11 @@ export default function TeacherPage() {
           </Link>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/student"
+            <LanguageToggle currentLang={lang} onLanguageChange={setLang} />
+            <Link href="/student"
               className="glass-btn-primary inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 text-xs font-heading font-bold no-underline"
             >
-              <span>Student View</span>
+              <span>{t("teacher.studentView") || "Student View"}</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Link>
             <button
@@ -257,7 +260,7 @@ export default function TeacherPage() {
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5 sm:mr-1" />
-              <span className="hidden sm:inline">Sign Out</span>
+              <span className="hidden sm:inline">{t("teacher.signOut") || "Sign Out"}</span>
             </button>
           </div>
         </div>
@@ -278,7 +281,7 @@ export default function TeacherPage() {
               }`}
             >
               <Sparkles className="w-4 h-4 text-[#A06A3C]" />
-              <span>Synthetic Demo Class</span>
+              <span>{t("teacher.syntheticDemoClass") || "Synthetic Demo Class"}</span>
             </button>
 
             <button
@@ -290,7 +293,7 @@ export default function TeacherPage() {
               }`}
             >
               <Users className="w-4 h-4 text-[#1E1610]" />
-              <span>My Enrolled Students ({liveMembers.length})</span>
+              <span>{t("teacher.myClasses") || "My Enrolled Students"} ({liveMembers.length})</span>
             </button>
           </div>
 
@@ -300,7 +303,7 @@ export default function TeacherPage() {
               className="glass-btn-primary px-3.5 py-1.5 text-xs font-heading font-bold flex items-center gap-1 transition-all cursor-pointer rounded-xl"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Create New Class</span>
+              <span>{t("teacher.createNewClass") || "Create New Class"}</span>
             </button>
           </div>
         </div>
@@ -327,7 +330,7 @@ export default function TeacherPage() {
 
                 <div className="flex items-center gap-2">
                   <div className="bg-[#E8CF9C] px-3 py-1 border-2 border-[#1E1610] flex items-center gap-2">
-                    <span className="text-[10px] uppercase font-bold text-slate-500">Class Code</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-500">{t("teacher.shareCode") || "Class Code"}</span>
                     <code className="text-xs font-mono font-black text-emerald-900 tracking-wider">
                       {activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4"}
                     </code>
@@ -361,7 +364,7 @@ export default function TeacherPage() {
               <div className="flex flex-wrap items-center justify-between text-xs text-slate-700 font-sans gap-2">
                 <div className="flex items-center gap-4">
                   <span>
-                    <strong>Class Teacher:</strong> {teacherUser?.fullName || "Demo Teacher"}
+                    <strong>{t("teacher.title") || "Class Teacher"}:</strong> {teacherUser?.fullName || "Demo Teacher"}
                   </span>
                   <span>•</span>
                   <span>
@@ -369,7 +372,7 @@ export default function TeacherPage() {
                   </span>
                   <span>•</span>
                   <span>
-                    <strong>Enrolled Roster:</strong> {totalClassStudents} Students
+                    <strong>{t("teacher.roster") || "Enrolled Roster"}:</strong> {totalClassStudents} Students
                   </span>
                 </div>
                 <span className="text-[11px] font-medium text-[#1E1610] bg-[#E8CF9C] px-2.5 py-0.5 border-2 border-[#1E1610]">
@@ -383,7 +386,7 @@ export default function TeacherPage() {
               {/* Card 1: Total Students */}
               <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
-                  <span>Enrolled Students</span>
+                  <span>{t("teacher.studentCount") || "Enrolled Students"}</span>
                   <Users className="w-4 h-4 text-emerald-700" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-heading font-black text-emerald-950">
@@ -397,7 +400,7 @@ export default function TeacherPage() {
               {/* Card 2: Avg Diagnostic */}
               <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
-                  <span>Class Avg Diagnostic</span>
+                  <span>{t("teacher.accuracyRate") || "Class Avg Diagnostic"}</span>
                   <TrendingUp className="w-4 h-4 text-sky-700" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-heading font-black text-sky-950">

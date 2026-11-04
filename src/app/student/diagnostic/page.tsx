@@ -82,7 +82,7 @@ export default function DiagnosticDirectoryPage() {
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#1E1610] m-0">
-              Chapter quick checks
+              {t("diagnostic.chapterQuickCheck") || "Chapter quick checks"}
             </h1>
             <p className="text-xs sm:text-sm text-[#5A3720] font-sans font-semibold max-w-xl m-0 leading-relaxed">
               Quick checks show how well you know earlier topics. Scoring 70% or higher opens all chapter lessons.
@@ -94,7 +94,7 @@ export default function DiagnosticDirectoryPage() {
             className="py-2.5 px-4 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center gap-1.5 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors shrink-0 no-underline"
           >
             <BookOpen className="w-3.5 h-3.5 text-[#1E1610]" />
-            <span>View all lessons</span>
+            <span>{t("diagnostic.viewAllLessons") || "View all lessons"}</span>
           </Link>
         </div>
 
@@ -145,7 +145,7 @@ export default function DiagnosticDirectoryPage() {
                       className="w-full py-2.5 px-4 rounded-xs bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-2 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors no-underline"
                     >
                       <Target className="w-3.5 h-3.5 text-[#1E1610]" />
-                      <span>Start check</span>
+                      <span>{t("diagnostic.startCheck") || "Start check"}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#1E1610]" />
                     </Link>
                   ) : (
@@ -153,7 +153,7 @@ export default function DiagnosticDirectoryPage() {
                       href="/student/learn"
                       className="w-full py-2 px-3.5 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-1.5 border-[2px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors no-underline"
                     >
-                      <span>Go to lessons</span>
+                      <span>{t("tile.openLesson") || "Go to lessons"}</span>
                     </Link>
                   )}
                 </div>

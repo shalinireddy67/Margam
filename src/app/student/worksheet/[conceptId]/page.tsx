@@ -275,7 +275,7 @@ export default function AdaptivePracticeRunnerPage() {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 text-slate-800">
         <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] max-w-md text-center space-y-3 text-[#1E1610]">
-          <h2 className="font-heading font-extrabold text-lg text-emerald-950">No Questions Found</h2>
+          <h2 className="font-heading font-extrabold text-lg text-emerald-950">{t("practice.noQuestionsFound") || "No Questions Found"}</h2>
           <p className="text-xs text-slate-600 font-sans">
             Practice questions for this topic are currently being prepared.
           </p>
@@ -440,7 +440,7 @@ export default function AdaptivePracticeRunnerPage() {
             <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
               <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-              <span>Adaptive Practice</span>
+              <span>{t("practice.adaptivePracticeTitle") || "Adaptive Practice"}</span>
               <span>•</span>
               <span>Class {concept.class}</span>
               {isPersonalized && (
@@ -482,7 +482,7 @@ export default function AdaptivePracticeRunnerPage() {
                 </p>
                 {prereqsIncluded.length > 0 && (
                   <div className="flex items-center gap-2 pt-1 flex-wrap">
-                    <span className="text-[10px] text-[#5DAA3A] font-bold">Reinforcing:</span>
+                    <span className="text-[10px] text-[#5DAA3A] font-bold">{t("practice.reinforcing") || "Reinforcing:"}</span>
                     {prereqsIncluded.map((pr) => (
                       <span
                         key={pr.conceptId}
@@ -508,8 +508,8 @@ export default function AdaptivePracticeRunnerPage() {
                 >
                   <div className="flex items-center gap-2 font-heading font-extrabold text-sm">
                     <Sparkles className="w-4 h-4 text-[#1E1610]" />
-                    <span>✨ Block Repaired! Foundation Restored</span>
-                    <span className="px-1.5 py-0.5 bg-[#1E1610] text-[#6DB33F] text-[10px]">[///] Solid Grass</span>
+                    <span>{t("practice.blockRepaired") || "✨ Block Repaired! Foundation Restored"}</span>
+                    <span className="px-1.5 py-0.5 bg-[#1E1610] text-[#6DB33F] text-[10px]">{t("practice.solidGrassMastery") || "[///] Solid Grass"}</span>
                   </div>
                   <p className="text-xs font-sans font-bold">
                     You fixed 1 prerequisite gap. +50 XP bonus awarded and Foundation sticker unlocked!

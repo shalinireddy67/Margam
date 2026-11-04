@@ -222,7 +222,7 @@ export default function StudentProfilePage() {
             className="py-2 px-4 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#D1362B] font-heading font-bold text-xs flex items-center gap-1.5 border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none shrink-0 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Log Out</span>
+            <span>{t("profile.logOut") || "Log Out"}</span>
           </button>
         </div>
 
@@ -276,7 +276,7 @@ export default function StudentProfilePage() {
                     className="py-1 px-2.5 bg-[#E8CF9C] hover:bg-[#D9B87A] text-[#1E1610] border-2 border-[#1E1610] font-heading font-bold text-xs flex items-center gap-1 shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                   >
                     <Edit3 className="w-3.5 h-3.5 text-[#1E1610]" />
-                    <span>Edit</span>
+                    <span>{t("profile.edit") || "Edit"}</span>
                   </button>
                 )}
               </div>
@@ -305,14 +305,14 @@ export default function StudentProfilePage() {
                       className="py-2 px-4 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] font-heading font-bold text-xs flex items-center gap-1.5 shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                     >
                       <Save className="w-3.5 h-3.5" />
-                      <span>{savingName ? "Saving..." : "Save Nickname"}</span>
+                      <span>{savingName ? t("common.loading") : (t("profile.saveChanges") || "Save Nickname")}</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setIsEditingName(false)}
                       className="py-2 px-3 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-bold text-xs border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer"
                     >
-                      Cancel
+                      {t("common.cancel") || "Cancel"}
                     </button>
                   </div>
                 </form>
@@ -417,7 +417,7 @@ export default function StudentProfilePage() {
               href="/student/learn"
               className="text-xs font-heading font-bold text-[#1E1610] hover:text-[#2F4FB5] flex items-center gap-1"
             >
-              <span>Explore Curriculum</span>
+              <span>{t("profile.exploreCurriculum") || "Explore Curriculum"}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -487,7 +487,7 @@ export default function StudentProfilePage() {
             className="w-full sm:w-auto py-2 px-4 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#D1362B] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer shrink-0"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Sign Out of Margam</span>
+            <span>{t("profile.logOut") || "Sign Out of Margam"}</span>
           </button>
         </div>
 

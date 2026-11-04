@@ -4,12 +4,15 @@ import React from "react";
 import { ArrowRight, CheckCircle2, Compass, Award, Flame } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 import Companion from "@/components/ui/Companion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HeroProps {
-  currentLang: SupportedLanguage;
+  currentLang?: SupportedLanguage;
 }
 
-export default function Hero({ currentLang }: HeroProps) {
+export default function Hero({ currentLang: propLang }: HeroProps) {
+  const { lang } = useLanguage();
+  const currentLang = propLang || lang || "en";
   const content = {
     en: {
       badge: "Adaptive Math • Classes 6 to 10",
