@@ -83,9 +83,9 @@ export function Navigation({
         <header
           aria-label={t("nav.skipToContent")}
           data-panel="top-hud"
-          className={`sticky top-0 z-40 bg-[#232634]/85 text-[#F3E3BC] border-b-[3px] border-[#1E1610] shadow-[0px_3px_0px_#1E1610] backdrop-blur-[2px] ${className}`}
+          className={`sticky top-0 z-40 bg-[#181B26]/96 text-[#F3E3BC] border-b-[3px] border-[#120F0C] shadow-[0px_3px_0px_#10121A] backdrop-blur-[3px] ${className}`}
         >
-          <div className="max-w-[1200px] mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[68px] flex items-center justify-between gap-4">
             {/* Left: Brand Identity */}
             <div className="flex items-center gap-2 sm:gap-3">
               <a
@@ -116,7 +116,7 @@ export function Navigation({
 
             {/* Center: Desktop Navigation Links (>=1024px only) */}
             <nav
-              className="hidden lg:flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_3px_rgba(0,0,0,0.6)] gap-1.5"
+              className="hidden lg:flex items-center gap-3.5 xl:gap-5"
               aria-label="Desktop primary navigation"
             >
               {NAV_ITEMS.map((item) => {
@@ -129,13 +129,13 @@ export function Navigation({
                     key={item.id}
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`min-h-[40px] px-3.5 py-1.5 text-xs font-heading font-extrabold flex items-center gap-2 rounded-[2px] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5] ${
+                    className={`min-h-[42px] px-4 py-2 text-xs font-heading font-extrabold tracking-wide flex items-center gap-2 rounded-[2px] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5] ${
                       isActive
-                        ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#9CE86C,2px_2px_0px_#10121A]"
-                        : "bg-[#2B3042]/90 hover:bg-[#3B425A] text-[#F3E3BC] hover:text-[#FFE9A8] border-2 border-[#1E1610] shadow-[2px_2px_0px_#10121A] active:translate-x-[1px] active:translate-y-[1px]"
+                        ? "bg-[#5FA334] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_2px_0px_#8EDB49,2px_2px_0px_#10121A] cursor-default"
+                        : "bg-[#262A3B] hover:bg-[#343A52] text-[#F3E3BC] hover:text-[#FFE9A8] border-2 border-[#120F0C] shadow-[2px_2px_0px_#10121A] hover:shadow-[3px_3px_0px_#10121A] hover:-translate-y-0.5 active:translate-y-[1px] active:shadow-[1px_1px_0px_#10121A]"
                     }`}
                   >
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#1E1610]" : "text-[#F2C230]"}`} aria-hidden="true" />
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#120F0C]" : "text-[#F2C230]"}`} aria-hidden="true" />
                     <span>{localizedLabel}</span>
                   </a>
                 );
@@ -144,11 +144,11 @@ export function Navigation({
               {/* Teacher Portal link */}
               <a
                 href="/teacher"
-                className="min-h-[40px] px-3 py-1.5 text-xs font-heading font-extrabold bg-[#27324E]/90 hover:bg-[#34446A] text-[#F3E3BC] hover:text-[#FFE9A8] border-2 border-[#1E1610] shadow-[2px_2px_0px_#10121A] rounded-[2px] transition-all flex items-center gap-1.5 ml-1 active:translate-x-[1px] active:translate-y-[1px]"
+                className="min-h-[42px] px-3.5 py-2 text-xs font-heading font-extrabold tracking-wide bg-[#23314E] hover:bg-[#304368] text-[#78BDE8] hover:text-[#A6D5F7] border-2 border-[#120F0C] shadow-[2px_2px_0px_#10121A] hover:shadow-[3px_3px_0px_#10121A] hover:-translate-y-0.5 active:translate-y-[1px] active:shadow-[1px_1px_0px_#10121A] rounded-[2px] transition-all flex items-center gap-2 ml-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5]"
                 title={t("nav.teacherHub")}
               >
                 <Users className="w-3.5 h-3.5 text-[#78BDE8]" aria-hidden="true" />
-                <span className="text-[11px]">{t("nav.teacherHub")}</span>
+                <span className="text-xs">{t("nav.teacherHub")}</span>
               </a>
             </nav>
 
@@ -208,7 +208,7 @@ export function Navigation({
 
               {/* Multilingual Switcher (English | हिंदी | తెలుగు) */}
               <div
-                className="flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
+                className="flex items-center bg-[#181B26] p-1 border-2 border-[#120F0C] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
                 role="group"
                 aria-label={t("common.selectLanguage")}
               >
@@ -218,8 +218,8 @@ export function Navigation({
                   onClick={() => handleLanguageChange("en")}
                   className={`min-h-[32px] sm:min-h-[34px] px-2 sm:px-2.5 text-[11px] sm:text-xs font-heading font-extrabold rounded-[2px] transition-all cursor-pointer ${
                     activeLang === "en"
-                      ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                      : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                      ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                      : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
                   }`}
                 >
                   <span className="hidden sm:inline">English</span>
@@ -231,8 +231,8 @@ export function Navigation({
                   onClick={() => handleLanguageChange("hi")}
                   className={`min-h-[32px] sm:min-h-[34px] px-2 sm:px-2.5 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                     activeLang === "hi"
-                      ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                      : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                      ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                      : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
                   }`}
                 >
                   हिंदी
@@ -243,8 +243,8 @@ export function Navigation({
                   onClick={() => handleLanguageChange("te")}
                   className={`min-h-[32px] sm:min-h-[34px] px-2 sm:px-2.5 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                     activeLang === "te"
-                      ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                      : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                      ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                      : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
                   }`}
                 >
                   తెలుగు
@@ -262,7 +262,7 @@ export function Navigation({
         <aside
           aria-label="Tablet navigation rail"
           data-panel="tablet-rail"
-          className="hidden md:flex lg:hidden fixed left-0 top-16 bottom-0 w-20 z-40 bg-[#232634]/85 text-[#F3E3BC] border-r-[3px] border-[#1E1610] shadow-[3px_0px_0px_#1E1610] backdrop-blur-[2px] flex-col items-center py-4 gap-3 select-none"
+          className="hidden md:flex lg:hidden fixed left-0 top-16 sm:top-[68px] bottom-0 w-20 z-40 bg-[#181B26]/96 text-[#F3E3BC] border-r-[3px] border-[#120F0C] shadow-[3px_0px_0px_#10121A] backdrop-blur-[3px] flex-col items-center py-4 gap-3 select-none"
         >
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -276,8 +276,8 @@ export function Navigation({
                 aria-current={isActive ? "page" : undefined}
                 className={`w-16 min-h-[56px] p-2 flex flex-col items-center justify-center gap-1 rounded-[2px] transition-all no-underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5] ${
                   isActive
-                    ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#9CE86C,2px_2px_0px_#10121A]"
-                    : "bg-[#2B3042]/90 hover:bg-[#3B425A] text-[#F3E3BC] hover:text-[#FFE9A8] border-2 border-[#1E1610] shadow-[2px_2px_0px_#10121A]"
+                    ? "bg-[#5FA334] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_1px_1px_0px_#8EDB49,2px_2px_0px_#10121A]"
+                    : "bg-[#262A3B] hover:bg-[#343A52] text-[#F3E3BC] hover:text-[#FFE9A8] border-2 border-[#120F0C] shadow-[2px_2px_0px_#10121A]"
                 }`}
               >
                 <Icon className={`w-5 h-5 shrink-0 ${isActive ? "text-[#1E1610]" : "text-[#F2C230]"}`} aria-hidden="true" />
@@ -297,9 +297,9 @@ export function Navigation({
         <nav
           aria-label="Mobile bottom navigation"
           data-panel="mobile-bottom-nav"
-          className="md:hidden fixed left-0 right-0 bottom-0 z-40 bg-[#1E212D]/92 text-[#F3E3BC] border-t-[3px] border-[#1E1610] shadow-[0px_-3px_0px_#1E1610] backdrop-blur-[2px] pb-[env(safe-area-inset-bottom,0px)]"
+          className="md:hidden fixed left-0 right-0 bottom-0 z-40 bg-[#181B26]/96 text-[#F3E3BC] border-t-[3px] border-[#120F0C] shadow-[0px_-3px_0px_#10121A] backdrop-blur-[3px] pb-[env(safe-area-inset-bottom,0px)]"
         >
-          <div className="flex w-full h-16 min-h-[64px] max-w-[600px] mx-auto p-1 gap-1">
+          <div className="flex w-full h-16 min-h-[64px] max-w-[600px] mx-auto p-1.5 gap-2">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -312,8 +312,8 @@ export function Navigation({
                   aria-current={isActive ? "page" : undefined}
                   className={`flex-1 min-h-[48px] h-full flex flex-col items-center justify-center gap-1 no-underline select-none transition-colors px-1 rounded-[2px] ${
                     isActive
-                      ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_0px_2px_0px_#9CE86C,1px_1px_0px_#10121A] font-heading font-extrabold"
-                      : "bg-[#2B3042]/70 text-[#F3E3BC] hover:bg-[#3B425A] hover:text-[#FFE9A8] border border-[#1E1610]/50"
+                      ? "bg-[#5FA334] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_2px_0px_#8EDB49,1px_1px_0px_#10121A] font-heading font-extrabold"
+                      : "bg-[#262A3B] text-[#F3E3BC] hover:bg-[#343A52] hover:text-[#FFE9A8] border border-[#120F0C] font-heading font-bold"
                   }`}
                 >
                   <Icon className={`w-5 h-5 shrink-0 ${isActive ? "text-[#1E1610]" : "text-[#F2C230]"}`} aria-hidden="true" />

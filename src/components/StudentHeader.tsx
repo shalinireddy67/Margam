@@ -43,7 +43,7 @@ export default function StudentHeader({
     <header className="sticky top-3 z-50 max-w-[1200px] mx-auto px-3 sm:px-6 w-full transition-all">
       <div
         data-panel="student-header"
-        className="bg-[#232634]/92 text-[#F3E3BC] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] rounded-xs"
+        className="bg-[#181B26]/96 text-[#F3E3BC] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 border-[3px] border-[#120F0C] shadow-[3px_3px_0px_#10121A] rounded-[2px]"
       >
         {/* Left: Brand + Back or Grade Scope */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -136,7 +136,7 @@ export default function StudentHeader({
 
           {/* Language Switcher */}
           <div
-            className="flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
+            className="flex items-center bg-[#181B26] p-1 border-2 border-[#120F0C] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
             role="group"
             aria-label={t("common.selectLanguage")}
           >
@@ -146,8 +146,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("en")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-[11px] sm:text-xs font-heading font-extrabold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "en"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                  : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
               }`}
             >
               <span className="hidden sm:inline">English</span>
@@ -159,8 +159,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("hi")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "hi"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                  : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
               }`}
             >
               हिंदी
@@ -171,8 +171,8 @@ export default function StudentHeader({
               onClick={() => handleLanguageChange("te")}
               className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
                 activeLang === "te"
-                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
-                : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
+                  ? "bg-[#F2C230] text-[#120F0C] border-2 border-[#120F0C] shadow-[inset_0px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                : "bg-[#262A3B] hover:bg-[#343A52] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#120F0C]"
               }`}
             >
               తెలుగు
