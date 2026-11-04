@@ -632,7 +632,7 @@ export default function ChapterTestRunnerPage() {
 
           {!result && (
             <div className="sticky bottom-4 z-30 panel-night p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex items-center justify-between gap-4 text-[#F3E3BC]">
-              <span className="text-xs font-heading font-extrabold text-emerald-950">
+              <span className="text-xs font-heading font-extrabold text-[#FFE9A8]">
                 {Object.keys(answers).length} of {questions.length} Answered
               </span>
 

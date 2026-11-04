@@ -234,10 +234,10 @@ export default function TeacherPage() {
               M
             </div>
             <div>
-              <span className="font-heading font-extrabold text-base sm:text-lg tracking-tight block leading-tight text-emerald-950">
+              <span className="font-heading font-extrabold text-base sm:text-lg tracking-tight block leading-tight text-[#F3E3BC]">
                 Margam Teacher
               </span>
-              <span className="text-[10px] font-bold text-emerald-800 block uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#D9B87A] block uppercase tracking-wider">
                 {teacherUser?.fullName ? `Welcome, ${teacherUser.fullName}` : "Classroom Diagnostics"}
               </span>
             </div>

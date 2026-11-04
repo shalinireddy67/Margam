@@ -309,7 +309,7 @@ function LoginForm() {
             <div className="w-9 h-9 bg-[#6DB33F] border-2 border-[#1E1610] flex items-center justify-center text-[#1E1610]">
               <Compass className="w-4 h-4" />
             </div>
-            <span className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">MARGAM</span>
+            <span className="font-heading font-extrabold text-base sm:text-lg text-[#F3E3BC]">MARGAM</span>
           </Link>
           <Link
             href="/"

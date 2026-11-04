@@ -83,7 +83,7 @@ export function Navigation({
         <header
           aria-label={t("nav.skipToContent")}
           data-panel="top-hud"
-          className={`sticky top-0 z-40 bg-[#232634]/85 text-[#F3E3BC] border-b-[3px] border-[#1E1610] shadow-[0px_3px_0px_#1E1610] backdrop-blur-[2px] ${className}`}
+          className={`sticky top-0 z-40 bg-[#232634]/89 text-[#F3E3BC] border-b-[3px] border-[#1E1610] shadow-[0px_3px_0px_#1E1610] backdrop-blur-[2px] ${className}`}
         >
           <div className="max-w-[1200px] mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
             {/* Left: Brand Identity */}
@@ -116,7 +116,7 @@ export function Navigation({
 
             {/* Center: Desktop Navigation Links (>=1024px only) */}
             <nav
-              className="hidden lg:flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_3px_rgba(0,0,0,0.6)] gap-1.5"
+              className="hidden lg:flex items-center bg-[#161822]/89 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_3px_rgba(0,0,0,0.6)] gap-2"
               aria-label="Desktop primary navigation"
             >
               {NAV_ITEMS.map((item) => {
@@ -208,7 +208,7 @@ export function Navigation({
 
               {/* Multilingual Switcher (English | हिंदी | తెలుగు) */}
               <div
-                className="flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
+                className="flex items-center bg-[#161822]/89 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
                 role="group"
                 aria-label={t("common.selectLanguage")}
               >
@@ -262,7 +262,7 @@ export function Navigation({
         <aside
           aria-label="Tablet navigation rail"
           data-panel="tablet-rail"
-          className="hidden md:flex lg:hidden fixed left-0 top-16 bottom-0 w-20 z-40 bg-[#232634]/85 text-[#F3E3BC] border-r-[3px] border-[#1E1610] shadow-[3px_0px_0px_#1E1610] backdrop-blur-[2px] flex-col items-center py-4 gap-3 select-none"
+          className="hidden md:flex lg:hidden fixed left-0 top-16 bottom-0 w-20 z-40 bg-[#232634]/89 text-[#F3E3BC] border-r-[3px] border-[#1E1610] shadow-[3px_0px_0px_#1E1610] backdrop-blur-[2px] flex-col items-center py-4 gap-3 select-none"
         >
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
