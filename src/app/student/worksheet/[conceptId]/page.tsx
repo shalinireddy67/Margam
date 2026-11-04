@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -109,7 +110,7 @@ export default function AdaptivePracticeRunnerPage() {
   const conceptId = params?.conceptId as string;
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [questions, setQuestions] = useState<ClientPracticeQuestion[]>([]);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [difficultyLevel, setDifficultyLevel] = useState<1 | 2 | 3>(1);
@@ -259,7 +260,7 @@ export default function AdaptivePracticeRunnerPage() {
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
-                <span>Return to Curriculum</span>
+                <span>{t("lesson.backToLessons")}</span>
               </Link>
             </div>
           </div>
@@ -461,11 +462,11 @@ export default function AdaptivePracticeRunnerPage() {
           </div>
 
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950 tracking-wide">
-            {concept.name[currentLang] || concept.name.en}
+            {resolve(concept.name).text}
           </h1>
 
           <p className="text-xs sm:text-sm text-[#5A3720] bg-[#E8CF9C]/70 p-4 border-2 border-[#1E1610] leading-relaxed font-sans font-medium">
-            {concept.learningObjective[currentLang] || concept.learningObjective.en}
+            {resolve(concept.learningObjective).text}
           </p>
 
           {/* Personalized Worksheet Metadata Banner */}
@@ -739,13 +740,13 @@ export default function AdaptivePracticeRunnerPage() {
 
                 {/* Prompt: Larger readable font on desktop */}
                 {(() => {
-                  const promptData = resolveLocalizedString(q.prompt, currentLang);
+                  const promptData = resolve(q.prompt);
                   return (
                     <div className="font-sans text-base sm:text-lg font-bold text-slate-900 leading-relaxed flex items-center flex-wrap gap-2">
                       <span className="break-words">{promptData.text}</span>
                       {promptData.isDraft && (
                         <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-heading font-bold bg-amber-100 text-amber-900 rounded-full border border-amber-300">
-                          Draft Translation
+                          {t("lesson.draftBadge")}
                         </span>
                       )}
                     </div>
@@ -756,7 +757,7 @@ export default function AdaptivePracticeRunnerPage() {
                 <div className="space-y-2 pt-2">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const optData = resolveLocalizedString(opt.text, currentLang);
+                    const optData = resolve(opt.text);
 
                     let optionBorderClass = "border-2 border-[#1E1610]";
                     let optionBgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";
@@ -858,13 +859,13 @@ export default function AdaptivePracticeRunnerPage() {
                             <span className="font-heading font-bold text-[10px] text-[#5DAA3A] uppercase block">
                               Step-by-step Solution:
                             </span>
-                            <p>{resolveLocalizedString(feedbackItem.explanation, currentLang).text}</p>
+                            <p>{resolve(feedbackItem.explanation).text}</p>
                           </div>
                         )}
 
                         {feedbackItem.hint && (
                           <p className="text-xs text-emerald-950 font-sans font-medium pt-1">
-                            <strong>Tip:</strong> {typeof feedbackItem.hint === 'string' ? feedbackItem.hint : resolveLocalizedString(feedbackItem.hint, currentLang).text}
+                            <strong>Tip:</strong> {typeof feedbackItem.hint === 'string' ? feedbackItem.hint : resolve(feedbackItem.hint).text}
                           </p>
                         )}
                       </div>

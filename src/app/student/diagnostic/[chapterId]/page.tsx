@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -145,7 +146,7 @@ export default function ChapterDiagnosticPage() {
   const chapterId = params?.chapterId as string;
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [questions, setQuestions] = useState<ClientQuestion[]>([]);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -558,7 +559,7 @@ export default function ChapterDiagnosticPage() {
               </div>
 
               <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950 tracking-wide">
-                {currentChapter ? (currentChapter.name[currentLang] || currentChapter.name.en) : chapterId}
+                {currentChapter ? resolve(currentChapter.name).text : chapterId}
               </h1>
 
               <p className="text-xs sm:text-sm text-[#5A3720] bg-[#E8CF9C]/70 p-4 border-2 border-[#1E1610] leading-relaxed font-sans font-medium">
@@ -872,13 +873,13 @@ export default function ChapterDiagnosticPage() {
 
                 {/* Question Prompt: Larger readable font on desktop */}
                 {(() => {
-                  const promptData = resolveLocalizedString(q.prompt, currentLang);
+                  const promptData = resolve(q.prompt);
                   return (
                     <div className="font-sans text-base sm:text-lg font-bold text-slate-900 leading-relaxed flex items-center flex-wrap gap-2">
                       <span className="break-words">{promptData.text}</span>
                       {promptData.isDraft && (
                         <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-heading font-bold bg-amber-100 text-amber-900 rounded-full border border-amber-300">
-                          Draft Translation
+                          {t("lesson.draftBadge")}
                         </span>
                       )}
                     </div>
@@ -889,7 +890,7 @@ export default function ChapterDiagnosticPage() {
                 <div className="space-y-2 pt-2">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const optData = resolveLocalizedString(opt.text, currentLang);
+                    const optData = resolve(opt.text);
 
                     let optionBorderClass = "border-2 border-[#1E1610]";
                     let optionBgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";
@@ -985,7 +986,7 @@ export default function ChapterDiagnosticPage() {
                         <span className="font-heading font-bold text-[10px] text-[#5DAA3A] uppercase block">
                           Step-by-step Solution:
                         </span>
-                        <p>{resolveLocalizedString(feedbackItem.explanation, currentLang).text}</p>
+                        <p>{resolve(feedbackItem.explanation).text}</p>
                       </div>
                     )}
 
@@ -993,7 +994,7 @@ export default function ChapterDiagnosticPage() {
                     {feedbackItem.hint && (
                       <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 font-sans flex items-center gap-2">
                         <HelpCircle className="w-4 h-4 shrink-0 text-amber-700" />
-                        <span>{resolveLocalizedString(feedbackItem.hint, currentLang).text}</span>
+                        <span>{resolve(feedbackItem.hint).text}</span>
                       </div>
                     )}
                   </div>
@@ -1041,7 +1042,7 @@ export default function ChapterDiagnosticPage() {
                     Confirmation #{cqIdx + 1}
                   </p>
                   <p className="text-sm font-bold text-slate-900 font-sans">
-                    {resolveLocalizedString(cq.prompt, currentLang).text}
+                    {resolve(cq.prompt).text}
                   </p>
                   <div className="space-y-1.5 pt-1">
                     {cq.options?.map((cOpt) => (
@@ -1060,7 +1061,7 @@ export default function ChapterDiagnosticPage() {
                         <span className="w-6 h-6 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] flex items-center justify-center font-heading text-[10px]">
                           {cOpt.id}
                         </span>
-                        <span>{resolveLocalizedString(cOpt.text, currentLang).text}</span>
+                        <span>{resolve(cOpt.text).text}</span>
                       </div>
                     ))}
                   </div>

@@ -29,35 +29,35 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const colorStyles: Record<CardColor, string> = {
-  // Semi-opaque plank panel (canonical replacement for white cards)
-  white: "bg-[#D9B87A]/90 text-[#1E1610] border-[#1E1610]",
-  cream: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
+  // Translucent plank panel (canonical replacement for white cards)
+  white: "bg-[#D9B87A]/82 text-[#1E1610] border-[#1E1610]",
+  cream: "bg-[#E8CF9C]/84 text-[#1E1610] border-[#1E1610]",
 
   // Neutral Stone
-  stone: "bg-[#B9BCC0]/90 text-[#1E1610] border-[#1E1610]",
+  stone: "bg-[#B9BCC0]/82 text-[#1E1610] border-[#1E1610]",
 
   // Grass Accent (Success)
-  grass: "bg-[#6DB33F]/90 text-[#1E1610] border-[#1E1610]",
-  green: "bg-[#6DB33F]/90 text-[#1E1610] border-[#1E1610]",
+  grass: "bg-[#6DB33F]/84 text-[#1E1610] border-[#1E1610]",
+  green: "bg-[#6DB33F]/84 text-[#1E1610] border-[#1E1610]",
 
   // Highlights
-  gold: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
-  sand: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
-  yellow: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
-  orange: "bg-[#F2C230]/90 text-[#1E1610] border-[#1E1610]",
+  gold: "bg-[#F2C230]/84 text-[#1E1610] border-[#1E1610]",
+  sand: "bg-[#E8CF9C]/84 text-[#1E1610] border-[#1E1610]",
+  yellow: "bg-[#F2C230]/84 text-[#1E1610] border-[#1E1610]",
+  orange: "bg-[#F2C230]/84 text-[#1E1610] border-[#1E1610]",
 
   // Water / Sky (Hints and Info)
-  sky: "bg-[#78BDE8]/90 text-[#1E1610] border-[#1E1610]",
-  cyan: "bg-[#4EDBD3]/90 text-[#1E1610] border-[#1E1610]",
+  sky: "bg-[#78BDE8]/82 text-[#1E1610] border-[#1E1610]",
+  cyan: "bg-[#4EDBD3]/82 text-[#1E1610] border-[#1E1610]",
 
   // Ground Wood & Dirt / HUD Night panels
-  dirt: "bg-[#8B5A2B]/92 text-[#F3E3BC] border-[#1E1610]",
-  charcoal: "bg-[#232634]/92 text-[#F3E3BC] border-[#1E1610]",
-  translucent: "bg-[#232634]/92 text-[#F3E3BC] border-[#1E1610]",
+  dirt: "bg-[#8B5A2B]/85 text-[#F3E3BC] border-[#1E1610]",
+  charcoal: "bg-[#232634]/85 text-[#F3E3BC] border-[#1E1610]",
+  translucent: "bg-[#232634]/85 text-[#F3E3BC] border-[#1E1610]",
 
   // Gaps and Mistakes ONLY
-  red: "bg-[#D1362B]/92 text-[#F3E3BC] border-[#1E1610]",
-  pink: "bg-[#E8CF9C]/92 text-[#1E1610] border-[#1E1610]",
+  red: "bg-[#D1362B]/85 text-[#F3E3BC] border-[#1E1610]",
+  pink: "bg-[#E8CF9C]/84 text-[#1E1610] border-[#1E1610]",
 };
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(

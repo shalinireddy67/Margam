@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BookOpen, Compass, Lock, Search } from "lucide-react";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { getActiveProfile } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
 import { getConceptsByClass } from "@/lib/curriculum";
@@ -14,7 +15,7 @@ export default function PracticeDirectoryPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [filter, setFilter] = useState<"all" | "completed">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -41,7 +42,7 @@ export default function PracticeDirectoryPage() {
           className="bg-[#D9B87A]/90 p-6 rounded-xs text-center border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610]"
         >
           <div className="w-8 h-8 border-[3px] border-[#6DB33F] border-t-transparent rounded-none animate-spin mx-auto mb-2" />
-          <p className="font-heading font-extrabold text-xs text-[#1E1610] m-0">Opening practice topics...</p>
+          <p className="font-heading font-extrabold text-xs text-[#1E1610] m-0">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -57,8 +58,8 @@ export default function PracticeDirectoryPage() {
 
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      const name = (c.name[currentLang] || c.name.en).toLowerCase();
-      const obj = (c.learningObjective[currentLang] || c.learningObjective.en).toLowerCase();
+      const name = resolve(c.name).text.toLowerCase();
+      const obj = resolve(c.learningObjective).text.toLowerCase();
       return name.includes(q) || obj.includes(q);
     }
     return true;
@@ -96,7 +97,7 @@ export default function PracticeDirectoryPage() {
               Practice topics
             </h1>
             <p className="text-xs sm:text-sm text-[#5A3720] font-sans font-semibold max-w-xl m-0 leading-relaxed">
-              Practice questions picked for you. Earn XP and get helpful hints as you solve.
+              {t("practice.subtitle")}
             </p>
           </div>
 
@@ -189,10 +190,10 @@ export default function PracticeDirectoryPage() {
                   </div>
 
                   <h3 className="font-heading font-extrabold text-sm text-[#1E1610] m-0">
-                    {concept.name[currentLang] || concept.name.en}
+                    {resolve(concept.name).text}
                   </h3>
                   <p className="text-xs text-[#5A3720] font-sans font-medium line-clamp-2 m-0 leading-relaxed">
-                    {concept.learningObjective[currentLang] || concept.learningObjective.en}
+                    {resolve(concept.learningObjective).text}
                   </p>
                 </div>
 

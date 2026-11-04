@@ -40,12 +40,13 @@ import { evaluateStudentBadges } from "@/lib/badges";
 import { getLearnerGreeting } from "@/lib/greetings";
 import { Sparkles, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HomePage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<Language>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
 
   // Onboarding form state
   const [nameInput, setNameInput] = useState("");
@@ -248,18 +249,30 @@ export default function HomePage() {
           <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
             {/* Hero Section: Learning Companion Mascot + H1 + Subline */}
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
-              <div className="shrink-0 mb-3">
-                <Companion
-                  pose={isIstNightTime() ? "sleepy" : "greet"}
-                  size={110}
-                  sticker={false}
-                  alt="Margam learning companion"
-                />
+              <div className="shrink-0 mb-3 sm:mb-5 flex flex-col items-center">
+                <div className="block sm:hidden">
+                  <Companion
+                    pose={isIstNightTime() ? "sleepy" : "greet"}
+                    size={160}
+                    withShadow={true}
+                    sticker={false}
+                    alt="Margam learning companion"
+                  />
+                </div>
+                <div className="hidden sm:block">
+                  <Companion
+                    pose={isIstNightTime() ? "sleepy" : "greet"}
+                    size={210}
+                    withShadow={true}
+                    sticker={false}
+                    alt="Margam learning companion"
+                  />
+                </div>
               </div>
 
               <h1
                 id="hero-heading"
-                className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#2B1B0F] leading-tight max-w-[22ch]"
+                className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#1E1610] leading-tight max-w-[22ch] drop-shadow-[1px_1px_0px_#FFE9A8]"
               >
                 {copy.h1}
               </h1>
@@ -272,7 +285,7 @@ export default function HomePage() {
             {/* Two Role Cards: Student & Teacher (side by side on desktop, stacked on mobile) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
               {/* Card 1: Student */}
-              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
+              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#6DB33F]">
                 <div className="space-y-3">
                   <span className="font-pixel text-[11px] uppercase tracking-wider text-[#5DAA3A] block">
                     {copy.studentLabel}
@@ -306,7 +319,7 @@ export default function HomePage() {
               </div>
 
               {/* Card 2: Teacher */}
-              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6">
+              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#3FA7C9]">
                 <div className="space-y-3">
                   <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3FA7C9] block">
                     {copy.teacherLabel}
@@ -355,14 +368,15 @@ export default function HomePage() {
         {profile && (
           <section aria-labelledby="dashboard-heading" className="space-y-6">
             {/* Hero Student Realm Banner */}
-            <div className="p-6 sm:p-7 bg-[#5A3720] border-4 border-[#422816] border-t-4 border-t-[#FFE9A8] shadow-[6px_6px_0px_rgba(0,0,0,0.5)] space-y-5">
+            <div className="p-6 sm:p-7 bg-[#5A3720]/82 border-3 border-[#1E1610] border-t-[5px] border-t-[#FFE9A8] shadow-[4px_4px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   {/* Mascot Companion with Pose */}
                   <div className="shrink-0">
                     <Companion
                       pose="cheer"
-                      size={90}
+                      size={130}
+                      withShadow={true}
                       sticker={false}
                       alt="Margam Learning Companion"
                     />
@@ -421,7 +435,7 @@ export default function HomePage() {
 
               {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
-                <div className="p-5 bg-[#422816] border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[4px_4px_0px_rgba(0,0,0,0.5)] space-y-3">
+                <div className="p-5 bg-[#422816]/85 border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[3px_3px_0px_#1E1610] rounded-[2px] space-y-3">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-2 text-[#FFE9A8]">
                       <AlertCircle className="w-5 h-5 shrink-0" />
@@ -438,7 +452,7 @@ export default function HomePage() {
 
                   {gapConcept && (
                     <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
-                      {gapConcept.name[currentLang] || gapConcept.name.en}
+                      {resolve(gapConcept.name).text}
                     </h3>
                   )}
 
@@ -518,7 +532,7 @@ export default function HomePage() {
             </div>
 
             {/* Companion Dialogue & Advice Card */}
-            <div className="p-4 sm:p-5 bg-[#5A3720] border-4 border-[#422816] shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col sm:flex-row items-center gap-4">
+            <div className="p-4 sm:p-5 bg-[#5A3720]/82 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] flex flex-col sm:flex-row items-center gap-4">
               <div className="shrink-0">
                 <Companion
                   pose={companionRevision?.pose || "greet"}
@@ -577,7 +591,7 @@ export default function HomePage() {
                   return (
                     <div
                       key={item.conceptId}
-                      className={`p-4 bg-[#5A3720] border-3 shadow-[4px_4px_0px_rgba(0,0,0,0.4)] flex flex-col justify-between gap-3 ${
+                      className={`p-4 bg-[#5A3720]/82 border-3 shadow-[3px_3px_0px_#1E1610] rounded-[2px] flex flex-col justify-between gap-3 ${
                         isCritical ? "border-[#FFE9A8]" : "border-[#7A4B2A]"
                       }`}
                     >
@@ -629,7 +643,7 @@ export default function HomePage() {
                 })}
               </div>
             ) : (
-              <div className="p-6 bg-[#5A3720] border-3 border-[#7A4B2A] text-center space-y-2">
+              <div className="p-6 bg-[#5A3720]/82 border-3 border-[#7A4B2A] shadow-[3px_3px_0px_#1E1610] rounded-[2px] text-center space-y-2">
                 <CheckCircle2 className="w-8 h-8 text-[#5DAA3A] mx-auto" />
                 <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
                   All Math Blocks in Great Shape!
@@ -691,7 +705,7 @@ export default function HomePage() {
                 : "available";
 
               const localizedTitle = `Ch ${chapter.chapterNumber}: ${
-                chapter.name[currentLang] || chapter.name.en
+                resolve(chapter.name).text
               }`;
               const localizedSubtitle = `NCERT • ${chapter.bookName}`;
 

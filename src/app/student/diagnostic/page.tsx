@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Target } from "lucide-react";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { getActiveProfile } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
 import {
@@ -18,7 +19,7 @@ export default function DiagnosticDirectoryPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
 
   useEffect(() => {
     const active = getActiveProfile();
@@ -43,7 +44,7 @@ export default function DiagnosticDirectoryPage() {
           className="bg-[#D9B87A]/90 p-6 rounded-xs text-center border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610]"
         >
           <div className="w-8 h-8 border-[3px] border-[#6DB33F] border-t-transparent rounded-none animate-spin mx-auto mb-2" />
-          <p className="font-heading font-extrabold text-xs text-[#1E1610] m-0">Opening quick check...</p>
+          <p className="font-heading font-extrabold text-xs text-[#1E1610] m-0">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -130,7 +131,7 @@ export default function DiagnosticDirectoryPage() {
                   </div>
 
                   <h3 className="font-heading font-extrabold text-base text-[#1E1610] m-0">
-                    {chapter.name[currentLang] || chapter.name.en}
+                    {resolve(chapter.name).text}
                   </h3>
                   <p className="text-xs text-[#5A3720] font-sans font-medium m-0">
                     {chapterConcepts.length} Concepts in this chapter syllabus.

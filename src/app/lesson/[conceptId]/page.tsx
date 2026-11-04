@@ -31,6 +31,7 @@ import {
   resolveLocalizedString,
 } from "@/lib/curriculum";
 
+import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { Companion } from "@/components/ui/Companion";
 import {
@@ -83,7 +84,7 @@ function LessonContent() {
   const gapReason = searchParams.get("reason") || "";
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [practiceQuestions, setPracticeQuestions] = useState<any[]>([]);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -182,7 +183,7 @@ function LessonContent() {
               className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#1E1610] bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
             >
               <ArrowLeft className="w-4 h-4 mr-1.5" />
-              <span>Back to Curriculum</span>
+              <span>{t("lesson.backToLessons")}</span>
             </Link>
           </div>
         </header>
@@ -330,10 +331,10 @@ function LessonContent() {
     setCompanionContext("lesson_start");
   };
 
-  const headlineData = resolveLocalizedString(activeVariant.headline, currentLang);
-  const explanationData = resolveLocalizedString(activeVariant.explanation, currentLang);
-  const workedProblem = resolveLocalizedString(activeVariant.workedExample.problem, currentLang);
-  const workedSolution = resolveLocalizedString(activeVariant.workedExample.solution, currentLang);
+  const headlineData = resolve(activeVariant.headline);
+  const explanationData = resolve(activeVariant.explanation);
+  const workedProblem = resolve(activeVariant.workedExample.problem);
+  const workedSolution = resolve(activeVariant.workedExample.solution);
 
   return (
     <div className="min-h-screen text-slate-800 flex flex-col justify-between">
@@ -425,11 +426,11 @@ function LessonContent() {
           </div>
 
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950 tracking-wide">
-            {concept.name[currentLang] || concept.name.en}
+            {resolve(concept.name).text}
           </h1>
 
           <p className="text-xs sm:text-sm text-[#5A3720] bg-[#E8CF9C]/70 p-4 border-2 border-[#1E1610] leading-relaxed font-sans font-medium">
-            <strong className="text-emerald-950 font-bold">Goal:</strong> {concept.learningObjective[currentLang] || concept.learningObjective.en}
+            <strong className="text-emerald-950 font-bold">{t("lesson.goal")}:</strong> {resolve(concept.learningObjective).text}
           </p>
 
           {!fromGap && (
@@ -475,14 +476,14 @@ function LessonContent() {
 
                   {activeVariant.visualAnalogy && (
                     <div className="p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs sm:text-sm text-emerald-950 font-sans">
-                      <strong>Intuition:</strong> {resolveLocalizedString(activeVariant.visualAnalogy, currentLang).text}
+                      <strong>{t("lesson.intuition")}:</strong> {resolve(activeVariant.visualAnalogy).text}
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Step-by-Step Worked Example Card */}
+            {/* Step-by-Step {t("lesson.workedExample")} Card */}
             <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
               <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-emerald-800">
                 <Sparkles className="w-4 h-4 text-emerald-700" />
@@ -524,7 +525,7 @@ function LessonContent() {
             <div className="flex items-center justify-between gap-3 border-b-2 border-[#1E1610]/20 pb-4 flex-wrap">
               <div>
                 <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
-                  Check Your Understanding
+                  {t("lesson.practiceWorksheet")}
                 </h2>
                 <p className="text-xs text-slate-600 font-sans mt-0.5">
                   Try this quick problem to verify concept comprehension.
@@ -552,7 +553,7 @@ function LessonContent() {
             <form onSubmit={handleSubmitPractice} className="space-y-6">
               {practiceQuestions.map((q, idx) => {
                 const feedbackItem = worksheetResult?.feedback.find((f) => f.questionId === q.id);
-                const qPrompt = resolveLocalizedString(q.prompt, currentLang);
+                const qPrompt = resolve(q.prompt);
 
                 return (
                   <div key={q.id} className="space-y-3 pt-2">
@@ -566,7 +567,7 @@ function LessonContent() {
                     <div className="space-y-2 pt-1">
                       {q.options?.map((opt: any) => {
                         const isSelected = answers[q.id] === opt.id;
-                        const optText = resolveLocalizedString(opt.text, currentLang);
+                        const optText = resolve(opt.text);
 
                         let borderClass = "border-2 border-[#1E1610]";
                         let bgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";

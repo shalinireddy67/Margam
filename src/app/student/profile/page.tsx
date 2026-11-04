@@ -22,6 +22,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
@@ -38,7 +39,7 @@ export default function StudentProfilePage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
 
   // Nickname editing state
   const [isEditingName, setIsEditingName] = useState(false);
@@ -76,7 +77,7 @@ export default function StudentProfilePage() {
       <div className="min-h-screen flex items-center justify-center text-[#1E1610]">
         <div className="panel-plank p-6 text-center border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
           <div className="w-8 h-8 border-3 border-[#6DB33F] border-t-transparent animate-spin mx-auto mb-2" />
-          <p className="font-heading font-extrabold text-xs text-[#1E1610]">Loading Profile...</p>
+          <p className="font-heading font-extrabold text-xs text-[#1E1610]">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -199,7 +200,7 @@ export default function StudentProfilePage() {
           <div className="space-y-1 text-center sm:text-left flex-1">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <span className="px-2.5 py-0.5 bg-[#8CCB55] border-2 border-[#1E1610] text-[11px] font-heading font-extrabold text-[#1E1610] uppercase tracking-wide">
-                Student Profile
+                {t("profile.title")}
               </span>
               <span className="px-2.5 py-0.5 bg-[#F2C230] border-2 border-[#1E1610] text-[11px] font-heading font-extrabold text-[#1E1610]">
                 {levelInfo.rank.badge} {levelInfo.rank.name} Scholar

@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -81,7 +82,7 @@ export default function ChapterTestRunnerPage() {
   const chapterId = params?.chapterId as string;
 
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [questions, setQuestions] = useState<ClientTestQuestion[]>([]);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [conceptAllocation, setConceptAllocation] = useState<Record<string, number>>({});
@@ -346,7 +347,7 @@ export default function ChapterTestRunnerPage() {
           </div>
 
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950 tracking-wide">
-            {currentChapter.name[currentLang] || currentChapter.name.en}
+            {resolve(currentChapter.name).text}
           </h1>
 
           <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
@@ -533,7 +534,7 @@ export default function ChapterTestRunnerPage() {
           {questions.map((q, qIndex) => {
             const isAnswered = !!answers[q.id];
             const feedbackItem = result?.feedback.find((f) => f.questionId === q.id);
-            const promptData = resolveLocalizedString(q.prompt, currentLang);
+            const promptData = resolve(q.prompt);
 
             return (
               <div
@@ -554,7 +555,7 @@ export default function ChapterTestRunnerPage() {
                   <span>{promptData.text}</span>
                   {promptData.isDraft && (
                     <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-heading font-bold bg-amber-100 text-amber-900 rounded-full border border-amber-300">
-                      Draft Translation
+                      {t("lesson.draftBadge")}
                     </span>
                   )}
                 </h2>
@@ -562,7 +563,7 @@ export default function ChapterTestRunnerPage() {
                 <div className="space-y-2.5 pt-1">
                   {q.options?.map((opt) => {
                     const isSelected = answers[q.id] === opt.id;
-                    const optData = resolveLocalizedString(opt.text, currentLang);
+                    const optData = resolve(opt.text);
 
                     let optionBorderClass = "border-2 border-[#1E1610]";
                     let optionBgClass = "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A]";

@@ -485,7 +485,8 @@ function LoginForm() {
               <div className="flex items-center gap-2.5">
                 <Companion
                   pose={isIstNightTime() ? "sleepy" : "greet"}
-                  size={50}
+                  size={80}
+                  withShadow={true}
                   sticker={false}
                   alt="Maru companion"
                 />

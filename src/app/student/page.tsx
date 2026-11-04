@@ -37,12 +37,13 @@ import { SegmentedXpBar } from "@/components/ui/PixelEffects";
 import { DailyQuests } from "@/components/ui/DailyQuests";
 import { getLearnerGreeting } from "@/lib/greetings";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function StudentDashboardPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
 
   useEffect(() => {
     const active = getActiveProfile();
@@ -113,7 +114,7 @@ export default function StudentDashboardPage() {
   if (activeGap && rootConcept) {
     nextRecommendation = {
       badge: "Foundational Gap Review",
-      title: `Fix earlier topic: ${rootConcept.name[currentLang] || rootConcept.name.en}`,
+      title: `Fix earlier topic: ${resolve(rootConcept.name).text}`,
       description:
         activeGap.plainLanguageReason ||
         `Our diagnostic detected a prerequisite gap from Class ${rootConcept.class}. Reviewing this concept will make current grade quests effortless.`,
@@ -184,7 +185,8 @@ export default function StudentDashboardPage() {
             <div className="shrink-0">
               <Companion
                 pose={isIstNightTime() ? "sleepy" : "greet"}
-                size={64}
+                size={100}
+                withShadow={true}
                 sticker={false}
                 alt="Margam companion"
               />
@@ -211,7 +213,7 @@ export default function StudentDashboardPage() {
                 </span>
               </div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#1E1610] leading-tight">
-                Welcome back, {profile.name}!
+                {t("home.welcomeBack")}, {profile.name}!
               </h1>
               <p className="text-xs sm:text-sm text-[#5A3720] font-sans max-w-xl">
                 {displayGreeting}
@@ -222,7 +224,7 @@ export default function StudentDashboardPage() {
           {/* Quick Profile Level & XP widget */}
           <div className="w-full md:w-64 space-y-2 p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] shrink-0">
             <div className="flex items-center justify-between text-xs font-heading font-bold text-[#1E1610]">
-              <span>Level {levelInfo.level} Progress</span>
+              <span>{t("profile.level", { lvl: levelInfo.level })}</span>
               <span>{profile.xp || 0} XP</span>
             </div>
             <SegmentedXpBar currentXp={profile.xp || 0} />
@@ -293,17 +295,17 @@ export default function StudentDashboardPage() {
               <div className="flex items-center gap-2 text-[#D1362B]">
                 <AlertCircle className="w-5 h-5 shrink-0 text-[#D1362B]" />
                 <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#1E1610]">
-                  Foundational Learning Gap Identified
+                  {t("dashboard.activeGapTitle")}
                 </h3>
               </div>
               <span className="px-2.5 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[11px] font-heading font-bold text-[#1E1610]">
-                Earlier topic from Class {rootConcept.class}
+                {t("dashboard.activeGapBadge")}
               </span>
             </div>
 
             <div className="space-y-1">
               <div className="font-heading font-bold text-sm text-[#1E1610]">
-                {rootConcept.name[currentLang] || rootConcept.name.en}
+                {resolve(rootConcept.name).text}
               </div>
               <p className="font-sans text-xs sm:text-sm text-[#5A3720] leading-relaxed">
                 {activeGap.plainLanguageReason ||
@@ -340,7 +342,7 @@ export default function StudentDashboardPage() {
                 className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] font-heading font-bold text-xs shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <BookOpen className="w-4 h-4 mr-1 shrink-0" />
-                <span>Learn this topic</span>
+                <span>{t("dashboard.fixThisTopic")}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -420,7 +422,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#1E1610]/20 flex items-center justify-between text-xs font-heading font-bold text-[#1E1610]">
-              <span>Open Lessons</span>
+              <span>{t("dashboard.openLessons")}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -449,7 +451,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#1E1610]/20 flex items-center justify-between text-xs font-heading font-bold text-[#1E1610]">
-              <span>Start Practice</span>
+              <span>{t("dashboard.startPractice")}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -478,7 +480,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#1E1610]/20 flex items-center justify-between text-xs font-heading font-bold text-[#1E1610]">
-              <span>Take quick check</span>
+              <span>{t("dashboard.takeQuickCheck")}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -507,7 +509,7 @@ export default function StudentDashboardPage() {
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#1E1610]/20 flex items-center justify-between text-xs font-heading font-bold text-[#1E1610]">
-              <span>Edit Profile</span>
+              <span>{t("dashboard.editProfile")}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -609,7 +611,7 @@ export default function StudentDashboardPage() {
                       )}
                     </div>
                     <h3 className="font-heading font-extrabold text-sm text-[#1E1610]">
-                      {chapter.name[currentLang] || chapter.name.en}
+                      {resolve(chapter.name).text}
                     </h3>
                   </div>
 

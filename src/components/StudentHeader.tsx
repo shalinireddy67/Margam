@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Volume2, VolumeX, Flame } from "lucide-react";
+import { ArrowLeft, Flame } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
 import { Logo } from "@/components/ui";
-// Sound effects disabled per accessibility guidelines
 import { getLevelProgress } from "@/lib/xp-config";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface StudentHeaderProps {
   profile: LearnerProfile | null;
-  currentLang: SupportedLanguage;
-  onLanguageChange: (lang: SupportedLanguage) => void;
+  currentLang?: SupportedLanguage;
+  onLanguageChange?: (lang: SupportedLanguage) => void;
   backHref?: string;
   backLabel?: string;
 }
@@ -21,16 +21,22 @@ export default function StudentHeader({
   currentLang,
   onLanguageChange,
   backHref,
-  backLabel = "Back to Learning Path",
+  backLabel,
 }: StudentHeaderProps) {
-  
+  const { lang: contextLang, setLang: contextSetLang, t } = useLanguage();
+  const activeLang = currentLang || contextLang || "en";
+  const handleLanguageChange = onLanguageChange || contextSetLang;
+
+  const defaultBackLabel = t("lesson.backToLessons");
+  const effectiveBackLabel = backLabel || defaultBackLabel;
+
   const levelInfo = profile ? getLevelProgress(profile.xp || 0) : null;
-  const gradeNames: Record<number, string> = {
-    6: "Class 6 • Ganita Prakash",
-    7: "Class 7 • Ganita Prakash",
-    8: "Class 8 • Ganita Prakash",
-    9: "Class 9 • Ganita Manjari",
-    10: "Class 10 • Mathematics",
+  const gradeBookNames: Record<number, string> = {
+    6: "Ganita Prakash",
+    7: "Ganita Prakash",
+    8: "Ganita Prakash",
+    9: "Ganita Manjari",
+    10: "Mathematics",
   };
 
   return (
@@ -47,8 +53,8 @@ export default function StudentHeader({
               className="inline-flex items-center justify-center min-h-[38px] gap-1.5 text-xs font-heading font-extrabold text-[#1E1610] py-1.5 px-3 bg-[#E8CF9C] hover:bg-[#F3E3BC] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] rounded-xs transition-all cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4 text-[#1E1610] shrink-0" />
-              <span className="hidden sm:inline">{backLabel}</span>
-              <span className="sm:hidden">Back</span>
+              <span className="hidden sm:inline">{effectiveBackLabel}</span>
+              <span className="sm:hidden">{t("common.back")}</span>
             </Link>
           ) : (
             <Link
@@ -67,7 +73,8 @@ export default function StudentHeader({
           {profile && (
             <div className="hidden md:flex items-center gap-2 pl-3 border-l-2 border-[#1E1610]/40">
               <span className="inline-flex items-center px-2.5 py-0.5 text-[10px] font-heading font-extrabold bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[1px_1px_0px_#1E1610] rounded-xs">
-                {gradeNames[profile.selectedClass] || `Class ${profile.selectedClass}`}
+                {t("home.classBadge", { grade: profile.selectedClass || 10 })} •{" "}
+                {gradeBookNames[profile.selectedClass || 10] || "NCERT"}
               </span>
             </div>
           )}
@@ -81,11 +88,21 @@ export default function StudentHeader({
               {profile.streak && profile.streak.current > 0 && (
                 <div
                   className="flex items-center gap-1 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#D1362B] shadow-[1px_1px_0px_#1E1610] select-none"
-                  title={`${profile.streak.current} ${profile.streak.current === 1 ? "day in a row" : "days in a row"}`}
+                  title={t(
+                    profile.streak.current === 1
+                      ? "nav.streakDays"
+                      : "nav.streakDaysPlural",
+                    { count: profile.streak.current }
+                  )}
                 >
                   <Flame className="w-3.5 h-3.5 text-[#D1362B] fill-[#D1362B]" aria-hidden="true" />
                   <span className="hidden md:inline">
-                    {profile.streak.current} {profile.streak.current === 1 ? "day in a row" : "days in a row"}
+                    {t(
+                      profile.streak.current === 1
+                        ? "nav.streakDays"
+                        : "nav.streakDaysPlural",
+                      { count: profile.streak.current }
+                    )}
                   </span>
                   <span className="md:hidden">{profile.streak.current}d</span>
                 </div>
@@ -95,17 +112,17 @@ export default function StudentHeader({
               {levelInfo && (
                 <div
                   className="flex items-center gap-2 px-2.5 py-1 bg-[#18120C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#F3E3BC] shadow-[1px_1px_0px_#1E1610] select-none"
-                  title={`${levelInfo.rank.name} level • ${levelInfo.progressPercent}% to next level`}
+                  title={`${levelInfo.rank.name} • ${levelInfo.progressPercent}%`}
                 >
                   <span className="text-sm select-none" aria-hidden="true">{levelInfo.rank.badge}</span>
-                  <span className="text-[#F2C230]">{levelInfo.rank.name} level</span>
+                  <span className="text-[#F2C230]">{levelInfo.rank.name}</span>
                   <div
                     className="w-14 h-2 bg-[#232634] border border-[#1E1610] overflow-hidden"
                     role="progressbar"
                     aria-valuenow={levelInfo.progressPercent}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    aria-label={`${levelInfo.rank.name} level progression: ${levelInfo.progressPercent}%`}
+                    aria-label={`${levelInfo.rank.name} progression: ${levelInfo.progressPercent}%`}
                   >
                     <div
                       className="h-full bg-[#6DB33F] transition-all duration-300"
@@ -119,47 +136,46 @@ export default function StudentHeader({
 
           {/* Language Switcher */}
           <div
-            className="flex items-center bg-[#D9B87A] p-0.5 border-2 border-[#1E1610] rounded-xs shadow-[2px_2px_0px_#1E1610]"
+            className="flex items-center bg-[#161822]/85 p-1 border-2 border-[#1E1610] rounded-[2px] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)] gap-1"
             role="group"
-            aria-label="Select Interface Language"
+            aria-label={t("common.selectLanguage")}
           >
             <button
               type="button"
               data-l="en"
-              onClick={() => onLanguageChange("en")}
-              className={`min-h-[32px] min-w-[28px] sm:min-w-[34px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-xs transition-all cursor-pointer ${
-                currentLang === "en"
-                  ? "bg-[#F2C230] text-[#1E1610] border border-[#1E1610] shadow-[1px_1px_0px_#1E1610] font-extrabold"
-                  : "text-[#1E1610] hover:bg-[#E8CF9C]"
+              onClick={() => handleLanguageChange("en")}
+              className={`min-h-[30px] sm:min-h-[32px] px-2 text-[11px] sm:text-xs font-heading font-extrabold rounded-[2px] transition-all cursor-pointer ${
+                activeLang === "en"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
               }`}
             >
-              EN
+              <span className="hidden sm:inline">English</span>
+              <span className="sm:hidden">EN</span>
             </button>
             <button
               type="button"
               data-l="hi"
-              onClick={() => onLanguageChange("hi")}
-              className={`min-h-[32px] min-w-[28px] sm:min-w-[38px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-xs transition-all cursor-pointer ${
-                currentLang === "hi"
-                  ? "bg-[#F2C230] text-[#1E1610] border border-[#1E1610] shadow-[1px_1px_0px_#1E1610] font-extrabold"
-                  : "text-[#1E1610] hover:bg-[#E8CF9C]"
+              onClick={() => handleLanguageChange("hi")}
+              className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
+                activeLang === "hi"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                  : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
               }`}
             >
-              <span className="sm:hidden">हि</span>
-              <span className="hidden sm:inline">हिन्दी</span>
+              हिंदी
             </button>
             <button
               type="button"
               data-l="te"
-              onClick={() => onLanguageChange("te")}
-              className={`min-h-[32px] min-w-[28px] sm:min-w-[38px] px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold rounded-xs transition-all cursor-pointer ${
-                currentLang === "te"
-                  ? "bg-[#F2C230] text-[#1E1610] border border-[#1E1610] shadow-[1px_1px_0px_#1E1610] font-extrabold"
-                  : "text-[#1E1610] hover:bg-[#E8CF9C]"
+              onClick={() => handleLanguageChange("te")}
+              className={`min-h-[30px] sm:min-h-[32px] px-2 text-xs font-heading font-bold rounded-[2px] transition-all cursor-pointer ${
+                activeLang === "te"
+                  ? "bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] shadow-[inset_1px_1px_0px_#FFF2CC,1px_1px_0px_#10121A]"
+                : "bg-[#2B3042]/85 hover:bg-[#3B425A] text-[#D9B87A] hover:text-[#F3E3BC] border border-[#1E1610]"
               }`}
             >
-              <span className="sm:hidden">తె</span>
-              <span className="hidden sm:inline">తెలుగు</span>
+              తెలుగు
             </button>
           </div>
         </div>

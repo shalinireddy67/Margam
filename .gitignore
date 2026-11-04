@@ -51,3 +51,6 @@ screenshots/
 
 # Translation Review CSV
 translations-review.csv
+
+# Scratch scripts
+/scratch/

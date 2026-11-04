@@ -327,71 +327,71 @@
 }
 
 /* ==========================================================================
-   OFFICIAL PHASE 2 SEMI-OPAQUE PANELS (88-92% opacity, NO backdrop-filter)
+   OFFICIAL PHASE 2 SEMI-OPAQUE PANELS (80-84% opacity, translucent block-world depth)
    ========================================================================== */
 
 .panel-plank, .card-plank {
-  background-color: rgba(217, 184, 122, 0.90);
+  background-color: rgba(217, 184, 122, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.25), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .panel-stone, .card-stone {
-  background-color: rgba(185, 188, 192, 0.90);
+  background-color: rgba(185, 188, 192, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(230, 232, 235, 0.3), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .panel-night, .card-night {
-  background-color: rgba(35, 38, 52, 0.92);
+  background-color: rgba(35, 38, 52, 0.85);
   color: #F3E3BC;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(65, 72, 95, 0.4), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .panel-grass, .card-grass {
-  background-color: rgba(109, 179, 63, 0.90);
+  background-color: rgba(109, 179, 63, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(156, 232, 108, 0.3), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .panel-sky, .card-sky {
-  background-color: rgba(120, 189, 232, 0.90);
+  background-color: rgba(120, 189, 232, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(180, 225, 250, 0.3), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 /* Migration fallbacks mapping glass/card classes to semi-opaque panels */
 .glass-panel, .glass-card, .voxel-card, .voxel-panel, .card-block, .voxel-card-white, .voxel-card-light, .voxel-panel-light, .voxel-card-translucent {
-  background-color: rgba(217, 184, 122, 0.90);
+  background-color: rgba(217, 184, 122, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.25), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .glass-panel-tinted {
-  background-color: rgba(109, 179, 63, 0.90);
+  background-color: rgba(109, 179, 63, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(156, 232, 108, 0.3), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
 .glass-panel-cream {
-  background-color: rgba(232, 207, 156, 0.92);
+  background-color: rgba(232, 207, 156, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
-  box-shadow: 3px 3px 0px #1E1610;
+  box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.3), 3px 3px 0px #1E1610;
   border-radius: 2px;
 }
 
@@ -463,7 +463,27 @@ textarea:focus,
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes companion-gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes companion-shadow-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.16;
   }
 }
 
@@ -481,18 +501,20 @@ textarea:focus,
 
 @keyframes companion-hop {
   0%, 100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0);
   }
-  25% {
-    transform: translateY(-3px) rotate(-2deg);
-  }
-  75% {
-    transform: translateY(-3px) rotate(2deg);
+  50% {
+    transform: translateY(-6px);
   }
 }
 
-.animate-companion-float {
-  animation: companion-float 3.5s ease-in-out infinite;
+.animate-companion-float,
+.animate-companion-gentle-float {
+  animation: companion-gentle-float 3.8s ease-in-out infinite;
+}
+
+.animate-companion-shadow {
+  animation: companion-shadow-breathe 3.8s ease-in-out infinite;
 }
 
 .animate-companion-bounce {

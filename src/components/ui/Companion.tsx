@@ -6,15 +6,16 @@ export type CompanionPose = "greet" | "read" | "think" | "cheer" | "oops" | "sle
 
 export interface CompanionProps {
   pose?: CompanionPose;
-  size?: number | "sm" | "default" | "lg";
+  size?: number | "sm" | "default" | "lg" | "xl";
   className?: string;
   alt?: string;
   sticker?: boolean;
   simplified?: boolean;
+  withShadow?: boolean;
 }
 
 /**
- * Margam Learning Companion (Minecraft Chicken Jockey mascot).
+ * Margam Learning Companion (Minecraft-inspired Chicken Jockey mascot).
  * Faithful to authentic voxel identity, balanced proportions, and transparent rendering.
  */
 export function Companion({
@@ -23,16 +24,19 @@ export function Companion({
   className = "",
   alt,
   sticker = false,
+  withShadow = false,
 }: CompanionProps) {
-  let dimension = 120;
+  let dimension = 140;
   if (typeof size === "number") {
     dimension = size;
   } else if (size === "sm") {
     dimension = 64;
   } else if (size === "default") {
-    dimension = 120;
+    dimension = 140;
   } else if (size === "lg") {
     dimension = 220;
+  } else if (size === "xl") {
+    dimension = 280;
   }
 
   // Mascot aspect ratio: width is ~0.52 of height
@@ -51,9 +55,7 @@ export function Companion({
   const animationClass =
     pose === "cheer"
       ? "animate-companion-bounce"
-      : pose === "greet"
-        ? "animate-companion-hop"
-        : "animate-companion-float";
+      : "animate-companion-gentle-float";
 
   return (
     <div
@@ -62,22 +64,22 @@ export function Companion({
       data-pose={pose}
       role="img"
       aria-label={alt || defaultAlt}
-      style={{ width: mascotWidth + (sticker ? 16 : 0), height: mascotHeight }}
-      className={`relative inline-flex items-center justify-center shrink-0 select-none ${className}`}
+      style={{ width: mascotWidth + (sticker ? 16 : 0), height: mascotHeight + (withShadow ? 12 : 0) }}
+      className={`relative inline-flex flex-col items-center justify-center shrink-0 select-none ${className}`}
     >
       {/* Optional Sticker / Block Backing */}
       {sticker && (
         <div className="absolute inset-0 bg-[#5A3720] border-2 border-[#422816] shadow-[3px_3px_0px_rgba(0,0,0,0.4)] -z-10" />
       )}
 
-      {/* Mascot Container with Subtle Animation */}
+      {/* Mascot Container with Smooth Gentle Float Animation */}
       <div className={`relative w-full h-full flex items-center justify-center ${animationClass} motion-reduce:animate-none`}>
         <img
           src="/images/companion/mascot-trimmed.png"
           alt={alt || defaultAlt}
           width={mascotWidth}
           height={mascotHeight}
-          className="object-contain drop-shadow-[2px_3px_0px_rgba(43,27,15,0.7)]"
+          className="object-contain drop-shadow-[2px_4px_0px_rgba(30,22,16,0.65)]"
           style={{
             maxHeight: "100%",
             maxWidth: "100%",
@@ -125,6 +127,14 @@ export function Companion({
           </div>
         )}
       </div>
+
+      {/* Subtle Grounding Shadow that breathes in sync with the float */}
+      {withShadow && (
+        <div
+          aria-hidden="true"
+          className="w-[65%] h-2 bg-[#1E1610]/35 rounded-full blur-[1px] -mt-1 animate-companion-shadow motion-reduce:animate-none pointer-events-none"
+        />
+      )}
     </div>
   );
 }

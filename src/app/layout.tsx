@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import WorldBackground from "@/components/world/WorldBackground";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const SITE_NAME = "Margam";
 const SITE_DESCRIPTION =
@@ -39,12 +40,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-full flex flex-col text-[#1E1610] font-sans antialiased pb-24 md:pb-0 overflow-x-hidden selection:bg-[#6DB33F]/30 selection:text-[#1E1610]">
-        {/* Universal Movable World Background */}
-        <WorldBackground />
-        <a href="#main-content" className="skip-to-content">
-          Skip to main content
-        </a>
-        {children}
+        <LanguageProvider>
+          {/* Universal Movable World Background */}
+          <WorldBackground />
+          <a href="#main-content" className="skip-to-content">
+            Skip to main content
+          </a>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

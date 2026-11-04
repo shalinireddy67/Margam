@@ -19,6 +19,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ConceptPathway from "@/components/ConceptPathway";
 import { LearnerProfile, Concept, Chapter, SupportedLanguage } from "@/lib/types";
 import {
@@ -37,7 +38,7 @@ export default function StudentLearnPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "unlocked" | "completed" | "locked">("all");
   const [viewMode, setViewMode] = useState<"cascade" | "pathway">("cascade");
@@ -62,7 +63,7 @@ export default function StudentLearnPage() {
       <div className="min-h-screen flex items-center justify-center text-[#1E1610]">
         <div className="panel-plank p-6 text-center border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
           <div className="w-8 h-8 border-3 border-[#6DB33F] border-t-transparent animate-spin mx-auto mb-2" />
-          <p className="font-heading font-extrabold text-xs text-[#1E1610]">Loading Curriculum...</p>
+          <p className="font-heading font-extrabold text-xs text-[#1E1610]">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -382,12 +383,12 @@ export default function StudentLearnPage() {
 
                         {/* Title */}
                         <h2 className="font-heading font-extrabold text-base text-[#1E1610]">
-                          {concept.name[currentLang] || concept.name.en}
+                          {resolve(concept.name).text}
                         </h2>
 
                         {/* Objective */}
                         <p className="text-xs text-[#5A3720] font-sans leading-relaxed">
-                          {concept.learningObjective[currentLang] || concept.learningObjective.en}
+                          {resolve(concept.learningObjective).text}
                         </p>
 
                         {/* Prerequisite Requirement Message if Locked */}
