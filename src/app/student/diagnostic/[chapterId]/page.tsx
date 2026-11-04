@@ -25,7 +25,7 @@ import {
   LearnerProfile,
   Chapter,
 } from "@/lib/types";
-import { getActiveProfile, saveProfile } from "@/lib/storage";
+import { getActiveProfile, saveProfile, ensureActiveProfile } from "@/lib/storage";
 import { unlockChapterLessons } from "@/lib/progression";
 import {
   chapters,
@@ -165,15 +165,18 @@ export default function ChapterDiagnosticPage() {
   const [confirmationStatus, setConfirmationStatus] = useState<"pending" | "passed" | "failed" | null>(null);
   const [confirmationSubmitted, setConfirmationSubmitted] = useState(false);
 
-  const initDiagnostic = useCallback(() => {
+  const initDiagnostic = useCallback(async () => {
     try {
       setLoading(true);
       setHasError(false);
       setErrorMessage(null);
 
-      const active = getActiveProfile();
+      let active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        active = await ensureActiveProfile();
+      }
+      if (!active || !active.selectedClass) {
+        router.replace("/student");
         return;
       }
       setProfile(active);

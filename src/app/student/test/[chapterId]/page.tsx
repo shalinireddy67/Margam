@@ -21,7 +21,7 @@ import {
   LearnerProfile,
   Chapter,
 } from "@/lib/types";
-import { getActiveProfile } from "@/lib/storage";
+import { getActiveProfile, ensureActiveProfile } from "@/lib/storage";
 import {
   chapters,
   getConceptById,
@@ -92,15 +92,18 @@ export default function ChapterTestRunnerPage() {
   const [hasError, setHasError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const initTest = useCallback(() => {
+  const initTest = useCallback(async () => {
     try {
       setLoading(true);
       setHasError(false);
       setErrorMessage(null);
 
-      const active = getActiveProfile();
+      let active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        active = await ensureActiveProfile();
+      }
+      if (!active || !active.selectedClass) {
+        router.replace("/student");
         return;
       }
       setProfile(active);

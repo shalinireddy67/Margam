@@ -592,6 +592,32 @@ export async function syncCloudProgress(): Promise<LearnerProfile | null> {
 /**
  * On logout: cleans up session and reverts back to guest mode.
  */
+export async function ensureActiveProfile(): Promise<LearnerProfile> {
+  const local = getActiveProfile();
+  if (local && local.selectedClass) {
+    return local;
+  }
+  if (typeof window !== "undefined") {
+    try {
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        if (data?.authenticated && data.user) {
+          await handleLoginSync(data.user);
+          const restored = getActiveProfile();
+          if (restored && restored.selectedClass) {
+            return restored;
+          }
+        }
+      }
+    } catch {
+      // offline fallback
+    }
+  }
+  const fallback = createLearnerProfile("Student", 10);
+  return fallback;
+}
+
 export function handleLogout(): void {
   setStorageMode("guest");
   clearActiveProfile();

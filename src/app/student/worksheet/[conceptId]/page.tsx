@@ -24,7 +24,7 @@ import {
   LearnerProfile,
   AttemptComparison,
 } from "@/lib/types";
-import { getActiveProfile, saveProfile } from "@/lib/storage";
+import { getActiveProfile, saveProfile, ensureActiveProfile } from "@/lib/storage";
 import { canAccessTopic } from "@/lib/progression";
 import {
   getConceptById,
@@ -128,16 +128,19 @@ export default function AdaptivePracticeRunnerPage() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [awardedXpAnim, setAwardedXpAnim] = useState<number>(0);
 
-  const initPractice = useCallback(() => {
+  const initPractice = useCallback(async () => {
     try {
       setLoading(true);
       setHasError(false);
       setErrorMessage(null);
       setIsLocked(false);
 
-      const active = getActiveProfile();
+      let active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        active = await ensureActiveProfile();
+      }
+      if (!active || !active.selectedClass) {
+        router.replace("/student");
         return;
       }
 

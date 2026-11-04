@@ -61,7 +61,7 @@ export default function StudentHeader({
             </Link>
           ) : (
             <Link
-              href="/"
+              href="/student"
               className="flex items-center min-h-[44px] gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl"
             >
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-sm border border-white/60 flex items-center justify-center text-white shrink-0">

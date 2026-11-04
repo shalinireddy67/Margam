@@ -22,6 +22,7 @@ import {
   getActiveProfile,
   createLearnerProfile,
   clearActiveProfile,
+  handleLoginSync,
 } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
 import {
@@ -52,13 +53,30 @@ export default function HomePage() {
   const [selectedClass, setSelectedClass] = useState<6 | 7 | 8 | 9 | 10>(10);
 
   useEffect(() => {
-    const active = getActiveProfile();
-    if (active && active.selectedClass) {
-      const updated = syncClassProgression(active);
-      setProfile(updated);
-      setSelectedClass(updated.selectedClass as 6 | 7 | 8 | 9 | 10);
+    async function initActiveHomeProfile() {
+      let active = getActiveProfile();
+      if (!active || !active.selectedClass) {
+        try {
+          const res = await fetch("/api/auth/me");
+          if (res.ok) {
+            const data = await res.json();
+            if (data?.authenticated && data.user && data.user.role === "student") {
+              await handleLoginSync(data.user);
+              active = getActiveProfile();
+            }
+          }
+        } catch {
+          // offline
+        }
+      }
+      if (active && active.selectedClass) {
+        const updated = syncClassProgression(active);
+        setProfile(updated);
+        setSelectedClass(updated.selectedClass as 6 | 7 | 8 | 9 | 10);
+      }
+      setIsLoaded(true);
     }
-    setIsLoaded(true);
+    initActiveHomeProfile();
   }, []);
 
   useEffect(() => {

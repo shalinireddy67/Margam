@@ -19,7 +19,7 @@ import {
   SupportedLanguage,
   LearnerProfile,
 } from "@/lib/types";
-import { getActiveProfile } from "@/lib/storage";
+import { getActiveProfile, ensureActiveProfile } from "@/lib/storage";
 import {
   recordTopicOpened,
   completeLesson,
@@ -79,16 +79,19 @@ function LessonContent() {
   const [isLocked, setIsLocked] = useState(false);
   const [lockedReason, setLockedReason] = useState<string>("");
 
-  const initLesson = useCallback(() => {
+  const initLesson = useCallback(async () => {
     try {
       setIsLoaded(false);
       setHasError(false);
       setErrorMessage(null);
       setIsLocked(false);
 
-      const active = getActiveProfile();
+      let active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        active = await ensureActiveProfile();
+      }
+      if (!active || !active.selectedClass) {
+        router.replace("/student");
         return;
       }
 
