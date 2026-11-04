@@ -202,3 +202,4 @@ export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
     </div>
   );
 }
+
