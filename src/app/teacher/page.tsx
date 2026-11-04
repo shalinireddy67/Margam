@@ -39,14 +39,13 @@ import {
 import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
 import { LearnerProfile } from "@/lib/types";
-import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 
 export default function TeacherPage() {
   const router = useRouter();
   const [selectedStudentId, setSelectedStudentId] = useState<string>("stu-synth-01");
   const [filterAttention, setFilterAttention] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"dashboard" | "heatmap" | "misconceptions" | "print" | "leaderboard">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "heatmap" | "misconceptions" | "print" | "effort">("dashboard");
   const [leaderboardEnabled, setLeaderboardEnabled] = useState(true);
   const [hiddenStudentIds, setHiddenStudentIds] = useState<Set<string>>(new Set(["stu-synth-07"]));
   const [localProfile, setLocalProfile] = useState<LearnerProfile | null>(null);
@@ -1166,14 +1165,14 @@ export default function TeacherPage() {
             Printable A4 Remedial Worksheet
           </button>
           <button
-            onClick={() => setActiveTab("leaderboard")}
+            onClick={() => setActiveTab("effort")}
             className={`min-h-[42px] px-3.5 py-2 text-xs font-heading font-bold rounded-xl transition-all cursor-pointer ${
-              activeTab === "leaderboard"
+              activeTab === "effort"
                 ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] font-heading font-bold"
                 : "bg-[#E8CF9C] text-[#1E1610] hover:bg-[#D9B87A] border-2 border-[#1E1610] font-heading font-bold"
             }`}
           >
-            Quest Board & XP
+            Class Effort & Gaps
           </button>
         </div>
 
@@ -1292,74 +1291,45 @@ export default function TeacherPage() {
 
             {/* Right Column: Evidence Drill-Down Panel */}
             <div className="lg:col-span-7 space-y-4">
-              {/* Weekly Quest & Gamification Pulse Card */}
+              {/* Weekly Class Effort & Engagement Pulse Card */}
               <div className="panel-plank p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-3 text-[#1E1610]">
-                <div className="flex items-center justify-between border-b-2 border-[#7A4B2A] pb-2">
+                <div className="flex items-center justify-between border-b-2 border-[#1E1610]/20 pb-2">
                   <div className="flex items-center gap-2">
-                    <Trophy className="w-4 h-4 text-amber-600" />
-                    <span className="font-heading font-extrabold text-xs text-emerald-950 uppercase tracking-wider">
-                      Weekly Class XP Pulse
+                    <Trophy className="w-4 h-4 text-[#D9B87A]" />
+                    <span className="font-heading font-extrabold text-xs text-[#1E1610] uppercase tracking-wider">
+                      Class Effort Pulse
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#E5D7BE]">Leaderboard:</span>
-                    <button
-                      type="button"
-                      onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
-                      className={`text-[10px] font-heading font-bold px-2 py-0.5 border cursor-pointer ${
-                        leaderboardEnabled
-                          ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514]"
-                          : "bg-[#E8CF9C] text-[#5A3720] border-2 border-[#1E1610]"
-                      }`}
-                    >
-                      {leaderboardEnabled ? "Active" : "Disabled"}
-                    </button>
-                  </div>
+                  <span className="text-[10px] px-2 py-0.5 bg-[#E8CF9C] border border-[#1E1610] font-heading font-bold text-[#1E1610]">
+                    Focus: Effort & Gaps
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  {/* Leaders */}
                   <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
-                    <span className="text-[10px] font-heading font-bold text-slate-500 uppercase block">
-                      👑 XP Leaders
+                    <span className="text-[10px] font-heading font-bold text-[#5A3720] uppercase block">
+                      Questions Solved
                     </span>
-                    <div className="text-xs space-y-0.5">
-                      <div className="flex justify-between font-bold text-[#FFF7E6]">
-                        <span>1. Aarav S.</span>
-                        <span className="text-emerald-950">390 XP</span>
-                      </div>
-                      <div className="flex justify-between text-[#E5D7BE]">
-                        <span>2. Diya S.</span>
-                        <span>340 XP</span>
-                      </div>
+                    <div className="text-sm font-heading font-extrabold text-[#1E1610]">
+                      142 Completed
                     </div>
                   </div>
 
-                  {/* Most Improved */}
                   <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
-                    <span className="text-[10px] font-heading font-bold text-emerald-700 uppercase block">
-                      📈 Most Improved
+                    <span className="text-[10px] font-heading font-bold text-[#5A3720] uppercase block">
+                      Active Days
                     </span>
-                    <div className="text-xs space-y-0.5">
-                      <div className="flex justify-between font-bold text-emerald-700">
-                        <span>Rohan P.</span>
-                        <span>+48%</span>
-                      </div>
-                      <div className="flex justify-between text-[#E5D7BE]">
-                        <span>Ananya G.</span>
-                        <span>+35%</span>
-                      </div>
+                    <div className="text-sm font-heading font-extrabold text-[#D1362B]">
+                      4.2 avg / week
                     </div>
                   </div>
 
-                  {/* Needs Encouragement */}
-                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 space-y-1 shadow-2xs">
-                    <span className="text-[10px] font-heading font-bold text-rose-700 uppercase block">
-                      ⚠️ Needs Encouragement
+                  <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] space-y-1">
+                    <span className="text-[10px] font-heading font-bold text-[#5A3720] uppercase block">
+                      Gaps Repaired
                     </span>
-                    <div className="text-xs text-[#E5D7BE] space-y-0.5">
-                      <div className="truncate font-bold text-emerald-950">Kavya R. (8d idle)</div>
-                      <div className="truncate text-[11px] text-[#D9D9D9]/70">No quests logged this week</div>
+                    <div className="text-sm font-heading font-extrabold text-[#6DB33F]">
+                      18 Foundations Fixed
                     </div>
                   </div>
                 </div>
@@ -1881,79 +1851,72 @@ export default function TeacherPage() {
             </div>
           </div>
         )}
-        {/* TAB 5: Quest Board & Teacher Controls */}
-        {activeTab === "leaderboard" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7 space-y-4">
-              <ClassLeaderboard classId="demo-sec-10a" />
+        {/* TAB 5: Class Effort & Learning Gaps Tracker (No competitive leaderboard) */}
+        {activeTab === "effort" && (
+          <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-5 text-[#1E1610]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-[#1E1610]/20 pb-3">
+              <div>
+                <h3 className="font-heading font-extrabold text-base text-[#1E1610]">
+                  Class Effort & Learning Gaps Tracker
+                </h3>
+                <p className="text-xs text-[#5A3720] font-sans">
+                  Tracks individual student practice activity, consistency, and resolved prerequisite gaps without public peer ranking.
+                </p>
+              </div>
+              <span className="text-xs font-heading font-extrabold px-2.5 py-1 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610]">
+                {students.length} Students Tracked
+              </span>
             </div>
 
-            <div className="lg:col-span-5 space-y-4">
-              {/* Teacher Board Controls */}
-              <div className="panel-plank p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4 text-[#1E1610]">
-                <div className="flex items-center justify-between flex flex-wrap gap-1.5 bg-[#E8CF9C]/70 p-1.5 border-2 border-[#1E1610]">
-                  <h3 className="font-heading font-extrabold text-sm text-emerald-950 uppercase tracking-wider">
-                    Leaderboard Controls
-                  </h3>
-                  <button
-                    type="button"
-                    onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
-                    className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
-                      leaderboardEnabled
-                        ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
-                              : "bg-[#E8CF9C] text-[#5A3720] border-2 border-[#1E1610]"
-                    }`}
-                  >
-                    {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
-                  </button>
-                </div>
-
-                <p className="text-xs text-[#E5D7BE] leading-relaxed">
-                  As the classroom educator, you can enable or disable the public quest board for this cohort, or hide individual students to ensure healthy, friendly learning motivation.
-                </p>
-
-                {/* Individual Student Visibility Table */}
-                <div className="space-y-2 pt-2">
-                  <span className="text-[11px] font-heading font-bold text-emerald-950 uppercase block">
-                    Student Visibility Controls
-                  </span>
-                  <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-1">
-                    {syntheticClassData.students.map((st) => {
-                      const isHidden = hiddenStudentIds.has(st.id);
-                      return (
-                        <div
-                          key={st.id}
-                          className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] flex items-center justify-between text-xs"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="font-heading font-bold text-[#FFF7E6]">
-                              #{st.rollNumber} {st.name}
-                            </span>
-                            {isHidden && (
-                              <span className="text-[9px] bg-[#E04A3F] text-[#FFF7E6] px-1 font-bold">
-                                Hidden
-                              </span>
-                            )}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const next = new Set(hiddenStudentIds);
-                              if (next.has(st.id)) next.delete(st.id);
-                              else next.add(st.id);
-                              setHiddenStudentIds(next);
-                            }}
-                                className="min-h-[32px] px-3 py-1 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#1E1610] text-xs font-heading font-bold flex items-center gap-1 cursor-pointer shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
-                          >
-                            {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
-                            <span>{isHidden ? "Show" : "Hide"}</span>
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-[#1E1610] text-[#5A3720] font-heading font-extrabold text-[11px] uppercase">
+                    <th className="py-2.5 px-3">Student</th>
+                    <th className="py-2.5 px-3">Questions Solved</th>
+                    <th className="py-2.5 px-3">Days Active</th>
+                    <th className="py-2.5 px-3">Root Gap Status</th>
+                    <th className="py-2.5 px-3">Attention Level</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y-2 divide-[#1E1610]/10 font-sans">
+                  {students.map((st) => (
+                    <tr key={st.id} className="hover:bg-[#E8CF9C]/50 transition-colors">
+                      <td className="py-2.5 px-3 font-heading font-bold text-[#1E1610]">
+                        #{st.rollNumber} {st.name}
+                      </td>
+                      <td className="py-2.5 px-3 text-[#1E1610]">
+                        {(st as any).totalQuestions || Math.round(st.diagnosticScore * 2.5)}
+                      </td>
+                      <td className="py-2.5 px-3 text-[#D1362B] font-bold">
+                        {Math.max(1, Math.min(7, ((st.correctCount || 2) + 1)))} days in a row
+                      </td>
+                      <td className="py-2.5 px-3">
+                        {st.needsAttention ? (
+                          <span className="px-2 py-0.5 bg-[#D1362B] text-[#F3E3BC] border border-[#1E1610] text-[10px] font-heading font-bold">
+                            Prerequisite Gap: {typeof st.recommendedRemedialConcept === "object" && st.recommendedRemedialConcept ? (st.recommendedRemedialConcept as any).name : (st.recommendedRemedialConcept || "Class 7 Integers")}
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 bg-[#6DB33F] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-bold">
+                            Foundations Strong ✓
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-2.5 px-3">
+                        {st.needsAttention ? (
+                          <span className="px-2 py-0.5 bg-[#F2C230] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-extrabold">
+                            Needs Guidance
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 bg-[#E8CF9C] text-[#5A3720] border border-[#1E1610] text-[10px] font-heading font-bold">
+                            On Track
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}

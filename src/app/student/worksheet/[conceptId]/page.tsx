@@ -44,7 +44,7 @@ import {
   SegmentedXpBar,
   LevelUpModal,
 } from "@/components/ui/PixelEffects";
-import { playPopSound, playGentleOopsSound } from "@/lib/sound";
+// Sound disabled per accessibility guidelines
 import { applyAwardedXpToProfile } from "@/lib/gamification";
 import { getLevelProgress, isIstNightTime } from "@/lib/xp-config";
 
@@ -128,6 +128,7 @@ export default function AdaptivePracticeRunnerPage() {
   const [showLevelUp, setShowLevelUp] = useState<{ newLevel: number; rank: any } | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [awardedXpAnim, setAwardedXpAnim] = useState<number>(0);
+  const [showBlockRepaired, setShowBlockRepaired] = useState(false);
 
   const initPractice = useCallback(() => {
     try {
@@ -366,11 +367,9 @@ export default function AdaptivePracticeRunnerPage() {
 
         if (practiceRes.xpAwarded && practiceRes.xpAwarded > 0) {
           setAwardedXpAnim(practiceRes.xpAwarded);
-          setShowConfetti(true);
-          playPopSound();
-          setTimeout(() => setShowConfetti(false), 2200);
-        } else if (!practiceRes.passed) {
-          playGentleOopsSound();
+        }
+        if (practiceRes.gapResolved) {
+          setShowBlockRepaired(true);
         }
 
         if (xpOutcome.leveledUp) {
@@ -500,6 +499,22 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Results Summary Box with Mascot & Comparison */}
           {result && (
             <div className="space-y-4 mt-6">
+              {showBlockRepaired && (
+                <div
+                  role="status"
+                  className="p-4 bg-[#6DB33F] text-[#1E1610] border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] animate-bounce motion-reduce:animate-none space-y-1"
+                  style={{ animationDuration: "500ms" }}
+                >
+                  <div className="flex items-center gap-2 font-heading font-extrabold text-sm">
+                    <Sparkles className="w-4 h-4 text-[#1E1610]" />
+                    <span>✨ Block Repaired! Foundation Restored</span>
+                    <span className="px-1.5 py-0.5 bg-[#1E1610] text-[#6DB33F] text-[10px]">[///] Solid Grass</span>
+                  </div>
+                  <p className="text-xs font-sans font-bold">
+                    You fixed 1 prerequisite gap. +50 XP bonus awarded and Foundation sticker unlocked!
+                  </p>
+                </div>
+              )}
               {result.gapResolved && (
                 <div className="glass-panel p-5 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-emerald-950 space-y-2">
                   <div className="flex items-center gap-2 text-emerald-900 font-heading font-extrabold text-xs uppercase tracking-wider">
@@ -817,7 +832,7 @@ export default function AdaptivePracticeRunnerPage() {
                           {feedbackItem.isCorrect ? (
                             <>
                               <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />
-                              <span className="text-[#5DAA3A]">Correct! Solid understanding demonstrated.</span>
+                              <span className="text-[#6DB33F]">Nice work! Solid understanding.</span>
                             </>
                           ) : (
                             <>

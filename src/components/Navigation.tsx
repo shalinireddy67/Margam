@@ -164,50 +164,49 @@ export function Navigation({
               </a>
             </nav>
 
-            {/* Right: Sound, Streak, Level Chip & Language Switcher */}
+            {/* Right: Streak, Level Tier HUD, and Multilingual Switcher */}
             <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-              {/* Gamification Pills (Tablet & Desktop) */}
               {profile && (
-                <div className="hidden sm:flex items-center gap-2">
-                  {/* Streak Pill */}
+                <div className="flex items-center gap-2">
+                  {/* Streak: plain wording */}
                   {profile.streak && profile.streak.current > 0 && (
                     <div
-                      className="flex items-center gap-1 px-2 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-sans font-extrabold text-[#D1362B] shadow-[2px_2px_0px_#1E1610] select-none"
-                      title={`${profile.streak.current} day study streak`}
+                      className="flex items-center gap-1.5 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-sans font-extrabold text-[#D1362B] shadow-[2px_2px_0px_#1E1610] select-none"
+                      title={`${profile.streak.current} ${profile.streak.current === 1 ? "day in a row" : "days in a row"}`}
                     >
                       <Flame className="w-3.5 h-3.5 text-[#D1362B] fill-[#D1362B]" aria-hidden="true" />
-                      <span>{profile.streak.current}d</span>
+                      <span className="hidden sm:inline">
+                        {profile.streak.current} {profile.streak.current === 1 ? "day in a row" : "days in a row"}
+                      </span>
+                      <span className="sm:hidden">{profile.streak.current}d</span>
                     </div>
                   )}
 
-                  {/* Level & Rank Pill */}
+                  {/* Level as tool tier + XP bar */}
                   {levelInfo && (
                     <div
-                      className="hidden md:flex items-center gap-1.5 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-sans font-extrabold text-[#1E1610] shadow-[2px_2px_0px_#1E1610] select-none"
-                      title={`Level ${levelInfo.level} • ${levelInfo.rank.name} Rank`}
+                      className="hidden md:flex items-center gap-2 px-2.5 py-1 bg-[#18120C] border-2 border-[#1E1610] text-xs font-heading font-extrabold text-[#F3E3BC] shadow-[2px_2px_0px_#1E1610] select-none"
+                      title={`${levelInfo.rank.name} level • ${levelInfo.progressPercent}% to next level`}
                     >
-                      <span>{levelInfo.rank.badge}</span>
-                      <span className="hidden xl:inline">{levelInfo.rank.name}</span>
-                      <span>Lv {levelInfo.level}</span>
+                      <span className="text-sm select-none" aria-hidden="true">{levelInfo.rank.badge}</span>
+                      <span className="text-[#F2C230]">{levelInfo.rank.name} level</span>
+                      <div
+                        className="w-16 h-2 bg-[#232634] border border-[#1E1610] overflow-hidden"
+                        role="progressbar"
+                        aria-valuenow={levelInfo.progressPercent}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={`${levelInfo.rank.name} level XP progression: ${levelInfo.progressPercent}%`}
+                      >
+                        <div
+                          className="h-full bg-[#6DB33F] transition-all duration-300"
+                          style={{ width: `${levelInfo.progressPercent}%` }}
+                        />
+                      </div>
                     </div>
                   )}
                 </div>
               )}
-
-              {/* Sound Toggle Button */}
-              <button
-                type="button"
-                onClick={toggleSound}
-                className="min-h-[38px] min-w-[38px] sm:min-h-[44px] sm:min-w-[44px] p-1.5 sm:p-2 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-[#1E1610] hover:bg-[#F3E3BC] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5]"
-                aria-label={soundOn ? "Mute Game Audio" : "Enable Game Audio (8-bit synth sound effects)"}
-                title={soundOn ? "Sound: ON" : "Sound: OFF"}
-              >
-                {soundOn ? (
-                  <Volume2 className="w-4 h-4 text-[#1E1610]" aria-hidden="true" />
-                ) : (
-                  <VolumeX className="w-4 h-4 text-[#6B6F76]" aria-hidden="true" />
-                )}
-              </button>
 
               {/* Multilingual Switcher (EN | हिन्दी | తెలుగు) */}
               {onLanguageChange && (

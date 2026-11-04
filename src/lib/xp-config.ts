@@ -27,8 +27,10 @@ export interface XpRank {
 
 export const XP_CONFIG = {
   // Reward Rules
-  PER_CORRECT_ANSWER_BASE: 10, // Multiplied by question difficulty (1, 2, 3)
-  FIRST_TRY_BONUS: 5,
+  PER_CORRECT_ANSWER_BASE: 5,
+  FIRST_TRY_BONUS: 0,
+  LESSON_COMPLETION: 20,
+  QUEST_COMPLETION: 15,
   DIAGNOSTIC_COMPLETION: 30,
   ROOT_GAP_RESOLVED: 50,
   CHAPTER_TEST_COMPLETION: 40,

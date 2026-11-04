@@ -3,48 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { Zap, Trophy, Award, Flame } from "lucide-react";
 import { getLevelProgress, XpRank } from "@/lib/xp-config";
-import { playLevelUpSound } from "@/lib/sound";
+// Sound disabled per accessibility guidelines
 
 /**
  * Pixel Confetti Burst Component
  * Radiates 10 colorful pixel squares outward with smooth physics.
  * Replaces with simple fade when prefers-reduced-motion is active.
  */
-export function PixelConfetti({ active }: { active: boolean }) {
-  if (!active) return null;
-
-  const particles = [
-    { x: -36, y: -42, color: "#6DB33F", size: 8, delay: 0 },
-    { x: 38, y: -40, color: "#F2C230", size: 6, delay: 40 },
-    { x: -50, y: -10, color: "#4EDBD3", size: 8, delay: 20 },
-    { x: 52, y: -14, color: "#E8CF9C", size: 6, delay: 60 },
-    { x: -28, y: -60, color: "#F2C230", size: 10, delay: 10 },
-    { x: 26, y: -58, color: "#6DB33F", size: 8, delay: 50 },
-    { x: 0, y: -65, color: "#78BDE8", size: 8, delay: 30 },
-    { x: -44, y: -30, color: "#D9B87A", size: 6, delay: 70 },
-  ];
-
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-visible z-30"
-    >
-      {particles.map((p, i) => (
-        <span
-          key={i}
-          className="absolute block animate-pixel-burst motion-reduce:opacity-0"
-          style={{
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-            backgroundColor: p.color,
-            boxShadow: `1px 1px 0px #1E1610`,
-            transform: `translate(${p.x}px, ${p.y}px)`,
-            animationDelay: `${p.delay}ms`,
-          }}
-        />
-      ))}
-    </div>
-  );
+export function PixelConfetti({ active }: { active?: boolean }) {
+  return null;
 }
 
 /**
@@ -90,7 +57,7 @@ export function MistakeCreatureCard({
       return {
         name: "Sign Slip",
         creature: "❄️",
-        line: "Sign Slip spotted! Remember: when multiplying two negatives, the result turns positive.",
+        line: "Sign Slip got you. Try one more.",
         color: "#78BDE8",
       };
     }
@@ -98,7 +65,7 @@ export function MistakeCreatureCard({
       return {
         name: "Operation Ooze",
         creature: "🧪",
-        line: "Operation Ooze spotted! Check whether the problem asks to add, multiply, or square.",
+        line: "Operation Ooze got you. Try one more.",
         color: "#F2C230",
       };
     }
@@ -106,14 +73,14 @@ export function MistakeCreatureCard({
       return {
         name: "Bracket Bug",
         creature: "🐛",
-        line: "Bracket Bug spotted! Remember to multiply the outside factor with every term inside.",
+        line: "Bracket Bug got you. Try one more.",
         color: "#E8CF9C",
       };
     }
     return {
       name: "Curious Critter",
       creature: "🦉",
-      line: hint || "A small misstep spotted! Take a deep breath and review the steps calmly.",
+      line: "Curious Critter got you. Try one more.",
       color: "#E8CF9C",
     };
   })();
@@ -230,9 +197,7 @@ export function LevelUpModal({
   rank: XpRank;
   onClose: () => void;
 }) {
-  useEffect(() => {
-    playLevelUpSound();
-  }, []);
+  
 
   return (
     <div

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Volume2, VolumeX, Flame } from "lucide-react";
 import { SupportedLanguage, LearnerProfile } from "@/lib/types";
 import { Logo } from "@/components/ui";
-import { isSoundEnabled, setSoundEnabled, playPopSound } from "@/lib/sound";
+// Sound effects disabled per accessibility guidelines
 import { getLevelProgress } from "@/lib/xp-config";
 
 interface StudentHeaderProps {
@@ -23,19 +23,7 @@ export default function StudentHeader({
   backHref,
   backLabel = "Back to Learning Path",
 }: StudentHeaderProps) {
-  const [soundOn, setSoundOn] = useState(false);
-
-  useEffect(() => {
-    setSoundOn(isSoundEnabled());
-  }, []);
-
-  const toggleSound = () => {
-    const next = !soundOn;
-    setSoundOn(next);
-    setSoundEnabled(next);
-    if (next) playPopSound();
-  };
-
+  
   const levelInfo = profile ? getLevelProgress(profile.xp || 0) : null;
   const gradeNames: Record<number, string> = {
     6: "Class 6 • Ganita Prakash",
@@ -85,46 +73,49 @@ export default function StudentHeader({
           )}
         </div>
 
-        {/* Right: Sound Toggle, Streak, Level, & Language Switcher */}
+        {/* Right: Streak, Level Tier HUD, & Language Switcher */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {profile && (
-            <div className="hidden lg:flex items-center gap-1.5">
-              {/* Level & Rank Pill */}
-              <div
-                className="flex items-center gap-1 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#1E1610] shadow-[1px_1px_0px_#1E1610] select-none"
-                title={`${levelInfo?.rank.name} Rank • Level ${levelInfo?.level} (${profile.xp || 0} XP)`}
-              >
-                <span>{levelInfo?.rank.badge}</span>
-                <span>Lv {levelInfo?.level}</span>
-              </div>
-
-              {/* Streak Flame Pill */}
+            <div className="hidden sm:flex items-center gap-1.5">
+              {/* Streak: plain wording */}
               {profile.streak && profile.streak.current > 0 && (
                 <div
-                  className="flex items-center gap-1 px-2 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#D1362B] shadow-[1px_1px_0px_#1E1610] select-none"
-                  title={`${profile.streak.current} day study streak`}
+                  className="flex items-center gap-1 px-2.5 py-1 bg-[#E8CF9C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#D1362B] shadow-[1px_1px_0px_#1E1610] select-none"
+                  title={`${profile.streak.current} ${profile.streak.current === 1 ? "day in a row" : "days in a row"}`}
                 >
                   <Flame className="w-3.5 h-3.5 text-[#D1362B] fill-[#D1362B]" aria-hidden="true" />
-                  <span>{profile.streak.current}d</span>
+                  <span className="hidden md:inline">
+                    {profile.streak.current} {profile.streak.current === 1 ? "day in a row" : "days in a row"}
+                  </span>
+                  <span className="md:hidden">{profile.streak.current}d</span>
+                </div>
+              )}
+
+              {/* Tool Tier Level & XP bar */}
+              {levelInfo && (
+                <div
+                  className="flex items-center gap-2 px-2.5 py-1 bg-[#18120C] border-2 border-[#1E1610] rounded-xs text-xs font-heading font-extrabold text-[#F3E3BC] shadow-[1px_1px_0px_#1E1610] select-none"
+                  title={`${levelInfo.rank.name} level • ${levelInfo.progressPercent}% to next level`}
+                >
+                  <span className="text-sm select-none" aria-hidden="true">{levelInfo.rank.badge}</span>
+                  <span className="text-[#F2C230]">{levelInfo.rank.name} level</span>
+                  <div
+                    className="w-14 h-2 bg-[#232634] border border-[#1E1610] overflow-hidden"
+                    role="progressbar"
+                    aria-valuenow={levelInfo.progressPercent}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${levelInfo.rank.name} level progression: ${levelInfo.progressPercent}%`}
+                  >
+                    <div
+                      className="h-full bg-[#6DB33F] transition-all duration-300"
+                      style={{ width: `${levelInfo.progressPercent}%` }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
           )}
-
-          {/* Sound Toggle */}
-          <button
-            type="button"
-            onClick={toggleSound}
-            className="min-h-[36px] min-w-[36px] p-2 bg-[#E8CF9C] hover:bg-[#F3E3BC] border-2 border-[#1E1610] rounded-xs text-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center transition-all cursor-pointer"
-            aria-label={soundOn ? "Mute Audio" : "Enable Audio"}
-            title={soundOn ? "Sound: ON" : "Sound: OFF"}
-          >
-            {soundOn ? (
-              <Volume2 className="w-3.5 h-3.5 text-[#1E1610]" aria-hidden="true" />
-            ) : (
-              <VolumeX className="w-3.5 h-3.5 text-[#6B6F76]" aria-hidden="true" />
-            )}
-          </button>
 
           {/* Language Switcher */}
           <div

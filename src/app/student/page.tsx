@@ -34,7 +34,7 @@ import {
 import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime, getLevelProgress } from "@/lib/xp-config";
 import { SegmentedXpBar } from "@/components/ui/PixelEffects";
-import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
+import { DailyQuests } from "@/components/ui/DailyQuests";
 import { getLearnerGreeting } from "@/lib/greetings";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 
@@ -231,9 +231,9 @@ export default function StudentDashboardPage() {
                 {levelInfo.currentLevelXp} / {levelInfo.nextLevelXp} XP (Needs {levelInfo.xpUntilNextLevel} XP)
               </span>
               {profile.streak && profile.streak.current > 0 && (
-                <span className="flex items-center gap-0.5 font-heading font-bold text-[#D1362B]">
+                <span className="flex items-center gap-1 font-heading font-bold text-[#D1362B]">
                   <Flame className="w-3.5 h-3.5 text-[#D1362B] fill-[#D1362B]" />
-                  {profile.streak.current}d Streak
+                  {profile.streak.current} {profile.streak.current === 1 ? "day in a row" : "days in a row"}
                 </span>
               )}
             </div>
@@ -642,10 +642,48 @@ export default function StudentDashboardPage() {
           </div>
         </div>
 
-        {/* 8. Gamification & Leaderboard Section */}
+        {/* 8. Daily Quests & Personal Effort (No competitive leaderboard) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <ClassLeaderboard classId={`class-${studyClass}`} />
+          <div className="lg:col-span-2 space-y-4">
+            <DailyQuests profile={profile} onProfileUpdate={setProfile} />
+
+            {/* Personal Learning Effort Card */}
+            <div className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] text-[#1E1610] space-y-3">
+              <div className="flex items-center justify-between border-b-2 border-[#1E1610]/20 pb-2">
+                <span className="font-heading font-extrabold text-xs text-[#1E1610] uppercase tracking-wider">
+                  Personal Learning Effort
+                </span>
+                <span className="text-[11px] font-heading font-bold text-[#5A3720]">
+                  Your Journey
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610]">
+                  <span className="text-[10px] font-heading font-extrabold uppercase text-[#5A3720] block">
+                    Questions Solved
+                  </span>
+                  <span className="font-heading font-extrabold text-lg text-[#1E1610]">
+                    {Object.keys(profile.answeredQuestionsHistory || {}).length}
+                  </span>
+                </div>
+                <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610]">
+                  <span className="text-[10px] font-heading font-extrabold uppercase text-[#5A3720] block">
+                    Days Active
+                  </span>
+                  <span className="font-heading font-extrabold text-lg text-[#D1362B]">
+                    {profile.streak?.current || 0}
+                  </span>
+                </div>
+                <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610]">
+                  <span className="text-[10px] font-heading font-extrabold uppercase text-[#5A3720] block">
+                    Gaps Repaired
+                  </span>
+                  <span className="font-heading font-extrabold text-lg text-[#6DB33F]">
+                    {(profile.resolvedGaps || []).length}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Badges Preview Card */}

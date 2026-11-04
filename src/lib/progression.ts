@@ -18,6 +18,8 @@ import {
   getQuestionsByConceptId,
 } from "./curriculum";
 import { getActiveProfile, saveProfile } from "./storage";
+import { XP_CONFIG } from "./xp-config";
+import { applyAwardedXpToProfile } from "./gamification";
 
 /**
  * Initializes or refreshes topic statuses for the profile's selected class.
@@ -188,10 +190,21 @@ export function completeLesson(conceptId: string): {
     return { success: false, profile, error: "Cannot complete locked topic" };
   }
 
-  // Mark lesson explicitly complete
+  // Mark lesson explicitly complete and award XP if not already completed
+  const wasAlreadyCompleted = progress.lessonCompleted;
   progress.lessonCompleted = true;
   progress.status = "completed";
   progress.completedAt = new Date().toISOString();
+
+  let effectiveProfile = profile;
+  if (!wasAlreadyCompleted) {
+    const outcome = applyAwardedXpToProfile(
+      profile,
+      XP_CONFIG.LESSON_COMPLETION || 20,
+      (profile.dailyXp?.xp || 0) + (XP_CONFIG.LESSON_COMPLETION || 20)
+    );
+    effectiveProfile = outcome.updatedProfile;
+  }
 
   // Check for newly unlocked topics in this class
   let newlyUnlocked: string | undefined;
@@ -219,8 +232,8 @@ export function completeLesson(conceptId: string): {
     }
   }
 
-  saveProfile(profile);
-  return { success: true, profile, unlockedConceptId: newlyUnlocked };
+  saveProfile(effectiveProfile);
+  return { success: true, profile: effectiveProfile, unlockedConceptId: newlyUnlocked };
 }
 
 /**

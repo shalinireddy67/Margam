@@ -19,6 +19,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import ConceptPathway from "@/components/ConceptPathway";
 import { LearnerProfile, Concept, Chapter, SupportedLanguage } from "@/lib/types";
 import {
   getActiveProfile,
@@ -39,6 +40,7 @@ export default function StudentLearnPage() {
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "unlocked" | "completed" | "locked">("all");
+  const [viewMode, setViewMode] = useState<"cascade" | "pathway">("cascade");
 
   useEffect(() => {
     const active = getActiveProfile();
@@ -170,6 +172,38 @@ export default function StudentLearnPage() {
           </div>
         </div>
 
+        {/* View Mode Switcher: Cascade List vs Prerequisite Path Map */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setViewMode("cascade")}
+            className={`min-h-[40px] px-4 py-1.5 text-xs font-heading font-extrabold border-2 transition-all cursor-pointer ${
+              viewMode === "cascade"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610]"
+            }`}
+          >
+            Topic Cascade List
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewMode("pathway")}
+            className={`min-h-[40px] px-4 py-1.5 text-xs font-heading font-extrabold border-2 transition-all cursor-pointer ${
+              viewMode === "pathway"
+                ? "bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610]"
+                : "bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610]"
+            }`}
+          >
+            🗺️ Prerequisite Path Map
+          </button>
+        </div>
+
+        {viewMode === "pathway" && (
+          <ConceptPathway currentLang={currentLang} profile={profile} />
+        )}
+
+        {viewMode === "cascade" && (
+          <>
         {/* Filter & Search Bar */}
         <div className="panel-plank p-4 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Search Input */}
@@ -408,6 +442,8 @@ export default function StudentLearnPage() {
             })
           )}
         </div>
+          </>
+        )}
       </main>
 
       {/* Footer */}
