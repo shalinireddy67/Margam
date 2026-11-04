@@ -327,11 +327,11 @@
 }
 
 /* ==========================================================================
-   OFFICIAL PHASE 2 SEMI-OPAQUE PANELS (92-94% opacity, sturdy block-world clarity)
+   OFFICIAL PHASE 2 SEMI-OPAQUE PANELS (80-84% opacity, translucent block-world depth)
    ========================================================================== */
 
 .panel-plank, .card-plank {
-  background-color: rgba(217, 184, 122, 0.93);
+  background-color: rgba(217, 184, 122, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.25), 3px 3px 0px #1E1610;
@@ -339,7 +339,7 @@
 }
 
 .panel-stone, .card-stone {
-  background-color: rgba(185, 188, 192, 0.93);
+  background-color: rgba(185, 188, 192, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(230, 232, 235, 0.3), 3px 3px 0px #1E1610;
@@ -347,7 +347,7 @@
 }
 
 .panel-night, .card-night {
-  background-color: rgba(35, 38, 52, 0.94);
+  background-color: rgba(35, 38, 52, 0.85);
   color: #F3E3BC;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(65, 72, 95, 0.4), 3px 3px 0px #1E1610;
@@ -355,7 +355,7 @@
 }
 
 .panel-grass, .card-grass {
-  background-color: rgba(109, 179, 63, 0.92);
+  background-color: rgba(109, 179, 63, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(156, 232, 108, 0.3), 3px 3px 0px #1E1610;
@@ -363,7 +363,7 @@
 }
 
 .panel-sky, .card-sky {
-  background-color: rgba(120, 189, 232, 0.92);
+  background-color: rgba(120, 189, 232, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(180, 225, 250, 0.3), 3px 3px 0px #1E1610;
@@ -372,7 +372,7 @@
 
 /* Migration fallbacks mapping glass/card classes to semi-opaque panels */
 .glass-panel, .glass-card, .voxel-card, .voxel-panel, .card-block, .voxel-card-white, .voxel-card-light, .voxel-panel-light, .voxel-card-translucent {
-  background-color: rgba(217, 184, 122, 0.93);
+  background-color: rgba(217, 184, 122, 0.82);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.25), 3px 3px 0px #1E1610;
@@ -380,7 +380,7 @@
 }
 
 .glass-panel-tinted {
-  background-color: rgba(109, 179, 63, 0.92);
+  background-color: rgba(109, 179, 63, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(156, 232, 108, 0.3), 3px 3px 0px #1E1610;
@@ -388,7 +388,7 @@
 }
 
 .glass-panel-cream {
-  background-color: rgba(232, 207, 156, 0.94);
+  background-color: rgba(232, 207, 156, 0.84);
   color: #1E1610;
   border: 3px solid #1E1610;
   box-shadow: inset 1px 1px 0px rgba(255, 233, 168, 0.3), 3px 3px 0px #1E1610;

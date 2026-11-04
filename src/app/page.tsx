@@ -368,7 +368,7 @@ export default function HomePage() {
         {profile && (
           <section aria-labelledby="dashboard-heading" className="space-y-6">
             {/* Hero Student Realm Banner */}
-            <div className="p-6 sm:p-7 bg-[#5A3720]/93 border-3 border-[#1E1610] border-t-[5px] border-t-[#FFE9A8] shadow-[4px_4px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] space-y-5">
+            <div className="p-6 sm:p-7 bg-[#5A3720]/82 border-3 border-[#1E1610] border-t-[5px] border-t-[#FFE9A8] shadow-[4px_4px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
                   {/* Mascot Companion with Pose */}
@@ -399,7 +399,7 @@ export default function HomePage() {
 
                 {/* Progress / Mastery Stats */}
                 <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2">
-                  <span className="px-3 py-1 bg-[#5DAA3A] text-[#1E1610] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
+                  <span className="px-3 py-1 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
                     {completedConceptsCount} {copy.conceptsMastered}
                   </span>
                   {resolvedGapsCount > 0 && (
@@ -435,7 +435,7 @@ export default function HomePage() {
 
               {/* Active Gap Remediation Box if Found */}
               {firstActiveGapId ? (
-                <div className="p-5 bg-[#422816]/94 border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[3px_3px_0px_#1E1610] rounded-[2px] space-y-3">
+                <div className="p-5 bg-[#422816]/85 border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[3px_3px_0px_#1E1610] rounded-[2px] space-y-3">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-2 text-[#FFE9A8]">
                       <AlertCircle className="w-5 h-5 shrink-0" />
@@ -532,7 +532,7 @@ export default function HomePage() {
             </div>
 
             {/* Companion Dialogue & Advice Card */}
-            <div className="p-4 sm:p-5 bg-[#5A3720]/93 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] flex flex-col sm:flex-row items-center gap-4">
+            <div className="p-4 sm:p-5 bg-[#5A3720]/82 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] flex flex-col sm:flex-row items-center gap-4">
               <div className="shrink-0">
                 <Companion
                   pose={companionRevision?.pose || "greet"}
@@ -555,7 +555,7 @@ export default function HomePage() {
                 <div className="shrink-0">
                   <Link
                     href={revisionQueue[0].href}
-                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                   >
                     <span>Start Revision Worksheet</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
@@ -591,7 +591,7 @@ export default function HomePage() {
                   return (
                     <div
                       key={item.conceptId}
-                      className={`p-4 bg-[#5A3720]/93 border-3 shadow-[3px_3px_0px_#1E1610] rounded-[2px] flex flex-col justify-between gap-3 ${
+                      className={`p-4 bg-[#5A3720]/82 border-3 shadow-[3px_3px_0px_#1E1610] rounded-[2px] flex flex-col justify-between gap-3 ${
                         isCritical ? "border-[#FFE9A8]" : "border-[#7A4B2A]"
                       }`}
                     >
@@ -632,7 +632,7 @@ export default function HomePage() {
                         </span>
                         <Link
                           href={item.href}
-                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
+                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
                         >
                           <span>Practice Worksheet</span>
                           <ArrowRight className="w-3 h-3 ml-1" />
@@ -643,7 +643,7 @@ export default function HomePage() {
                 })}
               </div>
             ) : (
-              <div className="p-6 bg-[#5A3720]/93 border-3 border-[#7A4B2A] shadow-[3px_3px_0px_#1E1610] rounded-[2px] text-center space-y-2">
+              <div className="p-6 bg-[#5A3720]/82 border-3 border-[#7A4B2A] shadow-[3px_3px_0px_#1E1610] rounded-[2px] text-center space-y-2">
                 <CheckCircle2 className="w-8 h-8 text-[#5DAA3A] mx-auto" />
                 <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
                   All Math Blocks in Great Shape!
@@ -677,7 +677,7 @@ export default function HomePage() {
               >
                 {copy.classBadge} {currentGrade} {copy.chaptersHeading}
               </h2>
-              <p className="text-xs text-[#F3E3BC] mt-0.5">
+              <p className="text-xs text-[#E5D7BE]/80 mt-0.5">
                 {copy.chaptersSubtitle}
               </p>
             </div>
