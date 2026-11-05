@@ -6,58 +6,34 @@ import { useRouter } from "next/navigation";
 import {
   Button,
   Card,
-  Tile,
   Input,
   LanguageToggle,
   OfflineBanner,
   Logo,
-  ProgressBar,
   type Language,
 } from "@/components/ui";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { LearnerProfile, SupportedLanguage } from "@/lib/types";
-import {
-  getActiveProfile,
-  createLearnerProfile,
-  clearActiveProfile,
-} from "@/lib/storage";
+import { getActiveProfile } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
-import {
-  getChaptersByClass,
-  getSupportedChapters,
-  getConceptsByChapter,
-  canTakeChapterDiagnostic,
-  getConceptById,
-} from "@/lib/curriculum";
 import { isFeatureEnabled } from "@/lib/flags";
 import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime } from "@/lib/xp-config";
-import { SegmentedXpBar } from "@/components/ui/PixelEffects";
-import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
-import ConceptPathway from "@/components/ConceptPathway";
-import { evaluateStudentBadges } from "@/lib/badges";
-import { getLearnerGreeting } from "@/lib/greetings";
-import { Sparkles, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
-import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
+import { ArrowRight, CheckCircle2, Sparkles, BookOpen, Users, Compass, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HomePage() {
   const router = useRouter();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { lang: currentLang, setLang: setCurrentLang, t, resolve } = useLanguage();
-
-  // Onboarding form state
-  const [nameInput, setNameInput] = useState("");
-  const [selectedClass, setSelectedClass] = useState<6 | 7 | 8 | 9 | 10>(10);
+  const { lang: currentLang, setLang: setCurrentLang, t } = useLanguage();
 
   useEffect(() => {
     const active = getActiveProfile();
     if (active && active.selectedClass) {
       const updated = syncClassProgression(active);
       setProfile(updated);
-      setSelectedClass(updated.selectedClass as 6 | 7 | 8 | 9 | 10);
     }
     setIsLoaded(true);
   }, []);
@@ -66,36 +42,7 @@ export default function HomePage() {
     document.documentElement.lang = currentLang;
   }, [currentLang]);
 
-  // Handle Try 3 Questions (Fast entry into pilot diagnostic)
-  const handleTryQuestions = () => {
-    const effectiveProfile =
-      profile ||
-      syncClassProgression(
-        createLearnerProfile(nameInput.trim() || "Student", selectedClass)
-      );
-    setProfile(effectiveProfile);
-    const eligibleChapters = getSupportedChapters(selectedClass).filter((ch) =>
-      canTakeChapterDiagnostic(ch.id)
-    );
-    const chapterId =
-      eligibleChapters[0]?.id || (selectedClass === 10 ? "c10-ch04" : "c6-ch01");
-    router.push(`/student/diagnostic/${chapterId}`);
-  };
-
-  // Handle Reset Profile
-  const handleResetProfile = () => {
-    if (
-      window.confirm(
-        "Are you sure you want to switch class or learner? Progress for this profile is preserved in browser storage."
-      )
-    ) {
-      clearActiveProfile();
-      setProfile(null);
-      setNameInput("");
-    }
-  };
-
-  // Translations dictionary
+  // Multilingual copy dictionary for landing page
   const copy = {
     en: {
       appName: "Margam",
@@ -116,17 +63,73 @@ export default function HomePage() {
       teacherBtn: "Set up my class",
       teacherSignIn: "Already registered? Sign in",
       trustLine: "Follows NCERT 2024–26 · No trackers · No email needed",
-      reviewed: true,
-      welcomeBack: "Welcome back",
-      classBadge: "Class",
-      activeGapFound: "Earlier Topic You Missed",
-      fixGapBtn: "Fix this topic",
-      continueLessonBtn: "Next lesson",
-      switchProfile: "Switch Grade / Reset Profile",
-      chaptersHeading: "Maths Chapters & Quick Checks",
-      chaptersSubtitle: "Choose a chapter to start a quick check or learn a lesson.",
-      teacherLink: "Teacher Hub",
-      conceptsMastered: "Concepts Mastered",
+
+      // SECTION A — HOW MARGAM WORKS
+      howItWorksHeading: "Learning that understands where you need help.",
+      howItWorksBadge: "5 STEPS TO MASTERY",
+      howItWorksSubtitle: "A calm, structured pathway from your first check to genuine maths confidence.",
+      step1Title: "1. Choose your class",
+      step1Desc: "Select your grade from Class 6 to 10 to view your aligned NCERT mathematics chapters.",
+      step2Title: "2. Find your learning gaps",
+      step2Desc: "A short check finds earlier topics you missed—like integer signs behind quadratic equations—without test pressure.",
+      step3Title: "3. Learn concepts through guided lessons",
+      step3Desc: "Read concise, step-by-step lessons with clear worked examples and intuitive explanations.",
+      step4Title: "4. Practise with questions adapted to your understanding",
+      step4Desc: "Questions match your current understanding so practice stays encouraging, never overwhelming.",
+      step5Title: "5. Track your progress and improvement",
+      step5Desc: "Watch your mastered topics grow and build lasting confidence for school examinations.",
+
+      // SECTION B — LEARNING THAT ADAPTS TO YOU
+      adaptiveHeading: "Learning that adapts to you",
+      adaptiveBadge: "ADAPTIVE LEARNING",
+      adaptiveSubtitle: "Mathematics builds like a tower. When an earlier block is missing, higher grades feel difficult. Margam finds the missing block.",
+      adaptivePoint1Title: "Identifies difficult concepts",
+      adaptivePoint1Desc: "Spots exactly which concepts cause trouble instead of just giving a percentage score.",
+      adaptivePoint2Title: "Recognises mistake patterns",
+      adaptivePoint2Desc: "Understands why mistakes happen—whether it is a sign rule, formula confusion, or calculation step.",
+      adaptivePoint3Title: "Revisits foundational concepts",
+      adaptivePoint3Desc: "Guides you back to previous grade topics needed for your current chapter so you can master them.",
+      adaptivePoint4Title: "Adapts practice to your pace",
+      adaptivePoint4Desc: "Difficulty scales with understanding, providing targeted practice until the topic clicks.",
+      adaptivePoint5Title: "Builds genuine confidence",
+      adaptivePoint5Desc: "Students learn without penalty or fear, building mastery one small step at a time.",
+
+      // SECTION C — BUILT FOR TEACHERS TOO
+      teachersHeading: "Built for teachers too",
+      teachersBadge: "TEACHER TOOLS",
+      teachersSubtitle: "Margam supports teachers in the classroom. It does not replace them.",
+      teacherFeat1Title: "Monitor student progress",
+      teacherFeat1Desc: "View class rosters, lesson completions, and chapter practice activity in one clear dashboard.",
+      teacherFeat2Title: "Identify common learning gaps",
+      teacherFeat2Desc: "Discover which prerequisite skills from earlier grades the whole class finds difficult.",
+      teacherFeat3Title: "Understand individual student performance",
+      teacherFeat3Desc: "Review specific error tags and accuracy rates for each student privately.",
+      teacherFeat4Title: "Use learning insights in the classroom",
+      teacherFeat4Desc: "Plan targeted classroom revisions based on actual student gap data to help everyone succeed.",
+      teacherCtaBtn: "Explore Teacher Hub",
+
+      // SECTION D — WHY MARGAM?
+      whyHeading: "Why Margam?",
+      whyBadge: "OUR FOCUS",
+      whySubtitle: "A focused learning space built specifically for Indian school mathematics.",
+      why1Title: "Designed for Classes 6–10",
+      why1Desc: "Strictly aligned with the NCERT Mathematics syllabus for middle and secondary school.",
+      why2Title: "Understanding over memorising",
+      why2Desc: "Focuses on why formulas work, not just rushing through repetitive question drills.",
+      why3Title: "Identifies foundational gaps",
+      why3Desc: "Directly bridges gaps between middle school basics and board exam requirements.",
+      why4Title: "Supports students and teachers",
+      why4Desc: "Bridges home practice with classroom guidance without replacing teachers.",
+      why5Title: "Clear, visible progress",
+      why5Desc: "Clean mastery tracking shows students and parents real improvement every week.",
+
+      // SECTION E — FINAL CALL TO ACTION
+      ctaHeading: "Ready to start understanding maths?",
+      ctaSubtitle: "Free for students. No email or phone number needed to get started.",
+      ctaStudentBtn: "Start learning as student",
+      ctaTeacherBtn: "Set up teacher class",
+      ctaStudentSub: "Instant access with your name · Follows NCERT 2024–26",
+      ctaTeacherSub: "Create a class and share a simple code with students",
     },
     hi: {
       appName: "मार्गम्",
@@ -147,17 +150,73 @@ export default function HomePage() {
       teacherBtn: "मेरी कक्षा सेट करें",
       teacherSignIn: "पहले से पंजीकृत हैं? साइन इन करें",
       trustLine: "एनसीईआरटी 2024–26 पर आधारित · कोई ट्रैकर नहीं · ईमेल की आवश्यकता नहीं",
-      reviewed: false,
-      welcomeBack: "पुनः स्वागत है",
-      classBadge: "कक्षा",
-      activeGapFound: "पिछला छूटा हुआ विषय",
-      fixGapBtn: "यह विषय सुधारें",
-      continueLessonBtn: "पाठ जारी रखें",
-      switchProfile: "कक्षा बदलें",
-      chaptersHeading: "गणित के अध्याय",
-      chaptersSubtitle: "अभ्यास करने या जांच के लिए अध्याय चुनें।",
-      teacherLink: "शिक्षक दृश्य",
-      conceptsMastered: "अवधारणाएं पूर्ण",
+
+      // SECTION A — HOW MARGAM WORKS
+      howItWorksHeading: "वह सीख जो समझती है कि आपको कहाँ मदद चाहिए।",
+      howItWorksBadge: "सफलता के 5 सरल कदम",
+      howItWorksSubtitle: "पहली जांच से लेकर विषय में पूरी समझ तक पाँच आसान चरण।",
+      step1Title: "1. अपनी कक्षा चुनें",
+      step1Desc: "कक्षा 6 से 10 में से अपनी कक्षा चुनें और अपने एनसीईआरटी गणित पाठ देखें।",
+      step2Title: "2. अपनी कमियों को पहचानें",
+      step2Desc: "एक छोटी सी जांच पुरानी कक्षाओं के छूटे हुए विषयों को खोजती है—बिना किसी परीक्षा के दबाव के।",
+      step3Title: "3. सरल पाठों से समझें",
+      step3Desc: "स्पष्ट उदाहरणों और चित्रों के साथ छोटे, क्रमबद्ध पाठ पढ़कर अवधारणाओं को समझें।",
+      step4Title: "4. अपनी समझ के अनुसार अभ्यास करें",
+      step4Desc: "ऐसे प्रश्न हल करें जो आपके स्तर से मेल खाते हैं, ताकि अभ्यास आसान और उत्साहवर्धक लगे।",
+      step5Title: "5. अपनी प्रगति देखें",
+      step5Desc: "मास्टर किए गए विषयों को बढ़ते देखें और स्कूल की परीक्षाओं के लिए मजबूत नींव बनाएं।",
+
+      // SECTION B — LEARNING THAT ADAPTS TO YOU
+      adaptiveHeading: "सीखने का ऐसा तरीका जो आपके अनुसार बदलता है",
+      adaptiveBadge: "अनुकूली शिक्षण",
+      adaptiveSubtitle: "गणित एक मीनार की तरह है। यदि नीचे का कोई ब्लॉक कमजोर हो, तो ऊपर की कक्षाएं कठिन लगती हैं।",
+      adaptivePoint1Title: "कठिन विषयों की समय पर पहचान",
+      adaptivePoint1Desc: "यह केवल नंबर नहीं देता, बल्कि ठीक वही विषय पहचानता है जहाँ समझने में कठिनाई हो रही है।",
+      adaptivePoint2Title: "गलतियों के पैटर्न को समझना",
+      adaptivePoint2Desc: "यह समझता है कि गलती किस वजह से हुई—चिह्नों की भूल, सूत्र में उलझन या गणना की चूक।",
+      adaptivePoint3Title: "बुनियादी विषयों पर वापसी",
+      adaptivePoint3Desc: "वर्तमान पाठ को आसान बनाने के लिए पिछली कक्षाओं के जरूरी नियमों को फिर से सिखाता है।",
+      adaptivePoint4Title: "आपकी गति के अनुसार अभ्यास",
+      adaptivePoint4Desc: "जैसे-जैसे समझ बढ़ती है, प्रश्नों का स्तर स्वाभाविक रूप से आगे बढ़ता है।",
+      adaptivePoint5Title: "आत्मविश्वास में वृद्धि",
+      adaptivePoint5Desc: "बिना किसी डर या दबाव के, छोटे-छोटे कदमों से गणित में महारत हासिल करें।",
+
+      // SECTION C — BUILT FOR TEACHERS TOO
+      teachersHeading: "शिक्षकों के लिए भी तैयार",
+      teachersBadge: "शिक्षक साधन",
+      teachersSubtitle: "मार्गम् कक्षा शिक्षण का साथी है, यह शिक्षकों की जगह नहीं लेता बल्कि उनकी मदद करता है।",
+      teacherFeat1Title: "विद्यार्थियों की प्रगति देखें",
+      teacherFeat1Desc: "कक्षा के सभी छात्रों की पाठ प्रगति और अभ्यास रिपोर्ट एक जगह देखें।",
+      teacherFeat2Title: "कक्षा की आम कमियों को पहचानें",
+      teacherFeat2Desc: "देखें कि पिछली कक्षाओं के किन विषयों में पूरी कक्षा को अधिक सहायता चाहिए।",
+      teacherFeat3Title: "प्रत्येक छात्र की जरूरत समझें",
+      teacherFeat3Desc: "हर छात्र की सटीकता और गलतियों को देखकर व्यक्तिगत मार्गदर्शन दें।",
+      teacherFeat4Title: "कक्षा शिक्षण को मजबूती दें",
+      teacherFeat4Desc: "जांच से मिली जानकारी का उपयोग करके कक्षा में जरूरी विषयों का दोहराव कराएं।",
+      teacherCtaBtn: "शिक्षक दृश्य देखें",
+
+      // SECTION D — WHY MARGAM?
+      whyHeading: "मार्गम् ही क्यों?",
+      whyBadge: "हमारा उद्देश्य",
+      whySubtitle: "भारतीय स्कूली छात्रों के लिए विशेष रूप से बनाया गया सीखने का मंच।",
+      why1Title: "कक्षा 6–10 के लिए उपयुक्त",
+      why1Desc: "मध्य और माध्यमिक कक्षाओं के एनसीईआरटी गणित पाठ्यक्रम पर पूरी तरह आधारित।",
+      why2Title: "रटने के बजाय समझ पर ज़ोर",
+      why2Desc: "केवल उत्तर निकालने के बजाय यह समझाता है कि सूत्र कैसे काम करते हैं।",
+      why3Title: "छिपी हुई कमियों की खोज",
+      why3Desc: "कक्षा 10 की कठिनाइयों को कक्षा 6 से 8 की बुनियाद से जोड़कर सुधारता है।",
+      why4Title: "छात्रों और शिक्षकों दोनों का साथी",
+      why4Desc: "घर पर अभ्यास और कक्षा की पढ़ाई के बीच एक सरल पुल बनाता है।",
+      why5Title: "स्पष्ट और पारदर्शी प्रगति",
+      why5Desc: "साफ रिपोर्ट से छात्रों को हर सप्ताह अपनी समझ में सुधार दिखाई देता है।",
+
+      // SECTION E — FINAL CALL TO ACTION
+      ctaHeading: "गणित को गहराई से समझने के लिए तैयार हैं?",
+      ctaSubtitle: "छात्रों के लिए पूरी तरह निःशुल्क। शुरू करने के लिए किसी ईमेल या फ़ोन नंबर की जरूरत नहीं।",
+      ctaStudentBtn: "छात्र के रूप में सीखना शुरू करें",
+      ctaTeacherBtn: "शिक्षक कक्षा बनाएं",
+      ctaStudentSub: "अपने नाम से तुरंत प्रवेश करें · एनसीईआरटी 2024–26 के अनुसार",
+      ctaTeacherSub: "कक्षा बनाएं और विद्यार्थियों के साथ सरल कोड साझा करें",
     },
     te: {
       appName: "మార్గం",
@@ -178,42 +237,75 @@ export default function HomePage() {
       teacherBtn: "నా తరగతిని సిద్ధం చేయండి",
       teacherSignIn: "ఇప్పటికే నమోదు చేసుకున్నారా? సైన్ ఇన్ చేయండి",
       trustLine: "NCERT 2024–26 ఆధారంగా · ట్రాకర్లు లేవు · ఈమెయిల్ అవసరం లేదు",
-      reviewed: false,
-      welcomeBack: "పునఃస్వాగతం",
-      classBadge: "తరగతి",
-      activeGapFound: "గతంలో తప్పిన అంశం",
-      fixGapBtn: "ఈ అంశాన్ని సరిచేయండి",
-      continueLessonBtn: "అభ్యాసం కొనసాగించండి",
-      switchProfile: "తరగతి లేదా పేరు మార్చండి",
-      chaptersHeading: "గణిత అధ్యాయాలు",
-      chaptersSubtitle: "అభ్యాసం చేయడానికి లేదా లోపాలను గుర్తించడానికి ఒక అధ్యాయాన్ని ఎంచుకోండి.",
-      teacherLink: "ఉపాధ్యాయుల వీక్షణ",
-      conceptsMastered: "కాన్సెప్ట్‌లు పూర్తి అయ్యాయి",
+
+      // SECTION A — HOW MARGAM WORKS
+      howItWorksHeading: "మీకు ఎక్కడ సహాయం కావాలో అర్థం చేసుకునే అభ్యాసం.",
+      howItWorksBadge: "విశ్వాసానికి 5 సులభమైన దశలు",
+      howItWorksSubtitle: "మొదటి చిన్న పరిశీలన నుండి పూర్తి అవగాహన వరకు 5 సాధారణ దశలు.",
+      step1Title: "1. మీ తరగతిని ఎంచుకోండి",
+      step1Desc: "మీ NCERT గణిత అధ్యాయాలను చూడటానికి 6 నుండి 10 తరగతులలో మీ తరగతిని ఎంచుకోండి.",
+      step2Title: "2. మీ అభ్యసన లోపాలను గుర్తించండి",
+      step2Desc: "ఎటువంటి పరీక్ష ఒత్తిడి లేకుండా, గత తరగతులలో తప్పిపోయిన పునాది అంశాలను చిన్న పరిశీలన ద్వారా గుర్తిస్తుంది.",
+      step3Title: "3. మార్గదర్శక పాఠాల ద్వారా నేర్చుకోండి",
+      step3Desc: "స్పష్టమైన ఉదాహరణలు మరియు వివరణలతో కూడిన చిన్న పాఠాల ద్వారా అంశాలను సులభంగా అర్థం చేసుకోండి.",
+      step4Title: "4. మీ అవగాహనకు తగినట్లు అభ్యాసం చేయండి",
+      step4Desc: "మీ స్థాయికి సరిపోయే ప్రశ్నలను సాధన చేయండి, తద్వారా సాధన సులభంగా మరియు ఉత్సాహంగా ఉంటుంది.",
+      step5Title: "5. మీ ప్రగతిని పరిశీలించండి",
+      step5Desc: "మీరు పూర్తి చేసిన అంశాలను చూస్తూ, పాఠశాల పరీక్షలకు బలమైన పునాదిని నిర్మించుకోండి.",
+
+      // SECTION B — LEARNING THAT ADAPTS TO YOU
+      adaptiveHeading: "మీ స్థాయికి అనుగుణంగా మారే అభ్యాసం",
+      adaptiveBadge: "అనుకూల అభ్యాసం",
+      adaptiveSubtitle: "గణితం ఒక భవనం లాంటిది. పునాది రాయి బలహీనంగా ఉంటే, పై తరగతులు కష్టంగా అనిపిస్తాయి.",
+      adaptivePoint1Title: "కష్టమైన అంశాలను త్వరగా గుర్తిస్తుంది",
+      adaptivePoint1Desc: "కేవలం మార్కులు మాత్రమే కాకుండా, ఏ భావనలో ఇబ్బంది ఉందో సరిగ్గా గుర్తిస్తుంది.",
+      adaptivePoint2Title: "తప్పుల తీరును అర్థం చేసుకుంటుంది",
+      adaptivePoint2Desc: "తప్పు ఎందుకు జరిగిందో విశ్లేషిస్తుంది—గుర్తుల గందరగోళమా, సూత్రాల లోపమా లేదా గణన తప్పిదమా.",
+      adaptivePoint3Title: "పునాది అంశాలను తిరిగి గుర్తుచేస్తుంది",
+      adaptivePoint3Desc: "ప్రస్తుత పాఠాన్ని అర్థం చేసుకోవడానికి అవసరమైన పాత తరగతుల పునాదులను సరిదిద్దుతుంది.",
+      adaptivePoint4Title: "మీ వేగానికి తగిన అభ్యాసం",
+      adaptivePoint4Desc: "మీ అవగాహన పెరిగే కొద్దీ ప్రశ్నల స్థాయి కూడా క్రమంగా పెరుగుతుంది.",
+      adaptivePoint5Title: "నిజమైన ఆత్మవిశ్వాసం",
+      adaptivePoint5Desc: "ఎటువంటి భయం లేకుండా, చిన్న చిన్న దశల్లో గణితంలో పట్టు సాధించవచ్చు.",
+
+      // SECTION C — BUILT FOR TEACHERS TOO
+      teachersHeading: "ఉపాధ్యాయుల కోసం కూడా రూపొందించబడింది",
+      teachersBadge: "ఉపాధ్యాయ సాధనాలు",
+      teachersSubtitle: "మార్గం తరగతి గది బోధనకు సహకరిస్తుంది, ఇది ఉపాధ్యాయుల స్థానాన్ని భర్తీ చేయదు.",
+      teacherFeat1Title: "విద్యార్థుల ప్రగతిని పరిశీలించండి",
+      teacherFeat1Desc: "తరగతి విద్యార్థులందరి పాఠాల ప్రగతి మరియు అభ్యాస నివేదికలను ఒకే చోట చూడండి.",
+      teacherFeat2Title: "తరగతిలోని సాధారణ లోపాలను గుర్తించండి",
+      teacherFeat2Desc: "పాత తరగతుల ఏ పునాది అంశాలలో విద్యార్థులకు మరింత సహాయం కావాలో తెలుసుకోండి.",
+      teacherFeat3Title: "ప్రతి విద్యార్థి అవసరాన్ని అర్థం చేసుకోండి",
+      teacherFeat3Desc: "విద్యార్థుల కచ్చితత్వం మరియు తప్పులను చూసి వ్యక్తిగతంగా మార్గదర్శనం చేయండి.",
+      teacherFeat4Title: "తరగతి బోధనకు బలాన్ని ఇవ్వండి",
+      teacherFeat4Desc: "ఈ సమాచారాన్ని ఉపయోగించి తరగతిలో అవసరమైన అంశాలను తిరిగి బోధించండి.",
+      teacherCtaBtn: "ఉపాధ్యాయ సాధనాలు చూడండి",
+
+      // SECTION D — WHY MARGAM?
+      whyHeading: "ఎందుకు మార్గం?",
+      whyBadge: "మా లక్ష్యం",
+      whySubtitle: "భారతీయ పాఠశాల విద్యార్థుల కోసం ప్రత్యేకంగా రూపొందించబడిన అభ్యాస వేదిక.",
+      why1Title: "6–10 తరగతులకు ప్రత్యేకం",
+      why1Desc: "మిడిల్ మరియు హైస్కూల్ NCERT గణిత సిలబస్‌కు అనుగుణంగా రూపొందించబడింది.",
+      why2Title: "బట్టీ పట్టడం కంటే అవగాహన ముఖ్యం",
+      why2Desc: "కేవలం లెక్కలు చేయడం కాకుండా, సూత్రాలు ఎలా పనిచేస్తాయో స్పష్టంగా వివరిస్తుంది.",
+      why3Title: "దాగి ఉన్న పునాది లోపాలను సరిచేస్తుంది",
+      why3Desc: "10వ తరగతి ఇబ్బందులను 6 నుండి 8 తరగతుల పునాదులతో జోడించి సరిదిద్దుతుంది.",
+      why4Title: "విద్యార్థులు మరియు ఉపాధ్యాయులకు తోడుగా",
+      why4Desc: "ఇంటి వద్ద అభ్యాసానికి మరియు తరగతి గది బోధనకు మధ్య వారధిగా నిలుస్తుంది.",
+      why5Title: "స్పష్టమైన ప్రగతి దర్శనం",
+      why5Desc: "సులభమైన నివేదికల ద్వారా ప్రతి వారం మీ అవగాహన మెరుగుపడటాన్ని స్పష్టంగా చూడవచ్చు.",
+
+      // SECTION E — FINAL CALL TO ACTION
+      ctaHeading: "గణితాన్ని లోతుగా నేర్చుకోవడానికి సిద్ధంగా ఉన్నారా?",
+      ctaSubtitle: "విద్యార్థులకు ఉచితం. ప్రారంభించడానికి ఈమెయిల్ లేదా ఫోన్ నంబర్ అవసరం లేదు.",
+      ctaStudentBtn: "విద్యార్థిగా నేర్చుకోవడం ప్రారంభించండి",
+      ctaTeacherBtn: "ఉపాధ్యాయ తరగతిని సిద్ధం చేయండి",
+      ctaStudentSub: "మీ పేరుతో వెంటనే ప్రవేశించండి · NCERT 2024–26 ఆధారంగా",
+      ctaTeacherSub: "తరగతిని సృష్టించండి మరియు విద్యార్థులతో కోడ్‌ను పంచుకోండి",
     },
   }[currentLang];
-
-  const currentGrade = profile ? (profile.selectedClass as 6 | 7 | 8 | 9 | 10) : selectedClass;
-  const gradeChapters = getChaptersByClass(currentGrade);
-
-  // Calculate completed concepts count if profile exists
-  const completedConceptsCount = profile
-    ? Object.values(profile.topicProgress || {}).filter((p) => p.status === "completed").length
-    : 0;
-
-  const resolvedGapsCount = profile?.resolvedGaps?.length || 0;
-
-  // Active gap concept if any
-  const firstActiveGapId =
-    profile?.activeGap && profile.activeGap.status === "confirmed"
-      ? profile.activeGap.rootConceptId
-    : undefined;
-
-  const gapConcept = firstActiveGapId ? getConceptById(firstActiveGapId) : undefined;
-
-  // Companion greeting
-  const learnerGreeting = getLearnerGreeting(profile?.name, currentLang);
-  const revisionQueue = profile ? getRevisionQueue(profile, 4) : [];
-  const companionRevision = profile ? getCompanionRevisionGreeting(revisionQueue, profile) : null;
 
   if (!isLoaded) {
     return (
@@ -232,7 +324,7 @@ export default function HomePage() {
       {/* Offline Status Listener */}
       <OfflineBanner />
 
-      {/* Unified Responsive Navigation (Top Navbar on Desktop, Left Rail on Tablet, Bottom Bar on Mobile) */}
+      {/* Unified Responsive Navigation */}
       <Navigation
         currentTab="home"
         currentLang={currentLang as SupportedLanguage}
@@ -241,522 +333,500 @@ export default function HomePage() {
       />
 
       {/* Main Content Container: Fluid padding, centered max-w-[1200px], safe-area bottom */}
-      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-10 md:pl-28 lg:pl-8 pb-16 flex-1 w-full">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 space-y-12 md:pl-28 lg:pl-8 pb-16 flex-1 w-full">
         {/* ================================================================= */}
-        {/* ONBOARDING / LANDING (For First-Time Visitors)                    */}
+        {/* 1. PRESERVED HERO SECTION (Exactly As Required)                   */}
         {/* ================================================================= */}
-        {!profile && (
-          <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
-            {/* Hero Section: Learning Companion Mascot + H1 + Subline */}
-            <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
-              <div className="shrink-0 mb-3 sm:mb-5 flex flex-col items-center">
-                <div className="block sm:hidden">
-                  <Companion
-                    pose={isIstNightTime() ? "sleepy" : "greet"}
-                    size={160}
-                    withShadow={true}
-                    sticker={false}
-                    alt="Margam learning companion"
-                  />
-                </div>
-                <div className="hidden sm:block">
-                  <Companion
-                    pose={isIstNightTime() ? "sleepy" : "greet"}
-                    size={210}
-                    withShadow={true}
-                    sticker={false}
-                    alt="Margam learning companion"
-                  />
-                </div>
-              </div>
-
-              <h1
-                id="hero-heading"
-                className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#1E1610] leading-tight max-w-[22ch] drop-shadow-[1px_1px_0px_#FFE9A8]"
-              >
-                {copy.h1}
-              </h1>
-
-              <p className="font-sans text-base sm:text-lg text-[#2B1B0F] max-w-[65ch] leading-relaxed">
-                {copy.subline}
-              </p>
-            </div>
-
-            {/* Two Role Cards: Student & Teacher (side by side on desktop, stacked on mobile) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
-              {/* Card 1: Student */}
-              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#6DB33F]">
-                <div className="space-y-3">
-                  <span className="font-pixel text-[11px] uppercase tracking-wider text-[#5DAA3A] block">
-                    {copy.studentLabel}
-                  </span>
-                  <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
-                    {copy.studentTitle}
-                  </h2>
-                  <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
-                    {copy.studentBody}
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <Link
-                    href="/login?role=student"
-                    className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
-                  >
-                    <span>{copy.studentBtn}</span>
-                    <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
-                  </Link>
-
-                  <div className="text-center">
-                    <Link
-                      href="/login?role=student"
-                      className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
-                    >
-                      {copy.studentSignIn}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2: Teacher */}
-              <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#3FA7C9]">
-                <div className="space-y-3">
-                  <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3FA7C9] block">
-                    {copy.teacherLabel}
-                  </span>
-                  <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
-                    {copy.teacherTitle}
-                  </h2>
-                  <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
-                    {copy.teacherBody}
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <Link
-                    href="/login?role=teacher"
-                    className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
-                  >
-                    <span>{copy.teacherBtn}</span>
-                    <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
-                  </Link>
-
-                  <div className="text-center">
-                    <Link
-                      href="/login?role=teacher"
-                      className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
-                    >
-                      {copy.teacherSignIn}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Line Below Cards */}
-            <div className="text-center pt-2 pb-4">
-              <p className="font-sans text-sm text-[#5A3720] max-w-none">
-                {copy.trustLine}
-              </p>
-            </div>
-          </section>
-        )}
-
-        {/* ================================================================= */}
-        {/* STUDENT DASHBOARD (When Profile is Active)                        */}
-        {/* ================================================================= */}
-        {profile && (
-          <section aria-labelledby="dashboard-heading" className="space-y-6">
-            {/* Hero Student Realm Banner */}
-            <div className="p-6 sm:p-7 bg-[#5A3720]/82 border-3 border-[#1E1610] border-t-[5px] border-t-[#FFE9A8] shadow-[4px_4px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  {/* Mascot Companion with Pose */}
-                  <div className="shrink-0">
-                    <Companion
-                      pose="cheer"
-                      size={130}
-                      withShadow={true}
-                      sticker={false}
-                      alt="Margam Learning Companion"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-heading font-bold text-[#FFE9A8] uppercase tracking-wider block">
-                      {learnerGreeting.text}
-                    </span>
-                    <h1
-                      id="dashboard-heading"
-                      className="font-heading font-extrabold text-2xl sm:text-3xl text-[#FFF7E6] leading-tight drop-shadow-[2px_2px_0px_#422816]"
-                    >
-                      {profile.name}
-                    </h1>
-                    <p className="text-xs text-[#E5D7BE] mt-1 font-bold">
-                      Class {profile.selectedClass} • Level {profile.currentDifficulty} / 3
-                    </p>
-                  </div>
-                </div>
-
-                {/* Progress / Mastery Stats */}
-                <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2">
-                  <span className="px-3 py-1 bg-[#5DAA3A] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)]">
-                    {completedConceptsCount} {copy.conceptsMastered}
-                  </span>
-                  {resolvedGapsCount > 0 && (
-                    <span className="px-3 py-1 bg-[#FFE9A8] text-[#2B1B0F] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>{resolvedGapsCount} Foundations Repaired</span>
-                    </span>
-                  )}
-                  <span className="text-[11px] font-bold text-[#FFE9A8]">
-                    XP Level: {Math.max(1, completedConceptsCount * 10 + resolvedGapsCount * 25)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Minecraft XP Progress Bar */}
-              <div className="space-y-1.5 pt-1">
-                <div className="flex items-center justify-between text-xs font-heading font-bold">
-                  <span className="text-[#E5D7BE]">Your progress</span>
-                  <span className="text-[#FFE9A8]">
-                    {completedConceptsCount} / {gradeChapters.length * 2} concepts
-                  </span>
-                </div>
-                <ProgressBar
-                  value={completedConceptsCount}
-                  max={Math.max(1, gradeChapters.length * 2)}
-                  segments={12}
-                  color="grass"
-                />
-              </div>
-
-              {/* Segmented XP Progress */}
-              <SegmentedXpBar currentXp={profile.xp || 0} />
-
-              {/* Active Gap Remediation Box if Found */}
-              {firstActiveGapId ? (
-                <div className="p-5 bg-[#422816]/85 border-3 border-[#FFE9A8] border-l-[8px] border-l-[#FFE9A8] shadow-[3px_3px_0px_#1E1610] rounded-[2px] space-y-3">
-                  <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-2 text-[#FFE9A8]">
-                      <AlertCircle className="w-5 h-5 shrink-0" />
-                      <span className="font-heading font-extrabold text-xs sm:text-sm">
-                        {copy.activeGapFound} {gapConcept ? `(Class ${gapConcept.class})` : ""}
-                      </span>
-                    </div>
-                    {gapConcept && (
-                      <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#FFE9A8] text-[#2B1B0F] border border-[#422816]">
-                        Class {gapConcept.class} Prerequisite
-                      </span>
-                    )}
-                  </div>
-
-                  {gapConcept && (
-                    <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
-                      {resolve(gapConcept.name).text}
-                    </h3>
-                  )}
-
-                  <p className="text-xs text-[#E5D7BE] leading-relaxed">
-                    {profile?.activeGap?.plainLanguageReason ||
-                      "A quick check found an earlier topic you missed. Practicing it now will make your current lessons much easier."}
-                  </p>
-
-                  <div className="pt-1 flex items-center gap-2 flex-wrap">
-                    <Link
-                      href={`/lesson/${firstActiveGapId}?fromGap=true`}
-                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#FFE9A8] hover:bg-[#FFF2CC] text-[#2B1B0F] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
-                    >
-                      <svg className="w-4 h-4 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                      <span>{copy.fixGapBtn}</span>
-                    </Link>
-                    <Link
-                      href={`/student/worksheet/${firstActiveGapId}`}
-                      className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
-                    >
-                      <span>Jump to Practice Worksheet</span>
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <div className="pt-2 flex flex-wrap gap-3 items-center">
-                  <Link
-                    href="/student"
-                    className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#FFF7E6] border-2 border-[#422816] font-heading font-bold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline transition-colors"
-                  >
-                    <span>Go to student home</span>
-                    <ArrowRight className="w-4 h-4 ml-1.5" />
-                  </Link>
-
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={handleTryQuestions}
-                  >
-                    <span>Take quick check</span>
-                  </Button>
-
-                  <button
-                    type="button"
-                    onClick={handleResetProfile}
-                    className="min-h-[44px] px-3 py-2 inline-flex items-center text-xs font-bold text-[#E5D7BE] hover:text-[#FFE9A8] underline cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5 mr-1" />
-                    <span>{copy.switchProfile}</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* ================================================================= */}
-        {/* YOUR REVISION ZONE (Smart Spaced Repetition)                      */}
-        {/* ================================================================= */}
-        {profile && (
-          <section aria-labelledby="revision-zone-heading" className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#7A4B2A] pb-2">
-              <div className="flex items-center gap-2">
-                <span className="text-[#FFE9A8] text-lg">⚔️</span>
-                <h2
-                  id="revision-zone-heading"
-                  className="font-heading font-extrabold text-xl sm:text-2xl text-[#FFF7E6]"
-                >
-                  Your Revision Zone
-                </h2>
-              </div>
-              <span className="text-xs font-heading font-bold text-[#FFE9A8]">
-                {revisionQueue.length > 0
-                  ? `${revisionQueue.length} Topic${revisionQueue.length > 1 ? "s" : ""} Prioritized`
-                  : "All Foundations Up to Date"}
-              </span>
-            </div>
-
-            {/* Companion Dialogue & Advice Card */}
-            <div className="p-4 sm:p-5 bg-[#5A3720]/82 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] backdrop-blur-[2px] rounded-[2px] flex flex-col sm:flex-row items-center gap-4">
-              <div className="shrink-0">
+        <section aria-labelledby="hero-heading" className="space-y-10 sm:space-y-12 py-4 sm:py-8">
+          {/* Hero Section: Learning Companion Mascot + H1 + Subline */}
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
+            <div className="shrink-0 mb-3 sm:mb-5 flex flex-col items-center">
+              <div className="block sm:hidden">
                 <Companion
-                  pose={companionRevision?.pose || "greet"}
-                  size={74}
+                  pose={isIstNightTime() ? "sleepy" : "greet"}
+                  size={160}
+                  withShadow={true}
                   sticker={false}
-                  alt="Margam Zombie Chicken Jockey companion revision advice"
+                  alt="Margam learning companion"
                 />
               </div>
-
-              <div className="flex-1 text-center sm:text-left space-y-1">
-                <span className="text-[10px] font-heading font-extrabold text-[#FFE9A8] uppercase tracking-wider block">
-                  Companion Quest Advice • {companionRevision?.title || "Daily Check-in"}
-                </span>
-                <p className="text-xs sm:text-sm text-[#FFF7E6] font-medium leading-relaxed">
-                  &ldquo;{companionRevision?.message}&rdquo;
-                </p>
+              <div className="hidden sm:block">
+                <Companion
+                  pose={isIstNightTime() ? "sleepy" : "greet"}
+                  size={210}
+                  withShadow={true}
+                  sticker={false}
+                  alt="Margam learning companion"
+                />
               </div>
-
-              {revisionQueue.length > 0 && (
-                <div className="shrink-0">
-                  <Link
-                    href={revisionQueue[0].href}
-                    className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
-                  >
-                    <span>Start Revision Worksheet</span>
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                  </Link>
-                </div>
-              )}
             </div>
 
-            {/* Revision Cards Grid */}
-            {revisionQueue.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                {revisionQueue.map((item) => {
-                  const isCritical = item.priority === "critical_gap";
-                  const isNeedsPractice = item.priority === "needs_practice";
-                  const isDue = item.priority === "due_revision";
+            <h1
+              id="hero-heading"
+              className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#1E1610] leading-tight max-w-[22ch] drop-shadow-[1px_1px_0px_#FFE9A8]"
+            >
+              {copy.h1}
+            </h1>
 
-                  const badgeColor = isCritical
-                    ? "bg-[#FFE9A8] text-[#2B1B0F] border-[#422816]"
-                    : isNeedsPractice
-                    ? "bg-[#E04A3F] text-[#FFF7E6] border-[#422816]"
-                    : isDue
-                    ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#422816]"
-                    : "bg-[#3FA7C9] text-[#FFF7E6] border-[#422816]";
-
-                  const badgeLabel = isCritical
-                    ? "CRITICAL GAP"
-                    : isNeedsPractice
-                    ? "NEEDS PRACTICE"
-                    : isDue
-                    ? (item.daysOverdue && item.daysOverdue > 0 ? `OVERDUE (${item.daysOverdue}D)` : "REVISION DUE")
-                    : "WORKSHEET PENDING";
-
-                  return (
-                    <div
-                      key={item.conceptId}
-                      className={`p-4 bg-[#5A3720]/82 border-3 shadow-[3px_3px_0px_#1E1610] rounded-[2px] flex flex-col justify-between gap-3 ${
-                        isCritical ? "border-[#FFE9A8]" : "border-[#7A4B2A]"
-                      }`}
-                    >
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className={`px-2 py-0.5 text-[10px] font-heading font-extrabold border ${badgeColor}`}>
-                            {badgeLabel}
-                          </span>
-                          <span className="text-[11px] font-heading font-bold text-[#E5D7BE]">
-                            Class {item.class} • Level {item.currentDifficulty}
-                          </span>
-                        </div>
-
-                        <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6] leading-snug">
-                          {item.conceptName}
-                        </h3>
-
-                        <p className="text-xs text-[#E5D7BE] leading-relaxed">
-                          {item.reason}
-                        </p>
-
-                        {/* Historical Attempt Improvement if recorded */}
-                        {item.previousImprovement && (
-                          <div className="p-2 bg-[#422816] border border-[#7A4B2A] flex items-center justify-between text-[11px]">
-                            <span className="text-[#E5D7BE]">
-                              Prev: {item.previousImprovement.previousPercentage}% ➔ Latest: {item.previousImprovement.latestPercentage}%
-                            </span>
-                            <span className={`font-heading font-extrabold ${item.previousImprovement.delta >= 0 ? "text-[#5DAA3A]" : "text-[#E04A3F]"}`}>
-                              {item.previousImprovement.delta >= 0 ? `+${item.previousImprovement.delta}%` : `${item.previousImprovement.delta}%`}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#7A4B2A]">
-                        <span className="text-[11px] font-heading font-bold text-[#FFE9A8]">
-                          Mastery: {item.mastery}%
-                        </span>
-                        <Link
-                          href={item.href}
-                          className="inline-flex items-center justify-center min-h-[38px] px-3.5 py-1.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#FFF7E6] border-2 border-[#422816] font-heading font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,0.4)] no-underline active:translate-x-[1px] active:translate-y-[1px] transition-colors"
-                        >
-                          <span>Practice Worksheet</span>
-                          <ArrowRight className="w-3 h-3 ml-1" />
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="p-6 bg-[#5A3720]/82 border-3 border-[#7A4B2A] shadow-[3px_3px_0px_#1E1610] rounded-[2px] text-center space-y-2">
-                <CheckCircle2 className="w-8 h-8 text-[#5DAA3A] mx-auto" />
-                <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#FFF7E6]">
-                  All Math Blocks in Great Shape!
-                </h3>
-                <p className="text-xs text-[#E5D7BE] max-w-md mx-auto">
-                  No topics are due for revision today. Start a new lesson below to keep learning.
-                </p>
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* ================================================================= */}
-        {/* CLASS QUEST LEADERBOARD                                           */}
-        {/* ================================================================= */}
-        {profile && (
-          <section id="class-leaderboard" aria-labelledby="leaderboard-heading" className="space-y-4">
-            <ClassLeaderboard classId="demo-sec-10a" />
-          </section>
-        )}
-
-        {/* ================================================================= */}
-        {/* CHAPTERS GRID (Minecraft Voxel Tiles)                             */}
-        {/* ================================================================= */}
-        <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#7A4B2A] pb-2">
-            <div>
-              <h2
-                id="chapters-list-heading"
-                className="font-heading font-extrabold text-xl sm:text-2xl text-[#FFF7E6]"
-              >
-                {copy.classBadge} {currentGrade} {copy.chaptersHeading}
-              </h2>
-              <p className="text-xs text-[#E5D7BE]/80 mt-0.5">
-                {copy.chaptersSubtitle}
-              </p>
-            </div>
-            <span className="text-xs font-heading font-bold text-[#FFE9A8] shrink-0">
-              {gradeChapters.length} Chapters
-            </span>
+            <p className="font-sans text-base sm:text-lg text-[#2B1B0F] max-w-[65ch] leading-relaxed">
+              {copy.subline}
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {gradeChapters.map((chapter) => {
-              const isReady = canTakeChapterDiagnostic(chapter.id);
-              const chapterConcepts = getConceptsByChapter(chapter.id);
-              const hasStarted =
-                isReady &&
-                chapterConcepts.some(
-                  (c) =>
-                    profile?.topicProgress[c.id]?.status === "completed" ||
-                    profile?.topicProgress[c.id]?.status === "in_progress"
-                );
+          {/* Two Role Cards: Student & Teacher (side by side on desktop, stacked on mobile) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
+            {/* Card 1: Student */}
+            <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#6DB33F]">
+              <div className="space-y-3">
+                <span className="font-pixel text-[11px] uppercase tracking-wider text-[#5DAA3A] block">
+                  {copy.studentLabel}
+                </span>
+                <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
+                  {copy.studentTitle}
+                </h2>
+                <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
+                  {copy.studentBody}
+                </p>
+              </div>
 
-              const tileState = !isReady
-                ? "coming_soon"
-                : hasStarted
-                ? "in_progress"
-                : "available";
+              <div className="space-y-3 pt-2">
+                <Link
+                  href={profile ? "/student" : "/login?role=student"}
+                  className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
+                >
+                  <span>{profile ? (currentLang === "hi" ? "विद्यार्थी डैशबोर्ड पर जाएं" : currentLang === "te" ? "విద్యార్థి హోమ్‌కు వెళ్లండి" : "Go to student home") : copy.studentBtn}</span>
+                  <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
+                </Link>
 
-              const localizedTitle = `Ch ${chapter.chapterNumber}: ${
-                resolve(chapter.name).text
-              }`;
-              const localizedSubtitle = `NCERT • ${chapter.bookName}`;
+                <div className="text-center">
+                  <Link
+                    href={profile ? "/student" : "/login?role=student"}
+                    className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
+                  >
+                    {profile ? (currentLang === "hi" ? "पहले से साइन इन हैं" : currentLang === "te" ? "ఇప్పటికే సైన్ ఇన్ అయ్యారు" : "Already signed in") : copy.studentSignIn}
+                  </Link>
+                </div>
+              </div>
+            </div>
 
-              const firstConceptId = chapterConcepts[0]?.id;
-              const diagnosticHref = isReady
-                ? `/student/diagnostic/${chapter.id}`
-                : undefined;
-              const practiceHref =
-                isReady && firstConceptId
-                  ? `/student/worksheet/${firstConceptId}`
-                  : undefined;
-              const lessonHref =
-                isReady && firstConceptId
-                  ? `/lesson/${firstConceptId}`
-                  : undefined;
+            {/* Card 2: Teacher */}
+            <div className="glass-panel p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t-[5px] border-t-[#3FA7C9]">
+              <div className="space-y-3">
+                <span className="font-pixel text-[11px] uppercase tracking-wider text-[#3FA7C9] block">
+                  {copy.teacherLabel}
+                </span>
+                <h2 className="font-heading font-bold text-2xl text-[#2B1B0F]">
+                  {copy.teacherTitle}
+                </h2>
+                <p className="font-sans text-sm sm:text-base text-[#2B1B0F]/85 leading-relaxed">
+                  {copy.teacherBody}
+                </p>
+              </div>
 
-              return (
-                <Tile
-                  key={chapter.id}
-                  title={localizedTitle}
-                  subtitle={localizedSubtitle}
-                  tooltip={
-                    !isReady
-                      ? "This chapter is still being built. Try another chapter or come back soon."
-                      : undefined
-                  }
-                  state={tileState}
-                  color="wood"
-                  diagnosticHref={diagnosticHref}
-                  practiceHref={practiceHref}
-                  lessonHref={lessonHref}
-                />
-              );
-            })}
+              <div className="space-y-3 pt-2">
+                <Link
+                  href="/login?role=teacher"
+                  className="w-full inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-base border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] hover:brightness-105 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline"
+                >
+                  <span>{copy.teacherBtn}</span>
+                  <ArrowRight className="w-5 h-5 ml-2 text-[#2B1B0F]" />
+                </Link>
+
+                <div className="text-center">
+                  <Link
+                    href="/login?role=teacher"
+                    className="inline-block text-xs sm:text-sm font-sans font-semibold text-[#5A3720] hover:text-[#2B1B0F] underline underline-offset-2"
+                  >
+                    {copy.teacherSignIn}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Line Below Cards */}
+          <div className="text-center pt-2 pb-4">
+            <p className="font-sans text-sm text-[#5A3720] max-w-none">
+              {copy.trustLine}
+            </p>
           </div>
         </section>
 
-        {/* Concept Pathway & Prerequisite Graph */}
-        <ConceptPathway currentLang={currentLang as SupportedLanguage} />
-
-        {/* Small Teacher link for mobile footer */}
-        {isFeatureEnabled("FEATURE_TEACHER_TOOLS") && (
-          <div className="pt-4 text-center sm:hidden">
-            <Link
-              href="/teacher"
-              className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 text-xs font-heading font-bold text-[#FFE9A8] underline"
+        {/* ================================================================= */}
+        {/* SECTION A — HOW MARGAM WORKS                                      */}
+        {/* ================================================================= */}
+        <section id="how-it-works" aria-labelledby="how-it-works-heading" className="space-y-8 pt-8 sm:pt-12 border-t-2 border-[#7A4B2A]/30">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-pixel text-[11px] uppercase tracking-wider px-3 py-1 bg-[#6DB33F]/20 text-[#2B1B0F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] inline-block">
+              {copy.howItWorksBadge}
+            </span>
+            <h2
+              id="how-it-works-heading"
+              className="font-heading font-extrabold text-2xl sm:text-3xl text-[#1E1610] leading-snug drop-shadow-[1px_1px_0px_#FFE9A8]"
             >
-              {copy.teacherLink}
+              {copy.howItWorksHeading}
+            </h2>
+            <p className="font-sans text-sm sm:text-base text-[#2B1B0F] leading-relaxed">
+              {copy.howItWorksSubtitle}
+            </p>
+          </div>
+
+          {/* 5 Steps Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch">
+            {/* Step 1 */}
+            <div className="panel-plank p-4 sm:p-5 flex flex-col justify-between space-y-3 border-t-[4px] border-t-[#6DB33F]">
+              <div className="space-y-2">
+                <div className="w-8 h-8 bg-[#6DB33F] text-[#1E1610] font-heading font-extrabold text-xs border-2 border-[#1E1610] flex items-center justify-center shadow-[1px_1px_0px_#1E1610]">
+                  01
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#1E1610] leading-snug">
+                  {copy.step1Title}
+                </h3>
+                <p className="font-sans text-xs text-[#2B1B0F] leading-relaxed">
+                  {copy.step1Desc}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="panel-plank p-4 sm:p-5 flex flex-col justify-between space-y-3 border-t-[4px] border-t-[#F2C230]">
+              <div className="space-y-2">
+                <div className="w-8 h-8 bg-[#F2C230] text-[#1E1610] font-heading font-extrabold text-xs border-2 border-[#1E1610] flex items-center justify-center shadow-[1px_1px_0px_#1E1610]">
+                  02
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#1E1610] leading-snug">
+                  {copy.step2Title}
+                </h3>
+                <p className="font-sans text-xs text-[#2B1B0F] leading-relaxed">
+                  {copy.step2Desc}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="panel-plank p-4 sm:p-5 flex flex-col justify-between space-y-3 border-t-[4px] border-t-[#78BDE8]">
+              <div className="space-y-2">
+                <div className="w-8 h-8 bg-[#78BDE8] text-[#1E1610] font-heading font-extrabold text-xs border-2 border-[#1E1610] flex items-center justify-center shadow-[1px_1px_0px_#1E1610]">
+                  03
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#1E1610] leading-snug">
+                  {copy.step3Title}
+                </h3>
+                <p className="font-sans text-xs text-[#2B1B0F] leading-relaxed">
+                  {copy.step3Desc}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="panel-plank p-4 sm:p-5 flex flex-col justify-between space-y-3 border-t-[4px] border-t-[#5DAA3A]">
+              <div className="space-y-2">
+                <div className="w-8 h-8 bg-[#5DAA3A] text-[#1E1610] font-heading font-extrabold text-xs border-2 border-[#1E1610] flex items-center justify-center shadow-[1px_1px_0px_#1E1610]">
+                  04
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#1E1610] leading-snug">
+                  {copy.step4Title}
+                </h3>
+                <p className="font-sans text-xs text-[#2B1B0F] leading-relaxed">
+                  {copy.step4Desc}
+                </p>
+              </div>
+            </div>
+
+            {/* Step 5 */}
+            <div className="panel-plank p-4 sm:p-5 flex flex-col justify-between space-y-3 border-t-[4px] border-t-[#D9B87A]">
+              <div className="space-y-2">
+                <div className="w-8 h-8 bg-[#E8CF9C] text-[#1E1610] font-heading font-extrabold text-xs border-2 border-[#1E1610] flex items-center justify-center shadow-[1px_1px_0px_#1E1610]">
+                  05
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#1E1610] leading-snug">
+                  {copy.step5Title}
+                </h3>
+                <p className="font-sans text-xs text-[#2B1B0F] leading-relaxed">
+                  {copy.step5Desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* SECTION B — LEARNING THAT ADAPTS TO YOU                           */}
+        {/* ================================================================= */}
+        <section id="adaptive-learning" aria-labelledby="adaptive-heading" className="space-y-8 pt-8 sm:pt-12 border-t-2 border-[#7A4B2A]/30">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-pixel text-[11px] uppercase tracking-wider px-3 py-1 bg-[#F2C230]/20 text-[#2B1B0F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] inline-block">
+              {copy.adaptiveBadge}
+            </span>
+            <h2
+              id="adaptive-heading"
+              className="font-heading font-extrabold text-2xl sm:text-3xl text-[#1E1610] leading-snug drop-shadow-[1px_1px_0px_#FFE9A8]"
+            >
+              {copy.adaptiveHeading}
+            </h2>
+            <p className="font-sans text-sm sm:text-base text-[#2B1B0F] leading-relaxed">
+              {copy.adaptiveSubtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Point 1 */}
+            <div className="panel-plank p-5 space-y-2.5 border-l-[6px] border-l-[#F2C230]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-[#F2C230] border border-[#1E1610] inline-block" />
+                <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                  {copy.adaptivePoint1Title}
+                </h3>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.adaptivePoint1Desc}
+              </p>
+            </div>
+
+            {/* Point 2 */}
+            <div className="panel-plank p-5 space-y-2.5 border-l-[6px] border-l-[#6DB33F]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-[#6DB33F] border border-[#1E1610] inline-block" />
+                <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                  {copy.adaptivePoint2Title}
+                </h3>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.adaptivePoint2Desc}
+              </p>
+            </div>
+
+            {/* Point 3 */}
+            <div className="panel-plank p-5 space-y-2.5 border-l-[6px] border-l-[#78BDE8]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-[#78BDE8] border border-[#1E1610] inline-block" />
+                <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                  {copy.adaptivePoint3Title}
+                </h3>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.adaptivePoint3Desc}
+              </p>
+            </div>
+
+            {/* Point 4 */}
+            <div className="panel-plank p-5 space-y-2.5 border-l-[6px] border-l-[#5DAA3A]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-[#5DAA3A] border border-[#1E1610] inline-block" />
+                <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                  {copy.adaptivePoint4Title}
+                </h3>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.adaptivePoint4Desc}
+              </p>
+            </div>
+
+            {/* Point 5 */}
+            <div className="panel-plank p-5 space-y-2.5 border-l-[6px] border-l-[#D9B87A] md:col-span-2 lg:col-span-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-[#D9B87A] border border-[#1E1610] inline-block" />
+                <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                  {copy.adaptivePoint5Title}
+                </h3>
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.adaptivePoint5Desc}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* SECTION C — BUILT FOR TEACHERS TOO                                */}
+        {/* ================================================================= */}
+        <section id="for-teachers" aria-labelledby="teachers-heading" className="space-y-8 pt-8 sm:pt-12 border-t-2 border-[#7A4B2A]/30">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-pixel text-[11px] uppercase tracking-wider px-3 py-1 bg-[#3FA7C9]/20 text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] inline-block">
+              {copy.teachersBadge}
+            </span>
+            <h2
+              id="teachers-heading"
+              className="font-heading font-extrabold text-2xl sm:text-3xl text-[#1E1610] leading-snug drop-shadow-[1px_1px_0px_#FFE9A8]"
+            >
+              {copy.teachersHeading}
+            </h2>
+            <p className="font-sans text-sm sm:text-base text-[#2B1B0F] leading-relaxed">
+              {copy.teachersSubtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+            {/* Teacher Feature 1 */}
+            <div className="panel-plank p-5 space-y-2 border-t-[4px] border-t-[#3FA7C9]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.teacherFeat1Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.teacherFeat1Desc}
+              </p>
+            </div>
+
+            {/* Teacher Feature 2 */}
+            <div className="panel-plank p-5 space-y-2 border-t-[4px] border-t-[#3FA7C9]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.teacherFeat2Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.teacherFeat2Desc}
+              </p>
+            </div>
+
+            {/* Teacher Feature 3 */}
+            <div className="panel-plank p-5 space-y-2 border-t-[4px] border-t-[#3FA7C9]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.teacherFeat3Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.teacherFeat3Desc}
+              </p>
+            </div>
+
+            {/* Teacher Feature 4 */}
+            <div className="panel-plank p-5 space-y-2 border-t-[4px] border-t-[#3FA7C9]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.teacherFeat4Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.teacherFeat4Desc}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center pt-2">
+            <Link
+              href="/login?role=teacher"
+              className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-extrabold text-sm border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] active:translate-y-[2px] active:shadow-[1px_1px_0px_#1E1610] transition-all no-underline"
+            >
+              <span>{copy.teacherCtaBtn}</span>
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
-        )}
+        </section>
+
+        {/* ================================================================= */}
+        {/* SECTION D — WHY MARGAM?                                           */}
+        {/* ================================================================= */}
+        <section id="why-margam" aria-labelledby="why-heading" className="space-y-8 pt-8 sm:pt-12 border-t-2 border-[#7A4B2A]/30">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-pixel text-[11px] uppercase tracking-wider px-3 py-1 bg-[#8B5A2B]/20 text-[#2B1B0F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] inline-block">
+              {copy.whyBadge}
+            </span>
+            <h2
+              id="why-heading"
+              className="font-heading font-extrabold text-2xl sm:text-3xl text-[#1E1610] leading-snug drop-shadow-[1px_1px_0px_#FFE9A8]"
+            >
+              {copy.whyHeading}
+            </h2>
+            <p className="font-sans text-sm sm:text-base text-[#2B1B0F] leading-relaxed">
+              {copy.whySubtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Point 1 */}
+            <div className="panel-stone p-5 space-y-2 border-t-[4px] border-t-[#6DB33F]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.why1Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.why1Desc}
+              </p>
+            </div>
+
+            {/* Point 2 */}
+            <div className="panel-stone p-5 space-y-2 border-t-[4px] border-t-[#6DB33F]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.why2Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.why2Desc}
+              </p>
+            </div>
+
+            {/* Point 3 */}
+            <div className="panel-stone p-5 space-y-2 border-t-[4px] border-t-[#6DB33F]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.why3Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.why3Desc}
+              </p>
+            </div>
+
+            {/* Point 4 */}
+            <div className="panel-stone p-5 space-y-2 border-t-[4px] border-t-[#6DB33F]">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.why4Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.why4Desc}
+              </p>
+            </div>
+
+            {/* Point 5 */}
+            <div className="panel-stone p-5 space-y-2 border-t-[4px] border-t-[#6DB33F] sm:col-span-2 lg:col-span-2">
+              <h3 className="font-heading font-bold text-base text-[#1E1610]">
+                {copy.why5Title}
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-[#2B1B0F] leading-relaxed">
+                {copy.why5Desc}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
+        {/* SECTION E — FINAL CALL TO ACTION                                  */}
+        {/* ================================================================= */}
+        <section id="get-started" aria-labelledby="cta-heading" className="max-w-4xl mx-auto my-8 sm:my-12 p-6 sm:p-10 panel-night border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] rounded-[2px] text-center space-y-6">
+          <div className="space-y-2 max-w-xl mx-auto">
+            <h2
+              id="cta-heading"
+              className="font-heading font-extrabold text-2xl sm:text-3xl text-[#FFE9A8] leading-snug drop-shadow-[2px_2px_0px_#1E1610]"
+            >
+              {copy.ctaHeading}
+            </h2>
+            <p className="font-sans text-sm sm:text-base text-[#F3E3BC] leading-relaxed">
+              {copy.ctaSubtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto pt-2">
+            {/* Student CTA */}
+            <div className="space-y-2">
+              <Link
+                href={profile ? "/student" : "/login?role=student"}
+                className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3.5 bg-[#5DAA3A] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-extrabold text-base border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] active:translate-y-[2px] active:shadow-[1px_1px_0px_#1E1610] transition-all no-underline"
+              >
+                <span>{profile ? (currentLang === "hi" ? "विद्यार्थी डैशबोर्ड पर जाएं" : currentLang === "te" ? "విద్యార్థి హోమ్‌కు వెళ్లండి" : "Go to student home") : copy.ctaStudentBtn}</span>
+                <ArrowRight className="w-5 h-5 ml-2 text-[#1E1610]" />
+              </Link>
+              <p className="text-[11px] text-[#E5D7BE]">
+                {copy.ctaStudentSub}
+              </p>
+            </div>
+
+            {/* Teacher CTA */}
+            <div className="space-y-2">
+              <Link
+                href="/login?role=teacher"
+                className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3.5 bg-[#D9B87A] hover:bg-[#E8CF9C] text-[#1E1610] font-heading font-extrabold text-base border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] active:translate-y-[2px] active:shadow-[1px_1px_0px_#1E1610] transition-all no-underline"
+              >
+                <span>{copy.ctaTeacherBtn}</span>
+                <ArrowRight className="w-5 h-5 ml-2 text-[#1E1610]" />
+              </Link>
+              <p className="text-[11px] text-[#E5D7BE]">
+                {copy.ctaTeacherSub}
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Slim Brown Ground-Strip Footer */}
