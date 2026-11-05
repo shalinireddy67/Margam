@@ -34,3 +34,4 @@ for (const p of pages) {
 if (issues === 0) {
   console.log("All pages have <= 1 <h1> tag. Clean!");
 }
+
