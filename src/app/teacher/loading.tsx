@@ -1,19 +1,36 @@
 import React from "react";
+import { SkeletonList, SkeletonLine } from "@/components/ui/LoadingSkeleton";
 
 export default function TeacherLoading() {
   return (
-    <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 text-center space-y-4">
-        <div className="w-14 h-14 bg-[#5DAA3A] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] mx-auto flex items-center justify-center animate-pulse motion-reduce:animate-none">
-          <div className="w-6 h-6 bg-[#A4D2FF]" />
+    <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] py-6 px-4">
+      <div className="max-w-[1200px] mx-auto space-y-6">
+        {/* Header Skeleton */}
+        <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-1 w-full sm:w-auto">
+            <SkeletonLine width="220px" height="26px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+            <SkeletonLine width="180px" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
+          </div>
+          <div className="w-36 h-10 bg-[#5DAA3A]/40 border-[2px] border-[#2B1B0F]" />
         </div>
-        <div className="space-y-1.5">
-          <h2 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
-            Loading teacher dashboard
-          </h2>
-          <p className="text-xs text-[#2B1B0F]/75 font-sans leading-relaxed">
-            Gathering classroom diagnostics and concept analytics...
-          </p>
+
+        {/* Metrics Row Skeleton */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[1, 2, 3].map((idx) => (
+            <div
+              key={idx}
+              className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] p-4 space-y-2 animate-pulse"
+            >
+              <SkeletonLine width="50%" height="14px" className="bg-[#2B1B0F]/20 border-[#2B1B0F]/30" />
+              <SkeletonLine width="40%" height="32px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+            </div>
+          ))}
+        </div>
+
+        {/* Class Roster / Gaps Table Skeleton */}
+        <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 space-y-4">
+          <SkeletonLine width="240px" height="22px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+          <SkeletonList count={4} />
         </div>
       </div>
     </div>

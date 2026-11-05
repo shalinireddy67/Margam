@@ -17,17 +17,17 @@ export default function LessonErrorBoundary({
 
   return (
     <div className="min-h-screen bg-[#FFF7E6] flex items-center justify-center p-4 text-[#2B1B0F]">
-      <div className="max-w-md w-full bg-white border-[3px] border-[#2B1B0F] p-6 sm:p-8 shadow-[4px_4px_0px_#2B1B0F] space-y-6 text-center">
+      <div className="max-w-md w-full bg-[#FFFDF7] border-[3px] border-[#2B1B0F] p-6 sm:p-8 shadow-[4px_4px_0px_#2B1B0F] space-y-6 text-center">
         <div className="w-16 h-16 mx-auto bg-[#FFE9A8] border-[3px] border-[#2B1B0F] flex items-center justify-center shadow-[3px_3px_0px_#2B1B0F]">
           <AlertTriangle className="w-8 h-8 text-[#2B1B0F]" />
         </div>
 
         <div className="space-y-2">
           <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#2B1B0F]">
-            Lesson could not load
+            Something went wrong.
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-            This lesson could not load. Reload the page or return to your lessons.
+            We could not load this part of Margam.
           </p>
         </div>
 
@@ -38,14 +38,14 @@ export default function LessonErrorBoundary({
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            <span>Reload lesson</span>
+            <span>Try again</span>
           </button>
           <Link
             href="/student"
-            className="flex-1 min-h-[48px] px-5 py-3 bg-white hover:bg-[#FFF7E6] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 no-underline"
+            className="flex-1 min-h-[48px] px-5 py-3 bg-[#FFFDF7] hover:bg-[#FFF7E6] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] transition-all flex items-center justify-center gap-2 no-underline"
           >
             <Home className="w-4 h-4" />
-            <span>Return to lessons</span>
+            <span>View lessons</span>
           </Link>
         </div>
       </div>

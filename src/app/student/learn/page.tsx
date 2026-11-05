@@ -27,6 +27,7 @@ import {
   getConceptsByClass,
   getConceptById,
 } from "@/lib/curriculum";
+import { SkeletonList, SkeletonLine } from "@/components/ui/LoadingSkeleton";
 
 export default function StudentLearnPage() {
   const router = useRouter();
@@ -52,11 +53,12 @@ export default function StudentLearnPage() {
 
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-[#2B1B0F]">
-        <div className="bg-[#FFFDF7] p-6 rounded-[2px] text-center border-3 border-[#2B1B0F] shadow-block">
-          <div className="w-8 h-8 border-3 border-[#5DAA3A] border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-pixel text-xs text-[#2B1B0F]">Loading curriculum...</p>
+      <div className="min-h-screen py-8 px-4 text-[#2B1B0F] max-w-[1200px] mx-auto space-y-6">
+        <div className="bg-[#FFFDF7] p-6 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-3">
+          <SkeletonLine width="200px" height="24px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+          <SkeletonLine width="320px" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
         </div>
+        <SkeletonList count={5} />
       </div>
     );
   }
@@ -228,20 +230,28 @@ export default function StudentLearnPage() {
         {/* Vertical Cascade of Topics */}
         <div className="space-y-3">
           {filteredConcepts.length === 0 ? (
-            <div className="bg-[#FFFDF7] p-8 rounded-[2px] text-center space-y-2 border-3 border-[#2B1B0F] shadow-block">
-              <BookOpen className="w-8 h-8 text-[#2B1B0F]/40 mx-auto" />
-              <h2 className="font-pixel text-xs sm:text-sm text-[#2B1B0F]">No topics found</h2>
-              <p className="text-xs text-[#2B1B0F]/70 font-sans">No topics match your search or filter settings.</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchQuery("");
-                  setStatusFilter("all");
-                }}
-                className="text-xs font-heading font-bold text-[#5DAA3A] underline cursor-pointer"
-              >
-                Reset filters
-              </button>
+            <div className="bg-[#FFFDF7] p-8 text-center space-y-3 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F]">
+              <div className="w-12 h-12 bg-[#FFE9A8] border-[2px] border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] mx-auto flex items-center justify-center">
+                <Search className="w-6 h-6 text-[#2B1B0F]" />
+              </div>
+              <h2 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
+                {searchQuery.trim() ? `Nothing found for ${searchQuery.trim()}.` : "Nothing found."}
+              </h2>
+              <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80">
+                Try checking for another NCERT topic.
+              </p>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setStatusFilter("all");
+                  }}
+                  className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[2px] border-[#2B1B0F] font-heading font-bold text-xs shadow-[2px_2px_0px_#2B1B0F] cursor-pointer"
+                >
+                  Clear search
+                </button>
+              </div>
             </div>
           ) : (
             filteredConcepts.map((concept) => {

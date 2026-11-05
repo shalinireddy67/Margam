@@ -18,11 +18,11 @@ export default function NotFound() {
 
       {/* Main 404 Card */}
       <main className="max-w-md mx-auto px-4 py-16 text-center w-full my-auto">
-        <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-8 space-y-4">
+        <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-8 space-y-4">
           <span className="font-pixel text-4xl text-[#E04A3F] block">404</span>
-          <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page not found</h1>
+          <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page not found.</h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-            The requested page does not exist. Check the address or return to the home screen.
+            This maths quest does not exist.
           </p>
           <div className="pt-2">
             <Link
@@ -30,7 +30,7 @@ export default function NotFound() {
               className="inline-flex items-center justify-center min-h-[48px] gap-2 px-6 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[4px_4px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] no-underline"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to home</span>
+              <span>Go home</span>
             </Link>
           </div>
         </div>

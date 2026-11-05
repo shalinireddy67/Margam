@@ -276,10 +276,10 @@ export default function StudentDashboardPage() {
                   START LEARNING
                 </span>
                 <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-[#2B1B0F]">
-                  Baseline diagnostic
+                  No check-ins yet.
                 </h2>
                 <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans max-w-xl leading-relaxed">
-                  Take a 6-question check-in for Class {studyClass}. Margam finds any earlier topics you missed and walks you back to fix them.
+                  Take a 5-question check-in to find where to start.
                 </p>
               </div>
             </div>
@@ -288,7 +288,7 @@ export default function StudentDashboardPage() {
                 href={firstDiagnosticHref}
                 className="px-5 py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 no-underline cursor-pointer"
               >
-                <span>Start diagnostic</span>
+                <span>Start quick check</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
@@ -670,19 +670,19 @@ export default function StudentDashboardPage() {
               <div className="p-4 bg-[#FFF7E6] border-2 border-[#2B1B0F] text-center space-y-1.5">
                 <div className="text-3xl">🎯</div>
                 <div className="font-heading font-bold text-xs text-[#2B1B0F]">
-                  No badges earned yet
+                  No badges earned yet.
                 </div>
                 <p className="text-[11px] text-[#2B1B0F]/70 font-sans">
-                  Complete your first lesson or practice worksheet to earn your first badge.
+                  Complete lessons and practice worksheets to earn badges.
                 </p>
               </div>
             )}
 
             <Link
-              href="/student/stickers"
-              className="w-full py-2.5 px-3 bg-white hover:bg-slate-50 text-[#2B1B0F] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-2 border-[#2B1B0F] shadow-xs transition-colors no-underline"
+              href="/student/learn"
+              className="w-full py-2.5 px-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-2 border-[#2B1B0F] shadow-xs transition-colors no-underline"
             >
-              <span>View all badges</span>
+              <span>Go to lessons</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

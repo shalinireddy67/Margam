@@ -115,22 +115,22 @@ export default function StickersPage() {
         <OfflineBanner />
         <Navigation currentTab="stickers" profile={null} />
         <main className="max-w-md mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
-          <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 space-y-4">
+          <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 space-y-4">
             <div className="w-12 h-12 bg-[#FFE9A8] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F]">
-              <Lock className="w-6 h-6" />
+              <Award className="w-6 h-6" />
             </div>
             <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">
-              Badges
+              No badges earned yet.
             </h1>
             <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed">
-              Start a lesson or practice worksheet to earn your first badge.
+              Complete lessons and practice worksheets to earn badges.
             </p>
             <div className="pt-2">
               <Link
-                href="/student"
+                href="/student/learn"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F] no-underline hover:brightness-105"
               >
-                <span>Start learning</span>
+                <span>Go to lessons</span>
               </Link>
             </div>
           </div>

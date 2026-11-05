@@ -1,19 +1,35 @@
 import React from "react";
+import { SkeletonCard, SkeletonPathMap, SkeletonLine } from "@/components/ui/LoadingSkeleton";
 
 export default function StudentLoading() {
   return (
-    <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 text-center space-y-4">
-        <div className="w-14 h-14 bg-[#5DAA3A] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] mx-auto flex items-center justify-center animate-pulse motion-reduce:animate-none">
-          <div className="w-6 h-6 bg-[#FFE9A8]" />
+    <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] py-6 px-4">
+      <div className="max-w-[1200px] mx-auto space-y-6">
+        {/* Top Status Header Skeleton */}
+        <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-12 h-12 bg-[#FFE9A8] border-[2px] border-[#2B1B0F] shrink-0" />
+            <div className="space-y-1.5 flex-1">
+              <SkeletonLine width="140px" height="20px" className="bg-[#2B1B0F]/20 border-[#2B1B0F]/30" />
+              <SkeletonLine width="90px" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
+            </div>
+          </div>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-24 h-10 bg-[#5DAA3A]/30 border-[2px] border-[#2B1B0F]" />
+            <div className="w-24 h-10 bg-[#F4C542]/30 border-[2px] border-[#2B1B0F]" />
+          </div>
         </div>
-        <div className="space-y-1.5">
-          <h2 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
-            Preparing Learning Space
-          </h2>
-          <p className="text-xs text-[#2B1B0F]/75 font-sans leading-relaxed">
-            Organizing your concept map and practice quests...
-          </p>
+
+        {/* Quest Card Skeleton */}
+        <SkeletonCard className="w-full" />
+
+        {/* Concept Path Map Skeleton */}
+        <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 space-y-4">
+          <div className="space-y-1">
+            <SkeletonLine width="200px" height="24px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+            <SkeletonLine width="320px" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
+          </div>
+          <SkeletonPathMap />
         </div>
       </div>
     </div>

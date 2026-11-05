@@ -152,3 +152,4 @@ CREATE TRIGGER trg_protect_class_member_immutability
 -- ------------------------------------------------------------------------------
 REVOKE ALL ON public.class_weekly_leaderboard FROM anon;
 GRANT SELECT ON public.class_weekly_leaderboard TO authenticated;
+

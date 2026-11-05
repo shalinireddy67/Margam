@@ -335,10 +335,10 @@ export default function TeacherPage() {
                     TEACHER DASHBOARD
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#2B1B0F]">
-                    No Classes Created Yet
+                    No classes yet.
                   </h2>
                   <p className="text-sm text-[#2B1B0F]/80 font-sans max-w-md mx-auto leading-relaxed">
-                    Create your first classroom to generate a unique join code for your students, track diagnostic progress, and see which earlier topics students are missing.
+                    Set up your first class to see topic gaps.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -347,7 +347,7 @@ export default function TeacherPage() {
                     className="w-full sm:w-auto px-6 py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
-                    <span>Create Your First Class</span>
+                    <span>Make a class</span>
                   </button>
                   <button
                     onClick={() => setViewMode("synthetic")}

@@ -27,15 +27,68 @@ export function SkeletonCard({ className = "" }: { className?: string }) {
     <div
       aria-label="Loading..."
       role="status"
-      className={`border-4 border-[#5A3720] rounded-[2px] p-5 bg-[#FFF7E6] shadow-[inset_2px_2px_0px_rgba(255,255,255,0.9),4px_4px_0px_rgba(0,0,0,0.35)] space-y-3 ${className}`.trim()}
+      className={`border-[3px] border-[#2B1B0F] p-5 bg-[#FFFDF7] shadow-[4px_4px_0px_#2B1B0F] space-y-3 ${className}`.trim()}
     >
-      <SkeletonLine width="60%" height="24px" className="bg-[#A06A3C]/40 border-[#7A4B2A]" />
-      <SkeletonLine width="90%" height="16px" className="bg-[#A06A3C]/20 border-[#7A4B2A]" />
-      <SkeletonLine width="75%" height="16px" className="bg-[#A06A3C]/20 border-[#7A4B2A]" />
+      <SkeletonLine width="60%" height="24px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+      <SkeletonLine width="90%" height="16px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/30" />
+      <SkeletonLine width="75%" height="16px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/30" />
       <div className="pt-2">
-        <SkeletonLine width="40%" height="36px" className="bg-[#5DAA3A]/40 border-[#2F6B22]" />
+        <SkeletonLine width="40%" height="36px" className="bg-[#5DAA3A]/40 border-[#2B1B0F]" />
       </div>
       <span className="sr-only">Loading content...</span>
+    </div>
+  );
+}
+
+export function SkeletonPathMap({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-label="Loading concept path..."
+      role="status"
+      className={`space-y-4 p-4 ${className}`.trim()}
+    >
+      {[1, 2, 3].map((node) => (
+        <div key={node} className="relative flex items-center gap-4">
+          {/* Node Block */}
+          <div className="w-14 h-14 bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] flex items-center justify-center shrink-0 animate-pulse">
+            <div className="w-6 h-6 bg-[#FFE9A8] border border-[#2B1B0F]" />
+          </div>
+
+          {/* Node Details */}
+          <div className="flex-1 bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] p-4 space-y-2">
+            <SkeletonLine width="50%" height="20px" className="bg-[#2B1B0F]/20 border-[#2B1B0F]/30" />
+            <SkeletonLine width="80%" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
+          </div>
+        </div>
+      ))}
+      <span className="sr-only">Loading concept path...</span>
+    </div>
+  );
+}
+
+export function SkeletonList({ count = 3, className = "" }: { count?: number; className?: string }) {
+  return (
+    <div
+      aria-label="Loading list..."
+      role="status"
+      className={`space-y-3 ${className}`.trim()}
+    >
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] p-4 flex items-center justify-between gap-4 animate-pulse"
+        >
+          <div className="flex items-center gap-3 flex-1">
+            <div className="w-10 h-10 bg-[#FFE9A8] border-[2px] border-[#2B1B0F] shrink-0" />
+            <div className="space-y-1.5 flex-1">
+              <SkeletonLine width="65%" height="18px" className="bg-[#2B1B0F]/20 border-[#2B1B0F]/30" />
+              <SkeletonLine width="45%" height="12px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
+            </div>
+          </div>
+          <div className="w-24 h-10 bg-[#5DAA3A]/40 border-[2px] border-[#2B1B0F] shrink-0" />
+        </div>
+      ))}
+      <span className="sr-only">Loading list items...</span>
     </div>
   );
 }

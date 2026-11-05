@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { NetworkStatusMonitor } from "@/components/ui/Toast";
 
 const SITE_NAME = "Margam";
 const LANDING_TITLE = "Margam: find the gap behind your maths mistakes";
@@ -77,6 +78,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
+        <NetworkStatusMonitor />
         {children}
       </body>
     </html>

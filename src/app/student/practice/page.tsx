@@ -26,6 +26,7 @@ import {
   getChaptersByClass,
   getConceptsByClass,
 } from "@/lib/curriculum";
+import { SkeletonList, SkeletonLine } from "@/components/ui/LoadingSkeleton";
 
 export default function PracticeHubPage() {
   const router = useRouter();
@@ -51,11 +52,12 @@ export default function PracticeHubPage() {
 
   if (!isLoaded || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-800">
-        <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
-          <div className="w-8 h-8 border-3 border-amber-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-amber-950">Opening Practice Hub...</p>
+      <div className="min-h-screen py-8 px-4 text-[#2B1B0F] max-w-[1200px] mx-auto space-y-6">
+        <div className="bg-[#FFFDF7] p-6 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-3">
+          <SkeletonLine width="220px" height="24px" className="bg-[#FFE9A8] border-[#2B1B0F]" />
+          <SkeletonLine width="320px" height="14px" className="bg-[#2B1B0F]/10 border-[#2B1B0F]/20" />
         </div>
+        <SkeletonList count={5} />
       </div>
     );
   }
@@ -160,76 +162,102 @@ export default function PracticeHubPage() {
         </div>
 
         {/* Worksheet Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredConcepts.map((concept) => {
-            const tp = profile.topicProgress?.[concept.id];
-            const isCompleted = tp?.worksheetCompleted || tp?.status === "completed";
-            const scorePercentage =
-              tp?.worksheetScore !== undefined && tp?.worksheetTotal
-                ? Math.round((tp.worksheetScore / tp.worksheetTotal) * 100)
-                : null;
-            const isUnlocked = tp?.status === "available" || tp?.status === "in_progress" || isCompleted;
-
-            return (
-              <div
-                key={concept.id}
-                className={`glass-panel p-5 rounded-2xl border transition-all flex flex-col justify-between gap-4 ${
-                  isUnlocked
-                    ? "border-white/80 hover:border-amber-400/80 hover:scale-[1.01]"
-                    : "border-slate-200/80 bg-white/50 opacity-75"
-                }`}
+        {filteredConcepts.length === 0 ? (
+          <div className="bg-[#FFFDF7] p-8 text-center space-y-3 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F]">
+            <div className="w-12 h-12 bg-[#FFE9A8] border-[2px] border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] mx-auto flex items-center justify-center">
+              <Search className="w-6 h-6 text-[#2B1B0F]" />
+            </div>
+            <h2 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
+              {searchQuery.trim() ? `Nothing found for ${searchQuery.trim()}.` : "Nothing found."}
+            </h2>
+            <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80">
+              Try checking for another NCERT topic.
+            </p>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setFilter("all");
+                }}
+                className="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] hover:brightness-105 text-[#2B1B0F] border-[2px] border-[#2B1B0F] font-heading font-bold text-xs shadow-[2px_2px_0px_#2B1B0F] cursor-pointer"
               >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">
-                      {concept.chapter || `Class ${studyClass}`}
-                    </span>
-                    {scorePercentage !== null ? (
-                      <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                        Best: {scorePercentage}%
+                Clear search
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredConcepts.map((concept) => {
+              const tp = profile.topicProgress?.[concept.id];
+              const isCompleted = tp?.worksheetCompleted || tp?.status === "completed";
+              const scorePercentage =
+                tp?.worksheetScore !== undefined && tp?.worksheetTotal
+                  ? Math.round((tp.worksheetScore / tp.worksheetTotal) * 100)
+                  : null;
+              const isUnlocked = tp?.status === "available" || tp?.status === "in_progress" || isCompleted;
+
+              return (
+                <div
+                  key={concept.id}
+                  className={`glass-panel p-5 rounded-2xl border transition-all flex flex-col justify-between gap-4 ${
+                    isUnlocked
+                      ? "border-white/80 hover:border-amber-400/80 hover:scale-[1.01]"
+                      : "border-slate-200/80 bg-white/50 opacity-75"
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-heading font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">
+                        {concept.chapter || `Class ${studyClass}`}
                       </span>
-                    ) : isUnlocked ? (
-                      <span className="text-[10px] font-heading font-bold text-slate-500">
-                        Ready to Start
-                      </span>
-                    ) : (
-                      <span className="text-[10px] font-heading font-bold text-slate-400 flex items-center gap-1">
-                        <Lock className="w-3 h-3" /> Locked
-                      </span>
-                    )}
+                      {scorePercentage !== null ? (
+                        <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                          Best: {scorePercentage}%
+                        </span>
+                      ) : isUnlocked ? (
+                        <span className="text-[10px] font-heading font-bold text-slate-500">
+                          Ready to Start
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-heading font-bold text-slate-400 flex items-center gap-1">
+                          <Lock className="w-3 h-3" /> Locked
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="font-heading font-extrabold text-sm text-emerald-950">
+                      {concept.name[currentLang] || concept.name.en}
+                    </h3>
+                    <p className="text-xs text-slate-600 font-sans line-clamp-2">
+                      {concept.learningObjective[currentLang] || concept.learningObjective.en}
+                    </p>
                   </div>
 
-                  <h3 className="font-heading font-extrabold text-sm text-emerald-950">
-                    {concept.name[currentLang] || concept.name.en}
-                  </h3>
-                  <p className="text-xs text-slate-600 font-sans line-clamp-2">
-                    {concept.learningObjective[currentLang] || concept.learningObjective.en}
-                  </p>
+                  <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between">
+                    {isUnlocked ? (
+                      <Link
+                        href={`/student/worksheet/${concept.id}`}
+                        className="w-full py-2 px-3.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+                      >
+                        <Compass className="w-3.5 h-3.5" />
+                        <span>{scorePercentage !== null ? "Practice Again" : "Start Worksheet"}</span>
+                      </Link>
+                    ) : (
+                      <Link
+                        href="/student/learn"
+                        className="w-full py-2 px-3.5 rounded-xl bg-slate-200 text-slate-600 font-heading font-bold text-xs flex items-center justify-center gap-1.5"
+                      >
+                        <Lock className="w-3.5 h-3.5" />
+                        <span>Study in lessons</span>
+                      </Link>
+                    )}
+                  </div>
                 </div>
-
-                <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between">
-                  {isUnlocked ? (
-                    <Link
-                      href={`/student/worksheet/${concept.id}`}
-                      className="w-full py-2 px-3.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-colors"
-                    >
-                      <Compass className="w-3.5 h-3.5" />
-                      <span>{scorePercentage !== null ? "Practice Again" : "Start Worksheet"}</span>
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/student/learn"
-                      className="w-full py-2 px-3.5 rounded-xl bg-slate-200 text-slate-600 font-heading font-bold text-xs flex items-center justify-center gap-1.5"
-                    >
-                      <Lock className="w-3.5 h-3.5" />
-                      <span>Study in lessons</span>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
       </main>
 
