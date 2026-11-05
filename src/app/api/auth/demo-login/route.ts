@@ -69,9 +69,95 @@ function getDemoPassword(): string | undefined {
   return pw.trim().replace(/^["']|["']$/g, "");
 }
 
+function cleanEnv(val?: string | null): string | undefined {
+  if (!val) return undefined;
+  const clean = val.trim().replace(/^["']|["']$/g, "").trim();
+  return clean || undefined;
+}
+
+function getHostSafe(urlStr?: string | null): string | null {
+  if (!urlStr) return null;
+  try {
+    const clean = urlStr.trim().replace(/^["']|["']$/g, "").trim();
+    if (!clean) return null;
+    if (clean.includes("://")) {
+      return new URL(clean).hostname;
+    }
+    const afterAt = clean.includes("@") ? clean.split("@")[1] : clean;
+    return afterAt.split("/")[0].split(":")[0];
+  } catch (e: any) {
+    return `invalid: ${e?.message}`;
+  }
+}
+
 export async function GET() {
   const enabled = isDemoLoginEnabled();
-  return NextResponse.json({ enabled });
+
+  const supabaseUrlEnv = cleanEnv(process.env.SUPABASE_URL);
+  const nextPublicUrlEnv = cleanEnv(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  const pgHostEnv = cleanEnv(process.env.POSTGRES_HOST);
+  const pgUrlEnv = cleanEnv(process.env.POSTGRES_URL);
+
+  let pingSupabaseUrl = "not attempted";
+  if (supabaseUrlEnv) {
+    try {
+      const res = await fetch(`${supabaseUrlEnv.replace(/\/+$/, "")}/auth/v1/health`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      pingSupabaseUrl = `HTTP ${res.status}`;
+    } catch (e: any) {
+      pingSupabaseUrl = `failed: ${e?.message}`;
+    }
+  }
+
+  let pingNextPublicUrl = "not attempted";
+  if (nextPublicUrlEnv) {
+    try {
+      const res = await fetch(`${nextPublicUrlEnv.replace(/\/+$/, "")}/auth/v1/health`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      pingNextPublicUrl = `HTTP ${res.status}`;
+    } catch (e: any) {
+      pingNextPublicUrl = `failed: ${e?.message}`;
+    }
+  }
+
+  let pingPgHostDerived = "not attempted";
+  if (pgHostEnv && pgHostEnv.includes(".supabase.co")) {
+    const ref = pgHostEnv.replace(/^db\./, "").split(".")[0];
+    const derived = `https://${ref}.supabase.co`;
+    try {
+      const res = await fetch(`${derived}/auth/v1/health`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      pingPgHostDerived = `ref ${ref}: HTTP ${res.status}`;
+    } catch (e: any) {
+      pingPgHostDerived = `ref ${ref} failed: ${e?.message}`;
+    }
+  }
+
+  const diagnostics = {
+    has_SUPABASE_URL: Boolean(supabaseUrlEnv),
+    host_SUPABASE_URL: getHostSafe(supabaseUrlEnv),
+    ping_SUPABASE_URL: pingSupabaseUrl,
+    has_NEXT_PUBLIC_SUPABASE_URL: Boolean(nextPublicUrlEnv),
+    host_NEXT_PUBLIC_SUPABASE_URL: getHostSafe(nextPublicUrlEnv),
+    ping_NEXT_PUBLIC_SUPABASE_URL: pingNextPublicUrl,
+    has_POSTGRES_HOST: Boolean(pgHostEnv),
+    val_POSTGRES_HOST: getHostSafe(pgHostEnv),
+    ping_POSTGRES_HOST_DERIVED: pingPgHostDerived,
+    has_POSTGRES_URL: Boolean(pgUrlEnv),
+    host_POSTGRES_URL: getHostSafe(pgUrlEnv),
+    has_SUPABASE_ANON_KEY: Boolean(process.env.SUPABASE_ANON_KEY),
+    has_SUPABASE_PUBLISHABLE_KEY: Boolean(process.env.SUPABASE_PUBLISHABLE_KEY),
+    has_NEXT_PUBLIC_SUPABASE_ANON_KEY: Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
+    has_NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: Boolean(process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY),
+    has_SUPABASE_SERVICE_ROLE_KEY: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
+    has_SUPABASE_SECRET_KEY: Boolean(process.env.SUPABASE_SECRET_KEY),
+    has_DEMO_PASSWORD: Boolean(process.env.DEMO_PASSWORD),
+  };
+
+  return NextResponse.json({ enabled, diagnostics });
 }
 
 export async function POST(req: NextRequest) {

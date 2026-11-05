@@ -51,28 +51,34 @@ function cleanEnvValue(val?: string | null): string | undefined {
 }
 
 /**
- * Standardized Public Supabase URL getter
+ * Standardized Supabase URL getter.
+ * Supports server-side integration SUPABASE_URL as well as NEXT_PUBLIC_SUPABASE_URL.
  */
 export function getSupabaseUrl(): string | undefined {
-  const raw = cleanEnvValue(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  const raw = cleanEnvValue(
+    process.env.SUPABASE_URL ||
+    process.env.NEXT_PUBLIC_SUPABASE_URL
+  );
   if (!raw) return undefined;
   return raw.replace(/\/+$/, "");
 }
 
 /**
- * Standardized Public Supabase Anon / Publishable Key getter.
- * Supports primary name: NEXT_PUBLIC_SUPABASE_ANON_KEY
- * Supported alias: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+ * Standardized Supabase Anon / Publishable Key getter.
+ * Supports integration names (SUPABASE_PUBLISHABLE_KEY, SUPABASE_ANON_KEY)
+ * and public names (NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY).
  */
 export function getSupabaseAnonKey(): string | undefined {
   return cleanEnvValue(
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_ANON_KEY
   );
 }
 
 /**
- * Checks whether public Supabase configuration is set with valid (non-placeholder) values.
+ * Checks whether Supabase configuration is set with valid (non-placeholder) values.
  */
 export function isSupabaseConfigured(): boolean {
   const url = getSupabaseUrl();
@@ -83,8 +89,7 @@ export function isSupabaseConfigured(): boolean {
 
 /**
  * Standardized Server-Only Supabase Service Role / Secret Key getter.
- * Supports primary name: SUPABASE_SERVICE_ROLE_KEY
- * Supported aliases: SUPABASE_SECRET_KEY, SUPABASE_SERVICE_KEY
+ * Supports integration primary name SUPABASE_SECRET_KEY as well as SUPABASE_SERVICE_ROLE_KEY.
  *
  * NOTE: Returns undefined if called on client or if unconfigured.
  */
@@ -94,8 +99,8 @@ export function getSupabaseServiceKey(): string | undefined {
     return undefined;
   }
   return cleanEnvValue(
-    process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_SECRET_KEY ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_SERVICE_KEY
   );
 }
