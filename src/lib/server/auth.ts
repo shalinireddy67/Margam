@@ -44,77 +44,70 @@ export async function getAuthenticatedUser(
         error: authError,
       } = await serverClient.auth.getUser();
 
-      if (authError || !user) {
-        return null;
-      }
+      if (!authError && user) {
+        // Query database profile using Admin client (trusted, bypasses RLS)
+        const admin = getSupabaseAdminClient();
+        let profileRole: "student" | "teacher" = "student";
+        let username: string | null = null;
+        let fullName = user.user_metadata?.full_name || "Student";
+        let selectedClass: number | null = null;
+        let avatarPixel: string | undefined = undefined;
+        let enrolledClass: { id: string; name: string; grade: number } | null = null;
 
-      // Query database profile using Admin client (trusted, bypasses RLS)
-      const admin = getSupabaseAdminClient();
-      let profileRole: "student" | "teacher" = "student";
-      let username: string | null = null;
-      let fullName = user.user_metadata?.full_name || "Student";
-      let selectedClass: number | null = null;
-      let avatarPixel: string | undefined = undefined;
-      let enrolledClass: { id: string; name: string; grade: number } | null = null;
+        if (admin) {
+          const { data: profile } = await admin
+            .from("profiles")
+            .select("role, username, full_name, selected_class, avatar_pixel")
+            .eq("id", user.id)
+            .single();
 
-      if (admin) {
-        const { data: profile } = await admin
-          .from("profiles")
-          .select("role, username, full_name, selected_class, avatar_pixel")
-          .eq("id", user.id)
-          .single();
+          if (profile) {
+            profileRole = profile.role === "teacher" ? "teacher" : "student";
+            username = profile.username;
+            fullName = profile.full_name || fullName;
+            selectedClass = profile.selected_class;
+            avatarPixel = profile.avatar_pixel;
+          }
 
-        if (profile) {
-          profileRole = profile.role === "teacher" ? "teacher" : "student";
-          username = profile.username;
-          fullName = profile.full_name || fullName;
-          selectedClass = profile.selected_class;
-          avatarPixel = profile.avatar_pixel;
-        }
+          // Fetch enrolled class for student
+          if (profileRole === "student") {
+            const { data: member } = await admin
+              .from("class_members")
+              .select("classes(id, name, grade)")
+              .eq("student_id", user.id)
+              .maybeSingle();
 
-        // Fetch enrolled class for student
-        if (profileRole === "student") {
-          const { data: member } = await admin
-            .from("class_members")
-            .select("classes(id, name, grade)")
-            .eq("student_id", user.id)
-            .maybeSingle();
-
-          if (member?.classes) {
-            enrolledClass = member.classes as any;
+            if (member?.classes) {
+              enrolledClass = member.classes as any;
+            }
           }
         }
-      }
 
-      return {
-        id: user.id,
-        email: user.email || "",
-        role: profileRole,
-        username,
-        fullName,
-        selectedClass,
-        avatarPixel,
-        enrolledClass,
-        source: "supabase",
-      };
+        return {
+          id: user.id,
+          email: user.email || "",
+          role: profileRole,
+          username,
+          fullName,
+          selectedClass,
+          avatarPixel,
+          enrolledClass,
+          source: "supabase",
+        };
+      }
     } catch (err: any) {
       if (err?.digest === "DYNAMIC_SERVER_USAGE" || err?.digest?.startsWith?.("NEXT_REDIRECT")) {
         throw err;
       }
       console.error("[Auth] Error verifying Supabase user session:", err);
-      return null;
     }
   }
 
-  // 2. Non-Production Fallback: If not production, check signed mock session token
-  if (process.env.NODE_ENV === "production") {
-    // In production, NEVER fall back to mockDb
-    return null;
-  }
-
-  // Check signed cookie or test header in dev/test mode
+  // 2. Token-Based Authentication Verification (signed margam_auth_token cookie)
+  // Validates HMAC-SHA256 signature with SESSION_SECRET across serverless functions
   const token =
     req?.cookies.get("margam_auth_token")?.value ||
+    req?.cookies.get("margam_session")?.value ||
     req?.headers.get("x-test-auth-token");
 
   if (!token) {
@@ -125,38 +118,89 @@ export async function getAuthenticatedUser(
     userId: string;
     role: "student" | "teacher";
     expiresAt: number;
+    username?: string;
   }>(token);
 
   if (!payload || (payload.expiresAt && payload.expiresAt < Date.now())) {
     return null;
   }
 
-  const mockUser = mockDb.profiles.get(payload.userId);
-  if (!mockUser) {
-    return null;
-  }
+  // Verify against Supabase DB profile if admin client is available
+  const admin = getSupabaseAdminClient();
+  if (admin) {
+    try {
+      const { data: profile } = await admin
+        .from("profiles")
+        .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo")
+        .eq("id", payload.userId)
+        .maybeSingle();
 
-  let enrolledClass: { id: string; name: string; grade: number } | null = null;
-  if (mockUser.role === "student") {
-    const mockMember = Array.from(mockDb.classMembers.values()).find(
-      (m) => m.studentId === mockUser.id
-    );
-    if (mockMember) {
-      const cls = mockDb.classes.get(mockMember.classId);
-      if (cls) {
-        enrolledClass = { id: cls.id, name: cls.name, grade: cls.grade };
+      if (profile) {
+        let enrolledClass: { id: string; name: string; grade: number } | null = null;
+        if (profile.role === "student") {
+          const { data: member } = await admin
+            .from("class_members")
+            .select("classes(id, name, grade)")
+            .eq("student_id", profile.id)
+            .maybeSingle();
+
+          if (member?.classes) {
+            enrolledClass = member.classes as any;
+          }
+        }
+
+        return {
+          id: profile.id,
+          email: "",
+          role: profile.role === "teacher" ? "teacher" : "student",
+          username: profile.username,
+          fullName: profile.full_name || "User",
+          selectedClass: profile.selected_class,
+          avatarPixel: profile.avatar_pixel,
+          enrolledClass,
+          source: "supabase",
+        };
       }
+    } catch {
+      // Proceed to mock / demo session resolution if DB is temporarily unreachable
     }
   }
 
+  const mockUser = mockDb.profiles.get(payload.userId);
+  if (mockUser) {
+    let enrolledClass: { id: string; name: string; grade: number } | null = null;
+    if (mockUser.role === "student") {
+      const mockMember = Array.from(mockDb.classMembers.values()).find(
+        (m) => m.studentId === mockUser.id
+      );
+      if (mockMember) {
+        const cls = mockDb.classes.get(mockMember.classId);
+        if (cls) {
+          enrolledClass = { id: cls.id, name: cls.name, grade: cls.grade };
+        }
+      }
+    }
+
+    return {
+      id: mockUser.id,
+      email: mockUser.email,
+      role: mockUser.role,
+      username: mockUser.username,
+      fullName: mockUser.fullName,
+      selectedClass: mockUser.selectedClass,
+      enrolledClass,
+      source: "mock",
+    };
+  }
+
+  // Fallback for valid signed session payload
   return {
-    id: mockUser.id,
-    email: mockUser.email,
-    role: mockUser.role,
-    username: mockUser.username,
-    fullName: mockUser.fullName,
-    selectedClass: mockUser.selectedClass,
-    enrolledClass,
+    id: payload.userId,
+    email: payload.role === "teacher" ? "demo.teacher@margam.example" : `${payload.userId}@student.margam.local`,
+    role: payload.role,
+    username: payload.username || payload.userId.replace(/^usr_/, ""),
+    fullName: payload.role === "teacher" ? "Demo Teacher" : "Demo Student",
+    selectedClass: 10,
     source: "mock",
   };
 }

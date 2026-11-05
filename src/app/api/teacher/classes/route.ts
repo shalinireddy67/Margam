@@ -133,7 +133,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ classes: enrichedClasses, members: enrichedMembers });
   } else {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === "production" && !isDemoTeacher) {
       return NextResponse.json(
         { error: "Database service unavailable in production: Supabase credentials not configured." },
         { status: 503 }
