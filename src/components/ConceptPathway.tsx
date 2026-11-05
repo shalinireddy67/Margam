@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowRight, CheckCircle2, ChevronRight, Info, Network, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Info, Network, Layers } from "lucide-react";
 import conceptsData from "../../data/concepts.json";
 import { SupportedLanguage } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";

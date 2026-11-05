@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  Sparkles,
   BookOpen,
   CheckCircle2,
   Lock,
@@ -302,7 +301,7 @@ export default function StudentLearnPage() {
                             className="w-8 h-8 rounded-[2px] bg-[#FFF7E6] text-[#2B1B0F] border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] flex items-center justify-center"
                             title="Ready to Learn"
                           >
-                            <Sparkles className="w-4 h-4 text-[#5DAA3A]" />
+                            <BookOpen className="w-4 h-4 text-[#5DAA3A]" />
                           </div>
                         ) : (
                           <div

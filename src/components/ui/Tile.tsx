@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Sparkles, BookOpen, Compass, Lock } from "lucide-react";
+import { BookOpen, Compass, Lock } from "lucide-react";
 
 export type ChapterTileState = "available" | "in_progress" | "coming_soon";
 export type LessonTileState = "available" | "in_progress" | "locked";
@@ -139,7 +139,7 @@ export function Tile({
         <div className="flex items-center justify-between gap-2 mb-2.5">
           {isInProgress ? (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-heading font-bold shadow-xs">
-              <Sparkles className="w-3 h-3 text-amber-600" />
+              <Compass className="w-3 h-3 text-amber-600" />
               <span>IN PROGRESS</span>
             </span>
           ) : (

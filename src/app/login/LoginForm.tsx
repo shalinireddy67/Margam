@@ -20,7 +20,6 @@ import {
   getActiveProfile,
   saveProfile,
 } from "@/lib/storage";
-import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -36,12 +35,6 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  // Demo submitting state
-  const [demoSubmitting, setDemoSubmitting] = useState<string | null>(null);
-
-  // Copy state for manual credentials
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   // Student form fields
   const [studentUsername, setStudentUsername] = useState("");
@@ -75,94 +68,28 @@ export default function LoginForm() {
     }
     const demo = searchParams.get("demo");
     if (demo === "1" || demo === "true") {
-      setSubMode("signin");
-      if (isTeacherFlow) {
-        setTeacherEmail(DEMO_SCHOOL_CONFIG.teacher.email);
-        setTeacherPassword(DEMO_SCHOOL_CONFIG.demoPassword);
-      } else {
-        setStudentUsername("student07");
-        setStudentPassword(DEMO_SCHOOL_CONFIG.demoPassword);
-      }
+      router.push("/demo");
     }
-  }, [searchParams, isTeacherFlow]);
+  }, [searchParams, router]);
+
+  const copyToClipboard = (_key: string, text: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    }
+  };
 
   const resetMessages = () => {
     setErrorMessage(null);
     setSuccessMessage(null);
   };
 
-  const copyToClipboard = (key: string, text: string) => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-      setCopiedKey(key);
-      setTimeout(() => setCopiedKey(null), 2000);
-    }
-  };
-
   const copyRecoveryCode = () => {
     if (recoveryCode) {
-      copyToClipboard("recovery", recoveryCode);
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        navigator.clipboard.writeText(recoveryCode);
+      }
       setCopiedRecovery(true);
       setTimeout(() => setCopiedRecovery(false), 2500);
-    }
-  };
-
-  // Demo login handler
-  const handleDemoLogin = async (role: "teacher" | "student", studentUser = "student07") => {
-    resetMessages();
-    setDemoSubmitting(role === "teacher" ? "teacher" : studentUser);
-    try {
-      const res = await fetch("/api/auth/demo-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          role,
-          username: role === "student" ? studentUser : undefined,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setErrorMessage(data.error || "Demo sign in failed.");
-        return;
-      }
-
-      if (data.user) {
-        await handleLoginSync(data.user);
-
-        // Ensure unfixed gap is present on student profile so "Fix this first" renders live
-        if (role === "student") {
-          const demoStudent = DEMO_STUDENTS.find((s) => s.username === studentUser);
-          if (demoStudent?.identifiedGap) {
-            const active = getActiveProfile();
-            if (active) {
-              active.activeGap = {
-                currentConceptId: "c10-quad-02",
-                rootConceptId: demoStudent.identifiedGap.conceptId,
-                plainLanguageReason: demoStudent.identifiedGap.reason,
-                prerequisitePath: [
-                  demoStudent.identifiedGap.conceptId,
-                  "c8-dist-01",
-                  "c9-id-01",
-                  "c10-quad-02",
-                ],
-                confirmationQuestionIds: [],
-                status: "confirmed",
-              };
-              saveProfile(active);
-            }
-          }
-        }
-      }
-
-      if (data.role === "teacher") {
-        setStorageMode("supabase");
-      }
-      router.push(data.redirectUrl || (data.role === "teacher" ? "/teacher" : "/student"));
-    } catch {
-      setErrorMessage("Network error during demo sign in.");
-    } finally {
-      setDemoSubmitting(null);
     }
   };
 
@@ -851,181 +778,18 @@ export default function LoginForm() {
         )}
       </div>
 
-      {/* ============================================================= */}
-      {/* 2. JUDGES PANEL (MOVES BELOW THE FORM AS COLLAPSED DETAILS)   */}
-      {/* ============================================================= */}
-      <details className="group border-[3px] border-[#2B1B0F] bg-white shadow-[4px_4px_0px_#2B1B0F] rounded-[2px] overflow-hidden">
-        <summary className="px-5 py-4 cursor-pointer font-heading font-bold text-base sm:text-lg text-[#2B1B0F] bg-[#FFF7E6] hover:bg-[#FFE9A8] transition-colors flex items-center justify-between select-none">
-          <span>Judges: try it without signing up</span>
-          <span className="text-xs font-sans text-[#7A4B2A] font-semibold group-open:rotate-180 transition-transform">
-            ▼
-          </span>
-        </summary>
-
-        <div className="p-5 sm:p-6 space-y-5 bg-white border-t-[3px] border-[#2B1B0F]">
-          <div>
-            <h2 className="text-base sm:text-lg font-heading font-bold text-[#2B1B0F]">
-              Judges: try it without signing up
-            </h2>
-            <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans mt-0.5">
-              The data is made up: one class of 25 students. Pick a role.
-            </p>
-          </div>
-
-          {/* Exactly two actions: Equal cards (student in sky, teacher in plank), 3px border, hard shadow, no gradients, no icons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Action 1: Student (Sky) */}
-            <div className="p-5 bg-[#E8F4F8] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px] flex flex-col justify-between space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#1E6F8C] block">
-                  Student role
-                </span>
-                <h3 className="font-heading font-bold text-base text-[#2B1B0F]">
-                  Advik Verma
-                </h3>
-                <p className="text-xs text-[#2B1B0F]/85 font-sans leading-relaxed">
-                  Advik hasn&apos;t fixed his gap in integer signs yet. Start at &apos;Fix this first&apos;.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                disabled={demoSubmitting !== null}
-                onClick={() => handleDemoLogin("student", "student07")}
-                className="w-full min-h-[44px] px-4 py-2.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#2B1B0F] text-xs font-heading font-bold border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer flex items-center justify-center gap-1.5 rounded-[2px] disabled:opacity-60"
-              >
-                <span>
-                  {demoSubmitting === "student07" ? "Signing in..." : "Open as Advik Verma"}
-                </span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Action 2: Teacher (Plank) */}
-            <div className="p-5 bg-[#F5EBE1] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] rounded-[2px] flex flex-col justify-between space-y-4">
-              <div className="space-y-1">
-                <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#7A4B2A] block">
-                  Teacher role
-                </span>
-                <h3 className="font-heading font-bold text-base text-[#2B1B0F]">
-                  Demo Teacher
-                </h3>
-                <p className="text-xs text-[#2B1B0F]/85 font-sans leading-relaxed">
-                  Class 10-A (demo) with 25 students and prerequisite gap heatmaps.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                disabled={demoSubmitting !== null}
-                onClick={() => handleDemoLogin("teacher")}
-                className="w-full min-h-[44px] px-4 py-2.5 bg-[#5DAA3A] hover:bg-[#6EB5FF] text-[#2B1B0F] text-xs font-heading font-bold border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer flex items-center justify-center gap-1.5 rounded-[2px] disabled:opacity-60"
-              >
-                <span>
-                  {demoSubmitting === "teacher" ? "Signing in..." : "Open the teacher dashboard"}
-                </span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Manual Credentials: Nested details "Sign in by hand instead" */}
-          <details className="border-2 border-[#2B1B0F] bg-[#FFF7E6] rounded-[2px] p-3 text-xs text-[#2B1B0F]">
-            <summary className="font-heading font-bold cursor-pointer hover:underline select-none">
-              Sign in by hand instead
-            </summary>
-            <div className="pt-3 space-y-2.5 font-sans">
-              <div className="flex flex-wrap items-center justify-between gap-1 border-b border-[#2B1B0F]/20 pb-2">
-                <span>
-                  Teacher email:{" "}
-                  <code className="font-mono bg-white px-1.5 py-0.5 border border-[#2B1B0F]">
-                    {DEMO_SCHOOL_CONFIG.teacher.email}
-                  </code>
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyToClipboard("teacherEmail", DEMO_SCHOOL_CONFIG.teacher.email)
-                  }
-                  className="px-2 py-0.5 bg-white border border-[#2B1B0F] font-heading font-bold text-[10px] hover:bg-[#FFE9A8]"
-                >
-                  {copiedKey === "teacherEmail" ? "Copied" : "Copy"}
-                </button>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-1 border-b border-[#2B1B0F]/20 pb-2">
-                <span>
-                  Teacher password:{" "}
-                  <code className="font-mono bg-white px-1.5 py-0.5 border border-[#2B1B0F]">
-                    {DEMO_SCHOOL_CONFIG.demoPassword}
-                  </code>
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyToClipboard("teacherPass", DEMO_SCHOOL_CONFIG.demoPassword)
-                  }
-                  className="px-2 py-0.5 bg-white border border-[#2B1B0F] font-heading font-bold text-[10px] hover:bg-[#FFE9A8]"
-                >
-                  {copiedKey === "teacherPass" ? "Copied" : "Copy"}
-                </button>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-1 border-b border-[#2B1B0F]/20 pb-2">
-                <span>
-                  Student username:{" "}
-                  <code className="font-mono bg-white px-1.5 py-0.5 border border-[#2B1B0F]">
-                    student07
-                  </code>
-                </span>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard("stuUser", "student07")}
-                  className="px-2 py-0.5 bg-white border border-[#2B1B0F] font-heading font-bold text-[10px] hover:bg-[#FFE9A8]"
-                >
-                  {copiedKey === "stuUser" ? "Copied" : "Copy"}
-                </button>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-1 border-b border-[#2B1B0F]/20 pb-2">
-                <span>
-                  Student password:{" "}
-                  <code className="font-mono bg-white px-1.5 py-0.5 border border-[#2B1B0F]">
-                    {DEMO_SCHOOL_CONFIG.demoPassword}
-                  </code>
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyToClipboard("stuPass", DEMO_SCHOOL_CONFIG.demoPassword)
-                  }
-                  className="px-2 py-0.5 bg-white border border-[#2B1B0F] font-heading font-bold text-[10px] hover:bg-[#FFE9A8]"
-                >
-                  {copiedKey === "stuPass" ? "Copied" : "Copy"}
-                </button>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-1">
-                <span>
-                  Class code:{" "}
-                  <code className="font-mono bg-white px-1.5 py-0.5 border border-[#2B1B0F]">
-                    {DEMO_SCHOOL_CONFIG.classCode}
-                  </code>
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    copyToClipboard("classCode", DEMO_SCHOOL_CONFIG.classCode)
-                  }
-                  className="px-2 py-0.5 bg-white border border-[#2B1B0F] font-heading font-bold text-[10px] hover:bg-[#FFE9A8]"
-                >
-                  {copiedKey === "classCode" ? "Copied" : "Copy"}
-                </button>
-              </div>
-            </div>
-          </details>
-        </div>
-      </details>
+      {/* Demo Link */}
+      <div className="pt-2 text-center">
+        <p className="text-xs font-sans text-[#2B1B0F]/80">
+          Want to explore a sample class?{" "}
+          <Link
+            href="/demo"
+            className="font-heading font-bold text-[#5DAA3A] hover:underline"
+          >
+            Try the demo
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

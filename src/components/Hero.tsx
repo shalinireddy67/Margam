@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, CheckCircle2, Sparkles, TrendingUp, Compass, Award, Flame } from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp, Compass, Award, Flame } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 
 interface HeroProps {
@@ -134,6 +134,13 @@ export default function Hero({ currentLang }: HeroProps) {
             </a>
 
             <a
+              href="/demo"
+              className="inline-flex items-center justify-center min-h-[52px] px-6 bg-[#6EB5FF] hover:bg-[#5AA3EC] text-[#2B1B0F] border-[2px] border-[#422816] font-pixel text-xs shadow-[2px_2px_0px_#1B120C] transition-all cursor-pointer no-underline"
+            >
+              <span>Try the demo</span>
+            </a>
+
+            <a
               href="#chapters"
               className="inline-flex items-center justify-center min-h-[52px] px-6 bg-[#FFF7E6] hover:bg-[#FFE9A8] text-[#2B1B0F] border-[2px] border-[#422816] font-pixel text-xs shadow-[2px_2px_0px_#1B120C] transition-all cursor-pointer no-underline"
             >
@@ -224,7 +231,7 @@ export default function Hero({ currentLang }: HeroProps) {
 
           {/* Bottom Achievement Chip */}
           <div className="mt-4 p-3 bg-[#FFE9A8] text-[#2B1B0F] border-[2px] border-[#422816] flex items-center gap-2.5 text-xs font-pixel">
-            <Sparkles className="w-4 h-4 text-[#5DAA3A] shrink-0" />
+            <Award className="w-4 h-4 text-[#5DAA3A] shrink-0" />
             <span className="truncate">{content.recentAchievement}</span>
           </div>
         </div>

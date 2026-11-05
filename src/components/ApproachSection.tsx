@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BookOpen, CheckSquare, Award, ArrowRight, Printer, Sparkles } from "lucide-react";
+import { BookOpen, CheckSquare, Award, ArrowRight, Printer } from "lucide-react";
 import { SupportedLanguage } from "@/lib/types";
 
 interface ApproachSectionProps {

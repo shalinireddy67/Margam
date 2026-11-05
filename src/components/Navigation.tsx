@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Home,
-  Sparkles,
+  BookOpen,
   Award,
   User,
   Volume2,
@@ -40,7 +40,7 @@ export const NAV_ITEMS: readonly NavItemConfig[] = [
     id: "learn",
     label: { en: "Learn", hi: "सीखें", te: "నేర్చుకోండి" },
     href: "/student",
-    icon: Sparkles,
+    icon: BookOpen,
   },
   {
     id: "stickers",

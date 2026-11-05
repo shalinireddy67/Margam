@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import {
-  Sparkles,
   Award,
   Star,
   Lock,
@@ -27,7 +26,7 @@ interface DerivedSticker {
   unlocked: boolean;
   unlockedAtLabel?: string;
   color: "yellow" | "cyan" | "pink" | "green" | "orange";
-  icon: "star" | "sparkles" | "award" | "trending" | "zap";
+  icon: "star" | "award" | "trending" | "zap";
 }
 
 export default function StickersPage() {
@@ -187,11 +186,11 @@ export default function StickersPage() {
       unlocked: completedCount >= 3,
       unlockedAtLabel: completedCount >= 3 ? `${completedCount} topics completed` : `Complete 3 topics to earn (${completedCount}/3)`,
       color: "orange",
-      icon: "sparkles",
+      icon: "award",
     },
     {
       id: "top_performer",
-      title: "Top Performer",
+      title: "Level 3 Explorer",
       description: "Reached Difficulty Level 3 in adaptive practice",
       unlocked: profile.currentDifficulty === 3,
       unlockedAtLabel: profile.currentDifficulty === 3 ? "Level 3 achieved" : "Reach difficulty level 3 to earn",
@@ -269,8 +268,7 @@ export default function StickersPage() {
                     st.icon === "star" ? <Star className="w-7 h-7" /> :
                     st.icon === "award" ? <Award className="w-7 h-7" /> :
                     st.icon === "trending" ? <TrendingUp className="w-7 h-7" /> :
-                    st.icon === "zap" ? <Zap className="w-7 h-7" /> :
-                    <Sparkles className="w-7 h-7" />
+                    <Zap className="w-7 h-7" />
                   ) : (
                     <Lock className="w-6 h-6 text-[#2B1B0F]/50" />
                   )}

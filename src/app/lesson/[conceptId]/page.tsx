@@ -8,7 +8,6 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
   AlertCircle,
   RotateCcw,
   BookOpen,
@@ -403,7 +402,7 @@ function LessonContent() {
                   : "bg-emerald-100 text-emerald-950 border border-emerald-300"
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <BookOpen className="w-3.5 h-3.5" />
               <span>
                 Variant: {variantKey === "basics_first" ? "Basics-First" : variantKey === "fast_track" ? "Fast-Track" : "Standard"}
               </span>
@@ -464,7 +463,7 @@ function LessonContent() {
             {/* Step-by-Step Worked Example Card */}
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800">
               <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-emerald-800">
-                <Sparkles className="w-4 h-4 text-emerald-700" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                 <span>Step-by-Step Example</span>
               </div>
 

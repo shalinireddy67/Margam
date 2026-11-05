@@ -7,7 +7,6 @@ import {
   AlertTriangle,
   Lock,
   ArrowRight,
-  Sparkles,
   Flame,
   Compass,
   BookOpen,

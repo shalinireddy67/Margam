@@ -47,8 +47,8 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       hero: {
         h1: "Stuck in Class 10 maths? It probably started in Class 7.",
         sub: "Margam finds the earlier topic you missed, like integer signs hiding behind your quadratic mistakes, and walks you back to fix it. NCERT, in English, हिन्दी and తెలుగు.",
-        demoBtn: "Try the demo (judges)",
-        demoSub: "Pre-fills demo credentials for quick evaluation",
+        demoBtn: "Try the demo",
+        demoSub: "Opens sample student and teacher accounts",
         student: {
           tag: "Student",
           title: "I'm a student",
@@ -117,7 +117,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         tag: "04 // FOR TEACHERS",
         heading: "See what your classroom is actually missing",
         sub: "Stop reteaching the current chapter when the real obstacle is an earlier topic missed from two grades ago. Our heatmap shows the exact bottleneck across your class.",
-        classTitle: "Class 10-A (demo) (Example Public School)",
+        classTitle: "Class 10-A (Demo)",
         stat1Num: "25",
         stat1Label: "Enrolled Students",
         stat2Num: "68%",
@@ -220,8 +220,8 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       hero: {
         h1: "कक्षा 10 के गणित में अटक रहे हैं? इसकी शुरुआत शायद कक्षा 7 में हुई थी।",
         sub: "मार्गम् उस पुरानी कमी को खोजता है जो छूट गई थी—जैसे द्विघात समीकरण की गलतियों के पीछे छिपे पूर्णांकों के चिह्न—और उसे सुधारने का मार्ग दिखाता है। एनसीईआरटी, अंग्रेजी, हिन्दी और తెలుగు में।",
-        demoBtn: "डेमो आज़माएँ (जज)",
-        demoSub: "त्वरित मूल्यांकन के लिए परीक्षण क्रेडेंशियल पहले से भरे गए हैं",
+        demoBtn: "डेमो आज़माएँ",
+        demoSub: "त्वरित मूल्यांकन के लिए नमूना खाते खोलें",
         student: {
           tag: "विद्यार्थी",
           title: "मैं एक विद्यार्थी हूँ",
@@ -393,8 +393,8 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       hero: {
         h1: "10వ తరగతి లెక్కల్లో ఇబ్బంది పడుతున్నారా? అది బహుశా 7వ తరగతిలోనే మొదలై ఉండవచ్చు.",
         sub: "మార్గం మీరు గతంలో తప్పిపోయిన పునాది అంశాన్ని గుర్తిస్తుంది—ఉదాహరణకు వర్గ సమీకరణాల తప్పుల వెనుక దాగి ఉన్న పూర్ణ సంఖ్యల సంకేత నియమాలు—మరియు దానిని సరిదిద్దేందుకు మార్గదర్శనం చేస్తుంది. NCERT, English, हिन्दी మరియు తెలుగులో.",
-        demoBtn: "డెమోను ప్రయత్నించండి (జడ్జ్)",
-        demoSub: "త్వరిత పరిశీలన కోసం ఆధారాలు ముందుగానే పూరించబడతాయి",
+        demoBtn: "డెమోను ప్రయత్నించండి",
+        demoSub: "త్వరిత మూల్యాంకనం కోసం నమూనా ఖాతాలను తెరుస్తుంది",
         student: {
           tag: "విద్యార్థి",
           title: "నేను విద్యార్థిని",
@@ -602,7 +602,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
           {/* Prominent Demo Entry Button for Judges */}
           <div className="pt-2 w-full max-w-md">
             <Link
-              href="/login?role=student&demo=1"
+              href="/demo"
               className="w-full inline-flex items-center justify-center min-h-[50px] px-6 py-3 bg-[#F4C542] hover:bg-[#F6CF5C] text-[#2B1B0F] font-heading font-bold text-base sm:text-lg border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all no-underline gap-2 rounded-[2px]"
             >
               <span>{copy.hero.demoBtn}</span>
@@ -1007,7 +1007,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
               💡 <strong>{copy.s4.insight}</strong>
             </p>
             <Link
-              href="/login?role=teacher&demo=1"
+              href="/demo"
               className="shrink-0 inline-flex items-center justify-center min-h-[38px] px-4 py-2 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-xs border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] hover:brightness-105 active:translate-x-0.5 active:translate-y-0.5 transition-all no-underline rounded-[2px]"
             >
               <span>{copy.s4.cta}</span>
@@ -1245,7 +1245,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
             </div>
 
             <Link
-              href="/login?role=student&demo=1"
+              href="/demo"
               className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] hover:brightness-105 active:translate-x-0.5 active:translate-y-0.5 transition-all no-underline rounded-[2px]"
             >
               <span>{copy.s7.enterStudentBtn}</span>
@@ -1290,7 +1290,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
             </div>
 
             <Link
-              href="/login?role=teacher&demo=1"
+              href="/demo"
               className="w-full inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] font-heading font-bold text-sm border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] hover:brightness-105 active:translate-x-0.5 active:translate-y-0.5 transition-all no-underline rounded-[2px]"
             >
               <span>{copy.s7.enterTeacherBtn}</span>

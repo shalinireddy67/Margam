@@ -1,82 +1,112 @@
-# Margam — Supabase Demo Seeder & Judge Evaluation Guide
+# Margam Demo Runbook & Judge Provisioning Guide
 
-This guide details how to provision, evaluate, and safely reset the synthetic demo dataset for **Code Kernel '26** judging.
+This runbook documents the exact sequence for provisioning, verifying, and resetting the demo dataset for **Code Kernel '26** judging.
 
 ---
 
-## 1. Quick Start Commands
+## 1. Required Environment Variables
 
+Configure these variables in your hosting environment (e.g., Vercel) and local `.env.local`:
+
+| Variable Name | Required | Description |
+| :--- | :--- | :--- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project API URL (`https://<project-ref>.supabase.co`) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase public anon key (used by frontend browser client) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Yes | Supabase backend service role key (used for server-side mutations) |
+| `SESSION_SECRET` | Yes | 32+ character random secret for dual-mode HMAC-SHA256 session signatures |
+| `DEMO_PASSWORD` | Optional | Password for demo accounts. When set, displayed with a copy button on `/demo` |
+
+> [!IMPORTANT]
+> Never commit `.env.local` or expose `SUPABASE_SERVICE_ROLE_KEY` or `SESSION_SECRET`.
+
+---
+
+## 2. Exact Run Order for Deployment & Demo Setup
+
+Follow these steps in strict sequence:
+
+### Step 1: Migration Check
+Ensure all local migrations in `supabase/migrations/` have been executed against your Supabase database in order:
+1. `20261101_initial_schema.sql`
+2. `20261102_gamification_leaderboard.sql`
+3. `20261103_demo_data_flags.sql`
+4. `20261104_security_repair.sql`
+5. `20261105_security_hardening.sql`
+
+Verify that all tables have RLS enabled and contain the `is_demo` boolean flag.
+
+### Step 2: Create the 4 Demo Users in Supabase Auth
+Open the **Supabase Dashboard ➔ Authentication ➔ Users** and click **Add user ➔ Create user**.
+Create the following 4 accounts with **Auto Confirm User** checked (`email_confirm: true`):
+
+1. **Teacher**:
+   - Email: `demo.teacher@margam.example`
+   - Password: `<your DEMO_PASSWORD>` (e.g., `MargamDemo@2026`)
+2. **Student (Riya - gap unfixed)**:
+   - Email: `demo_riya@student.margam.local`
+   - Password: `<your DEMO_PASSWORD>`
+3. **Student (Aarav - all mastered)**:
+   - Email: `demo_aarav@student.margam.local`
+   - Password: `<your DEMO_PASSWORD>`
+4. **Student (New - clean empty state)**:
+   - Email: `demo_new@student.margam.local`
+   - Password: `<your DEMO_PASSWORD>`
+
+> [!NOTE]
+> The seed script `demo_data.sql` validates these exact email addresses and will abort with `RAISE EXCEPTION` if any are missing from `auth.users`.
+
+### Step 3: Set DEMO_PASSWORD in Vercel / Environment
+Set `DEMO_PASSWORD` in your Vercel Project Settings ➔ Environment Variables (and in `.env.local` for local development).
+- When `DEMO_PASSWORD` is configured, `/demo` renders the password with a one-click copy button.
+- If unset, the password row remains completely hidden.
+
+### Step 4: Run `supabase/seed/demo_data.sql`
+Open the **Supabase SQL Editor** and execute the full contents of `supabase/seed/demo_data.sql`.
+This single-transaction script performs:
+- Verifies the 4 auth accounts exist.
+- Creates profiles for Teacher (`demo_teacher`), Riya (`demo_riya`), Aarav (`demo_aarav`), and New Student (`demo_new`).
+- Creates Class 10-A (Demo) with code `DEMO10A` and enables the class leaderboard.
+- Enrolls 25 synthetic classmates (`synth_01` through `synth_25`) with short first-name-plus-initial labels.
+- Seeds the student misconception clusters:
+  - 8 students share a weak integer sign rule (`c7-int-02`) and weak quadratic standard form (`c10-quad-01`).
+  - 5 students share weak powers & exponents (`c8-exp-01`).
+  - Remaining students have solid mastery across all topics.
+- Seeds Riya's state: solid on `c6-neg-01`, weak and unfixed on `c7-int-02`, untouched on `c8-dist-01` and `c9-id-01`, weak on `c10-quad-01`, one failed quick check attempt, one practice attempt, and XP events.
+- Seeds Aarav's state: 100% mastery across all concepts, 10/10 quick check, 10/10 chapter test, and full XP progression.
+- Keeps New Student in a clean empty state (zero attempts, zero mastery, zero XP).
+- Marks all seeded rows with `is_demo = true`.
+
+### Step 5: Run Verification Check
+Run the verification check script to ensure database connectivity, auth users, RLS policies, and demo data isolation:
 ```bash
-# Provision the demo classroom (Class 9-B Maths · DEMO26) in Supabase:
-npm run seed:demo
+node scripts/check-supabase.mjs
+```
 
-# Reset the demo classroom right before judging (deletes ONLY is_demo=true rows):
-npm run seed:demo:reset
+### Step 6: Redeploy
+Trigger a deployment or push to your repository main branch:
+```bash
+git push origin main
 ```
 
 ---
 
-## 2. Credentials & Accounts
+## 3. Demo Reset Instructions
 
-All credentials read strictly from `.env.local` if provided, or fall back to standard presentation evaluation passwords:
-
-| Role | Identifier | Default Password | Environment Variable Override |
-| :--- | :--- | :--- | :--- |
-| **Demo Teacher** | `demo.teacher@margam.example` | `MargamDemo@2026` | `DEMO_TEACHER_PASSWORD` |
-| **Demo Student** | `demo_student` | `MargamDemo@2026` | `DEMO_STUDENT_PASSWORD` |
-| **Demo Class** | Code: `DEMO26` | N/A | Class 9-B Maths (Demo) |
-
-> [!NOTE]
-> All 25 additional synthetic classroom peers (`demo_stu_01` to `demo_stu_25`) receive cryptographically randomized, unusable passwords (`crypto.randomBytes(32)`), preventing student account hijacking while enabling realistic class-wide heatmaps.
+To restore the demo class to its initial state before or after judge evaluations:
+1. Open the **Supabase SQL Editor**.
+2. Run `supabase/seed/demo_reset.sql`.
+   - Strictly targets rows where `is_demo = true`.
+   - Preserves all real teacher accounts, student profiles, and migration logs.
+   - Preserves the 4 manual auth user credentials in `auth.users`.
+3. Run `supabase/seed/demo_data.sql` to immediately re-populate the pristine initial demo state.
 
 ---
 
-## 3. The Pedagogical Prerequisite Chain
+## 4. Evaluation Guide for Judges
 
-The demo student and class cohort illustrate Margam's core educational journey:
-**IDENTIFY ➔ UNDERSTAND ➔ LEARN ➔ PRACTICE ➔ IMPROVE**
-
-### Traced Error Chain:
-1. **Class 10 — Quadratic Equations (`c10-quad-01`)**:
-   - The student struggles with standard factorisation: $x^2 - 5x + 6 = 0$.
-   - Root misconception: `sign_error_both_negative_yields_positive_product`.
-2. **Class 9 — Algebraic Identities (`c9-id-02`)**:
-   - Distractor tag: `sign_error_constant_product`.
-3. **Class 8 — Distributive Law (`c8-dist-01`)**:
-   - Mastered ($85\%$), but fails when negative multipliers are introduced.
-4. **Class 7 — Integer Sign Rules (`c7-int-02`) [THE ROOT GAP]**:
-   - Mistake tag: `negative_times_negative_equals_negative_error`.
-   - Mastery is low ($40\%$). The diagnostic flags this as the root prerequisite breakdown.
-5. **Class 6 — Negative Numbers (`c6-neg-01`) [DEEPEST FOUNDATION]**:
-   - Number line comprehension is solid ($92\%$), proving the gap is specifically sign arithmetic.
-
-### Classroom Cluster Heatmap:
-- **8 students** (32% of class) share the `c7-int-02` Integer Sign bottleneck.
-- **5 students** (20% of class) share a `c7-frac-01` fraction reciprocal gap.
-- **12 students** are on grade level, demonstrating contrasting progress.
-
----
-
-## 4. Reset & Safety Mechanics
-
-When `npm run seed:demo:reset` is executed:
-1. Only rows matching `is_demo = true` in `profiles`, `classes`, `class_members`, `attempts`, `concept_mastery`, and `xp_events` are targeted.
-2. The seeder refuses to delete or truncate any row where `is_demo` is `false` or `null`.
-3. Demo user authentication records matching `@margam.example` or metadata `is_demo: true` are cleanly removed from `auth.users`.
-4. Run `npm run seed:demo:reset && npm run seed:demo` immediately before judge evaluations to guarantee a pristine initial state.
-
----
-
-## 5. Security & Isolation Evaluation
-
-### Can Real Students Join `DEMO26`?
-- **Analysis:** In the current application code, class join codes are verified against the `classes` table via `api/student/join-class`. Any student with a valid account could technically enter `DEMO26` if given the code.
-- **Recommendation:** Keep `DEMO26` dedicated to hackathon judging. For production deployments with real schools, demo classes should be provisioned in an isolated environment.
-
-### Can the Demo Teacher See Non-Demo Data Through RLS?
-- **Analysis:** Row-Level Security (RLS) on `profiles`, `attempts`, and `concept_mastery` strictly restricts teachers to students enrolled in classes where `teacher_id = auth.uid()`.
-- **Verdict:** The demo teacher **CANNOT** view any non-demo students or classes owned by other teachers.
-
-### Multi-Tenant Recommendation:
-- We strongly recommend maintaining a **dedicated, isolated Supabase project** exclusively for public hackathon demonstration and testing, completely separated from school production databases.
-
+| Evaluation Flow | Start Page | Description |
+| :--- | :--- | :--- |
+| **One-Click Demo** | `/demo` | Click **"Open as Riya (student)"** or **"Open the teacher dashboard"** |
+| **Student Journey** | `/student` | Observe "Fix this first" directing Riya to Class 7 Integer Signs (`c7-int-02`) |
+| **Teacher Dashboard** | `/teacher` | Observe class topic gap heatmap showing the cluster of 8 students struggling with Integer Signs |
+| **Clean Student State** | Sign in as `demo_new` | Observe the empty state prompt: *"No check-ins yet. Take a 5-question check-in to find where to start."* |

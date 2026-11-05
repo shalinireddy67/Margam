@@ -39,7 +39,7 @@ import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
 import ConceptPathway from "@/components/ConceptPathway";
 import { evaluateStudentBadges } from "@/lib/badges";
 import { getCatGreeting } from "@/lib/greetings";
-import { Sparkles, AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
+import { AlertCircle, ArrowRight, RotateCcw, Calendar, CheckCircle2, TrendingUp } from "lucide-react";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 
 export default function HomePage() {

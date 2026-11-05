@@ -14,7 +14,6 @@ import {
   GitBranch,
   ShieldCheck,
   Award,
-  Sparkles,
   TrendingUp,
   Target,
   Check,

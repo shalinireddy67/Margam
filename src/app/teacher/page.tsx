@@ -12,7 +12,7 @@ import {
   ArrowRight,
   TrendingDown,
   Layers,
-  Sparkles,
+  Award,
   BookOpen,
   Printer,
   ChevronRight,
@@ -169,9 +169,11 @@ export default function TeacherPage() {
   const activeLiveClass = liveClasses.find((c) => c.id === selectedLiveClassId) || liveClasses[0] || null;
   const isDemoLiveClass = Boolean(
     activeLiveClass?.isDemo ||
-    activeLiveClass?.schoolName === "Example Public School" ||
+    activeLiveClass?.class_code === "DEMO10A" ||
+    activeLiveClass?.classCode === "DEMO10A" ||
     activeLiveClass?.class_code === "DEMO-10A" ||
     activeLiveClass?.classCode === "DEMO-10A" ||
+    teacherUser?.email === "demo.teacher@margam.example" ||
     teacherUser?.email === "teacher@example.demo.invalid"
   );
 
@@ -294,7 +296,7 @@ export default function TeacherPage() {
                   : "bg-white/70 text-emerald-950 hover:bg-white rounded-xl"
               }`}
             >
-              <Sparkles className="w-4 h-4 text-[#A06A3C]" />
+              <Users className="w-4 h-4 text-[#A06A3C]" />
               <span>Synthetic Demo Class</span>
             </button>
 
@@ -353,7 +355,7 @@ export default function TeacherPage() {
                     onClick={() => setViewMode("synthetic")}
                     className="w-full sm:w-auto px-5 py-3 bg-white hover:bg-slate-50 text-[#2B1B0F] font-heading font-bold text-xs uppercase tracking-wider border-3 border-[#2B1B0F] shadow-block hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <Sparkles className="w-4 h-4 text-[#A06A3C]" />
+                    <Users className="w-4 h-4 text-[#A06A3C]" />
                     <span>Explore Demo Class</span>
                   </button>
                 </div>
@@ -373,7 +375,7 @@ export default function TeacherPage() {
                     </span>
                   )}
                   <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
-                    {activeLiveClass?.schoolName || "Example Public School"}, {activeLiveClass?.name || "Class 10-A (demo)"}
+                    {activeLiveClass?.name || "Class 10-A (Demo)"}
                   </h2>
                 </div>
 
@@ -483,7 +485,7 @@ export default function TeacherPage() {
               <div className="glass-panel p-4 rounded-2xl border border-white/80 shadow-xs space-y-1">
                 <div className="flex items-center justify-between text-slate-600 text-xs font-heading font-bold">
                   <span>Concept progress</span>
-                  <Sparkles className="w-4 h-4 text-emerald-600" />
+                  <Award className="w-4 h-4 text-emerald-600" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-heading font-black text-emerald-950">
                   {avgClassMastery}%
@@ -569,7 +571,7 @@ export default function TeacherPage() {
                     Affects rational coefficients in real numbers & trigonometric ratios.
                   </p>
                   <div className="text-[10px] font-heading font-bold text-amber-800 bg-amber-50 px-2 py-1 rounded border border-amber-200 flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-amber-600" />
+                    <BookOpen className="w-3 h-3 text-amber-600" />
                     <span>Vihaan & Ishaan routed to fraction review</span>
                   </div>
                 </div>
@@ -799,7 +801,7 @@ export default function TeacherPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-heading font-bold">
-                          {activeLiveClass?.schoolName || "Example Public School"}, Class 10-A (demo)
+                          {activeLiveClass?.name || "Class 10-A (Demo)"}
                         </span>
                         {inspectingStudent.rollNumber && (
                           <span className="font-mono text-xs font-bold text-slate-500">
@@ -845,7 +847,7 @@ export default function TeacherPage() {
                     )}
                   </div>
 
-                  {/* Breakthrough / Resolved Gap Banner */}
+                  {/* Fixed Gap Banner */}
                   {inspectingStudent.resolvedGap && (
                     <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-300 space-y-1">
                       <div className="flex items-center gap-1.5 font-heading font-bold text-xs text-emerald-900">

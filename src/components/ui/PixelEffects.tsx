@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Sparkles, Trophy, Award, Flame } from "lucide-react";
+import { Trophy, Award, Flame } from "lucide-react";
 import { getLevelProgress, XpRank } from "@/lib/xp-config";
 import { playLevelUpSound } from "@/lib/sound";
 
@@ -65,7 +65,7 @@ export function FloatingXp({
       aria-live="polite"
       className="pointer-events-none fixed top-16 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-8 sm:top-20 z-50 animate-xp-float motion-reduce:animate-none flex items-center gap-1.5 px-3 py-1.5 bg-[#2F6B22] text-[#FFE9A8] border-2 border-[#102610] shadow-[3px_3px_0px_#102610] font-heading font-extrabold text-xs"
     >
-      <Sparkles className="w-4 h-4 text-[#FFE9A8]" />
+      <Award className="w-4 h-4 text-[#FFE9A8]" />
       <span>+{xp} XP</span>
     </div>
   );

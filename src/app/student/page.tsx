@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   Compass,
-  Sparkles,
   BookOpen,
   Award,
   AlertCircle,

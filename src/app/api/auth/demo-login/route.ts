@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     } else {
       let targetStudent = DEMO_STUDENTS[studentIndex] || DEMO_STUDENTS[0];
       if (username) {
-        const found = DEMO_STUDENTS.find((s) => s.username === username);
+        const found = DEMO_STUDENTS.find((s) => s.username === username || (username === 'demo_riya' && (s.username === 'demo_riya' || s.username === 'student07')) || (username === 'student07' && (s.username === 'demo_riya' || s.username === 'student07')) || (username === 'demo_aarav' && (s.username === 'demo_aarav' || s.username === 'student01')) || (username === 'student01' && (s.username === 'demo_aarav' || s.username === 'student01')) || (username === 'demo_new' && (s.username === 'demo_new' || s.username === 'student25')));
         if (found) targetStudent = found;
       }
       targetEmail = targetStudent.email;
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
         // Sign in with password to set proper SSR Auth cookies
         const { data: signInData, error: signInError } = await routeClient.auth.signInWithPassword({
           email: targetEmail,
-          password: DEMO_SCHOOL_CONFIG.demoPassword,
+          password: process.env.DEMO_PASSWORD || DEMO_SCHOOL_CONFIG.demoPassword,
         });
 
         if (!signInError && signInData.user) {

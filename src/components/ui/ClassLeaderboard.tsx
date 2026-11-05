@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Trophy, TrendingUp, Flame, Shield, EyeOff, Eye, Sparkles } from "lucide-react";
+import { Trophy, TrendingUp, Flame, Shield, EyeOff, Eye } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile, saveProfile } from "@/lib/storage";
 
@@ -253,7 +253,7 @@ export function ClassLeaderboard({
           {data?.userRelativePosition && (
             <div className="mt-3 p-3 bg-[#2B1B0F] border-2 border-[#FFE9A8] text-[#FFF7E6] flex items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#FFE9A8] shrink-0" />
+                <Trophy className="w-4 h-4 text-[#FFE9A8] shrink-0" />
                 <span>
                   You&apos;re ranked <strong className="text-[#FFE9A8]">#{data.userRelativePosition.rank}</strong> with{" "}
                   <strong>{data.userRelativePosition.weeklyXp} XP</strong>!

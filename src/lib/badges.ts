@@ -17,7 +17,7 @@ export interface BadgeDefinition {
     hi: string;
     te: string;
   };
-  icon: "star" | "sparkles" | "award" | "trending" | "zap" | "shield" | "flame" | "globe" | "crown";
+  icon: "star" | "award" | "trending" | "zap" | "shield" | "flame" | "globe" | "crown";
   color: "yellow" | "cyan" | "pink" | "green" | "orange" | "gold" | "diamond";
   isSecret?: boolean;
 }
@@ -76,9 +76,9 @@ export const BADGE_DEFINITIONS: BadgeDefinition[] = [
   {
     id: "top_performer",
     title: {
-      en: "Top Performer",
-      hi: "शीर्ष प्रदर्शनकर्ता",
-      te: "అగ్రశ్రేణి ప్రదర్శకుడు",
+      en: "Level 3 Explorer",
+      hi: "स्तर 3 खोजकर्ता",
+      te: "స్థాయి 3 అన్వేషకుడు",
     },
     description: {
       en: "Reached Difficulty Level 3 in adaptive practice",

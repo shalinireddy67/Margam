@@ -10,7 +10,6 @@ import {
   ArrowRight,
   ArrowLeft,
   RotateCcw,
-  Sparkles,
   BookOpen,
   Award,
   TrendingUp,
@@ -475,7 +474,7 @@ export default function AdaptivePracticeRunnerPage() {
           {/* Personalized Worksheet Metadata Banner */}
           {isPersonalized && personalizedReason && (
             <div className="glass-panel p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-950 flex items-start gap-3">
-              <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <Compass className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div className="space-y-1">
                 <span className="text-[11px] font-heading font-extrabold text-amber-900 uppercase tracking-wider block">
                   Targeted practice strategy

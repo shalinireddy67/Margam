@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, ArrowRight, RotateCcw, Sparkles, BookOpen, Award } from "lucide-react";
+import { CheckCircle2, ArrowRight, RotateCcw, BookOpen, Award } from "lucide-react";
 import conceptsData from "../../data/concepts.json";
 import lessonsData from "../../data/lessons.json";
 import { SupportedLanguage } from "@/lib/types";
@@ -151,7 +151,7 @@ export default function DiagnosticWidget({ currentLang = "en" }: DiagnosticWidge
       {/* Header */}
       <div className="max-w-3xl mb-8 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#422816] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_rgba(0,0,0,0.35)] text-xs font-heading font-bold text-[#FFE9A8]">
-          <Sparkles className="w-4 h-4 text-[#5DAA3A]" />
+          <BookOpen className="w-4 h-4 text-[#5DAA3A]" />
           <span>{t.badge}</span>
         </div>
         <h2 className="font-heading text-xl sm:text-3xl font-extrabold text-[#FFE9A8] tracking-tight drop-shadow-[2px_2px_0px_#2B1B0F]">
