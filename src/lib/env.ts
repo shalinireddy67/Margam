@@ -55,10 +55,22 @@ function cleanEnvValue(val?: string | null): string | undefined {
  * Supports server-side integration SUPABASE_URL as well as NEXT_PUBLIC_SUPABASE_URL.
  */
 export function getSupabaseUrl(): string | undefined {
-  const raw = cleanEnvValue(
+  let raw = cleanEnvValue(
     process.env.SUPABASE_URL ||
     process.env.NEXT_PUBLIC_SUPABASE_URL
   );
+
+  // Derive project URL from integration's POSTGRES_HOST if not explicitly defined
+  if (!raw && process.env.POSTGRES_HOST) {
+    const pgHost = cleanEnvValue(process.env.POSTGRES_HOST);
+    if (pgHost && pgHost.includes(".supabase.co")) {
+      const ref = pgHost.replace(/^db\./, "").split(".")[0];
+      if (ref && !isPlaceholderValue(ref)) {
+        raw = `https://${ref}.supabase.co`;
+      }
+    }
+  }
+
   if (!raw) return undefined;
   return raw.replace(/\/+$/, "");
 }
