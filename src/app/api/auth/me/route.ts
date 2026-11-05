@@ -22,6 +22,7 @@ export async function GET(req: NextRequest) {
         selectedClass: session.selectedClass,
         avatarPixel: session.avatarPixel,
         enrolledClass: session.enrolledClass || null,
+        is_demo: session.is_demo ?? session.isDemo ?? false,
       },
     });
   } catch (err) {

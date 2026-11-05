@@ -22,6 +22,8 @@ export interface AuthUserSession {
   avatarPixel?: string;
   enrolledClass?: { id: string; name: string; grade: number } | null;
   source: "supabase" | "mock";
+  is_demo?: boolean;
+  isDemo?: boolean;
 }
 
 /**
@@ -186,6 +188,8 @@ export async function getAuthenticatedUser(
           avatarPixel: profile.avatar_pixel,
           enrolledClass,
           source: "supabase",
+          is_demo: Boolean(profile.is_demo),
+          isDemo: Boolean(profile.is_demo),
         };
       }
     } catch {
@@ -229,6 +233,8 @@ export async function getAuthenticatedUser(
     fullName: payload.role === "teacher" ? "Demo Teacher" : "Demo Student",
     selectedClass: 10,
     source: "mock",
+    is_demo: (payload as any).is_demo ?? true,
+    isDemo: (payload as any).is_demo ?? true,
   };
 }
 

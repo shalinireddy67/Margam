@@ -370,12 +370,14 @@ export async function POST(req: NextRequest) {
               username: targetUsername,
               selectedClass: targetClass,
               school: DEMO_SCHOOL_CONFIG.schoolName,
+              is_demo: true,
             };
 
             const signedToken = signSessionPayload({
               userId: authenticatedUser.id,
               role,
               username: targetUsername,
+              is_demo: true,
               expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
             });
 
@@ -414,12 +416,14 @@ export async function POST(req: NextRequest) {
               username: dbProfile.username || targetUsername,
               selectedClass: dbProfile.selected_class || targetClass,
               school: DEMO_SCHOOL_CONFIG.schoolName,
+              is_demo: true,
             };
 
             const signedToken = signSessionPayload({
               userId: dbProfile.id,
               role: dbProfile.role === "teacher" ? "teacher" : "student",
               username: dbProfile.username || targetUsername,
+              is_demo: true,
               expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
             });
 
