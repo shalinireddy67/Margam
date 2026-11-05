@@ -149,11 +149,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("integers")}
-            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
-              activeGroupTab === "integers"
-                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
-                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
-            }`}
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${activeGroupTab === "integers"
+              ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+              : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
+              }`}
           >
             {t.tabIntegers}
           </button>
@@ -161,11 +160,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("transposition")}
-            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
-              activeGroupTab === "transposition"
-                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
-                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
-            }`}
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${activeGroupTab === "transposition"
+              ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+              : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
+              }`}
           >
             {t.tabTransposition}
           </button>
@@ -173,11 +171,10 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
           <button
             type="button"
             onClick={() => setActiveGroupTab("fractions")}
-            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${
-              activeGroupTab === "fractions"
-                ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
-                : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
-            }`}
+            className={`min-h-[48px] px-4 py-2 border-[2px] font-pixel text-xs transition-all cursor-pointer ${activeGroupTab === "fractions"
+              ? "bg-[#3FA7C9] text-white border-[#422816] shadow-[3px_3px_0px_#1B120C]"
+              : "bg-white/80 border-[#422816]/30 text-[#2B1B0F] hover:bg-white hover:border-[#422816]"
+              }`}
           >
             {t.tabFractions}
           </button>
@@ -196,8 +193,8 @@ export default function TeacherControl({ currentLang }: TeacherControlProps) {
             {(activeGroupTab === "integers"
               ? integerGapStudents
               : activeGroupTab === "transposition"
-              ? transpositionStudents
-              : fractionStudents
+                ? transpositionStudents
+                : fractionStudents
             ).map((student) => (
               <div
                 key={student.id}

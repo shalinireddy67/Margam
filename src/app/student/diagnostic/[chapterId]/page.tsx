@@ -277,7 +277,7 @@ export default function ChapterDiagnosticPage() {
           backHref="/student"
           backLabel="Back to Lessons"
         />
-        <main className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
+        <main id="main-content" className="max-w-xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center items-center text-center my-auto w-full">
           <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 w-full text-slate-800">
             <div className="w-14 h-14 bg-rose-500 rounded-2xl flex items-center justify-center mx-auto text-white font-heading font-extrabold text-lg shadow-xs">
               !

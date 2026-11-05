@@ -251,7 +251,7 @@ export default function AdaptivePracticeRunnerPage() {
           backHref="/student"
           backLabel="Back to Lessons"
         />
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+        <main id="main-content" className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="bg-white p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-4">
             <div className="w-12 h-12 bg-[#F4C542] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F]">
               <Lock className="w-6 h-6" />

@@ -201,7 +201,7 @@ export default function ChapterTestRunnerPage() {
           backHref="/student"
           backLabel="Back to Lessons"
         />
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+        <main id="main-content" className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 max-w-lg mx-auto text-center text-slate-800">
             <div className="w-12 h-12 bg-rose-100 border border-rose-300 rounded-2xl flex items-center justify-center mx-auto text-rose-900 font-heading font-extrabold text-lg shadow-xs">
               !

@@ -4,6 +4,10 @@ export const metadata: Metadata = {
   title: "Student",
   description:
     "Diagnose prerequisite maths gaps, follow your learning path, and practice NCERT concepts.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Student | Margam",
     description:
@@ -24,4 +28,3 @@ export default function StudentLayout({
 }) {
   return <>{children}</>;
 }
-

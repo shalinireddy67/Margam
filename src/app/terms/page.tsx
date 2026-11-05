@@ -6,6 +6,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "Terms of service",
     title: "Terms of service",
     subtitle: "Plain-language terms for students, parents, and teachers.",
+    lastUpdated: "5 November 2026",
     backText: "Back to home",
     sections: [
       {
@@ -30,7 +31,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. Questions and contact",
-        body: "If you have questions about these terms, contact [TODO: contact email/address].",
+        body: "If you have questions about these terms, please open an issue at https://github.com/shalinireddy67/Margam/issues.",
       },
     ],
   },
@@ -38,6 +39,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "सेवा की शर्तें",
     title: "सेवा की शर्तें",
     subtitle: "विद्यार्थियों, अभिभावकों और शिक्षकों के लिए सरल नियम।",
+    lastUpdated: "5 November 2026",
     backText: "होम पर लौटें",
     sections: [
       {
@@ -62,7 +64,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. संपर्क",
-        body: "यदि आपके कोई प्रश्न हैं, तो संपर्क करें: [TODO: contact email/address]。",
+        body: "यदि आपके कोई प्रश्न हैं, तो कृपया यहाँ समस्या दर्ज करें: https://github.com/shalinireddy67/Margam/issues",
       },
     ],
   },
@@ -70,6 +72,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "నిబంధనలు",
     title: "సేవా నిబంధనలు",
     subtitle: "విద్యార్థులు, తల్లిదండ్రులు మరియు ఉపాధ్యాయుల కోసం సరళమైన నియమాలు.",
+    lastUpdated: "5 November 2026",
     backText: "హోమ్‌కు తిరిగి వెళ్లండి",
     sections: [
       {
@@ -94,7 +97,7 @@ const TERMS_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. సంప్రదించండి",
-        body: "సందేహాలు ఉంటే సంప్రదించండి: [TODO: contact email/address].",
+        body: "సందేహాలు ఉంటే దయచేసి ఇక్కడ తెలియజేయండి: https://github.com/shalinireddy67/Margam/issues",
       },
     ],
   },

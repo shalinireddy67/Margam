@@ -58,6 +58,19 @@ interface PracticeResultState {
 function LessonContent() {
   const params = useParams();
   const router = useRouter();
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const currentProgress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const searchParams = useSearchParams();
   const conceptId = params?.conceptId as string;
 
@@ -172,7 +185,7 @@ function LessonContent() {
           </div>
         </header>
 
-        <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
+        <main id="main-content" className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
           <div className="glass-panel p-8 rounded-3xl border border-white/80 shadow-lg space-y-4 max-w-lg mx-auto text-center">
             <div className="w-12 h-12 bg-amber-100 border border-amber-300 rounded-2xl flex items-center justify-center mx-auto text-amber-900 shadow-xs">
               <Lock className="w-6 h-6" />
@@ -368,8 +381,23 @@ function LessonContent() {
         </div>
       </header>
 
+      {/* Scroll Reading Progress Bar */}
+      <div 
+        className="w-full h-1 bg-[#2B1B0F]/10 sticky top-16 z-40 overflow-hidden" 
+        role="progressbar" 
+        aria-valuenow={Math.round(scrollProgress)} 
+        aria-valuemin={0} 
+        aria-valuemax={100}
+        aria-label="Lesson reading progress"
+      >
+        <div 
+          className="h-full bg-[#5DAA3A] transition-[width] duration-150 ease-out" 
+          style={{ width: `${scrollProgress}%` }} 
+        />
+      </div>
+
       {/* Main Content Area */}
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         {/* Remediation Gap Alert if fromGap is true */}
         {fromGap && (
           <div className="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-l-amber-500 bg-amber-50/70 border border-amber-200/80 text-amber-950 space-y-2">

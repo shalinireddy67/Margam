@@ -216,3 +216,4 @@ export function AvatarPixel({
     </div>
   );
 }
+

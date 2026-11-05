@@ -49,7 +49,7 @@ export default function DemoPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full space-y-8">
+      <main id="main-content" className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full space-y-8">
         {/* Page Title & Subtitle */}
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <h1 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl text-[#2B1B0F] tracking-tight">

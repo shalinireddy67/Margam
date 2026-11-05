@@ -217,11 +217,16 @@ export default function StudentDashboardPage() {
       />
 
       {/* Main student content */}
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 w-full flex-1 space-y-6 has-mobile-nav">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Welcome Companion & Hero Bar */}
         <div className="bg-[#FFFDF7] p-5 sm:p-7 border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
+            <AvatarPixel
+              avatar={profile.avatar_pixel || profile.avatarPixel || "wood_scholar"}
+              size={56}
+              alt={`${profile.name}'s avatar`}
+            />
             <AvatarPixel
               avatar={profile.avatar_pixel || profile.avatarPixel || "wood_scholar"}
               size={56}
@@ -281,6 +286,11 @@ export default function StudentDashboardPage() {
         {totalAttempted === 0 && !hasActiveGap && (
           <div className="bg-[#FFFDF7] p-6 sm:p-7 border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-start gap-4">
+            <AvatarPixel
+              avatar={profile.avatar_pixel || profile.avatarPixel || "wood_scholar"}
+              size={56}
+              alt={`${profile.name}'s avatar`}
+            />
               <div className="p-3 bg-[#F4C542] border-2 border-[#2B1B0F] shrink-0">
                 <Target className="w-8 h-8 text-[#2B1B0F]" />
               </div>
@@ -318,6 +328,11 @@ export default function StudentDashboardPage() {
         {fixThisFirst && (
           <div className="bg-[#FFF0F0] p-5 sm:p-6 border-3 border-[#D9453D] shadow-[4px_4px_0px_#D9453D] flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
             <div className="flex items-start gap-4">
+            <AvatarPixel
+              avatar={profile.avatar_pixel || profile.avatarPixel || "wood_scholar"}
+              size={56}
+              alt={`${profile.name}'s avatar`}
+            />
               <div className="p-3 bg-[#D9453D] text-white border-2 border-[#2B1B0F] shrink-0 text-xl font-pixel flex items-center justify-center">
                 ⚡
               </div>

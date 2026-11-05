@@ -6,6 +6,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "Privacy notice",
     title: "Privacy notice",
     subtitle: "Plain-language notice for students, parents, and teachers.",
+    lastUpdated: "5 November 2026",
     backText: "Back to home",
     sections: [
       {
@@ -30,7 +31,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. Questions and contact",
-        body: "If you have questions about your data or this notice, contact [TODO: contact email/address].",
+        body: "If you have questions about your data or this notice, please open an issue at https://github.com/shalinireddy67/Margam/issues.",
       },
     ],
   },
@@ -38,6 +39,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "गोपनीयता सूचना",
     title: "गोपनीयता सूचना",
     subtitle: "विद्यार्थियों, अभिभावकों और शिक्षकों के लिए सरल भाषा में सूचना।",
+    lastUpdated: "5 November 2026",
     backText: "होम पर लौटें",
     sections: [
       {
@@ -62,7 +64,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. संपर्क",
-        body: "यदि आपके कोई प्रश्न हैं, तो संपर्क करें: [TODO: contact email/address]。",
+        body: "यदि आपके कोई प्रश्न हैं, तो कृपया यहां संपर्क करें: https://github.com/shalinireddy67/Margam/issues.",
       },
     ],
   },
@@ -70,6 +72,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
     badge: "గోప్యతా నోటీసు",
     title: "గోప్యతా నోటీసు",
     subtitle: "విద్యార్థులు, తల్లిదండ్రులు మరియు ఉపాధ్యాయుల కోసం సరళమైన వివరణ.",
+    lastUpdated: "5 November 2026",
     backText: "హోమ్‌కు తిరిగి వెళ్లండి",
     sections: [
       {
@@ -94,7 +97,7 @@ const PRIVACY_CONTENT: Record<"en" | "hi" | "te", LegalDocument> = {
       },
       {
         title: "6. సంప్రదించండి",
-        body: "సందేహాలు ఉంటే సంప్రదించండి: [TODO: contact email/address].",
+        body: "సందేహాలు ఉంటే దయచేసి ఇక్కడ సంప్రదించండి: https://github.com/shalinireddy67/Margam/issues.",
       },
     ],
   },

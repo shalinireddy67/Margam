@@ -99,7 +99,7 @@ export default function DesignSystemPage() {
         </div>
       </header>
 
-      <main className="space-y-12">
+      <main id="main-content" className="space-y-12">
         {/* Typography Showcase */}
         <section aria-labelledby="typography-heading" className="space-y-4">
           <h2

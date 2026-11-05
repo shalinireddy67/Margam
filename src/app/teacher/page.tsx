@@ -284,7 +284,7 @@ export default function TeacherPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 space-y-6">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1 space-y-6">
 
         {/* View Mode Switcher: Synthetic Demo Class vs Enrolled Students */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 glass-panel p-3 border border-white/70 shadow-xs rounded-2xl">
@@ -2035,6 +2035,10 @@ export default function TeacherPage() {
                             <button
                               type="button"
                               onClick={() => {
+                                if (!isHidden) {
+                                  const confirmed = typeof window !== "undefined" ? window.confirm(`Hide ${st.name} from the public class leaderboard?`) : true;
+                                  if (!confirmed) return;
+                                }
                                 const next = new Set(hiddenStudentIds);
                                 if (next.has(st.id)) next.delete(st.id);
                                 else next.add(st.id);

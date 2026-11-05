@@ -171,7 +171,7 @@ export default function StudentProfilePage() {
       />
 
       {/* Main Profile Content */}
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         
         {/* Profile Hero Header */}
         <div className="bg-[#FFFDF7] p-6 sm:p-8 border-3 border-[#2B1B0F] border-t-4 border-t-[#5DAA3A] shadow-block rounded-[2px] flex flex-col sm:flex-row items-center gap-6">

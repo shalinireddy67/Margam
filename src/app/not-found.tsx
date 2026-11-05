@@ -17,7 +17,7 @@ export default function NotFound() {
       </header>
 
       {/* Main 404 Card */}
-      <main className="max-w-md mx-auto px-4 py-16 text-center w-full my-auto">
+      <main id="main-content" className="max-w-md mx-auto px-4 py-16 text-center w-full my-auto">
         <div className="bg-[#FFFDF7] border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-8 space-y-4">
           <span className="font-pixel text-4xl text-[#E04A3F] block">404</span>
           <h1 className="font-heading font-extrabold text-2xl text-[#2B1B0F]">Page not found.</h1>

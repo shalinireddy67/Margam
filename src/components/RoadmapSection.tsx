@@ -67,7 +67,7 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
       dates: "28–29 Oct",
       done: false,
       points: [
-        "Classroom topic progress heatmap",
+        "Classroom mastery heatmap matrix",
         "Automated remedial peer grouping engine",
         "Single-click 1-page A4 worksheet generator",
         "Teacher topic override authority",
@@ -108,11 +108,10 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
         {phases.map((p) => (
           <div
             key={p.num}
-            className={`p-6 border-[3px] border-[#422816] flex flex-col justify-between space-y-4 shadow-[4px_4px_0px_#1B120C] ${
-              p.done
-                ? "bg-[#FFF7E6]"
-                : "bg-white/80"
-            }`}
+            className={`p-6 border-[3px] border-[#422816] flex flex-col justify-between space-y-4 shadow-[4px_4px_0px_#1B120C] ${p.done
+              ? "bg-[#FFF7E6]"
+              : "bg-white/80"
+              }`}
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -120,11 +119,10 @@ export default function RoadmapSection({ currentLang }: RoadmapSectionProps) {
                   {p.num}
                 </span>
                 <span
-                  className={`text-xs font-pixel px-2.5 py-0.5 border ${
-                    p.done
-                      ? "bg-[#5DAA3A] text-white border-[#422816]"
-                      : "bg-[#D9D9D9] text-[#2B1B0F] border-[#422816]"
-                  }`}
+                  className={`text-xs font-pixel px-2.5 py-0.5 border ${p.done
+                    ? "bg-[#5DAA3A] text-white border-[#422816]"
+                    : "bg-[#D9D9D9] text-[#2B1B0F] border-[#422816]"
+                    }`}
                 >
                   {p.done ? t.phase1Status : t.phasePlanned}
                 </span>

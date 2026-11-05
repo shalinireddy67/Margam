@@ -14,6 +14,7 @@ export interface LegalDocument {
   badge: string;
   title: string;
   subtitle: string;
+  lastUpdated?: string;
   sections: LegalSection[];
   backText: string;
 }
@@ -25,11 +26,12 @@ export interface LegalPageViewerProps {
 export function LegalPageViewer({ content }: LegalPageViewerProps) {
   const [currentLang, setCurrentLang] = useState<Language>("en");
   const doc = content[currentLang] || content.en;
+  const lastUpdated = doc.lastUpdated || "5 November 2026";
 
   return (
     <div className="min-h-screen bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between">
-      {/* Header */}
-      <header className="border-b-[3px] border-[#2B1B0F] bg-white text-[#2B1B0F] shadow-[0px_3px_0px_rgba(43,27,15,0.1)]">
+      {/* Header - Sticky */}
+      <header className="sticky top-0 z-40 border-b-[3px] border-[#2B1B0F] bg-white text-[#2B1B0F] shadow-[0px_3px_0px_rgba(43,27,15,0.1)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 py-3 flex items-center justify-between gap-3">
           <Link
             href="/"
@@ -61,13 +63,18 @@ export function LegalPageViewer({ content }: LegalPageViewerProps) {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-4 py-8 w-full flex-1">
+      <main id="main-content" className="max-w-3xl mx-auto px-4 py-8 w-full flex-1">
         <div className="bg-white border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] p-6 sm:p-8 space-y-6 rounded-[2px]">
           {/* Document Header */}
           <div className="space-y-2 border-b-2 border-[#2B1B0F]/15 pb-5">
-            <span className="px-2.5 py-0.5 border-2 border-[#2B1B0F] bg-[#FFF7E6] text-[10px] font-heading font-bold uppercase tracking-wider text-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] rounded-[2px] inline-block">
-              {doc.badge}
-            </span>
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <span className="px-2.5 py-0.5 border-2 border-[#2B1B0F] bg-[#FFF7E6] text-[10px] font-heading font-bold uppercase tracking-wider text-[#2B1B0F] shadow-[1px_1px_0px_#2B1B0F] rounded-[2px] inline-block">
+                {doc.badge}
+              </span>
+              <span className="text-xs text-[#2B1B0F]/70 font-sans font-medium">
+                Last updated: {lastUpdated}
+              </span>
+            </div>
             <h1 className="font-heading font-bold text-2xl sm:text-3xl text-[#2B1B0F]">
               {doc.title}
             </h1>
@@ -94,7 +101,7 @@ export function LegalPageViewer({ content }: LegalPageViewerProps) {
 
       {/* Footer */}
       <footer className="max-w-3xl mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
-        Margam · Maths for Classes 6-10
+        © 2026 Margam · Maths for Classes 6–10
       </footer>
     </div>
   );

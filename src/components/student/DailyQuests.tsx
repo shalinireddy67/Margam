@@ -265,3 +265,4 @@ export function DailyQuests({ profile }: DailyQuestsProps) {
     </div>
   );
 }
+

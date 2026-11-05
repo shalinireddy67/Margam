@@ -62,7 +62,7 @@ export default function StickersPage() {
       <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between">
         <OfflineBanner />
         <Navigation currentTab="stickers" profile={null} />
-        <main className="max-w-[1200px] mx-auto px-4 py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8">
+        <main id="main-content" className="max-w-[1200px] mx-auto px-4 py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8">
           <SkeletonCard />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <SkeletonCard />

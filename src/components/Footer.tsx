@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShieldCheck, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Logo } from "@/components/ui";
 
 export default function Footer() {
@@ -48,8 +48,14 @@ export default function Footer() {
             <Link href="/" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               Home
             </Link>
-            <Link href="/student" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
+            <Link href="/learn" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               Learn
+            </Link>
+            <Link href="/login" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
+              Sign in
+            </Link>
+            <Link href="/demo" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
+              Demo
             </Link>
             <Link href="/teacher" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               Teacher
@@ -59,9 +65,6 @@ export default function Footer() {
             </Link>
             <Link href="/terms" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               Terms
-            </Link>
-            <Link href="/cookies" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              Cookies
             </Link>
           </nav>
 
@@ -78,7 +81,7 @@ export default function Footer() {
 
         <div className="pt-2 border-t border-[#7A4B2A]/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FFF7E6]/70 font-sans gap-2">
           <p className="m-0">
-            No email or phone asked. No ad trackers. Built around NCERT chapters for Classes 6-10.
+            © 2026 Margam. No email or phone asked. No ad trackers. Built around NCERT chapters for Classes 6-10.
           </p>
           <p className="m-0 text-[#FFE9A8]/90 font-medium">
             English · हिन्दी · తెలుగు

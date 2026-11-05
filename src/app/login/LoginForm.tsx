@@ -39,6 +39,7 @@ export default function LoginForm() {
   // Student form fields
   const [studentUsername, setStudentUsername] = useState("");
   const [studentPassword, setStudentPassword] = useState("");
+  const [showStudentPassword, setShowStudentPassword] = useState(false);
   const [studentFullName, setStudentFullName] = useState("");
   const [studentClass, setStudentClass] = useState<number>(10);
   const [studentClassCode, setStudentClassCode] = useState("");
@@ -46,6 +47,7 @@ export default function LoginForm() {
   // Teacher form fields
   const [teacherEmail, setTeacherEmail] = useState("");
   const [teacherPassword, setTeacherPassword] = useState("");
+  const [showTeacherPassword, setShowTeacherPassword] = useState(false);
   const [teacherFullName, setTeacherFullName] = useState("");
   const [teacherClassName, setTeacherClassName] = useState("");
   const [teacherGrade, setTeacherGrade] = useState<number>(10);
@@ -331,7 +333,7 @@ export default function LoginForm() {
         {/* Alerts */}
         {errorMessage && (
           <div
-            className={`p-3.5 border-2 border-[#2B1B0F] rounded-[2px] text-xs font-semibold flex items-start gap-2 shadow-[2px_2px_0px_#2B1B0F] ${
+            role="alert" aria-live="assertive" className={`p-3.5 border-2 border-[#2B1B0F] rounded-[2px] text-xs font-semibold flex items-start gap-2 shadow-[2px_2px_0px_#2B1B0F] ${
               isLocked ? "bg-[#FFE9A8] text-[#2B1B0F]" : "bg-[#FEE2E2] text-[#991B1B]"
             }`}
           >
@@ -341,7 +343,7 @@ export default function LoginForm() {
         )}
 
         {successMessage && !recoveryCode && !createdClassCode && (
-          <div className="p-3.5 border-2 border-[#2B1B0F] bg-[#E8F8E5] text-[#166534] text-xs font-semibold rounded-[2px] flex items-center gap-2 shadow-[2px_2px_0px_#2B1B0F]">
+          <div role="status" aria-live="polite" className="p-3.5 border-2 border-[#2B1B0F] bg-[#E8F8E5] text-[#166534] text-xs font-semibold rounded-[2px] flex items-center gap-2 shadow-[2px_2px_0px_#2B1B0F]">
             <CheckCircle className="w-4 h-4 shrink-0" />
             <span>{successMessage}</span>
           </div>
@@ -463,13 +465,21 @@ export default function LoginForm() {
                   <div className="relative">
                     <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                     <input
-                      type="password"
+                      type={showStudentPassword ? "text" : "password"}
                       required
                       value={studentPassword}
                       onChange={(e) => setStudentPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-9 pr-3 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#5DAA3A] shadow-[2px_2px_0px_#2B1B0F]"
+                      className="w-full pl-9 pr-16 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#5DAA3A] shadow-[2px_2px_0px_#2B1B0F]"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowStudentPassword(!showStudentPassword)}
+                      className="absolute right-2 top-2 text-[11px] font-bold text-[#7A4B2A] hover:text-[#2B1B0F] px-2 py-1 rounded-[2px] border border-[#2B1B0F] bg-[#FFF7E6] cursor-pointer"
+                      aria-label={showStudentPassword ? "Hide password" : "Show password"}
+                    >
+                      {showStudentPassword ? "Hide" : "Show"}
+                    </button>
                   </div>
                 </div>
 
@@ -526,14 +536,22 @@ export default function LoginForm() {
                   <div className="relative">
                     <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                     <input
-                      type="password"
+                      type={showStudentPassword ? "text" : "password"}
                       required
                       minLength={6}
                       value={studentPassword}
                       onChange={(e) => setStudentPassword(e.target.value)}
                       placeholder="Minimum 6 characters"
-                      className="w-full pl-9 pr-3 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#5DAA3A] shadow-[2px_2px_0px_#2B1B0F]"
+                      className="w-full pl-9 pr-16 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#5DAA3A] shadow-[2px_2px_0px_#2B1B0F]"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowStudentPassword(!showStudentPassword)}
+                      className="absolute right-2 top-2 text-[11px] font-bold text-[#7A4B2A] hover:text-[#2B1B0F] px-2 py-1 rounded-[2px] border border-[#2B1B0F] bg-[#FFF7E6] cursor-pointer"
+                      aria-label={showStudentPassword ? "Hide password" : "Show password"}
+                    >
+                      {showStudentPassword ? "Hide" : "Show"}
+                    </button>
                   </div>
                 </div>
 
@@ -636,13 +654,21 @@ export default function LoginForm() {
                   <div className="relative">
                     <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                     <input
-                      type="password"
+                      type={showTeacherPassword ? "text" : "password"}
                       required
                       value={teacherPassword}
                       onChange={(e) => setTeacherPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-9 pr-3 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#3FA7C9] shadow-[2px_2px_0px_#2B1B0F]"
+                      className="w-full pl-9 pr-16 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#3FA7C9] shadow-[2px_2px_0px_#2B1B0F]"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowTeacherPassword(!showTeacherPassword)}
+                      className="absolute right-2 top-2 text-[11px] font-bold text-[#7A4B2A] hover:text-[#2B1B0F] px-2 py-1 rounded-[2px] border border-[#2B1B0F] bg-[#FFF7E6] cursor-pointer"
+                      aria-label={showTeacherPassword ? "Hide password" : "Show password"}
+                    >
+                      {showTeacherPassword ? "Hide" : "Show"}
+                    </button>
                   </div>
                 </div>
 
@@ -695,14 +721,22 @@ export default function LoginForm() {
                   <div className="relative">
                     <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                     <input
-                      type="password"
+                      type={showTeacherPassword ? "text" : "password"}
                       required
                       minLength={6}
                       value={teacherPassword}
                       onChange={(e) => setTeacherPassword(e.target.value)}
                       placeholder="Minimum 6 characters"
-                      className="w-full pl-9 pr-3 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#3FA7C9] shadow-[2px_2px_0px_#2B1B0F]"
+                      className="w-full pl-9 pr-16 py-2.5 bg-white rounded-[2px] border-2 border-[#2B1B0F] text-xs font-sans text-[#2B1B0F] placeholder:text-[#2B1B0F]/40 focus:outline-none focus:ring-2 focus:ring-[#3FA7C9] shadow-[2px_2px_0px_#2B1B0F]"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowTeacherPassword(!showTeacherPassword)}
+                      className="absolute right-2 top-2 text-[11px] font-bold text-[#7A4B2A] hover:text-[#2B1B0F] px-2 py-1 rounded-[2px] border border-[#2B1B0F] bg-[#FFF7E6] cursor-pointer"
+                      aria-label={showTeacherPassword ? "Hide password" : "Show password"}
+                    >
+                      {showTeacherPassword ? "Hide" : "Show"}
+                    </button>
                   </div>
                 </div>
 

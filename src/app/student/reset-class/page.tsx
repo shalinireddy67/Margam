@@ -45,7 +45,7 @@ export default function ResetClassPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center items-center my-auto">
+      <main id="main-content" className="max-w-xl mx-auto px-4 py-12 w-full flex-1 flex flex-col justify-center items-center my-auto">
         <div className="bg-white p-6 sm:p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] space-y-6 text-center w-full">
           <div className="flex justify-center mb-2">
             <div className="w-14 h-14 bg-[#FFF7E6] border-2 border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] flex items-center justify-center text-2xl">

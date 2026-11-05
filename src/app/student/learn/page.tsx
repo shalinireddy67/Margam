@@ -119,7 +119,7 @@ export default function StudentLearnPage() {
       />
 
       {/* Main Content */}
-      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
+      <main id="main-content" className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6 has-mobile-nav">
         {/* Header Banner */}
         <div className="bg-[#FFFDF7] p-5 sm:p-6 rounded-[2px] border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">

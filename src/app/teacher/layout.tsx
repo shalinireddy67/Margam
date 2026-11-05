@@ -4,6 +4,10 @@ export const metadata: Metadata = {
   title: "Teacher",
   description:
     "Manage classes, view student prerequisite gaps across Classes 6–10, and track mastery heatmaps.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Teacher | Margam",
     description:
@@ -24,4 +28,3 @@ export default function TeacherLayout({
 }) {
   return <>{children}</>;
 }
-

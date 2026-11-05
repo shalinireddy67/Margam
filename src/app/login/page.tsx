@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   title: "Sign in",
   description:
     "Sign in to Margam as a student or teacher to diagnose prerequisite gaps and access lessons.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "Sign in | Margam",
     description:
@@ -45,16 +49,11 @@ export default function LoginPage() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-2xl mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center space-y-6">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-8 w-full flex-1 flex flex-col justify-center space-y-6">
         <Suspense fallback={<LoginShellFallback />}>
           <LoginForm />
         </Suspense>
       </main>
-
-      {/* Lightweight Footer */}
-      <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#2B1B0F]/70">
-        Margam · Maths for Classes 6-10
-      </footer>
     </div>
   );
 }
