@@ -5,7 +5,13 @@ import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseRouteClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { checkLockout, recordFailedAttempt, resetLockout } from "@/lib/server/lockout";
-import { generateStudentEmail, mockDb } from "@/lib/server/auth-helpers";
+import {
+  generateStudentEmail,
+  generateTeacherEmail,
+  normalizeUsername,
+  getCandidateEmailsForUsername,
+  mockDb,
+} from "@/lib/server/auth-helpers";
 import { signSessionPayload } from "@/lib/server/auth";
 
 export const dynamic = "force-dynamic";
@@ -41,16 +47,12 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-real-ip") ||
       "127.0.0.1";
 
-    // Normalize identifier: trim and lowercase.
-    // If it contains "@", treat as email; otherwise username -> ${username}@student.margam.local
     const cleanIdentifier = identifier.trim().toLowerCase();
     const isEmail = cleanIdentifier.includes("@");
-    const canonicalEmail = isEmail
-      ? cleanIdentifier
-      : `${cleanIdentifier}@student.margam.local`;
+    const cleanUsername = normalizeUsername(identifier);
 
-    // 1. Enforce 15-minute server lockout check using canonical email + IP key
-    const lockout = checkLockout(canonicalEmail, clientIp);
+    // 1. Enforce 15-minute server lockout check using normalized identifier + IP key
+    const lockout = checkLockout(cleanIdentifier, clientIp);
     if (lockout.locked) {
       return NextResponse.json(
         {
@@ -62,16 +64,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Determine target candidate emails:
-    // Email users try direct canonical email.
-    // Students entering username try canonical @student.margam.local first,
-    // then fallback to synthetic non-routable @student.internal.margam.local for registered students.
-    const candidateEmails = isEmail
-      ? [canonicalEmail]
-      : [
-          canonicalEmail,
-          `${cleanIdentifier.replace(/[^a-z0-9_-]/g, "")}@student.internal.margam.local`,
-        ];
+    const candidateEmails: string[] = [];
+    if (isEmail) {
+      candidateEmails.push(cleanIdentifier);
+    } else {
+      // Include candidate aliases for username across student and teacher formats
+      const roleCandidates = getCandidateEmailsForUsername(cleanUsername, expectedRole);
+      for (const email of roleCandidates) {
+        if (!candidateEmails.includes(email)) {
+          candidateEmails.push(email);
+        }
+      }
+      if (!candidateEmails.includes(`${cleanUsername}@student.margam.local`)) {
+        candidateEmails.push(`${cleanUsername}@student.margam.local`);
+      }
+    }
 
     const supabaseActive = isSupabaseConfigured();
 
@@ -95,11 +102,28 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      // Server-side Username-to-Identity Resolution (Supabase Username Architecture)
+      if (!isEmail) {
+        const { data: profileByUsername } = await admin
+          .from("profiles")
+          .select("id, role, username")
+          .ilike("username", cleanUsername)
+          .maybeSingle();
+
+        if (profileByUsername?.id) {
+          const { data: authUserData } = await admin.auth.admin.getUserById(profileByUsername.id);
+          if (authUserData?.user?.email) {
+            const email = authUserData.user.email.toLowerCase();
+            if (!candidateEmails.includes(email)) {
+              candidateEmails.unshift(email);
+            }
+          }
+        }
+      }
+
       // Authenticate with Supabase Auth (sets HttpOnly SSR cookies on response)
-      // Tries candidates in order; cleanly resolves demo students and registered students
       let signInData: any = null;
       let signInError: any = null;
-      let targetEmail = candidateEmails[0];
 
       for (const email of candidateEmails) {
         const result = await routeClient.auth.signInWithPassword({
@@ -110,14 +134,13 @@ export async function POST(req: NextRequest) {
         if (result.data?.user && !result.error) {
           signInData = result.data;
           signInError = null;
-          targetEmail = email;
           break;
         }
         signInError = result.error;
       }
 
       if (signInError || !signInData?.user) {
-        const failure = recordFailedAttempt(canonicalEmail, clientIp);
+        const failure = recordFailedAttempt(cleanIdentifier, clientIp);
         if (failure.locked) {
           return NextResponse.json(
             {
@@ -163,13 +186,13 @@ export async function POST(req: NextRequest) {
       }
 
       // Clear failure lockout on success
-      resetLockout(canonicalEmail, clientIp);
+      resetLockout(cleanIdentifier, clientIp);
 
       const authenticatedUser = {
         id: signInData.user.id,
         role: profile.role,
-        username: profile.username,
-        email: targetEmail,
+        username: profile.username || cleanUsername,
+        email: signInData.user.email || `${cleanUsername}@margam.local`,
         fullName: profile.full_name || "User",
         selectedClass: profile.selected_class,
         avatarPixel: profile.avatar_pixel,
@@ -204,23 +227,24 @@ export async function POST(req: NextRequest) {
       return finalResponse;
     } else {
       if (process.env.NODE_ENV === 'production') {
-      return NextResponse.json(
-        { error: 'Database configuration error: Supabase credentials are missing or unconfigured in production.' },
-        { status: 503 }
-      );
-    }
+        return NextResponse.json(
+          { error: 'Database configuration error: Supabase credentials are missing or unconfigured in production.' },
+          { status: 503 }
+        );
+      }
 
-    // Offline / Test mock fallback (Non-production only)
+      // Offline / Test mock fallback (Non-production only)
       const profile = Array.from(mockDb.profiles.values()).find(
         (p) =>
-          candidateEmails.some((e) => p.email.toLowerCase() === e.toLowerCase()) ||
-          (p.username && p.username.toLowerCase() === cleanIdentifier)
+          (p.email && candidateEmails.some((e) => p.email.toLowerCase() === e.toLowerCase())) ||
+          (p.username && p.username.toLowerCase() === cleanIdentifier) ||
+          (p.username && p.username.toLowerCase() === cleanUsername.toLowerCase())
       );
 
       const enteredHash = crypto.createHash("sha256").update(password).digest("hex");
 
       if (!profile || profile.passwordHash !== enteredHash) {
-        const failure = recordFailedAttempt(canonicalEmail, clientIp);
+        const failure = recordFailedAttempt(cleanIdentifier, clientIp);
         if (failure.locked) {
           return NextResponse.json(
             {
@@ -249,7 +273,7 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      resetLockout(canonicalEmail, clientIp);
+      resetLockout(cleanIdentifier, clientIp);
 
       const authenticatedUser = {
         id: profile.id,
@@ -260,7 +284,6 @@ export async function POST(req: NextRequest) {
         selectedClass: profile.selectedClass,
       };
 
-      // Sign the fallback session token with HMAC
       const signedToken = signSessionPayload({
         userId: profile.id,
         role: profile.role,

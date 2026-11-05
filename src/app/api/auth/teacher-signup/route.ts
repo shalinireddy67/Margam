@@ -4,28 +4,44 @@ import crypto from "crypto";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseRouteClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
-import { generateClassCode, mockDb } from "@/lib/server/auth-helpers";
+import {
+  generateClassCode,
+  generateTeacherEmail,
+  normalizeUsername,
+  mockDb,
+} from "@/lib/server/auth-helpers";
 import { signSessionPayload } from "@/lib/server/auth";
 
 export const dynamic = "force-dynamic";
 
-const TeacherSignUpSchema = z.object({
-  email: z.string().email("Valid email address is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  fullName: z.string().min(2, "Teacher name is required"),
-  className: z.string().min(2, "Class name is required (e.g. Class 8A)"),
-  grade: z.union([
-    z.literal(6),
-    z.literal(7),
-    z.literal(8),
-    z.literal(9),
-    z.literal(10),
-  ]),
-  schoolName: z.string().optional(),
-  consentConfirmed: z.boolean().refine((val) => val === true, {
-    message: "You must confirm school or institutional consent to proceed",
-  }),
-});
+const TeacherSignUpSchema = z
+  .object({
+    username: z
+      .string()
+      .min(3, "Username must be at least 3 characters")
+      .max(30, "Username must not exceed 30 characters")
+      .regex(/^[a-zA-Z0-9_-]+$/, "Username may only contain letters, numbers, hyphens, and underscores")
+      .optional(),
+    email: z.string().email("Valid email address is required").optional().or(z.literal("")),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    fullName: z.string().min(2, "Teacher name is required"),
+    className: z.string().min(2, "Class name is required (e.g. Class 8A)"),
+    grade: z.union([
+      z.literal(6),
+      z.literal(7),
+      z.literal(8),
+      z.literal(9),
+      z.literal(10),
+    ]),
+    schoolName: z.string().optional(),
+    consentConfirmed: z.boolean().refine((val) => val === true, {
+      message: "You must confirm school or institutional consent to proceed",
+    }),
+  })
+  .refine((data) => Boolean(data.username?.trim()) || Boolean(data.email?.trim()), {
+    message: "Either username or email is required",
+    path: ["username"],
+  });
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,8 +54,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { email, password, fullName, className, grade, schoolName, consentConfirmed } =
-      parsed.data;
+    const {
+      username: rawUsername,
+      email: rawEmail,
+      password,
+      fullName,
+      className,
+      grade,
+      schoolName,
+      consentConfirmed,
+    } = parsed.data;
+
+    const teacherName = fullName.trim();
+    const cleanUsername = rawUsername?.trim()
+      ? normalizeUsername(rawUsername.trim())
+      : normalizeUsername(rawEmail!.split("@")[0].replace(/[^a-zA-Z0-9_-]/g, "_"));
+
+    const teacherEmail = rawEmail?.trim()
+      ? rawEmail.trim().toLowerCase()
+      : generateTeacherEmail(cleanUsername);
+
     const classCode = generateClassCode(grade);
 
     const supabaseActive = isSupabaseConfigured();
@@ -60,9 +94,24 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      // Check if username already exists in profiles
+      const { data: existingUser } = await admin
+        .from("profiles")
+        .select("id")
+        .ilike("username", cleanUsername)
+        .maybeSingle();
+
+      if (existingUser) {
+        return NextResponse.json(
+          { error: "Username is already taken. Please choose another." },
+          { status: 409 }
+        );
+      }
+
       // 1. Create teacher auth user in Supabase
+      let authUserId: string;
       const { data: authData, error: authError } = await admin.auth.admin.createUser({
-        email: email.trim().toLowerCase(),
+        email: teacherEmail,
         password,
         email_confirm: true,
         app_metadata: {
@@ -70,26 +119,79 @@ export async function POST(req: NextRequest) {
         },
         user_metadata: {
           role: "teacher", // Strictly assigned on server
-          full_name: fullName.trim(),
+          username: cleanUsername,
+          full_name: teacherName,
           school_name: schoolName?.trim() || null,
         },
       });
 
-      if (authError || !authData.user) {
-        return NextResponse.json(
-          { error: authError?.message || "Failed to create teacher account" },
-          { status: 400 }
-        );
+      if (authError || !authData?.user) {
+        const errMsg = authError?.message || "";
+        if (errMsg.toLowerCase().includes("already") || errMsg.toLowerCase().includes("exists")) {
+          // Check for orphan auth user without profile
+          const { data: userList } = await admin.auth.admin.listUsers();
+          const orphan = userList?.users?.find(
+            (u) => u.email?.toLowerCase() === teacherEmail.toLowerCase()
+          );
+
+          if (orphan) {
+            const { data: prof } = await admin
+              .from("profiles")
+              .select("id")
+              .eq("id", orphan.id)
+              .maybeSingle();
+
+            if (!prof) {
+              await admin.auth.admin.deleteUser(orphan.id);
+              const retry = await admin.auth.admin.createUser({
+                email: teacherEmail,
+                password,
+                email_confirm: true,
+                app_metadata: { role: "teacher" },
+                user_metadata: {
+                  role: "teacher",
+                  username: cleanUsername,
+                  full_name: teacherName,
+                  school_name: schoolName?.trim() || null,
+                },
+              });
+              if (retry.error || !retry.data?.user) {
+                return NextResponse.json(
+                  { error: retry.error?.message || "Failed to create teacher account" },
+                  { status: 400 }
+                );
+              }
+              authUserId = retry.data.user.id;
+            } else {
+              return NextResponse.json(
+                { error: "Username or email is already registered." },
+                { status: 409 }
+              );
+            }
+          } else {
+            return NextResponse.json(
+              { error: "Username or email is already registered." },
+              { status: 409 }
+            );
+          }
+        } else {
+          return NextResponse.json(
+            { error: authError?.message || "Failed to create teacher account" },
+            { status: 400 }
+          );
+        }
+      } else {
+        authUserId = authData.user.id;
       }
 
-      const teacherId = authData.user.id;
+      const teacherId = authUserId;
 
       // 2. Insert into profiles table
       const { error: profileError } = await admin.from("profiles").insert({
         id: teacherId,
         role: "teacher",
-        username: null,
-        full_name: fullName.trim(),
+        username: cleanUsername,
+        full_name: teacherName,
         selected_class: grade,
         consent_confirmed: consentConfirmed,
       });
@@ -131,8 +233,9 @@ export async function POST(req: NextRequest) {
         user: {
           id: teacherId,
           role: "teacher",
-          email: email.trim().toLowerCase(),
-          fullName: fullName.trim(),
+          username: cleanUsername,
+          email: teacherEmail,
+          fullName: teacherName,
           classCode,
           className: className.trim(),
           grade,
@@ -144,7 +247,7 @@ export async function POST(req: NextRequest) {
       const routeClient = createSupabaseRouteClient(req, response);
       if (routeClient) {
         await routeClient.auth.signInWithPassword({
-          email: email.trim().toLowerCase(),
+          email: teacherEmail,
           password,
         });
       }
@@ -174,11 +277,13 @@ export async function POST(req: NextRequest) {
 
     // Offline / Test mock fallback (Non-production only)
       const existing = Array.from(mockDb.profiles.values()).find(
-        (p) => p.email.toLowerCase() === email.toLowerCase()
+        (p) =>
+          (p.username && p.username.toLowerCase() === cleanUsername.toLowerCase()) ||
+          (p.email && p.email.toLowerCase() === teacherEmail.toLowerCase())
       );
       if (existing) {
         return NextResponse.json(
-          { error: "Email is already registered" },
+          { error: "Username or email is already registered" },
           { status: 409 }
         );
       }
@@ -189,10 +294,10 @@ export async function POST(req: NextRequest) {
       mockDb.profiles.set(teacherId, {
         id: teacherId,
         role: "teacher",
-        username: null,
-        email: email.trim().toLowerCase(),
+        username: cleanUsername,
+        email: teacherEmail,
         passwordHash: crypto.createHash("sha256").update(password).digest("hex"),
-        fullName: fullName.trim(),
+        fullName: teacherName,
         selectedClass: grade,
         recoveryCodeHash: null,
         consentConfirmed,
@@ -221,8 +326,9 @@ export async function POST(req: NextRequest) {
         user: {
           id: teacherId,
           role: "teacher",
-          email: email.trim().toLowerCase(),
-          fullName: fullName.trim(),
+          username: cleanUsername,
+          email: teacherEmail,
+          fullName: teacherName,
           classCode,
           className: className.trim(),
           grade,

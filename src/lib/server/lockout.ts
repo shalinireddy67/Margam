@@ -13,8 +13,10 @@ interface FailureRecord {
 const MAX_FAILURES = 5;
 const LOCKOUT_MS = 15 * 60 * 1000; // 15 minutes in milliseconds
 
-// In-memory lockout registry on the server
-const lockoutStore = new Map<string, FailureRecord>();
+// In-memory lockout registry on the server (attached to globalThis for Next.js dev server persistence)
+const globalForLockout = globalThis as unknown as { __margam_lockout_store?: Map<string, FailureRecord> };
+const lockoutStore = globalForLockout.__margam_lockout_store || new Map<string, FailureRecord>();
+globalForLockout.__margam_lockout_store = lockoutStore;
 
 function getKeys(identifier: string, ip?: string): string[] {
   const normId = identifier.trim().toLowerCase();

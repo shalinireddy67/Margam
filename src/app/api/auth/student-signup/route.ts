@@ -8,6 +8,7 @@ import {
   generateStudentEmail,
   generateRecoveryCode,
   hashRecoveryCode,
+  normalizeUsername,
   mockDb,
 } from "@/lib/server/auth-helpers";
 import { signSessionPayload } from "@/lib/server/auth";
@@ -44,10 +45,11 @@ export async function POST(req: NextRequest) {
     }
 
     const { username, password, fullName, selectedClass, classCode } = parsed.data;
-    const studentEmail = generateStudentEmail(username);
+    const cleanUsername = normalizeUsername(username);
+    const studentEmail = generateStudentEmail(cleanUsername);
     const recoveryCode = generateRecoveryCode();
     const recoveryCodeHash = hashRecoveryCode(recoveryCode);
-    const studentName = (fullName && fullName.trim()) || username;
+    const studentName = (fullName && fullName.trim()) || cleanUsername;
 
     const supabaseActive = isSupabaseConfigured();
 
@@ -68,11 +70,11 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // Check if username already exists in profiles
+      // Check if username already exists in profiles (case-insensitive)
       const { data: existingUser } = await admin
         .from("profiles")
         .select("id")
-        .eq("username", username.toLowerCase())
+        .ilike("username", cleanUsername)
         .maybeSingle();
 
       if (existingUser) {
@@ -115,6 +117,7 @@ export async function POST(req: NextRequest) {
       }
 
       // 1. Create auth user in Supabase
+      let authUserId: string;
       const { data: authData, error: authError } = await admin.auth.admin.createUser({
         email: studentEmail,
         password,
@@ -124,25 +127,78 @@ export async function POST(req: NextRequest) {
         },
         user_metadata: {
           role: "student", // Strictly hardcoded to student
-          username: username.toLowerCase(),
+          username: cleanUsername,
           full_name: studentName,
         },
       });
 
-      if (authError || !authData.user) {
-        return NextResponse.json(
-          { error: authError?.message || "Failed to create student account" },
-          { status: 400 }
-        );
+      if (authError || !authData?.user) {
+        // Check if an orphaned auth user without a profile exists with this email
+        const errMsg = authError?.message || "";
+        if (errMsg.toLowerCase().includes("already") || errMsg.toLowerCase().includes("exists")) {
+          const { data: userList } = await admin.auth.admin.listUsers();
+          const orphanUser = userList?.users?.find(
+            (u) => u.email?.toLowerCase() === studentEmail.toLowerCase()
+          );
+
+          if (orphanUser) {
+            // Check if profile truly does not exist
+            const { data: prof } = await admin
+              .from("profiles")
+              .select("id")
+              .eq("id", orphanUser.id)
+              .maybeSingle();
+
+            if (!prof) {
+              // Delete orphan and recreate cleanly
+              await admin.auth.admin.deleteUser(orphanUser.id);
+              const retry = await admin.auth.admin.createUser({
+                email: studentEmail,
+                password,
+                email_confirm: true,
+                app_metadata: { role: "student" },
+                user_metadata: {
+                  role: "student",
+                  username: cleanUsername,
+                  full_name: studentName,
+                },
+              });
+              if (retry.error || !retry.data?.user) {
+                return NextResponse.json(
+                  { error: retry.error?.message || "Failed to create student account" },
+                  { status: 400 }
+                );
+              }
+              authUserId = retry.data.user.id;
+            } else {
+              return NextResponse.json(
+                { error: "Username is already taken. Please choose another." },
+                { status: 409 }
+              );
+            }
+          } else {
+            return NextResponse.json(
+              { error: "Username is already taken. Please choose another." },
+              { status: 409 }
+            );
+          }
+        } else {
+          return NextResponse.json(
+            { error: authError?.message || "Failed to create student account" },
+            { status: 400 }
+          );
+        }
+      } else {
+        authUserId = authData.user.id;
       }
 
-      const userId = authData.user.id;
+      const userId = authUserId;
 
       // 2. Insert into public.profiles (role strictly 'student')
       const { error: profileError } = await admin.from("profiles").insert({
         id: userId,
         role: "student",
-        username: username.toLowerCase(),
+        username: cleanUsername,
         full_name: studentName,
         selected_class: selectedClass,
         recovery_code_hash: recoveryCodeHash,
@@ -176,7 +232,7 @@ export async function POST(req: NextRequest) {
         user: {
           id: userId,
           role: "student",
-          username: username.toLowerCase(),
+          username: cleanUsername,
           fullName: studentName,
           selectedClass,
           enrolledClass: enrolledClassName,
@@ -218,7 +274,7 @@ export async function POST(req: NextRequest) {
 
     // Mock / Dev fallback (Non-production only)
       const existing = Array.from(mockDb.profiles.values()).find(
-        (p) => p.username?.toLowerCase() === username.toLowerCase()
+        (p) => p.username?.toLowerCase() === cleanUsername
       );
       if (existing) {
         return NextResponse.json(
@@ -260,7 +316,7 @@ export async function POST(req: NextRequest) {
       mockDb.profiles.set(userId, {
         id: userId,
         role: "student",
-        username: username.toLowerCase(),
+        username: cleanUsername,
         email: studentEmail,
         passwordHash: crypto.createHash("sha256").update(password).digest("hex"),
         fullName: studentName,

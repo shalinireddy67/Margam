@@ -62,6 +62,7 @@ function LoginForm() {
   const [studentClassCode, setStudentClassCode] = useState("");
 
   // Teacher form fields
+  const [teacherUsername, setTeacherUsername] = useState("");
   const [teacherEmail, setTeacherEmail] = useState("");
   const [teacherPassword, setTeacherPassword] = useState("");
   const [teacherFullName, setTeacherFullName] = useState("");
@@ -230,7 +231,7 @@ function LoginForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          identifier: teacherEmail.trim(),
+          identifier: (teacherUsername.trim() || teacherEmail.trim()),
           password: teacherPassword,
           expectedRole: "teacher",
         }),
@@ -253,7 +254,7 @@ function LoginForm() {
         const warning = data.attemptsRemaining
           ? ` (${data.attemptsRemaining} attempt(s) remaining before 15-min lockout)`
           : "";
-        setErrorMessage((data.error || "Invalid email or password.") + warning);
+        setErrorMessage((data.error || "Invalid username or password.") + warning);
         setLoading(false);
         return;
       }
@@ -283,7 +284,8 @@ function LoginForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: teacherEmail.trim(),
+          username: teacherUsername.trim(),
+          email: teacherEmail.trim() || undefined,
           password: teacherPassword,
           fullName: teacherFullName.trim(),
           className: teacherClassName.trim(),
@@ -299,7 +301,7 @@ function LoginForm() {
         return;
       }
 
-      setCreatedClassCode(data.classInfo?.classCode || null);
+      setCreatedClassCode(data.classCode || data.classInfo?.classCode || null);
       setStorageMode("supabase");
       setSuccessMessage(data.message || "Teacher account created!");
     } catch {
@@ -872,16 +874,16 @@ function LoginForm() {
                 <form onSubmit={handleTeacherSignIn} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      Educator Email <span className="text-[#D9453D]">*</span>
+                      Teacher Username <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
-                      <Mail className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
-                        type="email"
+                        type="text"
                         required
-                        value={teacherEmail}
-                        onChange={(e) => setTeacherEmail(e.target.value)}
-                        placeholder="teacher@school.edu.in"
+                        value={teacherUsername}
+                        onChange={(e) => setTeacherUsername(e.target.value)}
+                        placeholder="e.g. shalini_teacher or demo_teacher"
                         className="w-full pl-9 pr-3 py-2.5 bg-[#E8CF9C] border-3 border-[#1E1610] text-xs font-sans text-[#1E1610] placeholder:text-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
                       />
                     </div>
@@ -931,13 +933,32 @@ function LoginForm() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      School / Educator Email <span className="text-[#D9453D]">*</span>
+                      Teacher Username <span className="text-[#D9453D]">*</span>
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
+                      <input
+                        type="text"
+                        required
+                        pattern="^[a-zA-Z0-9_-]{3,30}$"
+                        title="3-30 characters: letters, numbers, hyphens, and underscores only"
+                        value={teacherUsername}
+                        onChange={(e) => setTeacherUsername(e.target.value)}
+                        placeholder="e.g. shalini_teacher"
+                        className="w-full pl-9 pr-3 py-2.5 bg-[#E8CF9C] border-3 border-[#1E1610] text-xs font-sans text-[#1E1610] placeholder:text-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
+                      />
+                    </div>
+                    <p className="text-[10px] text-slate-500 font-sans">3–30 characters, letters/numbers/underscores only</p>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-[#2B1B0F] block">
+                      School / Educator Email (Optional)
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
                       <input
                         type="email"
-                        required
                         value={teacherEmail}
                         onChange={(e) => setTeacherEmail(e.target.value)}
                         placeholder="teacher@school.edu.in"
