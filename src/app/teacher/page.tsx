@@ -162,10 +162,10 @@ export default function TeacherPage() {
   const activeLiveClass = liveClasses.find((c) => c.id === selectedLiveClassId) || liveClasses[0] || null;
   const isDemoLiveClass = Boolean(
     activeLiveClass?.isDemo ||
-    activeLiveClass?.schoolName === "Vignan School" ||
-    activeLiveClass?.class_code === "VIGNAN-10A4" ||
-    activeLiveClass?.classCode === "VIGNAN-10A4" ||
-    teacherUser?.email === "teacher@vignan.demo.invalid"
+    activeLiveClass?.schoolName === "Margam Demo School" ||
+    activeLiveClass?.class_code === "DEMO10A" ||
+    activeLiveClass?.classCode === "DEMO10A" ||
+    teacherUser?.email === "demo.teacher@margam.example"
   );
 
   const classMembers = activeLiveClass
@@ -317,11 +317,11 @@ export default function TeacherPage() {
                   </span>
                   {isDemoLiveClass && (
                     <span className="px-2.5 py-0.5 bg-[#8CCB55] border-2 border-[#1E1610] text-[#1E1610] text-[10px] font-heading font-extrabold tracking-wide uppercase">
-                      DEMO ENVIRONMENT (CLASS 10-A4)
+                      DEMO ENVIRONMENT (CLASS 10-A)
                     </span>
                   )}
                   <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950">
-                    {activeLiveClass?.schoolName || "Vignan School"} • {activeLiveClass?.name || "Class 10-A4"}
+                    {activeLiveClass?.schoolName || "Margam Demo School"} • {activeLiveClass?.name || "Class 10-A (Demo)"}
                   </h2>
                 </div>
 
@@ -329,11 +329,11 @@ export default function TeacherPage() {
                   <div className="bg-[#E8CF9C] px-3 py-1 border-2 border-[#1E1610] flex items-center gap-2">
                     <span className="text-[10px] uppercase font-bold text-slate-500">Class Code</span>
                     <code className="text-xs font-mono font-black text-emerald-900 tracking-wider">
-                      {activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4"}
+                      {activeLiveClass?.class_code || activeLiveClass?.classCode || "DEMO10A"}
                     </code>
                     <button
                       type="button"
-                      onClick={() => copyCode(activeLiveClass?.class_code || activeLiveClass?.classCode || "VIGNAN-10A4")}
+                      onClick={() => copyCode(activeLiveClass?.class_code || activeLiveClass?.classCode || "DEMO10A")}
                       className="p-1 text-slate-500 hover:text-emerald-900 transition-colors"
                       title="Copy Class Code"
                     >
@@ -728,7 +728,7 @@ export default function TeacherPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-heading font-bold">
-                          {activeLiveClass?.schoolName || "Vignan School"} • Class 10-A4
+                          {activeLiveClass?.schoolName || "Margam Demo School"} • Class 10-A (Demo)
                         </span>
                         {inspectingStudent.rollNumber && (
                           <span className="font-mono text-xs font-bold text-slate-500">

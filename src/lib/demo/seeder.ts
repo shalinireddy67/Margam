@@ -1,10 +1,10 @@
 /**
  * Margam Demo School Seeder
- * Idempotently seeds Vignan School, Class 10-A4, Demo Teacher, and all 25 students
+ * Idempotently seeds Margam Demo School, Class 10-A (Demo), Demo Teacher, and all 28 students
  * into both Supabase PostgreSQL (when credentials are active) and the in-memory mockDb.
  *
  * SAFETY GUARDS:
- * - Operates strictly on domain '@vignan.demo.invalid' and classCode 'VIGNAN-10A4'.
+ * - Operates strictly on domain '@student.margam.local' and classCode 'DEMO10A'.
  * - Never modifies, drops, or overwrites any real student or teacher record.
  * - Idempotent: can be safely executed repeatedly without creating duplicates.
  */
@@ -154,13 +154,13 @@ export function seedMockDatabase(): SeedingResult {
     attemptsSeeded: totalAttempts,
     conceptMasteryRecordsSeeded: totalMastery,
     success: true,
-    message: `Successfully seeded Vignan School (Class 10-A4) with ${DEMO_STUDENTS.length} students into Mock Store.`,
+    message: `Successfully seeded Margam Demo School (Class 10-A (Demo)) with ${DEMO_STUDENTS.length} students into Mock Store.`,
   };
 }
 
 /**
  * Seeds the live Supabase PostgreSQL database via service_role admin client.
- * Strictly scoped to Vignan School demo identifiers to protect all real production data.
+ * Strictly scoped to Margam Demo School demo identifiers to protect all real production data.
  */
 export async function seedSupabaseDatabase(): Promise<SeedingResult> {
   const admin = getSeederAdminClient();
@@ -343,7 +343,7 @@ export async function seedSupabaseDatabase(): Promise<SeedingResult> {
     attemptsSeeded: totalAttempts,
     conceptMasteryRecordsSeeded: totalMastery,
     success: true,
-    message: `Successfully seeded Vignan School (Class 10-A4) with ${DEMO_STUDENTS.length} students into Supabase PostgreSQL.`,
+    message: `Successfully seeded Margam Demo School (Class 10-A (Demo)) with ${DEMO_STUDENTS.length} students into Supabase PostgreSQL.`,
   };
 }
 
@@ -370,13 +370,15 @@ export async function cleanDemoData(): Promise<{ success: boolean; message: stri
   if (isSupabaseConfigured()) {
     const admin = getSeederAdminClient();
     if (admin) {
-      // Delete Class 10-A4 (cascades to class_members)
+      // Delete Class 10-A (cascades to class_members)
       await admin.from("classes").delete().eq("class_code", DEMO_SCHOOL_CONFIG.classCode);
 
       // Find and delete demo users in auth
       const { data: list } = await admin.auth.admin.listUsers();
       const demoUsers = (list?.users || []).filter(
-        (u) => u.email?.endsWith("@vignan.demo.invalid")
+        (u) =>
+          u.email?.endsWith("@student.margam.local") ||
+          u.email === DEMO_SCHOOL_CONFIG.teacher.email
       );
 
       for (const u of demoUsers) {

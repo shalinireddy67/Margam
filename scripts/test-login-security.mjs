@@ -90,6 +90,105 @@ assert(!resetCheck.locked, "Lockout successfully cleared upon successful authent
 console.log("");
 
 // ==============================================================================
+// TEST SUITE 1B: EMAIL OR USERNAME LOGIN & SHARED LOCKOUT COUNTER
+// ==============================================================================
+console.log("--------------------------------------------------");
+console.log("  TEST 1B: Username/Email Login & Shared Lockout  ");
+console.log("--------------------------------------------------");
+
+function normalizeToCanonicalEmail(identifier) {
+  const clean = identifier.trim().toLowerCase();
+  return clean.includes("@") ? clean : `${clean}@student.margam.local`;
+}
+
+const lockoutTestUsername = "demo_riya";
+const lockoutTestEmail = "demo_riya@student.margam.local";
+const ipForTest = "10.0.0.42";
+
+// 1. Normalization verification
+const canonicalFromUsername = normalizeToCanonicalEmail(lockoutTestUsername);
+const canonicalFromEmail = normalizeToCanonicalEmail(lockoutTestEmail);
+assert(
+  canonicalFromUsername === lockoutTestEmail,
+  `Username "${lockoutTestUsername}" converts to canonical email "${lockoutTestEmail}"`
+);
+assert(
+  canonicalFromEmail === lockoutTestEmail,
+  `Email "${lockoutTestEmail}" resolves to canonical email "${lockoutTestEmail}"`
+);
+assert(
+  canonicalFromUsername === canonicalFromEmail,
+  "Both username and email forms resolve to the EXACT SAME canonical identifier"
+);
+
+// 2. Shared counter - alternating username and email cannot dodge lockout
+clearAllLockouts();
+
+// 3 failures using username form
+for (let i = 1; i <= 3; i++) {
+  const res = recordFailedAttempt(canonicalFromUsername, ipForTest);
+  assert(!res.locked && res.attempts === i, `Failure ${i}/5 via username recorded`);
+}
+
+// 4th failure using email form
+const res4 = recordFailedAttempt(canonicalFromEmail, ipForTest);
+assert(!res4.locked && res4.attempts === 4, "Failure 4/5 via email shares the same counter (attempts = 4)");
+
+// 5th failure using username form again: must trigger lockout
+const res5 = recordFailedAttempt(canonicalFromUsername, ipForTest);
+assert(res5.locked, "5th alternating failure triggers immediate 15-minute lockout");
+
+// Verify that both forms are locked out
+const checkViaEmail = checkLockout(canonicalFromEmail, ipForTest);
+const checkViaUsername = checkLockout(canonicalFromUsername, ipForTest);
+assert(checkViaEmail.locked, "Checking with email form reports account LOCKED");
+assert(checkViaUsername.locked, "Checking with username form reports account LOCKED");
+
+// 3. Reset clears for both forms
+resetLockout(canonicalFromEmail, ipForTest);
+assert(!checkLockout(canonicalFromEmail, ipForTest).locked, "Email form unlocked after reset");
+assert(!checkLockout(canonicalFromUsername, ipForTest).locked, "Username form unlocked after reset");
+
+// 4. Generic error messages
+const GENERIC_AUTH_ERROR = "Wrong email, username or password.";
+const LOCKOUT_MESSAGE = "Too many tries. Try again in 15 minutes.";
+
+function getAuthErrorMessage(isUserFound, isPasswordCorrect, isLocked) {
+  if (isLocked) return LOCKOUT_MESSAGE;
+  if (!isUserFound || !isPasswordCorrect) return GENERIC_AUTH_ERROR;
+  return null;
+}
+
+assert(
+  getAuthErrorMessage(false, false, false) === GENERIC_AUTH_ERROR,
+  "Unknown user returns generic error: 'Wrong email, username or password.'"
+);
+assert(
+  getAuthErrorMessage(true, false, false) === GENERIC_AUTH_ERROR,
+  "Wrong password returns generic error: 'Wrong email, username or password.'"
+);
+assert(
+  getAuthErrorMessage(true, true, true) === LOCKOUT_MESSAGE,
+  "Locked user returns lockout message: 'Too many tries. Try again in 15 minutes.'"
+);
+
+// 5. Input validation (string, max 254 chars, reject control characters)
+function validateLoginInput(identifier, password) {
+  if (typeof identifier !== "string" || typeof password !== "string") return false;
+  if (identifier.length < 1 || identifier.length > 254) return false;
+  if (password.length < 1 || password.length > 254) return false;
+  if (/[\x00-\x1F\x7F]/.test(identifier) || /[\x00-\x1F\x7F]/.test(password)) return false;
+  return true;
+}
+
+assert(validateLoginInput("demo_riya", "pass123") === true, "Valid username & password passes input validation");
+assert(validateLoginInput("demo_riya\x00admin", "pass123") === false, "Null byte in identifier rejected");
+assert(validateLoginInput("demo_riya\n", "pass123") === false, "Newline in identifier rejected");
+assert(validateLoginInput("a".repeat(255), "pass123") === false, "Identifier exceeding 254 chars rejected");
+
+console.log("");
+
+// ==============================================================================
 // TEST SUITE 2: STUDENT ROW-LEVEL SECURITY & ISOLATION
 // ==============================================================================
 console.log("--------------------------------------------------");

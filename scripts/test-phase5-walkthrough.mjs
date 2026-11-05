@@ -66,9 +66,10 @@ console.log("-------------------------------------------------------------------
 const loginPagePath = path.resolve(process.cwd(), "src/app/login/page.tsx");
 const loginContent = fs.readFileSync(loginPagePath, "utf8");
 assert(loginContent.includes("/api/auth/demo-login"), "Login page integrates passwordless /api/auth/demo-login");
-assert(loginContent.includes("student01"), "Login offers top student entry");
-assert(loginContent.includes("student08"), "Login offers remedial breakthrough student entry");
-assert(loginContent.includes("selectedDemoStudent"), "Login offers full 25-student selector dropdown");
+assert(loginContent.includes('handleDemoLogin("teacher")'), "Login offers demo teacher entry");
+assert(loginContent.includes('handleDemoLogin("riya")'), "Login offers demo student Riya entry");
+assert(loginContent.includes('handleDemoLogin("aarav")'), "Login offers demo student Aarav entry");
+assert(loginContent.includes('handleDemoLogin("new")'), "Login offers demo new student entry");
 
 // ------------------------------------------------------------------------------
 // STEP 3: Student with Unfixed Gap

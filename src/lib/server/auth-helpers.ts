@@ -46,6 +46,8 @@ export interface StoredUserProfile {
   recoveryCodeHash: string | null;
   consentConfirmed: boolean;
   classCode?: string | null;
+  is_demo?: boolean;
+  avatar_pixel?: string;
   createdAt: string;
   updated_at: string;
 }

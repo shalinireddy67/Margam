@@ -3,24 +3,23 @@
  * Margam Login Diagnostic & Reproduction Script (scripts/debug-login.mjs)
  *
  * Verifies the 5 stages of the authentication pipeline:
- *  a. Username-to-email conversion result
- *  b. Supabase Auth signInWithPassword (with anon key)
- *  c. Profiles table read (role, username, consent_confirmed)
- *  d. POST /api/auth/login (HTTP status & error message only)
- *  e. Session cookie & signed margam_auth_token headers
+ *  1. identifier conversion (username -> canonical email or direct email)
+ *  2. signInWithPassword (Supabase Auth)
+ *  3. profile read (role & profile verification)
+ *  4. POST /api/auth/login (HTTP status & response)
+ *  5. session cookie received (margam_auth_token cookie)
  *
  * CRITICAL SAFETY RULES:
- * - Reads NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY from .env.local
- * - Reads password from hidden prompt (no echo, not stored, not logged) or DEBUG_PASSWORD env
- * - NEVER prints or logs passwords, session tokens, service-role keys, or session payloads
+ * - Reads password from hidden prompt (no echo, not stored, not logged) or DEBUG_PASSWORD env.
+ * - Prints ONLY pass/fail, email used, and non-sensitive status codes.
+ * - NEVER prints or logs passwords, session tokens, service-role keys, or session payloads.
  */
 
 import fs from "fs";
 import path from "path";
-import readline from "readline";
 import { createClient } from "@supabase/supabase-js";
 
-// 1. Read .env.local safely
+// Read .env.local safely
 const envPath = path.resolve(process.cwd(), ".env.local");
 const envVars = {};
 
@@ -44,14 +43,7 @@ if (fs.existsSync(envPath)) {
 const supabaseUrl = envVars.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anonKey = envVars.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const localPort = process.env.PORT || 3000;
-const localBaseUrl = `http://localhost:${localPort}`;
-
-// Canonical username to email conversion from src/lib/server/auth-helpers.ts
-const INTERNAL_STUDENT_DOMAIN = "student.internal.margam.local";
-function generateStudentEmail(username) {
-  const clean = username.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "");
-  return `${clean}@${INTERNAL_STUDENT_DOMAIN}`;
-}
+const targetBaseUrl = process.env.TARGET_URL || process.env.VERCEL_URL || `http://localhost:${localPort}`;
 
 async function getPasswordHidden() {
   if (process.env.DEBUG_PASSWORD) {
@@ -77,10 +69,8 @@ async function getPasswordHidden() {
           resolve(input);
           return;
         } else if (ch === "\u0003") {
-          // Ctrl+C
           process.exit(1);
         } else if (ch === "\b" || ch === "\x7f") {
-          // Backspace
           if (input.length > 0) {
             input = input.slice(0, -1);
           }
@@ -98,93 +88,75 @@ export async function debugLogin(identifier, password) {
   console.log(`  DEBUGGING LOGIN FOR: ${identifier}`);
   console.log(`==================================================`);
 
-  const isEmail = identifier.includes("@");
-  const expectedRole = isEmail ? "teacher" : "student";
+  const cleanId = identifier.trim().toLowerCase();
+  const isEmail = cleanId.includes("@");
+  const expectedRole = cleanId.includes("teacher") ? "teacher" : "student";
 
-  // Stage a: Username-to-email conversion result
-  let targetEmail = "";
+  // Step 1: identifier conversion
+  let canonicalEmail = "";
   if (isEmail) {
-    targetEmail = identifier.trim().toLowerCase();
-    console.log(`[PASS] Stage a (email conversion): Direct email identifier used: ${targetEmail}`);
+    canonicalEmail = cleanId;
+    console.log(`[PASS] Step 1 (identifier conversion): Email used: ${canonicalEmail}`);
   } else {
-    targetEmail = generateStudentEmail(identifier);
-    console.log(`[PASS] Stage a (email conversion): Converted "${identifier}" -> "${targetEmail}"`);
+    canonicalEmail = `${cleanId}@student.margam.local`;
+    console.log(`[PASS] Step 1 (identifier conversion): Converted username "${identifier}" -> "${canonicalEmail}"`);
   }
 
-  // Check Supabase credentials
+  // Step 2 & 3: signInWithPassword & profile read (Supabase direct)
+  let authUser = null;
+  let authClient = null;
+
   if (!supabaseUrl || !anonKey || supabaseUrl.includes("your-project") || anonKey.includes("your-anon")) {
-    console.log(`[FAIL] Stage b (supabase auth): NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY not set or placeholder in .env.local`);
-    console.log(`[FAIL] Stage c (profile read): Skipped (no Supabase connection)`);
+    console.log(`[FAIL] Step 2 (signInWithPassword): Supabase URL/Anon Key not configured`);
+    console.log(`[FAIL] Step 3 (profile read): Skipped (no Supabase connection)`);
   } else {
-    // Stage b: Supabase Auth signInWithPassword with anon key
-    let authUser = null;
-    let authClient = null;
     try {
       authClient = createClient(supabaseUrl, anonKey, {
         auth: { persistSession: false, autoRefreshToken: false },
       });
 
-      const candidateEmails = isEmail
-        ? [targetEmail]
-        : [targetEmail, `${identifier.trim().toLowerCase()}@student.margam.local`];
+      const res = await authClient.auth.signInWithPassword({
+        email: canonicalEmail,
+        password,
+      });
 
-      let signInData = null;
-      let signInErr = null;
-      let resolvedEmail = targetEmail;
-
-      for (const email of candidateEmails) {
-        const res = await authClient.auth.signInWithPassword({
-          email,
-          password,
-        });
-        if (res.data?.user && !res.error) {
-          signInData = res.data;
-          signInErr = null;
-          resolvedEmail = email;
-          break;
-        }
-        signInErr = res.error;
-      }
-
-      if (signInErr || !signInData?.user) {
-        console.log(`[FAIL] Stage b (supabase auth): ${signInErr?.message || "User sign-in failed"} (status: ${signInErr?.status || 400})`);
+      if (res.error || !res.data?.user) {
+        console.log(`[FAIL] Step 2 (signInWithPassword): ${res.error?.message || "Sign-in failed"} (status: ${res.error?.status || 400})`);
       } else {
-        authUser = signInData.user;
-        console.log(`[PASS] Stage b (supabase auth): Supabase Auth authenticated successfully via "${resolvedEmail}" (User ID: ${authUser.id})`);
+        authUser = res.data.user;
+        console.log(`[PASS] Step 2 (signInWithPassword): Authenticated successfully via "${canonicalEmail}"`);
       }
     } catch (err) {
-      console.log(`[FAIL] Stage b (supabase auth): Network or client exception: ${err.message}`);
+      console.log(`[FAIL] Step 2 (signInWithPassword): Exception: ${err.message}`);
     }
 
-    // Stage c: Profiles read using returned session
     if (authUser && authClient) {
       try {
         const { data: profile, error: profileErr } = await authClient
           .from("profiles")
-          .select("role, username, consent_confirmed")
+          .select("role, username, is_demo")
           .eq("id", authUser.id)
           .single();
 
         if (profileErr || !profile) {
-          console.log(`[FAIL] Stage c (profile read): Profile query failed: ${profileErr?.message || "Profile row not found"}`);
+          console.log(`[FAIL] Step 3 (profile read): Profile query failed (status: ${profileErr?.code || 500})`);
         } else {
           const roleMatch = profile.role === expectedRole;
-          const userMatch = isEmail || profile.username?.toLowerCase() === identifier.trim().toLowerCase();
-          if (roleMatch && userMatch) {
-            console.log(`[PASS] Stage c (profile read): Profile verified. role="${profile.role}", username="${profile.username}", consent_confirmed=${profile.consent_confirmed}`);
+          if (roleMatch) {
+            console.log(`[PASS] Step 3 (profile read): Profile verified (role="${profile.role}", is_demo=${profile.is_demo})`);
           } else {
-            console.log(`[FAIL] Stage c (profile read): Role or username mismatch. Profile role="${profile.role}" (expected "${expectedRole}"), username="${profile.username}"`);
+            console.log(`[FAIL] Step 3 (profile read): Role mismatch (profile role="${profile.role}", expected "${expectedRole}")`);
           }
         }
       } catch (err) {
-        console.log(`[FAIL] Stage c (profile read): Exception reading profile: ${err.message}`);
+        console.log(`[FAIL] Step 3 (profile read): Exception: ${err.message}`);
       }
     } else {
-      console.log(`[FAIL] Stage c (profile read): Skipped due to failed auth in Stage b`);
+      console.log(`[FAIL] Step 3 (profile read): Skipped due to failed sign-in in Step 2`);
     }
   }
 
-  // Stage d: POST /api/auth/login
+  // Step 4: POST /api/auth/login
   let routeResponse = null;
   let responseCookies = [];
   try {
@@ -194,7 +166,7 @@ export async function debugLogin(identifier, password) {
       expectedRole,
     };
 
-    const res = await fetch(`${localBaseUrl}/api/auth/login`, {
+    const res = await fetch(`${targetBaseUrl}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(postBody),
@@ -205,10 +177,9 @@ export async function debugLogin(identifier, password) {
     try {
       json = await res.json();
     } catch {
-      json = { error: "Non-JSON response received" };
+      json = { error: "Non-JSON response" };
     }
 
-    // Read set-cookie headers
     if (res.headers.getSetCookie) {
       responseCookies = res.headers.getSetCookie();
     } else {
@@ -217,28 +188,25 @@ export async function debugLogin(identifier, password) {
     }
 
     if (res.ok) {
-      console.log(`[PASS] Stage d (POST /api/auth/login): HTTP ${status} OK (success=true, role=${json.role || expectedRole})`);
+      console.log(`[PASS] Step 4 (POST /api/auth/login): HTTP ${status} OK`);
       routeResponse = json;
     } else {
-      console.log(`[FAIL] Stage d (POST /api/auth/login): HTTP ${status} — Error: "${json.error || "Unknown error"}"`);
+      console.log(`[FAIL] Step 4 (POST /api/auth/login): HTTP ${status} — Error: "${json.error || "Unknown error"}"`);
     }
   } catch (err) {
-    console.log(`[FAIL] Stage d (POST /api/auth/login): Could not connect to local server at ${localBaseUrl}. Is "npm run dev" running? (${err.message})`);
+    console.log(`[FAIL] Step 4 (POST /api/auth/login): Connection error to ${targetBaseUrl}: ${err.message}`);
   }
 
-  // Stage e: Cookies set check
+  // Step 5: session cookie received
   if (routeResponse) {
     const hasAuthToken = responseCookies.some((c) => c.includes("margam_auth_token="));
-    const hasSbCookie = responseCookies.some((c) => c.includes("-auth-token="));
-    if (hasAuthToken && hasSbCookie) {
-      console.log(`[PASS] Stage e (cookie verification): Both signed margam_auth_token and Supabase SSR session cookie set`);
-    } else if (hasAuthToken) {
-      console.log(`[PASS] Stage e (cookie verification): Signed margam_auth_token set (Mock/Offline mode)`);
+    if (hasAuthToken) {
+      console.log(`[PASS] Step 5 (session cookie received): margam_auth_token cookie received successfully`);
     } else {
-      console.log(`[FAIL] Stage e (cookie verification): Required auth session cookies were not present in response headers`);
+      console.log(`[FAIL] Step 5 (session cookie received): margam_auth_token cookie missing in response`);
     }
   } else {
-    console.log(`[FAIL] Stage e (cookie verification): Skipped due to failed route response in Stage d`);
+    console.log(`[FAIL] Step 5 (session cookie received): Skipped due to failed Step 4`);
   }
 }
 
@@ -254,7 +222,11 @@ async function main() {
   if (identifierArg) {
     identifiers = [identifierArg];
   } else {
-    identifiers = ["demo_riya", "demo.teacher@margam.example"];
+    identifiers = [
+      "demo_riya",
+      "demo_riya@student.margam.local",
+      "demo.teacher@margam.example",
+    ];
   }
 
   const password = await getPasswordHidden();

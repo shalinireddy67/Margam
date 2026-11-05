@@ -9,6 +9,8 @@
  *          strictly avoids literal machine translations and formal/medical vocabulary.
  */
 
+import { LocalizedString } from "@/lib/types";
+
 export interface TranslationDictionary {
   common: {
     loading: string;
@@ -218,6 +220,9 @@ export interface TranslationDictionary {
     useRecovery: string;
     invalidCredentials: string;
     recoveryCodeHelp: string;
+    enterIdentifier: string;
+    identifierPlaceholder: string;
+    identifierHelp: string;
   };
   teacher: {
     title: string;
@@ -458,8 +463,11 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       haveAccount: "Already have an account? Sign in",
       needAccount: "New here? Create profile",
       useRecovery: "Sign in with recovery code",
-      invalidCredentials: "Nickname not found or password incorrect.",
+      invalidCredentials: "Wrong email, username or password.",
       recoveryCodeHelp: "Use the 16-character code given when you created your profile.",
+      enterIdentifier: "Email or username",
+      identifierPlaceholder: "e.g. riya or riya@student.margam.local",
+      identifierHelp: "Use your email or username.",
     },
     teacher: {
       title: "Teacher dashboard",
@@ -697,8 +705,11 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       haveAccount: "पहले से खाता है? साइन इन करें",
       needAccount: "यहाँ नए हैं? प्रोफ़ाइल बनाएं",
       useRecovery: "रिकवरी कोड से साइन इन करें",
-      invalidCredentials: "उपनाम नहीं मिला या पासवर्ड गलत है।",
+      invalidCredentials: "गलत ईमेल, यूज़रनेम या पासवर्ड।",
       recoveryCodeHelp: "प्रोफ़ाइल बनाते समय मिला 16-अक्षरों का कोड उपयोग करें।",
+      enterIdentifier: "ईमेल या यूज़रनेम",
+      identifierPlaceholder: "उदा. riya या riya@student.margam.local",
+      identifierHelp: "अपना ईमेल या यूज़रनेम इस्तेमाल करें।",
     },
     teacher: {
       title: "शिक्षक डैशबोर्ड",
@@ -936,8 +947,11 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       haveAccount: "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
       needAccount: "కొత్తవారా? ప్రొఫైల్ సృష్టించండి",
       useRecovery: "రికవరీ కోడ్‌తో సైన్ ఇన్ చేయండి",
-      invalidCredentials: "మారుపేరు కనిపించలేదు లేదా పాస్‌వర్డ్ తప్పు.",
+      invalidCredentials: "తప్పు ఈమెయిల్, యూజర్‌నేమ్ లేదా పాస్‌వర్డ్.",
       recoveryCodeHelp: "ప్రొఫైల్ సృష్టించినప్పుడు ఇచ్చిన 16-అక్షరాల కోడ్‌ను ఉపయోగించండి.",
+      enterIdentifier: "ఈమెయిల్ లేదా యూజర్‌నేమ్",
+      identifierPlaceholder: "ఉదా. riya లేదా riya@student.margam.local",
+      identifierHelp: "మీ ఈమెయిల్ లేదా యూజర్‌నేమ్ ఉపయోగించండి.",
     },
     teacher: {
       title: "ఉపాధ్యాయుల డ్యాష్‌బోర్డ్",
@@ -961,4 +975,12 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
     },
   },
 };
+
+export const loginIdentifierHelp: LocalizedString = {
+  en: "Use your email or username.",
+  hi: "अपना ईमेल या यूज़रनेम इस्तेमाल करें।",
+  te: "మీ ఈమెయిల్ లేదా యూజర్‌నేమ్ ఉపయోగించండి.",
+  reviewed: false,
+};
+
 

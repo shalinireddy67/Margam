@@ -11,8 +11,16 @@ import { signSessionPayload } from "@/lib/server/auth";
 export const dynamic = "force-dynamic";
 
 const LoginSchema = z.object({
-  identifier: z.string().min(1, "Username or email is required"),
-  password: z.string().min(1, "Password is required"),
+  identifier: z
+    .string()
+    .min(1, "Identifier is required")
+    .max(254, "Identifier is too long")
+    .refine((val) => !/[\x00-\x1F\x7F]/.test(val), "Invalid control characters"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .max(254, "Password is too long")
+    .refine((val) => !/[\x00-\x1F\x7F]/.test(val), "Invalid control characters"),
   expectedRole: z.enum(["student", "teacher"]).optional(),
 });
 
@@ -22,7 +30,7 @@ export async function POST(req: NextRequest) {
     const parsed = LoginSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { error: parsed.error.issues[0]?.message || "Invalid input" },
+        { error: "Wrong email, username or password." },
         { status: 400 }
       );
     }
@@ -33,28 +41,36 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-real-ip") ||
       "127.0.0.1";
 
-    // 1. Enforce 15-minute server lockout check
-    const lockout = checkLockout(identifier, clientIp);
+    // Normalize identifier: trim and lowercase.
+    // If it contains "@", treat as email; otherwise username -> ${username}@student.margam.local
+    const cleanIdentifier = identifier.trim().toLowerCase();
+    const isEmail = cleanIdentifier.includes("@");
+    const canonicalEmail = isEmail
+      ? cleanIdentifier
+      : `${cleanIdentifier}@student.margam.local`;
+
+    // 1. Enforce 15-minute server lockout check using canonical email + IP key
+    const lockout = checkLockout(canonicalEmail, clientIp);
     if (lockout.locked) {
       return NextResponse.json(
         {
           error: "Too many tries. Try again in 15 minutes.",
           locked: true,
-          remainingMinutes: lockout.remainingMinutes,
+          remainingMinutes: lockout.remainingMinutes || 15,
         },
         { status: 429 }
       );
     }
 
-    // Determine target email:
-    // Teachers use standard email; Students use username converted to synthetic non-routable address.
-    // Supports both canonical (@student.internal.margam.local) and dashboard demo (@student.margam.local) domains.
-    const isEmail = identifier.includes("@");
+    // Determine target candidate emails:
+    // Email users try direct canonical email.
+    // Students entering username try canonical @student.margam.local first,
+    // then fallback to synthetic non-routable @student.internal.margam.local for registered students.
     const candidateEmails = isEmail
-      ? [identifier.trim().toLowerCase()]
+      ? [canonicalEmail]
       : [
-          generateStudentEmail(identifier),
-          `${identifier.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "")}@student.margam.local`,
+          canonicalEmail,
+          `${cleanIdentifier.replace(/[^a-z0-9_-]/g, "")}@student.internal.margam.local`,
         ];
 
     const supabaseActive = isSupabaseConfigured();
@@ -80,7 +96,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Authenticate with Supabase Auth (sets HttpOnly SSR cookies on response)
-      // Tries candidates in order; cleanly resolves dashboard-created demo students
+      // Tries candidates in order; cleanly resolves demo students and registered students
       let signInData: any = null;
       let signInError: any = null;
       let targetEmail = candidateEmails[0];
@@ -101,7 +117,7 @@ export async function POST(req: NextRequest) {
       }
 
       if (signInError || !signInData?.user) {
-        const failure = recordFailedAttempt(identifier, clientIp);
+        const failure = recordFailedAttempt(canonicalEmail, clientIp);
         if (failure.locked) {
           return NextResponse.json(
             {
@@ -114,7 +130,7 @@ export async function POST(req: NextRequest) {
         }
         return NextResponse.json(
           {
-            error: isEmail ? "Wrong email or password." : "Wrong username or password.",
+            error: "Wrong email, username or password.",
             attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
@@ -147,7 +163,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Clear failure lockout on success
-      resetLockout(identifier, clientIp);
+      resetLockout(canonicalEmail, clientIp);
 
       const authenticatedUser = {
         id: signInData.user.id,
@@ -198,13 +214,13 @@ export async function POST(req: NextRequest) {
       const profile = Array.from(mockDb.profiles.values()).find(
         (p) =>
           candidateEmails.some((e) => p.email.toLowerCase() === e.toLowerCase()) ||
-          (p.username && p.username.toLowerCase() === identifier.trim().toLowerCase())
+          (p.username && p.username.toLowerCase() === cleanIdentifier)
       );
 
       const enteredHash = crypto.createHash("sha256").update(password).digest("hex");
 
       if (!profile || profile.passwordHash !== enteredHash) {
-        const failure = recordFailedAttempt(identifier, clientIp);
+        const failure = recordFailedAttempt(canonicalEmail, clientIp);
         if (failure.locked) {
           return NextResponse.json(
             {
@@ -217,7 +233,7 @@ export async function POST(req: NextRequest) {
         }
         return NextResponse.json(
           {
-            error: isEmail ? "Wrong email or password." : "Wrong username or password.",
+            error: "Wrong email, username or password.",
             attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
@@ -233,7 +249,7 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      resetLockout(identifier, clientIp);
+      resetLockout(canonicalEmail, clientIp);
 
       const authenticatedUser = {
         id: profile.id,
