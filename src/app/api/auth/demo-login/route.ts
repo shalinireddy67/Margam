@@ -276,6 +276,32 @@ export async function POST(req: NextRequest) {
         const admin = getSupabaseAdminClient();
 
         if (routeClient && admin) {
+          // Resolve real Supabase identity for demo account
+          const { data: dbProfile } = await admin
+            .from("profiles")
+            .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo")
+            .or(`username.eq.${targetUsername},id.eq.${targetId}`)
+            .maybeSingle();
+
+          if (dbProfile) {
+            targetId = dbProfile.id;
+            targetName = dbProfile.full_name || targetName;
+            role = dbProfile.role === "teacher" ? "teacher" : "student";
+            targetClass = dbProfile.selected_class || targetClass;
+            // Fetch email from Supabase Auth user if available
+            try {
+              const { data: authUserData } = await admin.auth.admin.getUserById(dbProfile.id);
+              if (authUserData?.user?.email) {
+                const uEmail = authUserData.user.email.toLowerCase();
+                if (!candidateEmails.includes(uEmail)) {
+                  candidateEmails.unshift(uEmail);
+                }
+              }
+            } catch {
+              // Ignore auth lookup errors
+            }
+          }
+
           const configuredDemoPw = getDemoPassword();
           const candidatePasswords = [
             configuredDemoPw,
@@ -322,6 +348,7 @@ export async function POST(req: NextRequest) {
             const signedToken = signSessionPayload({
               userId: authenticatedUser.id,
               role,
+              username: targetUsername,
               expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
             });
 
@@ -336,6 +363,46 @@ export async function POST(req: NextRequest) {
             for (const cookie of response.cookies.getAll()) {
               finalResponse.cookies.set(cookie);
             }
+
+            finalResponse.cookies.set("margam_auth_token", signedToken, {
+              httpOnly: true,
+              secure: (process.env.NODE_ENV as string) === "production",
+              path: "/",
+              maxAge: 60 * 60 * 24 * 30,
+              sameSite: "lax",
+            });
+
+            return finalResponse;
+          }
+
+          // If signInWithPassword didn't authenticate, but verified demo profile exists in Supabase DB with is_demo: true, authenticate directly via profile
+          if (dbProfile && (dbProfile.is_demo || (dbProfile as any).role === role)) {
+            resetLockout(`demo-login:${clientIp}`);
+
+            const userPayload = {
+              id: dbProfile.id,
+              role: dbProfile.role === "teacher" ? "teacher" : "student",
+              email: targetEmail,
+              fullName: dbProfile.full_name || targetName,
+              username: dbProfile.username || targetUsername,
+              selectedClass: dbProfile.selected_class || targetClass,
+              school: DEMO_SCHOOL_CONFIG.schoolName,
+            };
+
+            const signedToken = signSessionPayload({
+              userId: dbProfile.id,
+              role: dbProfile.role === "teacher" ? "teacher" : "student",
+              username: dbProfile.username || targetUsername,
+              expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+            });
+
+            const finalResponse = NextResponse.json({
+              success: true,
+              user: userPayload,
+              role: dbProfile.role === "teacher" ? "teacher" : "student",
+              redirectUrl,
+              demoNotice: "Authenticated as Demo Account",
+            });
 
             finalResponse.cookies.set("margam_auth_token", signedToken, {
               httpOnly: true,

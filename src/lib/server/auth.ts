@@ -1,5 +1,6 @@
 import "server-only";
 import crypto from "crypto";
+import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 import { getSupabaseServerClient, isSupabaseConfigured } from "@/lib/supabase";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -105,10 +106,29 @@ export async function getAuthenticatedUser(
 
   // 2. Token-Based Authentication Verification (signed margam_auth_token cookie)
   // Validates HMAC-SHA256 signature with SESSION_SECRET across serverless functions
-  const token =
-    req?.cookies.get("margam_auth_token")?.value ||
-    req?.cookies.get("margam_session")?.value ||
-    req?.headers.get("x-test-auth-token");
+  let token =
+    req?.cookies?.get("margam_auth_token")?.value ||
+    req?.cookies?.get("margam_session")?.value ||
+    req?.headers?.get("x-test-auth-token");
+
+  if (!token) {
+    try {
+      const cookieStore = cookies() as any;
+      token =
+        cookieStore.get("margam_auth_token")?.value ||
+        cookieStore.get("margam_session")?.value;
+    } catch {
+      // In edge or unsupported contexts
+    }
+  }
+
+  if (!token && req?.headers?.get("cookie")) {
+    const rawCookie = req.headers.get("cookie") || "";
+    const match = rawCookie.match(/(?:^|;\s*)margam_auth_token=([^;]+)/);
+    if (match) {
+      token = decodeURIComponent(match[1]);
+    }
+  }
 
   if (!token) {
     return null;
@@ -129,11 +149,18 @@ export async function getAuthenticatedUser(
   const admin = getSupabaseAdminClient();
   if (admin) {
     try {
-      const { data: profile } = await admin
+      let profileQuery = admin
         .from("profiles")
-        .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo")
-        .eq("id", payload.userId)
-        .maybeSingle();
+        .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo");
+
+      const uname = payload.username || (payload.userId.startsWith("usr_") ? payload.userId.replace(/^usr_/, "") : null);
+      if (uname) {
+        profileQuery = profileQuery.or(`id.eq.${payload.userId},username.eq.${uname}`);
+      } else {
+        profileQuery = profileQuery.eq("id", payload.userId);
+      }
+
+      const { data: profile } = await profileQuery.maybeSingle();
 
       if (profile) {
         let enrolledClass: { id: string; name: string; grade: number } | null = null;
@@ -151,7 +178,7 @@ export async function getAuthenticatedUser(
 
         return {
           id: profile.id,
-          email: "",
+          email: payload.role === "teacher" ? "demo.teacher@margam.example" : `${profile.username || payload.userId}@student.margam.local`,
           role: profile.role === "teacher" ? "teacher" : "student",
           username: profile.username,
           fullName: profile.full_name || "User",
