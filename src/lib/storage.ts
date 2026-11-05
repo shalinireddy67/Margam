@@ -120,6 +120,8 @@ export const LearnerProfileSchema = z.object({
   unlockedBadgeIds: z.array(z.string()).optional(),
   soundEnabled: z.boolean().optional(),
   optOutOfLeaderboard: z.boolean().optional(),
+  avatar_pixel: z.string().default("wood_scholar").optional(),
+  avatarPixel: z.string().default("wood_scholar").optional(),
 });
 
 /**
@@ -333,6 +335,8 @@ export function createLearnerProfile(
     consecutiveCorrect: 0,
     consecutiveIncorrect: 0,
     currentDifficulty: 1,
+    avatar_pixel: "wood_scholar",
+    avatarPixel: "wood_scholar",
     resolvedGaps: [],
   };
   saveProfile(profile);
@@ -391,6 +395,8 @@ export function resetProfileToClass(
     consecutiveCorrect: 0,
     consecutiveIncorrect: 0,
     currentDifficulty: 1,
+    avatar_pixel: "wood_scholar",
+    avatarPixel: "wood_scholar",
     resolvedGaps: [],
   };
   saveProfile(profile);
@@ -562,7 +568,9 @@ export async function handleLoginSync(authenticatedUser: {
       consecutiveCorrect: 0,
       consecutiveIncorrect: 0,
       currentDifficulty: 1,
-      resolvedGaps: [],
+      avatar_pixel: "wood_scholar",
+    avatarPixel: "wood_scholar",
+    resolvedGaps: [],
     };
     saveProfile(newProfile);
   }

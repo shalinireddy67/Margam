@@ -40,6 +40,7 @@ import syntheticClassData from "../../../data/synthetic-class.json";
 import { getActiveProfile } from "@/lib/storage";
 import { LearnerProfile } from "@/lib/types";
 import { ClassLeaderboard } from "@/components/ui/ClassLeaderboard";
+import { AvatarPixel } from "@/components/ui/AvatarPixel";
 
 export default function TeacherPage() {
   const router = useRouter();
@@ -1957,76 +1958,184 @@ export default function TeacherPage() {
         )}
         {/* TAB 5: Quest Board & Teacher Controls */}
         {activeTab === "leaderboard" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7 space-y-4">
-              <ClassLeaderboard classId="demo-sec-10a" />
-            </div>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div className="lg:col-span-7 space-y-4">
+                {leaderboardEnabled ? (
+                  <ClassLeaderboard classId="demo-sec-10a" />
+                ) : (
+                  <div className="bg-[#FFFDF7] p-8 border-3 border-[#2B1B0F] shadow-block text-center space-y-3">
+                    <div className="w-12 h-12 bg-[#E2DDD5] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F]">
+                      <EyeOff className="w-6 h-6" />
+                    </div>
+                    <h3 className="font-heading font-extrabold text-lg text-[#2B1B0F]">
+                      Class Leaderboard Disabled
+                    </h3>
+                    <p className="text-xs text-[#2B1B0F]/80 max-w-md mx-auto">
+                      The public leaderboard is currently turned off for this class. Students will not see ranks or competition.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setLeaderboardEnabled(true)}
+                      className="px-4 py-2 bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-bold text-xs uppercase shadow-xs cursor-pointer hover:bg-[#4E9330] transition-colors"
+                    >
+                      Turn Leaderboard On
+                    </button>
+                  </div>
+                )}
+              </div>
 
-            <div className="lg:col-span-5 space-y-4">
-              {/* Teacher Board Controls */}
-              <div className="glass-panel p-6 rounded-2xl border border-white/80 shadow-xs space-y-4 text-slate-800">
-                <div className="flex items-center justify-between flex flex-wrap gap-1.5 bg-white/60 p-1.5 rounded-2xl border border-white/80 shadow-xs pb-1.5">
-                  <h3 className="font-heading font-extrabold text-sm text-emerald-950 uppercase tracking-wider">
-                    Leaderboard Controls
-                  </h3>
-                  <button
-                    type="button"
-                    onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
-                    className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
-                      leaderboardEnabled
-                        ? "bg-[#5DAA3A] text-[#FFF7E6] border-[#204514] shadow-[inset_1px_1px_0px_rgba(255,255,255,0.4)]"
-                              : "bg-white/60 text-slate-400 border-slate-200"
-                    }`}
-                  >
-                    {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
-                  </button>
-                </div>
+              <div className="lg:col-span-5 space-y-4">
+                {/* Teacher Board Controls */}
+                <div className="bg-[#FFFDF7] p-6 border-3 border-[#2B1B0F] shadow-block space-y-4 text-[#2B1B0F]">
+                  <div className="flex items-center justify-between pb-3 border-b-2 border-[#2B1B0F]/15">
+                    <h3 className="font-heading font-extrabold text-sm text-[#2B1B0F] uppercase tracking-wider">
+                      Leaderboard Controls
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => setLeaderboardEnabled(!leaderboardEnabled)}
+                      className={`min-h-[36px] px-3 py-1 text-xs font-heading font-bold border-2 transition-all cursor-pointer ${
+                        leaderboardEnabled
+                          ? "bg-[#5DAA3A] text-[#2B1B0F] border-[#2B1B0F] shadow-xs"
+                          : "bg-[#E2DDD5] text-[#2B1B0F]/70 border-[#2B1B0F]"
+                      }`}
+                    >
+                      {leaderboardEnabled ? "Leaderboard ON" : "Leaderboard OFF"}
+                    </button>
+                  </div>
 
-                <p className="text-xs text-[#E5D7BE] leading-relaxed">
-                  As the teacher, you can enable or disable the public activity board for this class, or hide individual students.
-                </p>
+                  <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans">
+                    You can toggle the class leaderboard on or off, or hide individual students from public view.
+                  </p>
 
-                {/* Individual Student Visibility Table */}
-                <div className="space-y-2 pt-2">
-                  <span className="text-[11px] font-heading font-bold text-emerald-950 uppercase block">
-                    Student Visibility Controls
-                  </span>
-                  <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-1">
-                    {syntheticClassData.students.map((st) => {
-                      const isHidden = hiddenStudentIds.has(st.id);
-                      return (
-                        <div
-                          key={st.id}
-                          className="p-3 rounded-xl bg-white/80 border border-white/90 flex items-center justify-between text-xs shadow-2xs"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="font-heading font-bold text-[#FFF7E6]">
-                              #{st.rollNumber} {st.name}
-                            </span>
-                            {isHidden && (
-                              <span className="text-[9px] bg-[#E04A3F] text-[#FFF7E6] px-1 font-bold">
-                                Hidden
-                              </span>
-                            )}
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const next = new Set(hiddenStudentIds);
-                              if (next.has(st.id)) next.delete(st.id);
-                              else next.add(st.id);
-                              setHiddenStudentIds(next);
-                            }}
-                              className="min-h-[32px] px-3 py-1 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#2B1B0F] border border-[#2B1B0F] shadow-xs text-xs font-heading font-bold flex items-center gap-1 cursor-pointer transition-all active:translate-y-0.5"
+                  {/* Individual Student Visibility Table */}
+                  <div className="space-y-2 pt-2">
+                    <span className="text-[11px] font-heading font-bold text-[#2B1B0F] uppercase block">
+                      Student Visibility Controls
+                    </span>
+                    <div className="max-h-[260px] overflow-y-auto space-y-1.5 pr-1">
+                      {syntheticClassData.students.map((st) => {
+                        const isHidden = hiddenStudentIds.has(st.id);
+                        return (
+                          <div
+                            key={st.id}
+                            className="p-2.5 bg-white border-2 border-[#2B1B0F] flex items-center justify-between text-xs shadow-xs"
                           >
-                            {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
-                            <span>{isHidden ? "Show" : "Hide"}</span>
-                          </button>
-                        </div>
-                      );
-                    })}
+                            <div className="flex items-center gap-2">
+                              <span className="font-heading font-bold text-[#2B1B0F]">
+                                #{st.rollNumber} {st.name}
+                              </span>
+                              {isHidden && (
+                                <span className="text-[9px] bg-[#D9453D] text-white px-1.5 py-0.2 font-pixel">
+                                  Hidden
+                                </span>
+                              )}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const next = new Set(hiddenStudentIds);
+                                if (next.has(st.id)) next.delete(st.id);
+                                else next.add(st.id);
+                                setHiddenStudentIds(next);
+                              }}
+                              className="min-h-[28px] px-2.5 py-1 bg-white hover:bg-[#FFF7E6] text-[#2B1B0F] border border-[#2B1B0F] shadow-xs text-xs font-heading font-bold flex items-center gap-1 cursor-pointer transition-all"
+                            >
+                              {isHidden ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
+                              <span>{isHidden ? "Show" : "Hide"}</span>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Effort View: XP earned this week, questions answered, active streak */}
+            <div className="bg-[#FFFDF7] p-6 border-3 border-[#2B1B0F] shadow-block space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-[#2B1B0F]/15 pb-3">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide mb-1">
+                    EFFORT & ENGAGEMENT
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-heading font-extrabold text-[#2B1B0F]">
+                    Student Effort View
+                  </h3>
+                  <p className="text-xs text-[#2B1B0F]/80 font-sans">
+                    Weekly practice metrics: XP earned this week, questions answered, and active daily streak.
+                  </p>
+                </div>
+              </div>
+
+              {/* Effort Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b-2 border-[#2B1B0F] bg-[#FFF7E6] text-[#2B1B0F] font-heading font-bold">
+                      <th className="py-2.5 px-3">Student</th>
+                      <th className="py-2.5 px-3">XP Earned This Week</th>
+                      <th className="py-2.5 px-3">Questions Answered</th>
+                      <th className="py-2.5 px-3">Active Streak</th>
+                      <th className="py-2.5 px-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#2B1B0F]/15">
+                    {syntheticClassData.students.map((st, idx) => {
+                      const hash = (idx * 37 + 13) % 100;
+                      const weeklyXp = Math.floor(120 + hash * 2.8);
+                      const questionsAnswered = Math.floor(14 + (hash % 26));
+                      const streakDays = Math.max(1, (hash % 14) + 1);
+                      const avatarTiers = ["wood_scholar", "stone_scholar", "iron_scholar", "gold_scholar", "diamond_scholar"];
+                      const avatar = avatarTiers[idx % 5];
+
+                      return (
+                        <tr key={st.id} className="hover:bg-[#FFF7E6]/60 transition-colors">
+                          <td className="py-2.5 px-3">
+                            <div className="flex items-center gap-2">
+                              <AvatarPixel avatar={avatar} size={24} showBorder={true} />
+                              <div>
+                                <span className="font-heading font-bold text-[#2B1B0F]">
+                                  #{st.rollNumber} {st.name}
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-heading font-extrabold text-[#2B1B0F]">
+                            {weeklyXp} XP
+                          </td>
+                          <td className="py-2.5 px-3 font-sans font-bold text-[#2B1B0F]/90">
+                            {questionsAnswered} questions
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="inline-flex items-center gap-1 font-heading font-bold text-[#B8322B]">
+                              <svg className="w-3 h-3 shrink-0" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
+                                <rect x="5" y="1" width="2" height="2" fill="#B8322B" />
+                                <rect x="4" y="3" width="4" height="3" fill="#E5A823" />
+                                <rect x="3" y="6" width="6" height="4" fill="#B8322B" />
+                                <rect x="5" y="7" width="2" height="2" fill="#F4C542" />
+                              </svg>
+                              {streakDays} days in a row
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span
+                              className={`px-2 py-0.5 text-[10px] font-heading font-bold border ${
+                                st.needsAttention
+                                  ? "bg-[#FFF0F0] text-[#D9453D] border-[#D9453D]"
+                                  : "bg-[#5DAA3A]/20 text-[#2F6B22] border-[#2F6B22]"
+                              }`}
+                            >
+                              {st.needsAttention ? "Needs review" : "On track"}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Trophy, TrendingUp, Flame, Shield, EyeOff, Eye } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile, saveProfile } from "@/lib/storage";
+import { AvatarPixel } from "./AvatarPixel";
 
 interface LeaderboardEntry {
   studentId: string;
@@ -201,6 +202,13 @@ export function ClassLeaderboard({
                   >
                     {medal.badge}
                   </span>
+
+                  <AvatarPixel
+                    avatar={item.avatarPixel}
+                    size={28}
+                    showBorder={true}
+                    className="shrink-0"
+                  />
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">

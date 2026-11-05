@@ -57,6 +57,8 @@ import { evaluateStudentBadges } from "@/lib/badges";
 import { getCatGreeting } from "@/lib/greetings";
 import { getRevisionQueue, getCompanionRevisionGreeting } from "@/lib/revision";
 import { PathMap } from "@/components/student/PathMap";
+import { DailyQuests } from "@/components/student/DailyQuests";
+import { AvatarPixel } from "@/components/ui/AvatarPixel";
 
 export default function StudentDashboardPage() {
   const router = useRouter();
@@ -220,7 +222,11 @@ export default function StudentDashboardPage() {
         {/* Welcome Companion & Hero Bar */}
         <div className="bg-[#FFFDF7] p-5 sm:p-7 border-3 border-[#2B1B0F] shadow-block flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-start gap-4">
-
+            <AvatarPixel
+              avatar={profile.avatar_pixel || profile.avatarPixel || "wood_scholar"}
+              size={56}
+              alt={`${profile.name}'s avatar`}
+            />
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-2.5 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] text-[10px] font-pixel uppercase tracking-wide">
@@ -254,14 +260,22 @@ export default function StudentDashboardPage() {
             <div className="flex items-center justify-between text-[10px] text-[#2B1B0F]/70 font-sans font-medium">
               <span>{levelInfo.currentLevelXp} / {levelInfo.nextLevelXp} XP (Needs {levelInfo.xpUntilNextLevel} XP)</span>
               {profile.streak && profile.streak.current > 0 && (
-                <span className="flex items-center gap-0.5 font-heading font-bold text-[#B8322B]">
-                  <Flame className="w-3 h-3 text-[#B8322B] fill-[#B8322B]" />
-                  {profile.streak.current}d Streak
+                <span className="flex items-center gap-1 font-heading font-bold text-[#B8322B]">
+                  <svg className="w-3 h-3 shrink-0" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges">
+                    <rect x="5" y="1" width="2" height="2" fill="#B8322B" />
+                    <rect x="4" y="3" width="4" height="3" fill="#E5A823" />
+                    <rect x="3" y="6" width="6" height="4" fill="#B8322B" />
+                    <rect x="5" y="7" width="2" height="2" fill="#F4C542" />
+                  </svg>
+                  <span>{profile.streak.current} days in a row</span>
                 </span>
               )}
             </div>
           </div>
         </div>
+
+        {/* Daily Quests */}
+        <DailyQuests profile={profile} />
 
         {/* 1. NEW STUDENT EMPTY STATE BANNER (When no attempts or gaps recorded) */}
         {totalAttempted === 0 && !hasActiveGap && (

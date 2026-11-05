@@ -139,3 +139,67 @@ export function playGentleOopsSound(): void {
   }
 }
 
+/**
+ * Quest Complete chime (subtle cheerful 8-bit blip, <200ms)
+ */
+export function playQuestCompleteSound(): void {
+  if (!isSoundEnabled()) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const notes = [587.33, 739.99, 880.0]; // D5, F#5, A5
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "square";
+      const start = ctx.currentTime + i * 0.06;
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0.12, start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.08);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(start);
+      osc.stop(start + 0.09);
+    });
+  } catch {
+    // Audio playback error guarded
+  }
+}
+
+/**
+ * Badge Unlocked chime (subtle ascending chime, <250ms)
+ */
+export function playBadgeUnlockedSound(): void {
+  if (!isSoundEnabled()) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const notes = [659.25, 783.99, 1046.5]; // E5, G5, C6
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "triangle";
+      const start = ctx.currentTime + i * 0.07;
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0.15, start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.1);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(start);
+      osc.stop(start + 0.11);
+    });
+  } catch {
+    // Audio playback error guarded
+  }
+}
+

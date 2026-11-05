@@ -174,7 +174,7 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="px-2 py-0.5 bg-[#D9453D] text-white text-[9px] font-pixel uppercase tracking-wider">
-                        CRACKED
+                        GAP
                       </span>
                       <span className="text-[10px] font-heading font-bold text-[#D9453D]">
                         Class {node.concept.class}
@@ -349,18 +349,18 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
               );
             }
 
-            // LOCKED BLOCK (STONE GRAY DASHED)
+            // LOCKED BLOCK (DARK STONE BLOCK)
             return (
               <div
                 key={node.concept.id}
-                className="relative p-4 bg-[#EBE7DF] border-2 border-dashed border-[#8C827A] rounded-none flex flex-col justify-between min-h-[170px] text-[#8C827A] opacity-75"
+                className="relative p-4 bg-[#3E3A36] border-3 border-[#2B1B0F] shadow-[2px_2px_0px_#1B120C] rounded-none flex flex-col justify-between min-h-[170px] text-[#D9D9D9]"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="px-1.5 py-0.5 bg-[#D6D0C5] text-[#6E655F] text-[9px] font-pixel uppercase tracking-wider">
+                    <span className="px-2 py-0.5 bg-[#2B1B0F] text-[#B8B0A8] text-[9px] font-pixel uppercase tracking-wider">
                       LOCKED
                     </span>
-                    <span className="text-[10px] font-heading font-medium text-[#6E655F]">
+                    <span className="text-[10px] font-heading font-medium text-[#B8B0A8]">
                       Class {node.concept.class}
                     </span>
                   </div>
@@ -369,18 +369,18 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
                     <div className="text-[10px] font-pixel text-[#8C827A]">
                       STEP 0{node.stepNumber}
                     </div>
-                    <h3 className="font-heading font-bold text-xs sm:text-sm text-[#6E655F] mt-0.5 leading-snug">
+                    <h3 className="font-heading font-bold text-xs sm:text-sm text-[#FFF7E6] mt-0.5 leading-snug">
                       {conceptName}
                     </h3>
                   </div>
 
-                  <div className="flex items-center gap-1 text-[10px] font-heading font-medium text-[#8C827A]">
-                    <Lock className="w-3 h-3 shrink-0" />
+                  <div className="flex items-center gap-1 text-[10px] font-heading font-medium text-[#B8B0A8]">
+                    <Lock className="w-3.5 h-3.5 text-[#F4C542] shrink-0" />
                     <span>Complete previous steps first</span>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#D6D0C5] mt-2 text-[10px] font-heading font-bold text-slate-500">
+                <div className="pt-3 border-t border-[#2B1B0F] mt-2 text-[10px] font-heading font-bold text-[#8C827A]">
                   Prerequisites required
                 </div>
               </div>
@@ -398,15 +398,15 @@ export function PathMap({ profile, currentLang = "en" }: PathMapProps) {
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 bg-[#FFF0F0] border-2 border-[#D9453D] inline-block" />
-            <span className="text-[#D9453D]">Weak / Gap (Cracked Block)</span>
+            <span className="text-[#D9453D]">Active Gap (Cracked Block)</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 bg-[#F4C542] border border-[#2B1B0F] inline-block" />
             <span>In Progress</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 bg-white border border-[#2B1B0F] inline-block" />
-            <span>Available</span>
+            <span className="w-3.5 h-3.5 bg-[#3E3A36] border border-[#2B1B0F] inline-block" />
+            <span>Locked (Dark Stone)</span>
           </span>
         </div>
         <span className="text-[10px] font-pixel text-[#2B1B0F]/60 uppercase">

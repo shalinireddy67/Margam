@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Trophy, Award, Flame } from "lucide-react";
 import { getLevelProgress, XpRank } from "@/lib/xp-config";
 import { playLevelUpSound } from "@/lib/sound";
+import { MistakeCreature, MistakeCreatureType } from "./MistakeCreature";
 
 /**
  * Pixel Confetti Burst Component
@@ -86,34 +87,42 @@ export function MistakeCreatureCard({
 }) {
   const categoryInfo = (() => {
     const t = (tag || "").toLowerCase();
-    if (t.includes("sign") || t.includes("negative") || t.includes("minus")) {
+    if (t.includes("sign") || t.includes("negative") || t.includes("minus") || t.includes("inverted_result")) {
       return {
         name: "Sign Slip",
-        creature: "❄️",
-        line: "Sign error: when multiplying two negative numbers, the result is positive.",
+        creatureType: "sign_slip" as MistakeCreatureType,
+        line: "Check negative signs carefully: multiplying two negative numbers gives a positive result.",
         color: "#6EB5FF",
       };
     }
-    if (t.includes("added_instead") || t.includes("multipli") || t.includes("square")) {
+    if (t.includes("fraction") || t.includes("divided") || t.includes("inverted_division") || t.includes("denominator")) {
       return {
-        name: "Operation Ooze",
-        creature: "🧪",
-        line: "Operation error: check whether the problem asks to add, multiply, or square.",
+        name: "Fraction Fumble",
+        creatureType: "fraction_fumble" as MistakeCreatureType,
+        line: "Check fraction steps: inverted division or dropped denominators change the result.",
+        color: "#7EC8E3",
+      };
+    }
+    if (t.includes("bracket") || t.includes("distribut") || t.includes("term") || t.includes("middle_linear")) {
+      return {
+        name: "Distribution Dodge",
+        creatureType: "distribution_dodge" as MistakeCreatureType,
+        line: "Multiply the outside factor with every term inside the brackets.",
+        color: "#F2D16B",
+      };
+    }
+    if (t.includes("added_instead") || t.includes("multipli") || t.includes("calculat") || t.includes("arithmetic") || t.includes("slip")) {
+      return {
+        name: "Calculation Slip",
+        creatureType: "calculation_slip" as MistakeCreatureType,
+        line: "Check your arithmetic: re-add or re-multiply the values carefully.",
         color: "#FFB36B",
       };
     }
-    if (t.includes("bracket") || t.includes("distribut") || t.includes("term")) {
-      return {
-        name: "Bracket Bug",
-        creature: "🐛",
-        line: "Bracket error: multiply the outside factor with every term inside the parentheses.",
-        color: "#FFE9A8",
-      };
-    }
     return {
-      name: "Curious Critter",
-      creature: "🦉",
-      line: hint || "Review the steps above calmly.",
+      name: "Maths Helper",
+      creatureType: "general_glitch" as MistakeCreatureType,
+      line: hint || "Take your time and check each step to see where the value changed.",
       color: "#FFE9A8",
     };
   })();
@@ -125,10 +134,9 @@ export function MistakeCreatureCard({
       className="animate-gentle-shake motion-reduce:animate-none mt-4 p-3.5 bg-[#422816] border-3 border-[#A06A3C] shadow-[3px_3px_0px_#1B120C] text-[#FFF7E6] flex items-start gap-3 rounded-[2px]"
     >
       <div
-        className="w-9 h-9 shrink-0 flex items-center justify-center border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#1B120C] text-lg select-none"
-        style={{ backgroundColor: categoryInfo.color }}
+        className="w-10 h-10 shrink-0 flex items-center justify-center border-2 border-[#2B1B0F] shadow-[1px_1px_0px_#1B120C] bg-[#FFF7E6] p-1 select-none overflow-hidden"
       >
-        {categoryInfo.creature}
+        <MistakeCreature type={categoryInfo.creatureType} size="sm" className="w-8 h-8" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 mb-0.5">
@@ -144,7 +152,7 @@ export function MistakeCreatureCard({
         <button
           type="button"
           onClick={onDismiss}
-          className="text-xs text-[#D9D9D9] hover:text-[#FFE9A8] p-1 font-bold"
+          className="text-xs text-[#D9D9D9] hover:text-[#FFE9A8] p-1 font-bold cursor-pointer"
           aria-label="Dismiss helper"
         >
           ✕

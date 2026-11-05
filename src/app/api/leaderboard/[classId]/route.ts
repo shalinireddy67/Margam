@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited } from "@/lib/server/rate-limit";
 import syntheticClassData from "../../../../../data/synthetic-class.json";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export interface LeaderboardEntry {
   studentId: string;
@@ -39,18 +41,76 @@ export async function GET(
     const { searchParams } = new URL(req.url);
     const tab = searchParams.get("tab") || "weekly"; // "weekly" | "most_improved" | "streak_kings"
     const currentStudentId = searchParams.get("studentId") || "";
-    const hideOptedOut = searchParams.get("hideOptedOut") !== "false";
 
-    const cacheKey = `${classId}:${tab}`;
-    const cached = leaderboardCache.get(cacheKey);
-    const now = Date.now();
+    // 1. If Supabase is configured, read from real class_weekly_leaderboard view
+    if (isSupabaseConfigured()) {
+      const admin = getSupabaseAdminClient();
+      if (admin) {
+        const { data: dbRows, error: dbErr } = await admin
+          .from("class_weekly_leaderboard")
+          .select("class_id, student_id, display_name, avatar_pixel, weekly_xp, rank_position")
+          .eq("class_id", classId)
+          .order("rank_position", { ascending: true })
+          .limit(10);
 
-    // Generate entries based on class dataset
+        if (!dbErr && dbRows && dbRows.length > 0) {
+          const top10: LeaderboardEntry[] = dbRows.map((row: any) => {
+            const weeklyXp = Number(row.weekly_xp) || 0;
+            const level = Math.max(1, Math.floor(weeklyXp / 80) + 1);
+            let rankName = "Wood";
+            let rankBadge = "🪵";
+            if (level >= 20) {
+              rankName = "Diamond";
+              rankBadge = "💎";
+            } else if (level >= 15) {
+              rankName = "Gold";
+              rankBadge = "👑";
+            } else if (level >= 10) {
+              rankName = "Iron";
+              rankBadge = "⚔️";
+            } else if (level >= 5) {
+              rankName = "Stone";
+              rankBadge = "🪨";
+            }
+
+            return {
+              studentId: row.student_id,
+              displayName: row.display_name,
+              avatarPixel: row.avatar_pixel || "wood_scholar",
+              level,
+              rankBadge,
+              rankName,
+              weeklyXp,
+              streakDays: Math.max(1, Math.floor(weeklyXp / 60) + 1),
+              improvedDelta: 15,
+              rankPosition: Number(row.rank_position) || 1,
+              isCurrentUser: currentStudentId ? row.student_id === currentStudentId : false,
+            };
+          });
+
+          return NextResponse.json({
+            classId,
+            tab,
+            resetWindowLabel: "Resets Mondays at 00:00 IST",
+            totalMembers: dbRows.length,
+            leaderboard: top10,
+            userRelativePosition: null,
+          });
+        }
+      }
+    }
+
+    // 2. Synthetic fallback (offline demo)
     const rawStudents = syntheticClassData.students || [];
+    const AVATAR_TIERS = [
+      "wood_scholar",
+      "stone_scholar",
+      "iron_scholar",
+      "gold_scholar",
+      "diamond_scholar",
+    ];
 
-    // Synthesize weekly XP, streaks, and levels safely and deterministically
     const entries: LeaderboardEntry[] = rawStudents.map((s, idx) => {
-      // Deterministic weekly XP derived from student metrics
       const hash = (idx * 37 + 13) % 100;
       const weeklyXp = Math.floor(120 + hash * 2.8);
       const streakDays = Math.max(1, (hash % 14) + 1);
@@ -73,14 +133,17 @@ export async function GET(
         rankBadge = "🪨";
       }
 
-      // Privacy: Only use chosen first-name or anonymous alias (never real full names or private scores)
+      // If student opted out (profiles.opt_out_leaderboard = true), show 'A classmate'
+      const isOptedOut = (s as any).optOutOfLeaderboard === true;
       const firstName = s.name.split(" ")[0];
-      const displayName = `${firstName}_${s.rollNumber}`;
+      const displayName = isOptedOut ? "A classmate" : `${firstName}_${s.rollNumber}`;
+      const tierIdx = Math.min(AVATAR_TIERS.length - 1, Math.floor((level - 1) / 5));
+      const avatarPixel = (s as any).avatarPixel || AVATAR_TIERS[tierIdx];
 
       return {
         studentId: s.id,
         displayName,
-        avatarPixel: `avatar_${(idx % 6) + 1}`,
+        avatarPixel,
         level,
         rankBadge,
         rankName,
@@ -97,7 +160,6 @@ export async function GET(
     } else if (tab === "streak_kings") {
       entries.sort((a, b) => b.streakDays - a.streakDays);
     } else {
-      // Default: weekly XP
       entries.sort((a, b) => b.weeklyXp - a.weeklyXp);
     }
 
@@ -180,4 +242,3 @@ export async function GET(
     );
   }
 }
-

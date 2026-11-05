@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   Award,
-  Star,
-  Lock,
   CheckCircle2,
-  TrendingUp,
-  Zap,
+  ArrowRight,
 } from "lucide-react";
-import { LearnerProfile } from "@/lib/types";
+import { LearnerProfile, SupportedLanguage } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -18,22 +15,17 @@ import {
   SkeletonCard,
   OfflineBanner,
 } from "@/components/ui";
-
-interface DerivedSticker {
-  id: string;
-  title: string;
-  description: string;
-  unlocked: boolean;
-  unlockedAtLabel?: string;
-  color: "yellow" | "cyan" | "pink" | "green" | "orange";
-  icon: "star" | "award" | "trending" | "zap";
-}
+import { evaluateStudentBadges, EvaluatedBadge } from "@/lib/badges";
+import { PixelBadgeIcon } from "@/components/ui/PixelBadgeIcon";
+import { playBadgeUnlockedSound } from "@/lib/sound";
 
 export default function StickersPage() {
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [currentLang, setCurrentLang] = useState<SupportedLanguage>("en");
+  const hasPlayedChimeRef = useRef(false);
 
   const initStickers = useCallback(() => {
     try {
@@ -49,6 +41,8 @@ export default function StickersPage() {
       }
 
       setProfile(active);
+      const savedLang = (localStorage.getItem("margam_language") as SupportedLanguage) || "en";
+      setCurrentLang(savedLang);
       setLoading(false);
     } catch (err) {
       console.error("Error loading learner stickers:", err);
@@ -97,7 +91,7 @@ export default function StickersPage() {
             <button
               type="button"
               onClick={initStickers}
-              className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F]"
+              className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#5DAA3A] text-[#2B1B0F] border-[3px] border-[#2B1B0F] font-heading font-bold text-sm shadow-[3px_3px_0px_#2B1B0F] cursor-pointer"
             >
               Try again
             </button>
@@ -138,68 +132,9 @@ export default function StickersPage() {
     );
   }
 
-  // Derive all stickers strictly from existing profile fields
-  const completedTopics = Object.values(profile.topicProgress).filter((t) => t.status === "completed");
-  const completedCount = completedTopics.length;
-
-  const stickers: DerivedSticker[] = [
-    {
-      id: "first_step",
-      title: "First Step",
-      description: `Began learning in Class ${profile.selectedClass}`,
-      unlocked: true,
-      unlockedAtLabel: "Earned on sign in",
-      color: "green",
-      icon: "star",
-    },
-    {
-      id: "concept_pioneer",
-      title: "Concept Pioneer",
-      description: "Mastered first mathematical concept",
-      unlocked: completedCount >= 1,
-      unlockedAtLabel: completedCount >= 1 ? "1 topic completed" : "Complete 1 topic to earn",
-      color: "yellow",
-      icon: "award",
-    },
-    {
-      id: "adaptive_climber",
-      title: "Adaptive Climber",
-      description: "Reached Difficulty Level 2 or higher",
-      unlocked: profile.currentDifficulty >= 2,
-      unlockedAtLabel: profile.currentDifficulty >= 2 ? `Level ${profile.currentDifficulty} reached` : "Advance difficulty to earn",
-      color: "cyan",
-      icon: "trending",
-    },
-    {
-      id: "focus_streak",
-      title: "Focus Streak",
-      description: "Answered 3 questions correctly in a row",
-      unlocked: profile.consecutiveCorrect >= 3,
-      unlockedAtLabel: profile.consecutiveCorrect >= 3 ? "3 correct streak achieved" : "Answer 3 correct in a row to earn",
-      color: "pink",
-      icon: "zap",
-    },
-    {
-      id: "mastery_builder",
-      title: "Mastery Builder",
-      description: "Completed 3 sequential concepts",
-      unlocked: completedCount >= 3,
-      unlockedAtLabel: completedCount >= 3 ? `${completedCount} topics completed` : `Complete 3 topics to earn (${completedCount}/3)`,
-      color: "orange",
-      icon: "award",
-    },
-    {
-      id: "top_performer",
-      title: "Level 3 Explorer",
-      description: "Reached Difficulty Level 3 in adaptive practice",
-      unlocked: profile.currentDifficulty === 3,
-      unlockedAtLabel: profile.currentDifficulty === 3 ? "Level 3 achieved" : "Reach difficulty level 3 to earn",
-      color: "yellow",
-      icon: "star",
-    },
-  ];
-
-  const unlockedCount = stickers.filter((s) => s.unlocked).length;
+  // Derive badges from real history
+  const evaluatedBadges: EvaluatedBadge[] = evaluateStudentBadges(profile, [currentLang]);
+  const unlockedCount = evaluatedBadges.filter((b) => b.unlocked).length;
 
   return (
     <div className="min-h-[100dvh] bg-[#FFF7E6] text-[#2B1B0F] flex flex-col justify-between">
@@ -207,90 +142,97 @@ export default function StickersPage() {
 
       <Navigation
         currentTab="stickers"
+        currentLang={currentLang}
+        onLanguageChange={setCurrentLang}
         profile={profile}
       />
 
       <main className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex-1 space-y-6 md:pl-28 lg:pl-8 pb-10 lg:pb-12">
         {/* Showcase Banner */}
-        <div className="bg-white p-6 sm:p-8 border-[3px] border-[#2B1B0F] shadow-[4px_4px_0px_#2B1B0F] text-center space-y-4 max-w-2xl mx-auto">
-          <div className="w-16 h-16 bg-[#F4C542] border-[3px] border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F]">
+        <div className="bg-[#FFFDF7] p-6 sm:p-8 border-3 border-[#2B1B0F] shadow-block text-center space-y-4 max-w-2xl mx-auto">
+          <div className="w-16 h-16 bg-[#F4C542] border-3 border-[#2B1B0F] shadow-[3px_3px_0px_#2B1B0F] flex items-center justify-center mx-auto text-[#2B1B0F]">
             <Award className="w-8 h-8" />
           </div>
 
           <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#2B1B0F]">
-            Badges
+            Badge Inventory
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed max-w-lg mx-auto">
-            Earn badges as you complete topics and quick checks.
+            Badges earned from your real study history, completed lessons, streaks, and fixed gaps.
           </p>
           <div className="pt-1">
-            <span className="inline-block px-3.5 py-1.5 bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F]">
-              {unlockedCount} of {stickers.length} badges earned
+            <span className="inline-block px-3.5 py-1.5 bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-xs">
+              {unlockedCount} of {evaluatedBadges.length} badges earned
             </span>
           </div>
         </div>
 
-        {/* Empty State: If no badges unlocked beyond onboarding */}
-        {unlockedCount <= 1 && completedCount === 0 && (
-          <div className="bg-white p-4 border-[2px] border-[#2B1B0F] shadow-[2px_2px_0px_#2B1B0F] text-center space-y-2 max-w-md mx-auto">
-            <p className="text-xs font-sans font-bold text-[#2B1B0F]/80">
-              Complete a lesson or practice worksheet to earn more badges.
-            </p>
-          </div>
-        )}
+        {/* Badges Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {evaluatedBadges.map((badge) => {
+            const title = badge.title[currentLang] || badge.title.en;
+            const description = badge.description[currentLang] || badge.description.en;
 
-        {/* Stickers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {stickers.map((st) => {
-            const colorClass = {
-              green: "bg-[#5DAA3A] text-[#2B1B0F]",
-              yellow: "bg-[#FFE9A8] text-[#2B1B0F]",
-              cyan: "bg-[#6EB5FF] text-[#2B1B0F]",
-              pink: "bg-[#FF8FA3] text-[#2B1B0F]",
-              orange: "bg-[#FFB36B] text-[#2B1B0F]",
-            }[st.color];
+            if (!badge.unlocked) {
+              // LOCKED BADGE (GREY STONE BLOCK WITH LOCK ICON)
+              return (
+                <div
+                  key={badge.id}
+                  className="p-4 bg-[#3E3A36] border-3 border-[#2B1B0F] shadow-[3px_3px_0px_#1B120C] text-center space-y-3 select-none flex flex-col justify-between min-h-[200px]"
+                >
+                  <div className="space-y-3">
+                    <div className="w-14 h-14 bg-[#2B1B0F] border-2 border-[#1B120C] flex items-center justify-center mx-auto shadow-inner">
+                      <PixelBadgeIcon type="lock" unlocked={false} size={28} />
+                    </div>
 
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-center gap-1.5">
+                        <h2 className="font-heading font-bold text-sm text-[#D9D9D9]">
+                          {title}
+                        </h2>
+                      </div>
+                      <p className="text-xs font-sans text-[#A69E96] leading-snug">
+                        {description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#2B1B0F]">
+                    <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#2B1B0F] text-[#8C827A] border border-[#1B120C] block">
+                      {badge.unlockedAtLabel}
+                    </span>
+                  </div>
+                </div>
+              );
+            }
+
+            // UNLOCKED BADGE (PIXEL ARTWORK AND TITLE)
             return (
               <div
-                key={st.id}
-                className={`p-4 border-[3px] border-[#2B1B0F] text-center space-y-3 select-none ${
-                  st.unlocked
-                    ? "bg-white shadow-[4px_4px_0px_#2B1B0F]"
-                    : "bg-[#E5D7BE]/40 shadow-[2px_2px_0px_#2B1B0F] opacity-75 border-dashed"
-                }`}
+                key={badge.id}
+                className="p-4 bg-white border-3 border-[#2B1B0F] shadow-block text-center space-y-3 select-none flex flex-col justify-between min-h-[200px] transition-transform hover:-translate-y-0.5"
               >
-                <div
-                  className={`w-14 h-14 border-2 border-[#2B1B0F] flex items-center justify-center mx-auto shadow-[2px_2px_0px_#2B1B0F] ${
-                    st.unlocked ? colorClass : "bg-[#D8D8D8] text-[#2B1B0F]/50"
-                  }`}
-                >
-                  {st.unlocked ? (
-                    st.icon === "star" ? <Star className="w-7 h-7" /> :
-                    st.icon === "award" ? <Award className="w-7 h-7" /> :
-                    st.icon === "trending" ? <TrendingUp className="w-7 h-7" /> :
-                    <Zap className="w-7 h-7" />
-                  ) : (
-                    <Lock className="w-6 h-6 text-[#2B1B0F]/50" />
-                  )}
-                </div>
-
-                <div className="space-y-1">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <h2 className="font-heading font-extrabold text-base text-[#2B1B0F]">
-                      {st.title}
-                    </h2>
-                    {st.unlocked && <CheckCircle2 className="w-4 h-4 text-[#5DAA3A]" />}
+                <div className="space-y-3">
+                  <div className="w-14 h-14 bg-[#FFF7E6] border-2 border-[#2B1B0F] flex items-center justify-center mx-auto shadow-[2px_2px_0px_#2B1B0F]">
+                    <PixelBadgeIcon type={badge.icon} unlocked={true} size={32} />
                   </div>
-                  <p className="text-xs font-sans font-medium text-[#2B1B0F]/75 leading-snug">
-                    {st.description}
-                  </p>
+
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-center gap-1.5">
+                      <h2 className="font-heading font-extrabold text-base text-[#2B1B0F]">
+                        {title}
+                      </h2>
+                      <CheckCircle2 className="w-4 h-4 text-[#5DAA3A] shrink-0" />
+                    </div>
+                    <p className="text-xs font-sans font-medium text-[#2B1B0F]/75 leading-snug">
+                      {description}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="pt-2 border-t border-[#2B1B0F]/20">
-                  <span className={`text-[10px] font-heading font-bold px-2 py-0.5 border border-[#2B1B0F] ${
-                    st.unlocked ? "bg-[#5DAA3A] text-[#2B1B0F]" : "bg-transparent text-[#2B1B0F]/60"
-                  }`}>
-                    {st.unlockedAtLabel}
+                  <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#5DAA3A] text-[#2B1B0F] border border-[#2B1B0F] shadow-xs block">
+                    {badge.unlockedAtLabel}
                   </span>
                 </div>
               </div>

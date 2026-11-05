@@ -217,6 +217,8 @@ export interface LearnerProfile {
   unlockedBadgeIds?: string[];
   soundEnabled?: boolean;
   optOutOfLeaderboard?: boolean;
+  avatar_pixel?: "wood_scholar" | "stone_scholar" | "iron_scholar" | "gold_scholar" | "diamond_scholar" | string;
+  avatarPixel?: "wood_scholar" | "stone_scholar" | "iron_scholar" | "gold_scholar" | "diamond_scholar" | string;
 }
 
 export interface AttemptComparison {

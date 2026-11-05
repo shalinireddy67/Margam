@@ -59,10 +59,10 @@ export function evaluateDailyStreak(
     current = 1;
     longest = 1;
     streakIncreased = true;
-    message = "First day of your streak! 🔥 Maru is cheering for you!";
+    message = "First day of your streak! Keep going!";
   } else if (existing.lastActiveDate === todayIst) {
     // Already practiced today; maintain streak
-    message = "You have already secured today's streak flame! 🔥";
+    message = "You already practiced today. Streak safe!";
   } else {
     const diff = getDaysDifference(existing.lastActiveDate, todayIst);
 
@@ -71,25 +71,25 @@ export function evaluateDailyStreak(
       current += 1;
       streakIncreased = true;
       if (current > longest) longest = current;
-      message = `${current}-Day Streak! 🔥 Maru does a victory hop!`;
+      message = `${current} days in a row!`;
 
-      // Check if weekly freeze token milestone is reached (every 7 streak days)
+      // Check if weekly rest token milestone is reached (every 7 streak days)
       if (current % XP_CONFIG.STREAK_FREEZE_REWARD_DAYS === 0 && freezeTokens < XP_CONFIG.MAX_STREAK_FREEZES) {
         freezeTokens += 1;
         lastFreezeEarnedDate = todayIst;
-        message += " 🛡️ You earned a Streak Freeze Token!";
+        message += " 1 rest day earned!";
       }
     } else if (diff === 2 && freezeTokens > 0) {
-      // Missed exactly 1 day, but learner has a streak freeze token!
+      // Missed 1 day: weekly rest day used without breaking streak!
       freezeTokens -= 1;
       freezeUsed = true;
-      current += 1; // Saved!
+      current += 1; // Saved by rest day
       if (current > longest) longest = current;
-      message = `🛡️ Streak Freeze protected your flame! You're on day ${current}!`;
+      message = `Rest day used. You are on day ${current} in a row.`;
     } else {
       // Reset streak gently without punishment
       current = 1;
-      message = "Maru missed you! Welcome back — starting fresh with Day 1! ✨";
+      message = "Welcome back — starting fresh with Day 1.";
     }
   }
 
@@ -122,18 +122,18 @@ export function getStreakReminder(streakState?: LearnerProfile["streak"]): {
     if (currentStreak > 0) {
       return {
         needsPracticeToday: true,
-        reminderText: `Maru misses you! Play 1 lesson today to keep your ${currentStreak}-day flame alive 🔥`,
+        reminderText: `Practice 1 lesson today to keep your ${currentStreak} days in a row active.`,
       };
     }
     return {
       needsPracticeToday: true,
-      reminderText: "Maru is ready. Complete today's practice to keep your streak active.",
+      reminderText: "Complete today's practice to start your daily streak.",
     };
   }
 
   return {
     needsPracticeToday: false,
-    reminderText: "Today's flame is burning bright! Great job practicing today 🔥",
+    reminderText: "Great job practicing today!",
   };
 }
 

@@ -14,3 +14,4 @@ export * from "./MistakeCreature";
 export * from "./Logo";
 export * from "./WitchCat";
 export * from "./AppStateNotice";
+export * from "./AvatarPixel";

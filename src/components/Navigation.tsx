@@ -207,11 +207,16 @@ export function Navigation({
                   {/* Streak Pill */}
                   {profile.streak && profile.streak.current > 0 && (
                     <div
-                      className="flex items-center gap-1 px-2 py-1 bg-[#FFF7E6] border-2 border-[#2B1B0F] text-xs font-sans font-extrabold text-[#7A4B2A] shadow-[2px_2px_0px_#2B1B0F] select-none"
-                      title={`${profile.streak.current} day study streak`}
+                      className="flex items-center gap-1.5 px-2 py-1 bg-[#FFF7E6] border-2 border-[#2B1B0F] text-xs font-sans font-extrabold text-[#7A4B2A] shadow-[2px_2px_0px_#2B1B0F] select-none"
+                      title={`${profile.streak.current} days in a row`}
                     >
-                      <Flame className="w-3.5 h-3.5 text-[#E04A3F] fill-[#E04A3F]" aria-hidden="true" />
-                      <span>{profile.streak.current}d</span>
+                      <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" shapeRendering="crispEdges" aria-hidden="true">
+                        <rect x="5" y="1" width="2" height="2" fill="#B8322B" />
+                        <rect x="4" y="3" width="4" height="3" fill="#E5A823" />
+                        <rect x="3" y="6" width="6" height="4" fill="#B8322B" />
+                        <rect x="5" y="7" width="2" height="2" fill="#F4C542" />
+                      </svg>
+                      <span>{profile.streak.current} days in a row</span>
                     </div>
                   )}
 
