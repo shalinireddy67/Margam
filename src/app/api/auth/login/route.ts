@@ -8,6 +8,8 @@ import { checkLockout, recordFailedAttempt, resetLockout } from "@/lib/server/lo
 import { generateStudentEmail, mockDb } from "@/lib/server/auth-helpers";
 import { signSessionPayload } from "@/lib/server/auth";
 
+export const dynamic = "force-dynamic";
+
 const LoginSchema = z.object({
   identifier: z.string().min(1, "Username or email is required"),
   password: z.string().min(1, "Password is required"),
@@ -137,15 +139,33 @@ export async function POST(req: NextRequest) {
         avatarPixel: profile.avatar_pixel,
       };
 
-      // Return user data in response body (cookies are already set on response by routeClient)
-      return NextResponse.json({
+      // Sign the session token with HMAC for edge middleware verification
+      const signedToken = signSessionPayload({
+        userId: signInData.user.id,
+        role: profile.role,
+        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      });
+
+      const finalResponse = NextResponse.json({
         success: true,
         user: authenticatedUser,
         role: profile.role,
         redirectUrl: profile.role === "teacher" ? "/teacher" : "/student",
-      }, {
-        headers: response.headers,
       });
+
+      for (const cookie of response.cookies.getAll()) {
+        finalResponse.cookies.set(cookie);
+      }
+
+      finalResponse.cookies.set("margam_auth_token", signedToken, {
+        httpOnly: true,
+        secure: (process.env.NODE_ENV as string) === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
+
+      return finalResponse;
     } else {
       if (process.env.NODE_ENV === 'production') {
       return NextResponse.json(
@@ -229,6 +249,9 @@ export async function POST(req: NextRequest) {
       return response;
     }
   } catch (err) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Login route error:", err);
     return NextResponse.json(
       { error: "Internal server error during login" },

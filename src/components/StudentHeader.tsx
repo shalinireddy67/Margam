@@ -58,7 +58,7 @@ export default function StudentHeader({
             </Link>
           ) : (
             <Link
-              href="/"
+              href={profile ? "/student" : "/"}
               className="flex items-center min-h-[44px] gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2F4FB5] rounded-xs"
             >
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xs bg-[#6DB33F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center text-[#1E1610] shrink-0">

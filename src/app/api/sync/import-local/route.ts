@@ -5,6 +5,8 @@ import { mockDb, StoredAttempt } from "@/lib/server/auth-helpers";
 import { requireStudent, AuthUserSession } from "@/lib/server/auth";
 import { LearnerProfile, TopicProgress } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/sync/import-local
  * Pulls the consolidated cloud progress for the authenticated student.
@@ -14,6 +16,9 @@ export async function GET(req: NextRequest) {
   try {
     session = await requireStudent(req);
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     return NextResponse.json(
       { error: err.message || "Student authorization required" },
       { status: err.statusCode || 401 }
@@ -86,6 +91,9 @@ export async function GET(req: NextRequest) {
         attempts: attemptsRows || [],
       });
     } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
       console.error("[Sync GET] Failed to fetch cloud progress:", err);
       return NextResponse.json(
         { error: "Failed to retrieve cloud progress" },
@@ -159,6 +167,9 @@ export async function POST(req: NextRequest) {
   try {
     session = await requireStudent(req);
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     return NextResponse.json(
       { error: err.message || "Student authorization required" },
       { status: err.statusCode || 401 }
@@ -440,6 +451,9 @@ export async function POST(req: NextRequest) {
       });
     }
   } catch (err) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Error importing local progress:", err);
     return NextResponse.json(
       { error: "Failed to import local progress" },

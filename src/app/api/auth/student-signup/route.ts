@@ -12,6 +12,8 @@ import {
 } from "@/lib/server/auth-helpers";
 import { signSessionPayload } from "@/lib/server/auth";
 
+export const dynamic = "force-dynamic";
+
 const StudentSignUpSchema = z.object({
   username: z
     .string()
@@ -191,6 +193,20 @@ export async function POST(req: NextRequest) {
         });
       }
 
+      const signedToken = signSessionPayload({
+        userId,
+        role: "student",
+        expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      });
+
+      response.cookies.set("margam_auth_token", signedToken, {
+        httpOnly: true,
+        secure: (process.env.NODE_ENV as string) === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
+
       return response;
     } else {
       if (process.env.NODE_ENV === 'production') {
@@ -296,6 +312,9 @@ export async function POST(req: NextRequest) {
       return response;
     }
   } catch (err) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Student sign-up route error:", err);
     return NextResponse.json(
       { error: "Internal server error during student sign-up" },

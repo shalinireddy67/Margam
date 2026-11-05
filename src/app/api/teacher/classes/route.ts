@@ -6,11 +6,16 @@ import { requireTeacher, AuthUserSession } from "@/lib/server/auth";
 import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
 import { seedMockDatabase } from "@/lib/demo/seeder";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   let session: AuthUserSession;
   try {
     session = await requireTeacher(req);
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     return NextResponse.json(
       { error: err.message || "Teacher authorization required" },
       { status: err.statusCode || 401 }
@@ -206,6 +211,9 @@ export async function POST(req: NextRequest) {
   try {
     session = await requireTeacher(req);
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     return NextResponse.json(
       { error: err.message || "Teacher authorization required" },
       { status: err.statusCode || 401 }
@@ -280,6 +288,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, class: newClass });
     }
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Teacher class creation error:", err);
     return NextResponse.json(
       { error: "Failed to create class" },

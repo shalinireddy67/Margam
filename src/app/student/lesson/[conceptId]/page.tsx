@@ -12,7 +12,7 @@ export default function StudentLessonRedirectPage() {
     if (conceptId) {
       router.replace(`/lesson/${conceptId}`);
     } else {
-      router.replace("/");
+      router.replace("/student");
     }
   }, [conceptId, router]);
 

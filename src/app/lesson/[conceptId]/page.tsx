@@ -106,7 +106,7 @@ function LessonContent() {
 
       const active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        router.replace("/student");
         return;
       }
 
@@ -201,7 +201,7 @@ function LessonContent() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />
@@ -224,7 +224,7 @@ function LessonContent() {
           <h2 className="font-heading font-extrabold text-base text-emerald-950">Lesson Not Found</h2>
           <p className="text-xs text-slate-600 font-sans">This lesson content is not yet available.</p>
           <Link
-            href="/"
+            href="/student"
             className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited } from "@/lib/server/rate-limit";
 import syntheticClassData from "../../../../../data/synthetic-class.json";
 
+export const dynamic = "force-dynamic";
+
 export interface LeaderboardEntry {
   studentId: string;
   displayName: string;
@@ -173,6 +175,9 @@ export async function GET(
       },
     });
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Error in /api/leaderboard/[classId]:", err);
     return NextResponse.json(
       { error: "Internal server error fetching class leaderboard" },

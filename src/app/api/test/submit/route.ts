@@ -13,6 +13,8 @@ import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { mockDb } from "@/lib/server/auth-helpers";
 import { getAuthenticatedUser } from "@/lib/server/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -187,6 +189,9 @@ export async function POST(req: NextRequest) {
         });
       }
     } catch (saveErr) {
+    if ((saveErr as any)?.digest === "DYNAMIC_SERVER_USAGE" || (saveErr as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw saveErr;
+    }
       console.warn("[Test Submit] Could not persist attempt to database:", saveErr);
     }
 
@@ -211,6 +216,9 @@ export async function POST(req: NextRequest) {
       })),
     });
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Error in /api/test/submit:", err);
     return NextResponse.json(
       { error: "Internal server error" },

@@ -9,6 +9,8 @@ import { mockDb } from "@/lib/server/auth-helpers";
 import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
 import { seedMockDatabase, seedSupabaseDatabase } from "@/lib/demo/seeder";
 
+export const dynamic = "force-dynamic";
+
 const DemoLoginSchema = z.object({
   role: z.enum(["teacher", "student"]),
   studentIndex: z.number().int().min(0).max(24).optional(),
@@ -89,16 +91,33 @@ export async function POST(req: NextRequest) {
             school: DEMO_SCHOOL_CONFIG.schoolName,
           };
 
-          return NextResponse.json(
-            {
-              success: true,
-              user: userPayload,
-              role,
-              redirectUrl: isTeacher ? "/teacher" : "/student",
-              demoNotice: "Authenticated as Demo Account",
-            },
-            { headers: response.headers }
-          );
+          const signedToken = signSessionPayload({
+            userId: signInData.user.id,
+            role,
+            expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000,
+          });
+
+          const finalResponse = NextResponse.json({
+            success: true,
+            user: userPayload,
+            role,
+            redirectUrl: isTeacher ? "/teacher" : "/student",
+            demoNotice: "Authenticated as Demo Account",
+          });
+
+          for (const cookie of response.cookies.getAll()) {
+            finalResponse.cookies.set(cookie);
+          }
+
+          finalResponse.cookies.set("margam_auth_token", signedToken, {
+            httpOnly: true,
+            secure: (process.env.NODE_ENV as string) === "production",
+            path: "/",
+            maxAge: 60 * 60 * 24 * 30,
+            sameSite: "lax",
+          });
+
+          return finalResponse;
         }
       }
     }
@@ -138,6 +157,9 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("[Demo Login Error]:", err);
     return NextResponse.json({ error: "Failed to authenticate demo user" }, { status: 500 });
   }

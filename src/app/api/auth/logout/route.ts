@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseRouteClient } from "@/lib/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   const response = NextResponse.json({ success: true, message: "Logged out" });
 
@@ -9,6 +11,9 @@ export async function POST(req: NextRequest) {
     try {
       await supabase.auth.signOut();
     } catch (err) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
       console.warn("[Auth] Error signing out of Supabase:", err);
     }
   }

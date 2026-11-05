@@ -116,7 +116,7 @@ export default function SelectClassPage() {
       <header className="max-w-3xl mx-auto w-full mb-6">
         <div className="flex items-center justify-between">
           <Link
-            href="/"
+            href={profile ? "/student" : "/"}
             className="font-heading font-extrabold text-base sm:text-lg text-[#1E1610] tracking-wider no-underline hover:opacity-85"
           >
             MARGAM

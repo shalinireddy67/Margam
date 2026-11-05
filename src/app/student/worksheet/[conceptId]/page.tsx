@@ -140,7 +140,7 @@ export default function AdaptivePracticeRunnerPage() {
 
       const active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        router.replace("/student");
         return;
       }
 
@@ -240,7 +240,7 @@ export default function AdaptivePracticeRunnerPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
@@ -280,7 +280,7 @@ export default function AdaptivePracticeRunnerPage() {
             Practice questions for this topic are currently being prepared.
           </p>
           <Link
-            href="/"
+            href="/student"
             className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-bold active:translate-x-[1px] active:translate-y-[1px]"
           >
             Return to Learning Path

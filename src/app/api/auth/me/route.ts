@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedUser } from "@/lib/server/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const session = await getAuthenticatedUser(req);
@@ -23,6 +25,9 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (err) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("[Auth] /api/auth/me error:", err);
     return NextResponse.json({ authenticated: false, user: null });
   }

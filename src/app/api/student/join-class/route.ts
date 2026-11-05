@@ -6,6 +6,8 @@ import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { requireStudent, AuthUserSession } from "@/lib/server/auth";
 import { mockDb } from "@/lib/server/auth-helpers";
 
+export const dynamic = "force-dynamic";
+
 const JoinClassSchema = z.object({
   classCode: z.string().min(1, "Class code is required"),
 });
@@ -15,6 +17,9 @@ export async function POST(req: NextRequest) {
   try {
     session = await requireStudent(req);
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     return NextResponse.json(
       { error: err.message || "Student authorization required" },
       { status: err.statusCode || 401 }
@@ -156,6 +161,9 @@ export async function POST(req: NextRequest) {
       });
     }
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Join class error:", err);
     return NextResponse.json(
       { error: "Internal server error joining class" },

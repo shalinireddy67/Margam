@@ -6,6 +6,8 @@ import { createSignedSession } from "@/lib/server/session";
 import { isRateLimited } from "@/lib/server/rate-limit";
 import { getAuthenticatedUser } from "@/lib/server/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -84,6 +86,9 @@ export async function POST(req: NextRequest) {
       shortfall,
     });
   } catch (err: any) {
+    if ((err as any)?.digest === "DYNAMIC_SERVER_USAGE" || (err as any)?.digest?.startsWith?.("NEXT_REDIRECT")) {
+      throw err;
+    }
     console.error("Error in /api/diagnostic/start:", err);
     return NextResponse.json(
       { error: "Internal server error" },

@@ -101,7 +101,7 @@ export default function ChapterTestRunnerPage() {
 
       const active = getActiveProfile();
       if (!active || !active.selectedClass) {
-        router.replace("/");
+        router.replace("/student");
         return;
       }
       setProfile(active);
@@ -187,7 +187,7 @@ export default function ChapterTestRunnerPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
@@ -227,7 +227,7 @@ export default function ChapterTestRunnerPage() {
           profile={profile}
           currentLang={currentLang}
           onLanguageChange={setCurrentLang}
-          backHref="/"
+          backHref="/student"
           backLabel="Back to Lessons"
         />
         <main className="max-w-xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center text-center">
@@ -243,7 +243,7 @@ export default function ChapterTestRunnerPage() {
             </p>
             <div className="pt-2">
               <Link
-                href="/"
+                href="/student"
                 className="inline-flex items-center justify-center min-h-[46px] px-6 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all active:translate-x-[1px] active:translate-y-[1px]"
               >
                 <ArrowLeft className="w-4 h-4 mr-1.5" />

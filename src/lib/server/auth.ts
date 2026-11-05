@@ -97,7 +97,10 @@ export async function getAuthenticatedUser(
         enrolledClass,
         source: "supabase",
       };
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.digest === "DYNAMIC_SERVER_USAGE" || err?.digest?.startsWith?.("NEXT_REDIRECT")) {
+        throw err;
+      }
       console.error("[Auth] Error verifying Supabase user session:", err);
       return null;
     }
