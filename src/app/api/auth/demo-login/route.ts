@@ -276,12 +276,39 @@ export async function POST(req: NextRequest) {
         const admin = getSupabaseAdminClient();
 
         if (routeClient && admin) {
-          // Resolve real Supabase identity for demo account
-          const { data: dbProfile } = await admin
+          // Resolve real Supabase identity for demo account safely without UUID syntax error
+          const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(targetId);
+          let profileQuery = admin
             .from("profiles")
-            .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo")
-            .or(`username.eq.${targetUsername},id.eq.${targetId}`)
-            .maybeSingle();
+            .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo");
+
+          if (isUuid) {
+            profileQuery = profileQuery.or(`username.eq.${targetUsername},id.eq.${targetId}`);
+          } else if (role === "teacher") {
+            profileQuery = profileQuery.or(`username.eq.${targetUsername},role.eq.teacher`);
+          } else {
+            profileQuery = profileQuery.eq("username", targetUsername);
+          }
+
+          let { data: dbProfile } = await profileQuery.maybeSingle();
+
+          // If still not found and role is teacher, check if classes table has teacher_id
+          if (!dbProfile && role === "teacher") {
+            const { data: demoClass } = await admin
+              .from("classes")
+              .select("teacher_id")
+              .limit(1)
+              .maybeSingle();
+
+            if (demoClass?.teacher_id) {
+              const { data: tProf } = await admin
+                .from("profiles")
+                .select("id, role, username, full_name, selected_class, avatar_pixel, is_demo")
+                .eq("id", demoClass.teacher_id)
+                .maybeSingle();
+              if (tProf) dbProfile = tProf;
+            }
+          }
 
           if (dbProfile) {
             targetId = dbProfile.id;

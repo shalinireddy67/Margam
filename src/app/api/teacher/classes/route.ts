@@ -38,10 +38,29 @@ export async function GET(req: NextRequest) {
     }
 
     // 1. Fetch only classes owned by this teacher (strict isolation)
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(session.id);
+    let teacherUuid = isUuid ? session.id : null;
+
+    if (!teacherUuid && isDemoTeacher) {
+      // Find the demo class teacher ID
+      const { data: demoClass } = await admin
+        .from("classes")
+        .select("teacher_id")
+        .limit(1)
+        .maybeSingle();
+      if (demoClass?.teacher_id) {
+        teacherUuid = demoClass.teacher_id;
+      }
+    }
+
+    if (!teacherUuid) {
+      return NextResponse.json({ classes: [], members: [] });
+    }
+
     let { data: classes, error } = await admin
       .from("classes")
       .select("id, name, grade, class_code, created_at")
-      .eq("teacher_id", session.id);
+      .eq("teacher_id", teacherUuid);
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });

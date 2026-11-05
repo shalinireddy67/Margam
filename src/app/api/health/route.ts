@@ -82,6 +82,8 @@ export async function GET(req: NextRequest) {
 
     // 2. Safe DB profiles inspection
     let profilesList: any[] = [];
+    let teacherProfiles: any[] = [];
+    let demoClasses: any[] = [];
     if (admin) {
       try {
         const { data: profs } = await admin
@@ -89,6 +91,17 @@ export async function GET(req: NextRequest) {
           .select("id, role, username, is_demo")
           .limit(10);
         profilesList = profs || [];
+
+        const { data: tProfs } = await admin
+          .from("profiles")
+          .select("id, role, username, full_name, is_demo")
+          .eq("role", "teacher");
+        teacherProfiles = tProfs || [];
+
+        const { data: cls } = await admin
+          .from("classes")
+          .select("id, name, grade, class_code, teacher_id");
+        demoClasses = cls || [];
       } catch (pErr: any) {
         profilesList = [{ error: pErr?.message }];
       }
@@ -185,6 +198,8 @@ export async function GET(req: NextRequest) {
       },
       hmacSelfTest,
       profilesList,
+      teacherProfiles,
+      demoClasses,
       authUsersCount,
       authUserSummary,
       demoAuthTest,
