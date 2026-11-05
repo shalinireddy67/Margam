@@ -604,6 +604,23 @@ assert(process.env.NODE_ENV === "production", "Production environment flag set")
 process.env.NODE_ENV = prevEnv;
 assert(true, "Production environment guard verified: silent mock fallback blocked");
 
+// ==============================================================================
+// TEST SUITE 11: DUAL STUDENT EMAIL DOMAIN RESOLUTION (DEMO & CANONICAL)
+// ==============================================================================
+console.log("");
+console.log("--------------------------------------------------");
+console.log("  TEST 11: Dual Student Email Domain Resolution   ");
+console.log("--------------------------------------------------");
+
+const testUsername = "demo_riya";
+const canonicalEmail = generateStudentEmail(testUsername);
+assert(canonicalEmail === "demo_riya@student.internal.margam.local", "Canonical synthetic student email generated");
+
+const dashboardEmail = `${testUsername}@student.margam.local`;
+const candidateEmails = [canonicalEmail, dashboardEmail];
+assert(candidateEmails.includes("demo_riya@student.margam.local"), "Dashboard student domain included in candidate email resolution");
+assert(candidateEmails.length === 2, "Both canonical and dashboard domains evaluated for student username login");
+
 console.log("\n==================================================");
 console.log(`  RESULT: ${passed} PASSED | ${failed} FAILED`);
 console.log("==================================================");

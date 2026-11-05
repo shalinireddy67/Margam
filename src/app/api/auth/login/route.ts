@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     if (lockout.locked) {
       return NextResponse.json(
         {
-          error: `Account is temporarily locked due to 5 failed login attempts. Please wait ${lockout.remainingMinutes} minute(s) before trying again.`,
+          error: "Too many tries. Try again in 15 minutes.",
           locked: true,
           remainingMinutes: lockout.remainingMinutes,
         },
@@ -47,9 +47,15 @@ export async function POST(req: NextRequest) {
     }
 
     // Determine target email:
-    // Teachers use standard email; Students use username converted to synthetic non-routable address
+    // Teachers use standard email; Students use username converted to synthetic non-routable address.
+    // Supports both canonical (@student.internal.margam.local) and dashboard demo (@student.margam.local) domains.
     const isEmail = identifier.includes("@");
-    const targetEmail = isEmail ? identifier.trim().toLowerCase() : generateStudentEmail(identifier);
+    const candidateEmails = isEmail
+      ? [identifier.trim().toLowerCase()]
+      : [
+          generateStudentEmail(identifier),
+          `${identifier.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "")}@student.margam.local`,
+        ];
 
     const supabaseActive = isSupabaseConfigured();
 
@@ -74,18 +80,32 @@ export async function POST(req: NextRequest) {
       }
 
       // Authenticate with Supabase Auth (sets HttpOnly SSR cookies on response)
-      const { data: signInData, error: signInError } =
-        await routeClient.auth.signInWithPassword({
-          email: targetEmail,
+      // Tries candidates in order; cleanly resolves dashboard-created demo students
+      let signInData: any = null;
+      let signInError: any = null;
+      let targetEmail = candidateEmails[0];
+
+      for (const email of candidateEmails) {
+        const result = await routeClient.auth.signInWithPassword({
+          email,
           password,
         });
 
-      if (signInError || !signInData.user) {
+        if (result.data?.user && !result.error) {
+          signInData = result.data;
+          signInError = null;
+          targetEmail = email;
+          break;
+        }
+        signInError = result.error;
+      }
+
+      if (signInError || !signInData?.user) {
         const failure = recordFailedAttempt(identifier, clientIp);
         if (failure.locked) {
           return NextResponse.json(
             {
-              error: "Account has been locked for 15 minutes after 5 consecutive failed attempts.",
+              error: "Too many tries. Try again in 15 minutes.",
               locked: true,
               remainingMinutes: 15,
             },
@@ -94,7 +114,7 @@ export async function POST(req: NextRequest) {
         }
         return NextResponse.json(
           {
-            error: "Invalid username/email or password.",
+            error: isEmail ? "Wrong email or password." : "Wrong username or password.",
             attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
@@ -177,7 +197,7 @@ export async function POST(req: NextRequest) {
     // Offline / Test mock fallback (Non-production only)
       const profile = Array.from(mockDb.profiles.values()).find(
         (p) =>
-          p.email.toLowerCase() === targetEmail.toLowerCase() ||
+          candidateEmails.some((e) => p.email.toLowerCase() === e.toLowerCase()) ||
           (p.username && p.username.toLowerCase() === identifier.trim().toLowerCase())
       );
 
@@ -188,7 +208,7 @@ export async function POST(req: NextRequest) {
         if (failure.locked) {
           return NextResponse.json(
             {
-              error: "Account has been locked for 15 minutes after 5 consecutive failed attempts.",
+              error: "Too many tries. Try again in 15 minutes.",
               locked: true,
               remainingMinutes: 15,
             },
@@ -197,7 +217,7 @@ export async function POST(req: NextRequest) {
         }
         return NextResponse.json(
           {
-            error: "Invalid username/email or password.",
+            error: isEmail ? "Wrong email or password." : "Wrong username or password.",
             attemptsRemaining: Math.max(0, 5 - failure.attempts),
           },
           { status: 401 }
