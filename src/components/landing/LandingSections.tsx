@@ -52,7 +52,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         student: {
           tag: "Student",
           title: "I'm a student",
-          desc: "Take a short diagnostic, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
+          desc: "Take a short quick check, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
           btn: "Start learning",
           signIn: "Already have an account? Sign in",
         },
@@ -88,13 +88,13 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         tag: "02 // HOW MARGAM WORKS",
         heading: "Three steps from stuck to confident",
         b1Num: "01",
-        b1Title: "Diagnostic",
+        b1Title: "Quick check",
         b1Text:
-          "A 5-question check-in tests prerequisite understanding behind your current class topic, tracing errors back to earlier classes.",
+          "A 5-question check-in tests earlier topics you missed behind your current class topic, tracing errors back to earlier classes.",
         b2Num: "02",
         b2Title: "Fix the Gap",
         b2Text:
-          "Targeted micro-lessons and scaffolded questions rebuild the missing prerequisite step-by-step with immediate feedback.",
+          "Short lessons and stepped questions rebuild the earlier topic you missed step-by-step with immediate feedback.",
         b3Num: "03",
         b3Title: "Prove It",
         b3Text:
@@ -116,18 +116,18 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       s4: {
         tag: "04 // FOR TEACHERS",
         heading: "See what your classroom is actually missing",
-        sub: "Stop reteaching the current chapter when the real obstacle is an unmastered concept from two grades ago. Our heatmap shows the exact prerequisite bottleneck across your class.",
+        sub: "Stop reteaching the current chapter when the real obstacle is an earlier topic missed from two grades ago. Our heatmap shows the exact bottleneck across your class.",
         classTitle: "Class 10-A (demo) (Example Public School)",
         stat1Num: "25",
         stat1Label: "Enrolled Students",
         stat2Num: "68%",
-        stat2Label: "Class Diagnostic Average",
+        stat2Label: "Class quick check average",
         stat3Num: "7",
         stat3Label: "Students Stuck on Class 7 Signs",
         row1Concept: "Class 6 · Negative Numbers (c6-neg-01)",
         row1Rate: "23 / 25 Mastered (92%)",
         row2Concept: "Class 7 · Integer Sign Rules (c7-int-02)",
-        row2Rate: "12 / 25 Mastered (48%) · 7 ROOT GAPS",
+        row2Rate: "12 / 25 Mastered (48%) · 7 earlier topic gaps",
         row3Concept: "Class 8 · Distributive Law (c8-dist-01)",
         row3Rate: "18 / 25 Mastered (72%)",
         row4Concept: "Class 10 · Quadratic Factorisation (c10-quad-01)",
@@ -163,7 +163,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
           "No third-party advertising cookies, marketing pixels, or surveillance scripts. The entire learning session stays private.",
         f3Title: "Server-Side Verification",
         f3Desc:
-          "Answer keys, diagnostic rules, and grading logic run strictly on the server. Answer sheets cannot be inspected in client browser tools.",
+          "Answer keys, test rules, and grading logic run strictly on the server. Answer sheets cannot be inspected in client browser tools.",
         f4Title: "Local Guest Learning",
         f4Desc:
           "Students can practice completely as a guest without creating an account. Progress is stored safely in your own browser's storage.",
@@ -171,7 +171,7 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
       s7: {
         tag: "07 // TRY THE DEMO (FOR JUDGES)",
         heading: "Evaluation credentials for Code Kernel '26",
-        sub: "Pre-seeded synthetic class with realistic NCERT student learning histories and gap diagnostics.",
+        sub: "Pre-seeded synthetic class with realistic NCERT student learning histories and gap checks.",
         disclaimer: "Demo accounts use synthetic data only.",
         studentCard: "Demo Student",
         studentUser: "student01",
@@ -198,13 +198,13 @@ export function LandingSections({ currentLang }: LandingSectionsProps) {
         chain2Desc:
           "Classes 6–10: Variables & Expressions ➔ Simple Linear Equations ➔ Equations in One Variable ➔ Polynomials ➔ Linear Pairs.",
         allMapped:
-          "All 67 NCERT mathematics chapters (Classes 6–10) are mapped in our prerequisite dependency graph and ready for expanded question sets.",
+          "All 67 NCERT mathematics chapters (Classes 6–10) are mapped in our learning topic graph and ready for expanded question sets.",
       },
       s9: {
         tag: "09 // FREQUENTLY ASKED QUESTIONS",
         heading: "Everything you need to know",
         q1: "How does Margam find where I got stuck?",
-        a1: "When you complete a 5-question chapter diagnostic, our prerequisite engine analyzes error patterns against a prerequisite dependency graph. If a quadratic factoring error stems from integer sign confusion, Margam identifies the Class 7 concept as the root gap rather than repeating Class 10 problems.",
+        a1: "When you complete a 5-question chapter quick check, Margam checks earlier topics behind the chapter. If a quadratic factoring error comes from integer signs, Margam shows you the Class 7 topic that went wrong so you can fix it first.",
         q2: "Do students need to provide an email or phone number?",
         a2: "No. Students create an account using only a username, password, and optional class code (or can practice as a guest). No email, phone number, or personal identity information is required.",
         q3: "Does Margam work offline?",

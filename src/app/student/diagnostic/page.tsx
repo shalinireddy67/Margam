@@ -51,7 +51,7 @@ export default function DiagnosticHubPage() {
       <div className="min-h-screen flex items-center justify-center text-slate-800">
         <div className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/70">
           <div className="w-8 h-8 border-3 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-          <p className="font-heading text-xs text-cyan-950">Loading diagnostic checks...</p>
+          <p className="font-heading text-xs text-cyan-950">Loading quick checks...</p>
         </div>
       </div>
     );
@@ -79,17 +79,17 @@ export default function DiagnosticHubPage() {
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-full bg-cyan-100/90 border border-cyan-300 text-[10px] font-heading font-extrabold text-cyan-900 uppercase tracking-wide">
-                Chapter Placement
+                Chapter quick check
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-white/80 border border-white text-[10px] font-heading font-bold text-slate-700">
                 Class {studyClass} Mathematics
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-emerald-950">
-              Chapter diagnostics
+              Chapter quick checks
             </h1>
             <p className="text-xs sm:text-sm text-slate-700 font-sans max-w-xl">
-              Diagnostics evaluate prerequisite topics for each chapter. Scoring 70% or higher marks chapter lessons available, and identifies earlier topics that need review.
+              Quick checks look for earlier topics you missed. Scoring 70% or more opens chapter lessons, and shows earlier topics to fix.
             </p>
           </div>
 
@@ -124,7 +124,7 @@ export default function DiagnosticHubPage() {
                     </span>
                     {hasDiagnostic ? (
                       <span className="text-[10px] font-heading font-extrabold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                        Diagnostic ready
+                        Quick check ready
                       </span>
                     ) : (
                       <span className="text-[10px] font-heading font-bold text-slate-500">
@@ -148,7 +148,7 @@ export default function DiagnosticHubPage() {
                       className="w-full py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors"
                     >
                       <Target className="w-3.5 h-3.5" />
-                      <span>Start diagnostic</span>
+                      <span>Start quick check</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   ) : (

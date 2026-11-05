@@ -27,7 +27,7 @@ export default function Hero({ currentLang }: HeroProps) {
       progressValue: "2 of 3 Gaps Fixed",
       streakLabel: "4-Day Streak",
       xpLabel: "240 Math XP",
-      pathTitle: "Prerequisite Path",
+      pathTitle: "Earlier topic path",
       node1: "Class 7: Integers",
       node2: "Class 8: Transposition",
       node3: "Class 9: Factoring",
@@ -134,7 +134,7 @@ export default function Hero({ currentLang }: HeroProps) {
             </a>
 
             <a
-              href="#try-diagnostic"
+              href="#chapters"
               className="inline-flex items-center justify-center min-h-[52px] px-6 bg-[#FFF7E6] hover:bg-[#FFE9A8] text-[#2B1B0F] border-[2px] border-[#422816] font-pixel text-xs shadow-[2px_2px_0px_#1B120C] transition-all cursor-pointer no-underline"
             >
               <span>{content.ctaMain}</span>

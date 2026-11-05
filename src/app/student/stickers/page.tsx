@@ -222,7 +222,7 @@ export default function StickersPage() {
             Badges
           </h1>
           <p className="text-xs sm:text-sm font-sans font-medium text-[#2B1B0F]/80 leading-relaxed max-w-lg mx-auto">
-            Earn badges as you complete topics and diagnostic checks.
+            Earn badges as you complete topics and quick checks.
           </p>
           <div className="pt-1">
             <span className="inline-block px-3.5 py-1.5 bg-[#5DAA3A] text-[#2B1B0F] border-2 border-[#2B1B0F] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#2B1B0F]">

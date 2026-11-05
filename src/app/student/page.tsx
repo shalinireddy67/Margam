@@ -129,12 +129,12 @@ export default function StudentDashboardPage() {
       const currName = currConcept ? resolveLocalizedString(currConcept.name, currentLang).text : "";
       fixThisFirst = {
         concept: rootConcept,
-        title: `Repair Foundational Skill: ${rootName}`,
+        title: `Fix earlier topic: ${rootName}`,
         description: currConcept
-          ? `While working on Class ${currConcept.class} (${currName}), a prerequisite topic in Class ${rootConcept.class} was missed. Fixing this clears the path.`
-          : `A prerequisite topic in Class ${rootConcept.class} was missed. Repair this foundation first to keep moving forward.`,
+          ? `While working on Class ${currConcept.class} (${currName}), you missed an earlier topic in Class ${rootConcept.class}. Fix this first to make fast progress.`
+          : `You missed an earlier topic in Class ${rootConcept.class}. Fix this first to keep moving forward.`,
         actionHref: `/student/worksheet/${rootConcept.id}`,
-        actionText: "Fix gap now",
+        actionText: "Fix this first",
         isRootGap: true,
       };
     }
@@ -151,10 +151,10 @@ export default function StudentDashboardPage() {
         const weakName = resolveLocalizedString(weakConcept.name, currentLang).text;
         fixThisFirst = {
           concept: weakConcept,
-          title: `Reinforce Concept: ${weakName}`,
-          description: `Your assessed mastery is currently ${Math.round(weakProg.mastery ?? 50)}%. Complete a targeted adaptive practice set to solidify your method.`,
+          title: `Practice topic: ${weakName}`,
+          description: `Your score on this topic is ${Math.round(weakProg.mastery ?? 50)}%. Complete a practice worksheet to build confidence.`,
           actionHref: `/student/worksheet/${weakConcept.id}`,
-          actionText: "Practice Skill",
+          actionText: "Practice now",
           isRootGap: false,
         };
       }
@@ -314,7 +314,7 @@ export default function StudentDashboardPage() {
                     FIX THIS FIRST
                   </span>
                   <span className="text-[11px] font-heading font-bold text-[#D9453D]">
-                    Class {fixThisFirst.concept.class} Foundational Skill
+                    Class {fixThisFirst.concept.class} earlier topic you missed
                   </span>
                 </div>
                 <h2 className="text-lg sm:text-xl font-heading font-extrabold text-[#2B1B0F]">
@@ -419,7 +419,7 @@ export default function StudentDashboardPage() {
                   Practice Worksheets
                 </h2>
                 <p className="text-xs text-[#2B1B0F]/70 font-sans mt-1">
-                  Solve adaptive problem sets, receive instant hints, and overcome common NCERT misconceptions.
+                  Answer questions picked for you, see instant hints, and fix common mix-ups.
                 </p>
               </div>
             </div>
@@ -445,15 +445,15 @@ export default function StudentDashboardPage() {
               </div>
               <div>
                 <h2 className="font-heading font-extrabold text-base text-[#2B1B0F] group-hover:text-[#3880FF] transition-colors">
-                  Check chapter progress
+                  Quick chapter checks
                 </h2>
                 <p className="text-xs text-[#2B1B0F]/70 font-sans mt-1">
-                  Take chapter diagnostics to find earlier topics you missed and make lessons available.
+                  Take quick checks to find earlier topics you missed and open new lessons.
                 </p>
               </div>
             </div>
             <div className="pt-3 mt-auto border-t-2 border-[#2B1B0F]/10 flex items-center justify-between text-xs font-heading font-bold text-[#2B1B0F]">
-              <span>Start diagnostic</span>
+              <span>Start quick check</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -543,7 +543,7 @@ export default function StudentDashboardPage() {
                 Class {studyClass} Mathematics Chapters
               </h2>
               <p className="text-xs text-[#2B1B0F]/70 font-sans mt-0.5">
-                Explore chapters, take chapter diagnostics, or study individual concept lessons.
+                Explore chapters, take chapter quick checks, or study individual lessons.
               </p>
             </div>
             <Link
@@ -596,7 +596,7 @@ export default function StudentDashboardPage() {
                         className="text-xs font-heading font-bold text-[#3880FF] hover:underline flex items-center gap-1"
                       >
                         <Target className="w-3.5 h-3.5" />
-                        <span>Diagnostic</span>
+                        <span>Quick check</span>
                       </Link>
                     ) : (
                       <span className="text-[11px] text-slate-500 font-sans">

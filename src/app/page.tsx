@@ -123,7 +123,7 @@ export default function HomePage() {
       studentLabel: "Student",
       studentTitle: "I'm a student",
       studentBody:
-        "Take a short diagnostic, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
+        "Take a short quick check, see a map of what you know, then fix gaps one small step at a time. No email or phone number needed.",
       studentBtn: "Start learning",
       studentSignIn: "Already have an account? Sign in",
       teacherLabel: "Teacher",
@@ -136,12 +136,12 @@ export default function HomePage() {
       reviewed: true,
       welcomeBack: "Welcome back",
       classBadge: "Class",
-      activeGapFound: "Prerequisite gap detected",
+      activeGapFound: "Earlier topic missed",
       fixGapBtn: "Fix this first",
       continueLessonBtn: "Continue lesson",
       switchProfile: "Switch class or reset profile",
-      chaptersHeading: "Maths chapters and diagnostics",
-      chaptersSubtitle: "Choose a chapter to diagnose prerequisite gaps or start lessons.",
+      chaptersHeading: "Maths chapters and quick checks",
+      chaptersSubtitle: "Choose a chapter to check for earlier topics you missed or start lessons.",
       teacherLink: "Teacher",
       conceptsMastered: "concepts completed",
     },
@@ -335,7 +335,7 @@ export default function HomePage() {
                     </div>
                     {gapConcept && (
                       <span className="text-[10px] font-pixel px-2 py-0.5 bg-[#F4C542] text-[#2B1B0F] border border-[#2B1B0F]">
-                        Class {gapConcept.class} Prerequisite
+                        Class {gapConcept.class} earlier topic
                       </span>
                     )}
                   </div>
@@ -348,7 +348,7 @@ export default function HomePage() {
 
                   <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans">
                     {profile?.activeGap?.plainLanguageReason ||
-                      "Our diagnostic detected an underlying prerequisite gap. Strengthening this foundation will make your current grade chapters much easier."}
+                      "Our quick check found an earlier topic you missed. Fixing this first makes your current class topics much simpler."}
                   </p>
 
                   <div className="pt-1 flex items-center gap-2 flex-wrap">
@@ -541,7 +541,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         {profile && (
           <>
-        {/* CHAPTERS GRID (Minecraft Voxel Tiles)                             */}
+        {/* CHAPTERS GRID (Block-world Tiles)                             */}
         {/* ================================================================= */}
         <section id="chapters" aria-labelledby="chapters-list-heading" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b-2 border-[#7A4B2A] pb-2">

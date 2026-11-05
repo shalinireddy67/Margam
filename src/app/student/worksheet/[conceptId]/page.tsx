@@ -147,7 +147,7 @@ export default function AdaptivePracticeRunnerPage() {
       const access = canAccessTopic(conceptId, active, true);
       if (!access.accessible) {
         setIsLocked(true);
-        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this practice.");
+        setLockedReason(access.reason || "You must complete earlier topics before starting this worksheet.");
         setLoading(false);
         return;
       }
@@ -261,7 +261,7 @@ export default function AdaptivePracticeRunnerPage() {
               Practice Locked
             </h1>
             <p className="text-xs sm:text-sm text-[#2B1B0F]/80 font-sans leading-relaxed">
-              {lockedReason || "You must complete prerequisite topics before accessing this practice."}
+              {lockedReason || "You must complete earlier topics before starting this worksheet."}
             </p>
             <div className="pt-2">
               <Link
@@ -509,7 +509,7 @@ export default function AdaptivePracticeRunnerPage() {
                     <span>Earlier topic gap resolved (+50 XP)</span>
                   </div>
                   <h3 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
-                    Prerequisite topic completed
+                    Earlier topic completed
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-700 font-sans leading-relaxed">
                     You scored <strong>{result.percentage}%</strong> on this topic. This block is now marked complete on your path map.

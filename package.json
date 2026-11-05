@@ -30,7 +30,8 @@
     "test:anti-repetition": "npx tsx scripts/test-anti-repetition.mjs",
     "test:flow": "npx tsx scripts/test-phase7-flow.mjs",
     "test:rls": "node scripts/test-rls.mjs",
-    "test:states": "node scripts/test-states.mjs"
+    "test:states": "node scripts/test-states.mjs",
+    "check:words": "node scripts/check-words.mjs"
   },
   "dependencies": {
     "@fontsource/baloo-2": "^5.3.0",

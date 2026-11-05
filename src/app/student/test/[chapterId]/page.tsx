@@ -210,7 +210,7 @@ export default function ChapterTestRunnerPage() {
               Chapter Test Error
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-              {errorMessage || "We encountered an issue preparing the chapter assessment questions."}
+              {errorMessage || "We could not prepare the chapter test questions."}
             </p>
             <div className="pt-2">
               <Button
@@ -250,7 +250,7 @@ export default function ChapterTestRunnerPage() {
               Chapter Test Unavailable
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-              This chapter assessment is currently in progress. Complete prerequisite lesson worksheets first.
+              This chapter test is locked. Complete earlier lesson worksheets first.
             </p>
             <div className="pt-2">
               <Link

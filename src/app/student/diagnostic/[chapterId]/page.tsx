@@ -284,10 +284,10 @@ export default function ChapterDiagnosticPage() {
               !
             </div>
             <h1 className="font-heading font-extrabold text-xl text-emerald-950">
-              Diagnostic Assessment Error
+              Quick check error
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-              {errorMessage || "We encountered an issue preparing this diagnostic assessment."}
+              {errorMessage || "We could not load this quick check."}
             </p>
             <div className="pt-2">
               <Button
@@ -323,7 +323,7 @@ export default function ChapterDiagnosticPage() {
               <BookOpen className="w-7 h-7 text-amber-900" />
             </div>
             <h1 className="font-heading font-extrabold text-xl text-[#FFF7E6]">
-              Diagnostic Not Available
+              Quick check not available
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed max-w-md mx-auto">
               This chapter is still being built. Try another chapter or come back soon.
@@ -362,7 +362,7 @@ export default function ChapterDiagnosticPage() {
     }
 
     if (!sessionToken) {
-      setErrorMessage("Missing session token. Please reload the assessment.");
+      setErrorMessage("Missing session token. Please reload the quick check.");
       return;
     }
 
@@ -550,12 +550,12 @@ export default function ChapterDiagnosticPage() {
             <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-emerald-950">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2 text-xs font-heading font-bold text-emerald-900 bg-emerald-100/90 border border-emerald-300 px-3 py-1 rounded-full">
-                  <span>Chapter diagnostic</span>
+                  <span>Chapter quick check</span>
                   <span>,</span>
                   <span>Class {profile.selectedClass}</span>
                 </div>
                 <span className="text-[10px] font-heading font-bold px-2.5 py-0.5 bg-white/80 border border-white/90 rounded-full text-slate-700 shadow-2xs">
-                  Diagnostic check
+                  Quick check
                 </span>
               </div>
 
@@ -564,7 +564,7 @@ export default function ChapterDiagnosticPage() {
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-700 bg-white/80 p-4 rounded-2xl border border-white/90 leading-relaxed font-sans font-medium text-xs sm:text-sm">
-                Answer these 6 questions. Margam checks your answers against the NCERT prerequisite graph to see what you understand and find any earlier topics you missed.
+                Answer these 6 questions. Margam checks your answers to see what you know and find any earlier topics you missed.
               </p>
 
               {errorMessage && (
@@ -592,19 +592,19 @@ export default function ChapterDiagnosticPage() {
                 <div className="flex items-center gap-4">
                   <div>
                     <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-emerald-900 block">
-                      Diagnostic Evaluation Complete
+                      Quick check complete
                     </span>
                     <h2 className="font-heading font-extrabold text-lg sm:text-2xl text-emerald-950 mt-0.5">
                       {result.passed
                         ? "Chapter lessons ready"
                         : foundGapsCount > 0
-                        ? "Foundational Gap Identified"
+                        ? "Earlier topic you missed"
                         : "Practice Recommended"}
                     </h2>
                     <p className="text-xs text-slate-600 font-sans font-medium mt-1">
                       {result.passed
-                        ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
-                        : "We analyzed your error patterns. Strengthening prerequisite concepts will make this chapter effortless."}
+                        ? "You answered these questions accurately. Chapter lessons are ready to start."
+                        : "We found a few topics that went wrong. Fixing earlier topics first will make this chapter much easier."}
                     </p>
                   </div>
                 </div>
@@ -693,7 +693,7 @@ export default function ChapterDiagnosticPage() {
                     <span>Topic analysis</span>
                   </h3>
                   <span className="text-[10px] font-heading text-slate-500 uppercase">
-                    Diagnosed against Prerequisite Graph
+                    Checked against earlier topics
                   </span>
                 </div>
 
@@ -782,7 +782,7 @@ export default function ChapterDiagnosticPage() {
                               </span>
                               {step.isFoundational && (
                                 <span className="text-[9px] font-heading font-extrabold px-2 py-0.5 bg-rose-100 text-rose-900 rounded-full border border-rose-300">
-                                  Prerequisite
+                                  Earlier topic
                                 </span>
                               )}
                             </div>
@@ -814,7 +814,7 @@ export default function ChapterDiagnosticPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex items-center justify-between border-b border-white/80 pb-2">
             <h2 className="font-heading font-extrabold text-base sm:text-lg text-emerald-950">
-              {result ? "Diagnostic Questions Review & Educational Feedback" : "Assessment Questions"}
+              {result ? "Question review and feedback" : "Questions"}
             </h2>
             <span className="text-xs font-heading font-bold text-emerald-900">
               {questions.length} Total Questions
@@ -990,7 +990,7 @@ export default function ChapterDiagnosticPage() {
                 disabled={submitting}
                 className="inline-flex items-center justify-center min-h-[46px] gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-heading font-extrabold text-xs shadow-sm cursor-pointer disabled:opacity-50 transition-all"
               >
-                <span>{submitting ? "Evaluating..." : "Submit Diagnostic Assessment"}</span>
+                <span>{submitting ? "Checking..." : "Submit quick check"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -1002,13 +1002,13 @@ export default function ChapterDiagnosticPage() {
           <div className="mt-8 glass-panel p-6 sm:p-8 rounded-3xl border border-white/80 shadow-[0_12px_40px_rgba(16,42,18,0.08)] space-y-4 text-slate-800">
             <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-amber-900">
               <ShieldCheck className="w-4 h-4 text-amber-600" />
-              <span>Diagnostic Confirmation Step</span>
+              <span>Quick check confirmation</span>
             </div>
             <h2 className="font-heading font-extrabold text-base text-emerald-950">
               Verification Questions
             </h2>
             <p className="text-xs text-slate-600 font-sans">
-              Please answer these 2 quick follow-up questions to confirm whether targeted prerequisite routing is needed.
+              Please answer these 2 quick questions to confirm what earlier topic needs review.
             </p>
 
             <form onSubmit={handleConfirmationSubmit} className="space-y-4 pt-2">
@@ -1062,12 +1062,12 @@ export default function ChapterDiagnosticPage() {
             {/* Diagnostic Study Guide Card */}
             <div className="bg-[#FFFDF7] p-5 border-3 border-[#2B1B0F] shadow-block rounded-[2px] space-y-2">
               <span className="text-[10px] font-pixel text-[#5DAA3A] uppercase tracking-wider block">
-                Diagnostic Progress
+                Quick Check Progress
               </span>
               <p className="text-xs text-[#2B1B0F]/80 leading-relaxed font-sans font-medium">
                 {result
                   ? result.passed
-                    ? "You answered the prerequisite questions accurately. Chapter lessons are ready to start."
+                    ? "You answered these questions accurately. Chapter lessons are ready to start."
                     : "We found an earlier topic to review before continuing."
                   : "Work at your own pace. Each question checks an earlier topic."}
               </p>
@@ -1102,10 +1102,10 @@ export default function ChapterDiagnosticPage() {
             {/* Diagnostic Quest Bounty */}
             <div className="glass-panel p-4 rounded-2xl border border-white/80 space-y-2 text-xs bg-amber-50/70 text-amber-950">
               <div className="flex items-center gap-1.5 text-amber-900 font-heading font-extrabold">
-                <span>Diagnostic check</span>
+                <span>Quick check</span>
               </div>
               <p className="text-[11px] text-slate-700 font-sans leading-relaxed">
-                Complete this diagnostic to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and make practice worksheets available.
+                Complete this quick check to earn <strong className="text-amber-900 font-bold">+30 XP</strong> and open practice worksheets.
               </p>
             </div>
           </aside>

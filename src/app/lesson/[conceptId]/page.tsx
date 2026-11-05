@@ -101,7 +101,7 @@ function LessonContent() {
 
       if (!access.accessible) {
         setIsLocked(true);
-        setLockedReason(access.reason || "You must complete prerequisite topics before accessing this lesson.");
+        setLockedReason(access.reason || "You must complete earlier topics before starting this lesson.");
         setIsLoaded(true);
         return;
       }
@@ -182,7 +182,7 @@ function LessonContent() {
               Lesson Locked
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-              {lockedReason || "You must complete prerequisite topics before accessing this lesson."}
+              {lockedReason || "You must complete earlier topics before starting this lesson."}
             </p>
             <div className="pt-2">
               <Link
@@ -230,7 +230,7 @@ function LessonContent() {
     variantKey = "basics_first";
     variantReason =
       gapReason ||
-      "Basics-First: Selected to reinforce foundational prerequisites identified during diagnostic backtracking.";
+      "Basics-First: Selected to fix earlier topics found during your quick check.";
   } else {
     variantKey = selectLessonVariant(topicProgress?.mastery);
     if (variantKey === "basics_first") {
@@ -376,7 +376,7 @@ function LessonContent() {
           <div className="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-l-amber-500 bg-amber-50/70 border border-amber-200/80 text-amber-950 space-y-2">
             <div className="flex items-center gap-2 font-heading font-extrabold text-xs uppercase tracking-wider text-amber-900">
               <GitBranch className="w-4 h-4 text-amber-600" />
-              <span>Diagnostic Remediation Route</span>
+              <span>Earlier topic to fix</span>
             </div>
             <p className="text-xs sm:text-sm font-semibold leading-relaxed text-slate-700">
               {variantReason}

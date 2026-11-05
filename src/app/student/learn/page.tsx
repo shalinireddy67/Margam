@@ -360,7 +360,7 @@ export default function StudentLearnPage() {
                           <div className="pt-1 flex items-center gap-1.5 text-xs font-sans text-[#E04A3F]">
                             <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                             <span>
-                              <strong>Prerequisite needed:</strong> Complete {missingPrereqNames.join(", ")} first.
+                              <strong>Earlier topic needed:</strong> Complete {missingPrereqNames.join(", ")} first.
                             </span>
                           </div>
                         )}
@@ -394,7 +394,7 @@ export default function StudentLearnPage() {
                           type="button"
                           disabled
                           className="flex-1 sm:flex-initial py-2 px-4 rounded-[2px] bg-[#E5E0D8] text-[#8B8B8B] border-2 border-[#8B8B8B] font-heading font-bold text-xs flex items-center justify-center gap-1.5 cursor-not-allowed"
-                          title="Complete prerequisites first"
+                          title="Complete earlier topics first"
                         >
                           <Lock className="w-3.5 h-3.5" />
                           <span>Locked</span>
