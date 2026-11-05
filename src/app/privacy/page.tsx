@@ -4,24 +4,23 @@ import React, { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
+  Compass,
   ShieldCheck,
   ArrowLeft,
   RefreshCw,
   Lock,
   FileText,
-  Cookie,
-  Settings2,
 } from "lucide-react";
 import {
+  Button,
+  LanguageToggle,
+  OfflineBanner,
   Toast,
+  SkeletonLine,
   SkeletonCard,
   EmptyState,
   type Language,
 } from "@/components/ui";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { openCookieSettings } from "@/components/ui/CookieConsent";
 
 interface PolicySection {
   title: string;
@@ -43,9 +42,7 @@ const PRIVACY_CONTENT: Record<
     lockedMessage: string;
     emptyTitle: string;
     emptyMessage: string;
-    cookiePolicyLink: string;
-    termsLink: string;
-    cookieSettingsBtn: string;
+    footerText: string;
   }
 > = {
   en: {
@@ -86,9 +83,7 @@ const PRIVACY_CONTENT: Record<
     lockedMessage: "This policy document is locked by current system policy.",
     emptyTitle: "No Policy Content",
     emptyMessage: "The privacy policy sections are currently unavailable.",
-    cookiePolicyLink: "Cookie Policy",
-    termsLink: "Terms of Service",
-    cookieSettingsBtn: "Cookie Preferences",
+    footerText: "Margam • Plain Language Privacy",
   },
   hi: {
     title: "गोपनीयता सूचना",
@@ -128,9 +123,7 @@ const PRIVACY_CONTENT: Record<
     lockedMessage: "यह नीति दस्तावेज़ वर्तमान सिस्टम नीति द्वारा लॉक है।",
     emptyTitle: "कोई सामग्री नहीं",
     emptyMessage: "गोपनीयता नीति अनुभाग वर्तमान में उपलब्ध नहीं हैं।",
-    cookiePolicyLink: "कुकी नीति",
-    termsLink: "सेवा की शर्तें",
-    cookieSettingsBtn: "कुकी प्राथमिकताएँ",
+    footerText: "मार्गम् • सरल भाषा गोपनीयता",
   },
   te: {
     title: "గోప్యతా నోటీసు",
@@ -170,24 +163,23 @@ const PRIVACY_CONTENT: Record<
     lockedMessage: "ఈ పత్రం ప్రస్తుతం లాక్ చేయబడింది.",
     emptyTitle: "కంటెంట్ లేదు",
     emptyMessage: "గోప్యతా విభాగాల వివరాలు అందుబాటులో లేవు.",
-    cookiePolicyLink: "కుకీ విధానం",
-    termsLink: "సేవా నిబంధనలు",
-    cookieSettingsBtn: "కుకీ ప్రాధాన్యతలు",
+    footerText: "మార్గం • సరళ భాష గోప్యత",
   },
 };
 
 function PrivacyView() {
   const searchParams = useSearchParams();
   const stateParam = searchParams?.get("state");
+  const langParam = searchParams?.get("lang") as Language | null;
 
-  const { lang, setLang } = useLanguage();
-  const currentLang: Language = (lang as Language) || "en";
-
+  const [currentLang, setCurrentLang] = useState<Language>(
+    langParam && ["en", "hi", "te"].includes(langParam) ? langParam : "en"
+  );
   const [isOnline, setIsOnline] = useState(true);
   const [hasError, setHasError] = useState(stateParam === "error");
   const [isLocked] = useState(stateParam === "locked");
   const [isEmpty] = useState(stateParam === "empty");
-  const [isLoading] = useState(stateParam === "loading");
+  const [isLoading, setIsLoading] = useState(stateParam === "loading");
 
   useEffect(() => {
     setIsOnline(navigator.onLine);
@@ -201,21 +193,19 @@ function PrivacyView() {
     };
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
+
   const content = PRIVACY_CONTENT[currentLang] || PRIVACY_CONTENT.en;
+
+  // Offline banner forced by query param or network
   const showOfflineBanner = !isOnline || stateParam === "offline";
 
   return (
-    <div className="min-h-screen text-[#1E1610] flex flex-col justify-between">
-      {/* Top Floating Navigation */}
-      <Navigation
-        currentTab="home"
-        currentLang={currentLang}
-        onLanguageChange={setLang}
-        showTopBar={true}
-      />
-
+    <div className="min-h-screen bg-[#102610] voxel-grid-bg text-[#F2F0DF] flex flex-col justify-between pb-safe">
       {showOfflineBanner && (
-        <div className="fixed top-20 left-4 right-4 z-50 max-w-[480px] mx-auto">
+        <div className="fixed top-2 left-4 right-4 z-50 max-w-[480px] mx-auto">
           <Toast
             type="offline"
             message="You are viewing the saved offline privacy notice."
@@ -224,8 +214,40 @@ function PrivacyView() {
         </div>
       )}
 
+      {/* Header */}
+      <header className="border-b-3 border-[#315B2A] bg-[#173B19] shadow-[0px_4px_0px_#102610] text-[#F2F0DF]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-3">
+          <Link
+            href="/"
+            aria-label="Margam Home"
+            className="flex items-center gap-2.5 min-h-[48px] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none rounded-none p-1"
+          >
+            <div className="w-9 h-9 rounded-none bg-[#79B82A] text-[#102610] border-[2px] border-[#315B2A] flex items-center justify-center text-[#F2F0DF] shadow-[2px_2px_0px_#102610]">
+              <Compass className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <span className="font-heading font-extrabold text-xl text-[#F2F0DF]">
+              Margam
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-3">
+            <LanguageToggle
+              currentLang={currentLang}
+              onLanguageChange={(lang) => setCurrentLang(lang)}
+            />
+            <Link
+              href="/"
+              className="min-h-[48px] min-w-[48px] px-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#F2F0DF] bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+            >
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+              <span className="hidden sm:inline">{content.backText}</span>
+            </Link>
+          </div>
+        </div>
+      </header>
+
       {/* Main Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 w-full flex-1 space-y-6">
+      <main className="max-w-3xl mx-auto px-4 py-8 w-full flex-1">
         {/* Loading skeleton state */}
         {isLoading && (
           <div className="space-y-4">
@@ -236,19 +258,19 @@ function PrivacyView() {
 
         {/* Locked state */}
         {!isLoading && isLocked && (
-          <div className="panel-plank border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] p-6 sm:p-8 text-center space-y-4">
-            <div className="w-14 h-14 mx-auto rounded-[2px] bg-[#FAF3E3] border-2 border-[#1E1610] flex items-center justify-center shadow-[2px_2px_0px_#1E1610]">
-              <Lock className="w-7 h-7 text-[#5A3720]" aria-hidden="true" />
+          <div className="bg-[#173B19] border-4 border-[#315B2A] rounded-none shadow-[4px_4px_0px_#102610] p-6 sm:p-8 text-center space-y-4">
+            <div className="w-14 h-14 mx-auto rounded-none bg-[#79B82A] text-[#102610] border-4 border-[#315B2A] flex items-center justify-center shadow-[3px_3px_0px_#102610]">
+              <Lock className="w-7 h-7 text-[#F2F0DF]" aria-hidden="true" />
             </div>
-            <h1 className="text-xl font-heading font-extrabold text-[#1E1610]">
+            <h1 className="text-xl font-heading font-extrabold text-[#F2F0DF]">
               {content.lockedTitle}
             </h1>
-            <p className="text-sm font-sans font-medium text-[#5A3720]">
+            <p className="text-sm font-bold text-[#D8D8D0]">
               {content.lockedMessage}
             </p>
             <Link
               href="/"
-              className="inline-flex items-center justify-center min-h-[44px] px-6 text-xs font-heading font-extrabold bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px]"
+              className="inline-flex items-center justify-center min-h-[48px] px-6 text-sm font-extrabold bg-[#79B82A] text-[#102610] border-4 border-[#315B2A] rounded-none shadow-[3px_3px_0px_#102610] hover:bg-[#FFD700] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
             >
               {content.backText}
             </Link>
@@ -257,21 +279,22 @@ function PrivacyView() {
 
         {/* Error state with retry */}
         {!isLoading && !isLocked && hasError && (
-          <div className="panel-plank border-3 border-[#D1362B] shadow-[4px_4px_0px_#1E1610] p-6 sm:p-8 text-center space-y-4">
-            <h1 className="text-xl font-heading font-extrabold text-[#D1362B]">
+          <div className="bg-[#173B19] border-4 border-[#315B2A] rounded-none shadow-[4px_4px_0px_#102610] p-6 sm:p-8 text-center space-y-4">
+            <h1 className="text-xl font-heading font-extrabold text-[#F2F0DF]">
               {content.errorTitle}
             </h1>
-            <p className="text-sm font-sans font-medium text-[#5A3720]">
+            <p className="text-sm font-bold text-[#D8D8D0]">
               {content.errorMessage}
             </p>
-            <button
-              type="button"
+            <Button
+              variant="yellow"
+              size="sm"
               onClick={() => setHasError(false)}
-              className="min-h-[44px] px-5 bg-[#FAF3E3] hover:bg-[#EEDBB8] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] inline-flex items-center gap-2 font-heading font-bold text-xs cursor-pointer"
+              className="min-h-[48px] inline-flex items-center gap-2"
             >
-              <RefreshCw className="w-4 h-4 text-[#1E1610]" aria-hidden="true" />
+              <RefreshCw className="w-4 h-4" aria-hidden="true" />
               <span>{content.retryText}</span>
-            </button>
+            </Button>
           </div>
         )}
 
@@ -285,55 +308,41 @@ function PrivacyView() {
           />
         )}
 
-        {/* Normal Content View */}
+        {/* Normal content view */}
         {!isLoading && !isLocked && !hasError && !isEmpty && (
-          <div className="panel-plank p-6 sm:p-8 border-3 border-[#1E1610] shadow-[4px_4px_0px_#1E1610] space-y-6 text-[#1E1610]">
-            {/* Header section with high-contrast text and warm panel */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b-2 border-[#1E1610]/20">
-              <div className="flex items-start gap-3.5">
-                <div className="w-12 h-12 rounded-[2px] bg-[#FAF3E3] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center shrink-0 mt-0.5">
-                  <ShieldCheck className="w-6 h-6 text-[#6DB33F]" aria-hidden="true" />
+          <div className="bg-[#173B19] p-6 sm:p-8 rounded-none border-4 border-[#315B2A] shadow-[4px_4px_0px_#102610] space-y-6">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b-[2px] border-[#315B2A]">
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 rounded-none bg-[#8DE86A] border-[2px] border-[#315B2A] flex items-center justify-center shadow-[2px_2px_0px_#102610] shrink-0 mt-0.5">
+                  <ShieldCheck
+                    className="w-6 h-6 text-[#F2F0DF]"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div>
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#1E1610] leading-tight m-0">
+                  <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-[#F2F0DF]">
                     {content.title}
                   </h1>
-                  <p className="text-xs sm:text-sm font-sans font-medium text-[#5A3720] mt-1 leading-relaxed">
+                  <p className="text-xs sm:text-sm font-bold text-[#D8D8D0] mt-0.5">
                     {content.subtitle}
                   </p>
                 </div>
               </div>
-
-              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto shrink-0">
-                <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#6DB33F] text-[#1E1610] border-2 border-[#1E1610] shadow-[1px_1px_0px_#1E1610] font-heading font-extrabold text-xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#1E1610]" />
-                  {content.badge}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={openCookieSettings}
-                  className="inline-flex items-center gap-1.5 min-h-[38px] px-3.5 py-1.5 bg-[#FAF3E3] hover:bg-[#EEDBB8] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] font-heading font-extrabold text-xs cursor-pointer"
-                >
-                  <Settings2 className="w-3.5 h-3.5 text-[#5A3720]" />
-                  <span>{content.cookieSettingsBtn}</span>
-                </button>
-              </div>
+              <span className="shrink-0 text-xs font-black px-2.5 py-1 bg-[#79B82A] text-[#102610] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610]">
+                {content.badge}
+              </span>
             </div>
 
-            {/* Structured policy sections with dark, high-contrast readable text */}
-            <div className="space-y-4">
+            <div className="space-y-5 text-sm sm:text-base leading-relaxed text-[#F2F0DF]">
               {content.sections.map((sec, idx) => (
                 <section
                   key={idx}
-                  className="p-5 sm:p-6 bg-[#FAF3E3] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] rounded-[2px] space-y-2 transition-all hover:translate-x-[1px]"
+                  className="p-4 bg-[#102610] voxel-grid-bg border-[2px] border-[#315B2A] rounded-none space-y-1.5"
                 >
-                  <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#1E1610] m-0">
+                  <h2 className="font-heading font-extrabold text-base text-[#F2F0DF]">
                     {sec.title}
                   </h2>
-                  <p className="font-sans text-xs sm:text-sm text-[#3E2718] font-medium leading-relaxed m-0">
-                    {sec.body}
-                  </p>
+                  <p className="font-medium text-[#222222]">{sec.body}</p>
                 </section>
               ))}
             </div>
@@ -341,30 +350,31 @@ function PrivacyView() {
             {/* Cross navigation between policies */}
             <nav
               aria-label="Related policies"
-              className="pt-5 border-t-2 border-[#1E1610]/20 flex flex-wrap items-center gap-3"
+              className="pt-4 border-t-[2px] border-[#315B2A] flex flex-wrap gap-3"
             >
               <Link
-                href="/cookies"
-                className="min-h-[42px] px-4 py-2 inline-flex items-center gap-2 text-xs font-heading font-extrabold bg-[#FAF3E3] hover:bg-[#EEDBB8] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] rounded-[2px] transition-all no-underline"
-              >
-                <Cookie className="w-4 h-4 text-[#5A3720]" aria-hidden="true" />
-                <span>{content.cookiePolicyLink}</span>
-              </Link>
-
-              <Link
                 href="/terms"
-                className="min-h-[42px] px-4 py-2 inline-flex items-center gap-2 text-xs font-heading font-extrabold bg-[#FAF3E3] hover:bg-[#EEDBB8] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] rounded-[2px] transition-all no-underline"
+                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
               >
-                <FileText className="w-4 h-4 text-[#5A3720]" aria-hidden="true" />
-                <span>{content.termsLink}</span>
+                <FileText className="w-4 h-4" aria-hidden="true" />
+                <span>Terms of Service</span>
+              </Link>
+              <Link
+                href="/cookies"
+                className="min-h-[48px] px-4 py-2 inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold bg-[#173B19] border-[2px] border-[#315B2A] rounded-none shadow-[2px_2px_0px_#102610] hover:bg-[#79B82A] text-[#102610] focus-visible:ring-3 focus-visible:ring-[#111111] focus-visible:outline-none"
+              >
+                <FileText className="w-4 h-4" aria-hidden="true" />
+                <span>Cookie Policy</span>
               </Link>
             </nav>
           </div>
         )}
       </main>
 
-      {/* Margam Standard Footer */}
-      <Footer />
+      {/* Footer */}
+      <footer className="border-t-[3px] border-[#315B2A] py-4 text-center text-xs font-bold text-[#D8D8D0] bg-[#173B19]">
+        {content.footerText}
+      </footer>
     </div>
   );
 }
@@ -373,7 +383,7 @@ export default function PrivacyPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen text-[#1E1610] p-6 max-w-4xl mx-auto">
+        <div className="min-h-screen bg-[#102610] voxel-grid-bg p-6">
           <SkeletonCard />
         </div>
       }

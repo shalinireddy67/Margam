@@ -106,7 +106,7 @@ export default function PracticeDirectoryPage() {
             className="py-2.5 px-4 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center gap-1.5 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors shrink-0 no-underline"
           >
             <BookOpen className="w-3.5 h-3.5 text-[#1E1610]" />
-            <span>{t("practice.viewLessons") || "View lessons"}</span>
+            <span>View lessons</span>
           </Link>
         </div>
 
@@ -121,7 +121,7 @@ export default function PracticeDirectoryPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("practice.searchPlaceholder") || "Search worksheets..."}
+              placeholder="Search worksheets..."
               className="w-full pl-9 pr-3 py-2 rounded-xs bg-[#E8CF9C] border-2 border-[#1E1610] text-xs font-sans font-bold text-[#1E1610] placeholder:text-[#6B6F76] focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
             />
           </div>
@@ -134,7 +134,7 @@ export default function PracticeDirectoryPage() {
                 filter === "all" ? "bg-[#F2C230] text-[#1E1610] border-[#1E1610] shadow-[1px_1px_0px_#1E1610]" : "text-[#1E1610] border-transparent"
               }`}
             >
-              {t("practice.allFilter") || "All Topics"} ({concepts.length})
+              All Topics ({concepts.length})
             </button>
             <button
               type="button"
@@ -143,7 +143,7 @@ export default function PracticeDirectoryPage() {
                 filter === "completed" ? "bg-[#F2C230] text-[#1E1610] border-[#1E1610] shadow-[1px_1px_0px_#1E1610]" : "text-[#1E1610] border-transparent"
               }`}
             >
-              {t("practice.completedFilter") || "Practiced"}
+              Practiced
             </button>
           </div>
         </div>
@@ -204,7 +204,7 @@ export default function PracticeDirectoryPage() {
                       className="w-full py-2 px-3.5 rounded-xs bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-1.5 border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-colors no-underline"
                     >
                       <Compass className="w-3.5 h-3.5 text-[#1E1610]" />
-                      <span>{scorePercentage !== null ? (t("practice.retryBtn") || "Practice Again") : (t("lesson.startWorksheetBtn") || "Start Worksheet")}</span>
+                      <span>{scorePercentage !== null ? "Practice Again" : "Start Worksheet"}</span>
                     </Link>
                   ) : (
                     <Link
@@ -212,7 +212,7 @@ export default function PracticeDirectoryPage() {
                       className="w-full py-2 px-3.5 rounded-xs bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] font-heading font-extrabold text-xs flex items-center justify-center gap-1.5 border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] no-underline"
                     >
                       <Lock className="w-3.5 h-3.5 text-[#1E1610]" />
-                      <span>{t("practice.unlockInLearn") || "Unlock in Learn"}</span>
+                      <span>Unlock in Learn</span>
                     </Link>
                   )}
                 </div>

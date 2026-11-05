@@ -201,7 +201,7 @@ export default function StudentDashboardPage() {
                   className="text-[11px] font-heading font-bold text-[#2F4FB5] hover:underline"
                   title="Switch study class"
                 >
-                  {t("dashboard.changeClass") || "Switch Class"}
+                  Switch Class
                 </Link>
                 {enrolledClass !== studyClass && (
                   <span className="px-2.5 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[11px] font-heading font-bold text-[#1E1610]">
@@ -263,7 +263,7 @@ export default function StudentDashboardPage() {
                   {nextRecommendation.badge}
                 </span>
                 <span className="text-[11px] font-heading font-bold text-[#5A3720]">
-                  {t("diagnostic.whatToDoNext") || "What to do next"}
+                  What to do next
                 </span>
               </div>
               <h2 className="font-heading font-extrabold text-base sm:text-lg leading-snug text-[#1E1610]">
@@ -370,25 +370,25 @@ export default function StudentDashboardPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
             <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center">
-              <span className="text-[11px] font-heading font-extrabold uppercase text-[#1E1610] block tracking-wide">{t("dashboard.completed") || "Completed"}</span>
+              <span className="text-[11px] font-heading font-extrabold uppercase text-[#1E1610] block tracking-wide">Completed</span>
               <span className="font-heading font-extrabold text-lg text-[#1E1610]">
                 {completedInClass.length}
               </span>
             </div>
             <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center">
-              <span className="text-[11px] font-heading font-extrabold uppercase text-[#5A3720] block tracking-wide">{t("dashboard.inProgress") || "In Progress"}</span>
+              <span className="text-[11px] font-heading font-extrabold uppercase text-[#5A3720] block tracking-wide">In Progress</span>
               <span className="font-heading font-extrabold text-lg text-[#1E1610]">
                 {inProgressInClass.length}
               </span>
             </div>
             <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center">
-              <span className="text-[11px] font-heading font-extrabold uppercase text-[#2F4FB5] block tracking-wide">{t("dashboard.available") || "Available"}</span>
+              <span className="text-[11px] font-heading font-extrabold uppercase text-[#2F4FB5] block tracking-wide">Available</span>
               <span className="font-heading font-extrabold text-lg text-[#1E1610]">
                 {availableInClass.length}
               </span>
             </div>
             <div className="p-3 bg-[#E8CF9C]/70 border-2 border-[#1E1610] text-center">
-              <span className="text-[11px] font-heading font-extrabold uppercase text-[#6B6F76] block tracking-wide">{t("dashboard.locked") || "Locked"}</span>
+              <span className="text-[11px] font-heading font-extrabold uppercase text-[#6B6F76] block tracking-wide">Locked</span>
               <span className="font-heading font-extrabold text-lg text-[#1E1610]">
                 {lockedInClass.length}
               </span>

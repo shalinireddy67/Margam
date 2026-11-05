@@ -214,7 +214,7 @@ export default function StudentLearnPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("practice.searchPlaceholder") || "Search topics or concepts..."}
+              placeholder="Search topics or concepts..."
               className="w-full pl-9 pr-3 py-2 bg-[#E8CF9C] border-3 border-[#1E1610] text-xs font-sans text-[#1E1610] placeholder:text-[#5A3720]/60 focus:outline-none focus:ring-2 focus:ring-[#2F4FB5]"
             />
           </div>
@@ -230,7 +230,7 @@ export default function StudentLearnPage() {
                   : "text-[#1E1610] hover:bg-[#D9B87A]/50"
               }`}
             >
-              {t("practice.allFilter") || "All"} ({allConcepts.length})
+              All ({allConcepts.length})
             </button>
             <button
               type="button"
@@ -241,7 +241,7 @@ export default function StudentLearnPage() {
                   : "text-[#1E1610] hover:bg-[#D9B87A]/50"
               }`}
             >
-              {t("tile.available") || "Available"}
+              Available
             </button>
             <button
               type="button"
@@ -252,7 +252,7 @@ export default function StudentLearnPage() {
                   : "text-[#1E1610] hover:bg-[#D9B87A]/50"
               }`}
             >
-              {t("practice.completedFilter") || "Completed"} ({completedCount})
+              Completed ({completedCount})
             </button>
             <button
               type="button"
@@ -263,7 +263,7 @@ export default function StudentLearnPage() {
                   : "text-[#1E1610] hover:bg-[#D9B87A]/50"
               }`}
             >
-              {t("tile.locked") || "Locked"}
+              Locked
             </button>
           </div>
         </div>
@@ -273,7 +273,7 @@ export default function StudentLearnPage() {
           {filteredConcepts.length === 0 ? (
             <div className="panel-plank p-8 text-center space-y-2 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610]">
               <BookOpen className="w-8 h-8 text-[#5A3720] mx-auto" />
-              <p className="font-heading font-bold text-sm text-[#1E1610]">{t("practice.emptySearch") || "No topics match your filter"}</p>
+              <p className="font-heading font-bold text-sm text-[#1E1610]">No topics match your filter</p>
               <button
                 type="button"
                 onClick={() => {
@@ -361,22 +361,22 @@ export default function StudentLearnPage() {
                           </span>
                           {isCompleted && (
                             <span className="text-[11px] font-heading font-extrabold px-2 py-0.5 bg-[#6DB33F] border border-[#1E1610] text-[#1E1610]">
-                              {t("pathway.masteredBadge") || "Mastered"}
+                              Mastered
                             </span>
                           )}
                           {isInProgress && (
                             <span className="text-[11px] font-heading font-bold px-2 py-0.5 bg-[#F2C230] border border-[#1E1610] text-[#1E1610]">
-                              {t("tile.inProgress") || "In Progress"}
+                              In Progress
                             </span>
                           )}
                           {isAvailable && (
                             <span className="text-[11px] font-heading font-bold px-2 py-0.5 bg-[#8CCB55] border border-[#1E1610] text-[#1E1610]">
-                              {t("tile.available") || "Unlocked"}
+                              Unlocked
                             </span>
                           )}
                           {isLocked && (
                             <span className="text-[11px] font-heading font-bold px-2 py-0.5 bg-[#B9BCC0] border border-[#1E1610] text-[#1E1610]">
-                              {t("tile.locked") || "Locked"}
+                              Locked
                             </span>
                           )}
                         </div>
@@ -411,7 +411,7 @@ export default function StudentLearnPage() {
                             href={`/lesson/${concept.id}`}
                             className="flex-1 sm:flex-initial py-2 px-4 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-bold text-xs flex items-center justify-center gap-1.5 border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px]"
                           >
-                            <span>{t("tile.openLesson") || "Open Lesson"}</span>
+                            <span>Open Lesson</span>
                             <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                           {isCompleted && (
@@ -421,7 +421,7 @@ export default function StudentLearnPage() {
                               title="Practice Worksheet"
                             >
                               <Compass className="w-3.5 h-3.5" />
-                              <span className="hidden md:inline">{t("tile.practiceWorksheet") || "Worksheet"}</span>
+                              <span className="hidden md:inline">Worksheet</span>
                             </Link>
                           )}
                         </>
@@ -433,7 +433,7 @@ export default function StudentLearnPage() {
                           title="Complete prerequisites first"
                         >
                           <Lock className="w-3.5 h-3.5" />
-                          <span>{t("tile.locked") || "Locked"}</span>
+                          <span>Locked</span>
                         </button>
                       )}
                     </div>

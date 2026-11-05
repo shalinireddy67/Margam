@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, Home, AlertTriangle } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function LessonErrorBoundary({
   error,
@@ -12,8 +11,6 @@ export default function LessonErrorBoundary({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  const { t } = useLanguage();
-
   useEffect(() => {
     console.error("Lesson section error:", error);
   }, [error]);
@@ -27,10 +24,10 @@ export default function LessonErrorBoundary({
 
         <div className="space-y-2">
           <h1 className="text-lg sm:text-xl font-heading font-extrabold text-[#2B1B0F] tracking-wide">
-            {t("errors.generic") || "Lesson Could Not Load"}
+            Lesson Could Not Load
           </h1>
           <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed font-sans">
-            {t("errors.description") || "There was a temporary issue reading this lesson. Your study progress is safely preserved."}
+            There was a temporary issue reading this lesson. Your study progress is safely preserved.
           </p>
         </div>
 
@@ -41,14 +38,14 @@ export default function LessonErrorBoundary({
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#5DAA3A] hover:bg-[#4E9330] text-[#1E1610] font-heading font-extrabold text-xs border-[2px] border-[#1E1610] shadow-[2px_2px_0px_#1B120C] active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
-            <span>{t("errors.reloadLessonBtn") || "Reload Lesson"}</span>
+            <span>Reload Lesson</span>
           </button>
           <Link
             href="/"
             className="flex-1 min-h-[48px] px-5 py-3 bg-[#FFF7E6] hover:bg-[#FFE9A8] text-[#2B1B0F] font-heading font-extrabold text-xs border-[2px] border-[#1E1610] shadow-[2px_2px_0px_#1B120C] active:translate-x-[1px] active:translate-y-[1px] transition-all flex items-center justify-center gap-2 no-underline"
           >
             <Home className="w-4 h-4" />
-            <span>{t("lesson.backToLessons") || "Return to Lessons"}</span>
+            <span>Return to Lessons</span>
           </Link>
         </div>
       </div>

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { Trophy, TrendingUp, Flame, EyeOff, Eye, Zap } from "lucide-react";
 import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile } from "@/lib/storage";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LeaderboardEntry {
   studentId: string;
@@ -42,7 +41,6 @@ export function ClassLeaderboard({
   classId?: string;
   className?: string;
 }) {
-  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<"weekly" | "most_improved" | "streak_kings">("weekly");
   const [data, setData] = useState<LeaderboardData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -102,7 +100,7 @@ export function ClassLeaderboard({
           </div>
           <div>
             <h2 className="font-heading font-extrabold text-base sm:text-lg text-[#F2C230] leading-tight m-0">
-              {t("leaderboard.title") || "Class Quest Board"}
+              Class Quest Board
             </h2>
             <p className="text-[11px] text-[#B9BCC0] font-medium m-0">
               Class Section • Privacy-First • {data?.resetWindowLabel || "Resets Mondays 00:00 IST"}
@@ -119,10 +117,10 @@ export function ClassLeaderboard({
               ? "bg-[#6B6F76] text-[#F3E3BC]"
               : "bg-[#6DB33F] text-[#1E1610]"
           }`}
-          title={t("leaderboard.hideFromLeaderboard") || "Toggle visibility on the class leaderboard"}
+          title="Toggle visibility on the class leaderboard"
         >
           {optOut ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-          <span>{optOut ? (t("leaderboard.hiddenOnLeaderboard") || "Hidden from Board") : (t("leaderboard.showOnLeaderboard") || "Visible on Board")}</span>
+          <span>{optOut ? "Hidden from Board" : "Visible on Board"}</span>
         </button>
       </div>
 
@@ -140,7 +138,7 @@ export function ClassLeaderboard({
           }`}
         >
           <Trophy className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t("leaderboard.weeklyXp") || "Weekly XP"}</span>
+          <span className="truncate">Weekly XP</span>
         </button>
 
         <button
@@ -155,7 +153,7 @@ export function ClassLeaderboard({
           }`}
         >
           <TrendingUp className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t("leaderboard.mostImproved") || "Most Improved"}</span>
+          <span className="truncate">Most Improved</span>
         </button>
 
         <button
@@ -170,7 +168,7 @@ export function ClassLeaderboard({
           }`}
         >
           <Flame className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">{t("leaderboard.streakKings") || "Streak Kings"}</span>
+          <span className="truncate">Streak Kings</span>
         </button>
       </div>
 
@@ -178,7 +176,7 @@ export function ClassLeaderboard({
       {loading ? (
         <div className="py-8 text-center text-xs text-[#B9BCC0] font-medium space-y-2">
           <div className="w-6 h-6 border-[3px] border-[#F2C230] border-t-transparent animate-spin mx-auto" />
-          <span>{t("leaderboard.assemblingScores") || "Assembling class quest scores..."}</span>
+          <span>Assembling class quest scores...</span>
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -208,7 +206,7 @@ export function ClassLeaderboard({
                       </span>
                       {item.isCurrentUser && (
                         <span className="text-[9px] bg-[#6DB33F] text-[#1E1610] px-1 py-0.2 font-heading font-extrabold uppercase rounded-none">
-                          {t("leaderboard.youBadge") || "You"}
+                          You
                         </span>
                       )}
                     </div>
@@ -241,7 +239,7 @@ export function ClassLeaderboard({
                     </div>
                   )}
                   <span className="text-[10px] text-[#B9BCC0] block">
-                    {activeTab === "weekly" ? "XP" : activeTab === "most_improved" ? "%" : "days"}
+                    {activeTab === "weekly" ? "this week" : activeTab === "most_improved" ? "growth" : "streak"}
                   </span>
                 </div>
               </div>
@@ -254,8 +252,8 @@ export function ClassLeaderboard({
               <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-[#F2C230] shrink-0" />
                 <span>
-                  Rank: <strong className="text-[#F2C230]">#{data.userRelativePosition.rank}</strong> •{" "}
-                  <strong>{data.userRelativePosition.weeklyXp} XP</strong>
+                  You&apos;re ranked <strong className="text-[#F2C230]">#{data.userRelativePosition.rank}</strong> with{" "}
+                  <strong>{data.userRelativePosition.weeklyXp} XP</strong>!
                 </span>
               </div>
               <span className="text-[11px] font-heading font-bold text-[#6DB33F] shrink-0">

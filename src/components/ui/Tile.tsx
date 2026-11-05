@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { BookOpen, Compass, Lock, Zap } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export type ChapterTileState = "available" | "in_progress" | "coming_soon";
 export type LessonTileState = "available" | "in_progress" | "locked";
@@ -46,8 +45,6 @@ export function Tile({
   icon,
   className = "",
 }: TileProps) {
-  const { t } = useLanguage();
-
   // Coming soon state
   if (state === "coming_soon") {
     const tooltipText =
@@ -71,7 +68,7 @@ export function Tile({
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-xs bg-[#E8CF9C] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-extrabold">
               <Lock className="w-3 h-3 text-[#1E1610]" />
-              <span>{t("tile.comingSoon") || "COMING SOON"}</span>
+              <span>COMING SOON</span>
             </span>
           </div>
           <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#1E1610] leading-tight">
@@ -84,8 +81,8 @@ export function Tile({
           )}
         </div>
         <div className="mt-4 pt-2 border-t-2 border-[#1E1610]/20 flex items-center justify-between text-[11px] font-heading font-bold text-[#5A3720]">
-          <span>{t("tile.underConstruction") || "Under Construction"}</span>
-          <span className="text-[10px]">{t("tile.questionsInForge") || "Questions in Forge"}</span>
+          <span>Under Construction</span>
+          <span className="text-[10px]">Questions in Forge</span>
         </div>
       </div>
     );
@@ -106,7 +103,7 @@ export function Tile({
           <div className="flex items-center justify-between mb-2">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-xs bg-[#E8CF9C] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-extrabold">
               <Lock className="w-3 h-3 text-[#1E1610]" />
-              <span>{t("tile.locked") || "LOCKED"}</span>
+              <span>LOCKED</span>
             </span>
           </div>
           <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#1E1610] leading-tight">
@@ -119,7 +116,7 @@ export function Tile({
           )}
         </div>
         <p className="text-xs font-extrabold text-[#D1362B] mt-4 font-heading">
-          {t("lesson.prerequisiteRequired") || "EARLIER TOPIC NEEDED"}
+          EARLIER TOPIC NEEDED
         </p>
       </div>
     );
@@ -143,12 +140,12 @@ export function Tile({
           {isInProgress ? (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-xs bg-[#F2C230] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-extrabold shadow-[1px_1px_0px_#1E1610]">
               <Zap className="w-3 h-3 text-[#1E1610]" />
-              <span>{t("tile.inProgress") || "IN PROGRESS"}</span>
+              <span>IN PROGRESS</span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-xs bg-[#6DB33F] text-[#1E1610] border border-[#1E1610] text-[10px] font-heading font-extrabold shadow-[1px_1px_0px_#1E1610]">
               <BookOpen className="w-3 h-3 text-[#1E1610]" />
-              <span>{t("tile.readyToLearn") || "READY"}</span>
+              <span>READY</span>
             </span>
           )}
         </div>
@@ -172,7 +169,7 @@ export function Tile({
             className="inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all"
           >
             <Compass className="w-3.5 h-3.5 mr-1.5 text-[#1E1610]" />
-            <span>{t("tile.quickCheck") || "Quick Check"}</span>
+            <span>Quick Check</span>
           </Link>
         )}
         {practiceHref && (
@@ -180,7 +177,7 @@ export function Tile({
             href={practiceHref}
             className="inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 bg-[#F2C230] hover:bg-[#E8CF9C] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all"
           >
-            <span>{t("common.practice") || "Practice"}</span>
+            <span>Practice</span>
           </Link>
         )}
         {lessonHref && (
@@ -188,7 +185,7 @@ export function Tile({
             href={lessonHref}
             className="inline-flex items-center justify-center min-h-[40px] px-3.5 py-1.5 bg-[#E8CF9C] hover:bg-[#F3E3BC] text-[#1E1610] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] text-xs font-heading font-extrabold no-underline transition-all"
           >
-            <span>{t("common.learn") || "Learn"}</span>
+            <span>Learn</span>
           </Link>
         )}
       </div>

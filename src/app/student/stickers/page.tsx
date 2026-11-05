@@ -20,7 +20,6 @@ import { getActiveProfile } from "@/lib/storage";
 import { Navigation } from "@/components/Navigation";
 import { SkeletonCard, OfflineBanner, Button } from "@/components/ui";
 import { getLevelProgress } from "@/lib/xp-config";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export type StickerRarity = "common" | "rare" | "epic";
 
@@ -36,7 +35,6 @@ export interface InventorySticker {
 }
 
 export default function StickersInventoryPage() {
-  const { t } = useLanguage();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -98,10 +96,10 @@ export default function StickersInventoryPage() {
               !
             </div>
             <h1 className="font-heading font-extrabold text-lg text-[#1E1610]">
-              {t("errors.generic") || "Could not load stickers"}
+              Could not load stickers
             </h1>
             <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed">
-              {errorMessage || t("stickers.tryAgain") || "Could not show stickers. Please tap Try again."}
+              {errorMessage || "Could not show stickers. Please tap Try again."}
             </p>
             <div className="pt-2">
               <Button
@@ -110,7 +108,7 @@ export default function StickersInventoryPage() {
                 onClick={initStickers}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                <span>{t("stickers.tryAgain") || "Try again"}</span>
+                <span>Try again</span>
                 <RotateCcw className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -134,17 +132,17 @@ export default function StickersInventoryPage() {
               <Lock className="w-6 h-6" />
             </div>
             <h1 className="font-heading font-extrabold text-lg text-[#1E1610]">
-              {t("stickers.locked") || "Stickers locked"}
+              Stickers locked
             </h1>
             <p className="text-xs sm:text-sm font-semibold text-[#5A3720] leading-relaxed">
-              {t("stickers.howToUnlock") || "Select a class and complete lessons to unlock your inventory."}
+              Select a class and complete lessons to unlock your inventory.
             </p>
             <div className="pt-2">
               <Link
                 href="/student/select-class"
                 className="inline-flex items-center justify-center min-h-[48px] px-6 py-2.5 bg-[#6DB33F] text-[#1E1610] border-3 border-[#1E1610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#1E1610] no-underline hover:bg-[#8CCB55]"
               >
-                <span>{t("stickers.selectClass") || "Select Class"}</span>
+                <span>Select Class</span>
               </Link>
             </div>
           </div>
@@ -163,6 +161,11 @@ export default function StickersInventoryPage() {
   const longestStreak = profile.streak?.longest || currentStreak;
   const consecutiveCorrect = profile.consecutiveCorrect || 0;
   const levelInfo = getLevelProgress(profile.xp || 0);
+
+  // Check if any chapter test was completed
+  const hasChapterTest = Object.values(profile.topicProgress || {}).some(
+    (t) => t.worksheetCompleted && (t.worksheetTotal || 0) >= 3
+  );
 
   // Exact Real Event Trigger Inventory Stickers
   const inventory: InventorySticker[] = [
@@ -197,33 +200,33 @@ export default function StickersInventoryPage() {
       earnedDateLabel: `${resolvedGapsCount} gap(s) repaired`,
     },
     {
-      id: "streak_warrior",
-      title: "Streak Keeper",
-      description: "Maintained a 3-day continuous daily study streak",
+      id: "streak_3_days",
+      title: "Flame Keeper",
+      description: "Practiced mathematics 3 days in a row",
       rarity: "rare",
       icon: "🔥",
-      unlocked: longestStreak >= 3,
-      hint: "Study 3 days in a row to earn the Streak Keeper sticker.",
-      earnedDateLabel: `${currentStreak} day streak`,
+      unlocked: longestStreak >= 3 || currentStreak >= 3,
+      hint: "Practice mathematics for 3 days in a row to earn this sticker.",
+      earnedDateLabel: `${longestStreak} days streak record`,
     },
     {
-      id: "streak_master",
-      title: "Fire Champion",
-      description: "Achieved a 7-day continuous daily study streak",
-      rarity: "epic",
-      icon: "⚡",
-      unlocked: longestStreak >= 7,
-      hint: "Maintain a full 7-day study streak to earn this sticker.",
-      earnedDateLabel: `${currentStreak} day streak`,
-    },
-    {
-      id: "accuracy_ace",
-      title: "Sharp Mind",
-      description: "Answered 10 practice questions consecutively correct",
+      id: "chapter_test_done",
+      title: "Chapter Tested",
+      description: "Completed a comprehensive chapter assessment",
       rarity: "rare",
-      icon: "🎯",
+      icon: "📜",
+      unlocked: hasChapterTest,
+      hint: "Finish a complete chapter assessment test to earn this sticker.",
+      earnedDateLabel: "Chapter test completed",
+    },
+    {
+      id: "ten_in_a_row",
+      title: "Diamond Focus",
+      description: "Answered 10 practice questions correctly in a row",
+      rarity: "epic",
+      icon: "💎",
       unlocked: consecutiveCorrect >= 10,
-      hint: "Answer 10 practice questions in a row without making a mistake.",
+      hint: "Answer 10 practice questions correctly in a row to earn this sticker.",
       earnedDateLabel: `${consecutiveCorrect}/10 consecutive correct`,
     },
     {
@@ -303,19 +306,19 @@ export default function StickersInventoryPage() {
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#F2C230] text-[#1E1610] border-2 border-[#1E1610] font-heading font-extrabold text-xs">
               <Award className="w-3.5 h-3.5" />
-              <span>{t("stickers.blockInventory") || "Block Inventory"}</span>
+              <span>Block Inventory</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#1E1610]">
-              {t("stickers.title") || "Stickers & Trophy Inventory"}
+              Stickers & Trophy Inventory
             </h1>
             <p className="text-xs sm:text-sm text-[#5A3720] font-sans max-w-xl">
-              {t("stickers.subtitle") || "Earn permanent inventory stickers by completing lessons, keeping daily streaks, and repairing foundational gaps."}
+              Earn permanent inventory stickers by completing lessons, keeping daily streaks, and repairing foundational gaps.
             </p>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
             <span className="px-3.5 py-1.5 bg-[#6DB33F] text-[#1E1610] border-3 border-[#1E1610] font-heading font-extrabold text-xs shadow-[2px_2px_0px_#1E1610]">
-              {unlockedCount} / {inventory.length} {t("stickers.totalEarned", { count: unlockedCount, total: inventory.length }) || "Stickers Collected"}
+              {unlockedCount} / {inventory.length} Stickers Collected
             </span>
           </div>
         </div>
@@ -335,7 +338,7 @@ export default function StickersInventoryPage() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-heading font-bold text-[#5A3720]">
-                      [✓ {t("stickers.earned") || "Earned"}]
+                      [✓ Earned]
                     </span>
                     {rarityBadge(item.rarity)}
                   </div>
@@ -371,7 +374,7 @@ export default function StickersInventoryPage() {
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-heading font-bold text-[#5A3720]">
-                    [-- {t("stickers.locked") || "Locked"}]
+                    [-- Locked]
                   </span>
                   {rarityBadge(item.rarity)}
                 </div>
@@ -391,7 +394,7 @@ export default function StickersInventoryPage() {
 
                 <div className="pt-2 border-t-2 border-[#1E1610]/15">
                   <span className="text-[10px] font-heading font-bold text-[#5A3720]">
-                    {t("stickers.locked") || "Incomplete"}
+                    Incomplete
                   </span>
                 </div>
               </div>
@@ -402,7 +405,7 @@ export default function StickersInventoryPage() {
 
       {/* Footer */}
       <footer className="max-w-[1200px] mx-auto px-4 my-6 text-center text-xs font-sans font-medium text-[#5A3720]">
-        Margam • {t("stickers.title") || "Block Inventory & Trophy Showcase"}
+        Margam • Block Inventory & Trophy Showcase
       </footer>
     </div>
   );

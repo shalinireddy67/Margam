@@ -8,11 +8,9 @@ import { LearnerProfile } from "@/lib/types";
 import { getActiveProfile, clearActiveProfile } from "@/lib/storage";
 import { Companion } from "@/components/ui/Companion";
 import { Logo } from "@/components/ui";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ResetClassPage() {
   const router = useRouter();
-  const { t } = useLanguage();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
 
   useEffect(() => {
@@ -46,9 +44,7 @@ export default function ResetClassPage() {
               MARGAM
             </span>
           </Link>
-          <span className="font-heading font-bold text-xs text-[#D9B87A]">
-            {t("profile.classSwitchProtocol") || "Class Switch Protocol"}
-          </span>
+          <span className="font-heading font-bold text-xs text-[#D9B87A]">Class Switch Protocol</span>
         </div>
       </header>
 
@@ -63,20 +59,20 @@ export default function ResetClassPage() {
 
           <div>
             <h1 className="font-heading font-extrabold text-lg sm:text-xl text-[#1E1610]">
-              {profile.name} • Class {profile.selectedClass}
+              Change Class for {profile.name}?
             </h1>
             <p className="text-xs sm:text-sm text-[#5A3720] mt-2 leading-relaxed font-sans font-semibold">
-              {t("profile.dangerZone") || "Reset Progress"}
+              You are currently enrolled in <strong className="text-[#1E1610]">Class {profile.selectedClass}</strong>.
             </p>
           </div>
 
           <div className="p-4 bg-[#E8CF9C] border-[2px] border-[#1E1610] text-left space-y-2 text-xs text-[#1E1610] rounded-xs">
             <div className="flex items-center gap-2 font-heading font-extrabold text-xs text-[#D1362B]">
               <ShieldAlert className="w-4 h-4 shrink-0" />
-              <span>{t("common.error") || "Caution"}</span>
+              <span>Progress Caution</span>
             </div>
             <p className="font-semibold leading-relaxed m-0">
-              {t("profile.classSwitchProtocol") || "Switching to another class will reset your active study session on this browser."}
+              Switching to another class will reset your active Class {profile.selectedClass} study streak and topic completions for this browser session.
             </p>
           </div>
 
@@ -87,7 +83,7 @@ export default function ResetClassPage() {
               className="w-full min-h-[48px] px-4 py-2.5 bg-[#D1362B] hover:bg-[#A82820] text-[#F3E3BC] border-[3px] border-[#1E1610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#1E1610] active:translate-x-[2px] active:translate-y-[2px] flex items-center justify-center gap-2 transition-colors cursor-pointer rounded-xs"
             >
               <RotateCcw className="w-4 h-4 text-[#F3E3BC]" />
-              <span>{t("profile.resetProgress") || "Reset and Switch Class"}</span>
+              <span>Reset Class {profile.selectedClass} Progress & Switch Grade</span>
             </button>
 
             <Link
@@ -95,14 +91,14 @@ export default function ResetClassPage() {
               className="w-full min-h-[48px] px-4 py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] border-[3px] border-[#1E1610] font-heading font-extrabold text-xs shadow-[3px_3px_0px_#1E1610] active:translate-x-[2px] active:translate-y-[2px] flex items-center justify-center gap-2 transition-colors cursor-pointer no-underline rounded-xs"
             >
               <ArrowLeft className="w-4 h-4 text-[#1E1610]" />
-              <span>{t("common.back") || "Cancel and Return"}</span>
+              <span>Cancel and Return to Class {profile.selectedClass}</span>
             </Link>
           </div>
         </div>
       </main>
 
       <footer className="border-t-2 border-[#1E1610]/20 py-4 text-center text-xs text-[#1E1610] font-bold">
-        Margam • {t("footer.description") || "Adaptive Mathematics for NCERT Classes 6–10"}
+        Margam Educational Platform • Safe & Deterministic Storage
       </footer>
     </div>
   );

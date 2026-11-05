@@ -6,7 +6,6 @@ import { LearnerProfile } from "@/lib/types";
 import { getIstDateString, XP_CONFIG } from "@/lib/xp-config";
 import { applyAwardedXpToProfile } from "@/lib/gamification";
 import { saveProfile } from "@/lib/storage";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface DailyQuestsProps {
   profile: LearnerProfile;
@@ -24,7 +23,6 @@ interface QuestState {
 }
 
 export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
-  const { t } = useLanguage();
   const todayIst = getIstDateString();
   const [animatingQuestId, setAnimatingQuestId] = useState<string | null>(null);
 
@@ -100,49 +98,43 @@ export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
 
     // Trigger <=600ms block-place animation
     setAnimatingQuestId(quest.id);
+    setTimeout(() => setAnimatingQuestId(null), 550);
 
-    // Save claim in localStorage
-    const updatedClaimed = [...claimedIds, quest.id];
+    const newClaimed = [...claimedIds, quest.id];
     try {
-      localStorage.setItem(storageKey, JSON.stringify(updatedClaimed));
-    } catch {
-      // ignore
-    }
+      localStorage.setItem(storageKey, JSON.stringify(newClaimed));
+    } catch {}
 
-    // Award XP with sound
-    const currentDaily = profile.dailyXp?.xp || 0;
-    const { updatedProfile } = applyAwardedXpToProfile(profile, quest.xpReward, currentDaily + quest.xpReward);
-    saveProfile(updatedProfile);
+    const result = applyAwardedXpToProfile(profile, quest.xpReward, (profile.dailyXp?.xp || 0) + quest.xpReward);
+    saveProfile(result.updatedProfile);
     if (onProfileUpdate) {
-      onProfileUpdate(updatedProfile);
+      onProfileUpdate(result.updatedProfile);
     }
-
-    setTimeout(() => {
-      setAnimatingQuestId(null);
-    }, 500);
   };
+
+  const allCompleted = quests.every((q) => q.completed);
 
   return (
     <div
       data-panel="daily-quests"
-      className="panel-plank p-4 sm:p-5 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] space-y-4"
+      className="panel-plank p-5 sm:p-6 border-3 border-[#1E1610] shadow-[3px_3px_0px_#1E1610] text-[#1E1610] space-y-4"
     >
       <div className="flex items-center justify-between border-b-2 border-[#1E1610]/20 pb-3">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-[#F2C230] border-2 border-[#1E1610] flex items-center justify-center text-[#1E1610] shadow-[1px_1px_0px_#1E1610]">
-            <Target className="w-4 h-4" />
+          <div className="w-7 h-7 bg-[#6DB33F] border-2 border-[#1E1610] flex items-center justify-center text-xs font-heading font-extrabold text-[#1E1610] shadow-[1px_1px_0px_#1E1610]">
+            ✓
           </div>
           <div>
-            <h3 className="font-heading font-extrabold text-sm text-[#1E1610] m-0">
-              {t("gamification.dailyGoalCompleted") || "Daily Quests"}
+            <h3 className="font-heading font-extrabold text-sm sm:text-base text-[#1E1610]">
+              Daily Quests
             </h3>
-            <p className="text-[11px] text-[#5A3720] font-sans m-0">
+            <p className="text-[11px] text-[#5A3720] font-sans">
               Finish 3 daily quests to earn bonus XP. Resets daily.
             </p>
           </div>
         </div>
         <span className="text-[11px] font-heading font-extrabold px-2 py-0.5 bg-[#E8CF9C] border-2 border-[#1E1610] text-[#1E1610]">
-          {quests.filter((q) => q.completed).length} / 3 {t("common.completed") || "Done"}
+          {quests.filter((q) => q.completed).length} / 3 Done
         </span>
       </div>
 
@@ -177,7 +169,7 @@ export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
                     {quest.title}
                   </span>
                   <span className="text-[10px] text-[#5A3720] font-sans">
-                    {quest.current}/{quest.target} • +{quest.xpReward} XP
+                    Progress: {quest.current}/{quest.target} • +{quest.xpReward} XP
                   </span>
                 </div>
               </div>
@@ -195,11 +187,11 @@ export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
                     className="min-h-[32px] px-3 py-1 bg-[#F2C230] hover:bg-[#6DB33F] text-[#1E1610] font-heading font-extrabold text-[11px] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] cursor-pointer flex items-center gap-1 transition-colors"
                   >
                     <Zap className="w-3 h-3 text-[#1E1610]" />
-                    <span>{t("gamification.claimReward") || "Claim XP"}</span>
+                    <span>Claim XP</span>
                   </button>
                 ) : (
                   <span className="text-[10px] font-heading font-bold px-2 py-0.5 bg-[#D9B87A] text-[#5A3720] border border-[#1E1610]">
-                    {t("common.inProgress") || "In Progress"}
+                    In Progress
                   </span>
                 )}
               </div>
@@ -211,4 +203,3 @@ export function DailyQuests({ profile, onProfileUpdate }: DailyQuestsProps) {
   );
 }
 
-export default DailyQuests;

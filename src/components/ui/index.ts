@@ -13,4 +13,3 @@ export * from "./ProgressBar";
 export * from "./MistakeCreature";
 export * from "./Logo";
 export * from "./Companion";
-export * from "./CookieConsent";

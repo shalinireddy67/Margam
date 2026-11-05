@@ -25,12 +25,9 @@ import { handleLoginSync, setStorageMode, createLearnerProfile } from "@/lib/sto
 import { Companion } from "@/components/ui/Companion";
 import { isIstNightTime } from "@/lib/xp-config";
 import { DEMO_SCHOOL_CONFIG, DEMO_STUDENTS } from "@/lib/demo/demo-school-data";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
 function LoginForm() {
   const router = useRouter();
-  const { lang, setLang, t } = useLanguage();
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
   const isTeacherFlow = roleParam === "teacher";
@@ -266,7 +263,7 @@ function LoginForm() {
     resetMessages();
 
     if (!teacherConsent) {
-      setErrorMessage(t("login.teacherConsentError") || "Please confirm school or guardian consent to register as an educator.");
+      setErrorMessage("Please confirm school or guardian consent to register as an educator.");
       return;
     }
 
@@ -314,16 +311,13 @@ function LoginForm() {
             </div>
             <span className="font-heading font-extrabold text-base sm:text-lg text-[#F3E3BC]">MARGAM</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <LanguageToggle currentLang={lang} onLanguageChange={setLang} />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#1E1610] py-1.5 px-3 bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>{t("login.goBack") || "Go back"}</span>
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#1E1610] py-1.5 px-3 bg-[#E8CF9C] hover:bg-[#D9B87A] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all active:translate-x-[1px] active:translate-y-[1px]"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Go back</span>
+          </Link>
         </div>
       </header>
 
@@ -351,7 +345,7 @@ function LoginForm() {
           <div className="space-y-1">
             <h2 className="text-base sm:text-lg font-heading font-extrabold text-emerald-950 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>{t("login.demoAccessTitle") || "Demo Access for Live Hackathon Judging"}</span>
+              <span>Demo Access for Live Hackathon Judging</span>
             </h2>
             <p className="text-xs text-slate-700 font-sans leading-relaxed">
               Explore the realistic seeded classroom without manual sign-ups. Click any option below to instantly enter as the teacher or inspect contrasting student learning journeys.
@@ -472,7 +466,7 @@ function LoginForm() {
           {/* Subtle Manual Credentials Note */}
           <div className="text-[11px] text-slate-600 font-sans flex flex-wrap items-center justify-between gap-1 pt-1">
             <span>
-              <strong>{t("login.manualCredentialsTitle") || "Manual Credentials"}:</strong> {t("login.teacherLabel") || "Teacher"}: <code className="bg-[#E8CF9C] px-1 py-0.5 border border-[#1E1610] font-mono font-bold text-[#1E1610]">{DEMO_SCHOOL_CONFIG.teacher.email}</code> / <code className="bg-[#E8CF9C] px-1 py-0.5 border border-[#1E1610] font-mono font-bold text-[#1E1610]">{DEMO_SCHOOL_CONFIG.demoPassword}</code>
+              <strong>Manual Credentials:</strong> Teacher: <code className="bg-[#E8CF9C] px-1 py-0.5 border border-[#1E1610] font-mono font-bold text-[#1E1610]">{DEMO_SCHOOL_CONFIG.teacher.email}</code> / <code className="bg-[#E8CF9C] px-1 py-0.5 border border-[#1E1610] font-mono font-bold text-[#1E1610]">{DEMO_SCHOOL_CONFIG.demoPassword}</code>
             </span>
             <span className="font-mono text-emerald-900 font-bold">
               Class Code: {DEMO_SCHOOL_CONFIG.classCode}
@@ -519,7 +513,7 @@ function LoginForm() {
               )}
             </div>
             <h1 className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-950">
-              {isTeacherFlow ? (t("login.teacherTab") || "Teacher Portal") : (t("login.studentTab") || "Student Portal")}
+              {isTeacherFlow ? "Teacher Portal" : "Student Portal"}
             </h1>
             <p className="text-xs text-slate-600 font-sans font-medium">
               {isTeacherFlow
@@ -681,7 +675,7 @@ function LoginForm() {
                 <form onSubmit={handleStudentSignIn} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      {t("login.enterNickname") || "Student Username"} <span className="text-[#D9453D]">*</span>
+                      Student Username <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
@@ -698,7 +692,7 @@ function LoginForm() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      {t("login.enterPassword") || "Password"} <span className="text-[#D9453D]">*</span>
+                      Password <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="relative">
                       <Lock className="w-4 h-4 text-[#7A4B2A] absolute left-3 top-3.5" />
@@ -718,7 +712,7 @@ function LoginForm() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[46px] py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] disabled:opacity-50 text-[#1E1610] text-xs font-heading font-extrabold border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all cursor-pointer flex items-center justify-center gap-2 active:translate-x-[1px] active:translate-y-[1px]"
                   >
-                    <span>{loading ? (t("common.loading") || "Signing in...") : (t("login.signInBtn") || "Log in as student")}</span>
+                    <span>{loading ? "Signing in..." : "Log in as student"}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
@@ -777,7 +771,7 @@ function LoginForm() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      {t("login.selectGrade") || "Select Class"} <span className="text-[#D9453D]">*</span>
+                      Select Class <span className="text-[#D9453D]">*</span>
                     </label>
                     <div className="grid grid-cols-5 gap-1.5">
                       {[6, 7, 8, 9, 10].map((c) => (
@@ -799,7 +793,7 @@ function LoginForm() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#2B1B0F] block">
-                      {t("login.classCode") || "Teacher Class Code"} ({t("common.loading") ? "Optional" : "Optional"})
+                      Teacher Class Code (Optional)
                     </label>
                     <input
                       type="text"
@@ -816,7 +810,7 @@ function LoginForm() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[46px] py-2.5 bg-[#6DB33F] hover:bg-[#8CCB55] disabled:opacity-50 text-[#1E1610] text-xs font-heading font-extrabold border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all cursor-pointer flex items-center justify-center gap-2 active:translate-x-[1px] active:translate-y-[1px]"
                   >
-                    <span>{loading ? (t("common.loading") || "Creating Account...") : (t("login.signUpBtn") || "Create Student Account")}</span>
+                    <span>{loading ? "Creating Account..." : "Create Student Account"}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
@@ -890,7 +884,7 @@ function LoginForm() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[46px] py-2.5 bg-[#78BDE8] hover:bg-[#4EDBD3] disabled:opacity-50 text-[#1E1610] text-xs font-heading font-extrabold border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all cursor-pointer flex items-center justify-center gap-2 active:translate-x-[1px] active:translate-y-[1px]"
                   >
-                    <span>{loading ? (t("common.loading") || "Signing In...") : (t("login.signInBtn") || "Log In to Teacher Hub")}</span>
+                    <span>{loading ? "Signing In..." : "Log In to Teacher Hub"}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
@@ -998,7 +992,7 @@ function LoginForm() {
                     disabled={loading || isLocked}
                     className="w-full min-h-[46px] py-2.5 bg-[#78BDE8] hover:bg-[#4EDBD3] disabled:opacity-50 text-[#1E1610] text-xs font-heading font-extrabold border-3 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] transition-all cursor-pointer flex items-center justify-center gap-2 active:translate-x-[1px] active:translate-y-[1px]"
                   >
-                    <span>{loading ? (t("common.loading") || "Registering...") : (t("login.signUpBtn") || "Create Teacher Account")}</span>
+                    <span>{loading ? "Registering..." : "Create Teacher Account"}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>

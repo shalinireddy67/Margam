@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import WorldBackground from "@/components/world/WorldBackground";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { CookieConsent } from "@/components/ui/CookieConsent";
 
 const SITE_NAME = "Margam";
 const SITE_DESCRIPTION =
@@ -48,8 +47,6 @@ export default function RootLayout({
             Skip to main content
           </a>
           {children}
-          {/* Global Cookie & Privacy Consent Controls */}
-          <CookieConsent />
         </LanguageProvider>
       </body>
     </html>

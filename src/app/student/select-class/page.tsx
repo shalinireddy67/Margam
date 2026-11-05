@@ -11,7 +11,6 @@ import {
   updateLearnerNickname,
 } from "@/lib/storage";
 import { syncClassProgression } from "@/lib/progression";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface GradeOption {
   grade: 6 | 7 | 8 | 9 | 10;
@@ -55,7 +54,6 @@ const GRADE_OPTIONS: GradeOption[] = [
 
 export default function SelectClassPage() {
   const router = useRouter();
-  const { t } = useLanguage();
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [name, setName] = useState("");
@@ -107,9 +105,7 @@ export default function SelectClassPage() {
           data-panel="loading"
           className="p-6 rounded-xs bg-[#D9B87A]/90 border-[3px] border-[#1E1610] text-center shadow-[3px_3px_0px_#1E1610]"
         >
-          <p className="font-heading font-extrabold text-sm text-[#1E1610] m-0">
-            {t("common.loading") || "Loading class options..."}
-          </p>
+          <p className="font-heading font-extrabold text-sm text-[#1E1610] m-0">Loading class options...</p>
         </div>
       </div>
     );
@@ -129,7 +125,7 @@ export default function SelectClassPage() {
             href={profile ? "/student" : "/"}
             className="text-xs font-heading font-extrabold text-[#5A3720] hover:text-[#1E1610] underline"
           >
-            {profile ? (t("dashboard.title") || "Back to Dashboard") : (t("errors.returnHome") || "Back to Home")}
+            {profile ? "Back to Dashboard" : "Back to Home"}
           </Link>
         </div>
       </header>
@@ -141,15 +137,15 @@ export default function SelectClassPage() {
         >
           <div className="space-y-2 text-center">
             <span className="font-heading font-extrabold text-[11px] uppercase tracking-wider text-[#6DB33F] block">
-              {t("profile.ncertCurriculum") || "NCERT Mathematics Curriculum"}
+              NCERT Mathematics Curriculum
             </span>
             <h1 className="font-heading font-extrabold text-lg sm:text-2xl text-[#1E1610] leading-snug m-0">
-              {profile ? (t("dashboard.selectClass") || "Select Your Study Class") : (t("dashboard.welcome") || "Welcome to Margam")}
+              {profile ? "Select Your Study Class" : "Welcome to Margam"}
             </h1>
             <p className="font-sans text-xs sm:text-sm text-[#5A3720] max-w-xl mx-auto leading-relaxed m-0">
               {profile
-                ? (t("dashboard.classSwitchDesc") || "Switch your daily study class anytime. Your completed lessons, mastery records, and XP are strictly preserved.")
-                : (t("dashboard.getStartedDesc") || "Choose your name and class (Classes 6–10) to begin. We pick questions to help you fix topics you missed.")}
+                ? "Switch your daily study class anytime. Your completed lessons, mastery records, and XP are strictly preserved."
+                : "Choose your name and class (Classes 6–10) to begin. We pick questions to help you fix topics you missed."}
             </p>
           </div>
 
@@ -160,7 +156,7 @@ export default function SelectClassPage() {
                 htmlFor="student-name-input"
                 className="font-heading font-extrabold text-xs sm:text-sm text-[#1E1610] block"
               >
-                {profile ? (t("profile.nickname") || "Your Nickname") : (t("login.enterNickname") || "What should we call you?")}{" "}
+                {profile ? "Your Nickname" : "What should we call you?"}{" "}
                 <span className="text-[#D1362B]">*</span>
               </label>
               <input
@@ -178,7 +174,7 @@ export default function SelectClassPage() {
             {/* Class Cards Grid */}
             <div className="space-y-2">
               <label className="font-heading font-extrabold text-xs sm:text-sm text-[#1E1610] block">
-                {t("login.selectGrade") || "Choose Your Class (Classes 6 to 10)"} <span className="text-[#D1362B]">*</span>
+                Choose Your Class (Classes 6 to 10) <span className="text-[#D1362B]">*</span>
               </label>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -198,11 +194,11 @@ export default function SelectClassPage() {
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
                           <span className="font-heading font-extrabold text-xs text-[#1E1610]">
-                            {t("common.classGrade", { grade: opt.grade }) || opt.title}
+                            {opt.title}
                           </span>
                           {isSelected && (
                             <span className="font-heading text-[10px] font-extrabold px-2 py-0.5 rounded-none bg-[#6DB33F] text-[#1E1610] border border-[#1E1610]">
-                              {t("common.selected") || "Selected"}
+                              Selected
                             </span>
                           )}
                         </div>
@@ -230,7 +226,7 @@ export default function SelectClassPage() {
                 type="submit"
                 className="w-full py-3 px-6 rounded-xs bg-[#6DB33F] hover:bg-[#8CCB55] text-[#1E1610] font-heading font-extrabold text-sm border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#1E1610] transition-all cursor-pointer"
               >
-                {profile ? `${t("common.save") || "Save"} • Class ${selectedGrade}` : `${t("common.start") || "Start"} • Class ${selectedGrade}`}
+                {profile ? `Save and start Class ${selectedGrade}` : `Start Class ${selectedGrade}`}
               </button>
             </div>
           </form>
@@ -240,14 +236,14 @@ export default function SelectClassPage() {
               href="/login?role=student"
               className="text-xs font-sans font-semibold text-[#5A3720] hover:text-[#1E1610] underline"
             >
-              {t("login.haveAccount") || "Already have an account?"} {t("login.signInBtn") || "Log in"}
+              Already have an account? Log in
             </Link>
           </div>
         </div>
       </main>
 
       <footer className="max-w-3xl mx-auto w-full mt-6 text-center text-xs font-sans text-[#5A3720] font-bold">
-        Margam • {t("footer.description") || "Adaptive Mathematics for NCERT Classes 6–10"}
+        Margam • Adaptive Mathematics for NCERT Classes 6–10
       </footer>
     </div>
   );

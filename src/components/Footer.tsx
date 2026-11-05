@@ -5,11 +5,8 @@ import Link from "next/link";
 import { ShieldCheck, ArrowUp } from "lucide-react";
 import { SITE_TAGLINE } from "@/config/site";
 import { Logo } from "@/components/ui";
-import { openCookieSettings } from "@/components/ui/CookieConsent";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -42,7 +39,7 @@ export default function Footer() {
                 MARGAM
               </span>
               <span className="text-[11px] text-[#FFF7E6]/75 ml-2 font-sans">
-                {t("footer.description") || "Adaptive Maths · Classes 6–10"}
+                Adaptive Maths · Classes 6–10
               </span>
             </div>
           </div>
@@ -50,46 +47,39 @@ export default function Footer() {
           {/* Navigation Links */}
           <nav aria-label="Footer links" className="flex flex-wrap items-center justify-center gap-5 text-xs font-sans font-bold text-[#FFF7E6]">
             <Link href="/" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("nav.home") || "Home"}
+              Home
             </Link>
             <Link href="/student" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("nav.learn") || "Learn"}
+              Learn
             </Link>
             <Link href="/teacher" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("nav.teacher") || "Teacher"}
+              Teacher
             </Link>
             <Link href="/privacy" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("footer.privacy") || "Privacy"}
+              Privacy
             </Link>
             <Link href="/terms" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("footer.terms") || "Terms"}
+              Terms
             </Link>
             <Link href="/cookies" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
-              {t("footer.cookies") || "Cookies"}
+              Cookies
             </Link>
-            <button
-              type="button"
-              onClick={openCookieSettings}
-              className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] cursor-pointer bg-transparent border-none p-0 text-xs font-sans font-bold text-[#FFF7E6]"
-            >
-              {t("footer.cookiePreferences") || "Cookie Preferences"}
-            </button>
           </nav>
 
           {/* Back to top */}
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-sans font-bold text-[#FFF7E6] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_#2B1B0F] active:translate-x.5 active:translate-y.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#422816] hover:bg-[#7A4B2A] text-xs font-sans font-bold text-[#FFF7E6] border-2 border-[#7A4B2A] rounded-[2px] shadow-[2px_2px_0px_#2B1B0F] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]"
           >
-            <span>{t("footer.topBtn") || "Top"}</span>
+            <span>Top</span>
             <ArrowUp className="w-3.5 h-3.5 text-[#FFE9A8]" />
           </button>
         </div>
 
         <div className="pt-2 border-t border-[#7A4B2A]/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FFF7E6]/70 font-sans gap-2">
           <p className="m-0">
-            {t("footer.allRightsReserved") || "© 2026 Margam. Built for Indian students and teachers across Classes 6–10."}
+            © 2026 Margam. Built for Indian students and teachers across Classes 6–10.
           </p>
           <p className="m-0 text-[#FFE9A8]/90 font-medium">
             English · हिन्दी · తెలుగు
