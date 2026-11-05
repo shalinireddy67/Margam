@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
       "127.0.0.1";
 
     // 2. Rate-limit per IP
-    const lockout = checkLockout("demo-login", clientIp);
+    const lockout = checkLockout(`demo-login:${clientIp}`);
     if (lockout.locked) {
       return NextResponse.json(
         {
@@ -142,9 +142,30 @@ export async function POST(req: NextRequest) {
       });
 
       if (signInError || !signInData?.user) {
-        recordFailedAttempt("demo-login", clientIp);
+        console.error("[Demo Login Error]:", target.email, signInError?.message, signInError?.status);
+        recordFailedAttempt(`demo-login:${clientIp}`);
+
+        let profileStatus = "unknown";
+        try {
+          const { data: p } = await admin
+            .from("profiles")
+            .select("id, role, is_demo")
+            .ilike("username", target.username)
+            .maybeSingle();
+          if (p) {
+            profileStatus = `found (role=${p.role}, is_demo=${p.is_demo})`;
+          } else {
+            profileStatus = "not found";
+          }
+        } catch {}
+
         return NextResponse.json(
-          { error: "Demo authentication failed." },
+          {
+            error: "Demo authentication failed.",
+            reason: signInError?.message || "User sign-in failed",
+            profileStatus,
+            code: signInError?.status || 401,
+          },
           { status: 401 }
         );
       }
@@ -172,7 +193,7 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      resetLockout("demo-login", clientIp);
+      resetLockout(`demo-login:${clientIp}`);
 
       const userPayload = {
         id: signInData.user.id,
@@ -252,7 +273,7 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      resetLockout("demo-login", clientIp);
+      resetLockout(`demo-login:${clientIp}`);
 
       const userPayload = {
         id: mockProfile.id,
