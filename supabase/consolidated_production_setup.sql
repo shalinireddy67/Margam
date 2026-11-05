@@ -1,16 +1,24 @@
 -- ==============================================================================
 -- MARGAM — CONSOLIDATED PRODUCTION DATABASE SETUP (ONE-CLICK EXECUTION)
--- Version: 2026-11-02-Final
+-- Version: 2026-11-03-Idempotent-v2
 -- Target: Supabase PostgreSQL 15+
 --
 -- This script safely, idempotently, and atomically initializes the complete
 -- Margam database with all tables, constraints, indexes, RLS policies,
 -- immutability triggers, and security-definer functions in their final,
 -- hardened state.
+--
+-- Resilient to:
+-- - Fresh databases (0 prior tables)
+-- - Partially migrated databases (where initial_schema or earlier files were run)
+-- - Pre-existing views/functions with differing return types (uses CASCADE drops)
 -- ==============================================================================
 
+-- Ensure pgcrypto extension is available for UUID generation
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 -- ------------------------------------------------------------------------------
--- 1. BASE TABLES & SCHEMAS
+-- 1. BASE TABLES & SCHEMAS (WITH IDEMPOTENT COLUMN ADDITIONS)
 -- ------------------------------------------------------------------------------
 
 -- 1.1 PROFILES TABLE
@@ -28,6 +36,11 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Self-healing column additions if profiles table was created by older schema
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS opt_out_leaderboard BOOLEAN NOT NULL DEFAULT FALSE,
+  ADD COLUMN IF NOT EXISTS avatar_pixel TEXT DEFAULT 'wood_scholar';
+
 -- 1.2 CLASSES TABLE (Created & owned by Teachers)
 CREATE TABLE IF NOT EXISTS public.classes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -39,6 +52,10 @@ CREATE TABLE IF NOT EXISTS public.classes (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Self-healing column addition if classes table was created by older schema
+ALTER TABLE public.classes
+  ADD COLUMN IF NOT EXISTS leaderboard_enabled BOOLEAN NOT NULL DEFAULT TRUE;
+
 -- 1.3 CLASS_MEMBERS TABLE (Students enrolled in a Class)
 CREATE TABLE IF NOT EXISTS public.class_members (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -48,6 +65,10 @@ CREATE TABLE IF NOT EXISTS public.class_members (
   hidden_by_teacher BOOLEAN NOT NULL DEFAULT FALSE,
   CONSTRAINT uq_class_student UNIQUE (class_id, student_id)
 );
+
+-- Self-healing column addition if class_members was created by older schema
+ALTER TABLE public.class_members
+  ADD COLUMN IF NOT EXISTS hidden_by_teacher BOOLEAN NOT NULL DEFAULT FALSE;
 
 -- 1.4 ATTEMPTS TABLE (Diagnostics, Worksheets, Chapter Tests)
 CREATE TABLE IF NOT EXISTS public.attempts (
@@ -95,6 +116,10 @@ CREATE TABLE IF NOT EXISTS public.xp_events (
   idempotency_key TEXT UNIQUE
 );
 
+-- Self-healing column addition if xp_events was created by older schema
+ALTER TABLE public.xp_events
+  ADD COLUMN IF NOT EXISTS idempotency_key TEXT;
+
 -- ------------------------------------------------------------------------------
 -- 2. PERFORMANCE INDEXES
 -- ------------------------------------------------------------------------------
@@ -118,11 +143,14 @@ ALTER TABLE public.xp_events ENABLE ROW LEVEL SECURITY;
 -- ------------------------------------------------------------------------------
 -- 4. PROFILE IMMUTABILITY & ROLE TAMPERING PREVENTION TRIGGER
 -- ------------------------------------------------------------------------------
+DROP TRIGGER IF EXISTS trg_protect_profile_immutability ON public.profiles;
+DROP FUNCTION IF EXISTS public.protect_profile_immutability() CASCADE;
+
 CREATE OR REPLACE FUNCTION public.protect_profile_immutability()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public, pg_temp
+SET search_path = public, auth, pg_temp
 AS $$
 BEGIN
   -- Service role and database administrators are permitted to perform trusted updates
@@ -150,20 +178,20 @@ BEGIN
 END;
 $$;
 
-DROP TRIGGER IF EXISTS trg_protect_profile_immutability ON public.profiles;
 CREATE TRIGGER trg_protect_profile_immutability
   BEFORE UPDATE ON public.profiles
   FOR EACH ROW
   EXECUTE FUNCTION public.protect_profile_immutability();
 
 -- ------------------------------------------------------------------------------
--- 5. ROW LEVEL SECURITY POLICIES
+-- 5. ROW LEVEL SECURITY POLICIES (CLEAN SLATE & HARDENED RECREATION)
 -- ------------------------------------------------------------------------------
 
 -- 5.1 PROFILES POLICIES
 DROP POLICY IF EXISTS "profiles_select_own" ON public.profiles;
 DROP POLICY IF EXISTS "profiles_select_teacher_scoped" ON public.profiles;
 DROP POLICY IF EXISTS "profiles_insert_student_only" ON public.profiles;
+DROP POLICY IF EXISTS "profiles_insert_own" ON public.profiles;
 DROP POLICY IF EXISTS "profiles_update_own" ON public.profiles;
 
 CREATE POLICY "profiles_select_own"
@@ -334,6 +362,8 @@ CREATE POLICY "xp_events_teacher_select_scoped"
 -- ------------------------------------------------------------------------------
 
 -- 6.1 HELPER: IST Week Start (Monday 00:00:00 IST)
+DROP FUNCTION IF EXISTS public.get_current_week_start_ist() CASCADE;
+
 CREATE OR REPLACE FUNCTION public.get_current_week_start_ist()
 RETURNS TIMESTAMPTZ
 LANGUAGE sql
@@ -344,7 +374,9 @@ AS $$
 $$;
 
 -- 6.2 CLASS_WEEKLY_LEADERBOARD VIEW
-CREATE OR REPLACE VIEW public.class_weekly_leaderboard AS
+DROP VIEW IF EXISTS public.class_weekly_leaderboard CASCADE;
+
+CREATE VIEW public.class_weekly_leaderboard AS
 SELECT
   cm.class_id,
   cm.student_id,
@@ -373,6 +405,8 @@ GROUP BY
   p.avatar_pixel;
 
 -- 6.3 SECURE LEADERBOARD RPC
+DROP FUNCTION IF EXISTS public.get_class_leaderboard(UUID) CASCADE;
+
 CREATE OR REPLACE FUNCTION public.get_class_leaderboard(target_class_id UUID)
 RETURNS TABLE (
   student_id UUID,
@@ -383,7 +417,7 @@ RETURNS TABLE (
 )
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public, pg_temp
+SET search_path = public, auth, pg_temp
 AS $$
 DECLARE
   calling_user UUID := auth.uid();
@@ -422,11 +456,13 @@ REVOKE ALL ON FUNCTION public.get_class_leaderboard(UUID) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.get_class_leaderboard(UUID) TO authenticated;
 
 -- 6.4 SECURE CLASS JOINING VIA CLASS CODE RPC
+DROP FUNCTION IF EXISTS public.join_class_with_code(TEXT) CASCADE;
+
 CREATE OR REPLACE FUNCTION public.join_class_with_code(p_class_code TEXT)
 RETURNS JSONB
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public, pg_temp
+SET search_path = public, auth, pg_temp
 AS $$
 DECLARE
   v_student_id UUID := auth.uid();
@@ -481,4 +517,3 @@ $$;
 
 REVOKE ALL ON FUNCTION public.join_class_with_code(TEXT) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.join_class_with_code(TEXT) TO authenticated;
-
