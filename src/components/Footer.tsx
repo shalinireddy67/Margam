@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ShieldCheck, ArrowUp } from "lucide-react";
 import { SITE_TAGLINE } from "@/config/site";
-import { Logo } from "@/components/ui";
+import { Logo, openCookieSettings } from "@/components/ui";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -64,6 +64,13 @@ export default function Footer() {
             <Link href="/cookies" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               Cookies
             </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] cursor-pointer text-xs font-sans font-bold text-[#FFF7E6] bg-transparent border-none p-0"
+            >
+              Cookie Settings
+            </button>
           </nav>
 
           {/* Back to top */}
