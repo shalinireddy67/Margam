@@ -70,7 +70,7 @@ export const DEMO_SCHOOL_CONFIG = {
     school: "Margam Demo School",
     assignedClass: "10-A",
   },
-  demoPassword: process.env.DEMO_PASSWORD || "",
+  demoPassword: process.env.DEMO_PASSWORD ? process.env.DEMO_PASSWORD.trim().replace(/^["']|["']$/g, "") : "",
 };
 
 export const DEMO_STUDENTS: DemoStudentData[] = [

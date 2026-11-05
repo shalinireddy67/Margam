@@ -45,17 +45,30 @@ const DEMO_ACCOUNTS = {
   },
 };
 
+function isDemoLoginEnabled(): boolean {
+  const envVal =
+    process.env.DEMO_LOGIN_ENABLED ||
+    process.env.NEXT_PUBLIC_DEMO_LOGIN_ENABLED;
+  if (!envVal) return false;
+  const clean = envVal.trim().replace(/^["']|["']$/g, "").toLowerCase();
+  return clean === "true" || clean === "1" || clean === "yes" || clean === "on";
+}
+
+function getDemoPassword(): string | undefined {
+  const pw = process.env.DEMO_PASSWORD;
+  if (!pw) return undefined;
+  return pw.trim().replace(/^["']|["']$/g, "");
+}
+
 export async function GET() {
-  const enabled =
-    process.env.DEMO_LOGIN_ENABLED === "true" ||
-    process.env.NEXT_PUBLIC_DEMO_LOGIN_ENABLED === "true";
+  const enabled = isDemoLoginEnabled();
   return NextResponse.json({ enabled });
 }
 
 export async function POST(req: NextRequest) {
   try {
     // 1. Kill switch: return 404 when disabled
-    if (process.env.DEMO_LOGIN_ENABLED !== "true") {
+    if (!isDemoLoginEnabled()) {
       return NextResponse.json(
         { error: "Demo login is disabled" },
         { status: 404 }
@@ -100,7 +113,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Sign in with fixed accounts using DEMO_PASSWORD from process.env. Reject if not set.
-    const demoPassword = process.env.DEMO_PASSWORD;
+    const demoPassword = getDemoPassword();
     if (!demoPassword) {
       return NextResponse.json(
         { error: "Demo authentication is not configured on this server." },
