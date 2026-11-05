@@ -58,7 +58,7 @@ export function Tile({
         aria-disabled="true"
         data-panel="tile-coming-soon"
         className={`
-          bg-[#B9BCC0]/88 text-[#1E1610] p-5 rounded-xs flex flex-col justify-between select-none
+          bg-[#B9BCC0]/82 text-[#1E1610] p-5 rounded-xs flex flex-col justify-between select-none
           border-[3px] border-dashed border-[#1E1610] shadow-[2px_2px_0px_#1E1610]
           cursor-not-allowed group relative
           ${className}
@@ -94,7 +94,7 @@ export function Tile({
       <div
         data-panel="tile-locked"
         className={`
-          bg-[#B9BCC0]/88 text-[#1E1610] p-5 rounded-xs flex flex-col justify-between select-none
+          bg-[#B9BCC0]/82 text-[#1E1610] p-5 rounded-xs flex flex-col justify-between select-none
           border-[3px] border-[#1E1610] shadow-[2px_2px_0px_#1E1610]
           ${className}
         `.trim()}
@@ -129,7 +129,7 @@ export function Tile({
     <div
       data-panel="tile"
       className={`
-        bg-[#D9B87A]/88 text-[#1E1610] p-5 sm:p-6 rounded-xs flex flex-col justify-between
+        bg-[#D9B87A]/82 text-[#1E1610] p-5 sm:p-6 rounded-xs flex flex-col justify-between
         border-[3px] border-[#1E1610] shadow-[3px_3px_0px_#1E1610] relative overflow-hidden
         ${isInProgress ? "border-t-[6px] border-t-[#F2C230]" : "border-t-[6px] border-t-[#6DB33F]"}
         ${className}
