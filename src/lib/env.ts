@@ -44,11 +44,19 @@ export function isPlaceholderValue(value?: string | null): boolean {
   return PLACEHOLDER_MARKERS.some((marker) => value.includes(marker));
 }
 
+function cleanEnvValue(val?: string | null): string | undefined {
+  if (!val) return undefined;
+  const clean = val.trim().replace(/^["']|["']$/g, "").trim();
+  return clean || undefined;
+}
+
 /**
  * Standardized Public Supabase URL getter
  */
 export function getSupabaseUrl(): string | undefined {
-  return process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const raw = cleanEnvValue(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  if (!raw) return undefined;
+  return raw.replace(/\/+$/, "");
 }
 
 /**
@@ -57,7 +65,7 @@ export function getSupabaseUrl(): string | undefined {
  * Supported alias: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
  */
 export function getSupabaseAnonKey(): string | undefined {
-  return (
+  return cleanEnvValue(
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   );
@@ -85,7 +93,7 @@ export function getSupabaseServiceKey(): string | undefined {
     // Client-side guard: never access or return server secrets
     return undefined;
   }
-  return (
+  return cleanEnvValue(
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_SECRET_KEY ||
     process.env.SUPABASE_SERVICE_KEY
@@ -109,7 +117,7 @@ export function isAdminConfigured(): boolean {
  * In non-production: Uses safe local testing fallback if unset.
  */
 export function getSessionSecret(): string {
-  const secret = process.env.SESSION_SECRET;
+  const secret = cleanEnvValue(process.env.SESSION_SECRET);
   if (!secret || isPlaceholderValue(secret)) {
     if (process.env.NODE_ENV === "production") {
       console.warn(

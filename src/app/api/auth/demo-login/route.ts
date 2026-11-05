@@ -159,10 +159,21 @@ export async function POST(req: NextRequest) {
           }
         } catch {}
 
+        let hostInfo = "unconfigured";
+        try {
+          const u = process.env.NEXT_PUBLIC_SUPABASE_URL;
+          if (u) {
+            hostInfo = u.replace(/^https?:\/\//, "").split("/")[0];
+          }
+        } catch (e: any) {
+          hostInfo = `invalid url: ${e?.message}`;
+        }
+
         return NextResponse.json(
           {
             error: "Demo authentication failed.",
             reason: signInError?.message || "User sign-in failed",
+            host: hostInfo,
             profileStatus,
             code: signInError?.status || 401,
           },
