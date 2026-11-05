@@ -281,6 +281,8 @@ export interface TranslationDictionary {
     teacherLabel: string;
     studentLabel: string;
     goBack: string;
+    teacherConsentLabel: string;
+    teacherConsentError: string;
   };
   teacher: {
     title: string;
@@ -341,6 +343,7 @@ export interface TranslationDictionary {
     privacy: string;
     terms: string;
     cookies: string;
+    cookiePreferences: string;
     topBtn: string;
     allRightsReserved: string;
   };
@@ -635,6 +638,8 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       teacherLabel: "Teacher",
       studentLabel: "Student",
       goBack: "Go back",
+      teacherConsentLabel: "I confirm I am an educator and authorized to view classroom diagnostic analytics.",
+      teacherConsentError: "Please confirm school or guardian consent to register as an educator.",
     },
     teacher: {
       title: "Teacher Dashboard",
@@ -695,6 +700,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       privacy: "Privacy Notice",
       terms: "Terms of Service",
       cookies: "Cookie Policy",
+      cookiePreferences: "Cookie Preferences",
       topBtn: "Top",
       allRightsReserved: "Free for all students and teachers.",
     },
@@ -984,6 +990,8 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       teacherLabel: "शिक्षक",
       studentLabel: "विद्यार्थी",
       goBack: "वापस जाएं",
+      teacherConsentLabel: "मैं पुष्टि करता हूँ कि मैं एक शिक्षक हूँ और कक्षा डायग्नोस्टिक रिपोर्ट देखने के लिए अधिकृत हूँ।",
+      teacherConsentError: "शिक्षक के रूप में पंजीकरण करने के लिए कृपया विद्यालय या संस्थागत सहमति की पुष्टि करें।",
     },
     teacher: {
       title: "शिक्षक डैशबोर्ड",
@@ -1044,6 +1052,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       privacy: "गोपनीयता नीति",
       terms: "सेवा की शर्तें",
       cookies: "कुकी नीति",
+      cookiePreferences: "कुकी प्राथमिकताएँ",
       topBtn: "ऊपर जाएं",
       allRightsReserved: "सभी विद्यार्थियों और शिक्षकों के लिए निःशुल्क।",
     },
@@ -1333,6 +1342,8 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       teacherLabel: "ఉపాధ్యాయుడు",
       studentLabel: "విద్యార్థి",
       goBack: "వెనక్కి వెళ్ళండి",
+      teacherConsentLabel: "నేను ఉపాధ్యాయుడినని మరియు తరగతి గది డయాగ్నస్టిక్ నివేదికలను చూసేందుకు అధికారం కలిగి ఉన్నానని నిర్ధారిస్తున్నాను.",
+      teacherConsentError: "ఉపాధ్యాయునిగా నమోదు చేసుకోవడానికి దయచేసి పాఠశాల లేదా సంస్థాగత సమ్మతిని నిర్ధారించండి.",
     },
     teacher: {
       title: "ఉపాధ్యాయుల డాష్‌బోర్డ్",
@@ -1393,6 +1404,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
       privacy: "గోప్యతా విధానం",
       terms: "నిబంధనలు",
       cookies: "కుకీ విధానం",
+      cookiePreferences: "కుకీ ప్రాధాన్యతలు",
       topBtn: "పైకి వెళ్ళండి",
       allRightsReserved: "విద్యార్థులు మరియు ఉపాధ్యాయులందరికీ ఉచితం.",
     },

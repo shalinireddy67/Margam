@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ShieldCheck, ArrowUp } from "lucide-react";
 import { SITE_TAGLINE } from "@/config/site";
 import { Logo } from "@/components/ui";
+import { openCookieSettings } from "@/components/ui/CookieConsent";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
@@ -66,6 +67,13 @@ export default function Footer() {
             <Link href="/cookies" className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF]">
               {t("footer.cookies") || "Cookies"}
             </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="hover:text-[#FFE9A8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB5FF] cursor-pointer bg-transparent border-none p-0 text-xs font-sans font-bold text-[#FFF7E6]"
+            >
+              {t("footer.cookiePreferences") || "Cookie Preferences"}
+            </button>
           </nav>
 
           {/* Back to top */}

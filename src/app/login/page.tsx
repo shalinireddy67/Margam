@@ -266,7 +266,7 @@ function LoginForm() {
     resetMessages();
 
     if (!teacherConsent) {
-      setErrorMessage("Please confirm school or guardian consent to register as an educator.");
+      setErrorMessage(t("login.teacherConsentError") || "Please confirm school or guardian consent to register as an educator.");
       return;
     }
 
