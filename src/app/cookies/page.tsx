@@ -200,33 +200,33 @@ function CookiesView() {
 
       {/* Header (Soft Cream, High-Contrast Typography) */}
       <header className="border-b-[3px] border-[#1E1610] bg-[#FAF6EC]/96 shadow-[0px_2px_0px_rgba(30,22,16,0.08)] backdrop-blur-[4px]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-3">
           <Link
             href="/"
             aria-label="Margam Home"
-            className="flex items-center gap-2.5 min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#2F4FB5] focus-visible:outline-none p-1"
+            className="flex items-center gap-2 sm:gap-2.5 min-h-[44px] focus-visible:ring-2 focus-visible:ring-[#2F4FB5] focus-visible:outline-none"
           >
-            <div className="w-9 h-9 rounded-[2px] bg-[#6DB33F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center shrink-0">
-              <Logo className="w-5 h-5 text-[#1E1610]" ariaLabel="Margam Logo" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[2px] bg-[#6DB33F] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] flex items-center justify-center shrink-0">
+              <Logo className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E1610]" ariaLabel="Margam Logo" />
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-base text-[#1E1610] leading-none">
+              <span className="font-heading font-extrabold text-sm sm:text-base text-[#1E1610] leading-none">
                 MARGAM
               </span>
-              <span className="text-[10px] font-sans font-bold text-[#5A3720] mt-0.5">
+              <span className="text-[10px] font-sans font-bold text-[#5A3720] mt-0.5 hidden sm:block">
                 Classes 6–10
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <LanguageToggle
               currentLang={currentLang}
               onLanguageChange={(lang) => setCurrentLang(lang)}
             />
             <Link
               href="/"
-              className="min-h-[40px] px-3.5 inline-flex items-center gap-1.5 text-xs font-heading font-extrabold text-[#1E1610] bg-[#FAF6EC] hover:bg-[#EFE8D8] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] rounded-[2px] transition-all no-underline focus-visible:ring-2 focus-visible:ring-[#2F4FB5]"
+              className="min-h-[32px] sm:min-h-[40px] px-2 sm:px-3.5 inline-flex items-center gap-1.5 text-xs font-heading font-extrabold text-[#1E1610] bg-[#FAF6EC] hover:bg-[#EFE8D8] border-2 border-[#1E1610] shadow-[2px_2px_0px_#1E1610] active:translate-x-[1px] active:translate-y-[1px] rounded-[2px] transition-all no-underline focus-visible:ring-2 focus-visible:ring-[#2F4FB5]"
             >
               <ArrowLeft className="w-4 h-4 text-[#1E1610]" aria-hidden="true" />
               <span className="hidden sm:inline">{content.backText}</span>
