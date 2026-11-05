@@ -112,8 +112,8 @@ export function getSessionSecret(): string {
   const secret = process.env.SESSION_SECRET;
   if (!secret || isPlaceholderValue(secret)) {
     if (process.env.NODE_ENV === "production") {
-      console.warn(
-        "[Margam Security Warning] SESSION_SECRET is unset or using a placeholder in production. Configure SESSION_SECRET (min 32 characters) in Vercel to guarantee session isolation across serverless cold starts."
+      throw new Error(
+        "SESSION_SECRET is unset or using a placeholder in production. Session verification failed closed."
       );
     }
     return "margam_internal_secure_hmac_secret_2026";

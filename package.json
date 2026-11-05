@@ -28,7 +28,8 @@
     "seed:demo": "node scripts/seed-demo.mjs",
     "seed:demo:reset": "node scripts/seed-demo.mjs --reset",
     "test:anti-repetition": "npx tsx scripts/test-anti-repetition.mjs",
-    "test:flow": "npx tsx scripts/test-phase7-flow.mjs"
+    "test:flow": "npx tsx scripts/test-phase7-flow.mjs",
+    "test:rls": "node scripts/test-rls.mjs"
   },
   "dependencies": {
     "@fontsource/baloo-2": "^5.3.0",
@@ -40,7 +41,7 @@
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.109.0",
     "lucide-react": "^0.453.0",
-    "next": "^14.2.15",
+    "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "server-only": "^0.0.1",
